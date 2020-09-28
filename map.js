@@ -1,10 +1,16 @@
 const projectionDataURL = "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv"
 const pollAverageDataURL = "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv"
-var dataURLToUse
+
+const kProjectionSource = "projection"
+const kPollAverageSource = "pollaverage"
+const dataSourceTypes = [kProjectionSource, kPollAverageSource]
+
+var currentDataSource = kPollAverageSource
 
 var selectedPartyID
 var partyIDs = ["DEM", "REP"]
 var partyCandiates = {"Biden":0, "Trump":1}
+var partyCandiateFullNames = {"Joseph R. Biden Jr.":0, "Donald Trump":1}
 var incumbentPartyNum
 var challengerPartyNum
 var marginColorValues = [15, 5, 1, 0]
@@ -12,7 +18,9 @@ var marginColors = [["#1c408c", "#587ccc", "#8aafff", "#949bb3"], ["#be1c29", "#
 
 var regionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
-var regionEV = {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":5, "KY":8, "LA":8, "ME-D1":1, "ME-D2":2, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":3, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3}
+var regionEV = {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":4, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3}
+
+var ev2016 = {"AL":1, "AK":1, "AZ":1, "AR":1, "CA":0, "CO":0, "CT":0, "DE":0, "DC":0, "FL":1, "GA":1, "HI":0, "ID":1, "IL":0, "IN":1, "IA":1, "KS":1, "KY":1, "LA":1, "ME-D1":0, "ME-D2":1, "ME-AL":0, "MD":0, "MA":0, "MI":1, "MN":0, "MS":1, "MO":1, "MT":1, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":1, "NV":0, "NH":0, "NJ":0, "NM":0, "NY":0, "NC":1, "ND":1, "OH":1, "OK":1, "OR":0, "PA":1, "RI":0, "SC":1, "SD":1, "TN":1, "TX":1, "UT":1, "VT":0, "VA":0, "WA":0, "WV":1, "WI":1, "WY":1}
 
 var regionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
@@ -21,12 +29,16 @@ var linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button
 var mapData
 var dataMapLoaded = false
 
+var cachedRawMapData = {}
+
 var rawMapData
 var dataMapStartDate
 var dataMapEndDate
 
-var kEditing = 0
-var kViewing = 1
+var currentSliderDate
+
+const kEditing = 0
+const kViewing = 1
 
 var currentMapState = kViewing
 
@@ -34,14 +46,35 @@ $(function() {
   $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-170) + "px")
 
   populateRegionsArray()
-  loadDataMap(projectionDataURL)
+  //loadDataMap(currentDataSource)
 })
 
-async function loadDataMap(url)
+async function loadDataMap(dataSourceType)
 {
-  rawMapData = await fetchMapData(url)
+  if (!(dataSourceType in cachedRawMapData))
+  {
+    var urlToUse
+    switch (currentDataSource)
+    {
+      case kProjectionSource:
+      urlToUse = projectionDataURL
+      break
+
+      case kPollAverageSource:
+      urlToUse = pollAverageDataURL
+      break
+    }
+    rawMapData = await fetchMapData(urlToUse)
+
+    cachedRawMapData[dataSourceType] = rawMapData.concat()
+  }
+  else
+  {
+    rawMapData = cachedRawMapData[dataSourceType].concat()
+  }
+
   setDataMapDateSliderRange()
-  displayDataMap()
+  displayDataMap(dataSourceType)
 }
 
 function fetchMapData(url)
@@ -57,31 +90,101 @@ function fetchMapData(url)
 
 function setDataMapDateSliderRange()
 {
+  var modelDateColumn
+  switch (currentDataSource)
+  {
+    case kProjectionSource:
+    modelDateColumn = 3
+    break
+
+    case kPollAverageSource:
+    modelDateColumn = 2
+    break
+  }
+
   var rowSplit = rawMapData.split("\n")
   var firstRow = rowSplit[1]
   var lastRow = rowSplit[rowSplit.length-2]
-  var startDate = new Date(lastRow.split(",")[3])
-  var endDate = new Date(firstRow.split(",")[3])
+  var startDate = new Date(lastRow.split(",")[modelDateColumn])
+  var endDate = new Date(firstRow.split(",")[modelDateColumn])
 
-  var dayCount = (endDate.getTime()-startDate.getTime())/(1000*60*60*24)
+  var dayCount = Math.round((endDate.getTime()-startDate.getTime())/(1000*60*60*24))
   $("#dataMapDateSlider").attr("max", dayCount)
-  $("#dataMapDateSlider").attr("value", dayCount)
+  if (currentSliderDate == null)
+  {
+    $("#dataMapDateSlider").val(dayCount)
+    currentSliderDate = endDate
+  }
+  else
+  {
+    var previousSliderDateValue = Math.round((currentSliderDate.getTime()-startDate.getTime())/(1000*60*60*24))
+    if (previousSliderDateValue < 0)
+    {
+      $("#dataMapDateSlider").val(0)
+      currentSliderDate = startDate
+    }
+    else
+    {
+      $("#dataMapDateSlider").val(previousSliderDateValue)
+    }
+  }
 
   dataMapStartDate = startDate
   dataMapEndDate = endDate
 }
 
-function displayDataMap(daysAgo)
+function updateSliderDateDisplay(dateToDisplay)
 {
-  daysAgo = daysAgo || 0
+  var dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()
+  $("#dateDisplay").html(dateString)
+  currentSliderDate = new Date(dateString)
+}
+
+function displayDataMap(dataSourceType, daysAgo)
+{
+  daysAgo = daysAgo || $("#dataMapDateSlider").attr('max')-$("#dataMapDateSlider").val()
 
   var dateToDisplay = new Date(dataMapEndDate.getTime()-daysAgo*1000*60*60*24)
-  $("#dateDisplay").html((zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear())
+  updateSliderDateDisplay(dateToDisplay)
 
-  mapData = extractDataMapDate(rawMapData, daysAgo)
+  mapData = extractDataMapDate(rawMapData, dateToDisplay)
 
-  incumbentPartyNum = partyCandiates[mapData[0].candidate_inc]
-  challengerPartyNum = partyCandiates[mapData[0].candidate_chal]
+  switch (dataSourceType)
+  {
+    case kProjectionSource:
+    incumbentPartyNum = partyCandiates[mapData[0].candidate_inc]
+    challengerPartyNum = partyCandiates[mapData[0].candidate_chal]
+    break
+
+    case kPollAverageSource: //Hard-Coding
+    incumbentPartyNum = 1
+    challengerPartyNum = 0
+
+    var mapDataTmp = []
+    var regionNames = Object.keys(regionNameToID)
+    for (regionNum in regionNames)
+    {
+      var regionToFind = regionNames[regionNum]
+
+      var mapDataRows = mapData.filter(row => (row.state == regionToFind && Object.keys(partyCandiateFullNames).includes(row.candidate_name)))
+      var marginSum = mapDataRows.length > 0 ? 0 : (ev2016[regionNameToID[regionToFind]] == challengerPartyNum ? -100 : 100)
+      for (rowNum in mapDataRows)
+      {
+        if (partyCandiateFullNames[mapDataRows[rowNum].candidate_name] == incumbentPartyNum)
+        {
+          marginSum += parseFloat(mapDataRows[rowNum].pct_estimate)
+        }
+        else
+        {
+          marginSum -= parseFloat(mapDataRows[rowNum].pct_estimate)
+        }
+      }
+      mapDataTmp.push({state: regionToFind, margin: marginSum})
+    }
+
+    mapData = mapDataTmp
+    break
+  }
 
   for (regionNum in mapData)
   {
@@ -112,7 +215,7 @@ function displayDataMap(daysAgo)
   dataMapLoaded = true
 }
 
-function extractDataMapDate(strData, daysAgo)
+function extractDataMapDate(strData, dateToExtract)
 {
   var finalArray = []
 
@@ -141,22 +244,12 @@ function extractDataMapDate(strData, daysAgo)
 
     if (rowNum > 0)
     {
-      if (!previousDate)
-      {
-        previousDate = rowDataArray.modeldate
-      }
-
-      if (previousDate && previousDate != rowDataArray.modeldate)
-      {
-        previousDate = rowDataArray.modeldate
-        dateChangeCount++
-      }
-
-      if (dateChangeCount < daysAgo)
+      if (dateToExtract.getTime() < (new Date(rowDataArray.modeldate)).getTime() || rowDataArray.modeldate == undefined)
       {
         continue
       }
-      else if (dateChangeCount > daysAgo)
+
+      if (dateToExtract.getTime() > (new Date(rowDataArray.modeldate)).getTime())
       {
         break
       }
@@ -171,6 +264,34 @@ function extractDataMapDate(strData, daysAgo)
   return finalArray
 }
 
+function toggleDataSource(buttonDiv)
+{
+  var dataSourceArrayIndex = dataSourceTypes.indexOf(currentDataSource)
+  dataSourceArrayIndex++
+  if (dataSourceArrayIndex > dataSourceTypes.length-1)
+  {
+    dataSourceArrayIndex = 0
+  }
+  currentDataSource = dataSourceTypes[dataSourceArrayIndex]
+
+  updateDataSourceButton(buttonDiv)
+  loadDataMap(currentDataSource)
+}
+
+function updateDataSourceButton(buttonDiv)
+{
+  switch (currentDataSource)
+  {
+    case kPollAverageSource:
+    $(buttonDiv).html("Poll Avg")
+    break
+
+    case kProjectionSource:
+    $(buttonDiv).html("Projection")
+    break
+  }
+}
+
 function clearMap()
 {
   regionDataArray = {}
@@ -179,7 +300,7 @@ function clearMap()
     var regionDataCallback = getRegionData($(this).attr('id'))
     var regionIDsToFill = regionDataCallback[1]
     var regionData = regionDataCallback[0]
-    
+
     updateRegionFillColors(regionIDsToFill, regionData)
   })
 }
@@ -444,7 +565,13 @@ function recalculatePartyTotals()
 }
 
 document.addEventListener('keypress', function(e) {
-  if (e.which >= 48 && e.which <= 57 && e.which-48 <= partyIDs.length)
+  if (dataMapLoaded && currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < dataSourceTypes.length)
+  {
+    currentDataSource = dataSourceTypes[e.which-49]
+    updateDataSourceButton($("#sourceToggleButton")[0])
+    loadDataMap(currentDataSource)
+  }
+  else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= partyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -577,5 +704,5 @@ function decimalPadding(num)
 
 function getKeyByValue(object, value)
 {
-  return Object.keys(object).find(key => object[key] == value);
+  return Object.keys(object).find(key => object[key] == value)
 }

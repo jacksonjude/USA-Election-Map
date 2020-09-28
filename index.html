@@ -10,17 +10,17 @@
     <div class="topnav">
       <div style="display: inline-block; margin-top: 4px;">
         <a onclick="openHelp()">Help</a>
-        <a onclick="loadMap()">Load</a>
+        <a id="sourceToggleButton" onclick="toggleDataSource(this)" style="min-width: 79px">Load</a>
         <a onclick="clearMap()">Clear</a>
       </div>
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div id="partyButtonDiv" style="display: inline-block;">
-        <a id="DEM" class="active" onclick="selectParty(this)">Dem</a>
-        <a id="REP" class="active" onclick="selectParty(this)">Rep</a>
+        <a id="DEM" class="active" onclick="selectParty(this)" style="min-width: 94px">Dem</a>
+        <a id="REP" class="active" onclick="selectParty(this)" style="min-width: 94px">Rep</a>
       </div>
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
-        <a id="editDoneButton" onclick="toggleEditing()">Edit</a>
+        <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Edit</a>
       </div>
     </div>
     <div id="mapzoom" style="margin: 0px; zoom: 120%;">
@@ -162,7 +162,7 @@
       </svg>
     </div>
     <span class="slidecontainer" style="user-select: none; -webkit-user-select: none;">
-      <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(this.max-this.value)">
+      <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentDataSource, this.max-this.value)">
     </span>
     <h3 id="dateDisplay" style="display: inline; color: white; padding-left: 20px; user-select: none; -webkit-user-select: none;"></h3>
     <div id="stateboxcontainer" class="boxcontainer" style="display: none; position: fixed; pointer-events: none; user-select: none; -webkit-user-select: none;">
