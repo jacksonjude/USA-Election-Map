@@ -1,3 +1,7 @@
+const projectionDataURL = "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv"
+const pollAverageDataURL = "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv"
+var dataURLToUse
+
 var selectedPartyID
 var partyIDs = ["DEM", "REP"]
 var partyCandiates = {"Biden":0, "Trump":1}
@@ -14,12 +18,12 @@ var regionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
 var linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
-var projectionData
-var projectionLoaded = false
+var mapData
+var dataMapLoaded = false
 
-var rawProjectionData
-var projectionStartDate
-var projectionEndDate
+var rawMapData
+var dataMapStartDate
+var dataMapEndDate
 
 var kEditing = 0
 var kViewing = 1
@@ -30,58 +34,58 @@ $(function() {
   $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-170) + "px")
 
   populateRegionsArray()
-  loadProjection()
+  loadDataMap(projectionDataURL)
 })
 
-async function loadProjection()
+async function loadDataMap(url)
 {
-  rawProjectionData = await fetchProjectionData()
-  setProjectionDateSliderRange()
-  displayProjectionData()
+  rawMapData = await fetchMapData(url)
+  setDataMapDateSliderRange()
+  displayDataMap()
 }
 
-function fetchProjectionData()
+function fetchMapData(url)
 {
-  var fetchProjectionDataPromise = new Promise((resolve, reject) => {
-    $.get("https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", null, function(data) {
+  var fetchMapDataPromise = new Promise((resolve, reject) => {
+    $.get(url, null, function(data) {
       resolve(data)
     })
   })
 
-  return fetchProjectionDataPromise
+  return fetchMapDataPromise
 }
 
-function setProjectionDateSliderRange()
+function setDataMapDateSliderRange()
 {
-  var rowSplit = rawProjectionData.split("\n")
+  var rowSplit = rawMapData.split("\n")
   var firstRow = rowSplit[1]
   var lastRow = rowSplit[rowSplit.length-2]
   var startDate = new Date(lastRow.split(",")[3])
   var endDate = new Date(firstRow.split(",")[3])
 
   var dayCount = (endDate.getTime()-startDate.getTime())/(1000*60*60*24)
-  $("#projectionDateSlider").attr("max", dayCount)
-  $("#projectionDateSlider").attr("value", dayCount)
+  $("#dataMapDateSlider").attr("max", dayCount)
+  $("#dataMapDateSlider").attr("value", dayCount)
 
-  projectionStartDate = startDate
-  projectionEndDate = endDate
+  dataMapStartDate = startDate
+  dataMapEndDate = endDate
 }
 
-function displayProjectionData(daysAgo)
+function displayDataMap(daysAgo)
 {
   daysAgo = daysAgo || 0
 
-  var dateToDisplay = new Date(projectionEndDate.getTime()-daysAgo*1000*60*60*24)
+  var dateToDisplay = new Date(dataMapEndDate.getTime()-daysAgo*1000*60*60*24)
   $("#dateDisplay").html((zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear())
 
-  projectionData = extractProjectionDate(rawProjectionData, daysAgo)
+  mapData = extractDataMapDate(rawMapData, daysAgo)
 
-  incumbentPartyNum = partyCandiates[projectionData[0].candidate_inc]
-  challengerPartyNum = partyCandiates[projectionData[0].candidate_chal]
+  incumbentPartyNum = partyCandiates[mapData[0].candidate_inc]
+  challengerPartyNum = partyCandiates[mapData[0].candidate_chal]
 
-  for (regionNum in projectionData)
+  for (regionNum in mapData)
   {
-    var regionData = projectionData[regionNum]
+    var regionData = mapData[regionNum]
     var regionID = regionNameToID[regionData.state]
     var margin = regionData.margin
 
@@ -105,10 +109,10 @@ function displayProjectionData(daysAgo)
     updateRegionFillColors(regionsToFill, regionData)
   }
 
-  projectionLoaded = true
+  dataMapLoaded = true
 }
 
-function extractProjectionDate(strData, daysAgo)
+function extractDataMapDate(strData, daysAgo)
 {
   var finalArray = []
 
@@ -172,7 +176,11 @@ function clearMap()
   regionDataArray = {}
   populateRegionsArray()
   $('#outlines').children().each(function() {
-    updateRegionFillColors()
+    var regionDataCallback = getRegionData($(this).attr('id'))
+    var regionIDsToFill = regionDataCallback[1]
+    var regionData = regionDataCallback[0]
+    
+    updateRegionFillColors(regionIDsToFill, regionData)
   })
 }
 
@@ -488,9 +496,10 @@ function mouseEnteredRegion(div)
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentMapState == kViewing && projectionLoaded)
+  else if (currentMapState == kViewing && dataMapLoaded)
   {
     var regionData = getRegionData(regionID)[0]
+    if (regionData.party == -1) { return }
     $("#stateboxcontainer").css("display", "block")
 
     var regionMarginString
