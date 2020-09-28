@@ -1,0 +1,121 @@
+@font-face {
+  font-family: 'Bree5erif';
+  src: url("./Bree5erif-Regular.ttf");
+}
+
+body {
+  font-family: 'Bree5erif';
+}
+
+.topnav {
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  cursor: pointer;
+  float: left;
+  color: #f2f2f2;
+  background-color: #444;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.topnav a:hover {
+  background-color: #666;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+}
+
+.topnav #DEM {
+  background-color: rgb(84, 102, 140);
+}
+
+.topnav #DEM:hover {
+  background-color: rgb(28, 64, 140);
+}
+
+.topnav #DEM.active {
+  background-color: rgb(28, 64, 140);
+  /* background-color: rgb(34, 78, 182); */
+}
+
+.topnav #REP {
+  background-color: rgb(191, 85, 92);
+}
+
+.topnav #REP:hover {
+  background-color: rgb(191, 29, 41);
+}
+
+.topnav #REP.active {
+  background-color: rgb(191, 29, 41);
+  /* background-color: rgb(217, 33, 45); */
+}
+
+.slidecontainer {
+  padding-left: 30px;
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 15px; /* Specified height */
+  border-radius: 5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #777; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  border-radius: 50%;
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.boxcontainer {
+  display: block;
+  vertical-align: top;
+}
+
+.box {
+  border: 1px solid white;
+  max-width: 200px;
+  background-color: rgba(68,68,68,0.8);
+  color: white;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+}
