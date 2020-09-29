@@ -65,18 +65,8 @@ function loadDataMap(dataSourceType)
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     if (!(dataSourceType in cachedRawMapData))
     {
-      var urlToUse
-      switch (currentDataSource)
-      {
-        case kProjectionSource:
-        urlToUse = projectionDataURL
-        break
-
-        case kPollAverageSource:
-        urlToUse = pollAverageDataURL
-        break
-      }
-      rawMapData = await fetchMapData(urlToUse)
+      var url = getURLFromSourceConstant(dataSourceType)
+      rawMapData = await fetchMapData(url)
 
       cachedRawMapData[dataSourceType] = rawMapData.concat()
     }
@@ -96,6 +86,29 @@ function loadDataMap(dataSourceType)
   return loadDataMapPromise
 }
 
+function getURLFromSourceConstant(sourceType)
+{
+  switch (sourceType)
+  {
+    case kProjectionSource:
+    return projectionDataURL
+
+    case kPollAverageSource:
+    return pollAverageDataURL
+  }
+}
+
+async function downloadAllMapData()
+{
+  for (sourceNum in dataSourceTypes)
+  {
+    cachedRawMapData[dataSourceTypes[sourceNum]] = await fetchMapData(getURLFromSourceConstant(dataSourceTypes[sourceNum]))
+  }
+
+  var endDate = getDateRange(cachedRawMapData[dataSourceTypes[0]], dataSourceTypes[0])[1]
+  $("#downloadButton").html("Download (" + (endDate.getMonth()+1) + "/" + endDate.getDate() + ")")
+}
+
 function fetchMapData(url)
 {
   var fetchMapDataPromise = new Promise((resolve, reject) => {
@@ -109,10 +122,10 @@ function fetchMapData(url)
   return fetchMapDataPromise
 }
 
-function setDataMapDateSliderRange()
+function getDateRange(mapData, dataSourceType)
 {
   var modelDateColumn
-  switch (currentDataSource)
+  switch (dataSourceType)
   {
     case kProjectionSource:
     modelDateColumn = 3
@@ -123,11 +136,20 @@ function setDataMapDateSliderRange()
     break
   }
 
-  var rowSplit = rawMapData.split("\n")
+  var rowSplit = mapData.split("\n")
   var firstRow = rowSplit[1]
   var lastRow = rowSplit[rowSplit.length-2]
   var startDate = new Date(lastRow.split(",")[modelDateColumn])
   var endDate = new Date(firstRow.split(",")[modelDateColumn])
+
+  return [startDate, endDate]
+}
+
+function setDataMapDateSliderRange()
+{
+  var dateRangeCallback = getDateRange(rawMapData, currentDataSource)
+  var startDate = dateRangeCallback[0]
+  var endDate = dateRangeCallback[1]
 
   var dayCount = Math.round((endDate.getTime()-startDate.getTime()+((endDate.getTimezoneOffset()-startDate.getTimezoneOffset())*60*1000))/(1000*60*60*24))
   $("#dataMapDateSlider").attr("max", dayCount)
