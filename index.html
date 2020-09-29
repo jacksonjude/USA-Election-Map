@@ -9,9 +9,8 @@
   <body style="background-color: black; margin: 0px;">
     <div class="topnav">
       <div style="display: inline-block; margin-top: 4px;">
-        <a onclick="openHelp()">Help</a>
-        <a id="sourceToggleButton" onclick="toggleDataSource(this)" style="min-width: 79px">Load</a>
-        <a onclick="clearMap()">Clear</a>
+        <a onclick="toggleHelpBox(this)">Help</a>
+        <a id="sourceToggleButton" onclick="toggleDataSource(this)" style="min-width: 140px">Load</a>
       </div>
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div id="partyButtonDiv" style="display: inline-block;">
@@ -21,6 +20,38 @@
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
         <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Edit</a>
+        <a onclick="clearMap()">Clear</a>
+      </div>
+      <div class="loader" id="loader"></div>
+    </div>
+    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;">
+      <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
+        <div id="helpbox" class="box">
+          <h3 style="margin: 0px;">Help</h3>
+          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
+            - Load data map with the load button<br>
+            - Toggle data source with button or 1, 2 keys<br>
+            - Select data map date using slider<br>
+            - Clik any state to see more poll / projection data<br>
+            - Edit / Done button or enter key to edit map<br>
+            - Select party using 0, 1, 2 keys<br>
+            - Left click to cycle safe, likely, lean, tilt<br>
+            - Right click to cycle tilt, lean, likely, safe<br>
+            - Hold and drag to fill states<br>
+            <br>
+            * Poll avg states may display +100 if no polls exist<br>
+          </h5>
+        </div>
+        <br><br>
+      </div>
+      <div id="creditboxontainer" class="boxcontainer" style="">
+        <div id="creditbox" class="box">
+          <h3 style="margin: 0px;">Credits</h3>
+          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
+            + Credit to <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">yapms</a> for the map outline<br>
+            + Credit to <a href="https://projects.fivethirtyeight.com/polls" style="color: white;">fivethirtyeight</a> for the projection data
+          </h5>
+        </div>
       </div>
     </div>
     <div id="mapzoom" style="margin: 0px; zoom: 120%;">
@@ -161,7 +192,7 @@
         </g>
       </svg>
     </div>
-    <span class="slidecontainer" style="user-select: none; -webkit-user-select: none;">
+    <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
       <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentDataSource, this.max-this.value)">
     </span>
     <h3 id="dateDisplay" style="display: inline; color: white; padding-left: 20px; user-select: none; -webkit-user-select: none;"></h3>

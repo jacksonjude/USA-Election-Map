@@ -7,6 +7,9 @@ const dataSourceTypes = [kProjectionSource, kPollAverageSource]
 
 var currentDataSource = kPollAverageSource
 
+const projectionDataRegionURL = "https://projects.fivethirtyeight.com/2020-election-forecast/"
+const pollDataRegionURL = "https://projects.fivethirtyeight.com/polls/president-general/"
+
 var selectedPartyID
 var partyIDs = ["DEM", "REP"]
 var partyCandiates = {"Biden":0, "Trump":1}
@@ -16,11 +19,15 @@ var challengerPartyNum
 var marginColorValues = [15, 5, 1, 0]
 var marginColors = [["#1c408c", "#587ccc", "#8aafff", "#949bb3"], ["#be1c29", "#ff5864", "#ff8b98", "#cf8980"]]
 
-var regionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
+const regionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
-var regionEV = {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":4, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3}
+const regionEV = {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":4, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3}
 
-var ev2016 = {"AL":1, "AK":1, "AZ":1, "AR":1, "CA":0, "CO":0, "CT":0, "DE":0, "DC":0, "FL":1, "GA":1, "HI":0, "ID":1, "IL":0, "IN":1, "IA":1, "KS":1, "KY":1, "LA":1, "ME-D1":0, "ME-D2":1, "ME-AL":0, "MD":0, "MA":0, "MI":1, "MN":0, "MS":1, "MO":1, "MT":1, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":1, "NV":0, "NH":0, "NJ":0, "NM":0, "NY":0, "NC":1, "ND":1, "OH":1, "OK":1, "OR":0, "PA":1, "RI":0, "SC":1, "SD":1, "TN":1, "TX":1, "UT":1, "VT":0, "VA":0, "WA":0, "WV":1, "WI":1, "WY":1}
+const ev2016 = {"AL":1, "AK":1, "AZ":1, "AR":1, "CA":0, "CO":0, "CT":0, "DE":0, "DC":0, "FL":1, "GA":1, "HI":0, "ID":1, "IL":0, "IN":1, "IA":1, "KS":1, "KY":1, "LA":1, "ME-D1":0, "ME-D2":1, "ME-AL":0, "MD":0, "MA":0, "MI":1, "MN":0, "MS":1, "MO":1, "MT":1, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":1, "NV":0, "NH":0, "NJ":0, "NM":0, "NY":0, "NC":1, "ND":1, "OH":1, "OK":1, "OR":0, "PA":1, "RI":0, "SC":1, "SD":1, "TN":1, "TX":1, "UT":1, "VT":0, "VA":0, "WA":0, "WV":1, "WI":1, "WY":1}
+
+const regionIDToProjectionName = {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}
+
+const regionIDToPollName = {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine", "ME-D2":"maine", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska", "NE-D2":"nebraska", "NE-D3":"nebraska", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}
 
 var regionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
@@ -42,45 +49,59 @@ const kViewing = 1
 
 var currentMapState = kViewing
 
+var showingHelpBox = false
+
 $(function() {
   $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-170) + "px")
+  $("#loader").hide()
 
   populateRegionsArray()
+  recalculatePartyTotals()
   //loadDataMap(currentDataSource)
 })
 
-async function loadDataMap(dataSourceType)
+function loadDataMap(dataSourceType)
 {
-  if (!(dataSourceType in cachedRawMapData))
-  {
-    var urlToUse
-    switch (currentDataSource)
+  var loadDataMapPromise = new Promise(async (resolve, reject) => {
+    if (!(dataSourceType in cachedRawMapData))
     {
-      case kProjectionSource:
-      urlToUse = projectionDataURL
-      break
+      var urlToUse
+      switch (currentDataSource)
+      {
+        case kProjectionSource:
+        urlToUse = projectionDataURL
+        break
 
-      case kPollAverageSource:
-      urlToUse = pollAverageDataURL
-      break
+        case kPollAverageSource:
+        urlToUse = pollAverageDataURL
+        break
+      }
+      rawMapData = await fetchMapData(urlToUse)
+
+      cachedRawMapData[dataSourceType] = rawMapData.concat()
     }
-    rawMapData = await fetchMapData(urlToUse)
+    else
+    {
+      rawMapData = cachedRawMapData[dataSourceType].concat()
+    }
 
-    cachedRawMapData[dataSourceType] = rawMapData.concat()
-  }
-  else
-  {
-    rawMapData = cachedRawMapData[dataSourceType].concat()
-  }
+    setDataMapDateSliderRange()
+    displayDataMap(dataSourceType)
+    $("#dataMapDateSliderContainer").show()
+    $("#dateDisplay").show()
 
-  setDataMapDateSliderRange()
-  displayDataMap(dataSourceType)
+    resolve()
+  })
+
+  return loadDataMapPromise
 }
 
 function fetchMapData(url)
 {
   var fetchMapDataPromise = new Promise((resolve, reject) => {
+    $("#loader").show()
     $.get(url, null, function(data) {
+      $("#loader").hide()
       resolve(data)
     })
   })
@@ -108,7 +129,7 @@ function setDataMapDateSliderRange()
   var startDate = new Date(lastRow.split(",")[modelDateColumn])
   var endDate = new Date(firstRow.split(",")[modelDateColumn])
 
-  var dayCount = Math.round((endDate.getTime()-startDate.getTime())/(1000*60*60*24))
+  var dayCount = Math.round((endDate.getTime()-startDate.getTime()+((endDate.getTimezoneOffset()-startDate.getTimezoneOffset())*60*1000))/(1000*60*60*24))
   $("#dataMapDateSlider").attr("max", dayCount)
   if (currentSliderDate == null)
   {
@@ -117,7 +138,7 @@ function setDataMapDateSliderRange()
   }
   else
   {
-    var previousSliderDateValue = Math.round((currentSliderDate.getTime()-startDate.getTime())/(1000*60*60*24))
+    var previousSliderDateValue = Math.round((currentSliderDate.getTime()-startDate.getTime()+((endDate.getTimezoneOffset() - startDate.getTimezoneOffset())*60*1000))/(1000*60*60*24))
     if (previousSliderDateValue < 0)
     {
       $("#dataMapDateSlider").val(0)
@@ -144,7 +165,17 @@ function displayDataMap(dataSourceType, daysAgo)
 {
   daysAgo = daysAgo || $("#dataMapDateSlider").attr('max')-$("#dataMapDateSlider").val()
 
-  var dateToDisplay = new Date(dataMapEndDate.getTime()-daysAgo*1000*60*60*24)
+  var dateToDisplay = new Date(dataMapEndDate.getTime()-daysAgo*1000*60*60*24) //To fix: This terrible timezone workaround code
+  var hoursToAdd
+  if (dateToDisplay.getHours() < 12)
+  {
+    hoursToAdd = -dateToDisplay.getHours()
+  }
+  else
+  {
+    hoursToAdd = 24-dateToDisplay.getHours()
+  }
+  dateToDisplay = new Date(dateToDisplay.getTime()+hoursToAdd*1000*60*60)
   updateSliderDateDisplay(dateToDisplay)
 
   mapData = extractDataMapDate(rawMapData, dateToDisplay)
@@ -283,11 +314,11 @@ function updateDataSourceButton(buttonDiv)
   switch (currentDataSource)
   {
     case kPollAverageSource:
-    $(buttonDiv).html("Poll Avg")
+    $(buttonDiv).html("Source: Poll Avg")
     break
 
     case kProjectionSource:
-    $(buttonDiv).html("Projection")
+    $(buttonDiv).html("Source: Projection")
     break
   }
 }
@@ -303,6 +334,24 @@ function clearMap()
 
     updateRegionFillColors(regionIDsToFill, regionData)
   })
+
+  $("#dataMapDateSliderContainer").hide()
+  $("#dateDisplay").hide()
+  $("#sourceToggleButton").html("Load")
+  currentDataSource = kPollAverageSource
+}
+
+function toggleHelpBox(helpButtonDiv)
+{
+  showingHelpBox = !showingHelpBox
+  if (showingHelpBox)
+  {
+    $("#helpboxcontainer").show()
+  }
+  else
+  {
+    $("#helpboxcontainer").hide()
+  }
 }
 
 function populateRegionsArray()
@@ -367,13 +416,18 @@ function toggleEditing()
     currentMapState = kViewing
     selectAllParties()
     $("#editDoneButton").html("Edit")
+
+    if (dataMapLoaded && currentRegionID)
+    {
+      updateStateBox(currentRegionID)
+    }
   }
   else if (currentMapState == kViewing)
   {
     currentMapState = kEditing
     deselectAllParties()
     $("#editDoneButton").html("Done")
-    $("#stateboxcontainer").css("display", "none")
+    $("#stateboxcontainer").hide()
   }
 }
 
@@ -426,9 +480,18 @@ function leftClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
   }
-  else if (currentMapState == kViewing)
+  else if (currentMapState == kViewing && currentRegionID)
   {
-    //Link to 538 forecast
+    switch (currentDataSource)
+    {
+      case kProjectionSource:
+      window.open(projectionDataRegionURL + regionIDToProjectionName[currentRegionID])
+      break
+
+      case kPollAverageSource:
+      window.open(pollDataRegionURL + regionIDToPollName[currentRegionID])
+      break
+    }
   }
 }
 
@@ -564,12 +627,16 @@ function recalculatePartyTotals()
   }
 }
 
-document.addEventListener('keypress', function(e) {
+document.addEventListener('keypress', async function(e) {
   if (dataMapLoaded && currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < dataSourceTypes.length)
   {
     currentDataSource = dataSourceTypes[e.which-49]
     updateDataSourceButton($("#sourceToggleButton")[0])
-    loadDataMap(currentDataSource)
+    await loadDataMap(currentDataSource)
+    if (currentRegionID)
+    {
+      updateStateBox(currentRegionID)
+    }
   }
   else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= partyIDs.length)
   {
@@ -625,15 +692,20 @@ function mouseEnteredRegion(div)
   }
   else if (currentMapState == kViewing && dataMapLoaded)
   {
-    var regionData = getRegionData(regionID)[0]
-    if (regionData.party == -1) { return }
-    $("#stateboxcontainer").css("display", "block")
-
-    var regionMarginString
-    var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
-    regionMarginString = getKeyByValue(partyCandiates, regionData.party) + " +" + roundedMarginValue
-    $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + regionMarginString)
+    updateStateBox(regionID)
   }
+}
+
+function updateStateBox(regionID)
+{
+  var regionData = getRegionData(regionID)[0]
+  if (regionData.party == -1) { return }
+  $("#stateboxcontainer").show()
+
+  var regionMarginString
+  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
+  regionMarginString = getKeyByValue(partyCandiates, regionData.party) + " +" + roundedMarginValue
+  $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + regionMarginString)
 }
 
 function mouseLeftRegion(div)
@@ -646,7 +718,7 @@ function mouseLeftRegion(div)
 
   if (currentMapState == kViewing)
   {
-    $("#stateboxcontainer").css("display", "none")
+    $("#stateboxcontainer").hide()
   }
 }
 
