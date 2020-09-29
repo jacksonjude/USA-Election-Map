@@ -107,6 +107,11 @@ async function downloadAllMapData()
 
   var endDate = getDateRange(cachedRawMapData[dataSourceTypes[0]], dataSourceTypes[0])[1]
   $("#downloadButton").html("Download (" + (endDate.getMonth()+1) + "/" + endDate.getDate() + ")")
+
+  if (dataMapLoaded)
+  {
+    loadDataMap(currentDataSource)
+  }
 }
 
 function fetchMapData(url)
