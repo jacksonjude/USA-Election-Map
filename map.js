@@ -230,11 +230,11 @@ function displayDataMap(dataSourceType, daysAgo)
       {
         if (partyCandiateFullNames[mapDataRows[rowNum].candidate_name] == incumbentPartyNum)
         {
-          marginSum += parseFloat(mapDataRows[rowNum].pct_estimate)
+          marginSum += parseFloat(mapDataRows[rowNum].pct_trend_adjusted)
         }
         else
         {
-          marginSum -= parseFloat(mapDataRows[rowNum].pct_estimate)
+          marginSum -= parseFloat(mapDataRows[rowNum].pct_trend_adjusted)
         }
       }
       mapDataTmp.push({state: regionToFind, margin: marginSum})
@@ -246,9 +246,17 @@ function displayDataMap(dataSourceType, daysAgo)
 
   for (regionNum in mapData)
   {
-    var regionData = mapData[regionNum]
-    var regionID = regionNameToID[regionData.state]
-    var margin = regionData.margin
+    var mapRegionData = mapData[regionNum]
+    var regionID = regionNameToID[mapRegionData.state]
+    var margin = mapRegionData.margin
+
+    var chanceInc
+    var chanceChal
+    if (currentDataSource == kProjectionSource)
+    {
+      chanceInc = mapRegionData.winstate_inc
+      chanceChal = mapRegionData.winstate_chal
+    }
 
     var partyTilt
     if (Math.sign(margin) == -1)
@@ -266,6 +274,8 @@ function displayDataMap(dataSourceType, daysAgo)
 
     regionData.margin = Math.abs(margin)
     regionData.party = partyTilt
+    regionData.chanceInc = chanceInc
+    regionData.chanceChal = chanceChal
 
     updateRegionFillColors(regionsToFill, regionData)
   }
@@ -615,14 +625,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData)
   }
   else
   {
-    for (marginValueNum in marginColorValues)
-    {
-      if (Math.abs(regionData.margin) >= marginColorValues[marginValueNum])
-      {
-        fillColor = marginColors[regionData.party][marginValueNum]
-        break
-      }
-    }
+    fillColor = getFillColorForMargin(regionData.margin, regionData.party)
   }
 
   for (regionIDNum in regionIDsToUpdate)
@@ -633,6 +636,17 @@ function updateRegionFillColors(regionIDsToUpdate, regionData)
   }
 
   recalculatePartyTotals()
+}
+
+function getFillColorForMargin(margin, party)
+{
+  for (marginValueNum in marginColorValues)
+  {
+    if (Math.abs(margin) >= marginColorValues[marginValueNum])
+    {
+      return marginColors[party][marginValueNum]
+    }
+  }
 }
 
 function recalculatePartyTotals()
@@ -732,7 +746,19 @@ function updateStateBox(regionID)
   var regionMarginString
   var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
   regionMarginString = getKeyByValue(partyCandiates, regionData.party) + " +" + roundedMarginValue
-  $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + regionMarginString)
+
+  if (currentDataSource == kProjectionSource)
+  {
+    regionMarginString += "<br>"
+    regionMarginString += "<span style='color: " + marginColors[challengerPartyNum][2] + "'>"
+    regionMarginString += decimalPadding(Math.round(regionData.chanceChal*1000)/10)
+    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + marginColors[incumbentPartyNum][2] + "'>"
+    regionMarginString += decimalPadding(Math.round(regionData.chanceInc*1000)/10)
+    regionMarginString += "%<span>"
+  }
+  //Couldn't get safe colors to look good
+  // + "<span style='color: " + getFillColorForMargin(roundedMarginValue, regionData.party) + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
+  $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + "<span style='color: " + marginColors[regionData.party][2] + ";'>" + regionMarginString + "</span>")
 }
 
 function mouseLeftRegion(div)
