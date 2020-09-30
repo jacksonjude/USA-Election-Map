@@ -43,6 +43,8 @@ var dataMapStartDate
 var dataMapEndDate
 
 var currentSliderDate
+const initialKeyPressDelay = 300
+const zoomKeyPressDelay = 30
 
 const kEditing = 0
 const kViewing = 1
@@ -693,50 +695,133 @@ function updateStateBox(regionID)
   $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + "<span style='color: " + marginColors[regionData.party][2] + ";'>" + regionMarginString + "</span>")
 }
 
+var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
+
 document.addEventListener('keydown', function(e) {
   if (e.which >= 37 && e.which <= 40 && dataMapLoaded)
   {
-    var sliderDiv = $("#dataMapDateSlider")[0]
-
     switch (e.which)
     {
       case 37:
-      if (sliderDiv.value == 0) { return }
-      sliderDiv.value -= 1
+      if (arrowKeysDown.left > 0) { return }
+      arrowKeysDown.left = 1
+      setTimeout(function() { arrowKeyCycle("left") }, initialKeyPressDelay)
+
+      incrementSlider("left")
       break
 
       case 39:
-      if (sliderDiv.value == sliderDiv.max) { return }
-      sliderDiv.value -= -1 //WHY DO I HAVE TO DO THIS BS
+      if (arrowKeysDown.right > 0) { return }
+      arrowKeysDown.right = 1
+      setTimeout(function() { arrowKeyCycle("right") }, initialKeyPressDelay)
+
+      incrementSlider("right")
       break
 
       case 40:
-      if (sliderDiv.value == 0) { return }
-      if (sliderDiv.value < 5)
-      {
-        sliderDiv.value = 0
-      }
-      else
-      {
-        sliderDiv.value -= 5
-      }
+      if (arrowKeysDown.down > 0) { return }
+      arrowKeysDown.down = 1
+      setTimeout(function() { arrowKeyCycle("down") }, initialKeyPressDelay)
+
+      incrementSlider("down")
       break
 
       case 38:
-      if (sliderDiv.value == sliderDiv.max) { return }
-      if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
-      {
-        sliderDiv.value = sliderDiv.max
-      }
-      else
-      {
-        sliderDiv.value -= -5 //WHY DO I HAVE TO DO THIS BS
-      }
+      if (arrowKeysDown.up > 0) { return }
+      arrowKeysDown.up = 1
+      setTimeout(function() { arrowKeyCycle("up") }, initialKeyPressDelay)
+
+      incrementSlider("up")
       break
     }
+  }
+})
 
-    displayDataMap(currentDataSource, sliderDiv.max-sliderDiv.value)
+function arrowKeyCycle(keyString)
+{
+  switch (arrowKeysDown[keyString])
+  {
+    case 0:
+    break
+
+    case 1:
+    arrowKeysDown[keyString] = 2
+    case 2:
+    incrementSlider(keyString)
+    setTimeout(function() { arrowKeyCycle(keyString) }, zoomKeyPressDelay)
+    break
+  }
+}
+
+function incrementSlider(keyString)
+{
+  var sliderDiv = $("#dataMapDateSlider")[0]
+
+  switch (keyString)
+  {
+    case "left":
+    if (sliderDiv.value == 0) { return }
+    sliderDiv.value -= 1
+    break
+
+    case "right":
+    if (sliderDiv.value == sliderDiv.max) { return }
+    sliderDiv.value -= -1 //WHY DO I HAVE TO DO THIS BS
+    break
+
+    case "down":
+    if (sliderDiv.value == 0) { return }
+    if (sliderDiv.value < 5)
+    {
+      sliderDiv.value = 0
+    }
+    else
+    {
+      sliderDiv.value -= 5
+    }
+    break
+
+    case "up":
+    if (sliderDiv.value == sliderDiv.max) { return }
+    if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
+    {
+      sliderDiv.value = sliderDiv.max
+    }
+    else
+    {
+      sliderDiv.value -= -5 //WHY DO I HAVE TO DO THIS BS
+    }
+    break
+  }
+
+  displayDataMap(currentDataSource, sliderDiv.max-sliderDiv.value)
+  if (currentRegionID)
+  {
     updateStateBox(currentRegionID)
+  }
+}
+
+document.addEventListener('keyup', function(e) {
+  if (e.which >= 37 && e.which <= 40 && dataMapLoaded)
+  {
+    switch (e.which)
+    {
+      case 37:
+      arrowKeysDown.left = 0
+      break
+
+      case 39:
+      arrowKeysDown.right = 0
+      break
+
+      case 40:
+      arrowKeysDown.down = 0
+      break
+
+      case 38:
+      arrowKeysDown.up = 0
+      break
+    }
   }
 })
 
