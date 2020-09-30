@@ -749,12 +749,13 @@ function updateStateBox(regionID)
 
   if (currentDataSource == kProjectionSource)
   {
-    regionMarginString += "<br></span><br>"
-    regionMarginString += "<span style='color: " + marginColors[challengerPartyNum][2] + "'>"
+    //
+    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
+    regionMarginString += "<span style='color: " + marginColors[challengerPartyNum][2] + ";'>"
     regionMarginString += decimalPadding(Math.round(regionData.chanceChal*1000)/10)
-    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + marginColors[incumbentPartyNum][2] + "'>"
+    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + marginColors[incumbentPartyNum][2] + ";'>"
     regionMarginString += decimalPadding(Math.round(regionData.chanceInc*1000)/10)
-    regionMarginString += "%</span>"
+    regionMarginString += "%</span></span>"
   }
   //Couldn't get safe colors to look good
   // + "<span style='color: " + getFillColorForMargin(roundedMarginValue, regionData.party) + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
