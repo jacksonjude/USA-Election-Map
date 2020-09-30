@@ -668,6 +668,78 @@ function recalculatePartyTotals()
   }
 }
 
+function updateStateBox(regionID)
+{
+  var regionData = getRegionData(regionID)[0]
+  if (regionData.party == -1) { return }
+  $("#stateboxcontainer").show()
+
+  var regionMarginString
+  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
+  regionMarginString = getKeyByValue(partyCandiates, regionData.party) + " +" + roundedMarginValue
+
+  if (currentDataSource == kProjectionSource)
+  {
+    //
+    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
+    regionMarginString += "<span style='color: " + marginColors[challengerPartyNum][2] + ";'>"
+    regionMarginString += decimalPadding(Math.round(regionData.chanceChal*1000)/10)
+    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + marginColors[incumbentPartyNum][2] + ";'>"
+    regionMarginString += decimalPadding(Math.round(regionData.chanceInc*1000)/10)
+    regionMarginString += "%</span></span>"
+  }
+  //Couldn't get safe colors to look good
+  // + "<span style='color: " + getFillColorForMargin(roundedMarginValue, regionData.party) + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
+  $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + "<span style='color: " + marginColors[regionData.party][2] + ";'>" + regionMarginString + "</span>")
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.which >= 37 && e.which <= 40 && dataMapLoaded)
+  {
+    var sliderDiv = $("#dataMapDateSlider")[0]
+
+    switch (e.which)
+    {
+      case 37:
+      if (sliderDiv.value == 0) { return }
+      sliderDiv.value -= 1
+      break
+
+      case 39:
+      if (sliderDiv.value == sliderDiv.max) { return }
+      sliderDiv.value -= -1 //WHY DO I HAVE TO DO THIS BS
+      break
+
+      case 40:
+      if (sliderDiv.value == 0) { return }
+      if (sliderDiv.value < 5)
+      {
+        sliderDiv.value = 0
+      }
+      else
+      {
+        sliderDiv.value -= 5
+      }
+      break
+
+      case 38:
+      if (sliderDiv.value == sliderDiv.max) { return }
+      if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
+      {
+        sliderDiv.value = sliderDiv.max
+      }
+      else
+      {
+        sliderDiv.value -= -5 //WHY DO I HAVE TO DO THIS BS
+      }
+      break
+    }
+
+    displayDataMap(currentDataSource, sliderDiv.max-sliderDiv.value)
+    updateStateBox(currentRegionID)
+  }
+})
+
 document.addEventListener('keypress', async function(e) {
   if (dataMapLoaded && currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < dataSourceTypes.length)
   {
@@ -735,31 +807,6 @@ function mouseEnteredRegion(div)
   {
     updateStateBox(regionID)
   }
-}
-
-function updateStateBox(regionID)
-{
-  var regionData = getRegionData(regionID)[0]
-  if (regionData.party == -1) { return }
-  $("#stateboxcontainer").show()
-
-  var regionMarginString
-  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
-  regionMarginString = getKeyByValue(partyCandiates, regionData.party) + " +" + roundedMarginValue
-
-  if (currentDataSource == kProjectionSource)
-  {
-    //
-    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
-    regionMarginString += "<span style='color: " + marginColors[challengerPartyNum][2] + ";'>"
-    regionMarginString += decimalPadding(Math.round(regionData.chanceChal*1000)/10)
-    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + marginColors[incumbentPartyNum][2] + ";'>"
-    regionMarginString += decimalPadding(Math.round(regionData.chanceInc*1000)/10)
-    regionMarginString += "%</span></span>"
-  }
-  //Couldn't get safe colors to look good
-  // + "<span style='color: " + getFillColorForMargin(roundedMarginValue, regionData.party) + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + "<span style='color: " + marginColors[regionData.party][2] + ";'>" + regionMarginString + "</span>")
 }
 
 function mouseLeftRegion(div)
