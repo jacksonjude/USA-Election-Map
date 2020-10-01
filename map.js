@@ -71,7 +71,7 @@ $(function() {
   }, 1000-((new Date()).getTime()%1000))
 })
 
-function loadDataMap(dataSourceType)
+function loadDataMap(dataSourceType, shouldSetToMax)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     if (!(dataSourceType in cachedRawMapData))
@@ -86,7 +86,7 @@ function loadDataMap(dataSourceType)
       rawMapData = cachedRawMapData[dataSourceType].concat()
     }
 
-    setDataMapDateSliderRange()
+    setDataMapDateSliderRange(shouldSetToMax)
     displayDataMap(dataSourceType)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
@@ -121,7 +121,7 @@ async function downloadAllMapData()
 
   if (dataMapLoaded)
   {
-    loadDataMap(currentDataSource)
+    loadDataMap(currentDataSource, true)
   }
 }
 
@@ -161,15 +161,17 @@ function getDateRange(mapData, dataSourceType)
   return [startDate, endDate]
 }
 
-function setDataMapDateSliderRange()
+function setDataMapDateSliderRange(shouldSetToMax)
 {
+  shouldSetToMax = shouldSetToMax || false
+
   var dateRangeCallback = getDateRange(rawMapData, currentDataSource)
   var startDate = dateRangeCallback[0]
   var endDate = dateRangeCallback[1]
 
   var dayCount = Math.round((endDate.getTime()-startDate.getTime()+((endDate.getTimezoneOffset()-startDate.getTimezoneOffset())*60*1000))/(1000*60*60*24))
   $("#dataMapDateSlider").attr("max", dayCount)
-  if (currentSliderDate == null)
+  if (currentSliderDate == null || shouldSetToMax)
   {
     $("#dataMapDateSlider").val(dayCount)
     currentSliderDate = endDate
