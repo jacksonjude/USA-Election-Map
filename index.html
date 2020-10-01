@@ -27,44 +27,11 @@
         <a onclick="clearMap()">Clear</a>
       </div>
       <div class="loader" id="loader"></div>
-    </div>
-    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;">
-      <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
-        <div id="helpbox" class="box">
-          <h3 style="margin: 0px;">Help</h3>
-          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
-            - Download button: Pre-load data map sources<br>
-            - Load button: Display data map<br>
-            - Source button / 1 & 2 keys: Toggle data source<br>
-            - Slider / arrow keys: Select data map date<br>
-            &nbsp;&nbsp;&nbsp;D=-5, L=-1, R=+1, U=+5<br>
-            - Click state: View more poll / projection data<br>
-            <br>
-            - Edit & Done button / enter key: Edit map<br>
-            - Party buttons / 0, 1, 2 keys: Select party<br>
-            - Left click state: Cycle safe, likely, lean, tilt<br>
-            - Right click state: Cycle tilt, lean, likely, safe<br>
-            - Hold and drag: Fill states<br>
-            <br>
-            * Poll avg states may display +100 if no polls exist<br>
-            * Projection states will display projected margin<br>
-            &nbsp;&nbsp;&nbsp;then percent chances for each candidate
-          </h5>
-        </div>
-        <br><br>
-      </div>
-      <div id="creditboxontainer" class="boxcontainer" style="">
-        <div id="creditbox" class="box">
-          <h3 style="margin: 0px;">Credits</h3>
-          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
-            <a href="https://www.yapms.com/app/?t=USA_2020_presidential"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">yapms</a> for the map outline<br>
-            <a href="https://projects.fivethirtyeight.com/polls/president-general/"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">fivethirtyeight</a> for the projection data<br>
-            <a href="https://github.com/jacksonjude/Election-2020-Map"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Source code on <a href="https://github.com/jacksonjude/Election-2020-Map" style="color: white;">GitHub</a>
-          </h5>
-        </div>
+      <div style="position: relative; float: right; right: 20px; display: inline-block; margin-top: 4px;">
+        <a href="https://vote.org" id="electionCountdownDisplay" style="min-width: 252px; font-size: 25px; padding: 8.5px 16px;"></a>
       </div>
     </div>
-    <div id="mapzoom" style="margin: 0px; zoom: 120%;">
+    <div id="mapzoom" style="margin: 0px; zoom: 120%; position: relative; float: left; margin-left: 25px;">
       <svg width="921px" height="585px" id="svgdata" style="overflow: visible; padding-top: 10px; padding-bottom: 20px;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
         <g id="outlines" style="stroke: rgb(24, 25, 34); stroke-width: 1.125px;">
          <!-- <path (.+?)/> -->
@@ -202,10 +169,48 @@
         </g>
       </svg>
     </div>
-    <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
-      <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentDataSource, this.max-this.value)">
-    </span>
-    <h3 id="dateDisplay" style="display: inline; color: white; padding-left: 20px; user-select: none; -webkit-user-select: none;"></h3>
+    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;">
+      <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
+        <div id="helpbox" class="box">
+          <h3 style="margin: 0px;">Help</h3>
+          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
+            - Download button: Pre-load data map sources<br>
+            - Load button: Display data map<br>
+            - Source button / 1 & 2 keys: Toggle data source<br>
+            - Slider / arrow keys: Select data map date<br>
+            &nbsp;&nbsp;&nbsp;D=-5, L=-1, R=+1, U=+5<br>
+            - Click state: View more poll / projection data<br>
+            <br>
+            - Edit & Done button / enter key: Edit map<br>
+            - Party buttons / 0, 1, 2 keys: Select party<br>
+            - Left click state: Cycle safe, likely, lean, tilt<br>
+            - Right click state: Cycle tilt, lean, likely, safe<br>
+            - Hold and drag: Fill states<br>
+            <br>
+            * Poll avg states may display +100 if no polls exist<br>
+            * Projection states will display projected margin<br>
+            &nbsp;&nbsp;&nbsp;then percent chances for each candidate
+          </h5>
+        </div>
+        <br><br>
+      </div>
+      <div id="creditboxontainer" class="boxcontainer" style="">
+        <div id="creditbox" class="box">
+          <h3 style="margin: 0px;">Credits</h3>
+          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
+            <a href="https://www.yapms.com/app/?t=USA_2020_presidential"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">yapms</a> for the map outline<br>
+            <a href="https://projects.fivethirtyeight.com/polls/president-general/"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">fivethirtyeight</a> for the projection data<br>
+            <a href="https://github.com/jacksonjude/Election-2020-Map"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Source code on <a href="https://github.com/jacksonjude/Election-2020-Map" style="color: white;">GitHub</a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div style="position: relative; float: left; left: 45px;">
+      <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
+        <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentDataSource, this.max-this.value)">
+      </span>
+      <h3 id="dateDisplay" style="display: inline; color: white; padding-left: 20px; user-select: none; -webkit-user-select: none;"></h3>
+    </div>
     <div id="stateboxcontainer" class="boxcontainer" style="display: none; position: fixed; pointer-events: none; user-select: none; -webkit-user-select: none;">
       <div id="statebox" class="box">
       </div>

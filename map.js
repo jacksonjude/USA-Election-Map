@@ -53,6 +53,8 @@ var currentMapState = kViewing
 
 var showingHelpBox = false
 
+const electionDayTime = 1604390400000
+
 $(function() {
   $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-170) + "px")
   $("#loader").hide()
@@ -60,6 +62,13 @@ $(function() {
   populateRegionsArray()
   recalculatePartyTotals()
   //loadDataMap(currentDataSource)
+
+  updateElectionDayCountdown()
+  setTimeout(function() {
+    setInterval(function() {
+      updateElectionDayCountdown()
+    }, 1000)
+  }, 1000-((new Date()).getTime()%1000))
 })
 
 function loadDataMap(dataSourceType)
@@ -693,6 +702,19 @@ function updateStateBox(regionID)
   //Couldn't get safe colors to look good
   // + "<span style='color: " + getFillColorForMargin(roundedMarginValue, regionData.party) + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
   $("#statebox").html(getKeyByValue(regionNameToID, currentRegionID) + "<br>" + "<span style='color: " + marginColors[regionData.party][2] + ";'>" + regionMarginString + "</span>")
+}
+
+function updateElectionDayCountdown()
+{
+  var currentDate = new Date()
+  var timeUntilElectionDay = electionDayTime-currentDate.getTime()
+
+  var daysUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60*24))
+  var hoursUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60)%24)
+  var minutesUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60)%60)
+  var secondsUntilElectionDay = Math.floor(timeUntilElectionDay/1000%60)
+
+  $("#electionCountdownDisplay").html(daysUntilElectionDay + "<span style='font-size: 16px;'> day" + (daysUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilElectionDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilElectionDay) + "<span style='font-size: 16px;'> min" + (minutesUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilElectionDay) + "<span style='font-size: 16px;'> s" + "</span>")
 }
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
