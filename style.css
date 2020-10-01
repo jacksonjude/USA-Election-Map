@@ -1,10 +1,15 @@
 @font-face {
-  font-family: 'Bree5erif';
+  font-family: 'Bree5erif-Regular';
   src: url("./assets/Bree5erif-Regular.ttf");
 }
 
+@font-face {
+  font-family: 'Bree5erif-Mono';
+  src: url("./assets/Bree5erif-Mono.ttf");
+}
+
 body {
-  font-family: 'Bree5erif';
+  font-family: 'Bree5erif-Regular';
 }
 
 .topnav {
