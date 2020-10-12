@@ -1,0 +1,561 @@
+date,region,margin
+11/30/2018,California,-15
+11/30/2018,Connecticut,-15
+11/30/2018,Delaware,-15
+11/30/2018,Washington DC,-15
+11/30/2018,Hawaii,-15
+11/30/2018,Illinois,-15
+11/30/2018,Maine 1st CD,-15
+11/30/2018,Maryland,-15
+11/30/2018,Massachusetts,-15
+11/30/2018,New Jersey,-15
+11/30/2018,New Mexico,-15
+11/30/2018,New York,-15
+11/30/2018,Oregon,-15
+11/30/2018,Rhode Island,-15
+11/30/2018,Vermont,-15
+11/30/2018,Washington,-15
+11/30/2018,Colorado,-5
+11/30/2018,Virginia,-5
+11/30/2018,Maine,-1
+11/30/2018,Minnesota,-1
+11/30/2018,New Hampshire,-1
+11/30/2018,Nevada,-1
+11/30/2018,Arizona,0
+11/30/2018,Florida,0
+11/30/2018,Michigan,0
+11/30/2018,Pennsylvania,0
+11/30/2018,Wisconsin,0
+11/30/2018,Georgia,1
+11/30/2018,Iowa,1
+11/30/2018,Maine 2nd CD,1
+11/30/2018,Nebraska 2nd CD,1
+11/30/2018,North Carolina,1
+11/30/2018,Ohio,5
+11/30/2018,Texas,5
+11/30/2018,Alabama,15
+11/30/2018,Alaska,15
+11/30/2018,Arkansas,15
+11/30/2018,Idaho,15
+11/30/2018,Indiana,15
+11/30/2018,Kansas,15
+11/30/2018,Kentucky,15
+11/30/2018,Louisiana,15
+11/30/2018,Mississippi,15
+11/30/2018,Missouri,15
+11/30/2018,Montana,15
+11/30/2018,Nebraska,15
+11/30/2018,Nebraska 1st CD,15
+11/30/2018,Nebraska 3rd CD,15
+11/30/2018,North Dakota,15
+11/30/2018,Oklahoma,15
+11/30/2018,South Carolina,15
+11/30/2018,South Dakota,15
+11/30/2018,Tennessee,15
+11/30/2018,Utah,15
+11/30/2018,West Virginia,15
+11/30/2018,Wyoming,15
+01/09/2019,California,-15
+01/09/2019,Connecticut,-15
+01/09/2019,Delaware,-15
+01/09/2019,Washington DC,-15
+01/09/2019,Hawaii,-15
+01/09/2019,Illinois,-15
+01/09/2019,Maine 1st CD,-15
+01/09/2019,Maryland,-15
+01/09/2019,Massachusetts,-15
+01/09/2019,New Jersey,-15
+01/09/2019,New Mexico,-15
+01/09/2019,New York,-15
+01/09/2019,Oregon,-15
+01/09/2019,Rhode Island,-15
+01/09/2019,Vermont,-15
+01/09/2019,Washington,-15
+01/09/2019,Colorado,-5
+01/09/2019,Virginia,-5
+01/09/2019,Maine,-1
+01/09/2019,Minnesota,-1
+01/09/2019,New Hampshire,-1
+01/09/2019,Nevada,-1
+01/09/2019,Arizona,0
+01/09/2019,Florida,0
+01/09/2019,Michigan,0
+01/09/2019,Pennsylvania,0
+01/09/2019,Wisconsin,0
+01/09/2019,Georgia,1
+01/09/2019,Iowa,1
+01/09/2019,Maine 2nd CD,1
+01/09/2019,Nebraska 2nd CD,1
+01/09/2019,North Carolina,1
+01/09/2019,Ohio,5
+01/09/2019,Texas,5
+01/09/2019,Alabama,15
+01/09/2019,Alaska,15
+01/09/2019,Arkansas,15
+01/09/2019,Idaho,15
+01/09/2019,Indiana,15
+01/09/2019,Kansas,15
+01/09/2019,Kentucky,15
+01/09/2019,Louisiana,15
+01/09/2019,Mississippi,15
+01/09/2019,Missouri,15
+01/09/2019,Montana,15
+01/09/2019,Nebraska,15
+01/09/2019,Nebraska 1st CD,15
+01/09/2019,Nebraska 3rd CD,15
+01/09/2019,North Dakota,15
+01/09/2019,Oklahoma,15
+01/09/2019,South Carolina,15
+01/09/2019,South Dakota,15
+01/09/2019,Tennessee,15
+01/09/2019,Utah,15
+01/09/2019,West Virginia,15
+01/09/2019,Wyoming,15
+09/29/2019,California,-15
+09/29/2019,Connecticut,-15
+09/29/2019,Delaware,-15
+09/29/2019,Washington DC,-15
+09/29/2019,Hawaii,-15
+09/29/2019,Illinois,-15
+09/29/2019,Maine 1st CD,-15
+09/29/2019,Maryland,-15
+09/29/2019,Massachusetts,-15
+09/29/2019,New Jersey,-15
+09/29/2019,New Mexico,-15
+09/29/2019,New York,-15
+09/29/2019,Oregon,-15
+09/29/2019,Rhode Island,-15
+09/29/2019,Vermont,-15
+09/29/2019,Washington,-15
+09/29/2019,Colorado,-5
+09/29/2019,Virginia,-5
+09/29/2019,Maine,-1
+09/29/2019,Michigan,-1
+09/29/2019,Minnesota,-1
+09/29/2019,New Hampshire,-1
+09/29/2019,Nevada,-1
+09/29/2019,Arizona,0
+09/29/2019,Florida,0
+09/29/2019,North Carolina,0
+09/29/2019,Pennsylvania,0
+09/29/2019,Wisconsin,0
+09/29/2019,Georgia,1
+09/29/2019,Iowa,1
+09/29/2019,Maine 2nd CD,1
+09/29/2019,Nebraska 2nd CD,1
+09/29/2019,Ohio,1
+09/29/2019,Texas,5
+09/29/2019,Alabama,15
+09/29/2019,Alaska,15
+09/29/2019,Arkansas,15
+09/29/2019,Idaho,15
+09/29/2019,Indiana,15
+09/29/2019,Kansas,15
+09/29/2019,Kentucky,15
+09/29/2019,Louisiana,15
+09/29/2019,Mississippi,15
+09/29/2019,Missouri,15
+09/29/2019,Montana,15
+09/29/2019,Nebraska,15
+09/29/2019,Nebraska 1st CD,15
+09/29/2019,Nebraska 3rd CD,15
+09/29/2019,North Dakota,15
+09/29/2019,Oklahoma,15
+09/29/2019,South Carolina,15
+09/29/2019,South Dakota,15
+09/29/2019,Tennessee,15
+09/29/2019,Utah,15
+09/29/2019,West Virginia,15
+09/29/2019,Wyoming,15
+10/29/2019,California,-15
+10/29/2019,Connecticut,-15
+10/29/2019,Delaware,-15
+10/29/2019,Washington DC,-15
+10/29/2019,Hawaii,-15
+10/29/2019,Illinois,-15
+10/29/2019,Maine 1st CD,-15
+10/29/2019,Maryland,-15
+10/29/2019,Massachusetts,-15
+10/29/2019,New Jersey,-15
+10/29/2019,New Mexico,-15
+10/29/2019,New York,-15
+10/29/2019,Oregon,-15
+10/29/2019,Rhode Island,-15
+10/29/2019,Vermont,-15
+10/29/2019,Washington,-15
+10/29/2019,Colorado,-5
+10/29/2019,Virginia,-5
+10/29/2019,Nevada,-5
+10/29/2019,Maine,-1
+10/29/2019,Michigan,-1
+10/29/2019,Minnesota,-1
+10/29/2019,New Hampshire,-1
+10/29/2019,Arizona,0
+10/29/2019,Florida,0
+10/29/2019,North Carolina,0
+10/29/2019,Pennsylvania,0
+10/29/2019,Wisconsin,0
+10/29/2019,Georgia,1
+10/29/2019,Iowa,1
+10/29/2019,Maine 2nd CD,1
+10/29/2019,Nebraska 2nd CD,1
+10/29/2019,Ohio,1
+10/29/2019,Texas,5
+10/29/2019,Alabama,15
+10/29/2019,Alaska,15
+10/29/2019,Arkansas,15
+10/29/2019,Idaho,15
+10/29/2019,Indiana,15
+10/29/2019,Kansas,15
+10/29/2019,Kentucky,15
+10/29/2019,Louisiana,15
+10/29/2019,Mississippi,15
+10/29/2019,Missouri,15
+10/29/2019,Montana,15
+10/29/2019,Nebraska,15
+10/29/2019,Nebraska 1st CD,15
+10/29/2019,Nebraska 3rd CD,15
+10/29/2019,North Dakota,15
+10/29/2019,Oklahoma,15
+10/29/2019,South Carolina,15
+10/29/2019,South Dakota,15
+10/29/2019,Tennessee,15
+10/29/2019,Utah,15
+10/29/2019,West Virginia,15
+10/29/2019,Wyoming,15
+03/09/2020,California,-15
+03/09/2020,Connecticut,-15
+03/09/2020,Delaware,-15
+03/09/2020,Washington DC,-15
+03/09/2020,Hawaii,-15
+03/09/2020,Illinois,-15
+03/09/2020,Maine 1st CD,-15
+03/09/2020,Maryland,-15
+03/09/2020,Massachusetts,-15
+03/09/2020,New Jersey,-15
+03/09/2020,New Mexico,-15
+03/09/2020,New York,-15
+03/09/2020,Oregon,-15
+03/09/2020,Rhode Island,-15
+03/09/2020,Vermont,-15
+03/09/2020,Washington,-15
+03/09/2020,Colorado,-5
+03/09/2020,Virginia,-5
+03/09/2020,Nevada,-5
+03/09/2020,Maine,-1
+03/09/2020,Minnesota,-1
+03/09/2020,New Hampshire,-1
+03/09/2020,Arizona,0
+03/09/2020,Florida,0
+03/09/2020,Nebraska 2nd CD,0
+03/09/2020,Michigan,0
+03/09/2020,North Carolina,0
+03/09/2020,Pennsylvania,0
+03/09/2020,Wisconsin,0
+03/09/2020,Georgia,1
+03/09/2020,Texas,1
+03/09/2020,Iowa,5
+03/09/2020,Maine 2nd CD,5
+03/09/2020,Ohio,5
+03/09/2020,Alabama,15
+03/09/2020,Alaska,15
+03/09/2020,Arkansas,15
+03/09/2020,Idaho,15
+03/09/2020,Indiana,15
+03/09/2020,Kansas,15
+03/09/2020,Kentucky,15
+03/09/2020,Louisiana,15
+03/09/2020,Mississippi,15
+03/09/2020,Missouri,15
+03/09/2020,Montana,15
+03/09/2020,Nebraska,15
+03/09/2020,Nebraska 1st CD,15
+03/09/2020,Nebraska 3rd CD,15
+03/09/2020,North Dakota,15
+03/09/2020,Oklahoma,15
+03/09/2020,South Carolina,15
+03/09/2020,South Dakota,15
+03/09/2020,Tennessee,15
+03/09/2020,Utah,15
+03/09/2020,West Virginia,15
+03/09/2020,Wyoming,15
+06/19/2020,California,-15
+06/19/2020,Connecticut,-15
+06/19/2020,Delaware,-15
+06/19/2020,Washington DC,-15
+06/19/2020,Hawaii,-15
+06/19/2020,Illinois,-15
+06/19/2020,Maine 1st CD,-15
+06/19/2020,Maryland,-15
+06/19/2020,Massachusetts,-15
+06/19/2020,New Jersey,-15
+06/19/2020,New Mexico,-15
+06/19/2020,New York,-15
+06/19/2020,Oregon,-15
+06/19/2020,Rhode Island,-15
+06/19/2020,Vermont,-15
+06/19/2020,Washington,-15
+06/19/2020,Colorado,-5
+06/19/2020,Virginia,-5
+06/19/2020,Nevada,-5
+06/19/2020,Maine,-1
+06/19/2020,Michigan,-1
+06/19/2020,Minnesota,-1
+06/19/2020,New Hampshire,-1
+06/19/2020,Arizona,0
+06/19/2020,Florida,0
+06/19/2020,Nebraska 2nd CD,0
+06/19/2020,North Carolina,0
+06/19/2020,Pennsylvania,0
+06/19/2020,Wisconsin,0
+06/19/2020,Georgia,1
+06/19/2020,Iowa,1
+06/19/2020,Ohio,1
+06/19/2020,Texas,1
+06/19/2020,Maine 2nd CD,5
+06/19/2020,Alabama,15
+06/19/2020,Alaska,15
+06/19/2020,Arkansas,15
+06/19/2020,Idaho,15
+06/19/2020,Indiana,15
+06/19/2020,Kansas,15
+06/19/2020,Kentucky,15
+06/19/2020,Louisiana,15
+06/19/2020,Mississippi,15
+06/19/2020,Missouri,15
+06/19/2020,Montana,15
+06/19/2020,Nebraska,15
+06/19/2020,Nebraska 1st CD,15
+06/19/2020,Nebraska 3rd CD,15
+06/19/2020,North Dakota,15
+06/19/2020,Oklahoma,15
+06/19/2020,South Carolina,15
+06/19/2020,South Dakota,15
+06/19/2020,Tennessee,15
+06/19/2020,Utah,15
+06/19/2020,West Virginia,15
+06/19/2020,Wyoming,15
+07/14/2020,California,-15
+07/14/2020,Connecticut,-15
+07/14/2020,Delaware,-15
+07/14/2020,Washington DC,-15
+07/14/2020,Hawaii,-15
+07/14/2020,Illinois,-15
+07/14/2020,Maine 1st CD,-15
+07/14/2020,Maryland,-15
+07/14/2020,Massachusetts,-15
+07/14/2020,New Jersey,-15
+07/14/2020,New Mexico,-15
+07/14/2020,New York,-15
+07/14/2020,Oregon,-15
+07/14/2020,Rhode Island,-15
+07/14/2020,Vermont,-15
+07/14/2020,Washington,-15
+07/14/2020,Colorado,-5
+07/14/2020,Maine,-5
+07/14/2020,Nevada,-5
+07/14/2020,Virginia,-5
+07/14/2020,Michigan,-1
+07/14/2020,Minnesota,-1
+07/14/2020,Nebraska 2nd CD,-1
+07/14/2020,New Hampshire,-1
+07/14/2020,Pennsylvania,-1
+07/14/2020,Wisconsin,-1
+07/14/2020,Arizona,0
+07/14/2020,Florida,0
+07/14/2020,Georgia,0
+07/14/2020,Maine 2nd CD,0
+07/14/2020,North Carolina,0
+07/14/2020,Iowa,1
+07/14/2020,Ohio,1
+07/14/2020,Texas,1
+07/14/2020,Alaska,5
+07/14/2020,Montana,5
+07/14/2020,South Carolina,5
+07/14/2020,Utah,5
+07/14/2020,Alabama,15
+07/14/2020,Arkansas,15
+07/14/2020,Idaho,15
+07/14/2020,Indiana,15
+07/14/2020,Kansas,15
+07/14/2020,Kentucky,15
+07/14/2020,Louisiana,15
+07/14/2020,Mississippi,15
+07/14/2020,Missouri,15
+07/14/2020,Nebraska,15
+07/14/2020,Nebraska 1st CD,15
+07/14/2020,Nebraska 3rd CD,15
+07/14/2020,North Dakota,15
+07/14/2020,Oklahoma,15
+07/14/2020,South Dakota,15
+07/14/2020,Tennessee,15
+07/14/2020,West Virginia,15
+07/14/2020,Wyoming,15
+07/23/2020,California,-15
+07/23/2020,Connecticut,-15
+07/23/2020,Delaware,-15
+07/23/2020,Washington DC,-15
+07/23/2020,Hawaii,-15
+07/23/2020,Illinois,-15
+07/23/2020,Maine 1st CD,-15
+07/23/2020,Maryland,-15
+07/23/2020,Massachusetts,-15
+07/23/2020,New Jersey,-15
+07/23/2020,New Mexico,-15
+07/23/2020,New York,-15
+07/23/2020,Oregon,-15
+07/23/2020,Rhode Island,-15
+07/23/2020,Vermont,-15
+07/23/2020,Washington,-15
+07/23/2020,Colorado,-5
+07/23/2020,Maine,-5
+07/23/2020,Nevada,-5
+07/23/2020,Virginia,-5
+07/23/2020,Florida,-1
+07/23/2020,Michigan,-1
+07/23/2020,Minnesota,-1
+07/23/2020,Nebraska 2nd CD,-1
+07/23/2020,New Hampshire,-1
+07/23/2020,Pennsylvania,-1
+07/23/2020,Wisconsin,-1
+07/23/2020,Arizona,0
+07/23/2020,Georgia,0
+07/23/2020,Maine 2nd CD,0
+07/23/2020,North Carolina,0
+07/23/2020,Iowa,1
+07/23/2020,Ohio,1
+07/23/2020,Texas,1
+07/23/2020,Alaska,5
+07/23/2020,Indiana,5
+07/23/2020,Kansas,5
+07/23/2020,Missouri,5
+07/23/2020,Montana,5
+07/23/2020,South Carolina,5
+07/23/2020,Utah,5
+07/23/2020,Alabama,15
+07/23/2020,Arkansas,15
+07/23/2020,Idaho,15
+07/23/2020,Kentucky,15
+07/23/2020,Louisiana,15
+07/23/2020,Mississippi,15
+07/23/2020,Nebraska,15
+07/23/2020,Nebraska 1st CD,15
+07/23/2020,Nebraska 3rd CD,15
+07/23/2020,North Dakota,15
+07/23/2020,Oklahoma,15
+07/23/2020,South Dakota,15
+07/23/2020,Tennessee,15
+07/23/2020,West Virginia,15
+07/23/2020,Wyoming,15
+09/17/2020,California,-15
+09/17/2020,Connecticut,-15
+09/17/2020,Delaware,-15
+09/17/2020,Washington DC,-15
+09/17/2020,Hawaii,-15
+09/17/2020,Illinois,-15
+09/17/2020,Maine 1st CD,-15
+09/17/2020,Maryland,-15
+09/17/2020,Massachusetts,-15
+09/17/2020,New Jersey,-15
+09/17/2020,New Mexico,-15
+09/17/2020,New York,-15
+09/17/2020,Oregon,-15
+09/17/2020,Rhode Island,-15
+09/17/2020,Vermont,-15
+09/17/2020,Washington,-15
+09/17/2020,Colorado,-5
+09/17/2020,Maine,-5
+09/17/2020,Virginia,-5
+09/17/2020,Arizona,-1
+09/17/2020,Michigan,-1
+09/17/2020,Minnesota,-1
+09/17/2020,Nebraska 2nd CD,-1
+09/17/2020,Nevada,-1
+09/17/2020,New Hampshire,-1
+09/17/2020,Pennsylvania,-1
+09/17/2020,Wisconsin,-1
+09/17/2020,Florida,0
+09/17/2020,Georgia,0
+09/17/2020,Maine 2nd CD,0
+09/17/2020,North Carolina,0
+09/17/2020,Iowa,1
+09/17/2020,Ohio,1
+09/17/2020,Texas,1
+09/17/2020,Alaska,5
+09/17/2020,Indiana,5
+09/17/2020,Kansas,5
+09/17/2020,Missouri,5
+09/17/2020,Montana,5
+09/17/2020,South Carolina,5
+09/17/2020,Utah,5
+09/17/2020,Alabama,15
+09/17/2020,Arkansas,15
+09/17/2020,Idaho,15
+09/17/2020,Kentucky,15
+09/17/2020,Louisiana,15
+09/17/2020,Mississippi,15
+09/17/2020,Nebraska,15
+09/17/2020,Nebraska 1st CD,15
+09/17/2020,Nebraska 3rd CD,15
+09/17/2020,North Dakota,15
+09/17/2020,Oklahoma,15
+09/17/2020,South Dakota,15
+09/17/2020,Tennessee,15
+09/17/2020,West Virginia,15
+09/17/2020,Wyoming,15
+09/29/2020,California,-15
+09/29/2020,Connecticut,-15
+09/29/2020,Delaware,-15
+09/29/2020,Washington DC,-15
+09/29/2020,Hawaii,-15
+09/29/2020,Illinois,-15
+09/29/2020,Maine 1st CD,-15
+09/29/2020,Maryland,-15
+09/29/2020,Massachusetts,-15
+09/29/2020,New Jersey,-15
+09/29/2020,New Mexico,-15
+09/29/2020,New York,-15
+09/29/2020,Oregon,-15
+09/29/2020,Rhode Island,-15
+09/29/2020,Vermont,-15
+09/29/2020,Washington,-15
+09/29/2020,Colorado,-5
+09/29/2020,Maine,-5
+09/29/2020,Virginia,-5
+09/29/2020,Arizona,-1
+09/29/2020,Michigan,-1
+09/29/2020,Minnesota,-1
+09/29/2020,Nebraska 2nd CD,-1
+09/29/2020,Nevada,-1
+09/29/2020,New Hampshire,-1
+09/29/2020,Pennsylvania,-1
+09/29/2020,Wisconsin,-1
+09/29/2020,Florida,0
+09/29/2020,Georgia,0
+09/29/2020,Iowa,0
+09/29/2020,Maine 2nd CD,0
+09/29/2020,North Carolina,0
+09/29/2020,Ohio,0
+09/29/2020,Texas,1
+09/29/2020,Alaska,5
+09/29/2020,Indiana,5
+09/29/2020,Kansas,5
+09/29/2020,Missouri,5
+09/29/2020,Montana,5
+09/29/2020,South Carolina,5
+09/29/2020,Utah,5
+09/29/2020,Alabama,15
+09/29/2020,Arkansas,15
+09/29/2020,Idaho,15
+09/29/2020,Kentucky,15
+09/29/2020,Louisiana,15
+09/29/2020,Mississippi,15
+09/29/2020,Nebraska,15
+09/29/2020,Nebraska 1st CD,15
+09/29/2020,Nebraska 3rd CD,15
+09/29/2020,North Dakota,15
+09/29/2020,Oklahoma,15
+09/29/2020,South Dakota,15
+09/29/2020,Tennessee,15
+09/29/2020,West Virginia,15
+09/29/2020,Wyoming,15
