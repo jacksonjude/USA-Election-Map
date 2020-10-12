@@ -4,7 +4,8 @@
   <head>
     <link rel="stylesheet" href="./style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="./map.js"></script>
+    <script src="./mapsource.js"></script>
+    <script src="./mapdisplay.js"></script>
     <title>Election Map 2020</title>
     <link rel="SHORTCUT ICON" type="image/x-icon" href="./assets/favicon.ico"/>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
@@ -12,9 +13,9 @@
   <body style="background-color: black; margin: 0px;">
     <div class="topnav">
       <div style="display: inline-block; margin-top: 4px;">
-        <a onclick="toggleHelpBox(this)">Help</a>
-        <a id="downloadButton" onclick="downloadAllMapData()" style="min-width: 135px">Download</a>
-        <a id="sourceToggleButton" onclick="toggleDataSource(this)" style="min-width: 140px">Load</a>
+        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
+        <a id="downloadButton" onclick="downloadAllMapData()" style="min-width: 160px">Download</a>
+        <a id="sourceToggleButton" onclick="toggleMapSource(this)" style="min-width: 195px">Display</a>
       </div>
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div id="partyButtonDiv" style="display: inline-block;">
@@ -174,22 +175,24 @@
         <div id="helpbox" class="box">
           <h3 style="margin: 0px;">Help</h3>
           <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
-            - Download button: Pre-load data map sources<br>
-            - Load button: Display data map<br>
-            - Source button / 1 & 2 keys: Toggle data source<br>
-            - Slider / arrow keys: Select data map date<br>
+            &#x2022; Download button: Pre-load data map sources<br>
+            &#x2022; Load button: Display data map<br>
+            &#x2022; Source button / <span style="color: #ec7039;">1</span>, <span style="color: #ec7039;">2</span>, <span style="color: #4a84ff;">3</span>, <span style="color: #0c71c0;">4</span> keys: Change map source<br>
+            &#x2022; Clear button / 0 key: Clear map<br>
+            &#x2022; Slider / arrow keys: Select data map date<br>
             &nbsp;&nbsp;&nbsp;D=-5, L=-1, R=+1, U=+5<br>
-            - Click state: View more poll / projection data<br>
+            &#x2022; Click state: View more poll / projection data<br>
             <br>
-            - Edit & Done button / enter key: Edit map<br>
-            - Party buttons / 0, 1, 2 keys: Select party<br>
-            - Left click state: Cycle safe, likely, lean, tilt<br>
-            - Right click state: Cycle tilt, lean, likely, safe<br>
-            - Hold and drag: Fill states<br>
+            &#x2022; Edit & Done button / enter key: Edit map<br>
+            &#x2022; Party buttons / 0, <span style="color: #8aafff;">1</span>, <span style="color: #ff8b98;">2</span> keys: Select party<br>
+            <!-- &#x2022; Left click state: Cycle <span style="color: #1c408c; -webkit-text-stroke-width: 0.0px; -webkit-text-stroke-color: white;">safe</span>,  <span style="color: #587ccc;">likely</span>,  <span style="color: #8aafff;">lean</span>,  <span style="color: #949bb3;">tilt</span><br> -->
+            &#x2022; Left click state: Cycle <span style="color: #be1c29;">safe</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #cf8980;">tilt</span><br>
+            &#x2022; Right click state: Cycle <span style="color: #cf8980;">tilt</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #be1c29;">safe</span><br>
+            &#x2022; Hold and drag: <span style="color: #587ccc;">Fill states</span><br>
             <br>
             * Poll avg states may display +100 if no polls exist<br>
             * Projection states will display projected margin<br>
-            &nbsp;&nbsp;&nbsp;then percent chances for each candidate
+            &nbsp;&nbsp;&nbsp;then percent chances for each candidate<br>
           </h5>
         </div>
         <br><br>
@@ -200,6 +203,8 @@
           <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
             <a href="https://www.yapms.com/app/?t=USA_2020_presidential"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">yapms</a> for the map outline<br>
             <a href="https://projects.fivethirtyeight.com/polls/president-general/"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">fivethirtyeight</a> for the projection data<br>
+            <a href="https://projects.jhkforecasts.com/presidential-forecast/"><img src="./assets/jhk.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://projects.jhkforecasts.com/presidential-forecast/" style="color: white;">jhk</a> for the projection data<br>
+            <a href="https://cookpolitical.com"><img src="./assets/cookpolitical.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Credit to <a href="https://cookpolitical.com" style="color: white;">cook political</a> for the projection data<br>
             <a href="https://github.com/jacksonjude/Election-2020-Map"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Source code on <a href="https://github.com/jacksonjude/Election-2020-Map" style="color: white;">GitHub</a>
           </h5>
         </div>
@@ -207,7 +212,7 @@
     </div>
     <div style="position: relative; float: left; left: 45px;">
       <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
-        <input type="range" min="0" max="1" value="0" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentDataSource, this.max-this.value)">
+        <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="displayDataMap(currentMapSource, this.value)">
       </span>
       <h3 id="dateDisplay" style="display: inline; color: white; padding-left: 20px; font-family: 'Bree5erif-Mono'; user-select: none; -webkit-user-select: none;"></h3>
     </div>
