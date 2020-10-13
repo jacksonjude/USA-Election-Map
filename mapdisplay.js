@@ -35,7 +35,7 @@ var regionMarginStrings = []
 $(function() {
   var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100
   $(".slider").css("width", mapWidth-190 + "px")
-  $("#evPieChartContainer").css("height", $(window).width()-100-mapWidth)
+  $("#evPieChartContainer").css("height", $(window).width()-150-mapWidth)
 
   $("#loader").hide()
 
@@ -250,11 +250,13 @@ function toggleHelpBox(helpButtonDiv)
   {
     $("#helpboxcontainer").show()
     $("#toggleHelpBoxButton").addClass('active')
+    $("#evPieChartContainer").hide()
   }
   else
   {
     $("#helpboxcontainer").hide()
     $("#toggleHelpBoxButton").removeClass('active')
+    $("#evPieChartContainer").show()
   }
 }
 
