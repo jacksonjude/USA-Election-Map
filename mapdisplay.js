@@ -39,7 +39,7 @@ $(function() {
   setupEVPieChart()
 
   populateRegionsArray()
-  recalculatePartyTotals()
+  displayPartyTotals(getPartyTotals())
   updateEVPieChart()
 
   updateElectionDayCountdown()
@@ -509,7 +509,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     regionDiv.css('fill', fillColor)
   }
 
-  recalculatePartyTotals()
+  displayPartyTotals(getPartyTotals())
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
   {
     updateEVPieChart()
@@ -527,7 +527,7 @@ function getFillColorForMargin(margin, party)
   }
 }
 
-function recalculatePartyTotals()
+function getPartyTotals()
 {
   var partyTotals = []
   for (partyNum in partyIDs)
@@ -537,9 +537,15 @@ function recalculatePartyTotals()
 
   for (regionID in displayRegionDataArray)
   {
+    if (displayRegionDataArray[regionID].party == -1) { continue }
     partyTotals[displayRegionDataArray[regionID].party] += regionEV[regionID]
   }
 
+  return partyTotals
+}
+
+function displayPartyTotals(partyTotals)
+{
   for (partyTotalNum in partyTotals)
   {
     $("#" + partyIDs[partyTotalNum]).html(getKeyByValue(partyCandiates, partyTotalNum) + " (" + partyTotals[partyTotalNum] + ")")
@@ -549,31 +555,46 @@ function recalculatePartyTotals()
 function setupEVPieChart()
 {
   var data = {
-    datasets: [{
-      data: [0, 0, 0, 0, 538, 0, 0, 0, 0],
-      backgroundColor: [
-        marginColors[0][0],
-        marginColors[0][1],
-        marginColors[0][2],
-        marginColors[0][3],
-        "#6c6e74",
-        marginColors[1][3],
-        marginColors[1][2],
-        marginColors[1][1],
-        marginColors[1][0]
-      ]
-    }],
-    labels: [
-      "Safe Dem",
-      "Likely Dem",
-      "Lean Dem",
-      "Tilt Dem",
-      "Tossup",
-      "Tilt Rep",
-      "Lean Rep",
-      "Likely Rep",
-      "Safe Rep"
-    ]
+    datasets: [
+      {
+        data: [0, 0, 0, 0, 538, 0, 0, 0, 0],
+        backgroundColor: [
+          marginColors[0][0],
+          marginColors[0][1],
+          marginColors[0][2],
+          marginColors[0][3],
+          "#6c6e74",
+          marginColors[1][3],
+          marginColors[1][2],
+          marginColors[1][1],
+          marginColors[1][0]
+        ],
+        labels: [
+          "Safe Dem",
+          "Likely Dem",
+          "Lean Dem",
+          "Tilt Dem",
+          "Tossup",
+          "Tilt Rep",
+          "Lean Rep",
+          "Likely Rep",
+          "Safe Rep"
+        ]
+      },
+      {
+        data: [0, 538, 0],
+        backgroundColor: [
+          marginColors[0][0],
+          "#6c6e74",
+          marginColors[1][0]
+        ],
+        labels: [
+          "Democratic",
+          "Tossup",
+          "Republican"
+        ]
+      }
+    ],
   }
 
   var options = {
@@ -597,13 +618,14 @@ function setupEVPieChart()
       displayColors: false,
       callbacks: {
         title: function(tooltipItem, data) {
-          var label = data.labels[tooltipItem[0].index] || ''
+          var label = data.datasets[tooltipItem[0].datasetIndex].labels[tooltipItem[0].index] || ''
           label += ': '
           label += data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]
 
           return label
         },
         label: function(tooltipItem, data) {
+          if (tooltipItem.datasetIndex != 0) { return }
           var labelArray = regionMarginStrings[tooltipItem.index].concat()
           return labelArray
         },
@@ -685,8 +707,36 @@ function updateEVPieChart()
     })
   }
 
-
   evPieChart.data.datasets[0].data = marginTotals
+
+  var partyTotals = getPartyTotals()
+  var evNotTossup = 0
+  for (partyTotalNum in partyTotals)
+  {
+    evNotTossup += partyTotals[partyTotalNum]
+  }
+  if (partyTotals.length == 0)
+  {
+    for (partyNum in partyIDs)
+    {
+      partyTotals.push(0)
+    }
+  }
+
+  partyTotals = partyTotals.concat().splice(0,Math.ceil(partyTotals.length/2)).concat([538-evNotTossup]).concat(partyTotals.concat().splice(Math.ceil(partyTotals.length/2)))
+
+  var safeMarginTotals = [marginTotals[0], marginTotals[4], marginTotals[8]] // Hardcoding two parties
+  console.log(safeMarginTotals, partyTotals)
+  if (safeMarginTotals.toString() == partyTotals.toString())
+  {
+    evPieChart.data.datasets[1].hidden = true
+  }
+  else
+  {
+    evPieChart.data.datasets[1].hidden = false
+    evPieChart.data.datasets[1].data = partyTotals
+  }
+
   evPieChart.update()
 }
 
