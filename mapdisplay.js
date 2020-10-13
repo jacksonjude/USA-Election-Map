@@ -64,8 +64,6 @@ function resizeElements()
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
   $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
-  //document.getElementById("infoboxcontainers").style.zoom = (100*($("#evPieChart").css("width").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")) + "%"
-  //console.log($("#evPieChart").css("width").replace("px", ""), $("#infoboxcontainers").css("width").replace("px", "")*document.getElementById("infoboxcontainers").style.zoom.replace("%", "")/100, (100*($("#evPieChart").css("width").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")), document.getElementById("infoboxcontainers").style.zoom)
 }
 
 function loadDataMap(shouldSetToMax)
@@ -708,8 +706,6 @@ function updateEVPieChart()
     })
   }
 
-  evPieChart.data.datasets[0].data = marginTotals
-
   var partyTotals = getPartyTotals()
   var evNotTossup = 0
   for (partyTotalNum in partyTotals)
@@ -725,17 +721,18 @@ function updateEVPieChart()
   }
 
   partyTotals = partyTotals.concat().splice(0,Math.ceil(partyTotals.length/2)).concat([538-evNotTossup]).concat(partyTotals.concat().splice(Math.ceil(partyTotals.length/2)))
+  evPieChart.data.datasets[1].data = partyTotals
 
   var safeMarginTotals = [marginTotals[0], marginTotals[4], marginTotals[8]] // Hardcoding two parties
-  console.log(safeMarginTotals, partyTotals)
   if (safeMarginTotals.toString() == partyTotals.toString())
   {
-    evPieChart.data.datasets[1].hidden = true
+    evPieChart.data.datasets[0].hidden = true
+    evPieChart.data.datasets[0].data = []
   }
   else
   {
-    evPieChart.data.datasets[1].hidden = false
-    evPieChart.data.datasets[1].data = partyTotals
+    evPieChart.data.datasets[0].hidden = false
+    evPieChart.data.datasets[0].data = marginTotals
   }
 
   evPieChart.update()
