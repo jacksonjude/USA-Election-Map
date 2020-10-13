@@ -95,7 +95,7 @@ body {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
-  background: #777; /* Green background */
+  background: #777; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -103,7 +103,7 @@ body {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
-  background: #4CAF50; /* Green background */
+  background: #777; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 

@@ -32,7 +32,7 @@ var showingHelpBox = false
 const electionDayTime = 1604361600000 //1604390400000 PST
 
 $(function() {
-  $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-170) + "px")
+  $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-190) + "px")
   $("#loader").hide()
 
   populateRegionsArray()
@@ -151,7 +151,7 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString)
   if (overrideDateString != null)
     dateString = overrideDateString
   else
-    dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()    
+    dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()
 
   $("#dateDisplay").html(dateString)
   currentSliderDate = dateToDisplay
