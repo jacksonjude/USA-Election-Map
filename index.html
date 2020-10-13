@@ -3,7 +3,9 @@
 <html>
   <head>
     <link rel="stylesheet" href="./style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./lib/jquery-3.5.1.min.js"></script>
+    <script src="./lib/chart.js-2.8.0.js"></script>
+    <script src="./lib/chartjs-plugin-datalabels-0.7.0.js"></script>
     <script src="./mapsource.js"></script>
     <script src="./mapdisplay.js"></script>
     <title>Election Map 2020</title>
@@ -171,7 +173,10 @@
         </g>
       </svg>
     </div>
-    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;">
+    <div id="evPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-right: 30px; user-select: none; -webkit-user-select: none;">
+      <canvas id="evPieChart" style="margin: 20px; margin-top: 0px;"></canvas>
+    </div>
+    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;  user-select: none; -webkit-user-select: none;">
       <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
         <div id="helpbox" class="box">
           <h3 style="margin: 0px;">Help</h3>

@@ -6,8 +6,6 @@ var partyCandiates = {"Biden":0, "Trump":1}
 var marginColorValues = [15, 5, 1, 0]
 var marginColors = [["#1c408c", "#587ccc", "#8aafff", "#949bb3"], ["#be1c29", "#ff5864", "#ff8b98", "#cf8980"]]
 
-var stateBoxColors = ["#707cff"]
-
 const regionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
 const regionEV = {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":4, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3}
@@ -31,12 +29,21 @@ var showingHelpBox = false
 
 const electionDayTime = 1604361600000 //1604390400000 PST
 
+var evPieChart
+var regionMarginStrings = []
+
 $(function() {
-  $(".slider").css("width", (parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100-190) + "px")
+  var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100
+  $(".slider").css("width", mapWidth-190 + "px")
+  $("#evPieChartContainer").css("height", $(window).width()-100-mapWidth)
+
   $("#loader").hide()
+
+  setupEVPieChart()
 
   populateRegionsArray()
   recalculatePartyTotals()
+  updateEVPieChart()
 
   updateElectionDayCountdown()
   setTimeout(function() {
@@ -187,8 +194,10 @@ function displayDataMap(dateIndex)
     regionData.chanceIncumbent = currentMapDataForDate[regionNum].chanceIncumbent
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
 
-    updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum])
+    updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
+
+  updateEVPieChart()
 
   showingDataMap = true
 }
@@ -221,8 +230,10 @@ function clearMap()
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
     var regionData = regionDataCallback.regionData
 
-    updateRegionFillColors(regionIDsToFill, regionData)
+    updateRegionFillColors(regionIDsToFill, regionData, false)
   })
+
+  updateEVPieChart()
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
@@ -463,7 +474,7 @@ function getBaseRegionID(regionID)
   return {baseID: regionID, linkedIDs: linkedRegionIDs}
 }
 
-function updateRegionFillColors(regionIDsToUpdate, regionData)
+function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
   var fillColor
   if (regionData.party == -1)
@@ -483,6 +494,10 @@ function updateRegionFillColors(regionIDsToUpdate, regionData)
   }
 
   recalculatePartyTotals()
+  if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
+  {
+    updateEVPieChart()
+  }
 }
 
 function getFillColorForMargin(margin, party)
@@ -513,6 +528,151 @@ function recalculatePartyTotals()
   {
     $("#" + partyIDs[partyTotalNum]).html(getKeyByValue(partyCandiates, partyTotalNum) + " (" + partyTotals[partyTotalNum] + ")")
   }
+}
+
+function setupEVPieChart()
+{
+  var data = {
+    datasets: [{
+      data: [0, 0, 0, 0, 538, 0, 0, 0, 0],
+      backgroundColor: [
+        marginColors[0][0],
+        marginColors[0][1],
+        marginColors[0][2],
+        marginColors[0][3],
+        "#6c6e74",
+        marginColors[1][3],
+        marginColors[1][2],
+        marginColors[1][1],
+        marginColors[1][0]
+      ]
+    }],
+    labels: [
+      "Safe Dem",
+      "Likely Dem",
+      "Lean Dem",
+      "Tilt Dem",
+      "Tossup",
+      "Tilt Rep",
+      "Lean Rep",
+      "Likely Rep",
+      "Safe Rep"
+    ]
+  }
+
+  var options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutoutPercentage: 50,
+    rotation: 0.5*Math.PI,
+    elements: {
+      arc: {
+        borderWidth: 2,
+        borderColor: "#ddd"
+      }
+    },
+    legend: {
+      display: false
+    },
+    tooltips: {
+      titleFontSize: 15,
+      titleFontStyle: "bold",
+      bodyFontSize: 15,
+      bodyFontStyle: "bold",
+      displayColors: false,
+      callbacks: {
+        title: function(tooltipItem, data) {
+          var label = data.labels[tooltipItem[0].index] || ''
+          label += ': '
+          label += data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]
+
+          return label
+        },
+        label: function(tooltipItem, data) {
+          var labelArray = regionMarginStrings[tooltipItem.index].concat()
+          return labelArray
+        },
+        labelTextColor: function(tooltipItem, chart) {
+          var color = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor[tooltipItem.index]
+          return color
+        }
+      }
+    },
+    plugins: {
+      datalabels: {
+        color: function(context) {
+          var index = context.dataIndex;
+          var value = context.dataset.data[index];
+          return value == 0 ? "rgb(0, 0, 0, 0)" : "#fff"
+        },
+        font: {
+          family: "Bree5erif-Mono",
+          size: 24,
+          weight: "bold"
+        }
+      }
+    }
+  }
+
+  var ctx = document.getElementById('evPieChart').getContext('2d')
+  evPieChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: data,
+    options: options
+  })
+}
+
+function updateEVPieChart()
+{
+  var marginTotals = []
+  for (partyNum in partyIDs)
+  {
+    for (marginNum in marginColors[partyNum])
+    {
+      marginTotals.push(0)
+    }
+  }
+  marginTotals.push(0) // Add tossup
+
+  regionMarginStrings = []
+  for (partyNum in partyIDs)
+  {
+    for (marginNum in marginColors[partyNum])
+    {
+      regionMarginStrings.push([])
+    }
+  }
+  regionMarginStrings.push([])
+
+  for (regionID in displayRegionDataArray)
+  {
+    var regionParty = displayRegionDataArray[regionID].party
+    var regionMargin = displayRegionDataArray[regionID].margin
+    var marginIndex
+    if (regionParty == -1)
+    {
+      marginIndex = marginColors[0].length-1+1
+    }
+    else
+    {
+      marginIndex = marginColors[regionParty].indexOf(getFillColorForMargin(regionMargin, regionParty))
+    }
+
+    var pieChartIndex = (regionParty == -1 ? marginIndex : (regionParty == 0 ? marginIndex : marginColors[0].length-1+1+marginColors[0].length-marginIndex))  // Hardcoding party 0, 1 indexes for dataset
+    marginTotals[pieChartIndex] += regionEV[regionID]
+    regionMarginStrings[pieChartIndex].push(regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10))
+  }
+
+  for (regionArrayNum in regionMarginStrings)
+  {
+    regionMarginStrings[regionArrayNum].sort((marginString1, marginString2) => {
+      return parseFloat(marginString1.split("+")[1]) > parseFloat(marginString2.split("+")[1])
+    })
+  }
+
+
+  evPieChart.data.datasets[0].data = marginTotals
+  evPieChart.update()
 }
 
 function updateStateBox(regionID)
