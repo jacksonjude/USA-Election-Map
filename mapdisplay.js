@@ -117,11 +117,13 @@ function setDataMapDateSliderRange(shouldSetToMax)
   var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
-  $("#dataMapDateSlider").attr("max", mapDates.length)
+  var previousValueWasLatest = $("#dataMapDateSlider").val() == $("#dataMapDateSlider").attr('max')
 
-  if (currentSliderDate == null || shouldSetToMax)
+  $("#dataMapDateSlider").attr('max', mapDates.length+1)
+
+  if (currentSliderDate == null || shouldSetToMax || previousValueWasLatest)
   {
-    $("#dataMapDateSlider").val(mapDates.length)
+    $("#dataMapDateSlider").val(mapDates.length+1)
     currentSliderDate = endDate
   }
   else
@@ -143,19 +145,34 @@ function setDataMapDateSliderRange(shouldSetToMax)
   }
 }
 
-function updateSliderDateDisplay(dateToDisplay)
+function updateSliderDateDisplay(dateToDisplay, overrideDateString)
 {
-  var dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()
+  var dateString
+  if (overrideDateString != null)
+    dateString = overrideDateString
+  else
+    dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()    
+
   $("#dateDisplay").html(dateString)
-  currentSliderDate = new Date(dateString)
+  currentSliderDate = dateToDisplay
 }
 
 function displayDataMap(dateIndex)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
-  var dateToDisplay = new Date(currentMapSource.getMapDates()[dateIndex-1])
-  updateSliderDateDisplay(dateToDisplay)
+  var mapDates = currentMapSource.getMapDates()
+  var dateToDisplay
+  var overrideDateString
+  if (dateIndex-1 > mapDates.length-1)
+  {
+    dateToDisplay = new Date(mapDates[dateIndex-1-1])
+    overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
+  }
+  else
+    dateToDisplay = new Date(mapDates[dateIndex-1])
+
+  updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
