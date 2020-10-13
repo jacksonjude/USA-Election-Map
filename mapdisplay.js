@@ -59,12 +59,13 @@ function resizeElements()
 
   var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*mapZoom
   $(".slider").css("width", mapWidth-190 + "px")
-  $("#evPieChart").css("width", $(window).width()-$(window).width()*0.14-mapWidth)
+  $("#evPieChart").css("width", $(window).width()-$(window).width()*0.12-mapWidth)
   $("#evPieChart").css("height", $(window).width()-$(window).width()*0.09-mapWidth)
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
-  document.getElementById("infoboxcontainers").style.zoom = (100*($("#evPieChart").css("width").replace("px", "")+$("#evPieChartContainer").css("padding-right").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")) + "%"
-  console.log(document.getElementById("infoboxcontainers").style.zoom)
+  $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
+  //document.getElementById("infoboxcontainers").style.zoom = (100*($("#evPieChart").css("width").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")) + "%"
+  //console.log($("#evPieChart").css("width").replace("px", ""), $("#infoboxcontainers").css("width").replace("px", "")*document.getElementById("infoboxcontainers").style.zoom.replace("%", "")/100, (100*($("#evPieChart").css("width").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")), document.getElementById("infoboxcontainers").style.zoom)
 }
 
 function loadDataMap(shouldSetToMax)
