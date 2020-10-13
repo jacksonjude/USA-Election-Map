@@ -33,11 +33,8 @@ var evPieChart
 var regionMarginStrings = []
 
 $(function() {
-  var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*parseInt(document.getElementById("mapzoom").style.zoom.replace("%", ""))/100
-  $(".slider").css("width", mapWidth-190 + "px")
-  $("#evPieChartContainer").css("height", $(window).width()-150-mapWidth)
-
   $("#loader").hide()
+  resizeElements()
 
   setupEVPieChart()
 
@@ -52,6 +49,23 @@ $(function() {
     }, 1000)
   }, 1000-((new Date()).getTime()%1000))
 })
+
+function resizeElements()
+{
+  //1.0*svgdatawidth*zoom/windowwidth == 0.6
+
+  var mapZoom = 0.62*$(window).width()/$("#svgdata").css("width").replace("px", "")
+  document.getElementById("mapzoom").style.zoom = (mapZoom*100) + "%"
+
+  var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*mapZoom
+  $(".slider").css("width", mapWidth-190 + "px")
+  $("#evPieChart").css("width", $(window).width()-$(window).width()*0.14-mapWidth)
+  $("#evPieChart").css("height", $(window).width()-$(window).width()*0.09-mapWidth)
+
+  //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
+  document.getElementById("infoboxcontainers").style.zoom = (100*($("#evPieChart").css("width").replace("px", "")+$("#evPieChartContainer").css("padding-right").replace("px", ""))/$("#infoboxcontainers").css("width").replace("px", "")) + "%"
+  console.log(document.getElementById("infoboxcontainers").style.zoom)
+}
 
 function loadDataMap(shouldSetToMax)
 {
@@ -563,8 +577,7 @@ function setupEVPieChart()
   }
 
   var options = {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive: false,
     cutoutPercentage: 50,
     rotation: 0.5*Math.PI,
     elements: {

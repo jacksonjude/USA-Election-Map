@@ -12,7 +12,7 @@
     <link rel="SHORTCUT ICON" type="image/x-icon" href="./assets/favicon.ico"/>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
   </head>
-  <body style="background-color: black; margin: 0px;">
+  <body style="background-color: black; margin: 0px;" onresize="resizeElements()">
     <div class="topnav">
       <a href="https://jacksonjude.com" style="padding: 0; padding-left: 3px; padding-right: 3px; margin-top: 4px;"><img src="./assets/favicon.ico" style="position: relative; top: 2px; padding-top: 1px; width: 45px; height: 45px;" /></a>
       <div style="display: inline-block; margin-top: 4px;">
@@ -173,10 +173,10 @@
         </g>
       </svg>
     </div>
-    <div id="evPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-right: 30px; user-select: none; -webkit-user-select: none;">
-      <canvas id="evPieChart" style="margin: 20px; margin-top: 0px;"></canvas>
+    <div id="evPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-right: 40px; user-select: none; -webkit-user-select: none;">
+      <canvas id="evPieChart"></canvas>
     </div>
-    <div style="display: inline-block; vertical-align: top; float: right; padding: 20px;  user-select: none; -webkit-user-select: none;">
+    <div id="infoboxcontainers" style="display: inline-block; vertical-align: top; float: right; padding: 20px;  user-select: none; -webkit-user-select: none;">
       <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
         <div id="helpbox" class="box">
           <h3 style="margin: 0px;">Help</h3>
