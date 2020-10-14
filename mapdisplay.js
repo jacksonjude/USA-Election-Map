@@ -18,7 +18,7 @@ var showingDataMap = false
 
 var currentSliderDate
 const initialKeyPressDelay = 500
-var zoomKeyPressDelayForHalf = 3000
+const zoomKeyPressDelayForHalf = 3000
 
 const kEditing = 0
 const kViewing = 1
@@ -32,14 +32,17 @@ const electionDayTime = 1604361600000 //1604390400000 PST
 var evPieChart
 var regionMarginStrings = []
 
+var evPieChartCutoutPercent = 50
+const minEVPieChartSliceLabelValue = 16
+
 $(function() {
   $("#loader").hide()
-  resizeElements()
-
-  setupEVPieChart()
+  resizeElements(false)
 
   populateRegionsArray()
   displayPartyTotals(getPartyTotals())
+
+  setupEVPieChart()
   updateEVPieChart()
 
   updateElectionDayCountdown()
@@ -50,20 +53,29 @@ $(function() {
   }, 1000-((new Date()).getTime()%1000))
 })
 
-function resizeElements()
+function resizeElements(initilizedPieChart)
 {
+  var windowWidth = $(window).width()
+
   //1.0*svgdatawidth*zoom/windowwidth == 0.6
 
-  var mapZoom = 0.62*$(window).width()/$("#svgdata").css("width").replace("px", "")
+  var mapZoom = 0.62*windowWidth/$("#svgdata").css("width").replace("px", "")
   document.getElementById("mapzoom").style.zoom = (mapZoom*100) + "%"
 
   var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*mapZoom
   $(".slider").css("width", mapWidth-190 + "px")
-  $("#evPieChart").css("width", $(window).width()-$(window).width()*0.12-mapWidth)
-  $("#evPieChart").css("height", $(window).width()-$(window).width()*0.09-mapWidth)
+  $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
+
+  $("#evPieChart").css("width", windowWidth-windowWidth*0.12-mapWidth)
+  $("#evPieChart").css("height", windowWidth-windowWidth*0.09-mapWidth)
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
   $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
+
+  if (initilizedPieChart == true || initilizedPieChart == null)
+  {
+    updateEVPieChart()
+  }
 }
 
 function loadDataMap(shouldSetToMax)
@@ -598,7 +610,7 @@ function setupEVPieChart()
 
   var options = {
     responsive: false,
-    cutoutPercentage: 50,
+    cutoutPercentage: evPieChartCutoutPercent,
     rotation: 0.5*Math.PI,
     elements: {
       arc: {
@@ -639,11 +651,11 @@ function setupEVPieChart()
         color: function(context) {
           var index = context.dataIndex;
           var value = context.dataset.data[index];
-          return value == 0 ? "rgb(0, 0, 0, 0)" : "#fff"
+          return value < minEVPieChartSliceLabelValue ? "rgb(0, 0, 0, 0)" : "#fff"
         },
         font: {
           family: "Bree5erif-Mono",
-          size: 24,
+          size: Math.round(24*$(window).width()/1800), //abc
           weight: "bold"
         }
       }
@@ -724,6 +736,7 @@ function updateEVPieChart()
   evPieChart.data.datasets[1].data = partyTotals
 
   var safeMarginTotals = [marginTotals[0], marginTotals[4], marginTotals[8]] // Hardcoding two parties
+  console.log(marginTotals, safeMarginTotals, partyTotals)
   if (safeMarginTotals.toString() == partyTotals.toString())
   {
     evPieChart.data.datasets[0].hidden = true
@@ -1032,6 +1045,38 @@ document.addEventListener('mouseup', function () {
     startRegionID = null
   }
 })
+
+$("html").on('dragenter', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+})
+
+$("html").on('dragover', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+})
+
+$("html").on('drop', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+
+  var file = e.originalEvent.dataTransfer.files[0]
+
+  //Eventually add switch here to check for file type (possibly using extension), for file uploads of maps, icons, etc.
+
+  var fr = new FileReader()
+	fr.onload = onFileReaderLoad
+	fr.readAsDataURL(file)
+})
+
+function onFileReaderLoad(e)
+{
+  var backgroundURL = "url('" + e.target.result + "')";
+	$("#evPieChart").css("background", backgroundURL)
+  $("#evPieChart").css("background-position", "center")
+  $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
+  $("#evPieChart").css("background-repeat", "no-repeat")
+}
 
 function zeroPadding(num)
 {
