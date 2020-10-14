@@ -32,7 +32,7 @@ const electionDayTime = 1604361600000 //1604390400000 PST
 var evPieChart
 var regionMarginStrings = []
 
-var evPieChartCutoutPercent = 50
+var evPieChartCutoutPercent = 55
 const minEVPieChartSliceLabelValue = 16
 const minEVPieChartSliceLabelBrightness = 0.7
 
@@ -68,6 +68,7 @@ function resizeElements(initilizedPieChart)
 
   $("#evPieChart").css("width", windowWidth-windowWidth*0.12-mapWidth)
   $("#evPieChart").css("height", windowWidth-windowWidth*0.09-mapWidth)
+  $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
   $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
@@ -1113,8 +1114,6 @@ function adjustBrightness(hexColorString, minBrightness)
   {
     hsv.v = minBrightness
   }
-
-  console.log(hsv.v)
 
   return RGBToHex(HSVtoRGB(hsv))
 }
