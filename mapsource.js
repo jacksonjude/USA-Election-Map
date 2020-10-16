@@ -32,7 +32,7 @@ class MapSource
       {
         self.mapDates[dateNum] = parseInt(self.mapDates[dateNum])
       }
-      self.mapDates.sort((mapDate1, mapDate2) => (mapDate1 > mapDate2))
+      self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
 
       self.setDateRange(self)
       self.mapData = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyNumbers, self.regionNameToIDMap, self.ev2016)
