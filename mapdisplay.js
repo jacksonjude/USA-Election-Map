@@ -716,7 +716,7 @@ function updateEVPieChart()
   for (regionArrayNum in regionMarginStrings)
   {
     regionMarginStrings[regionArrayNum].sort((marginString1, marginString2) => {
-      return parseFloat(marginString1.split("+")[1]) > parseFloat(marginString2.split("+")[1])
+      return parseFloat(marginString1.split("+")[1]) > parseFloat(marginString2.split("+")[1]) ? 1 : -1
     })
   }
 
