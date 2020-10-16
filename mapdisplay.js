@@ -52,6 +52,8 @@ $(function() {
       updateElectionDayCountdown()
     }, 1000)
   }, 1000-((new Date()).getTime()%1000))
+
+  $.ajaxSetup({cache: false})
 })
 
 function resizeElements(initilizedPieChart)
@@ -412,7 +414,7 @@ function leftClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
   }
-  else if (currentMapState == kViewing && currentRegionID)
+  else if (currentMapState == kViewing && showingDataMap && currentRegionID)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
