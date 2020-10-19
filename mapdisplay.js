@@ -265,7 +265,7 @@ function clearMap()
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
-  $("#sourceToggleButton").html("Display")
+  $("#sourceToggleButton").html("Select Source")
   currentMapSource = FiveThirtyEightPollAverageMapSource
 
   showingDataMap = false
