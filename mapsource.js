@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, incumbentChallengerPartyNumbers, regionNameToIDMap, ev2016, regionIDToLinkMap, organizeMapDataFunction, customOpenRegionLinkFunction)
+  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, incumbentChallengerPartyNumbers, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, organizeMapDataFunction, customOpenRegionLinkFunction)
   {
     this.id = id
     this.dataURL = dataURL
@@ -8,6 +8,7 @@ class MapSource
     this.columnMap = columnMap
     this.candidateNameToPartyIDMap = candidateNameToPartyIDMap
     this.incumbentChallengerPartyNumbers = incumbentChallengerPartyNumbers
+    this.incumbentChallengerPartyIDs = incumbentChallengerPartyIDs
     this.regionNameToIDMap = regionNameToIDMap
     this.ev2016 = ev2016
     this.regionIDToLinkMap = regionIDToLinkMap
@@ -35,7 +36,7 @@ class MapSource
       self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
 
       self.setDateRange(self)
-      self.mapData = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyNumbers, self.regionNameToIDMap, self.ev2016)
+      self.mapData = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyNumbers, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016)
 
       resolve(true)
     })
@@ -162,7 +163,7 @@ class MapSource
   }
 }
 
-var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyNumbers, regionNameToID, ev2016)
+var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyNumbers, partyIDs, regionNameToID, ev2016)
 {
   var filteredMapData = {}
 
@@ -208,7 +209,7 @@ var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, c
         challengerWinChance = columnMap.challengerWinChance ? regionRow[columnMap.challengerWinChance] : null
       }
 
-      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(margin), party: (Math.sign(margin) == 0 ? -1 : (Math.sign(margin) == -1 ? partyNumbers.challenger : partyNumbers.incumbent)), chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance}
+      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(margin), partyID: (Math.sign(margin) == 0 ? null : (Math.sign(margin) == -1 ? partyIDs.challenger : partyIDs.incumbent)), chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance}
     }
 
     filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -217,7 +218,7 @@ var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, c
   return filteredMapData
 }
 
-var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyNumbers, regionNameToID, ev2016)
+var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyNumbers, partyIDs, regionNameToID, ev2016)
 {
   var filteredMapData = {}
 
@@ -269,7 +270,7 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
       challengerWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? challengerWinChance/100 : challengerWinChance
       incumbentWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? incumbentWinChance/100 : incumbentWinChance
 
-      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), party: (Math.sign(marginSum) == -1 ? partyNumbers.challenger : partyNumbers.incumbent), chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance}
+      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: (Math.sign(marginSum) == -1 ? partyIDs.challenger : partyIDs.incumbent), chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance}
     }
 
     filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -281,7 +282,8 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
 
 // Map Source Declarations
 
-const incumbentChallengerPartyNumbers = {incumbent: 1, challenger: 0}
+const incumbentChallengerPartyNumbers = {incumbent: 1, challenger: 0} //TODO: remove incumbentChallengerPartyNumbers (some hardcoding still)
+const incumbentChallengerPartyIDs = {incumbent: RepublicanParty.getID(), challenger: DemocraticParty.getID()}
 const partyCandiateLastNames = {"Biden":0, "Trump":1}
 const partyCandiateFullNames = {"Joseph R. Biden Jr.":0, "Donald Trump":1}
 
@@ -302,6 +304,7 @@ var FiveThirtyEightPollAverageMapSource = new MapSource(
   },
   partyCandiateFullNames,
   incumbentChallengerPartyNumbers,
+  incumbentChallengerPartyIDs,
   regionNameToIDFiveThirtyEight,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
@@ -321,6 +324,7 @@ var FiveThirtyEightProjectionMapSource = new MapSource(
   },
   partyCandiateLastNames,
   incumbentChallengerPartyNumbers,
+  incumbentChallengerPartyIDs,
   regionNameToIDFiveThirtyEight,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
@@ -340,6 +344,7 @@ var JHKProjectionMapSource = new MapSource(
   },
   partyCandiateFullNames,
   incumbentChallengerPartyNumbers,
+  incumbentChallengerPartyIDs,
   regionNameToIDJHK,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-cd-1", "ME-D2":"maine-cd-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-cd-1", "NE-D2":"nebraska-cd-2", "NE-D3":"nebraska-cd-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
@@ -357,6 +362,7 @@ var CookProjectionMapSource = new MapSource(
   },
   partyCandiateLastNames,
   incumbentChallengerPartyNumbers,
+  incumbentChallengerPartyIDs,
   regionNameToIDCook,
   ev2016,
   null,
@@ -367,6 +373,20 @@ var CookProjectionMapSource = new MapSource(
     window.open(regionURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
   }
 )
+
+// var PastElectionResultMapSource = new MapSource(
+//   "Past Election",
+//   "https://map.jacksonjude.com/historical-president.csv",
+//   "https://en.wikipedia.org/wiki/",
+//   {
+//     date: "date",
+//     region: "region",
+//     percentAdjusted: "voteshare",
+//     party: "party",
+//     candidateName: "candidate"
+//   },
+//
+// )
 
 var mapSources = {}
 mapSources[FiveThirtyEightPollAverageMapSource.getID()] = FiveThirtyEightPollAverageMapSource
