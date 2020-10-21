@@ -123,6 +123,15 @@ class MapSource
     return this.mapData
   }
 
+  clearMapData()
+  {
+    this.rawMapData = null
+    this.mapData = null
+    this.mapDates = null
+    this.startDate = null
+    this.endDate = null
+  }
+
   setDateRange(self)
   {
     self.startDate = new Date(self.mapDates[0])

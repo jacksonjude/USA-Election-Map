@@ -23,6 +23,8 @@ var regionIDsToIgnore = [/.+-button/, /.+-land/]
 
 var showingDataMap = false
 
+var ignoreMapUpdateClickArray = []
+
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
@@ -46,6 +48,9 @@ const minEVPieChartSliceLabelBrightness = 0.7
 $(function() {
   $("#loader").hide()
   resizeElements(false)
+
+  createMapSourceDropdownItems()
+  addDivEventListeners()
 
   populateRegionsArray()
   displayPartyTotals(getPartyTotals())
@@ -88,28 +93,62 @@ function resizeElements(initilizedPieChart)
   }
 }
 
-function loadDataMap(shouldSetToMax)
+function createMapSourceDropdownItems()
+{
+  for (sourceNum in mapSourceIDs)
+  {
+    $("#dropdownItemsContainer").append("<div class='dropdown-separator'></div>")
+    //\"sourceToggleButton\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-error.png\", success: \"./assets/icon-success.png\"}, \"" +
+    $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+  }
+}
+
+function addDivEventListeners()
+{
+  document.getElementById("clearMapButton").addEventListener('click', function(e) {
+    clearMap()
+
+    if (e.altKey)
+    {
+      for (mapSourceID in mapSources)
+      {
+        mapSources[mapSourceID].clearMapData()
+        removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
+        insertStatusImage(mapSourceID.replace(/\s/g, '') + "-icon", "./assets/icon-download-none.png", 24, 24, -1)
+      }
+    }
+  })
+
+  document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
+    if (!e.altKey)
+    {
+      toggleMapSource(this)
+    }
+    else
+    {
+      downloadAllMapData()
+    }
+  })
+}
+
+function getIconDivsToUpdateArrayForSourceID(mapSourceID)
+{
+  var iconDivID = mapSourceID.replace(/\s/g, '') + "-icon"
+  //{"sourceToggleButton":{loading: "./assets/icon-loading.png", error: "./assets/icon-error.png", success: "./assets/icon-success.png"}}
+  var iconDivDictionary = {}
+  iconDivDictionary[iconDivID] = {loading: "./assets/icon-loading.png", error: "./assets/icon-download-none.png", success: "./assets/icon-download-complete.png", top: -1, width: 24, height: 24}
+
+  return iconDivDictionary
+}
+
+function loadDataMap(shouldSetToMax, forceDownload)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
 
-    insertStatusImage("sourceToggleButton", "./assets/icon-loading.png")
-    var loadedSuccessfully = await currentMapSource.loadMap()
-    removeStatusImage("sourceToggleButton")
-
-    if (!loadedSuccessfully)
-    {
-      insertStatusImage("sourceToggleButton", "./assets/icon-error.png")
-      resolve()
-      return
-    }
-    else
-    {
-      $("#dataMapDateSliderContainer").show()
-      $("#dateDisplay").show()
-      insertStatusImage("sourceToggleButton", "./assets/icon-success.png")
-    }
+    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
+    await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
 
     setDataMapDateSliderRange(shouldSetToMax)
     displayDataMap()
@@ -122,22 +161,68 @@ function loadDataMap(shouldSetToMax)
   return loadDataMapPromise
 }
 
+function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload)
+{
+  if (mapIDToIgnore != null)
+  {
+    ignoreMapUpdateClickArray.push(mapIDToIgnore)
+  }
+  var downloadDataPromise = new Promise(async (resolve, reject) => {
+    for (divID in divsToUpdateStatus)
+    {
+      removeStatusImage(divID)
+    }
+
+    for (divID in divsToUpdateStatus)
+    {
+      insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+    }
+
+    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload)
+    for (divID in divsToUpdateStatus)
+    {
+      removeStatusImage(divID)
+    }
+
+    if (!loadedSuccessfully)
+    {
+      for (divID in divsToUpdateStatus)
+      {
+        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      }
+      return
+    }
+    else
+    {
+      for (divID in divsToUpdateStatus)
+      {
+        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      }
+      resolve()
+    }
+  })
+
+  return downloadDataPromise
+}
+
 async function downloadAllMapData()
 {
-  $("#downloadButton").html("Downloading")
-  insertStatusImage("downloadButton", "./assets/icon-loading.png")
   for (sourceIDNum in mapSourceIDs)
   {
-    await mapSources[mapSourceIDs[sourceIDNum]].loadMap(true)
-  }
+    var sourcesLoaded = 0
+    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
+    downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function() {
+      if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID())
+      {
+        loadDataMap(true)
+      }
 
-  var endDate = FiveThirtyEightPollAverageMapSource.getDateRange().end //Hardcoding 538 polls as most recent end date
-  $("#downloadButton").html("Download (" + (endDate.getMonth()+1) + "/" + endDate.getDate() + ")")
-  insertStatusImage("downloadButton", "./assets/icon-success.png")
-
-  if (showingDataMap)
-  {
-    loadDataMap(true)
+      sourcesLoaded += 1
+      if (sourcesLoaded < mapSourceIDs.length)
+      {
+        $("#loader").show()
+      }
+    })
   }
 }
 
@@ -245,15 +330,36 @@ function toggleMapSource(buttonDiv)
   {
     mapSourceArrayIndex = 0
   }
-  currentMapSource = mapSources[mapSourceIDs[mapSourceArrayIndex]]
 
-  updateMapSourceButton(buttonDiv)
-  loadDataMap()
+  updateMapSource(mapSourceIDs[mapSourceArrayIndex], buttonDiv)
 }
 
-function updateMapSourceButton(buttonDiv)
+function updateMapSource(sourceID, buttonDiv, forceDownload)
 {
-  $(buttonDiv).html("Source: " + currentMapSource.getID())
+  if (ignoreMapUpdateClickArray.includes(sourceID.replace(/\s/g, '')))
+  {
+    ignoreMapUpdateClickArray.splice(ignoreMapUpdateClickArray.indexOf(sourceID), 1)
+    return
+  }
+  currentMapSource = mapSources[sourceID]
+
+  updateMapSourceButton()
+  loadDataMap(false, forceDownload)
+}
+
+function updateMapSourceButton(revertToDefault)
+{
+  revertToDefault = revertToDefault || false
+  $("#dropdownItemsContainer .active").removeClass("active")
+  if (revertToDefault)
+  {
+    $("#sourceToggleButton").html("Select Source")
+  }
+  else
+  {
+    $("#sourceToggleButton").html("Source: " + currentMapSource.getID())
+    $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
+  }
 }
 
 function clearMap()
@@ -272,7 +378,8 @@ function clearMap()
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
-  $("#sourceToggleButton").html("Select Source")
+
+  updateMapSourceButton(true)
   currentMapSource = FiveThirtyEightPollAverageMapSource
 
   showingDataMap = false
@@ -951,10 +1058,10 @@ document.addEventListener('keyup', function(e) {
 })
 
 document.addEventListener('keypress', async function(e) {
-  if (showingDataMap && currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
-    updateMapSourceButton($("#sourceToggleButton")[0])
+    updateMapSourceButton()
     await loadDataMap()
     if (currentRegionID)
     {
@@ -1061,7 +1168,7 @@ document.addEventListener('mousemove', function(e) {
   }
 })
 
-document.addEventListener('mouseup', function () {
+document.addEventListener('mouseup', function() {
   if (currentMapState == kEditing)
   {
     regionIDsChanged = []

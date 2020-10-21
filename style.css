@@ -28,16 +28,16 @@ body {
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  border-radius: 4px;
   margin-left: 4px;
+  border-radius: 4px;
 }
 
-.topnav a:hover {
-  background-color: #666;
+.topnav a:hover, .dropdown-content a:hover {
+  background-color: #545454;
 }
 
-.topnav a.active {
-  background-color: #888;
+.topnav a.active, .dropdown-content a.active {
+  background-color: #6a6a6a;
 }
 
 .topnav #DEM {
@@ -64,6 +64,59 @@ body {
 .topnav #REP.active {
   background-color: rgb(191, 29, 41);
   /* background-color: rgb(217, 33, 45); */
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 51px;
+  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+  z-index: 1;
+  min-width: 231px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  margin-left: 0px;
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  color: #f2f2f2;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  border-radius: 0px;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-separator {
+  border-top: 1px solid white;
+  height: 0px;
+  width: 100%;
 }
 
 .slidecontainer {
