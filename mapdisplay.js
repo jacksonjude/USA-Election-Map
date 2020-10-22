@@ -301,7 +301,18 @@ function displayDataMap(dateIndex)
 
   updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
+  var candidateNames = currentMapSource.getCandidateNames(dateToDisplay.getTime())
+  for (partyID in politicalParties)
+  {
+    if (partyID in candidateNames)
+    {
+      politicalParties[partyID].setCandidateName(candidateNames[partyID])
+    }
+  }
+
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
+
+  console.log(currentMapSource.getMapData(), dateToDisplay)
 
   for (regionNum in currentMapDataForDate)
   {
