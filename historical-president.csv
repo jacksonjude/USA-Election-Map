@@ -108,6 +108,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1976,Maine,ME,Carter,democrat,48.094076626194700,20171015
 11/1/1976,Maine,ME,McCarthy,independent,2.2514949230590800,20171015
 11/1/1976,Maine,ME,Bubar,prohibition,0.72365042818571800,20171015
+11/1/1976,Maine 1st CD,ME-1,Ford,republican,49.22,JJCooley
+11/1/1976,Maine 1st CD,ME-1,Carter,democrat,47.9,JJCooley
+11/1/1976,Maine 2nd CD,ME-2,Ford,republican,48.54,JJCooley
+11/1/1976,Maine 2nd CD,ME-2,Carter,democrat,48.27,JJCooley
 11/1/1976,Maryland,MD,Carter,democrat,53.035419923436400,20171015
 11/1/1976,Maryland,MD,Ford,republican,46.964580076563600,20171015
 11/1/1976,Massachusetts,MA,Carter,democrat,56.111578225108100,20171015
@@ -438,6 +442,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1980,Maine,ME,Clark,libertarian,0.97875570494693200,20171015
 11/1/1980,Maine,ME,Commoner,citizens,0.84013529352155100,20171015
 11/1/1980,Maine,ME,Hall,communist party use,0.11299953538262100,20171015
+11/1/1980,Maine 1st CD,ME-1,Reagan,republican,45.02,JJCooley
+11/1/1980,Maine 1st CD,ME-1,Carter,democrat,41.93,JJCooley
+11/1/1980,Maine 2nd CD,ME-2,Reagan,republican,62.16,JJCooley
+11/1/1980,Maine 2nd CD,ME-2,Carter,democrat,42.62,JJCooley
 11/1/1980,Maryland,MD,Carter,democrat,47.138129537499600,20171015
 11/1/1980,Maryland,MD,Reagan,republican,44.180965091762700,20171015
 11/1/1980,Maryland,MD,Anderson,independent,7.7596436472408900,20171015
@@ -760,6 +768,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1984,Maine,ME,Mondale,democrat,38.781040741651400,20171015
 11/1/1984,Maine,ME,Hall,communist party use,0.23357389757459200,20171015
 11/1/1984,Maine,ME,Serrette,alliance,0.13649248658577200,20171015
+11/1/1984,Maine 1st CD,ME-1,Reagan,republican,59.69,JJCooley
+11/1/1984,Maine 1st CD,ME-1,Mondale,democrat,39.95,JJCooley
+11/1/1984,Maine 2nd CD,ME-2,Reagan,republican,62.16,JJCooley
+11/1/1984,Maine 2nd CD,ME-2,Mondale,democrat,37.47,JJCooley
 11/1/1984,Maryland,MD,Reagan,republican,52.505052590500600,20171015
 11/1/1984,Maryland,MD,Mondale,democrat,47.016390860166600,20171015
 11/1/1984,Maryland,MD,Bergland,libertarian,0.3413743165502400,20171015
@@ -1043,6 +1055,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1988,Maine,ME,Dukakis,democrat,43.883538875926700,20171015
 11/1/1988,Maine,ME,Paul,libertarian,0.4864558090931200,20171015
 11/1/1988,Maine,ME,Fulani,new alliance,0.25313718954660500,20171015
+11/1/1988,Maine 1st CD,ME-1,Bush,republican,100,JJCooley
+11/1/1988,Maine 1st CD,ME-1,Dukakis,democrat,0,JJCooley
+11/1/1988,Maine 2nd CD,ME-2,Bush,republican,100,JJCooley
+11/1/1988,Maine 2nd CD,ME-2,Dukakis,democrat,0,JJCooley
 11/1/1988,Maryland,MD,Bush,republican,51.107586630097100,20171015
 11/1/1988,Maryland,MD,Dukakis,democrat,48.199034274054800,20171015
 11/1/1988,Maryland,MD,Paul,libertarian,0.39361673582763900,20171015
@@ -1327,6 +1343,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1992,Maine,ME,Marrou,libertarian,0.24738814920993300,20171015
 11/1/1992,Maine,ME,Fulani,new alliance,0.07637980335511900,20171015
 11/1/1992,Maine,ME,Phillips,taxpayers party,0.068285604540992700,20171015
+11/1/1992,Maine 1st CD,ME-1,Bush,republican,0,JJCooley
+11/1/1992,Maine 1st CD,ME-1,Clinton,democrat,100,JJCooley
+11/1/1992,Maine 2nd CD,ME-2,Bush,republican,0,JJCooley
+11/1/1992,Maine 2nd CD,ME-2,Clinton,democrat,100,JJCooley
 11/1/1992,Maryland,MD,Clinton,democrat,49.812605185983900,20171015
 11/1/1992,Maryland,MD,Bush,republican,35.629402694776700,20171015
 11/1/1992,Maryland,MD,Perot,independent,14.180028016003400,20171015
@@ -1658,6 +1678,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1996,Maine,ME,Browne,libertarian,0.49447348311676700,20171015
 11/1/1996,Maine,ME,Phillips,u.s. taxpayers party,0.25037258808015200,20171015
 11/1/1996,Maine,ME,Hagelin,natural law,0.13616175686626600,20171015
+11/1/1996,Maine 1st CD,ME-1,Dole,republican,0,JJCooley
+11/1/1996,Maine 1st CD,ME-1,Clinton,democrat,100,JJCooley
+11/1/1996,Maine 2nd CD,ME-2,Dole,republican,0,JJCooley
+11/1/1996,Maine 2nd CD,ME-2,Clinton,democrat,100,JJCooley
 11/1/1996,Maryland,MD,Clinton,democrat,54.254774351861700,20171015
 11/1/1996,Maryland,MD,Dole,republican,38.269497492798500,20171015
 11/1/1996,Maryland,MD,Perot,reform party,6.5031136467007700,20171015
@@ -1710,6 +1734,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1996,Nebraska,NE,Browne,libertarian,0.41215503052043400,20171015
 11/1/1996,Nebraska,NE,Phillips,u.s. taxpayers party,0.28461135345393900,20171015
 11/1/1996,Nebraska,NE,Hagelin,natural law,0.17552017596303600,20171015
+11/1/1996,Nebraska 1st CD,NE-1,Dole,republican,50,JJCooley
+11/1/1996,Nebraska 1st CD,NE-1,Clinton,democrat,38,JJCooley
+11/1/1996,Nebraska 2nd CD,NE-2,Dole,republican,53,JJCooley
+11/1/1996,Nebraska 2nd CD,NE-2,Clinton,democrat,38,JJCooley
+11/1/1996,Nebraska 3rd CD,NE-3,Dole,republican,59,JJCooley
+11/1/1996,Nebraska 3rd CD,NE-3,Clinton,democrat,29,JJCooley
 11/1/1996,Nevada,NV,Clinton,democrat,43.933496884416500,20171015
 11/1/1996,Nevada,NV,Dole,republican,42.914712920463800,20171015
 11/1/1996,Nevada,NV,Perot,reform party,9.4740447015695300,20171015
@@ -1984,6 +2014,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2000,Maine,ME,Buchanan,reform party,0.68163303503897600,20171015
 11/1/2000,Maine,ME,Browne,libertarian,0.47160476023178300,20171015
 11/1/2000,Maine,ME,Phillips,constitution party,0.088828612938907700,20171015
+11/1/2000,Maine 1st CD,ME-1,Bush,republican,42.59,JJCooley
+11/1/2000,Maine 1st CD,ME-1,Gore,democrat,50.52,JJCooley
+11/1/2000,Maine 2nd CD,ME-2,Bush,republican,45.56,JJCooley
+11/1/2000,Maine 2nd CD,ME-2,Gore,democrat,47.43,JJCooley
 11/1/2000,Maryland,MD,Gore,democrat,56.488308384504900,20171015
 11/1/2000,Maryland,MD,Bush,republican,40.184780655062300,20171015
 11/1/2000,Maryland,MD,Nader,green,2.6549319281141900,20171015
@@ -2034,6 +2068,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2000,Nebraska,NE,Gore,democrat,33.253039013283700,20171015
 11/1/2000,Nebraska,NE,Nader,green,3.5207074699541900,20171015
 11/1/2000,Nebraska,NE,Browne,libertarian,0.32208591157486400,20171015
+11/1/2000,Nebraska 1st CD,NE-1,Bush,republican,58.9,JJCooley
+11/1/2000,Nebraska 1st CD,NE-1,Gore,democrat,35.92,JJCooley
+11/1/2000,Nebraska 2nd CD,NE-2,Bush,republican,56.92,JJCooley
+11/1/2000,Nebraska 2nd CD,NE-2,Gore,democrat,38.52,JJCooley
+11/1/2000,Nebraska 3rd CD,NE-3,Bush,republican,71.35,JJCooley
+11/1/2000,Nebraska 3rd CD,NE-3,Gore,democrat,24.94,JJCooley
 11/1/2000,Nevada,NV,Bush,republican,49.485089247915300,20171015
 11/1/2000,Nevada,NV,Gore,democrat,45.941262762008800,20171015
 11/1/2000,Nevada,NV,Nader,green,2.4626451775933400,20171015
@@ -2283,6 +2323,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2004,Maine,ME,Cobb,green,0.39635397541957400,20171015
 11/1/2004,Maine,ME,Badnarik,libertarian,0.26527096788128800,20171015
 11/1/2004,Maine,ME,Peroutka,constitution party,0.099223491802924600,20171015
+11/1/2004,Maine 1st CD,ME-1,Bush,republican,43,JJCooley
+11/1/2004,Maine 1st CD,ME-1,Kerry,democrat,55,JJCooley
+11/1/2004,Maine 2nd CD,ME-2,Bush,republican,46,JJCooley
+11/1/2004,Maine 2nd CD,ME-2,Kerry,democrat,52,JJCooley
 11/1/2004,Maryland,MD,Kerry,democrat,55.97146761355200,20171015
 11/1/2004,Maryland,MD,Bush,republican,42.978217778594300,20171015
 11/1/2004,Maryland,MD,Nader,populist,0.49718190885305900,20171015
@@ -2333,6 +2377,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2004,Nebraska,NE,Nader,reform party,0.74275301791602500,20171015
 11/1/2004,Nebraska,NE,Badnarik,libertarian,0.262276627952700,20171015
 11/1/2004,Nebraska,NE,Cobb,green,0.12567689472696800,20171015
+11/1/2004,Nebraska 1st CD,NE-1,Bush,republican,63,JJCooley
+11/1/2004,Nebraska 1st CD,NE-1,Kerry,democrat,36,JJCooley
+11/1/2004,Nebraska 2nd CD,NE-2,Bush,republican,60,JJCooley
+11/1/2004,Nebraska 2nd CD,NE-2,Kerry,democrat,38,JJCooley
+11/1/2004,Nebraska 3rd CD,NE-3,Bush,republican,75,JJCooley
+11/1/2004,Nebraska 3rd CD,NE-3,Kerry,democrat,24,JJCooley
 11/1/2004,Nevada,NV,Bush,republican,50.469691545311100,20171015
 11/1/2004,Nevada,NV,Kerry,democrat,47.87804051895700,20171015
 11/1/2004,Nevada,NV,Nader,independent,0.58318175188376900,20171015
@@ -2568,6 +2618,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2008,Maine,ME,McCain,republican,40.384018337908200,20171015
 11/1/2008,Maine,ME,Nader,independent,1.4546687947831100,20171015
 11/1/2008,Maine,ME,McKinney,green,0.39662838518907500,20171015
+11/1/2008,Maine 1st CD,ME-1,McCain,republican,37.69,JJCooley
+11/1/2008,Maine 1st CD,ME-1,Obama,democrat,60.51,JJCooley
+11/1/2008,Maine 2nd CD,ME-2,McCain,republican,43.35,JJCooley
+11/1/2008,Maine 2nd CD,ME-2,Obama,democrat,54.61,JJCooley
 11/1/2008,Maryland,MD,Obama,democrat,61.919344762645900,20171015
 11/1/2008,Maryland,MD,McCain,republican,36.474519645112700,20171015
 11/1/2008,Maryland,MD,Nader,independent,0.55909037709435600,20171015
@@ -2617,6 +2671,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2008,Nebraska,NE,Baldwin,nebraska party,0.37090608662878600,20171015
 11/1/2008,Nebraska,NE,Barr,libertarian,0.34195244864161300,20171015
 11/1/2008,Nebraska,NE,McKinney,green,0.12829456832247400,20171015
+11/1/2008,Nebraska 1st CD,NE-1,McCain,republican,54.1,JJCooley
+11/1/2008,Nebraska 1st CD,NE-1,Obama,democrat,44.33,JJCooley
+11/1/2008,Nebraska 2nd CD,NE-2,McCain,republican,48.75,JJCooley
+11/1/2008,Nebraska 2nd CD,NE-2,Obama,democrat,50,JJCooley
+11/1/2008,Nebraska 3rd CD,NE-3,McCain,republican,68.64,JJCooley
+11/1/2008,Nebraska 3rd CD,NE-3,Obama,democrat,29.63,JJCooley
 11/1/2008,Nevada,NV,Obama,democrat,55.146675924318700,20171015
 11/1/2008,Nevada,NV,McCain,republican,42.654115108984100,20171015
 11/1/2008,Nevada,NV,Nader,independent,0.63543035683289100,20171015
@@ -2859,6 +2919,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2012,Maine,ME,Romney,republican,40.327392039825700,20171015
 11/1/2012,Maine,ME,Johnson,libertarian,1.2903617483353100,20171015
 11/1/2012,Maine,ME,Stein,green,1.1202359960152200,20171015
+11/1/2012,Maine 1st CD,ME-1,Romney,republican,38.18,JJCooley
+11/1/2012,Maine 1st CD,ME-1,Obama,democrat,59.57,JJCooley
+11/1/2012,Maine 2nd CD,ME-2,Romney,republican,44.38,JJCooley
+11/1/2012,Maine 2nd CD,ME-2,Obama,democrat,52.94,JJCooley
 11/1/2012,Maryland,MD,Obama,democrat,61.974190779318500,20171015
 11/1/2012,Maryland,MD,Romney,republican,35.897732338945400,20171015
 11/1/2012,Maryland,MD,Johnson,libertarian,1.1153067213528300,20171015
@@ -2898,6 +2962,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2012,Nebraska,NE,Romney,republican,59.80319217904800,20171015
 11/1/2012,Nebraska,NE,Obama,democrat,38.02731441792900,20171015
 11/1/2012,Nebraska,NE,Johnson,libertarian,1.3984508653929700,20171015
+11/1/2012,Nebraska 1st CD,NE-1,Romney,republican,57.43,JJCooley
+11/1/2012,Nebraska 1st CD,NE-1,Obama,democrat,40.83,JJCooley
+11/1/2012,Nebraska 2nd CD,NE-2,Romney,republican,52.85,JJCooley
+11/1/2012,Nebraska 2nd CD,NE-2,Obama,democrat,45.7,JJCooley
+11/1/2012,Nebraska 3rd CD,NE-3,Romney,republican,70.24,JJCooley
+11/1/2012,Nebraska 3rd CD,NE-3,Obama,democrat,27.82,JJCooley
 11/1/2012,Nevada,NV,Obama,democrat,52.356249470400600,20171015
 11/1/2012,Nevada,NV,Romney,republican,45.675315641263600,20171015
 11/1/2012,Nevada,NV,Johnson,libertarian,1.0806784390463100,20171015
@@ -3131,6 +3201,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2016,Maine,ME,Trump,republican,43.476678084498900,20171015
 11/1/2016,Maine,ME,Johnson,libertarian,4.9365714374549800,20171015
 11/1/2016,Maine,ME,Stein,green,1.8462427386214700,20171015
+11/1/2016,Maine 1st CD,ME-1,Trump,republican,39.15,JJCooley
+11/1/2016,Maine 1st CD,ME-1,Clinton,democrat,53.96,JJCooley
+11/1/2016,Maine 2nd CD,ME-2,Trump,republican,51.26,JJCooley
+11/1/2016,Maine 2nd CD,ME-2,Clinton,democrat,40.97,JJCooley
 11/1/2016,Maryland,MD,Clinton,democrat,60.325744235192800,20171015
 11/1/2016,Maryland,MD,Trump,republican,33.909304728547700,20171015
 11/1/2016,Maryland,MD,Johnson,libertarian,2.8620005565450500,20171015
@@ -3177,6 +3251,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/2016,Nebraska,NE,Clinton,democrat,33.698756377135500,20171015
 11/1/2016,Nebraska,NE,Johnson,libertarian,4.6132142184507200,20171015
 11/1/2016,Nebraska,NE,Stein,nominated by petition,1.0394123855313800,20171015
+11/1/2016,Nebraska 1st CD,NE-1,Trump,republican,56.18,JJCooley
+11/1/2016,Nebraska 1st CD,NE-1,Clinton,democrat,35.46,JJCooley
+11/1/2016,Nebraska 2nd CD,NE-2,Trump,republican,47.16,JJCooley
+11/1/2016,Nebraska 2nd CD,NE-2,Clinton,democrat,44.92,JJCooley
+11/1/2016,Nebraska 3rd CD,NE-3,Trump,republican,73.91,JJCooley
+11/1/2016,Nebraska 3rd CD,NE-3,Clinton,democrat,19.73,JJCooley
 11/1/2016,Nevada,NV,Clinton,democrat,47.91782367811900,20171015
 11/1/2016,Nevada,NV,Trump,republican,45.500695317602400,20171015
 11/1/2016,Nevada,NV,Johnson,libertarian,3.3218853992189300,20171015
