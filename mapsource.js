@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, organizeMapDataFunction, customOpenRegionLinkFunction)
+  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, organizeMapDataFunction, customOpenRegionLinkFunction)
   {
     this.id = id
     this.dataURL = dataURL
@@ -12,6 +12,7 @@ class MapSource
     this.regionNameToIDMap = regionNameToIDMap
     this.ev2016 = ev2016
     this.regionIDToLinkMap = regionIDToLinkMap
+    this.shouldFilterOutDuplicateRows = shouldFilterOutDuplicateRows
     this.filterMapDataFunction = organizeMapDataFunction
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
   }
@@ -37,7 +38,7 @@ class MapSource
 
       self.setDateRange(self)
 
-      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016)
+      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows)
       self.mapData = filterMapDataCallback.mapData
 
       if (filterMapDataCallback.candidateNameData != null && self.shortCandidateNameOverride == null)
@@ -246,7 +247,7 @@ var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, c
   return {mapData: filteredMapData}
 }
 
-var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyIDs, regionNameToID, ev2016)
+var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyIDs, regionNameToID, ev2016, shouldFilterOutDuplicateRows)
 {
   var filteredMapData = {}
   var candidateNameData = {}
@@ -256,20 +257,32 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
     var rawDateData = rawMapData[mapDates[dateNum]]
     var filteredDateData = {}
 
+    var currentMapDate = new Date(mapDates[dateNum])
+
     var regionNames = Object.keys(regionNameToID)
     for (var regionNum in regionNames)
     {
       var regionToFind = regionNames[regionNum]
+
+      var candidateArrayToTest = Object.keys(candidateNameToPartyIDMap)
+      if (candidateArrayToTest.includes(currentMapDate.getFullYear().toString()))
+      {
+        candidateArrayToTest = Object.keys(candidateNameToPartyIDMap[currentMapDate.getFullYear()])
+      }
+
       var mapDataRows = rawDateData.filter(row => {
-        return row[columnMap.region] == regionToFind && Object.keys(candidateNameToPartyIDMap).includes(row[columnMap.candidateName])
+        return row[columnMap.region] == regionToFind && candidateArrayToTest.includes(row[columnMap.candidateName])
       })
 
-      // cuz JHK is stupid for a third time and has duplicate rows sometimes
-      mapDataRows = mapDataRows.filter((row1, index, self) =>
-        index === self.findIndex((row2) => (
-          row1[columnMap.candidateName] === row2[columnMap.candidateName]
-        ))
-      )
+      if (shouldFilterOutDuplicateRows)
+      {
+        // cuz JHK is stupid for a third time and has duplicate rows sometimes
+        mapDataRows = mapDataRows.filter((row1, index, self) =>
+          index === self.findIndex((row2) => (
+            row1[columnMap.candidateName] === row2[columnMap.candidateName]
+          ))
+        )
+      }
 
       var marginSum = mapDataRows.length > 0 ? 0 : (ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100)
       var incumbentWinChance
@@ -278,6 +291,10 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
       for (var rowNum in mapDataRows)
       {
         var partyID = candidateNameToPartyIDMap[mapDataRows[rowNum][columnMap.candidateName]]
+        if (Object.keys(candidateNameToPartyIDMap).includes(currentMapDate.getFullYear().toString()))
+        {
+          partyID = candidateNameToPartyIDMap[currentMapDate.getFullYear().toString()][mapDataRows[rowNum][columnMap.candidateName]]
+        }
 
         if (!(mapDates[dateNum] in candidateNameData))
         {
@@ -330,22 +347,37 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
 
 // Map Source Declarations
 
-const incumbentChallengerPartyIDs = {incumbent: RepublicanParty.getID(), challenger: DemocraticParty.getID()}
-const partyCandiateLastNames = {"Biden":DemocraticParty.getID(), "Trump":RepublicanParty.getID()}
-const partyCandiateFullNames = {"Joseph R. Biden Jr.":DemocraticParty.getID(), "Donald Trump":RepublicanParty.getID()}
-const partyNamesToIDs = {"democrat":DemocraticParty.getID(), "republican":RepublicanParty.getID()}
+var democraticPartyID = DemocraticParty.getID()
+var republicanPartyID = RepublicanParty.getID()
+
+const incumbentChallengerPartyIDs = {incumbent: RepublicanParty.getID(), challenger: democraticPartyID}
+const partyCandiateLastNames = {"Biden":democraticPartyID, "Trump":RepublicanParty.getID()}
+const partyCandiateFullNames = {"Joseph R. Biden Jr.":democraticPartyID, "Donald Trump":RepublicanParty.getID()}
+const partyNamesToIDs = {"democrat":democraticPartyID, "republican":RepublicanParty.getID()}
 
 const partyIDToCandidateLastNames = {}
-partyIDToCandidateLastNames[DemocraticParty.getID()] = "Biden"
+partyIDToCandidateLastNames[democraticPartyID] = "Biden"
 partyIDToCandidateLastNames[RepublicanParty.getID()] = "Trump"
+
+const electionYearToCandidateData = {
+  1976: {"Carter":democraticPartyID, "Ford":republicanPartyID},
+  1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID},
+  1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID},
+  1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID},
+  1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID},
+  1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID},
+  2000: {"Gore":democraticPartyID, "Bush":republicanPartyID},
+  2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID},
+  2008: {"Obama":democraticPartyID, "McCain":republicanPartyID},
+  2012: {"Obama":democraticPartyID, "Romney":republicanPartyID},
+  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID}
+}
 
 const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 const regionNameToIDJHK = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine CD-1":"ME-D1", "Maine CD-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska CD-1":"NE-D1", "Nebraska CD-2":"NE-D2", "Nebraska CD-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 const regionNameToIDCook = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Washington DC":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine 1st CD":"ME-D1", "Maine 2nd CD":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska 1st CD":"NE-D1", "Nebraska 2nd CD":"NE-D2", "Nebraska 3rd CD":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME-AL", "Maine 1st CD":"ME-D1", "Maine 2nd CD":"ME-D2", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE-AL", "Nebraska 1st CD":"NE-D1", "Nebraska 2nd CD": "NE-D2", "Nebraska 3rd CD":"NE-D3", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
-var democraticPartyID = DemocraticParty.getID()
-var republicanPartyID = RepublicanParty.getID()
 const ev2016 = {"AL":republicanPartyID, "AK":republicanPartyID, "AZ":republicanPartyID, "AR":republicanPartyID, "CA":democraticPartyID, "CO":democraticPartyID, "CT":democraticPartyID, "DE":democraticPartyID, "DC":democraticPartyID, "FL":republicanPartyID, "GA":republicanPartyID, "HI":democraticPartyID, "ID":republicanPartyID, "IL":democraticPartyID, "IN":republicanPartyID, "IA":republicanPartyID, "KS":republicanPartyID, "KY":republicanPartyID, "LA":republicanPartyID, "ME-DrepublicanPartyID":democraticPartyID, "ME-D2":republicanPartyID, "ME-AL":democraticPartyID, "MD":democraticPartyID, "MA":democraticPartyID, "MI":republicanPartyID, "MN":democraticPartyID, "MS":republicanPartyID, "MO":republicanPartyID, "MT":republicanPartyID, "NE-DrepublicanPartyID":republicanPartyID, "NE-D2":republicanPartyID, "NE-D3":republicanPartyID, "NE-AL":republicanPartyID, "NV":democraticPartyID, "NH":democraticPartyID, "NJ":democraticPartyID, "NM":democraticPartyID, "NY":democraticPartyID, "NC":republicanPartyID, "ND":republicanPartyID, "OH":republicanPartyID, "OK":republicanPartyID, "OR":democraticPartyID, "PA":republicanPartyID, "RI":democraticPartyID, "SC":republicanPartyID, "SD":republicanPartyID, "TN":republicanPartyID, "TX":republicanPartyID, "UT":republicanPartyID, "VT":democraticPartyID, "VA":democraticPartyID, "WA":democraticPartyID, "WV":republicanPartyID, "WI":republicanPartyID, "WY":republicanPartyID}
 
 var FiveThirtyEightPollAverageMapSource = new MapSource(
@@ -364,6 +396,7 @@ var FiveThirtyEightPollAverageMapSource = new MapSource(
   regionNameToIDFiveThirtyEight,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
+  false,
   doubleLinePercentFilterFunction
 )
 
@@ -384,6 +417,7 @@ var FiveThirtyEightProjectionMapSource = new MapSource(
   regionNameToIDFiveThirtyEight,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
+  false,
   singleLineMarginFilterFunction
 )
 
@@ -404,6 +438,7 @@ var JHKProjectionMapSource = new MapSource(
   regionNameToIDJHK,
   ev2016,
   {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-cd-1", "ME-D2":"maine-cd-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-cd-1", "NE-D2":"nebraska-cd-2", "NE-D3":"nebraska-cd-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
+  true,
   doubleLinePercentFilterFunction
 )
 
@@ -422,6 +457,7 @@ var CookProjectionMapSource = new MapSource(
   regionNameToIDCook,
   ev2016,
   null,
+  false,
   singleLineMarginFilterFunction,
   function(regionURL, regionID, regionIDToLinkMap, mapDate)
   {
@@ -439,14 +475,15 @@ var PastElectionResultMapSource = new MapSource(
     region: "region",
     percentAdjusted: "voteshare",
     partyCandidateName: "candidate",
-    candidateName: "party"
+    candidateName: "candidate"
   },
-  partyNamesToIDs,
+  electionYearToCandidateData,
   null,
   incumbentChallengerPartyIDs,
   regionNameToIDHistorical,
   ev2016,
   {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
+  false,
   doubleLinePercentFilterFunction,
   function(regionURL, regionID, regionIDToLinkMap, mapDate)
   {
@@ -462,7 +499,7 @@ mapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
 mapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
 mapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
 
-var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), /*PastElectionResultMapSource.getID()*/]
+var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
 // Not implementing Economist bc data csv is not very useful (only shows current date)
 // var EconomistProjectionMapSource = new MapSource(
