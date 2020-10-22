@@ -1,12 +1,13 @@
 class MapSource
 {
-  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, organizeMapDataFunction, customOpenRegionLinkFunction)
+  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, organizeMapDataFunction, customOpenRegionLinkFunction)
   {
     this.id = id
     this.dataURL = dataURL
     this.regionURL = regionURL
     this.columnMap = columnMap
     this.candidateNameToPartyIDMap = candidateNameToPartyIDMap
+    this.shortCandidateNameOverride = shortCandidateNameOverride
     this.incumbentChallengerPartyIDs = incumbentChallengerPartyIDs
     this.regionNameToIDMap = regionNameToIDMap
     this.ev2016 = ev2016
@@ -39,21 +40,9 @@ class MapSource
       var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016)
       self.mapData = filterMapDataCallback.mapData
 
-      if (filterMapDataCallback.candidateNameData != null)
+      if (filterMapDataCallback.candidateNameData != null && self.shortCandidateNameOverride == null)
       {
         self.candidateNameData = filterMapDataCallback.candidateNameData
-      }
-      else
-      {
-        self.candidatePartyIDToNameMap = {}
-
-        for (var prop in self.candidateNameToPartyIDMap)
-        {
-          if (self.candidateNameToPartyIDMap.hasOwnProperty(prop))
-          {
-            self.candidatePartyIDToNameMap[self.candidateNameToPartyIDMap[prop]] = prop
-          }
-        }
       }
 
       resolve(true)
@@ -191,9 +180,9 @@ class MapSource
 
   getCandidateNames(date)
   {
-    if (this.candidateNameData == null || this.candidateNameData[date] == null)
+    if (this.candidateNameData == null || date == null || this.candidateNameData[date] == null)
     {
-      return this.candidatePartyIDToNameMap
+      return this.shortCandidateNameOverride
     }
     else
     {
@@ -346,6 +335,10 @@ const partyCandiateLastNames = {"Biden":DemocraticParty.getID(), "Trump":Republi
 const partyCandiateFullNames = {"Joseph R. Biden Jr.":DemocraticParty.getID(), "Donald Trump":RepublicanParty.getID()}
 const partyNamesToIDs = {"democrat":DemocraticParty.getID(), "republican":RepublicanParty.getID()}
 
+const partyIDToCandidateLastNames = {}
+partyIDToCandidateLastNames[DemocraticParty.getID()] = "Biden"
+partyIDToCandidateLastNames[RepublicanParty.getID()] = "Trump"
+
 const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 const regionNameToIDJHK = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine CD-1":"ME-D1", "Maine CD-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska CD-1":"NE-D1", "Nebraska CD-2":"NE-D2", "Nebraska CD-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 const regionNameToIDCook = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Washington DC":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine 1st CD":"ME-D1", "Maine 2nd CD":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska 1st CD":"NE-D1", "Nebraska 2nd CD":"NE-D2", "Nebraska 3rd CD":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
@@ -366,6 +359,7 @@ var FiveThirtyEightPollAverageMapSource = new MapSource(
     percentAdjusted: "pct_trend_adjusted"
   },
   partyCandiateFullNames,
+  partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
   regionNameToIDFiveThirtyEight,
   ev2016,
@@ -385,6 +379,7 @@ var FiveThirtyEightProjectionMapSource = new MapSource(
     challengerWinChance: "winstate_chal"
   },
   partyCandiateLastNames,
+  partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
   regionNameToIDFiveThirtyEight,
   ev2016,
@@ -404,6 +399,7 @@ var JHKProjectionMapSource = new MapSource(
     winChance: "win",
   },
   partyCandiateFullNames,
+  partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
   regionNameToIDJHK,
   ev2016,
@@ -421,6 +417,7 @@ var CookProjectionMapSource = new MapSource(
     margin: "margin"
   },
   partyCandiateLastNames,
+  partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
   regionNameToIDCook,
   ev2016,
@@ -445,6 +442,7 @@ var PastElectionResultMapSource = new MapSource(
     candidateName: "party"
   },
   partyNamesToIDs,
+  null,
   incumbentChallengerPartyIDs,
   regionNameToIDHistorical,
   ev2016,

@@ -23,16 +23,6 @@ const regionEVArray = {
   1970: {"AL":9, "AK":3, "AZ":6, "AR":6, "CA":45, "CO":7, "CT":8, "DE":3, "DC":3, "FL":17, "GA":12, "HI":4, "ID":4, "IL":26, "IN":13, "IA":8, "KS":7, "KY":9, "LA":10, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":14, "MI":21, "MN":10, "MS":7, "MO":12, "MT":4, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":3, "NH":4, "NJ":17, "NM":4, "NY":41, "NC":13, "ND":3, "OH":25, "OK":8, "OR":6, "PA":27, "RI":4, "SC":8, "SD":4, "TN":10, "TX":26, "UT":4, "VT":3, "VA":12, "WA":9, "WV":6, "WI":11, "WY":3}
 }
 
-for (regionEVDecade in regionEVArray)
-{
-  var decadeSum = 0
-  for (regionID in regionEVArray[regionEVDecade])
-  {
-    decadeSum += regionEVArray[regionEVDecade][regionID]
-  }
-  console.log(regionEVDecade, decadeSum)
-}
-
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
 var displayRegionDataArray = {}
@@ -318,28 +308,8 @@ function displayDataMap(dateIndex)
 
   updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
-  var candidateNames = currentMapSource.getCandidateNames(dateToDisplay.getTime())
-  for (partyID in politicalParties)
-  {
-    if (partyID in candidateNames)
-    {
-      politicalParties[partyID].setCandidateName(candidateNames[partyID])
-    }
-  }
-
-  var regionIDs = Object.values(mapRegionNameToID)
-  for (regionNum in regionIDs)
-  {
-    var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
-    if (regionChildren.length == 1)
-    {
-      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
-    }
-    else if (regionChildren.length == 2)
-    {
-      regionChildren[1].innerHTML = regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
-    }
-  }
+  updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
+  updateMapElectoralVoteText()
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
@@ -360,6 +330,35 @@ function displayDataMap(dateIndex)
   updateEVPieChart()
 
   showingDataMap = true
+}
+
+function updatePoliticalPartyCandidateNames(mapDate)
+{
+  var candidateNames = currentMapSource.getCandidateNames(mapDate)
+  for (partyID in politicalParties)
+  {
+    if (partyID in candidateNames)
+    {
+      politicalParties[partyID].setCandidateName(candidateNames[partyID])
+    }
+  }
+}
+
+function updateMapElectoralVoteText()
+{
+  var regionIDs = Object.values(mapRegionNameToID)
+  for (regionNum in regionIDs)
+  {
+    var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
+    if (regionChildren.length == 1)
+    {
+      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
+    }
+    else if (regionChildren.length == 2)
+    {
+      regionChildren[1].innerHTML = regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
+    }
+  }
 }
 
 function toggleMapSource(buttonDiv)
@@ -404,8 +403,15 @@ function updateMapSourceButton(revertToDefault)
 
 function clearMap()
 {
+  updateMapSourceButton(true)
+  currentMapSource = FiveThirtyEightPollAverageMapSource
+
+  updatePoliticalPartyCandidateNames()
+  updateMapElectoralVoteText()
+
   displayRegionDataArray = {}
   populateRegionsArray()
+
   $('#outlines').children().each(function() {
     var regionDataCallback = getRegionData($(this).attr('id'))
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
@@ -418,9 +424,6 @@ function clearMap()
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
-
-  updateMapSourceButton(true)
-  currentMapSource = FiveThirtyEightPollAverageMapSource
 
   showingDataMap = false
 }
