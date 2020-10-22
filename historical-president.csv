@@ -159,6 +159,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1976,Nebraska,NE,McCarthy,independent,1.5464384778549300,20171015
 11/1/1976,Nebraska,NE,Maddox,american independent party,0.5567376295634600,20171015
 11/1/1976,Nebraska,NE,Macbride,libertarian,0.24326368893891900,20171015
+11/1/1976,Nebraska 1st CD,NE-1,Ford,republican,59.203888263515900,JJCooley
+11/1/1976,Nebraska 1st CD,NE-1,Carter,democrat,38.449671940126800,JJCooley
+11/1/1976,Nebraska 2nd CD,NE-2,Ford,republican,59.203888263515900,JJCooley
+11/1/1976,Nebraska 2nd CD,NE-2,Carter,democrat,38.449671940126800,JJCooley
+11/1/1976,Nebraska 3rd CD,NE-3,Ford,republican,59.203888263515900,JJCooley
+11/1/1976,Nebraska 3rd CD,NE-3,Carter,democrat,38.449671940126800,JJCooley
 11/1/1976,Nevada,NV,Ford,republican,50.165943450434900,20171015
 11/1/1976,Nevada,NV,Carter,democrat,45.809804038122400,20171015
 11/1/1976,Nevada,NV,Macbride,libertarian,0.75244209316610200,20171015
@@ -490,6 +496,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1980,Nebraska,NE,Carter,democrat,26.022738466975100,20171015
 11/1/1980,Nebraska,NE,Anderson,independent,7.013555203562600,20171015
 11/1/1980,Nebraska,NE,Clark,libertarian,1.4136878003167900,20171015
+11/1/1980,Nebraska 1st CD,NE-1,Reagan,republican,65.550018529145500,JJCooley
+11/1/1980,Nebraska 1st CD,NE-1,Carter,democrat,26.022738466975100,JJCooley
+11/1/1980,Nebraska 2nd CD,NE-2,Reagan,republican,65.550018529145500,JJCooley
+11/1/1980,Nebraska 2nd CD,NE-2,Carter,democrat,26.022738466975100,JJCooley
+11/1/1980,Nebraska 3rd CD,NE-3,Reagan,republican,65.550018529145500,JJCooley
+11/1/1980,Nebraska 3rd CD,NE-3,Carter,democrat,26.022738466975100,JJCooley
 11/1/1980,Nevada,NV,Reagan,republican,63.611854307896900,20171015
 11/1/1980,Nevada,NV,Carter,democrat,27.356663329120400,20171015
 11/1/1980,Nevada,NV,Anderson,independent,7.2431593979285300,20171015
@@ -819,6 +831,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1984,Nebraska,NE,Bergland,libertarian,0.31882102163811700,20171015
 11/1/1984,Nebraska,NE,Mason,socialist workers,0.16347436703522500,20171015
 11/1/1984,Nebraska,NE,Serrette,alliance,0.15718689138002400,20171015
+11/1/1984,Nebraska 1st CD,NE-1,Reagan,republican,70.550690855556700,JJCooley
+11/1/1984,Nebraska 1st CD,NE-1,Mondale,democrat,28.809826864389900,JJCooley
+11/1/1984,Nebraska 2nd CD,NE-2,Reagan,republican,70.550690855556700,JJCooley
+11/1/1984,Nebraska 2nd CD,NE-2,Mondale,democrat,28.809826864389900,JJCooley
+11/1/1984,Nebraska 3rd CD,NE-3,Reagan,republican,70.550690855556700,JJCooley
+11/1/1984,Nebraska 3rd CD,NE-3,Mondale,democrat,28.809826864389900,JJCooley
 11/1/1984,Nevada,NV,Reagan,republican,66.769950162176300,20171015
 11/1/1984,Nevada,NV,Mondale,democrat,32.419345140193200,20171015
 11/1/1984,Nevada,NV,Bergland,libertarian,0.81070469763049300,20171015
@@ -1096,6 +1114,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1988,Nebraska,NE,Dukakis,democrat,39.191038074576900,20171015
 11/1/1988,Nebraska,NE,Paul,libertarian,0.38308905233081100,20171015
 11/1/1988,Nebraska,NE,Fulani,new alliance,0.26305246687277500,20171015
+11/1/1988,Nebraska 1st CD,NE-1,Bush,republican,52.071517253072400,JJCooley
+11/1/1988,Nebraska 1st CD,NE-1,Dukakis,democrat,46.19852655644100,JJCooley
+11/1/1988,Nebraska 2nd CD,NE-2,Bush,republican,52.071517253072400,JJCooley
+11/1/1988,Nebraska 2nd CD,NE-2,Dukakis,democrat,46.19852655644100,JJCooley
+11/1/1988,Nebraska 3rd CD,NE-3,Bush,republican,52.071517253072400,JJCooley
+11/1/1988,Nebraska 3rd CD,NE-3,Dukakis,democrat,46.19852655644100,JJCooley
 11/1/1988,Nevada,NV,Bush,republican,60.046687436067100,20171015
 11/1/1988,Nevada,NV,Dukakis,democrat,38.684125397440600,20171015
 11/1/1988,Nevada,NV,Paul,libertarian,1.0258412918605900,20171015
@@ -1396,6 +1420,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/1/1992,Nebraska,NE,Clinton,democrat,29.403454157435600,20171015
 11/1/1992,Nebraska,NE,Perot,independent,23.605849669037600,20171015
 11/1/1992,Nebraska,NE,Marrou,libertarian,0.18168358312566300,20171015
+11/1/1992,Nebraska 1st CD,NE-1,Bush,republican,46.597500359299600,JJCooley
+11/1/1992,Nebraska 1st CD,NE-1,Clinton,democrat,29.403454157435600,JJCooley
+11/1/1992,Nebraska 2nd CD,NE-2,Bush,republican,46.597500359299600,JJCooley
+11/1/1992,Nebraska 2nd CD,NE-2,Clinton,democrat,29.403454157435600,JJCooley
+11/1/1992,Nebraska 3rd CD,NE-3,Bush,republican,46.597500359299600,JJCooley
+11/1/1992,Nebraska 3rd CD,NE-3,Clinton,democrat,29.403454157435600,JJCooley
 11/1/1992,Nevada,NV,Clinton,democrat,37.357549998222500,20171015
 11/1/1992,Nevada,NV,Bush,republican,34.7267922530900,20171015
 11/1/1992,Nevada,NV,Perot,independent,26.185124763488600,20171015
