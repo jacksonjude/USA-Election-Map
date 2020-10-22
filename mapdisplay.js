@@ -421,6 +421,10 @@ function clearMap()
   })
 
   updateEVPieChart()
+  if (currentRegionID != null)
+  {
+    updateStateBox(currentRegionID)
+  }
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
@@ -934,7 +938,11 @@ function getCurrentDecade()
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionData.partyID == null) { return }
+  if (regionData.partyID == null)
+  {
+    $("#stateboxcontainer").hide()
+    return
+  }
   $("#stateboxcontainer").show()
 
   var regionMarginString
