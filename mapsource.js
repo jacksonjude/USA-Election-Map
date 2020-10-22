@@ -462,7 +462,7 @@ mapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
 mapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
 mapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
 
-var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), /*PastElectionResultMapSource.getID()*/]
 
 // Not implementing Economist bc data csv is not very useful (only shows current date)
 // var EconomistProjectionMapSource = new MapSource(
