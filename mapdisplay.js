@@ -334,6 +334,11 @@ function displayDataMap(dateIndex)
 
   updateEVPieChart()
 
+  if (currentRegionID)
+  {
+    updateStateBox(currentRegionID)
+  }
+
   showingDataMap = true
 }
 
@@ -1084,10 +1089,6 @@ function incrementSlider(keyString)
   }
 
   displayDataMap(sliderDiv.value)
-  if (currentRegionID)
-  {
-    updateStateBox(currentRegionID)
-  }
 }
 
 document.addEventListener('keyup', function(e) {
