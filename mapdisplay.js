@@ -106,7 +106,7 @@ function createMapSourceDropdownItems()
   {
     $("#dropdownItemsContainer").append("<div class='dropdown-separator'></div>")
     //\"sourceToggleButton\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-error.png\", success: \"./assets/icon-success.png\"}, \"" +
-    $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+    $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
   }
 }
 
@@ -168,7 +168,7 @@ function loadDataMap(shouldSetToMax, forceDownload)
   return loadDataMapPromise
 }
 
-function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload)
+function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap)
 {
   if (mapIDToIgnore != null)
   {
@@ -204,6 +204,11 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
       for (divID in divsToUpdateStatus)
       {
         insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      }
+
+      if (refreshMap && currentMapSource.getID() == mapSourceID)
+      {
+        displayDataMap()
       }
       resolve()
     }
