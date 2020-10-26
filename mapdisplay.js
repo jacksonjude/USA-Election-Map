@@ -208,7 +208,10 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
 
       if (refreshMap && currentMapSource.getID() == mapSourceID)
       {
+        setDataMapDateSliderRange()
         displayDataMap()
+        $("#dataMapDateSliderContainer").show()
+        $("#dateDisplay").show()
       }
       resolve()
     }
