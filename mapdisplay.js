@@ -52,6 +52,10 @@ var evPieChartCutoutPercent = 55
 const minEVPieChartSliceLabelValue = 16
 const minEVPieChartSliceLabelBrightness = 0.7
 
+const kCSVFileType = "text/csv"
+const kPNGFileType = "image/png"
+const kJPEGFileType = "image/jpeg"
+
 $(function() {
   $("#loader").hide()
   resizeElements(false)
@@ -157,7 +161,9 @@ function loadDataMap(shouldSetToMax, forceDownload)
     $("#dateDisplay").hide()
 
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
-    await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
+    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
+
+    if (!loadedSuccessfully) { resolve(); return }
 
     setDataMapDateSliderRange(shouldSetToMax)
     displayDataMap()
@@ -165,9 +171,15 @@ function loadDataMap(shouldSetToMax, forceDownload)
     $("#dateDisplay").show()
 
     $("#evPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
-    $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
 
-    console.log(currentMapSource.getIconURL(), $("#evPieChart").css("background-image"))
+    if (currentMapSource.getIconURL())
+    {
+      $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
+    }
+    else
+    {
+      $("#evPieChart").css("background-image", "")
+    }
 
     resolve()
   })
@@ -204,7 +216,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
       {
         insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
       }
-      return
+      resolve(false)
     }
     else
     {
@@ -220,7 +232,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
         $("#dataMapDateSliderContainer").show()
         $("#dateDisplay").show()
       }
-      resolve()
+      resolve(true)
     }
   })
 
@@ -233,8 +245,8 @@ async function downloadAllMapData()
   {
     var sourcesLoaded = 0
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function() {
-      if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID())
+    downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function(loadedSuccessfully) {
+      if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID() && loadedSuccessfully)
       {
         loadDataMap(true)
       }
@@ -448,6 +460,8 @@ function clearMap()
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
+
+  $("#evPieChart").css("background-image", "")
 
   showingDataMap = false
 }
@@ -1270,17 +1284,40 @@ $("html").on('drop', function(e) {
 
   var file = e.originalEvent.dataTransfer.files[0]
 
-  //Eventually add switch here to check for file type (possibly using extension), for file uploads of maps, icons, etc.
-
   var fr = new FileReader()
-	fr.onload = onFileReaderLoad
-	fr.readAsDataURL(file)
+
+  switch (file.type)
+  {
+    case kCSVFileType:
+    fr.onload = csvFileLoaded
+    fr.readAsText(file)
+    break
+
+    case kJPEGFileType:
+    case kPNGFileType:
+    fr.onload = imageFileLoaded
+    fr.readAsDataURL(file)
+    break
+
+    default:
+    return
+  }
 })
 
-function onFileReaderLoad(e)
+function csvFileLoaded(e)
 {
-  var backgroundURL = "url('" + e.target.result + "')";
-	$("#evPieChart").css("background", backgroundURL)
+  var textMapData = e.target.result
+  CustomMapSource.setTextMapData(textMapData)
+
+  currentMapSource = CustomMapSource
+  updateMapSourceButton()
+  loadDataMap()
+}
+
+function imageFileLoaded(e)
+{
+  var backgroundURL = "url('" + e.target.result + "')"
+	$("#evPieChart").css("background-image", backgroundURL)
 }
 
 function zeroPadding(num)
