@@ -90,6 +90,8 @@ function resizeElements(initilizedPieChart)
   $("#evPieChart").css("width", windowWidth-windowWidth*0.12-mapWidth)
   $("#evPieChart").css("height", windowWidth-windowWidth*0.09-mapWidth)
   $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
+  $("#evPieChart").css("background-position", "center")
+  $("#evPieChart").css("background-repeat", "no-repeat")
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
   $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
@@ -161,6 +163,11 @@ function loadDataMap(shouldSetToMax, forceDownload)
     displayDataMap()
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
+
+    $("#evPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
+    $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
+
+    console.log(currentMapSource.getIconURL(), $("#evPieChart").css("background-image"))
 
     resolve()
   })
@@ -1274,9 +1281,6 @@ function onFileReaderLoad(e)
 {
   var backgroundURL = "url('" + e.target.result + "')";
 	$("#evPieChart").css("background", backgroundURL)
-  $("#evPieChart").css("background-position", "center")
-  $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
-  $("#evPieChart").css("background-repeat", "no-repeat")
 }
 
 function zeroPadding(num)

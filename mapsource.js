@@ -1,10 +1,11 @@
 class MapSource
 {
-  constructor(id, dataURL, regionURL, columnMap, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, organizeMapDataFunction, customOpenRegionLinkFunction)
+  constructor(id, dataURL, regionURL, iconURL, columnMap, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, organizeMapDataFunction, customOpenRegionLinkFunction)
   {
     this.id = id
     this.dataURL = dataURL
     this.regionURL = regionURL
+    this.iconURL = iconURL
     this.columnMap = columnMap
     this.candidateNameToPartyIDMap = candidateNameToPartyIDMap
     this.shortCandidateNameOverride = shortCandidateNameOverride
@@ -170,7 +171,20 @@ class MapSource
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.regionURL, regionID, this.regionIDToLinkMap, modelDate)
+      this.customOpenRegionLinkFunction(this.regionURL, regionID, this.regionIDToLinkMap, modelDate, false)
+    }
+  }
+
+  openHomepageLink(modelDate)
+  {
+    if (this.customOpenRegionLinkFunction == undefined)
+    {
+      if (!this.regionURL) { return }
+      window.open(this.regionURL)
+    }
+    else
+    {
+      this.customOpenRegionLinkFunction(this.regionURL, null, null, modelDate, true)
     }
   }
 
@@ -189,6 +203,11 @@ class MapSource
     {
       return this.candidateNameData[date]
     }
+  }
+
+  getIconURL()
+  {
+    return this.iconURL
   }
 }
 
@@ -384,6 +403,7 @@ var FiveThirtyEightPollAverageMapSource = new MapSource(
   "538 Poll Avg",
   "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv",
   "https://projects.fivethirtyeight.com/polls/president-general/",
+  "./assets/fivethirtyeight-large.png",
   {
     date: "modeldate",
     region: "state",
@@ -404,6 +424,7 @@ var FiveThirtyEightProjectionMapSource = new MapSource(
   "538 Projection",
   "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv",
   "https://projects.fivethirtyeight.com/2020-election-forecast/",
+  "./assets/fivethirtyeight-large.png",
   {
     date: "modeldate",
     region: "state",
@@ -425,6 +446,7 @@ var JHKProjectionMapSource = new MapSource(
   "JHK",
   "https://data.jhkforecasts.com/2020-presidential.csv",
   "https://projects.jhkforecasts.com/presidential-forecast/",
+  "./assets/jhk-large.png",
   {
     date: "forecastDate",
     region: "state",
@@ -446,6 +468,7 @@ var CookProjectionMapSource = new MapSource(
   "Cook",
   "https://map.jacksonjude.com/cook/cook-latest.csv",
   "https://map.jacksonjude.com/cook/",
+  "./assets/cookpolitical-large.png",
   {
     date: "date",
     region: "region",
@@ -459,7 +482,7 @@ var CookProjectionMapSource = new MapSource(
   null,
   false,
   singleLineMarginFilterFunction,
-  function(regionURL, regionID, regionIDToLinkMap, mapDate)
+  function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
   {
     if (mapDate == null) { return }
     window.open(regionURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
@@ -470,6 +493,7 @@ var PastElectionResultMapSource = new MapSource(
   "Past Elections",
   "https://map.jacksonjude.com/historical-president.csv",
   "https://en.wikipedia.org/wiki/",
+  "./assets/wikipedia-large.png",
   {
     date: "date",
     region: "region",
@@ -485,10 +509,16 @@ var PastElectionResultMapSource = new MapSource(
   {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
   false,
   doubleLinePercentFilterFunction,
-  function(regionURL, regionID, regionIDToLinkMap, mapDate)
+  function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
   {
     if (mapDate == null) { return }
-    window.open(regionURL + mapDate.getFullYear() + "_United_States_presidential_election_in_" + regionIDToLinkMap[regionID])
+
+    var linkToOpen = regionURL + mapDate.getFullYear() + "_United_States_presidential_election"
+    if (!shouldOpenHomepage)
+    {
+      linkToOpen += "_in_" + regionIDToLinkMap[regionID]
+    }
+    window.open(linkToOpen)
   }
 )
 
