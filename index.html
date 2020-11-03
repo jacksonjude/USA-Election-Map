@@ -20,8 +20,8 @@
         <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
         <div class="dropdown">
           <a id="sourceToggleButton" style="min-width: 195px">Select Source</a>
-          <div class="dropdown-content">
-            <div id="dropdownItemsContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+          <div class="dropdown-content" style="min-width: 231px;">
+            <div id="mapSourcesDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
             </div>
           </div>
         </div>
@@ -34,6 +34,21 @@
       <div style="border-left: 80px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
         <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
+        <div class="dropdown">
+          <a id="compareButton" style="min-width: 204px" onclick="applyCompareToCustomMap()">Compare</a>
+          <div class="dropdown-content" style="min-width: 240px">
+            <div id="compareArrayDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+              <div class='dropdown-separator'></div>
+              <a id="compareItem-0" onclick="setMapCompareItem(0)" style="text-align: center">
+                &lt;Empty&gt;
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="compareItem-1" onclick="setMapCompareItem(1)" style="text-align: center">
+                &lt;Empty&gt;
+              </a>
+            </div>
+          </div>
+        </div>
         <a id="clearMapButton">Clear</a>
       </div>
       <div class="loader" id="loader"></div>

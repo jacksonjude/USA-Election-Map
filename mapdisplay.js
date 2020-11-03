@@ -1,7 +1,7 @@
 var currentMapSource = FiveThirtyEightPollAverageMapSource
 
 var selectedParty
-var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.001}
+var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.000000001}
 
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
@@ -52,6 +52,8 @@ const minEVPieChartSliceLabelBrightness = 0.7
 const kCSVFileType = "text/csv"
 const kPNGFileType = "image/png"
 const kJPEGFileType = "image/jpeg"
+
+var compareMapDataArray = [null, null]
 
 $(function() {
   $("#loader").hide()
@@ -107,14 +109,14 @@ function createMapSourceDropdownItems()
 {
   for (sourceNum in mapSourceIDs)
   {
-    $("#dropdownItemsContainer").append("<div class='dropdown-separator'></div>")
+    $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
     if (mapSourceIDs[sourceNum] != CustomMapSource.getID())
     {
-      $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
     }
     else
     {
-      $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapSourceCSV(currentMapSource)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
+      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapSourceCSV(currentMapSource)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
     }
   }
 }
@@ -430,7 +432,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 function updateMapSourceButton(revertToDefault)
 {
   revertToDefault = revertToDefault || false
-  $("#dropdownItemsContainer .active").removeClass("active")
+  $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
     $("#sourceToggleButton").html("Select Source")
@@ -589,7 +591,7 @@ function toggleEditing()
     $("#stateboxcontainer").hide()
 
     $("#sourceToggleButton").addClass('topnavdisable')
-    $("#dropdownItemsContainer").hide()
+    $("#mapSourcesDropdownContainer").hide()
 
     CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
 
@@ -613,7 +615,7 @@ function toggleEditing()
     }
 
     $("#sourceToggleButton").removeClass('topnavdisable')
-    $("#dropdownItemsContainer").show()
+    $("#mapSourcesDropdownContainer").show()
 
     CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
 
@@ -824,8 +826,12 @@ function getPartyTotals()
 
   for (regionID in displayRegionDataArray)
   {
-    if (displayRegionDataArray[regionID].partyID == null) { continue }
-    partyTotals[displayRegionDataArray[regionID].partyID] += regionEVArray[getCurrentDecade()][regionID]
+    var partyIDToSet = displayRegionDataArray[regionID].partyID
+    if (displayRegionDataArray[regionID].partyID == null)
+    {
+      partyIDToSet = TossupParty.getID()
+    }
+    partyTotals[partyIDToSet] += regionEVArray[getCurrentDecade()][regionID]
   }
 
   return partyTotals
@@ -1057,17 +1063,22 @@ function getCurrentDateOrToday()
 
 function getTodayString(delimiter, includeTime)
 {
+  var currentTimeDate = new Date()
+  return getMDYDateString(currentTimeDate, delimiter, includeTime)
+}
+
+function getMDYDateString(date, delimiter, includeTime)
+{
   delimiter = delimiter || "/"
 
-  var currentTimeDate = new Date()
-  var todayString = (currentTimeDate.getMonth()+1) + delimiter + currentTimeDate.getDate() + delimiter + currentTimeDate.getFullYear()
+  var dateString = (date.getMonth()+1) + delimiter + date.getDate() + delimiter + date.getFullYear()
 
   if (includeTime)
   {
-    todayString += delimiter + zeroPadding(currentTimeDate.getHours()) + delimiter + zeroPadding(currentTimeDate.getMinutes())
+    dateString += delimiter + zeroPadding(date.getHours()) + delimiter + zeroPadding(date.getMinutes())
   }
 
-  return todayString
+  return dateString
 }
 
 function updateStateBox(regionID)
@@ -1110,6 +1121,119 @@ function updateElectionDayCountdown()
   var secondsUntilElectionDay = Math.floor(timeUntilElectionDay/1000%60)
 
   $("#electionCountdownDisplay").html(daysUntilElectionDay + "<span style='font-size: 16px;'> day" + (daysUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilElectionDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilElectionDay) + "<span style='font-size: 16px;'> min" + (minutesUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilElectionDay) + "<span style='font-size: 16px;'> s" + "</span>")
+}
+
+$("html").on('dragenter', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+})
+
+$("html").on('dragover', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+})
+
+$("html").on('drop', function(e) {
+  e.stopPropagation()
+  e.preventDefault()
+
+  var file = e.originalEvent.dataTransfer.files[0]
+  loadUploadedFile(file)
+})
+
+function loadUploadedFile(file)
+{
+  var fr = new FileReader()
+
+  switch (file.type)
+  {
+    case kCSVFileType:
+    fr.onload = csvFileLoaded
+    fr.readAsText(file)
+    break
+
+    case kJPEGFileType:
+    case kPNGFileType:
+    fr.onload = imageFileLoaded
+    fr.readAsDataURL(file)
+    break
+
+    default:
+    return
+  }
+}
+
+function csvFileLoaded(e)
+{
+  var textMapData = e.target.result
+  CustomMapSource.setTextMapData(textMapData)
+
+  currentMapSource = CustomMapSource
+  updateMapSourceButton()
+  loadDataMap(false, true)
+}
+
+function imageFileLoaded(e)
+{
+  var backgroundURL = "url('" + e.target.result + "')"
+	$("#evPieChart").css("background-image", backgroundURL)
+}
+
+function downloadMapSourceCSV(mapSourceToDownload)
+{
+  if (!mapSourceToDownload.getTextMapData()) { return }
+
+  var downloadLinkDiv = $(document.createElement("a"))
+  downloadLinkDiv.hide()
+
+  var csvFileToDownload = new Blob([mapSourceToDownload.getTextMapData()], {type: 'text/csv'})
+  downloadLinkDiv.attr('href', window.URL.createObjectURL(csvFileToDownload))
+  downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
+
+  downloadLinkDiv[0].click()
+
+  downloadLinkDiv.remove()
+}
+
+function setMapCompareItem(compareArrayIndex)
+{
+  if (!showingDataMap) { return }
+  compareMapDataArray[compareArrayIndex] = cloneObject(displayRegionDataArray)
+  $("#compareItem-" + compareArrayIndex).html(currentMapSource.getID() + " : " + getMDYDateString(currentSliderDate))
+}
+
+function applyCompareToCustomMap()
+{
+  if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
+
+  var resultMapArray = {}
+  for (regionID in compareMapDataArray[0])
+  {
+    if (compareMapDataArray[0][regionID].partyID == TossupParty.getID())
+    {
+      resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
+    }
+    else
+    {
+      resultMapArray[regionID] = {}
+
+      if (compareMapDataArray[0][regionID].partyID == compareMapDataArray[1][regionID].partyID)
+      {
+        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin-compareMapDataArray[1][regionID].margin
+      }
+      else
+      {
+        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin+compareMapDataArray[1][regionID].margin
+      }
+
+      resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+    }
+  }
+
+  CustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime())
+  currentMapSource = CustomMapSource
+  updateMapSourceButton()
+  loadDataMap()
 }
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
@@ -1369,78 +1493,6 @@ document.addEventListener('mouseup', function() {
   }
 })
 
-$("html").on('dragenter', function(e) {
-  e.stopPropagation()
-  e.preventDefault()
-})
-
-$("html").on('dragover', function(e) {
-  e.stopPropagation()
-  e.preventDefault()
-})
-
-$("html").on('drop', function(e) {
-  e.stopPropagation()
-  e.preventDefault()
-
-  var file = e.originalEvent.dataTransfer.files[0]
-  loadUploadedFile(file)
-})
-
-function loadUploadedFile(file)
-{
-  var fr = new FileReader()
-
-  switch (file.type)
-  {
-    case kCSVFileType:
-    fr.onload = csvFileLoaded
-    fr.readAsText(file)
-    break
-
-    case kJPEGFileType:
-    case kPNGFileType:
-    fr.onload = imageFileLoaded
-    fr.readAsDataURL(file)
-    break
-
-    default:
-    return
-  }
-}
-
-function csvFileLoaded(e)
-{
-  var textMapData = e.target.result
-  CustomMapSource.setTextMapData(textMapData)
-
-  currentMapSource = CustomMapSource
-  updateMapSourceButton()
-  loadDataMap(false, true)
-}
-
-function imageFileLoaded(e)
-{
-  var backgroundURL = "url('" + e.target.result + "')"
-	$("#evPieChart").css("background-image", backgroundURL)
-}
-
-function downloadMapSourceCSV(mapSourceToDownload)
-{
-  if (!mapSourceToDownload.getTextMapData()) { return }
-
-  var downloadLinkDiv = $(document.createElement("a"))
-  downloadLinkDiv.hide()
-
-  var csvFileToDownload = new Blob([mapSourceToDownload.getTextMapData()], {type: 'text/csv'})
-  downloadLinkDiv.attr('href', window.URL.createObjectURL(csvFileToDownload))
-  downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
-
-  downloadLinkDiv[0].click()
-
-  downloadLinkDiv.remove()
-}
-
 function zeroPadding(num)
 {
   if (num < 10)
@@ -1544,4 +1596,11 @@ function HSVtoRGB(h, s, v) {
     g: Math.round(g * 255),
     b: Math.round(b * 255)
   }
+}
+
+function cloneObject(objectToClone)
+{
+  var newObject = JSON.parse(JSON.stringify(objectToClone))
+
+  return newObject
 }
