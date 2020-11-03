@@ -1,7 +1,7 @@
 var currentMapSource = FiveThirtyEightPollAverageMapSource
 
 var selectedParty
-var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0}
+var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.1}
 
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
@@ -108,8 +108,14 @@ function createMapSourceDropdownItems()
   for (sourceNum in mapSourceIDs)
   {
     $("#dropdownItemsContainer").append("<div class='dropdown-separator'></div>")
-    //\"sourceToggleButton\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-error.png\", success: \"./assets/icon-success.png\"}, \"" +
-    $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+    if (mapSourceIDs[sourceNum] != CustomMapSource.getID())
+    {
+      $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+    }
+    else
+    {
+      $("#dropdownItemsContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapSourceCSV(currentMapSource)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
+    }
   }
 }
 
@@ -139,6 +145,11 @@ function addDivEventListeners()
     {
       downloadAllMapData()
     }
+  })
+
+  $("#uploadFileInput").change(function() {
+    if (!this.files || this.files.length == 0) { return }
+    loadUploadedFile(this.files[0])
   })
 }
 
@@ -429,6 +440,19 @@ function updateMapSourceButton(revertToDefault)
     $("#sourceToggleButton").html("Source: " + currentMapSource.getID())
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
+
+  if (currentMapState == kEditing)
+  {
+    $("#editDoneButton").html("Done")
+  }
+  else if (currentMapSource == CustomMapSource)
+  {
+    $("#editDoneButton").html("Edit")
+  }
+  else
+  {
+    $("#editDoneButton").html("Copy")
+  }
 }
 
 function clearMap()
@@ -673,7 +697,7 @@ function rightClickRegion(div)
     if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.margin = 0
+      regionData.margin = marginValues.tilt
     }
     else if (selectedParty != null)
     {
@@ -755,9 +779,9 @@ function getBaseRegionID(regionID)
 function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
   var fillColor
-  if (regionData.partyID == null)
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID())
   {
-    fillColor = "#6c6e74"
+    fillColor = TossupParty.getMarginColors().tilt
   }
   else
   {
@@ -1031,10 +1055,18 @@ function getCurrentDateOrToday()
   return dateToUse
 }
 
-function getTodayString()
+function getTodayString(delimiter, includeTime)
 {
+  delimiter = delimiter || "/"
+
   var currentTimeDate = new Date()
-  var todayString = (currentTimeDate.getMonth()+1) + "/" + currentTimeDate.getDate() + "/" + currentTimeDate.getFullYear()
+  var todayString = (currentTimeDate.getMonth()+1) + delimiter + currentTimeDate.getDate() + delimiter + currentTimeDate.getFullYear()
+
+  if (includeTime)
+  {
+    todayString += delimiter + zeroPadding(currentTimeDate.getHours()) + delimiter + zeroPadding(currentTimeDate.getMinutes())
+  }
+
   return todayString
 }
 
@@ -1352,7 +1384,11 @@ $("html").on('drop', function(e) {
   e.preventDefault()
 
   var file = e.originalEvent.dataTransfer.files[0]
+  loadUploadedFile(file)
+})
 
+function loadUploadedFile(file)
+{
   var fr = new FileReader()
 
   switch (file.type)
@@ -1371,7 +1407,7 @@ $("html").on('drop', function(e) {
     default:
     return
   }
-})
+}
 
 function csvFileLoaded(e)
 {
@@ -1387,6 +1423,22 @@ function imageFileLoaded(e)
 {
   var backgroundURL = "url('" + e.target.result + "')"
 	$("#evPieChart").css("background-image", backgroundURL)
+}
+
+function downloadMapSourceCSV(mapSourceToDownload)
+{
+  if (!mapSourceToDownload.getTextMapData()) { return }
+
+  var downloadLinkDiv = $(document.createElement("a"))
+  downloadLinkDiv.hide()
+
+  var csvFileToDownload = new Blob([mapSourceToDownload.getTextMapData()], {type: 'text/csv'})
+  downloadLinkDiv.attr('href', window.URL.createObjectURL(csvFileToDownload))
+  downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
+
+  downloadLinkDiv[0].click()
+
+  downloadLinkDiv.remove()
 }
 
 function zeroPadding(num)

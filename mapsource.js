@@ -146,6 +146,11 @@ class MapSource
     this.textMapData = textData
   }
 
+  getTextMapData()
+  {
+    return this.textMapData
+  }
+
   getMapData()
   {
     return this.mapData
