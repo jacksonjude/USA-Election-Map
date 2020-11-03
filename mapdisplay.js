@@ -3,15 +3,12 @@ var currentMapSource = FiveThirtyEightPollAverageMapSource
 var selectedParty
 var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0}
 
-var tossupColor = "#6c6e74"
-const tossupName = "Tossup"
-
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
-marginPieChartIndexes[tossupName] = [tossupName]
+marginPieChartIndexes[TossupParty.getID()] = [TossupParty.getID()]
 marginPieChartIndexes[RepublicanParty.getID()] = ["tilt", "lean", "likely", "safe"]
 
-var marginPartyPieChartOrder = [DemocraticParty.getID(), tossupName, RepublicanParty.getID()]
+var marginPartyPieChartOrder = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
 
 const mapRegionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
@@ -133,6 +130,7 @@ function addDivEventListeners()
   })
 
   document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
+    if (currentMapState == kEditing) { return }
     if (!e.altKey)
     {
       toggleMapSource(this)
@@ -435,8 +433,16 @@ function updateMapSourceButton(revertToDefault)
 
 function clearMap()
 {
-  updateMapSourceButton(true)
-  currentMapSource = FiveThirtyEightPollAverageMapSource
+  if (currentMapSource != CustomMapSource)
+  {
+    updateMapSourceButton(true)
+    currentMapSource = FiveThirtyEightPollAverageMapSource
+  }
+  else
+  {
+    CustomMapSource.setTextMapData("date\n" + getTodayString())
+    loadDataMap(false, true)
+  }
 
   updatePoliticalPartyCandidateNames()
   updateMapElectoralVoteText()
@@ -495,7 +501,7 @@ function populateRegionsArray()
       }
     }
 
-    displayRegionDataArray[regionID] = {party: -1, margin: 0}
+    displayRegionDataArray[regionID] = {partyID: TossupParty.getID(), margin: 0}
   })
 }
 
@@ -540,23 +546,58 @@ function deselectAllParties()
 
 function toggleEditing()
 {
-  if (currentMapState == kEditing)
+  switch (currentMapState)
   {
+    case kEditing:
     currentMapState = kViewing
+    break
+
+    case kViewing:
+    currentMapState = kEditing
+    break
+  }
+
+  switch (currentMapState)
+  {
+    case kEditing:
+    deselectAllParties()
+    $("#editDoneButton").html("Done")
+    $("#stateboxcontainer").hide()
+
+    $("#sourceToggleButton").addClass('topnavdisable')
+    $("#dropdownItemsContainer").hide()
+
+    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
+
+    if (currentMapSource.getID() != CustomMapSource.getID())
+    {
+      currentMapSource = CustomMapSource
+      updateMapSourceButton()
+      loadDataMap()
+    }
+    break
+
+    case kViewing:
     selectAllParties()
-    $("#editDoneButton").html("Edit")
+    if (currentMapSource == CustomMapSource)
+    {
+      $("#editDoneButton").html("Edit")
+    }
+    else
+    {
+      $("#editDoneButton").html("Copy")
+    }
+
+    $("#sourceToggleButton").removeClass('topnavdisable')
+    $("#dropdownItemsContainer").show()
+
+    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
 
     if (showingDataMap && currentRegionID)
     {
       updateStateBox(currentRegionID)
     }
-  }
-  else if (currentMapState == kViewing)
-  {
-    currentMapState = kEditing
-    deselectAllParties()
-    $("#editDoneButton").html("Done")
-    $("#stateboxcontainer").hide()
+    break
   }
 }
 
@@ -582,7 +623,7 @@ function leftClickRegion(div)
       regionData.partyID = selectedParty.getID()
       regionData.margin = marginValues.safe
     }
-    else
+    else if (selectedParty != null)
     {
       var marginValueArray = Object.values(marginValues)
       var marginValueIndex = marginValueArray.indexOf(regionData.margin)
@@ -607,6 +648,11 @@ function leftClickRegion(div)
 
       regionData.margin = marginValueArray[marginValueIndex]
     }
+    else
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.margin = 0
+    }
 
     updateRegionFillColors(regionIDsToFill, regionData)
   }
@@ -624,12 +670,12 @@ function rightClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (regionData.partyID != selectedParty.getID())
+    if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
       regionData.margin = 0
     }
-    else
+    else if (selectedParty != null)
     {
       var marginValueArray = Object.values(marginValues)
       var marginValueIndex = marginValueArray.indexOf(regionData.margin)
@@ -653,6 +699,11 @@ function rightClickRegion(div)
       }
 
       regionData.margin = marginValueArray[marginValueIndex]
+    }
+    else
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.margin = 0
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
@@ -769,6 +820,7 @@ function setupEVPieChart()
   // Hardcoding two parties
   var democraticPartyColors = DemocraticParty.getMarginColors()
   var republicanPartyColors = RepublicanParty.getMarginColors()
+  var tossupPartyColor = TossupParty.getMarginColors().safe
 
   var data = {
     datasets: [
@@ -779,7 +831,7 @@ function setupEVPieChart()
           democraticPartyColors.likely,
           democraticPartyColors.lean,
           democraticPartyColors.tilt,
-          tossupColor,
+          tossupPartyColor,
           republicanPartyColors.tilt,
           republicanPartyColors.lean,
           republicanPartyColors.likely,
@@ -790,7 +842,7 @@ function setupEVPieChart()
           "Likely Dem",
           "Lean Dem",
           "Tilt Dem",
-          tossupName,
+          "Tossup",
           "Tilt Rep",
           "Lean Rep",
           "Likely Rep",
@@ -801,7 +853,7 @@ function setupEVPieChart()
         data: [0, 538, 0],
         backgroundColor: [
           democraticPartyColors.safe,
-          "#6c6e74",
+          tossupPartyColor,
           republicanPartyColors.safe
         ],
         labels: [
@@ -884,7 +936,6 @@ function updateEVPieChart()
       marginTotals.push(0)
     }
   }
-  marginTotals.push(0) // Add tossup
 
   regionMarginStrings = []
   for (partyIDNum in politicalPartyIDs)
@@ -901,12 +952,12 @@ function updateEVPieChart()
     var regionParty = displayRegionDataArray[regionID].partyID
     var regionMargin = displayRegionDataArray[regionID].margin
     var pieChartIndex
-    if (regionParty == null)
+    if (regionParty == null || regionParty == TossupParty.getID())
     {
       pieChartIndex = 0
       for (partyIDNum in marginPartyPieChartOrder)
       {
-        if (marginPartyPieChartOrder[partyIDNum] == tossupName) { break }
+        if (marginPartyPieChartOrder[partyIDNum] == TossupParty.getID()) { break }
         pieChartIndex += marginPieChartIndexes[marginPartyPieChartOrder[partyIDNum]].length
       }
     }
@@ -946,7 +997,7 @@ function updateEVPieChart()
     }
   }
 
-  partyTotals = partyTotals.concat().splice(0,Math.ceil(partyTotals.length/2)).concat([538-evNotTossup]).concat(partyTotals.concat().splice(Math.ceil(partyTotals.length/2)))
+  partyTotals = partyTotals.concat().splice(0,Math.ceil(partyTotals.length/2)).concat(partyTotals.concat().splice(Math.ceil(partyTotals.length/2)))
   evPieChart.data.datasets[1].data = partyTotals
 
   var safeMarginTotals = [marginTotals[0], marginTotals[4], marginTotals[8]] // Hardcoding two parties
@@ -969,10 +1020,28 @@ function getCurrentDecade()
   return currentSliderDate == null ? 2010 : (Math.floor((currentSliderDate.getFullYear()-1)/10)*10)
 }
 
+function getCurrentDateOrToday()
+{
+  var dateToUse = new Date(getTodayString()).getTime()
+  if (currentSliderDate)
+  {
+    dateToUse = currentSliderDate.getTime()
+  }
+
+  return dateToUse
+}
+
+function getTodayString()
+{
+  var currentTimeDate = new Date()
+  var todayString = (currentTimeDate.getMonth()+1) + "/" + currentTimeDate.getDate() + "/" + currentTimeDate.getFullYear()
+  return todayString
+}
+
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionData.partyID == null)
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID())
   {
     $("#stateboxcontainer").hide()
     return
@@ -1001,7 +1070,7 @@ function updateElectionDayCountdown()
 {
   var currentDate = new Date()
   var electionDayLocalOffset = (new Date(electionDayTime)).getTimezoneOffset()*60*1000
-  var timeUntilElectionDay = electionDayTime-currentDate.getTime()+electionDayLocalOffset
+  var timeUntilElectionDay = Math.abs(electionDayTime-currentDate.getTime()+electionDayLocalOffset)
 
   var daysUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60*24))
   var hoursUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60)%24)
@@ -1311,7 +1380,7 @@ function csvFileLoaded(e)
 
   currentMapSource = CustomMapSource
   updateMapSourceButton()
-  loadDataMap()
+  loadDataMap(false, true)
 }
 
 function imageFileLoaded(e)

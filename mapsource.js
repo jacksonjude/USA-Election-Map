@@ -133,7 +133,7 @@ class MapSource
       }
     }
 
-    if (currentModelDate.getTime() != null && currentDateArray.length > 0 && self.columnMap.date in currentDateArray[0])
+    if (currentModelDate != null && currentModelDate.getTime() != null && currentDateArray.length > 0 && self.columnMap.date in currentDateArray[0])
     {
       finalArray[currentModelDate.getTime()] = currentDateArray.concat()
     }
@@ -227,6 +227,109 @@ class MapSource
   getIconURL()
   {
     return this.iconURL
+  }
+
+  updateMapData(displayRegionArray, dateToUpdate)
+  {
+    if (!this.mapData)
+    {
+      this.mapData = {}
+    }
+    if (!(dateToUpdate in this.mapData))
+    {
+      this.mapData[dateToUpdate] = {}
+    }
+    for (regionID in displayRegionArray)
+    {
+      this.mapData[dateToUpdate][regionID] = displayRegionArray[regionID]
+    }
+
+    this.textMapData = this.convertArrayToCSV(this.mapData, this.columnMap, this.regionNameToIDMap, this.candidateNameToPartyIDMap)
+    this.rawMapData = this.convertCSVToArray(this, this.textMapData)
+  }
+
+  convertArrayToCSV(mapData, columnMap, regionNameToID, candidateNameToPartyIDs)
+  {
+    var csvText = ""
+
+    var columnTitles = Object.values(columnMap)
+    for (var titleNum in columnTitles)
+    {
+      csvText += columnTitles[titleNum]
+      if (titleNum < columnTitles.length-1)
+      {
+        csvText += ","
+      }
+    }
+    csvText += "\n"
+
+    var candidateNames = Object.keys(candidateNameToPartyIDs)
+
+    for (var mapDate in mapData)
+    {
+      var mapDateObject = new Date(parseInt(mapDate))
+      var mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
+      for (var regionID in mapData[mapDate])
+      {
+        if (mapData[mapDate][regionID].partyID == TossupParty.getID()) { continue }
+
+        for (var candidateName in candidateNameToPartyIDs)
+        {
+          for (var columnTitleNum in columnTitles)
+          {
+            var columnKey = getKeyByValue(columnMap, columnTitles[columnTitleNum])
+            switch (columnKey)
+            {
+              case "date":
+              csvText += mapDateString
+              break
+
+              case "candidateName":
+              csvText += candidateName
+              break
+
+              case "percentAdjusted":
+              if (candidateNameToPartyIDs[candidateName] == mapData[mapDate][regionID].partyID)
+              {
+                csvText += mapData[mapDate][regionID].margin
+              }
+              else
+              {
+                csvText += 0
+              }
+              break
+
+              case "region":
+              csvText += getKeyByValue(regionNameToID, regionID)
+              break
+            }
+
+            if (columnTitleNum < columnTitles.length-1)
+            {
+              csvText += ","
+            }
+          }
+
+          csvText += "\n"
+        }
+      }
+    }
+
+    csvText = csvText.slice(0, -1)
+
+    var rowCount = csvText.split("\n").length
+    if (rowCount == 1)
+    {
+      var mapDates = Object.keys(mapData)
+      var dateToUse = new Date()
+      if (mapDates.length > 0)
+      {
+        dateToUse = new Date(parseInt(mapDates[0]))
+      }
+      csvText = "date\n" + (dateToUse.getMonth()+1) + "/" + dateToUse.getDate() + "/" + dateToUse.getFullYear()
+    }
+
+    return csvText
   }
 }
 
@@ -322,7 +425,12 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
         )
       }
 
-      var marginSum = mapDataRows.length > 0 ? 0 : (ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100)
+      var marginSum = 0
+      if (!(mapDataRows.length > 0) && ev2016)
+      {
+        marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
+      }
+
       var incumbentWinChance
       var challengerWinChance
 
@@ -364,7 +472,7 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
         }
       }
 
-      if (marginSum == 0) //cuz JHK is stupid and made pollAvg = 0 if there are no polls with no any other indication of such fact
+      if (marginSum == 0 && ev2016) //cuz JHK is stupid and made pollAvg = 0 if there are no polls with no any other indication of such fact
       {
         marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
       }
@@ -373,7 +481,17 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
       challengerWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? challengerWinChance/100 : challengerWinChance
       incumbentWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? incumbentWinChance/100 : incumbentWinChance
 
-      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: (Math.sign(marginSum) == -1 ? partyIDs.challenger : partyIDs.incumbent), chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance, partyCandidates: candidateNameToPartyIDMap}
+      var greaterMarginPartyID = partyIDs.tossup
+      if (Math.sign(marginSum) == -1)
+      {
+        greaterMarginPartyID = partyIDs.challenger
+      }
+      else if (Math.sign(marginSum) == 1)
+      {
+        greaterMarginPartyID = partyIDs.incumbent
+      }
+
+      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: greaterMarginPartyID, chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance, partyCandidates: candidateNameToPartyIDMap}
     }
 
     filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -385,10 +503,11 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
 
 // Map Source Declarations
 
-var democraticPartyID = DemocraticParty.getID()
-var republicanPartyID = RepublicanParty.getID()
+const democraticPartyID = DemocraticParty.getID()
+const republicanPartyID = RepublicanParty.getID()
+const tossupPartyID = TossupParty.getID()
 
-const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID}
+const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID, tossup: tossupPartyID}
 const partyCandiateLastNames = {"Biden":democraticPartyID, "Trump":republicanPartyID}
 const partyCandiateFullNames = {"Joseph R. Biden Jr.":democraticPartyID, "Donald Trump":republicanPartyID}
 const partyNamesToIDs = {"democrat":democraticPartyID, "republican":republicanPartyID}
@@ -560,12 +679,15 @@ var CustomMapSource = new MapSource(
   partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
   regionNameToIDCustom,
-  ev2016,
+  null,
   null,
   false,
   doubleLinePercentFilterFunction,
-  null
+  null,
 )
+
+var todayDate = new Date()
+CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
 var mapSources = {}
 mapSources[FiveThirtyEightPollAverageMapSource.getID()] = FiveThirtyEightPollAverageMapSource

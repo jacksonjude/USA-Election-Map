@@ -66,8 +66,17 @@ var RepublicanParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var TossupParty = new PoliticalParty(
+  "Tossup",
+  ["Tossup"],
+  null,
+  {safe: "#6c6e74", likely: "#6c6e74", lean: "#6c6e74", tilt: "#6c6e74"},
+  defaultMarginNames
+)
+
 var politicalParties = {}
 politicalParties[DemocraticParty.getID()] = DemocraticParty
 politicalParties[RepublicanParty.getID()] = RepublicanParty
+politicalParties[TossupParty.getID()] = TossupParty
 
-var politicalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
+var politicalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]

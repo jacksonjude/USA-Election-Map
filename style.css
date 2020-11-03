@@ -40,6 +40,14 @@ body {
   background-color: #6a6a6a;
 }
 
+.topnavdisable {
+  background-color: #3d3d3d !important;
+}
+
+.topnavdisable:hover {
+  background-color: #3d3d3d !important;
+}
+
 .topnav #DEM {
   background-color: rgb(84, 102, 140);
 }
