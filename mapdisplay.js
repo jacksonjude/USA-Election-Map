@@ -1,7 +1,7 @@
 var currentMapSource = FiveThirtyEightPollAverageMapSource
 
 var selectedParty
-var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.1}
+var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.001}
 
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
@@ -365,7 +365,7 @@ function displayDataMap(dateIndex)
 
   updateEVPieChart()
 
-  if (currentRegionID)
+  if (currentRegionID && currentMapState == kViewing)
   {
     updateStateBox(currentRegionID)
   }
@@ -1073,7 +1073,7 @@ function getTodayString(delimiter, includeTime)
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID())
+  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID())
   {
     $("#stateboxcontainer").hide()
     return
@@ -1348,7 +1348,7 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
-  else if (currentMapState == kViewing && currentRegionID)
+  if (currentRegionID)
   {
     $("#stateboxcontainer").css("left", e.x+5)
     $("#stateboxcontainer").css("top", e.y+5)
