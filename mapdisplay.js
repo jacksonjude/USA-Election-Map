@@ -1445,6 +1445,19 @@ function mouseEnteredRegion(div)
   }
 
   $(div).css('stroke', '#ffffff')
+  for (linkedRegionSetNum in linkedRegions)
+  {
+    for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    {
+      if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
+      {
+        for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+        {
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', '#ffffff')
+        }
+      }
+    }
+  }
 }
 
 function mouseLeftRegion(div)
@@ -1461,6 +1474,19 @@ function mouseLeftRegion(div)
   }
 
   $(div).css('stroke', '#181922')
+  for (linkedRegionSetNum in linkedRegions)
+  {
+    for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    {
+      if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
+      {
+        for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+        {
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', '#181922')
+        }
+      }
+    }
+  }
 }
 
 document.addEventListener('mousemove', function(e) {
