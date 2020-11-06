@@ -1443,6 +1443,8 @@ function mouseEnteredRegion(div)
   {
     updateStateBox(regionID)
   }
+
+  $(div).css('stroke', '#ffffff')
 }
 
 function mouseLeftRegion(div)
@@ -1457,6 +1459,8 @@ function mouseLeftRegion(div)
   {
     $("#stateboxcontainer").hide()
   }
+
+  $(div).css('stroke', '#181922')
 }
 
 document.addEventListener('mousemove', function(e) {
