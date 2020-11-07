@@ -669,6 +669,42 @@ var PastElectionResultMapSource = new MapSource(
   }
 )
 
+var NYTElectionResultsMapSource = new MapSource(
+  "2020 Results",
+  "https://map.jacksonjude.com/nyt-2020-president-results.csv",
+  "https://www.nytimes.com/interactive/2020/11/03/us/elections/results-",
+  "",
+  {
+    date: "date",
+    region: "region",
+    candidateName: "candidate",
+    percentAdjusted: "percent"
+  },
+  partyCandiateLastNames,
+  partyIDToCandidateLastNames,
+  incumbentChallengerPartyIDs,
+  regionNameToIDCustom,
+  null,
+  {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine", "ME-D2":"maine", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska", "NE-D2":"nebraska", "NE-D3":"nebraska", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
+  false,
+  doubleLinePercentFilterFunction,
+  function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+  {
+    if (mapDate == null) { return }
+
+    var linkToOpen = regionURL
+    if (!shouldOpenHomepage)
+    {
+      linkToOpen += regionIDToLinkMap[regionID] + ".html"
+    }
+    else
+    {
+      linkToOpen += "president.html"
+    }
+    window.open(linkToOpen)
+  }
+)
+
 var CustomMapSource = new MapSource(
   "Custom",
   null,
@@ -688,7 +724,7 @@ var CustomMapSource = new MapSource(
   null,
   false,
   doubleLinePercentFilterFunction,
-  null,
+  null
 )
 
 var todayDate = new Date()
@@ -700,9 +736,10 @@ mapSources[FiveThirtyEightProjectionMapSource.getID()] = FiveThirtyEightProjecti
 mapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
 mapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
 mapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+mapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
 mapSources[CustomMapSource.getID()] = CustomMapSource
 
-var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), CustomMapSource.getID()]
+var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), NYTElectionResultsMapSource.getID(), CustomMapSource.getID()]
 
 // Not implementing Economist bc data csv is not very useful (only shows current date)
 // var EconomistProjectionMapSource = new MapSource(
