@@ -7,25 +7,25 @@ date,region,percent,candidate
 11/6/2020,Illinois,13,Biden
 11/6/2020,Maryland,28,Biden
 11/6/2020,Massachusetts,33,Biden
-11/6/2020,New Jersey,19,Biden
+11/6/2020,New Jersey,18,Biden
 11/6/2020,New Mexico,11,Biden
 11/6/2020,New York,18,Biden
 11/6/2020,Oregon,16,Biden
 11/6/2020,Rhode Island,20,Biden
 11/6/2020,Vermont,33,Biden
 11/6/2020,Washington,20,Biden
-11/6/2020,Arizona,0.9,Biden
+11/6/2020,Arizona,0.63,Biden
 11/6/2020,Colorado,13,Biden
 11/6/2020,Maine,10,Biden
 11/6/2020,Michigan,3,Biden
 11/6/2020,Minnesota,7,Biden
-11/6/2020,Nevada,1.8,Biden
+11/6/2020,Nevada,2.0,Biden
 11/6/2020,New Hampshire,7,Biden
-11/6/2020,Pennsylvania,0.4,Biden
+11/6/2020,Pennsylvania,0.51,Biden
 11/6/2020,Virginia,10,Biden
-11/6/2020,Wisconsin,0.6,Biden
+11/6/2020,Wisconsin,0.62,Biden
 11/6/2020,Florida,3,Trump
-11/6/2020,Georgia,0.1,Biden
+11/6/2020,Georgia,0.15,Biden
 11/6/2020,Iowa,8,Trump
 11/6/2020,North Carolina,1.4,Trump
 11/6/2020,Ohio,8,Trump
@@ -48,7 +48,7 @@ date,region,percent,candidate
 11/6/2020,Oklahoma,33,Trump
 11/6/2020,South Dakota,26,Trump
 11/6/2020,Tennessee,23,Trump
-11/6/2020,West Virginia,39,Trump
+11/6/2020,West Virginia,38,Trump
 11/6/2020,Wyoming,43,Trump
 11/6/2020,ME-1,23,Biden
 11/6/2020,ME-2,7,Trump
