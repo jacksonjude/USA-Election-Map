@@ -741,14 +741,6 @@ mapSources[CustomMapSource.getID()] = CustomMapSource
 
 var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), NYTElectionResultsMapSource.getID(), CustomMapSource.getID()]
 
-// Not implementing Economist bc data csv is not very useful (only shows current date)
-// var EconomistProjectionMapSource = new MapSource(
-//   "EconomistProjection",
-//   "https://cdn.economistdatateam.com/us-2020-forecast/data/president/state_averages_and_predictions_topline.csv",
-//   "https://projects.economist.com/us-2020-forecast/president/",
-// ...
-// )
-
 // Map source testing
 // async function app()
 // {

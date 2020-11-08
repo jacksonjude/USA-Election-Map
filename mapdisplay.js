@@ -1,7 +1,11 @@
 var currentMapSource = FiveThirtyEightPollAverageMapSource
 
 var selectedParty
-var marginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.000000001}
+
+var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: 0.000000001}
+var marginValues = cloneObject(defaultMarginValues)
+var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
+var editMarginID = null
 
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
@@ -60,6 +64,7 @@ $(function() {
   resizeElements(false)
 
   createMapSourceDropdownItems()
+  createMarginEditDropdownItems()
   addDivEventListeners()
 
   populateRegionsArray()
@@ -121,6 +126,16 @@ function createMapSourceDropdownItems()
   }
 }
 
+function createMarginEditDropdownItems()
+{
+  for (marginID in marginNames)
+  {
+    if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
+    $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right'>" + marginValues[marginID] + "</span></a>")
+  }
+}
+
 function addDivEventListeners()
 {
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
@@ -138,7 +153,7 @@ function addDivEventListeners()
   })
 
   document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
-    if (currentMapState == kEditing) { return }
+    if (currentMapState == kEditing || editMarginID) { return }
     if (!e.altKey)
     {
       toggleMapSource(this)
@@ -432,7 +447,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 function updateMapSourceButton(revertToDefault)
 {
   revertToDefault = revertToDefault || false
-  $("#mapSourcesDropdownContainer .active").removeClass("active")
+  $("#mapSourcesDropdownContainer").removeClass("active")
   if (revertToDefault)
   {
     $("#sourceToggleButton").html("Select Source")
@@ -454,6 +469,67 @@ function updateMapSourceButton(revertToDefault)
   else
   {
     $("#editDoneButton").html("Copy")
+  }
+}
+
+function toggleMarginEditing(marginID, div)
+{
+  if (editMarginID)
+  {
+    var marginValueToSet = parseFloat($("#" + editMarginID + "-text").val()) || defaultMarginValues[editMarginID]
+    if (marginValueToSet > 100)
+    {
+      marginValueToSet = 100
+    }
+
+    var marginIDArray = Object.keys(marginNames)
+    if (marginValueToSet < marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]])
+    {
+      marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]]
+    }
+    if (marginIDArray.indexOf(editMarginID) > 0 && marginValueToSet > marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)-1]])
+    {
+      marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)-1]]
+    }
+
+    var shouldRefreshMap = false
+    if (marginValueToSet != marginValues[editMarginID])
+    {
+      shouldRefreshMap = true
+    }
+
+    marginValues[editMarginID] = marginValueToSet
+
+    if (shouldRefreshMap && showingDataMap)
+    {
+      displayDataMap()
+    }
+
+    $("#" + editMarginID + "-edit").html(marginNames[editMarginID] + "<span style='float: right'>" + marginValues[editMarginID] + "</span>")
+  }
+
+  if (marginID == editMarginID)
+  {
+    marginID = null
+  }
+  editMarginID = marginID
+
+  if (marginID)
+  {
+    $(div).html(marginNames[marginID] + "<input class='marginTextInput' type='text' id='" + marginID + "-text' value='" + marginValues[marginID] + "'>")
+    $("#" + marginID + "-text").focus()
+
+    $("#marginEditButton").addClass('active')
+    $("#editDoneButton").addClass('topnavdisable')
+    $("#sourceToggleButton").addClass('topnavdisable')
+    $("#mapSourcesDropdownContainer").hide()
+  }
+  else
+  {
+    $("#marginEditButton").removeClass('active')
+    $("#editDoneButton").removeClass('topnavdisable')
+    $("#sourceToggleButton").removeClass('topnavdisable')
+    $("#mapSourcesDropdownContainer").show()
   }
 }
 
@@ -572,6 +648,8 @@ function deselectAllParties()
 
 function toggleEditing()
 {
+  if (editMarginID) { return }
+
   switch (currentMapState)
   {
     case kEditing:
@@ -592,6 +670,8 @@ function toggleEditing()
 
     $("#sourceToggleButton").addClass('topnavdisable')
     $("#mapSourcesDropdownContainer").hide()
+    $("#marginEditButton").addClass('topnavdisable')
+    $("#marginsDropdownContainer").hide()
 
     CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
 
@@ -616,6 +696,8 @@ function toggleEditing()
 
     $("#sourceToggleButton").removeClass('topnavdisable')
     $("#mapSourcesDropdownContainer").show()
+    $("#marginEditButton").removeClass('topnavdisable')
+    $("#marginsDropdownContainer").show()
 
     CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
 
@@ -1369,7 +1451,7 @@ document.addEventListener('keyup', function(e) {
 })
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == kViewing && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == kViewing && !editMarginID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateMapSourceButton()
@@ -1379,7 +1461,7 @@ document.addEventListener('keypress', async function(e) {
       updateStateBox(currentRegionID)
     }
   }
-  else if (currentMapState == kViewing && e.which == 48)
+  else if (currentMapState == kViewing && !editMarginID && e.which == 48)
   {
     clearMap()
   }
@@ -1397,7 +1479,14 @@ document.addEventListener('keypress', async function(e) {
   }
   else if (e.which == 13)
   {
-    toggleEditing()
+    if (editMarginID)
+    {
+      toggleMarginEditing()
+    }
+    else
+    {
+      toggleEditing()
+    }
   }
   else if (e.which == 82)
   {
