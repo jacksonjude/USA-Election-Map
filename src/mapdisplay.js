@@ -479,6 +479,7 @@ function toggleMarginEditing(marginID, div)
   if (editMarginID)
   {
     var marginValueToSet = parseFloat($("#" + editMarginID + "-text").val()) || defaultMarginValues[editMarginID]
+    marginValueToSet = Math.round(marginValueToSet*Math.pow(10, 1))/Math.pow(10, 1)
     if (marginValueToSet > 100)
     {
       marginValueToSet = 100

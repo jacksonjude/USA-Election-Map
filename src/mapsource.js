@@ -640,7 +640,7 @@ var CookProjectionMapSource = new MapSource(
 
 var PastElectionResultMapSource = new MapSource(
   "Past Elections",
-  "https://map.jacksonjude.com/historical-president.csv",
+  "https://map.jacksonjude.com/csv-sources/historical-president.csv",
   "https://en.wikipedia.org/wiki/",
   "./assets/wikipedia-large.png",
   {
@@ -673,7 +673,7 @@ var PastElectionResultMapSource = new MapSource(
 
 var NYTElectionResultsMapSource = new MapSource(
   "2020 Results",
-  "https://map.jacksonjude.com/nyt-2020-president-results.csv",
+  "https://map.jacksonjude.com/csv-sources/nyt-2020-president-results.csv",
   "https://www.nytimes.com/interactive/2020/11/03/us/elections/results-",
   "",
   {
