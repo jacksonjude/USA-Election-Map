@@ -132,7 +132,7 @@ function createMarginEditDropdownItems()
   {
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right'>" + marginValues[marginID] + "</span></a>")
+    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
   }
 }
 
@@ -505,7 +505,7 @@ function toggleMarginEditing(marginID, div)
       displayDataMap()
     }
 
-    $("#" + editMarginID + "-edit").html(marginNames[editMarginID] + "<span style='float: right'>" + marginValues[editMarginID] + "</span>")
+    $("#" + editMarginID + "-edit").html(marginNames[editMarginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[editMarginID] + "</span>")
   }
 
   if (marginID == editMarginID)
