@@ -549,6 +549,9 @@ function clearMap()
     loadDataMap(false, true)
   }
 
+  marginValues = cloneObject(defaultMarginValues)
+  createMarginEditDropdownItems()
+
   updatePoliticalPartyCandidateNames()
   updateMapElectoralVoteText()
 
