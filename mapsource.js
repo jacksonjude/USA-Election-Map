@@ -246,7 +246,9 @@ class MapSource
     }
     for (regionID in displayRegionArray)
     {
-      this.mapData[dateToUpdate][regionID] = displayRegionArray[regionID]
+      var regionData = displayRegionArray[regionID]
+      regionData.region = regionID
+      this.mapData[dateToUpdate][regionID] = regionData
     }
 
     this.textMapData = this.convertArrayToCSV(this.mapData, this.columnMap, this.regionNameToIDMap, this.candidateNameToPartyIDMap)

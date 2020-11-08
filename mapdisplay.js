@@ -54,6 +54,7 @@ const minEVPieChartSliceLabelValue = 16
 const minEVPieChartSliceLabelBrightness = 0.7
 
 const kCSVFileType = "text/csv"
+const kJSONFileType = "application/json"
 const kPNGFileType = "image/png"
 const kJPEGFileType = "image/jpeg"
 
@@ -121,13 +122,14 @@ function createMapSourceDropdownItems()
     }
     else
     {
-      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapSourceCSV(currentMapSource)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
+      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapFile(currentMapSource, kJSONFileType)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
     }
   }
 }
 
 function createMarginEditDropdownItems()
 {
+  $("#marginsDropdownContainer").html("")
   for (marginID in marginNames)
   {
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
@@ -447,7 +449,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 function updateMapSourceButton(revertToDefault)
 {
   revertToDefault = revertToDefault || false
-  $("#mapSourcesDropdownContainer").removeClass("active")
+  $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
     $("#sourceToggleButton").html("Select Source")
@@ -1229,6 +1231,11 @@ function loadUploadedFile(file)
 
   switch (file.type)
   {
+    case kJSONFileType:
+    fr.onload = jsonFileLoaded
+    fr.readAsText(file)
+    break
+
     case kCSVFileType:
     fr.onload = csvFileLoaded
     fr.readAsText(file)
@@ -1245,9 +1252,31 @@ function loadUploadedFile(file)
   }
 }
 
+function jsonFileLoaded(e)
+{
+  if (!e.target.result) { return }
+
+  var jsonMapData = JSON.parse(e.target.result)
+  if (!jsonMapData || !jsonMapData.mapData) { return }
+
+  if (jsonMapData.marginValues && Object.keys(jsonMapData.marginValues).toString() == Object.keys(marginValues).toString())
+  {
+    marginValues = jsonMapData.marginValues
+    createMarginEditDropdownItems()
+  }
+
+  CustomMapSource.setTextMapData(jsonMapData.mapData)
+
+  currentMapSource = CustomMapSource
+  updateMapSourceButton()
+  loadDataMap(false, true)
+}
+
 function csvFileLoaded(e)
 {
   var textMapData = e.target.result
+  if (!textMapData) { return }
+
   CustomMapSource.setTextMapData(textMapData)
 
   currentMapSource = CustomMapSource
@@ -1261,20 +1290,42 @@ function imageFileLoaded(e)
 	$("#evPieChart").css("background-image", backgroundURL)
 }
 
-function downloadMapSourceCSV(mapSourceToDownload)
+function downloadMapFile(mapSourceToDownload, fileType)
 {
   if (!mapSourceToDownload.getTextMapData()) { return }
 
   var downloadLinkDiv = $(document.createElement("a"))
   downloadLinkDiv.hide()
 
-  var csvFileToDownload = new Blob([mapSourceToDownload.getTextMapData()], {type: 'text/csv'})
-  downloadLinkDiv.attr('href', window.URL.createObjectURL(csvFileToDownload))
+  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType)
+  downloadLinkDiv.attr('href', window.URL.createObjectURL(fileToDownload))
   downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
 
   downloadLinkDiv[0].click()
 
   downloadLinkDiv.remove()
+}
+
+function getMapFileBlob(textMapData, fileType)
+{
+  var dataString
+  switch (fileType)
+  {
+    case kJSONFileType:
+    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues})
+    break
+
+    case kCSVFileType:
+    dataString = textMapData
+    break
+
+    default:
+    dataString = ""
+    break
+  }
+
+  var fileToDownload = new Blob([dataString], {type: fileType})
+  return fileToDownload
 }
 
 function setMapCompareItem(compareArrayIndex)
