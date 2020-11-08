@@ -675,7 +675,7 @@ var NYTElectionResultsMapSource = new MapSource(
   "2020 Results",
   "https://map.jacksonjude.com/csv-sources/nyt-2020-president-results.csv",
   "https://www.nytimes.com/interactive/2020/11/03/us/elections/results-",
-  "",
+  "./assets/nyt-large.png",
   {
     date: "date",
     region: "region",
