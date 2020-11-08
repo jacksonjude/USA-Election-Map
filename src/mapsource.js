@@ -615,8 +615,8 @@ var JHKProjectionMapSource = new MapSource(
 
 var CookProjectionMapSource = new MapSource(
   "Cook",
-  "https://map.jacksonjude.com/cook/cook-latest.csv",
-  "https://map.jacksonjude.com/cook/",
+  "https://map.jacksonjude.com/csv-sources/cook/cook-latest.csv",
+  "https://map.jacksonjude.com/csv-sources/cook/",
   "./assets/cookpolitical-large.png",
   {
     date: "date",
