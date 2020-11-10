@@ -234,9 +234,9 @@ class MapSource
     return this.iconURL
   }
 
-  updateMapData(displayRegionArray, dateToUpdate)
+  updateMapData(displayRegionArray, dateToUpdate, resetMapData)
   {
-    if (!this.mapData)
+    if (!this.mapData || resetMapData)
     {
       this.mapData = {}
     }

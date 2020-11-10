@@ -679,9 +679,10 @@ function toggleEditing()
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
 
-    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
+    var currentMapIsCustom = (currentMapSource.getID() == CustomMapSource.getID())
+    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
 
-    if (currentMapSource.getID() != CustomMapSource.getID())
+    if (!currentMapIsCustom)
     {
       currentMapSource = CustomMapSource
       updateMapSourceButton()
@@ -705,7 +706,7 @@ function toggleEditing()
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
 
-    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday())
+    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
 
     if (showingDataMap && currentRegionID)
     {
@@ -1269,6 +1270,11 @@ function jsonFileLoaded(e)
     createMarginEditDropdownItems()
   }
 
+  if (jsonMapData.iconURL)
+  {
+    $("#evPieChart").css("background-image", jsonMapData.iconURL)
+  }
+
   CustomMapSource.setTextMapData(jsonMapData.mapData)
 
   currentMapSource = CustomMapSource
@@ -1367,7 +1373,7 @@ function applyCompareToCustomMap()
     }
   }
 
-  CustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime())
+  CustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime(), true)
   currentMapSource = CustomMapSource
   updateMapSourceButton()
   loadDataMap()
