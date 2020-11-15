@@ -1,57 +1,57 @@
 date,region,percent,candidate
-11/13/2020,California,30,Biden
-11/13/2020,Connecticut,20,Biden
-11/13/2020,Delaware,19,Biden
-11/13/2020,District of Columbia,87,Biden
-11/13/2020,Hawaii,29,Biden
-11/13/2020,Illinois,16,Biden
-11/13/2020,Maryland,32,Biden
-11/13/2020,Massachusetts,33,Biden
-11/13/2020,New Jersey,16,Biden
-11/13/2020,New Mexico,11,Biden
-11/13/2020,New York,13,Biden
-11/13/2020,Oregon,16,Biden
-11/13/2020,Rhode Island,21,Biden
-11/13/2020,Vermont,35,Biden
-11/13/2020,Washington,19,Biden
-11/13/2020,Arizona,0.33,Biden
-11/13/2020,Colorado,13,Biden
-11/13/2020,Maine,10,Biden
-11/13/2020,Michigan,3,Biden
-11/13/2020,Minnesota,7,Biden
-11/13/2020,Nevada,3,Biden
-11/13/2020,New Hampshire,7,Biden
-11/13/2020,Pennsylvania,0.92,Biden
-11/13/2020,Virginia,10,Biden
-11/13/2020,Wisconsin,0.62,Biden
-11/13/2020,Florida,3,Trump
-11/13/2020,Georgia,0.28,Biden
-11/13/2020,Iowa,8,Trump
-11/13/2020,North Carolina,1.3,Trump
-11/13/2020,Ohio,8,Trump
-11/13/2020,Texas,6,Trump
-11/13/2020,Alaska,11,Trump
-11/13/2020,Indiana,16,Trump
-11/13/2020,Kansas,15,Trump
-11/13/2020,Missouri,16,Trump
-11/13/2020,Montana,16,Trump
-11/13/2020,South Carolina,12,Trump
-11/13/2020,Utah,20,Trump
-11/13/2020,Alabama,26,Trump
-11/13/2020,Arkansas,28,Trump
-11/13/2020,Idaho,31,Trump
-11/13/2020,Kentucky,26,Trump
-11/13/2020,Louisiana,19,Trump
-11/13/2020,Mississippi,20,Trump
-11/13/2020,Nebraska,19,Trump
-11/13/2020,North Dakota,33,Trump
-11/13/2020,Oklahoma,33,Trump
-11/13/2020,South Dakota,26,Trump
-11/13/2020,Tennessee,23,Trump
-11/13/2020,West Virginia,39,Trump
-11/13/2020,Wyoming,43,Trump
-11/13/2020,ME-1,23,Biden
-11/13/2020,ME-2,7,Trump
-11/13/2020,NE-1,15,Trump
-11/13/2020,NE-2,7,Biden
-11/13/2020,NE-3,53,Trump
+11/15/2020,California,30,Biden
+11/15/2020,Connecticut,20,Biden
+11/15/2020,Delaware,19,Biden
+11/15/2020,District of Columbia,87,Biden
+11/15/2020,Hawaii,29,Biden
+11/15/2020,Illinois,16,Biden
+11/15/2020,Maryland,32,Biden
+11/15/2020,Massachusetts,33,Biden
+11/15/2020,New Jersey,16,Biden
+11/15/2020,New Mexico,11,Biden
+11/15/2020,New York,13,Biden
+11/15/2020,Oregon,16,Biden
+11/15/2020,Rhode Island,21,Biden
+11/15/2020,Vermont,35,Biden
+11/15/2020,Washington,19,Biden
+11/15/2020,Arizona,0.31,Biden
+11/15/2020,Colorado,13,Biden
+11/15/2020,Maine,10,Biden
+11/15/2020,Michigan,3,Biden
+11/15/2020,Minnesota,7,Biden
+11/15/2020,Nevada,2,Biden
+11/15/2020,New Hampshire,7,Biden
+11/15/2020,Pennsylvania,0.97,Biden
+11/15/2020,Virginia,10,Biden
+11/15/2020,Wisconsin,0.62,Biden
+11/15/2020,Florida,3,Trump
+11/15/2020,Georgia,0.28,Biden
+11/15/2020,Iowa,8,Trump
+11/15/2020,North Carolina,1.3,Trump
+11/15/2020,Ohio,8,Trump
+11/15/2020,Texas,6,Trump
+11/15/2020,Alaska,11,Trump
+11/15/2020,Indiana,16,Trump
+11/15/2020,Kansas,15,Trump
+11/15/2020,Missouri,16,Trump
+11/15/2020,Montana,16,Trump
+11/15/2020,South Carolina,12,Trump
+11/15/2020,Utah,20,Trump
+11/15/2020,Alabama,26,Trump
+11/15/2020,Arkansas,28,Trump
+11/15/2020,Idaho,31,Trump
+11/15/2020,Kentucky,26,Trump
+11/15/2020,Louisiana,19,Trump
+11/15/2020,Mississippi,19,Trump
+11/15/2020,Nebraska,19,Trump
+11/15/2020,North Dakota,33,Trump
+11/15/2020,Oklahoma,33,Trump
+11/15/2020,South Dakota,26,Trump
+11/15/2020,Tennessee,23,Trump
+11/15/2020,West Virginia,39,Trump
+11/15/2020,Wyoming,43,Trump
+11/15/2020,ME-1,23,Biden
+11/15/2020,ME-2,7,Trump
+11/15/2020,NE-1,15,Trump
+11/15/2020,NE-2,7,Biden
+11/15/2020,NE-3,53,Trump
