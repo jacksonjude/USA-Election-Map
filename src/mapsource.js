@@ -234,6 +234,11 @@ class MapSource
     return this.iconURL
   }
 
+  setIconURL(newIconURL)
+  {
+    this.iconURL = newIconURL
+  }
+
   updateMapData(displayRegionArray, dateToUpdate, resetMapData)
   {
     if (!this.mapData || resetMapData)

@@ -1272,7 +1272,7 @@ function jsonFileLoaded(e)
 
   if (jsonMapData.iconURL)
   {
-    $("#evPieChart").css("background-image", jsonMapData.iconURL)
+    CustomMapSource.setIconURL(jsonMapData.iconURL)
   }
 
   CustomMapSource.setTextMapData(jsonMapData.mapData)
@@ -1307,7 +1307,13 @@ function downloadMapFile(mapSourceToDownload, fileType)
   var downloadLinkDiv = $(document.createElement("a"))
   downloadLinkDiv.hide()
 
-  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType)
+  var pieChartIconURL = $("#evPieChart").css("background-image")
+  if (pieChartIconURL)
+  {
+    pieChartIconURL = pieChartIconURL.replace("url(\"", "").replace("\")", "")
+  }
+
+  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType, pieChartIconURL)
   downloadLinkDiv.attr('href', window.URL.createObjectURL(fileToDownload))
   downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
 
@@ -1316,13 +1322,13 @@ function downloadMapFile(mapSourceToDownload, fileType)
   downloadLinkDiv.remove()
 }
 
-function getMapFileBlob(textMapData, fileType)
+function getMapFileBlob(textMapData, fileType, pieChartIconURL)
 {
   var dataString
   switch (fileType)
   {
     case kJSONFileType:
-    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues})
+    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues, iconURL: pieChartIconURL})
     break
 
     case kCSVFileType:
