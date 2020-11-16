@@ -1268,12 +1268,20 @@ function jsonFileLoaded(e)
   if (jsonMapData.marginValues && Object.keys(jsonMapData.marginValues).toString() == Object.keys(marginValues).toString())
   {
     marginValues = jsonMapData.marginValues
-    createMarginEditDropdownItems()
   }
+  else
+  {
+    marginValues = cloneObject(defaultMarginValues)
+  }
+  createMarginEditDropdownItems()
 
   if (jsonMapData.iconURL)
   {
     CustomMapSource.setIconURL(jsonMapData.iconURL)
+  }
+  else
+  {
+    CustomMapSource.setIconURL("")
   }
 
   CustomMapSource.setTextMapData(jsonMapData.mapData)
