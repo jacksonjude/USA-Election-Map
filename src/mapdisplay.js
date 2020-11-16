@@ -546,6 +546,7 @@ function clearMap()
   else
   {
     CustomMapSource.setTextMapData("date\n" + getTodayString())
+    CustomMapSource.setIconURL("")
     loadDataMap(false, true)
   }
 
