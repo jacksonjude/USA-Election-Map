@@ -1093,7 +1093,7 @@ function updateEVPieChart()
     }
 
     marginTotals[pieChartIndex] += regionEVArray[getCurrentDecade()][regionID]
-    regionMarginStrings[pieChartIndex].push(regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10))
+    regionMarginStrings[pieChartIndex].push(regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding()))
   }
 
   for (regionArrayNum in regionMarginStrings)
@@ -1182,7 +1182,7 @@ function updateStateBox(regionID)
   $("#stateboxcontainer").show()
 
   var regionMarginString
-  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10)
+  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding())
   regionMarginString = politicalParties[regionData.partyID].getCandidateName() + " +" + roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
@@ -1697,13 +1697,13 @@ function zeroPadding(num)
   return num
 }
 
-function decimalPadding(num)
+function decimalPadding(num, shouldAddDecimalPadding)
 {
-  if (num-Math.floor(num) == 0)
+  if (num-Math.floor(num) == 0 && shouldAddDecimalPadding)
   {
     return num + ".0"
   }
-  return num
+  return num.toString()
 }
 
 function getKeyByValue(object, value)
