@@ -170,6 +170,21 @@ function addDivEventListeners()
     if (!this.files || this.files.length == 0) { return }
     loadUploadedFile(this.files[0])
   })
+
+  document.getElementById("marginEditButton").addEventListener('click', function(e) {
+    toggleMarginEditing()
+
+    if (e.altKey)
+    {
+      marginValues = cloneObject(defaultMarginValues)
+      createMarginEditDropdownItems()
+
+      if (showingDataMap)
+      {
+        displayDataMap()
+      }
+    }
+  })
 }
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
