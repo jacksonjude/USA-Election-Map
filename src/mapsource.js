@@ -644,7 +644,7 @@ var CookProjectionMapSource = new MapSource(
   ev2016,
   null,
   false,
-  true,
+  false,
   singleLineMarginFilterFunction,
   function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
   {

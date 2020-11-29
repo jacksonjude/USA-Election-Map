@@ -7,6 +7,9 @@ var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 var editMarginID = null
 
+const defaultRegionFillColor = TossupParty.getMarginColors().safe
+var regionFillAnimationDuration = 0.1
+
 var marginPieChartIndexes = {}
 marginPieChartIndexes[DemocraticParty.getID()] = ["safe", "likely", "lean", "tilt"]
 marginPieChartIndexes[TossupParty.getID()] = [TossupParty.getID()]
@@ -45,6 +48,11 @@ var currentMapState = kViewing
 var showingHelpBox = false
 
 const electionDayTime = 1604361600000 //1604390400000 PST
+const electorsCastVotesTime = 1607965200000
+const congressCountsVotesTime = 1609952400000
+const inaugurationDayTime = 1611162000000
+
+const timesForCountdown = [electionDayTime, electorsCastVotesTime, congressCountsVotesTime, inaugurationDayTime]
 
 var evPieChart
 var regionMarginStrings = []
@@ -68,16 +76,18 @@ $(function() {
   createMarginEditDropdownItems()
   addDivEventListeners()
 
+  setOutlineDivProperties()
+
   populateRegionsArray()
   displayPartyTotals(getPartyTotals())
 
   setupEVPieChart()
   updateEVPieChart()
 
-  updateElectionDayCountdown()
+  updateCountdownTimer()
   setTimeout(function() {
     setInterval(function() {
-      updateElectionDayCountdown()
+      updateCountdownTimer()
     }, 1000)
   }, 1000-((new Date()).getTime()%1000))
 
@@ -184,6 +194,22 @@ function addDivEventListeners()
         displayDataMap()
       }
     }
+  })
+}
+
+function setOutlineDivProperties()
+{
+  $('#outlines').children().each(function() {
+    var outlineDiv = $(this)
+
+    $(this).css('transition', "fill " + regionFillAnimationDuration + "s linear")
+    outlineDiv.css('fill', defaultRegionFillColor)
+    outlineDiv.css('cursor', "pointer")
+
+    outlineDiv.attr('oncontextmenu', "rightClickRegion(this); return false;")
+    outlineDiv.attr('onclick', "leftClickRegion(this)")
+    outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
+    outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
   })
 }
 
@@ -475,11 +501,15 @@ function updateMapSourceButton(revertToDefault)
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentMapState == kEditing)
+  if (currentMapState == kEditing && currentMapSource.getID() == CustomMapSource.getID())
   {
     $("#editDoneButton").html("Done")
   }
-  else if (currentMapSource == CustomMapSource)
+  else if (currentMapState == kEditing && currentMapSource.getID() != CustomMapSource.getID())
+  {
+    toggleEditing(kViewing)
+  }
+  else if (currentMapState != kEditing && currentMapSource.getID() == CustomMapSource.getID())
   {
     $("#editDoneButton").html("Edit")
   }
@@ -668,19 +698,26 @@ function deselectAllParties()
   selectedParty = null
 }
 
-function toggleEditing()
+function toggleEditing(stateToSet)
 {
   if (editMarginID) { return }
 
-  switch (currentMapState)
+  if (stateToSet == null)
   {
-    case kEditing:
-    currentMapState = kViewing
-    break
+    switch (currentMapState)
+    {
+      case kEditing:
+      currentMapState = kViewing
+      break
 
-    case kViewing:
-    currentMapState = kEditing
-    break
+      case kViewing:
+      currentMapState = kEditing
+      break
+    }
+  }
+  else
+  {
+    currentMapState = stateToSet
   }
 
   switch (currentMapState)
@@ -690,8 +727,6 @@ function toggleEditing()
     $("#editDoneButton").html("Done")
     $("#stateboxcontainer").hide()
 
-    $("#sourceToggleButton").addClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").hide()
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
 
@@ -708,7 +743,7 @@ function toggleEditing()
 
     case kViewing:
     selectAllParties()
-    if (currentMapSource == CustomMapSource)
+    if (currentMapSource.getID() == CustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
     }
@@ -717,12 +752,13 @@ function toggleEditing()
       $("#editDoneButton").html("Copy")
     }
 
-    $("#sourceToggleButton").removeClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").show()
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
 
-    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+    if (currentMapSource.getID() == CustomMapSource.getID())
+    {
+      CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+    }
 
     if (showingDataMap && currentRegionID)
     {
@@ -1214,18 +1250,28 @@ function updateStateBox(regionID)
   $("#statebox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 }
 
-function updateElectionDayCountdown()
+function updateCountdownTimer()
 {
   var currentDate = new Date()
-  var electionDayLocalOffset = (new Date(electionDayTime)).getTimezoneOffset()*60*1000
-  var timeUntilElectionDay = Math.abs(electionDayTime-currentDate.getTime()+electionDayLocalOffset)
+  var countdownTime = timesForCountdown[timesForCountdown.length-1]
+  for (timeIndex in timesForCountdown)
+  {
+    if (currentDate.getTime() < timesForCountdown[timeIndex])
+    {
+      countdownTime = timesForCountdown[timeIndex]
+      break
+    }
+  }
 
-  var daysUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60*24))
-  var hoursUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60*60)%24)
-  var minutesUntilElectionDay = Math.floor(timeUntilElectionDay/(1000*60)%60)
-  var secondsUntilElectionDay = Math.floor(timeUntilElectionDay/1000%60)
+  var dayLocalOffset = (new Date(countdownTime)).getTimezoneOffset()*60*1000
+  var timeUntilDay = Math.abs(countdownTime-currentDate.getTime()+dayLocalOffset)
 
-  $("#electionCountdownDisplay").html(daysUntilElectionDay + "<span style='font-size: 16px;'> day" + (daysUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilElectionDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilElectionDay) + "<span style='font-size: 16px;'> min" + (minutesUntilElectionDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilElectionDay) + "<span style='font-size: 16px;'> s" + "</span>")
+  var daysUntilDay = Math.floor(timeUntilDay/(1000*60*60*24))
+  var hoursUntilDay = Math.floor(timeUntilDay/(1000*60*60)%24)
+  var minutesUntilDay = Math.floor(timeUntilDay/(1000*60)%60)
+  var secondsUntilDay = Math.floor(timeUntilDay/1000%60)
+
+  $("#countdownDisplay").html(daysUntilDay + "<span style='font-size: 16px;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16px;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16px;'> s" + "</span>")
 }
 
 $("html").on('dragenter', function(e) {
