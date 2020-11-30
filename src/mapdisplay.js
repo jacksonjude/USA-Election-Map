@@ -68,15 +68,16 @@ const kJPEGFileType = "image/jpeg"
 
 var compareMapDataArray = [null, null]
 
-$(function() {
+$(async function() {
+  await loadMapSVGFile()
+  setOutlineDivProperties()
+
   $("#loader").hide()
   resizeElements(false)
 
   createMapSourceDropdownItems()
   createMarginEditDropdownItems()
   addDivEventListeners()
-
-  setOutlineDivProperties()
 
   populateRegionsArray()
   displayPartyTotals(getPartyTotals())
@@ -94,26 +95,74 @@ $(function() {
   $.ajaxSetup({cache: false})
 })
 
+function loadMapSVGFile()
+{
+  var loadSVGFilePromise = new Promise((resolve, reject) => {
+    $('#mapzoom').load("src/usamap.svg", function() {
+      resolve()
+    })
+  })
+
+  return loadSVGFilePromise
+}
+
+function setOutlineDivProperties()
+{
+  $('#outlines').children().each(function() {
+    var outlineDiv = $(this)
+
+    $(this).css('transition', "fill " + regionFillAnimationDuration + "s linear")
+    outlineDiv.css('fill', defaultRegionFillColor)
+    outlineDiv.css('cursor', "pointer")
+
+    outlineDiv.attr('oncontextmenu', "rightClickRegion(this); return false;")
+    outlineDiv.attr('onclick', "leftClickRegion(this)")
+    outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
+    outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
+  })
+}
+
 function resizeElements(initilizedPieChart)
 {
   var windowWidth = $(window).width()
 
   //1.0*svgdatawidth*zoom/windowwidth == 0.6
-  var mapZoom = 0.62*windowWidth/$("#svgdata").css("width").replace("px", "")
-  $("#mapzoom").css("zoom", (mapZoom*100) + "%")
+  var mapZoom = 0.62*windowWidth/$("#svgdata").width()
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#mapzoom").css("transform", "scale(" + mapZoom + ")")
+    $("#mapzoom").css("transform-origin", "0 0")
+  }
+  else
+  {
+    $("#mapzoom").css("zoom", (mapZoom*100) + "%")
+  }
 
-  var mapWidth = parseInt($("#svgdata").css("width").replace("px", ""))*mapZoom
-  $(".slider").css("width", mapWidth-190 + "px")
-  $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
+  var mapWidth = $("#svgdata").width()*mapZoom
+  var originalMapHeight = $("#svgdata").height()
 
-  $("#evPieChart").css("width", windowWidth-windowWidth*0.12-mapWidth)
-  $("#evPieChart").css("height", windowWidth-windowWidth*0.09-mapWidth)
+  $(".slider").width(mapWidth-190)
+  var dateDisplayWidth = $("#dateDisplay").width()
+
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#dateDisplay").css("transform", "scale(" + (windowWidth*0.10/dateDisplayWidth) + ")")
+    $("#dateDisplay").css("transform-origin", "0 50%")
+    $("#sliderDateDisplayContainer").css("top", originalMapHeight*(mapZoom-1))
+  }
+  else
+  {
+    $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
+  }
+
+  $("#evPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
+  $("#evPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
   $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
   $("#evPieChart").css("background-position", "center")
   $("#evPieChart").css("background-repeat", "no-repeat")
 
   //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
-  $("#infoboxcontainers").css("width", $("#evPieChart").css("width").replace("px", ""))
+  $("#infoboxcontainers").width($("#evPieChart").width())
 
   if (initilizedPieChart == true || initilizedPieChart == null)
   {
@@ -194,22 +243,6 @@ function addDivEventListeners()
         displayDataMap()
       }
     }
-  })
-}
-
-function setOutlineDivProperties()
-{
-  $('#outlines').children().each(function() {
-    var outlineDiv = $(this)
-
-    $(this).css('transition', "fill " + regionFillAnimationDuration + "s linear")
-    outlineDiv.css('fill', defaultRegionFillColor)
-    outlineDiv.css('cursor', "pointer")
-
-    outlineDiv.attr('oncontextmenu', "rightClickRegion(this); return false;")
-    outlineDiv.attr('onclick', "leftClickRegion(this)")
-    outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
-    outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
   })
 }
 
