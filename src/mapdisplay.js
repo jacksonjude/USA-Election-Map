@@ -52,7 +52,8 @@ const electorsCastVotesTime = 1607965200000
 const congressCountsVotesTime = 1609952400000
 const inaugurationDayTime = 1611162000000
 
-const timesForCountdown = [electionDayTime, electorsCastVotesTime, congressCountsVotesTime, inaugurationDayTime]
+const countdownTimes = {"Election Day": electionDayTime, "Electoral College Vote": electorsCastVotesTime, "Congress Counts Votes": congressCountsVotesTime, "Inauguration Day": inaugurationDayTime}
+var currentCountdownTimeName
 
 var evPieChart
 var regionMarginStrings = []
@@ -77,6 +78,8 @@ $(async function() {
 
   createMapSourceDropdownItems()
   createMarginEditDropdownItems()
+  createCountdownDropdownItems()
+
   addDivEventListeners()
 
   populateRegionsArray()
@@ -195,6 +198,19 @@ function createMarginEditDropdownItems()
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
     $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
   }
+}
+
+function createCountdownDropdownItems()
+{
+  $("#countdownsDropdownContainer").html("")
+  for (timeName in countdownTimes)
+  {
+    $("#countdownsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    $("#countdownsDropdownContainer").append("<a id='" + timeName + "-countdown' style='padding-top: 14px; min-height: 25px;' onclick='selectCountdownTime(\"" + timeName + "\", this)'>" + timeName + "</a>")
+  }
+
+  updateCountdownTimer()
+  $("[id='" + currentCountdownTimeName + "-countdown']").addClass("active")
 }
 
 function addDivEventListeners()
@@ -612,6 +628,15 @@ function toggleMarginEditing(marginID, div)
     $("#sourceToggleButton").removeClass('topnavdisable')
     $("#mapSourcesDropdownContainer").show()
   }
+}
+
+function selectCountdownTime(countdownTimeName, countdownButtonDiv)
+{
+  $("#countdownsDropdownContainer .active").removeClass("active")
+  $(countdownButtonDiv).addClass("active")
+
+  currentCountdownTimeName = countdownTimeName
+  updateCountdownTimer()
 }
 
 function clearMap()
@@ -1286,25 +1311,37 @@ function updateStateBox(regionID)
 function updateCountdownTimer()
 {
   var currentDate = new Date()
-  var countdownTime = timesForCountdown[timesForCountdown.length-1]
-  for (timeIndex in timesForCountdown)
+
+  var countdownTime
+  if (currentCountdownTimeName != null)
   {
-    if (currentDate.getTime() < timesForCountdown[timeIndex])
+    countdownTime = countdownTimes[currentCountdownTimeName]
+  }
+  else
+  {
+    countdownTime = Object.values(countdownTimes).sort().slice(-1)[0]
+    for (timeName in countdownTimes)
     {
-      countdownTime = timesForCountdown[timeIndex]
-      break
+      if (currentDate.getTime() < countdownTimes[timeName])
+      {
+        countdownTime = countdownTimes[timeName]
+        break
+      }
     }
+
+    currentCountdownTimeName = getKeyByValue(countdownTimes, countdownTime)
   }
 
   var dayLocalOffset = (new Date(countdownTime)).getTimezoneOffset()*60*1000
   var timeUntilDay = Math.abs(countdownTime-currentDate.getTime()+dayLocalOffset)
+  var timeHasPassed = Math.sign(countdownTime-currentDate.getTime()+dayLocalOffset) == -1
 
   var daysUntilDay = Math.floor(timeUntilDay/(1000*60*60*24))
   var hoursUntilDay = Math.floor(timeUntilDay/(1000*60*60)%24)
   var minutesUntilDay = Math.floor(timeUntilDay/(1000*60)%60)
   var secondsUntilDay = Math.floor(timeUntilDay/1000%60)
 
-  $("#countdownDisplay").html(daysUntilDay + "<span style='font-size: 16px;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16px;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16px;'> s" + "</span>")
+  $("#countdownDisplay").html((timeHasPassed ? "+" : "–") + " " + daysUntilDay + "<span style='font-size: 16px;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16px;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16px;'> s" + "</span>")
 }
 
 $("html").on('dragenter', function(e) {
