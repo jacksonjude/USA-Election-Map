@@ -986,7 +986,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
   }
   else
   {
-    fillColor = politicalParties[regionData.partyID].getMarginColors()[getFillColorForMargin(regionData.margin, regionData.partyID)]
+    fillColor = politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(regionData.margin, regionData.partyID)]
   }
 
   for (regionIDNum in regionIDsToUpdate)
@@ -1003,7 +1003,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
   }
 }
 
-function getFillColorForMargin(margin, partyID)
+function getMarginIndexForValue(margin, partyID)
 {
   for (marginName in marginValues)
   {
@@ -1198,7 +1198,7 @@ function updateEVPieChart()
         if (marginPartyPieChartOrder[partyIDNum] == regionParty) { break }
         pieChartIndex += marginPieChartIndexes[marginPartyPieChartOrder[partyIDNum]].length
       }
-      pieChartIndex += marginPieChartIndexes[regionParty].indexOf(getFillColorForMargin(regionMargin, regionParty))
+      pieChartIndex += marginPieChartIndexes[regionParty].indexOf(getMarginIndexForValue(regionMargin, regionParty))
     }
 
     marginTotals[pieChartIndex] += regionEVArray[getCurrentDecade()][regionID]
@@ -1304,7 +1304,7 @@ function updateStateBox(regionID)
     regionMarginString += "%</span></span>"
   }
   //Couldn't get safe colors to look good
-  // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getFillColorForMargin(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
+  // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
   $("#statebox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 }
 
