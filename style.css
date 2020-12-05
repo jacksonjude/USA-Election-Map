@@ -193,8 +193,6 @@ body {
 
 .tick {
   position: relative;
-  /* -webkit-top: -34px;
-  -moz-top: -36.5px; */
   display: flex;
   justify-content: center;
   width: 2px;

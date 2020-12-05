@@ -39,6 +39,7 @@ var ignoreMapUpdateClickArray = []
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
+const maxDateSliderTicks = 25
 
 const kEditing = 0
 const kViewing = 1
@@ -435,11 +436,14 @@ function setDataMapDateSliderRange(shouldSetToMax)
   }
 
   $("#dataMapSliderStepList").empty()
-  for (dateNum in mapDates)
+  if (mapDates.length <= maxDateSliderTicks)
   {
+    for (dateNum in mapDates)
+    {
+      $("#dataMapSliderStepList").append("<span class='tick'></span>")
+    }
     $("#dataMapSliderStepList").append("<span class='tick'></span>")
   }
-  $("#dataMapSliderStepList").append("<span class='tick'></span>")
 }
 
 function updateSliderDateDisplay(dateToDisplay, overrideDateString)
