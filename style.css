@@ -149,11 +149,11 @@ body {
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  height: 15px; /* Specified height */
+  height: 30px; /* Specified height */
   border-radius: 5px;
-  background: #d3d3d3; /* Grey background */
+  background: #777; /* Grey background */
   outline: none; /* Remove outline */
-  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  opacity: 0.85; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
 }
@@ -167,19 +167,42 @@ body {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  border-radius: 50%;
-  background: #777; /* Grey background */
+  width: 30px; /* Set a specific slider handle width */
+  height: 30px; /* Slider handle height */
+  border-radius: 5px;
+  background: #eee; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  border-radius: 50%;
-  background: #777; /* Grey background */
+  width: 30px; /* Set a specific slider handle width */
+  height: 30px; /* Slider handle height */
+  border-radius: 5px;
+  background: #eee; /* Grey background */
   cursor: pointer; /* Cursor on hover */
+}
+
+.ticks {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 0px 1px;
+  margin: 0px 15px;
+  pointer-events: none;
+}
+
+.tick {
+  position: relative;
+  /* -webkit-top: -34px;
+  -moz-top: -36.5px; */
+  display: flex;
+  justify-content: center;
+  width: 2px;
+  background: white;
+
+  height: 30px;
+  line-height: 50px;
+  margin-bottom: 20px;
 }
 
 .boxcontainer {

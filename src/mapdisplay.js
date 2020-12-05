@@ -145,6 +145,17 @@ function resizeElements(initilizedPieChart)
   var originalMapHeight = $("#svgdata").height()
 
   $(".slider").width(mapWidth-190)
+  $("#dateDisplay").css("margin-top", ($(".slider").height()/4-1))
+
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#dataMapSliderStepList").css("margin-top", "-36.5px")
+  }
+  else
+  {
+    $("#dataMapSliderStepList").css("margin-top", "-34px")
+  }
+
   var dateDisplayWidth = $("#dateDisplay").width()
 
   if (navigator.userAgent.indexOf("Firefox") != -1)
@@ -422,6 +433,13 @@ function setDataMapDateSliderRange(shouldSetToMax)
     $("#dataMapDateSlider").val(parseInt(closestDateIndex)+1)
     currentSliderDate = new Date(closestDate)
   }
+
+  $("#dataMapSliderStepList").empty()
+  for (dateNum in mapDates)
+  {
+    $("#dataMapSliderStepList").append("<span class='tick'></span>")
+  }
+  $("#dataMapSliderStepList").append("<span class='tick'></span>")
 }
 
 function updateSliderDateDisplay(dateToDisplay, overrideDateString)
@@ -1695,7 +1713,7 @@ document.addEventListener('keypress', async function(e) {
       toggleEditing()
     }
   }
-  else if (e.which == 82)
+  else if (e.which == 82 || e.which == 114)
   {
     resizeElements()
   }
@@ -1830,6 +1848,11 @@ function zeroPadding(num)
 
 function decimalPadding(num, shouldAddDecimalPadding)
 {
+  if (shouldAddDecimalPadding == null)
+  {
+    shouldAddDecimalPadding = true
+  }
+
   if (num-Math.floor(num) == 0 && shouldAddDecimalPadding)
   {
     return num + ".0"
