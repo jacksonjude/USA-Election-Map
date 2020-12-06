@@ -170,7 +170,7 @@ body {
   width: 30px; /* Set a specific slider handle width */
   height: 30px; /* Slider handle height */
   border-radius: 5px;
-  background: #eee; /* Grey background */
+  background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -178,7 +178,7 @@ body {
   width: 30px; /* Set a specific slider handle width */
   height: 30px; /* Slider handle height */
   border-radius: 5px;
-  background: #eee; /* Grey background */
+  background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -186,7 +186,7 @@ body {
   display: flex;
   justify-content: space-between;
 
-  padding: 0px 1px;
+  padding: 0px -1px;
   margin: 0px 15px;
   pointer-events: none;
 }
@@ -195,8 +195,8 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 2px;
-  background: white;
+  width: 4px;
+  background: rgb(217, 217, 217);
 
   height: 30px;
   line-height: 50px;
