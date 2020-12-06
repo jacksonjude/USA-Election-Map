@@ -150,7 +150,7 @@ function resizeElements(initilizedPieChart)
 
   if (navigator.userAgent.indexOf("Firefox") != -1)
   {
-    $("#dataMapSliderStepList").css("margin-top", "-36.5px")
+    $("#dataMapSliderStepList").css("margin-top", "-34.5px")
   }
   else
   {
