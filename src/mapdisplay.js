@@ -68,7 +68,12 @@ const kJSONFileType = "application/json"
 const kPNGFileType = "image/png"
 const kJPEGFileType = "image/jpeg"
 
+var showingCompareMap = false
+var compareMapSourceIDArray = [null, null]
 var compareMapDataArray = [null, null]
+var selectedCompareSlider = null
+
+const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 
 $(async function() {
   await loadMapSVGFile()
@@ -146,29 +151,27 @@ function resizeElements(initilizedPieChart)
   var originalMapHeight = $("#svgdata").height()
 
   $(".slider").width(mapWidth-190)
-  $("#dateDisplay").css("margin-top", ($(".slider").height()/4-1))
 
-  if (navigator.userAgent.indexOf("Firefox") != -1)
-  {
-    $("#dataMapSliderStepList").css("margin-top", "-34.5px")
-  }
-  else
-  {
-    $("#dataMapSliderStepList").css("margin-top", "-34px")
-  }
+  setSliderTickMarginShift("dataMapDateSliderContainer", "dataMapDateSlider", "dataMapSliderStepList")
+  setSliderDateDisplayMarginShift("dateDisplay", "sliderDateDisplayContainer", "dataMapDateSlider", originalMapHeight, mapZoom)
 
-  var dateDisplayWidth = $("#dateDisplay").width()
+  setSliderTickMarginShift("firstCompareSliderDateDisplayContainer", "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList")
+  setSliderDateDisplayMarginShift("firstCompareDateDisplay", "firstCompareSliderDateDisplayContainer", "firstCompareDataMapDateSlider", originalMapHeight, mapZoom)
+  setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
+  setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
 
-  if (navigator.userAgent.indexOf("Firefox") != -1)
-  {
-    $("#dateDisplay").css("transform", "scale(" + (windowWidth*0.10/dateDisplayWidth) + ")")
-    $("#dateDisplay").css("transform-origin", "0 50%")
-    $("#sliderDateDisplayContainer").css("top", originalMapHeight*(mapZoom-1))
-  }
-  else
-  {
-    $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
-  }
+  // var dateDisplayWidth = $("#dateDisplay").width()
+  //
+  // if (navigator.userAgent.indexOf("Firefox") != -1)
+  // {
+  //   $("#dateDisplay").css("transform", "scale(" + (windowWidth*0.10/dateDisplayWidth) + ")")
+  //   $("#dateDisplay").css("transform-origin", "0 50%")
+  //   $("#sliderDateDisplayContainer").css("top", originalMapHeight*(mapZoom-1))
+  // }
+  // else
+  // {
+  //   $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
+  // }
 
   $("#evPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
   $("#evPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
@@ -185,19 +188,80 @@ function resizeElements(initilizedPieChart)
   }
 }
 
+function setSliderTickMarginShift(sliderContainerDivID, sliderDivID, sliderTicksDivID)
+{
+  var shouldHideSlider = $("#" + sliderContainerDivID).is(":hidden")
+  if (shouldHideSlider)
+  {
+    $("#" + sliderContainerDivID).show()
+  }
+  var marginShift = $("#" + sliderTicksDivID)[0].getBoundingClientRect().y-$("#" + sliderDivID)[0].getBoundingClientRect().y
+  if (marginShift != 0)
+  {
+    $("#" + sliderTicksDivID).css("margin-top", "-" + marginShift + "px")
+  }
+  if (shouldHideSlider)
+  {
+    $("#" + sliderContainerDivID).hide()
+  }
+}
+
+function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID, sliderDivID, originalMapHeight, mapZoom)
+{
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#" + dateDisplayDivID).css("transform", "scale(" + ($(window).width()*0.10/$("#" + dateDisplayDivID).width()) + ")")
+    $("#" + dateDisplayDivID).css("transform-origin", "0 50%")
+    console.log(sliderContainerDivID)
+    $("#" + sliderContainerDivID).css("top", originalMapHeight*(mapZoom-1))
+  }
+  else
+  {
+    $("#" + dateDisplayDivID).css("zoom", (100*$(window).width()/1800) + "%")
+  }
+
+  $("#" + dateDisplayDivID).css("margin-top", ($("#" + sliderDivID).height()/4-1))
+}
+
 function createMapSourceDropdownItems()
 {
   for (sourceNum in mapSourceIDs)
   {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
-    if (mapSourceIDs[sourceNum] != CustomMapSource.getID())
+
+    var mapSourceID = mapSourceIDs[sourceNum]
+    var mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
+
+    var divStringToAppend = ""
+
+    if (mapSourceID != CustomMapSource.getID())
     {
-      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon' style='float:right;' onclick='downloadDataForMapSource(\"" + mapSourceIDs[sourceNum] + "\", {\"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "\", true, true)'><img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span></a>")
+      divStringToAppend += "<span style='float: right; padding-left: 6px; padding-right: 12px;'>"
+      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\")' style='position: relative; top: 8px; width: 24px; height: 24px;' />"
+      divStringToAppend += "</span>"
+
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + mapSourceID
+      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
+      divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
+      divStringToAppend += "</span>"
+      divStringToAppend += "</a>"
     }
     else
     {
-      $("#mapSourcesDropdownContainer").append("<a id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "' onclick='updateMapSource(\"" + mapSourceIDs[sourceNum] + "\", \"#sourceToggleButton\")'>" + mapSourceIDs[sourceNum] + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); downloadMapFile(currentMapSource, kJSONFileType)'><img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' /></span>" + "<span id='" + mapSourceIDs[sourceNum].replace(/\s/g, '') + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceIDs[sourceNum] + "\"); $(\"#uploadFileInput\").click()'><img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' /></span>" + "</a>")
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + mapSourceID
+
+      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); downloadMapFile(currentMapSource, kJSONFileType)'>"
+      divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
+      divStringToAppend += "</span>"
+
+      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); $(\"#uploadFileInput\").click()'>"
+      divStringToAppend += "<img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 5px' />"
+      divStringToAppend += "</span>"
+
+      divStringToAppend += "</a>"
     }
+
+    $("#mapSourcesDropdownContainer").append(divStringToAppend)
   }
 }
 
@@ -400,21 +464,23 @@ function removeStatusImage(divID)
   $("#" + divID + " .status").remove()
 }
 
-function setDataMapDateSliderRange(shouldSetToMax)
+function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates)
 {
   shouldSetToMax = shouldSetToMax || false
+  sliderDivID = sliderDivID || "dataMapDateSlider"
+  sliderTickDivID = sliderTickDivID || "dataMapSliderStepList"
+  mapDates = mapDates || currentMapSource.getMapDates()
 
-  var mapDates = currentMapSource.getMapDates()
   var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
-  var previousValueWasLatest = $("#dataMapDateSlider").val() == $("#dataMapDateSlider").attr('max')
+  var previousValueWasLatest = $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max')
 
-  $("#dataMapDateSlider").attr('max', mapDates.length+1)
+  $("#" + sliderDivID).attr('max', mapDates.length+1)
 
   if (currentSliderDate == null || shouldSetToMax || previousValueWasLatest)
   {
-    $("#dataMapDateSlider").val(mapDates.length+1)
+    $("#" + sliderDivID).val(mapDates.length+1)
     currentSliderDate = endDate
   }
   else
@@ -431,30 +497,36 @@ function setDataMapDateSliderRange(shouldSetToMax)
       }
     }
 
-    $("#dataMapDateSlider").val(parseInt(closestDateIndex)+1)
+    $("#" + sliderDivID).val(parseInt(closestDateIndex)+1)
     currentSliderDate = new Date(closestDate)
   }
 
-  $("#dataMapSliderStepList").empty()
+  $("#" + sliderTickDivID).empty()
   if (mapDates.length <= maxDateSliderTicks)
   {
     for (dateNum in mapDates)
     {
-      $("#dataMapSliderStepList").append("<span class='tick'></span>")
+      $("#" + sliderTickDivID).append("<span class='tick'></span>")
     }
-    $("#dataMapSliderStepList").append("<span class='tick'></span>")
+    $("#" + sliderTickDivID).append("<span class='tick'></span>")
   }
 }
 
-function updateSliderDateDisplay(dateToDisplay, overrideDateString)
+function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDisplayDivID)
 {
+  sliderDateDisplayDivID = sliderDateDisplayDivID || "dateDisplay"
+
   var dateString
   if (overrideDateString != null)
+  {
     dateString = overrideDateString
+  }
   else
+  {
     dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()
+  }
 
-  $("#dateDisplay").html(dateString)
+  $("#" + sliderDateDisplayDivID).html(dateString)
   currentSliderDate = dateToDisplay
 }
 
@@ -471,7 +543,9 @@ function displayDataMap(dateIndex)
     overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
   }
   else
+  {
     dateToDisplay = new Date(mapDates[dateIndex-1])
+  }
 
   updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
@@ -552,6 +626,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
     ignoreMapUpdateClickArray.splice(ignoreMapUpdateClickArray.indexOf(sourceID), 1)
     return
   }
+
   currentMapSource = mapSources[sourceID]
 
   updateMapSourceButton()
@@ -587,6 +662,15 @@ function updateMapSourceButton(revertToDefault)
   else
   {
     $("#editDoneButton").html("Copy")
+  }
+
+  if (showingCompareMap && currentMapSource.getID() != CustomMapSource.getID())
+  {
+    updateCompareMapSlidersVisibility(false)
+  }
+  else if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  {
+    updateCompareMapSlidersVisibility(true)
   }
 }
 
@@ -673,6 +757,20 @@ function clearMap()
     CustomMapSource.setTextMapData("date\n" + getTodayString())
     CustomMapSource.setIconURL("")
     loadDataMap(false, true)
+  }
+
+  if (showingCompareMap)
+  {
+    showingCompareMap = false
+
+    $(".comparesourcecheckbox").prop('checked', false)
+
+    compareMapSourceIDArray = [null, null]
+    updateCompareMapSlidersVisibility()
+
+    $(".compareitemtext").html("&lt;Empty&gt;")
+    $(".compareitemimage").css('display', "none")
+    $(".compareitemimage").attr('src', "")
   }
 
   marginValues = cloneObject(defaultMarginValues)
@@ -1162,7 +1260,7 @@ function setupEVPieChart()
         },
         font: {
           family: "Bree5erif-Mono",
-          size: Math.round(24*$(window).width()/1800), //abc
+          size: Math.round(24*$(window).width()/1800),
           weight: "bold"
         }
       }
@@ -1354,9 +1452,8 @@ function updateCountdownTimer()
     currentCountdownTimeName = getKeyByValue(countdownTimes, countdownTime)
   }
 
-  var dayLocalOffset = (new Date(countdownTime)).getTimezoneOffset()*60*1000
-  var timeUntilDay = Math.abs(countdownTime-currentDate.getTime()+dayLocalOffset)
-  var timeHasPassed = Math.sign(countdownTime-currentDate.getTime()+dayLocalOffset) == -1
+  var timeUntilDay = Math.abs(countdownTime-currentDate.getTime())
+  var timeHasPassed = Math.sign(countdownTime-currentDate.getTime()) == -1
 
   var daysUntilDay = Math.floor(timeUntilDay/(1000*60*60*24))
   var hoursUntilDay = Math.floor(timeUntilDay/(1000*60*60)%24)
@@ -1506,11 +1603,172 @@ function getMapFileBlob(textMapData, fileType, pieChartIconURL)
   return fileToDownload
 }
 
+async function addCompareMapSource(mapSourceID)
+{
+  var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
+  var checkboxChecked = $("#" + checkboxID).prop('checked')
+
+  var compareSourcesUpdated
+  var mapSourceToUncheck
+  if (checkboxChecked && compareMapSourceIDArray[0] == null && compareMapSourceIDArray[1] == null)
+  {
+    compareSourcesUpdated = [true, true]
+    compareMapSourceIDArray[0] = mapSourceID
+    compareMapSourceIDArray[1] = mapSourceID
+  }
+  else if (checkboxChecked && compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
+  {
+    compareSourcesUpdated = [false, true]
+    compareMapSourceIDArray[1] = mapSourceID
+  }
+  else if (checkboxChecked)
+  {
+    compareSourcesUpdated = [true, true]
+    mapSourceToUncheck = shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) ? compareMapSourceIDArray[0] : compareMapSourceIDArray[1]
+    compareMapSourceIDArray[0] = compareMapSourceIDArray[0] == mapSourceToUncheck ? mapSourceID : compareMapSourceIDArray[0]
+    compareMapSourceIDArray[1] = compareMapSourceIDArray[1] == mapSourceToUncheck ? mapSourceID : compareMapSourceIDArray[1]
+  }
+  else if (!checkboxChecked && compareMapSourceIDArray[0] != compareMapSourceIDArray[1])
+  {
+    if (compareMapSourceIDArray[0] == mapSourceID)
+    {
+      compareSourcesUpdated = [true, false]
+      compareMapSourceIDArray[0] = compareMapSourceIDArray[1]
+    }
+    else if (compareMapSourceIDArray[1] == mapSourceID)
+    {
+      compareSourcesUpdated = [false, true]
+      compareMapSourceIDArray[1] = compareMapSourceIDArray[0]
+    }
+  }
+  else if (!checkboxChecked && compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
+  {
+    clearMap()
+    return
+  }
+
+  if (mapSourceToUncheck)
+  {
+    $("#" + mapSourceToUncheck.replace(/\s/g, '') + "-compare").prop('checked', false)
+  }
+
+  await updateCompareMapSources(compareSourcesUpdated, false)
+
+  showingCompareMap = true
+  updateCompareMapSlidersVisibility()
+}
+
+function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources)
+{
+  var updateCompareMapSourcesPromise = new Promise(async (resolve, reject) => {
+    if (compareSourcesToUpdate[0])
+    {
+      var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])
+      $('.comparesourcecheckbox').prop('disabled', true)
+      await downloadDataForMapSource(compareMapSourceIDArray[0], iconDivDictionary, null, false)
+      $('.comparesourcecheckbox').prop('disabled', false)
+    }
+    if (compareSourcesToUpdate[1])
+    {
+      var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[1])
+      $('.comparesourcecheckbox').prop('disabled', true)
+      await downloadDataForMapSource(compareMapSourceIDArray[1], iconDivDictionary, null, false)
+      $('.comparesourcecheckbox').prop('disabled', false)
+    }
+
+    if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
+    {
+      swapCompareMapSources()
+      var tempSourcesToUpdate = compareSourcesToUpdate[0]
+      compareSourcesToUpdate[0] = compareSourcesToUpdate[1]
+      compareSourcesToUpdate[1] = tempSourcesToUpdate
+    }
+
+    if (compareSourcesToUpdate[0])
+    {
+      setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
+      setCompareSourceDate(0, mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
+      $("#compareItemImage-0").css('display', "block")
+      $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
+    }
+    if (compareSourcesToUpdate[1])
+    {
+      setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
+      setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
+      $("#compareItemImage-1").css('display', "block")
+      $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
+    }
+
+    resolve()
+  })
+
+  return updateCompareMapSourcesPromise
+}
+
+function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
+{
+  return mapSources[firstMapSourceID].getMapDates().slice(-1)[0] < mapSources[secondMapSourceID].getMapDates().slice(-1)[0]
+}
+
+function swapCompareMapSources()
+{
+  var tempSourceID = compareMapSourceIDArray[0]
+  compareMapSourceIDArray[0] = compareMapSourceIDArray[1]
+  compareMapSourceIDArray[1] = tempSourceID
+}
+
+function updateCompareMapSlidersVisibility(overrideShowHide)
+{
+  var showCompareSliders = overrideShowHide
+  if (showCompareSliders == null)
+  {
+    showCompareSliders = showingCompareMap
+  }
+
+  if (showCompareSliders)
+  {
+    $("#firstCompareSliderDateDisplayContainer").show()
+    $("#secondCompareSliderDateDisplayContainer").show()
+
+    $("#sliderDateDisplayContainer").hide()
+  }
+  else
+  {
+    $("#firstCompareSliderDateDisplayContainer").hide()
+    $("#secondCompareSliderDateDisplayContainer").hide()
+
+    $("#sliderDateDisplayContainer").show()
+  }
+}
+
 function setMapCompareItem(compareArrayIndex)
 {
   if (!showingDataMap) { return }
   compareMapDataArray[compareArrayIndex] = cloneObject(displayRegionDataArray)
   $("#compareItem-" + compareArrayIndex).html(currentMapSource.getID() + " : " + getMDYDateString(currentSliderDate))
+}
+
+function setCompareSourceDate(compareArrayIndex, dateIndex)
+{
+  var mapDates = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapDates()
+
+  var dateToDisplay
+  var overrideDateString
+  if (dateIndex-1 > mapDates.length-1)
+  {
+    dateToDisplay = new Date(mapDates[dateIndex-1-1])
+    overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
+  }
+  else
+  {
+    dateToDisplay = new Date(mapDates[dateIndex-1])
+  }
+  updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay")
+
+  $("#compareItem-" + compareArrayIndex).html(compareMapSourceIDArray[compareArrayIndex] + " (" + getMDYDateString(dateToDisplay) + ")")
+
+  compareMapDataArray[compareArrayIndex] = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapData()[dateToDisplay.getTime()]
+  applyCompareToCustomMap()
 }
 
 function applyCompareToCustomMap()
@@ -1601,7 +1859,26 @@ function arrowKeyCycle(keyString)
     arrowKeysDown[keyString] = 2
     case 2:
     incrementSlider(keyString)
-    setTimeout(function() { arrowKeyCycle(keyString) }, zoomKeyPressDelayForHalf*2.0/currentMapSource.getMapDates().length)
+    var mapDatesLength = currentMapSource.getMapDates().length
+
+    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    {
+      switch (selectedCompareSlider)
+      {
+        case null:
+        return
+
+        case 0:
+        mapDatesLength = mapSources[compareMapSourceIDArray[0]].getMapDates().length
+        break
+
+        case 1:
+        mapDatesLength = mapSources[compareMapSourceIDArray[1]].getMapDates().length
+        break
+      }
+    }
+
+    setTimeout(function() { arrowKeyCycle(keyString) }, zoomKeyPressDelayForHalf*2.0/mapDatesLength)
     break
   }
 }
@@ -1609,6 +1886,29 @@ function arrowKeyCycle(keyString)
 function incrementSlider(keyString)
 {
   var sliderDiv = $("#dataMapDateSlider")[0]
+
+  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  {
+    switch (selectedCompareSlider)
+    {
+      case null:
+      if (keyString != "down" && keyString != "up")
+      {
+        return
+      }
+      sliderDiv = null
+      break
+
+      case 0:
+      sliderDiv = $("#firstCompareDataMapDateSlider")[0]
+      break
+
+      case 1:
+      sliderDiv = $("#secondCompareDataMapDateSlider")[0]
+      break
+    }
+  }
+
   if ($(sliderDiv).is(":hidden")) { return }
 
   switch (keyString)
@@ -1624,6 +1924,31 @@ function incrementSlider(keyString)
     break
 
     case "down":
+    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    {
+      switch (selectedCompareSlider)
+      {
+        case null:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = 1
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = null
+        selectedCompareSlider = 0
+        break
+
+        case 0:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = null
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = 1
+        selectedCompareSlider = 1
+        break
+
+        case 1:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = null
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = null
+        selectedCompareSlider = null
+        break
+      }
+      return
+    }
+
     if (sliderDiv.value == 0) { return }
     if (sliderDiv.value < 5)
     {
@@ -1636,6 +1961,31 @@ function incrementSlider(keyString)
     break
 
     case "up":
+    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    {
+      switch (selectedCompareSlider)
+      {
+        case null:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = null
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = 1
+        selectedCompareSlider = 1
+        break
+
+        case 0:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = null
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = null
+        selectedCompareSlider = null
+        break
+
+        case 1:
+        $("#firstCompareDataMapDateSlider")[0].style.opacity = 1
+        $("#secondCompareDataMapDateSlider")[0].style.opacity = null
+        selectedCompareSlider = 0
+        break
+      }
+      return
+    }
+
     if (sliderDiv.value == sliderDiv.max) { return }
     if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
     {
@@ -1648,7 +1998,23 @@ function incrementSlider(keyString)
     break
   }
 
-  displayDataMap(sliderDiv.value)
+  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  {
+    switch (selectedCompareSlider)
+    {
+      case 0:
+      setCompareSourceDate(0, $("#firstCompareDataMapDateSlider")[0].value)
+      break
+
+      case 1:
+      setCompareSourceDate(1, $("#secondCompareDataMapDateSlider")[0].value)
+      break
+    }
+  }
+  else
+  {
+    displayDataMap(sliderDiv.value)
+  }
 }
 
 document.addEventListener('keyup', function(e) {
@@ -1720,6 +2086,16 @@ document.addEventListener('keypress', async function(e) {
   else if (e.which == 82 || e.which == 114)
   {
     resizeElements()
+  }
+  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1)
+  {
+    var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.which)]
+    var checkboxID = mapSourceIDToCompare.replace(/\s/g, '') + '-compare'
+    if (!$('#' + checkboxID).prop('disabled'))
+    {
+      $('#' + checkboxID).prop('checked', !$('#' + checkboxID).prop('checked'))
+      addCompareMapSource(mapSourceIDToCompare)
+    }
   }
 })
 
