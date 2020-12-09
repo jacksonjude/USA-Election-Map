@@ -904,7 +904,10 @@ function toggleEditing(stateToSet)
   {
     case kEditing:
     deselectAllParties()
+
     $("#editDoneButton").html("Done")
+    $("#editDoneButton").addClass('active')
+
     $("#stateboxcontainer").hide()
 
     $("#marginEditButton").addClass('topnavdisable')
@@ -923,6 +926,7 @@ function toggleEditing(stateToSet)
 
     case kViewing:
     selectAllParties()
+    
     if (currentMapSource.getID() == CustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
@@ -931,6 +935,7 @@ function toggleEditing(stateToSet)
     {
       $("#editDoneButton").html("Copy")
     }
+    $("#editDoneButton").removeClass('active')
 
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
