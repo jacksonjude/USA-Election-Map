@@ -812,12 +812,14 @@ function toggleHelpBox(helpButtonDiv)
     $("#helpboxcontainer").show()
     $("#toggleHelpBoxButton").addClass('active')
     $("#evPieChartContainer").hide()
+    $("#creditboxcontainer").hide()
   }
   else
   {
     $("#helpboxcontainer").hide()
     $("#toggleHelpBoxButton").removeClass('active')
     $("#evPieChartContainer").show()
+    $("#creditboxcontainer").show()
   }
 }
 
