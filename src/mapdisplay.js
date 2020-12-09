@@ -1745,10 +1745,12 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
   if (showingCompareMap)
   {
     $("#compareButton").addClass('active')
+    $("#compareArrayDropdownContainer").show()
   }
   else
   {
     $("#compareButton").removeClass('active')
+    $("#compareArrayDropdownContainer").hide()
   }
 }
 
