@@ -1741,6 +1741,15 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
 
     $("#sliderDateDisplayContainer").show()
   }
+
+  if (showingCompareMap)
+  {
+    $("#compareButton").addClass('active')
+  }
+  else
+  {
+    $("#compareButton").removeClass('active')
+  }
 }
 
 function setMapCompareItem(compareArrayIndex)
