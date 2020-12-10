@@ -162,19 +162,6 @@ function resizeElements(initilizedPieChart)
   setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
   setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
 
-  // var dateDisplayWidth = $("#dateDisplay").width()
-  //
-  // if (navigator.userAgent.indexOf("Firefox") != -1)
-  // {
-  //   $("#dateDisplay").css("transform", "scale(" + (windowWidth*0.10/dateDisplayWidth) + ")")
-  //   $("#dateDisplay").css("transform-origin", "0 50%")
-  //   $("#sliderDateDisplayContainer").css("top", originalMapHeight*(mapZoom-1))
-  // }
-  // else
-  // {
-  //   $("#dateDisplay").css("zoom", (100*windowWidth/1800) + "%")
-  // }
-
   $("#evPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
   $("#evPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
   $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
@@ -214,7 +201,6 @@ function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID,
   {
     $("#" + dateDisplayDivID).css("transform", "scale(" + ($(window).width()*0.10/$("#" + dateDisplayDivID).width()) + ")")
     $("#" + dateDisplayDivID).css("transform-origin", "0 50%")
-    console.log(sliderContainerDivID)
     $("#" + sliderContainerDivID).css("top", originalMapHeight*(mapZoom-1))
   }
   else
@@ -1833,6 +1819,29 @@ function applyCompareToCustomMap()
   currentMapSource = CustomMapSource
   updateMapSourceButton()
   loadDataMap()
+}
+
+async function loadCompareItemMapSource(compareItemNum)
+{
+  currentMapSource = mapSources[compareMapSourceIDArray[compareItemNum]]
+  updateMapSourceButton()
+  await loadDataMap()
+
+  var dateIndexToSet
+  switch (compareItemNum)
+  {
+    case 0:
+    dateIndexToSet = $("#firstCompareDataMapDateSlider")[0].value
+    break
+
+    case 1:
+    dateIndexToSet = $("#secondCompareDataMapDateSlider")[0].value
+    break
+  }
+
+  $("#dataMapDateSlider").val(dateIndexToSet)
+  displayDataMap(dateIndexToSet)
+  updateCompareMapSlidersVisibility(false)
 }
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
