@@ -1663,7 +1663,7 @@ async function addCompareMapSource(mapSourceID)
   updateCompareMapSlidersVisibility()
 }
 
-function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources)
+function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
 {
   var updateCompareMapSourcesPromise = new Promise(async (resolve, reject) => {
     if (compareSourcesToUpdate[0])
@@ -1684,22 +1684,29 @@ function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources)
     if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
     {
       swapCompareMapSources()
-      var tempSourcesToUpdate = compareSourcesToUpdate[0]
-      compareSourcesToUpdate[0] = compareSourcesToUpdate[1]
-      compareSourcesToUpdate[1] = tempSourcesToUpdate
+      compareSourcesToUpdate = [true, true]
+    }
+
+    var overrideDateValues = [null, null]
+    if (swapSliderValues)
+    {
+      overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
+      overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
     }
 
     if (compareSourcesToUpdate[0])
     {
       setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-      setCompareSourceDate(0, mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
+      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
+      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
       $("#compareItemImage-0").css('display', "block")
       $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
     }
     if (compareSourcesToUpdate[1])
     {
       setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-      setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
+      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
+      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
       $("#compareItemImage-1").css('display', "block")
       $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
     }
