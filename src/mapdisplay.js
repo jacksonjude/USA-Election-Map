@@ -75,6 +75,8 @@ var selectedCompareSlider = null
 
 const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 
+var selectedDropdownDivID = null
+
 $(async function() {
   await loadMapSVGFile()
   setOutlineDivProperties()
@@ -926,7 +928,7 @@ function toggleEditing(stateToSet)
 
     case kViewing:
     selectAllParties()
-    
+
     if (currentMapSource.getID() == CustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
@@ -1610,6 +1612,16 @@ function getMapFileBlob(textMapData, fileType, pieChartIconURL)
   return fileToDownload
 }
 
+async function toggleCompareMapSourceCheckbox(mapSourceID, overrideAdd)
+{
+  var checkboxID = mapSourceID.replace(/\s/g, '') + '-compare'
+  if (!$('#' + checkboxID).prop('disabled') || overrideAdd)
+  {
+    $('#' + checkboxID).prop('checked', !$('#' + checkboxID).prop('checked') || overrideAdd)
+    await addCompareMapSource(mapSourceID)
+  }
+}
+
 async function addCompareMapSource(mapSourceID)
 {
   var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
@@ -2063,8 +2075,39 @@ document.addEventListener('keyup', function(e) {
   }
 })
 
+function deselectDropdownButton()
+{
+  $('.dropdown-content').css('display', '')
+  removeActiveClassFromDropdownButton()
+  selectedDropdownDivID = null
+}
+
+function removeActiveClassFromDropdownButton()
+{
+  switch (selectedDropdownDivID)
+  {
+    case "compareDropdownContent":
+    if (!showingCompareMap)
+    {
+      $("#compareButton").removeClass('active')
+    }
+    break
+
+    case "marginsDropdownContent":
+    if (!editMarginID)
+    {
+      $("#marginEditButton").removeClass('active')
+    }
+    break
+
+    case "mapSourcesDropdownContent":
+    $("#sourceToggleButton").removeClass('active')
+    break
+  }
+}
+
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == kViewing && !editMarginID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == kViewing && !editMarginID && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateMapSourceButton()
@@ -2077,6 +2120,74 @@ document.addEventListener('keypress', async function(e) {
   else if (currentMapState == kViewing && !editMarginID && e.which == 48)
   {
     clearMap()
+  }
+  else if (selectedDropdownDivID && e.which >= 49 && e.which <= 57)
+  {
+    switch (selectedDropdownDivID)
+    {
+      case "compareDropdownContent":
+      if (e.which >= 4+49) { return }
+
+      $(".comparesourcecheckbox").prop('checked', false)
+      compareMapSourceIDArray = [null, null]
+
+      switch (e.which)
+      {
+        case 1+49-1:
+        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
+        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+        break
+
+        case 2+49-1:
+        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+        break
+
+        case 3+49-1:
+        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
+        await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
+        break
+
+        case 4+49-1:
+        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
+        await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
+        break
+      }
+      break
+
+      case "marginsDropdownContent":
+      if (e.which >= 2+49) { return }
+
+      switch (e.which)
+      {
+        case 49:
+        marginValues = cloneObject(defaultMarginValues)
+        break
+
+        case 50:
+        marginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
+        break
+      }
+
+      createMarginEditDropdownItems()
+      if (showingDataMap)
+      {
+        displayDataMap()
+      }
+      break
+
+      case "mapSourcesDropdownContent":
+      if (e.which >= mapSourceIDs.length+49) { return }
+
+      currentMapSource = mapSources[mapSourceIDs[e.which-49]]
+      updateMapSourceButton()
+      await loadDataMap(true, true)
+      if (currentRegionID)
+      {
+        updateStateBox(currentRegionID)
+      }
+      break
+    }
   }
   else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= politicalPartyIDs.length)
   {
@@ -2108,11 +2219,46 @@ document.addEventListener('keypress', async function(e) {
   else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1)
   {
     var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.which)]
-    var checkboxID = mapSourceIDToCompare.replace(/\s/g, '') + '-compare'
-    if (!$('#' + checkboxID).prop('disabled'))
+    toggleCompareMapSourceCheckbox(mapSourceIDToCompare, false)
+  }
+  else if (e.which == 99 || e.which == 109 || e.which == 115)
+  {
+    removeActiveClassFromDropdownButton()
+
+    var contentDivIDToToggle = ""
+    var dropdownButtonDivID = ""
+    switch (e.which)
     {
-      $('#' + checkboxID).prop('checked', !$('#' + checkboxID).prop('checked'))
-      addCompareMapSource(mapSourceIDToCompare)
+      case 99:
+      contentDivIDToToggle = "compareDropdownContent"
+      dropdownButtonDivID = "compareButton"
+      break
+
+      case 109:
+      contentDivIDToToggle = "marginsDropdownContent"
+      dropdownButtonDivID = "marginEditButton"
+      break
+
+      case 115:
+      contentDivIDToToggle = "mapSourcesDropdownContent"
+      dropdownButtonDivID = "sourceToggleButton"
+      break
+    }
+
+    var shouldShowContentDiv = $("#" + contentDivIDToToggle).css('display') != "block"
+
+    $(".dropdown-content").css('display', "")
+
+    if (shouldShowContentDiv)
+    {
+      $("#" + contentDivIDToToggle).css('display', "block")
+      $("#" + dropdownButtonDivID).addClass('active')
+      selectedDropdownDivID = contentDivIDToToggle
+    }
+    else
+    {
+      removeActiveClassFromDropdownButton()
+      selectedDropdownDivID = null
     }
   }
 })

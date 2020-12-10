@@ -18,10 +18,10 @@
     <div class="topnav">
       <a href="https://jacksonjude.com" style="padding: 0; padding-left: 3px; padding-right: 3px; margin-top: 4px;"><img src="./assets/favicon.ico" style="position: relative; top: 2px; padding-top: 1px; width: 45px; height: 45px;" /></a>
       <div style="display: inline-block; margin-top: 4px;">
-        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
-        <div class="dropdown">
+        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Controls</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="sourceToggleButton" style="min-width: 204px">Select Source</a>
-          <div class="dropdown-content" style="min-width: 240px;">
+          <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 240px;">
             <div id="mapSourcesDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
             </div>
           </div>
@@ -35,16 +35,16 @@
       <div style="border-left: 50px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
         <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
-        <div class="dropdown">
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="marginEditButton" style="min-width: 70px">Margins</a>
-          <div class="dropdown-content" style="min-width: 126px">
+          <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 126px">
             <div id="marginsDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
             </div>
           </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="compareButton" style="min-width: 70px" onclick="applyCompareToCustomMap()">Compare</a>
-          <div class="dropdown-content" style="min-width: 280px">
+          <div id="compareDropdownContent" class="dropdown-content" style="min-width: 280px">
             <div id="compareArrayDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
               <a style="display:flex; justify-content:center; background-color: #444;">
@@ -86,44 +86,51 @@
     <div id="evPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-right: 50px; user-select: none; -webkit-user-select: none;">
       <canvas id="evPieChart"></canvas>
     </div>
-    <div id="infoboxcontainers" style="display: inline-block; vertical-align: top; float: right; padding-top: 50px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
+    <div id="infoboxcontainers" style="display: inline-block; vertical-align: top; float: right; padding-top: 35px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
       <div id="helpboxcontainer" class="boxcontainer" style="display: none;">
         <div id="helpbox" class="box">
-          <h3 style="margin: 0px;">Help</h3>
-          <h5 style="margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left;">
-            &#x2022; Select Source / <span style="color: #ec7039;">1</span>, <span style="color: #ec7039;">2</span>, <span style="color: #4a84ff;">3</span>, <span style="color: #0c71c0;">4</span> keys: Change map source<br>
+          <h3 style="margin: 0px;">Keyboard Controls</h3>
+          <h5 style="margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;">
+            &#x2022; Select Source / <span style="color: #ec7039;">1</span>, <span style="color: #ec7039;">2</span>, <span style="color: #4a84ff;">3</span>, <span style="color: #0c71c0;">4</span>, 5, 6 keys: Change map source<br>
             &#x2022; Source download buttons: Update selected source<br>
             &#x2022; Alt-click Select Source: Download all sources<br>
             &#x2022; Clear button / 0 key: Clear map<br>
             &#x2022; Slider / arrow keys: Select data map date<br>
-            &nbsp;&nbsp;&nbsp;D=-5, L=-1, R=+1, U=+5<br>
-            &#x2022; Click state: View more poll / projection data<br>
+            &nbsp;&nbsp;&nbsp;Down=-5, Left=-1, Right=+1, Up=+5<br>
+            &#x2022; Click state: View more poll / projection / result data<br>
+            <br>
+            &#x2022; S key: Toggle source dropdown selection<br>
+            &#x2022; 1-6 keys: Update source<br>
             <br>
             &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-            &#x2022; Party buttons / <span style="color: #8aafff;">1</span>, 2, <span style="color: #ff8b98;">3</span> keys: Select party<br>
-            &#x2022; Left click state: Cycle <span style="color: #be1c29;">safe</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #cf8980;">tilt</span><br>
-            &#x2022; Right click state: Cycle <span style="color: #cf8980;">tilt</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #be1c29;">safe</span><br>
+            &#x2022; Party buttons / <span style="color: #8aafff;">1</span>, 2, <span style="color: #ff8b98;">3</span> keys: Select party to fill<br>
+            &#x2022; Left click state: Cycle <span style="color: #be1c29;">safe</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #cf8980;">tilt</span> margins<br>
+            &#x2022; Right click state: Cycle <span style="color: #cf8980;">tilt</span>,  <span style="color: #ff8b98;">lean</span>,  <span style="color: #ff5864;">likely</span>,  <span style="color: #be1c29;">safe</span> margins<br>
             &#x2022; Hold and drag: <span style="color: #587ccc;">Fill states</span><br>
             <br>
             &#x2022; Source checkbox: Select map source to compare<br>
             &#x2022; Shift + 1-6 keys: Select map source to compare<br>
-            &#x2022; Compare sliders: Select dates within map sources<br>
-            &#x2022; Up/Down arrow keys: Select slider to adjust<br>
+            &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
             &#x2022; Left/Right arrow keys: Adjust selected slider<br>
             <br>
-            &#x2022; Margins button / enter key: Apply margins<br>
-            &#x2022; Margin dropdown button: Edit margin<br>
-            &#x2022; Alt-click margins button: Reset margins<br>
+            &#x2022; C key: Toggle margins dropdown selection<br>
+            &#x2022; 1 key: Compare 2020 Results vs Past Results<br>
+            &#x2022; 2 key: Compare Past Results vs Past Results<br>
+            &#x2022; 3 key: Compare 2020 Results vs 538 Projection<br>
+            &#x2022; 4 key: Compare 2020 Results vs 538 Poll Avg<br>
             <br>
-            &#x2022; Drop image file: Set icon inside pie chart<br>
+            &#x2022; Margins button / enter key: Apply entered margins<br>
+            &#x2022; Margin dropdown button: Edit margin value<br>
+            &#x2022; Alt-click margins button: Reset margins to default<br>
+            <br>
+            &#x2022; M key: Toggle margins dropdown selection<br>
+            &#x2022; 1 key: 15/5/1 margins (default)<br>
+            &#x2022; 2 key: 5/3/1 margins (election shift)<br>
+            <br>
+            &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
             &#x2022; Drop CSV / JSON file: Load custom map<br>
-            &#x2022; Custom Map download button: Download JSON<br>
-            &#x2022; Custom Map upload button: Upload JSON / CSV<br>
-            &#x2022; R key: Force element resize
-            <br>
           </h5>
         </div>
-        <br><br>
       </div>
       <div id="creditboxcontainer" class="boxcontainer" style="">
         <div id="creditbox" class="box">
