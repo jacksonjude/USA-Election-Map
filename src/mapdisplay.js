@@ -2206,6 +2206,7 @@ document.addEventListener('keypress', async function(e) {
       compareMapSourceIDArray = [null, null]
 
       loadComparePreset(e.which-(49-1))
+      break
 
       case "marginsDropdownContent":
       if (e.which >= 2+49) { return }
