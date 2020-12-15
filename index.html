@@ -44,18 +44,18 @@
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="compareButton" style="min-width: 70px" onclick="applyCompareToCustomMap()">Compare</a>
-          <div id="compareDropdownContent" class="dropdown-content" style="min-width: 280px">
+          <div id="compareDropdownContent" class="dropdown-content" style="min-width: 305px">
             <div id="compareArrayDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
               <a onclick="loadCompareItemMapSource(0)" style="display:flex; justify-content:center;">
-                <img id="compareItemImage-0" src="" class="compareitemimage" style="width: 25px; height: 25px; display: none; padding-right: 10px;" />
+                <img id="compareItemImage-0" src="" class="compareitemimage" style="width: 23px; height: 23px; display: none; padding-right: 10px;" />
                 <span id="compareItem-0" class="compareitemtext">
                   &lt;Empty&gt;
                 </span>
               </a>
               <div class='dropdown-separator'></div>
               <a onclick="loadCompareItemMapSource(1)" style="display:flex; justify-content:center;">
-                <img id="compareItemImage-1" src="" class="compareitemimage" style="width: 25px; height: 25px; display: none; padding-right: 10px;" />
+                <img id="compareItemImage-1" src="" class="compareitemimage" style="width: 23px; height: 23px; display: none; padding-right: 10px;" />
                 <span id="compareItem-1" class="compareitemtext">
                   &lt;Empty&gt;
                 </span>
@@ -63,6 +63,20 @@
               <div class='dropdown-separator'></div>
               <a id="swapCompareButton" onclick="swapCompareMapSources(); updateCompareMapSources([true, true], true, true)" style="text-align: center;">
                 Swap Compare Sources
+              </a>
+            </div>
+            <div id="comparePresetsDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+              <div class='dropdown-separator'></div>
+              <a onclick="loadComparePreset(kPastElectionsVsPastElections)" style="">
+                (1)&nbsp;&nbsp;Past Elections vs Past Elections
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="loadComparePreset(kPastElectionsVs538Projection)" style="">
+                (2)&nbsp;&nbsp;Past Elections vs 538 Projection
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="loadComparePreset(kPastElectionsVs538PollAvg)" style="">
+                (3)&nbsp;&nbsp;Past Elections vs 538 Poll Avg
               </a>
             </div>
           </div>

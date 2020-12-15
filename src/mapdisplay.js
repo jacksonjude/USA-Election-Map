@@ -1,4 +1,4 @@
-var currentMapSource = FiveThirtyEightPollAverageMapSource
+var currentMapSource = CustomMapSource
 
 var selectedParty
 
@@ -76,6 +76,10 @@ var selectedCompareSlider = null
 const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 
 var selectedDropdownDivID = null
+
+const kPastElectionsVsPastElections = 1
+const kPastElectionsVs538Projection = 2
+const kPastElectionsVs538PollAvg = 3
 
 $(async function() {
   await loadMapSVGFile()
@@ -228,7 +232,7 @@ function createMapSourceDropdownItems()
       divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\")' style='position: relative; top: 8px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
 
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + mapSourceID
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceID
       divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
@@ -236,7 +240,7 @@ function createMapSourceDropdownItems()
     }
     else
     {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + mapSourceID
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceID
 
       divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); downloadMapFile(currentMapSource, kJSONFileType)'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
@@ -738,7 +742,7 @@ function clearMap()
   if (currentMapSource != CustomMapSource)
   {
     updateMapSourceButton(true)
-    currentMapSource = FiveThirtyEightPollAverageMapSource
+    currentMapSource = CustomMapSource
   }
   else
   {
@@ -1756,11 +1760,13 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
   {
     $("#compareButton").addClass('active')
     $("#compareArrayDropdownContainer").show()
+    $("#comparePresetsDropdownContainer").hide()
   }
   else
   {
     $("#compareButton").removeClass('active')
     $("#compareArrayDropdownContainer").hide()
+    $("#comparePresetsDropdownContainer").show()
   }
 }
 
@@ -1849,6 +1855,30 @@ async function loadCompareItemMapSource(compareItemNum)
   $("#dataMapDateSlider").val(dateIndexToSet)
   displayDataMap(dateIndexToSet)
   updateCompareMapSlidersVisibility(false)
+}
+
+async function loadComparePreset(comparePresetNum)
+{
+  switch (comparePresetNum)
+  {
+    case kPastElectionsVsPastElections:
+    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+
+    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
+    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
+    break
+
+    case kPastElectionsVs538Projection:
+    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+    await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
+    break
+
+    case kPastElectionsVs538PollAvg:
+    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+    await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
+    break
+  }
 }
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
@@ -2147,27 +2177,7 @@ document.addEventListener('keypress', async function(e) {
       $(".comparesourcecheckbox").prop('checked', false)
       compareMapSourceIDArray = [null, null]
 
-      switch (e.which)
-      {
-        case 1+49-1:
-        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-
-        $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-        setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-        break
-
-        case 2+49-1:
-        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-        await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
-        break
-
-        case 3+49-1:
-        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-        await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
-        break
-      }
-      break
+      loadComparePreset(e.which-(49-1))
 
       case "marginsDropdownContent":
       if (e.which >= 2+49) { return }
