@@ -108,6 +108,8 @@ $(async function() {
   }, 1000-((new Date()).getTime()%1000))
 
   $.ajaxSetup({cache: false})
+
+  updateIconsBasedOnLocalCSVData()
 })
 
 function loadMapSVGFile()
@@ -373,7 +375,7 @@ function loadDataMap(shouldSetToMax, forceDownload)
   return loadDataMapPromise
 }
 
-function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap)
+function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch)
 {
   if (mapIDToIgnore != null)
   {
@@ -390,7 +392,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
       insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
     }
 
-    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload)
+    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch)
     for (divID in divsToUpdateStatus)
     {
       removeStatusImage(divID)
@@ -427,9 +429,9 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
 
 async function downloadAllMapData()
 {
+  var sourcesLoaded = 0
   for (sourceIDNum in mapSourceIDs)
   {
-    var sourcesLoaded = 0
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function(loadedSuccessfully) {
       if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID() && loadedSuccessfully)
@@ -443,6 +445,32 @@ async function downloadAllMapData()
         $("#loader").show()
       }
     })
+  }
+}
+
+async function fetchLocalCSVData()
+{
+  for (sourceIDNum in mapSourceIDs)
+  {
+    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
+    await downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, false, false, true)
+  }
+}
+
+async function updateIconsBasedOnLocalCSVData()
+{
+  for (sourceIDNum in mapSourceIDs)
+  {
+    var csvIsStored = await CSVDatabase.hasCSV(mapSourceIDs[sourceIDNum])
+    if (csvIsStored)
+    {
+      var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
+      for (divID in divsToUpdateStatus)
+      {
+        removeStatusImage(divID)
+        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      }
+    }
   }
 }
 

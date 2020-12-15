@@ -19,7 +19,7 @@ class MapSource
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
   }
 
-  loadMap(reloadCache)
+  loadMap(reloadCache, onlyAttemptLocalFetch)
   {
     var self = this
 
@@ -29,7 +29,7 @@ class MapSource
         var textData
         if (self.dataURL)
         {
-          textData = await self.loadMapCache(self)
+          textData = await self.loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
         }
         else
         {
@@ -64,17 +64,33 @@ class MapSource
     return loadMapPromise
   }
 
-  loadMapCache(self)
+  loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
   {
     self = self || this
 
-    var fetchMapDataPromise = new Promise((resolve, reject) => {
+    var fetchMapDataPromise = new Promise(async (resolve, reject) => {
+      if (!reloadCache)
+      {
+        var savedCSVText = await CSVDatabase.fetchCSV(this.id)
+        if (savedCSVText != null)
+        {
+          return resolve(savedCSVText)
+        }
+        else if (onlyAttemptLocalFetch)
+        {
+          return resolve()
+        }
+      }
+
       $("#loader").show()
       $.get(self.dataURL, null, function(data) {
         $("#loader").hide()
+
+        CSVDatabase.insertCSV(self.id, data)
         resolve(data)
       }).fail(function() {
         $("#loader").hide()
+
         resolve(null)
       })
     })
