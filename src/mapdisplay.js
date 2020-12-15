@@ -2142,7 +2142,7 @@ document.addEventListener('keypress', async function(e) {
     switch (selectedDropdownDivID)
     {
       case "compareDropdownContent":
-      if (e.which >= 4+49) { return }
+      if (e.which >= 3+49) { return }
 
       $(".comparesourcecheckbox").prop('checked', false)
       compareMapSourceIDArray = [null, null]
@@ -2150,22 +2150,20 @@ document.addEventListener('keypress', async function(e) {
       switch (e.which)
       {
         case 1+49-1:
-        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
         await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
+
+        $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
+        setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
         break
 
         case 2+49-1:
         await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-        break
-
-        case 3+49-1:
-        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
         await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
         break
 
-        case 4+49-1:
-        await toggleCompareMapSourceCheckbox(NYTElectionResultsMapSource.getID(), true)
+        case 3+49-1:
+        await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
         await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
         break
       }

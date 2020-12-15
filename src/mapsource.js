@@ -545,7 +545,8 @@ const electionYearToCandidateData = {
   2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID},
   2008: {"Obama":democraticPartyID, "McCain":republicanPartyID},
   2012: {"Obama":democraticPartyID, "Romney":republicanPartyID},
-  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID}
+  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID},
+  2020: {"Biden":democraticPartyID, "Trump":republicanPartyID}
 }
 
 const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
@@ -759,7 +760,7 @@ mapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
 mapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
 mapSources[CustomMapSource.getID()] = CustomMapSource
 
-var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), NYTElectionResultsMapSource.getID(), CustomMapSource.getID()]
+var mapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), CustomMapSource.getID()]
 
 // Map source testing
 // async function app()
