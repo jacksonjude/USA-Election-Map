@@ -447,14 +447,22 @@ async function updateIconsBasedOnLocalCSVData()
 {
   for (sourceIDNum in mapSourceIDs)
   {
+    var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     var csvIsStored = await CSVDatabase.hasCSV(mapSourceIDs[sourceIDNum])
     if (csvIsStored)
     {
-      var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
       for (divID in divsToUpdateStatus)
       {
         removeStatusImage(divID)
         insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      }
+    }
+    else
+    {
+      for (divID in divsToUpdateStatus)
+      {
+        removeStatusImage(divID)
+        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
       }
     }
   }
