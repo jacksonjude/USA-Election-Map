@@ -141,6 +141,16 @@ body {
   top: -5px;
 }
 
+.comparesourcecheckbox {
+  -webkit-appearance: none;
+  border-radius: 3px;
+  background-color: #888;
+}
+
+.comparesourcecheckbox:checked {
+  background-color: #fff;
+}
+
 .slidecontainer {
   width: 100%; /* Width of the outside container */
 }
