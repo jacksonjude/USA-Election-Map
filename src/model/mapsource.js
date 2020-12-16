@@ -764,6 +764,16 @@ var CustomMapSource = new MapSource(
   null
 )
 
+var NullMapSource = new MapSource(
+  "None",
+  null,
+  null,
+  null,
+  null,
+  partyCandiateLastNames,
+  partyIDToCandidateLastNames
+)
+
 var todayDate = new Date()
 CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 

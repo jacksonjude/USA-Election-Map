@@ -1,4 +1,4 @@
-var currentMapSource = CustomMapSource
+var currentMapSource = NullMapSource
 
 var selectedParty
 
@@ -753,10 +753,12 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
 
 function clearMap()
 {
-  if (currentMapSource != CustomMapSource)
+  if (currentMapSource != CustomMapSource || CustomMapSource.getTextMapData().startsWith("date\n"))
   {
     updateMapSourceButton(true)
-    currentMapSource = CustomMapSource
+    currentMapSource = NullMapSource
+
+    toggleEditing(kViewing)
   }
   else
   {
