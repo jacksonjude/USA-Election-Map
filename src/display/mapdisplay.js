@@ -216,14 +216,14 @@ function createMapSourceDropdownItems()
 
     if (mapSourceID != CustomMapSource.getID())
     {
-      divStringToAppend += "<span style='float: right; padding-left: 6px; padding-right: 12px;'>"
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\")' style='position: relative; top: 8px; width: 24px; height: 24px;' />"
-      divStringToAppend += "</span>"
+      // divStringToAppend += "<span style='float: right; padding-left: 6px; padding-right: 12px;'>"
+      // divStringToAppend += "</span>"
 
       divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceID
       divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
+      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='position: relative; top: -4px; right: -8px; float: right; width: 24px; height: 24px;' />"
       divStringToAppend += "</a>"
     }
     else
@@ -1288,8 +1288,13 @@ async function toggleCompareMapSourceCheckbox(mapSourceID, overrideAdd)
   }
 }
 
-async function addCompareMapSource(mapSourceID)
+async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
 {
+  if (clickDivIDToIgnore != null)
+  {
+    ignoreMapUpdateClickArray.push(clickDivIDToIgnore)
+  }
+
   var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
   var checkboxChecked = $("#" + checkboxID).prop('checked')
 
