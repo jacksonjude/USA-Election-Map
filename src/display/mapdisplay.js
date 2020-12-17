@@ -77,6 +77,7 @@ $(async function() {
   preloadAssets([
     "assets/icon-download-none.png",
     "assets/icon-download.png",
+    "assets/icon-loading.png",
     "assets/icon-download-complete.png",
 
     "assets/fivethirtyeight-large.png",
