@@ -74,6 +74,18 @@ $(async function() {
   $("#loader").hide()
   resizeElements(false)
 
+  preloadAssets([
+    "assets/icon-download-none.png",
+    "assets/icon-download.png",
+    "assets/icon-download-complete.png",
+
+    "assets/fivethirtyeight-large.png",
+    "assets/jhk-large.png",
+    "assets/cookpolitical-large.png",
+    "assets/wikipedia-large.png",
+    "assets/nyt-large.png"
+  ])
+
   createMapSourceDropdownItems()
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
@@ -201,6 +213,14 @@ function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID,
   }
 
   $("#" + dateDisplayDivID).css("margin-top", ($("#" + sliderDivID).height()/4-1))
+}
+
+function preloadAssets(assetURLs)
+{
+  for (urlNum in assetURLs)
+  {
+    (new Image()).src = assetURLs[urlNum]
+  }
 }
 
 function createMapSourceDropdownItems()
