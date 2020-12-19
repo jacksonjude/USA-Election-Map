@@ -790,6 +790,7 @@ function clearMap()
   {
     CustomMapSource.setTextMapData("date\n" + getTodayString())
     CustomMapSource.setIconURL("")
+    CustomMapSource.setCandidateNames()
     loadDataMap(false, true)
   }
 
@@ -1504,6 +1505,12 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
   $("#compareItem-" + compareArrayIndex).html(compareMapSourceIDArray[compareArrayIndex] + " (" + getMDYDateString(dateToDisplay) + ")")
 
   compareMapDataArray[compareArrayIndex] = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapData()[dateToDisplay.getTime()]
+
+  if (compareArrayIndex == 0)
+  {
+    CustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()))
+  }
+
   applyCompareToCustomMap()
 }
 

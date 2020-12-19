@@ -246,6 +246,19 @@ class MapSource
     }
   }
 
+  setCandidateNames(shortNameOverride)
+  {
+    if (shortNameOverride)
+    {
+      this.defaultShortCandidateNameOverride = cloneObject(this.shortCandidateNameOverride)
+      this.shortCandidateNameOverride = shortNameOverride
+    }
+    else if (this.defaultShortCandidateNameOverride)
+    {
+      this.shortCandidateNameOverride = cloneObject(this.defaultShortCandidateNameOverride)
+    }
+  }
+
   getIconURL()
   {
     return this.iconURL
