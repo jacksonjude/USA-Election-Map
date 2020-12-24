@@ -127,7 +127,7 @@ function setOutlineDivProperties()
   $('#outlines').children().each(function() {
     var outlineDiv = $(this)
 
-    $(this).css('transition', "fill " + regionFillAnimationDuration + "s linear")
+    outlineDiv.css('transition', "fill " + regionFillAnimationDuration + "s linear")
     outlineDiv.css('fill', defaultRegionFillColor)
     outlineDiv.css('cursor', "pointer")
 
@@ -591,6 +591,11 @@ function displayDataMap(dateIndex)
     var regionDataCallback = getRegionData(currentMapDataForDate[regionNum].region)
     var regionData = regionDataCallback.regionData
     var regionsToFill = regionDataCallback.linkedRegionIDs
+
+    if (regionData == null)
+    {
+      continue
+    }
 
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID

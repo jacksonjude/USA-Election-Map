@@ -547,6 +547,99 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
   return {mapData: filteredMapData, candidateNameData: candidateNameData}
 }
 
+var doubleLinePercentCopyFunction = function(rawMapData, mapDates, columnMap, candidateNameToPartyIDMap, partyIDs)
+{
+  var filteredMapData = {}
+  var candidateNameData = {}
+
+  for (var dateNum in mapDates)
+  {
+    var rawDateData = rawMapData[mapDates[dateNum]]
+    var filteredDateData = {}
+
+    var currentMapDate = new Date(mapDates[dateNum])
+
+    var candidateArrayToTest = Object.keys(candidateNameToPartyIDMap)
+    if (candidateArrayToTest.includes(currentMapDate.getFullYear().toString()))
+    {
+      candidateArrayToTest = Object.keys(candidateNameToPartyIDMap[currentMapDate.getFullYear()])
+    }
+
+    for (var rowNum in rawDateData)
+    {
+      var rowData = rawDateData[rowNum]
+
+      if (!candidateArrayToTest.includes(rowData[columnMap.candidateName]))
+      {
+        continue
+      }
+
+      var regionID = rowData[columnMap.region]
+
+      var regionDataToFill = {region: regionID, margin: 0, partyID: tossupPartyID, chanceIncumbent: null, chanceChallenger: null, partyCandidates: candidateNameToPartyIDMap}
+      if (regionID in filteredDateData)
+      {
+        regionDataToFill = filteredDateData[regionID]
+      }
+
+      var partyID = candidateNameToPartyIDMap[rowData[columnMap.candidateName]]
+      if (Object.keys(candidateNameToPartyIDMap).includes(currentMapDate.getFullYear().toString()))
+      {
+        partyID = candidateNameToPartyIDMap[currentMapDate.getFullYear().toString()][rowData[columnMap.candidateName]]
+      }
+
+      if (!(mapDates[dateNum] in candidateNameData))
+      {
+        candidateNameData[mapDates[dateNum]] = {}
+      }
+      if (!(partyID in candidateNameData[mapDates[dateNum]]))
+      {
+        var candidateNameToAdd
+        if ("partyCandidateName" in columnMap)
+        {
+          candidateNameToAdd = rowData[columnMap.partyCandidateName]
+        }
+        else
+        {
+          candidateNameToAdd = rowData[columnMap.candidateName]
+        }
+        candidateNameData[mapDates[dateNum]][partyID] = candidateNameToAdd
+      }
+
+      if (partyID == partyIDs.incumbent)
+      {
+        regionDataToFill.margin += parseFloat(rowData[columnMap.percentAdjusted])*100
+      }
+      else if (partyID == partyIDs.challenger)
+      {
+        regionDataToFill.margin -= parseFloat(rowData[columnMap.percentAdjusted])*100
+      }
+
+      var greaterMarginPartyID = partyIDs.tossup
+      if (Math.sign(regionDataToFill.margin) == -1)
+      {
+        greaterMarginPartyID = partyIDs.challenger
+      }
+      else if (Math.sign(regionDataToFill.margin) == 1)
+      {
+        greaterMarginPartyID = partyIDs.incumbent
+      }
+      regionDataToFill.partyID = greaterMarginPartyID
+
+      filteredDateData[regionID] = regionDataToFill
+    }
+
+    for (var regionID in filteredDateData)
+    {
+      filteredDateData[regionID].margin = Math.abs(filteredDateData[regionID].margin)
+    }
+
+    filteredMapData[mapDates[dateNum]] = filteredDateData
+  }
+
+  return {mapData: filteredMapData, candidateNameData: candidateNameData}
+}
+
 
 // Map Source Declarations
 
@@ -754,6 +847,28 @@ var NYTElectionResultsMapSource = new MapSource(
   }
 )
 
+var CountyPastElectionMapSource = new MapSource(
+  "County Election",
+  "/Users/jackson/Documents/GitHub/usa-2020/csv-sources/county-president.csv",
+  null,
+  null,
+  {
+    date: "date",
+    region: "region",
+    candidateName: "candidate",
+    percentAdjusted: "voteshare"
+  },
+  electionYearToCandidateData,
+  null,
+  incumbentChallengerPartyIDs,
+  null,
+  null,
+  null,
+  false,
+  true,
+  doubleLinePercentCopyFunction
+)
+
 var CustomMapSource = new MapSource(
   "Custom",
   null,
@@ -796,6 +911,7 @@ mapSources[FiveThirtyEightProjectionMapSource.getID()] = FiveThirtyEightProjecti
 mapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
 mapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
 mapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+mapSources[CountyPastElectionMapSource.getID()] = CountyPastElectionMapSource
 mapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
 mapSources[CustomMapSource.getID()] = CustomMapSource
 
