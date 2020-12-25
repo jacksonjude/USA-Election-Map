@@ -444,7 +444,7 @@ function mouseEnteredRegion(div)
     updateStateBox(regionID)
   }
 
-  $(div).css('stroke', '#ffffff')
+  $(div).css('stroke', regionSelectColor)
   for (linkedRegionSetNum in linkedRegions)
   {
     for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
@@ -453,7 +453,7 @@ function mouseEnteredRegion(div)
       {
         for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', '#ffffff')
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', regionSelectColor)
         }
       }
     }
@@ -473,7 +473,7 @@ function mouseLeftRegion(div)
     $("#stateboxcontainer").hide()
   }
 
-  $(div).css('stroke', '#181922')
+  $(div).css('stroke', regionDeselectColor)
   for (linkedRegionSetNum in linkedRegions)
   {
     for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
@@ -482,7 +482,7 @@ function mouseLeftRegion(div)
       {
         for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', '#181922')
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', regionDeselectColor)
         }
       }
     }

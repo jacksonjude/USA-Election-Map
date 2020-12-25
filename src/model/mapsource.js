@@ -347,7 +347,14 @@ class MapSource
               break
 
               case "region":
-              csvText += getKeyByValue(regionNameToID, regionID)
+              if (regionNameToID)
+              {
+                csvText += getKeyByValue(regionNameToID, regionID)
+              }
+              else
+              {
+                csvText += regionID
+              }
               break
             }
 
@@ -608,11 +615,11 @@ var doubleLinePercentCopyFunction = function(rawMapData, mapDates, columnMap, ca
 
       if (partyID == partyIDs.incumbent)
       {
-        regionDataToFill.margin += parseFloat(rowData[columnMap.percentAdjusted])*100
+        regionDataToFill.margin += parseFloat(rowData[columnMap.percentAdjusted])
       }
       else if (partyID == partyIDs.challenger)
       {
-        regionDataToFill.margin -= parseFloat(rowData[columnMap.percentAdjusted])*100
+        regionDataToFill.margin -= parseFloat(rowData[columnMap.percentAdjusted])
       }
 
       var greaterMarginPartyID = partyIDs.tossup
@@ -883,12 +890,12 @@ var CustomMapSource = new MapSource(
   partyCandiateLastNames,
   partyIDToCandidateLastNames,
   incumbentChallengerPartyIDs,
-  regionNameToIDCustom,
+  regionNameToIDCustom, //null,
   null,
   null,
   false,
   true,
-  doubleLinePercentFilterFunction,
+  doubleLinePercentFilterFunction, //doubleLinePercentCopyFunction,
   null
 )
 
