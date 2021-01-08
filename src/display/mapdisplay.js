@@ -45,12 +45,15 @@ var currentMapState = kViewing
 
 var showingHelpBox = false
 
-const electionDayTime = 1604361600000 //1604390400000 PST
+const electionDayTime2020 = 1604361600000 //1604390400000 PST
 const electorsCastVotesTime = 1607965200000
 const congressCountsVotesTime = 1609952400000
-const inaugurationDayTime = 1611162000000
+const inaugurationDayTime2021 = 1611162000000
 
-const countdownTimes = {"Election Day": electionDayTime, "Electoral College Vote": electorsCastVotesTime, "Congress Counts Votes": congressCountsVotesTime, "Inauguration Day": inaugurationDayTime}
+const electionDayTime2022 = 1667926800000
+const electionDayTime2024 = 1730826000000
+
+const countdownTimes = {"2020 Presidential Election": electionDayTime2020, "2021 Inauguration Day": inaugurationDayTime2021, "2022 Midterm Election": electionDayTime2022, "2024 Presidential Election": electionDayTime2024}
 var currentCountdownTimeName
 
 const kCSVFileType = "text/csv"
