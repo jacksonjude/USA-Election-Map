@@ -1269,9 +1269,14 @@ function updateStateBox(regionID)
   }
   $("#stateboxcontainer").show()
 
-  var regionMarginString
-  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding())
-  regionMarginString = politicalParties[regionData.partyID].getCandidateName() + " +" + roundedMarginValue
+  var decimalPlaceToRound = Math.floor(-Math.log(regionData.margin)/Math.log(10)+2)
+  if (decimalPlaceToRound <= 0)
+  {
+    decimalPlaceToRound = 1
+  }
+
+  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
+  var regionMarginString = politicalParties[regionData.partyID].getCandidateName() + " +" + roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
