@@ -1050,7 +1050,8 @@ function leftClickRegion(div)
         marginValueIndex = 0
       }
 
-      regionData.margin = marginValueArray[marginValueIndex]
+      // Hardcoding tilt = 0.1
+      regionData.margin = marginValueIndex == marginValueArray.length-1 ? 0.1 : marginValueArray[marginValueIndex]
     }
     else
     {
@@ -1102,7 +1103,8 @@ function rightClickRegion(div)
         marginValueIndex = marginValueArray.length-1
       }
 
-      regionData.margin = marginValueArray[marginValueIndex]
+      // Hardcoding tilt == 0.1
+      regionData.margin = marginValueIndex == marginValueArray.length-1 ? 0.1 : marginValueArray[marginValueIndex]
     }
     else
     {
