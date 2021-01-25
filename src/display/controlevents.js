@@ -470,7 +470,7 @@ function mouseLeftRegion(div)
 
   if (currentMapState == kViewing)
   {
-    $("#stateboxcontainer").hide()
+    $("#stateboxcontainer").trigger('hide')
   }
 
   $(div).css('stroke', regionDeselectColor)
@@ -502,7 +502,7 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
-  if (currentRegionID)
+  if ($("#stateboxcontainer").css('display') != "none")
   {
     $("#stateboxcontainer").css("left", e.x+5)
     $("#stateboxcontainer").css("top", e.y+5)

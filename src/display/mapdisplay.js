@@ -345,6 +345,20 @@ function addDivEventListeners()
       }
     }
   })
+
+  $("#stateboxcontainer").on('show', function() {
+    $(this).show()
+    $(this).css('opacity', "1")
+  })
+
+  $("#stateboxcontainer").on('hide', function() {
+    $(this).css('opacity', "0")
+
+    setTimeout(function() {
+      if ($("#stateboxcontainer").css('opacity') == "0") { $("#stateboxcontainer").hide() }
+      console.log("test1", $("#stateboxcontainer").css('opacity'))
+    }, 200)
+  })
 }
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
@@ -960,7 +974,7 @@ function toggleEditing(stateToSet)
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
 
-    $("#stateboxcontainer").hide()
+    $("#stateboxcontainer").trigger('hide')
 
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
@@ -1266,10 +1280,10 @@ function updateStateBox(regionID)
   var regionData = getRegionData(regionID).regionData
   if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID())
   {
-    $("#stateboxcontainer").hide()
+    $("#stateboxcontainer").trigger('hide')
     return
   }
-  $("#stateboxcontainer").show()
+  $("#stateboxcontainer").trigger('show')
 
   var decimalPlaceToRound = Math.floor(-Math.log(regionData.margin)/Math.log(10)+2)
   if (decimalPlaceToRound <= 0)
