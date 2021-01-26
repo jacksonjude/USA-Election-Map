@@ -8,7 +8,8 @@ var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 var editMarginID = null
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
-var regionFillAnimationDuration = 0.1
+const regionFillAnimationDuration = 0.1
+const regionStrokeAnimationDuration = 0.06
 
 const regionSelectColor = "#ffffff"
 const regionDeselectColor = "#181922" //#555
@@ -135,7 +136,7 @@ function setOutlineDivProperties()
   $('#outlines').children().each(function() {
     var outlineDiv = $(this)
 
-    outlineDiv.css('transition', "fill " + regionFillAnimationDuration + "s linear")
+    outlineDiv.css('transition', "fill " + regionFillAnimationDuration + "s linear, stroke " + regionStrokeAnimationDuration + "s linear")
     outlineDiv.css('fill', defaultRegionFillColor)
     outlineDiv.css('cursor', "pointer")
 
