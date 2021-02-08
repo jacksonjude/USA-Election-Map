@@ -1,3 +1,5 @@
+const sourceUpdatedTimesURL = "https://map.jacksonjude.com/csv-sources/source-updated-times.json"
+
 class CSVDatabase
 {
   static initilize(databaseName, databaseVersion)
@@ -38,7 +40,7 @@ class CSVDatabase
     var transaction = db.transaction('CSVFiles', 'readwrite')
     var store = transaction.objectStore('CSVFiles')
 
-    store.put({text: csvText}, sourceID)
+    store.put({text: csvText, updatedAt: Date.now()}, sourceID)
 
     transaction.oncomplete = function() {
       db.close()
@@ -55,11 +57,28 @@ class CSVDatabase
       var query = store.get(sourceID)
 
       query.onsuccess = function(event) {
-        resolve(query.result ? query.result.text : null)
+        var textResult = query.result ? query.result.text : null
+        var updatedTime = query.result ? query.result.updatedAt : null
+
+        $.getJSON(sourceUpdatedTimesURL, null, data => {
+          // console.log(updatedTime, data[sourceID], updatedTime != null && updatedTime >= data[sourceID])
+          if (updatedTime && updatedTime >= data[sourceID])
+          {
+            resolve(textResult)
+          }
+          else
+          {
+            resolve(null)
+          }
+        }).fail((callback, error) => {
+          console.log(error)
+          resolve(textResult)
+        })
       }
 
       query.onerror = function(event) {
         console.log(event.target.errorCode)
+        resolve(null)
       }
 
       transaction.oncomplete = function() {
