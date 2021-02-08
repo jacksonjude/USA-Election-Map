@@ -113,6 +113,17 @@ class CSVDatabase
 
     return hasCSVPromise
   }
+
+  static async isSourceUpdated(sourceID)
+  {
+    var self = this
+    var isSourceUpdatedPromise = new Promise(async (resolve, reject) => {
+      var result = await self.fetchCSV(sourceID)
+      resolve(result != null)
+    })
+
+    return isSourceUpdatedPromise
+  }
 }
 
 

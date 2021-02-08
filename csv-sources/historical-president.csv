@@ -3419,115 +3419,173 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Wyoming,WY,Clinton,democrat,21.62890087639300,20171015
 11/8/2016,Wyoming,WY,Johnson,libertarian,5.1343184382583400,20171015
 11/8/2016,Wyoming,WY,Castle,constitution party,0.78906286226563800,20171015
-11/3/2020,Alabama,AL,Trump,republican,62.0,20201214
-11/3/2020,Alabama,AL,Biden,democrat,36.6,20201214
-11/3/2020,Alaska,AK,Trump,republican,52.8,20201214
-11/3/2020,Alaska,AK,Biden,democrat,42.8,20201214
+11/3/2020,Alabama,AL,Trump,republican,62.03,20201214
+11/3/2020,Alabama,AL,Biden,democrat,36.57,20201214
+11/3/2020,Alabama,AL,Jorgensen,libertarian,1.08,20201214
+11/3/2020,Alaska,AK,Trump,republican,52.83,20201214
+11/3/2020,Alaska,AK,Biden,democrat,42.77,20201214
+11/3/2020,Alaska,AK,Jorgensen,libertarian,2.47,20201214
 11/3/2020,Arizona,AZ,Biden,democrat,49.36,20201214
 11/3/2020,Arizona,AZ,Trump,republican,49.06,20201214
-11/3/2020,Arkansas,AR,Trump,republican,62.4,20201214
-11/3/2020,Arkansas,AR,Biden,democrat,34.8,20201214
-11/3/2020,California,CA,Biden,democrat,63.5,20201214
-11/3/2020,California,CA,Trump,republican,34.3,20201214
-11/3/2020,Colorado,CO,Biden,democrat,55.4,20201214
-11/3/2020,Colorado,CO,Trump,republican,41.9,20201214
-11/3/2020,Connecticut,CT,Biden,democrat,59.2,20201214
-11/3/2020,Connecticut,CT,Trump,republican,39.2,20201214
-11/3/2020,Delaware,DE,Biden,democrat,58.8,20201214
-11/3/2020,Delaware,DE,Trump,republican,39.8,20201214
-11/3/2020,District of Columbia,DC,Biden,democrat,92.1,20201214
-11/3/2020,District of Columbia,DC,Trump,republican,5.4,20201214
-11/3/2020,Florida,FL,Trump,republican,51.2,20201214
-11/3/2020,Florida,FL,Biden,democrat,47.9,20201214
-11/3/2020,Georgia,GA,Biden,democrat,49.50,20201214
-11/3/2020,Georgia,GA,Trump,republican,49.26,20201214
-11/3/2020,Hawaii,HI,Biden,democrat,63.7,20201214
-11/3/2020,Hawaii,HI,Trump,republican,34.3,20201214
-11/3/2020,Idaho,ID,Trump,republican,63.8,20201214
-11/3/2020,Idaho,ID,Biden,democrat,33.1,20201214
-11/3/2020,Illinois,IL,Biden,democrat,57.5,20201214
-11/3/2020,Illinois,IL,Trump,republican,40.5,20201214
-11/3/2020,Indiana,IN,Trump,republican,57.0,20201214
-11/3/2020,Indiana,IN,Biden,democrat,41.0,20201214
-11/3/2020,Iowa,IA,Trump,republican,53.1,20201214
-11/3/2020,Iowa,IA,Biden,democrat,44.9,20201214
-11/3/2020,Kansas,KS,Trump,republican,56.1,20201214
-11/3/2020,Kansas,KS,Biden,democrat,41.5,20201214
-11/3/2020,Kentucky,KY,Trump,republican,62.1,20201214
-11/3/2020,Kentucky,KY,Biden,democrat,36.2,20201214
-11/3/2020,Louisiana,LA,Trump,republican,58.5,20201214
-11/3/2020,Louisiana,LA,Biden,democrat,39.9,20201214
-11/3/2020,Maine,ME,Biden,democrat,53.1,20201214
-11/3/2020,Maine,ME,Trump,republican,44.0,20201214
-11/3/2020,Maine 1st CD,ME-1,Biden,democrat,60.1,20201214
-11/3/2020,Maine 1st CD,ME-1,Trump,republican,37.0,20201214
-11/3/2020,Maine 2nd CD,ME-2,Trump,republican,52.5,20201214
-11/3/2020,Maine 2nd CD,ME-2,Biden,democrat,44.6,20201214
-11/3/2020,Maryland,MD,Biden,democrat,65.4,20201214
-11/3/2020,Maryland,MD,Trump,republican,32.2,20201214
-11/3/2020,Massachusetts,MA,Biden,democrat,65.6,20201214
-11/3/2020,Massachusetts,MA,Trump,republican,32.1,20201214
-11/3/2020,Michigan,MI,Biden,democrat,50.6,20201214
-11/3/2020,Michigan,MI,Trump,republican,47.8,20201214
-11/3/2020,Minnesota,MN,Biden,democrat,52.4,20201214
-11/3/2020,Minnesota,MN,Trump,republican,45.3,20201214
-11/3/2020,Mississippi,MS,Trump,republican,57.5,20201214
-11/3/2020,Mississippi,MS,Biden,democrat,41.0,20201214
-11/3/2020,Missouri,MO,Trump,republican,56.8,20201214
-11/3/2020,Missouri,MO,Biden,democrat,41.4,20201214
-11/3/2020,Montana,MT,Trump,republican,56.7,20201214
-11/3/2020,Montana,MT,Biden,democrat,40.4,20201214
-11/3/2020,Nebraska,NE,Trump,republican,58.2,20201214
-11/3/2020,Nebraska,NE,Biden,democrat,39.2,20201214
-11/3/2020,Nebraska 1st CD,NE-1,Trump,republican,56.3,20201214
-11/3/2020,Nebraska 1st CD,NE-1,Biden,democrat,41.3,20201214
-11/3/2020,Nebraska 2nd CD,NE-2,Biden,democrat,52.2,20201214
-11/3/2020,Nebraska 2nd CD,NE-2,Trump,republican,45.7,20201214
-11/3/2020,Nebraska 3rd CD,NE-3,Trump,republican,75.6,20201214
-11/3/2020,Nebraska 3rd CD,NE-3,Biden,democrat,22.4,20201214
-11/3/2020,Nevada,NV,Biden,democrat,50.1,20201214
-11/3/2020,Nevada,NV,Trump,republican,47.7,20201214
-11/3/2020,New Hampshire,NH,Biden,democrat,52.8,20201214
-11/3/2020,New Hampshire,NH,Trump,republican,45.5,20201214
-11/3/2020,New Jersey,NJ,Biden,democrat,57.1,20201214
-11/3/2020,New Jersey,NJ,Trump,republican,41.3,20201214
-11/3/2020,New Mexico,NM,Biden,democrat,54.3,20201214
-11/3/2020,New Mexico,NM,Trump,republican,43.5,20201214
-11/3/2020,New York,NY,Biden,democrat,60.9,20201214
-11/3/2020,New York,NY,Trump,republican,37.7,20201214
-11/3/2020,North Carolina,NC,Trump,republican,49.9,20201214
-11/3/2020,North Carolina,NC,Biden,democrat,48.6,20201214
-11/3/2020,North Dakota,ND,Trump,republican,65.1,20201214
-11/3/2020,North Dakota,ND,Biden,democrat,31.8,20201214
-11/3/2020,Ohio,OH,Trump,republican,53.3,20201214
-11/3/2020,Ohio,OH,Biden,democrat,45.2,20201214
-11/3/2020,Oklahoma,OK,Trump,republican,65.4,20201214
-11/3/2020,Oklahoma,OK,Biden,democrat,32.3,20201214
-11/3/2020,Oregon,OR,Biden,democrat,56.5,20201214
-11/3/2020,Oregon,OR,Trump,republican,40.4,20201214
+11/3/2020,Arizona,AZ,Jorgensen,libertarian,1.52,20201214
+11/3/2020,Arkansas,AR,Trump,republican,62.40,20201214
+11/3/2020,Arkansas,AR,Biden,democrat,34.78,20201214
+11/3/2020,Arkansas,AR,Jorgensen,libertarian,1.08,20201214
+11/3/2020,California,CA,Biden,democrat,63.48,20201214
+11/3/2020,California,CA,Trump,republican,34.32,20201214
+11/3/2020,California,CA,Jorgensen,libertarian,1.07,20201214
+11/3/2020,Colorado,CO,Biden,democrat,55.40,20201214
+11/3/2020,Colorado,CO,Trump,republican,41.90,20201214
+11/3/2020,Colorado,CO,Jorgensen,libertarian,1.61,20201214
+11/3/2020,Connecticut,CT,Biden,democrat,59.24,20201214
+11/3/2020,Connecticut,CT,Trump,republican,39.21,20201214
+11/3/2020,Connecticut,CT,Jorgensen,libertarian,1.11,20201214
+11/3/2020,Delaware,DE,Biden,democrat,58.74,20201214
+11/3/2020,Delaware,DE,Trump,republican,39.77,20201214
+11/3/2020,Delaware,DE,Jorgensen,libertarian,0.99,20201214
+11/3/2020,District of Columbia,DC,Biden,democrat,92.15,20201214
+11/3/2020,District of Columbia,DC,Trump,republican,5.40,20201214
+11/3/2020,District of Columbia,DC,Jorgensen,libertarian,0.59,20201214
+11/3/2020,Florida,FL,Trump,republican,51.22,20201214
+11/3/2020,Florida,FL,Biden,democrat,47.86,20201214
+11/3/2020,Florida,FL,Jorgensen,libertarian,0.64,20201214
+11/3/2020,Georgia,GA,Biden,democrat,49.47,20201214
+11/3/2020,Georgia,GA,Trump,republican,49.24,20201214
+11/3/2020,Georgia,GA,Jorgensen,libertarian,1.24,20201214
+11/3/2020,Hawaii,HI,Biden,democrat,63.73,20201214
+11/3/2020,Hawaii,HI,Trump,republican,34.27,20201214
+11/3/2020,Hawaii,HI,Jorgensen,libertarian,0.96,20201214
+11/3/2020,Idaho,ID,Trump,republican,63.84,20201214
+11/3/2020,Idaho,ID,Biden,democrat,33.07,20201214
+11/3/2020,Idaho,ID,Jorgensen,libertarian,1.89,20201214
+11/3/2020,Illinois,IL,Biden,democrat,57.54,20201214
+11/3/2020,Illinois,IL,Trump,republican,40.55,20201214
+11/3/2020,Illinois,IL,Jorgensen,libertarian,1.10,20201214
+11/3/2020,Indiana,IN,Trump,republican,57.02,20201214
+11/3/2020,Indiana,IN,Biden,democrat,40.96,20201214
+11/3/2020,Indiana,IN,Jorgensen,libertarian,1.95,20201214
+11/3/2020,Iowa,IA,Trump,republican,53.10,20201214
+11/3/2020,Iowa,IA,Biden,democrat,44.95,20201214
+11/3/2020,Iowa,IA,Jorgensen,libertarian,1.16,20201214
+11/3/2020,Kansas,KS,Trump,republican,56.18,20201214
+11/3/2020,Kansas,KS,Biden,democrat,41.53,20201214
+11/3/2020,Kansas,KS,Jorgensen,libertarian,2.20,20201214
+11/3/2020,Kentucky,KY,Trump,republican,62.09,20201214
+11/3/2020,Kentucky,KY,Biden,democrat,36.15,20201214
+11/3/2020,Kentucky,KY,Jorgensen,libertarian,1.23,20201214
+11/3/2020,Louisiana,LA,Trump,republican,58.46,20201214
+11/3/2020,Louisiana,LA,Biden,democrat,39.85,20201214
+11/3/2020,Louisiana,LA,Jorgensen,libertarian,1.01,20201214
+11/3/2020,Maine,ME,Biden,democrat,53.09,20201214
+11/3/2020,Maine,ME,Trump,republican,44.02,20201214
+11/3/2020,Maine,ME,Jorgensen,libertarian,1.73,20201214
+11/3/2020,Maine,ME,Hawkins,green,1.00,20201214
+11/3/2020,Maine 1st CD,ME-1,Biden,democrat,60.11,20201214
+11/3/2020,Maine 1st CD,ME-1,Trump,republican,37.02,20201214
+11/3/2020,Maine 1st CD,ME-1,Jorgensen,libertarian,1.66,20201214
+11/3/2020,Maine 1st CD,ME-1,Hawkins,green,1.05,20201214
+11/3/2020,Maine 2nd CD,ME-2,Trump,republican,52.26,20201214
+11/3/2020,Maine 2nd CD,ME-2,Biden,democrat,44.82,20201214
+11/3/2020,Maine 2nd CD,ME-2,Jorgensen,libertarian,1.81,20201214
+11/3/2020,Maryland,MD,Biden,democrat,65.36,20201214
+11/3/2020,Maryland,MD,Trump,republican,32.15,20201214
+11/3/2020,Maryland,MD,Jorgensen,libertarian,1.10,20201214
+11/3/2020,Massachusetts,MA,Biden,democrat,65.60,20201214
+11/3/2020,Massachusetts,MA,Trump,republican,32.14,20201214
+11/3/2020,Massachusetts,MA,Jorgensen,libertarian,1.29,20201214
+11/3/2020,Michigan,MI,Biden,democrat,50.62,20201214
+11/3/2020,Michigan,MI,Trump,republican,47.84,20201214
+11/3/2020,Michigan,MI,Jorgensen,libertarian,1.09,20201214
+11/3/2020,Minnesota,MN,Biden,democrat,52.40,20201214
+11/3/2020,Minnesota,MN,Trump,republican,45.28,20201214
+11/3/2020,Minnesota,MN,Jorgensen,libertarian,1.07,20201214
+11/3/2020,Mississippi,MS,Trump,republican,57.60,20201214
+11/3/2020,Mississippi,MS,Biden,democrat,41.06,20201214
+11/3/2020,Mississippi,MS,Jorgensen,libertarian,0.61,20201214
+11/3/2020,Missouri,MO,Trump,republican,56.80,20201214
+11/3/2020,Missouri,MO,Biden,democrat,41.41,20201214
+11/3/2020,Missouri,MO,Jorgensen,libertarian,1.36,20201214
+11/3/2020,Montana,MT,Trump,republican,56.92,20201214
+11/3/2020,Montana,MT,Biden,democrat,40.55,20201214
+11/3/2020,Montana,MT,Jorgensen,libertarian,2.53,20201214
+11/3/2020,Nebraska,NE,Trump,republican,58.51,20201214
+11/3/2020,Nebraska,NE,Biden,democrat,39.36,20201214
+11/3/2020,Nebraska,NE,Jorgensen,libertarian,2.13,20201214
+11/3/2020,Nebraska 1st CD,NE-1,Trump,republican,56.01,20201214
+11/3/2020,Nebraska 1st CD,NE-1,Biden,democrat,41.09,20201214
+11/3/2020,Nebraska 1st CD,NE-1,Jorgensen,libertarian,2.34,20201214
+11/3/2020,Nebraska 2nd CD,NE-2,Biden,democrat,52.30,20201214
+11/3/2020,Nebraska 2nd CD,NE-2,Trump,republican,45.66,20201214
+11/3/2020,Nebraska 2nd CD,NE-2,Jorgensen,libertarian,2.04,20201214
+11/3/2020,Nebraska 3rd CD,NE-3,Trump,republican,75.59,20201214
+11/3/2020,Nebraska 3rd CD,NE-3,Biden,democrat,22.41,20201214
+11/3/2020,Nebraska 3rd CD,NE-3,Jorgensen,libertarian,2.00,20201214
+11/3/2020,Nevada,NV,Biden,democrat,50.06,20201214
+11/3/2020,Nevada,NV,Trump,republican,47.67,20201214
+11/3/2020,Nevada,NV,Jorgensen,libertarian,1.05,20201214
+11/3/2020,New Hampshire,NH,Biden,democrat,52.78,20201214
+11/3/2020,New Hampshire,NH,Trump,republican,45.42,20201214
+11/3/2020,New Hampshire,NH,Jorgensen,libertarian,1.64,20201214
+11/3/2020,New Jersey,NJ,Biden,democrat,57.33,20201214
+11/3/2020,New Jersey,NJ,Trump,republican,41.40,20201214
+11/3/2020,New Jersey,NJ,Jorgensen,libertarian,0.70,20201214
+11/3/2020,New Mexico,NM,Biden,democrat,54.29,20201214
+11/3/2020,New Mexico,NM,Trump,republican,43.50,20201214
+11/3/2020,New Mexico,NM,Jorgensen,libertarian,1.36,20201214
+11/3/2020,New York,NY,Biden,democrat,60.86,20201214
+11/3/2020,New York,NY,Trump,republican,37.75,20201214
+11/3/2020,New York,NY,Jorgensen,libertarian,0.70,20201214
+11/3/2020,North Carolina,NC,Trump,republican,49.93,20201214
+11/3/2020,North Carolina,NC,Biden,democrat,48.59,20201214
+11/3/2020,North Carolina,NC,Jorgensen,libertarian,0.88,20201214
+11/3/2020,North Dakota,ND,Trump,republican,65.11,20201214
+11/3/2020,North Dakota,ND,Biden,democrat,31.76,20201214
+11/3/2020,North Dakota,ND,Jorgensen,libertarian,2.60,20201214
+11/3/2020,Ohio,OH,Trump,republican,53.27,20201214
+11/3/2020,Ohio,OH,Biden,democrat,45.24,20201214
+11/3/2020,Ohio,OH,Jorgensen,libertarian,1.14,20201214
+11/3/2020,Oklahoma,OK,Trump,republican,65.37,20201214
+11/3/2020,Oklahoma,OK,Biden,democrat,32.29,20201214
+11/3/2020,Oklahoma,OK,Jorgensen,libertarian,1.58,20201214
+11/3/2020,Oregon,OR,Biden,democrat,56.45,20201214
+11/3/2020,Oregon,OR,Trump,republican,40.37,20201214
+11/3/2020,Oregon,OR,Jorgensen,libertarian,1.75,20201214
 11/3/2020,Pennsylvania,PA,Biden,democrat,50.0,20201214
 11/3/2020,Pennsylvania,PA,Trump,republican,48.8,20201214
-11/3/2020,Rhode Island,RI,Biden,democrat,59.4,20201214
-11/3/2020,Rhode Island,RI,Trump,republican,38.6,20201214
-11/3/2020,South Carolina,SC,Trump,republican,55.1,20201214
-11/3/2020,South Carolina,SC,Biden,democrat,43.4,20201214
-11/3/2020,South Dakota,SD,Trump,republican,61.8,20201214
-11/3/2020,South Dakota,SD,Biden,democrat,35.6,20201214
-11/3/2020,Tennessee,TN,Trump,republican,60.7,20201214
-11/3/2020,Tennessee,TN,Biden,democrat,37.5,20201214
-11/3/2020,Texas,TX,Trump,republican,52.0,20201214
-11/3/2020,Texas,TX,Biden,democrat,46.5,20201214
-11/3/2020,Utah,UT,Trump,republican,58.1,20201214
-11/3/2020,Utah,UT,Biden,democrat,37.6,20201214
-11/3/2020,Vermont,VT,Biden,democrat,66.1,20201214
-11/3/2020,Vermont,VT,Trump,republican,30.7,20201214
-11/3/2020,Virginia,VA,Biden,democrat,54.1,20201214
-11/3/2020,Virginia,VA,Trump,republican,44.0,20201214
-11/3/2020,Washington,WA,Biden,democrat,58.0,20201214
-11/3/2020,Washington,WA,Trump,republican,38.8,20201214
-11/3/2020,West Virginia,WV,Trump,republican,68.6,20201214
-11/3/2020,West Virginia,WV,Biden,democrat,29.7,20201214
+11/3/2020,Pennsylvania,PA,Jorgensen,libertarian,1.15,20201214
+11/3/2020,Rhode Island,RI,Biden,democrat,59.38,20201214
+11/3/2020,Rhode Island,RI,Trump,republican,38.61,20201214
+11/3/2020,Rhode Island,RI,Jorgensen,libertarian,0.98,20201214
+11/3/2020,South Carolina,SC,Trump,republican,55.11,20201214
+11/3/2020,South Carolina,SC,Biden,democrat,43.43,20201214
+11/3/2020,South Carolina,SC,Jorgensen,libertarian,1.11,20201214
+11/3/2020,South Dakota,SD,Trump,republican,61.77,20201214
+11/3/2020,South Dakota,SD,Biden,democrat,35.60,20201214
+11/3/2020,South Dakota,SD,Jorgensen,libertarian,2.63,20201214
+11/3/2020,Tennessee,TN,Trump,republican,60.70,20201214
+11/3/2020,Tennessee,TN,Biden,democrat,37.50,20201214
+11/3/2020,Tennessee,TN,Jorgensen,libertarian,0.98,20201214
+11/3/2020,Texas,TX,Trump,republican,52.06,20201214
+11/3/2020,Texas,TX,Biden,democrat,46.48,20201214
+11/3/2020,Texas,TX,Jorgensen,libertarian,1.12,20201214
+11/3/2020,Utah,UT,Trump,republican,58.13,20201214
+11/3/2020,Utah,UT,Biden,democrat,37.65,20201214
+11/3/2020,Utah,UT,Jorgensen,libertarian,2.58,20201214
+11/3/2020,Vermont,VT,Biden,democrat,66.09,20201214
+11/3/2020,Vermont,VT,Trump,republican,30.67,20201214
+11/3/2020,Vermont,VT,Jorgensen,libertarian,0.98,20201214
+11/3/2020,Virginia,VA,Biden,democrat,54.11,20201214
+11/3/2020,Virginia,VA,Trump,republican,44.00,20201214
+11/3/2020,Virginia,VA,Jorgensen,libertarian,1.45,20201214
+11/3/2020,Washington,WA,Biden,democrat,57.97,20201214
+11/3/2020,Washington,WA,Trump,republican,38.77,20201214
+11/3/2020,Washington,WA,Jorgensen,libertarian,1.97,20201214
+11/3/2020,West Virginia,WV,Trump,republican,68.62,20201214
+11/3/2020,West Virginia,WV,Biden,democrat,29.69,20201214
+11/3/2020,West Virginia,WV,Jorgensen,libertarian,1.34,20201214
 11/3/2020,Wisconsin,WI,Biden,democrat,49.45,20201214
-11/3/2020,Wisconsin,WI,Trump,republican,48.83,20201214
-11/3/2020,Wyoming,WY,Trump,republican,69.9,20201214
-11/3/2020,Wyoming,WY,Biden,democrat,26.6,20201214
+11/3/2020,Wisconsin,WI,Trump,republican,48.82,20201214
+11/3/2020,Wisconsin,WI,Jorgensen,libertarian,1.17,20201214
+11/3/2020,Wyoming,WY,Trump,republican,69.94,20201214
+11/3/2020,Wyoming,WY,Biden,democrat,26.55,20201214
+11/3/2020,Wyoming,WY,Jorgensen,libertarian,2.08,20201214

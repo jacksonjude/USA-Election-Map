@@ -24,6 +24,8 @@ class MapSource
     var self = this
 
     var loadMapPromise = new Promise(async (resolve, reject) => {
+      reloadCache = reloadCache ? true : !(await CSVDatabase.isSourceUpdated(self.id))
+
       if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
       {
         var textData
@@ -697,8 +699,11 @@ const reformPartyID = ReformParty.getID()
 const greenPartyID = GreenParty.getID()
 const libertarianPartyID = LibertarianParty.getID()
 
+const independentRNPartyID = IndependentRNParty.getID()
+
 const independent2016EMPartyID = Independent2016EMParty.getID()
 const independent1980JAPartyID = Independent1980JAParty.getID()
+const independent1976EMPartyID = Independent1976EMParty.getID()
 
 const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID, tossup: tossupPartyID}
 const partyCandiateLastNames = {"Biden":democraticPartyID, "Trump":republicanPartyID}
@@ -710,18 +715,18 @@ partyIDToCandidateLastNames[democraticPartyID] = "Biden"
 partyIDToCandidateLastNames[republicanPartyID] = "Trump"
 
 const electionYearToCandidateData = {
-  1976: {"Carter":democraticPartyID, "Ford":republicanPartyID},
-  1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID, "Anderson":independent1980JAPartyID},
-  1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID},
-  1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID},
-  1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID, "Perot":reformPartyID},
-  1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID, "Perot":reformPartyID},
-  2000: {"Gore":democraticPartyID, "Bush":republicanPartyID, "Nader":greenPartyID},
-  2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID},
-  2008: {"Obama":democraticPartyID, "McCain":republicanPartyID},
-  2012: {"Obama":democraticPartyID, "Romney":republicanPartyID},
-  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID, "Johnson":libertarianPartyID, "McMullin":independent2016EMPartyID},
-  2020: {"Biden":democraticPartyID, "Trump":republicanPartyID}
+  1976: {"Carter":democraticPartyID, "Ford":republicanPartyID, "McCarthy":independent1976EMPartyID},
+  1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID, "Anderson":independent1980JAPartyID, "Clark":libertarianPartyID},
+  1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID, "Bergland":libertarianPartyID},
+  1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID, "Paul":libertarianPartyID},
+  1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID, "Perot":reformPartyID, "Marrou":libertarianPartyID},
+  1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID, "Perot":reformPartyID, "Nader":greenPartyID, "Browne":libertarianPartyID},
+  2000: {"Gore":democraticPartyID, "Bush":republicanPartyID, "Nader":greenPartyID, "Buchanan":reformPartyID, "Browne":libertarianPartyID},
+  2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID, "Nader":independentRNPartyID, "Badnarik":libertarianPartyID},
+  2008: {"Obama":democraticPartyID, "McCain":republicanPartyID, "Nader":independentRNPartyID, "Barr":libertarianPartyID},
+  2012: {"Obama":democraticPartyID, "Romney":republicanPartyID, "Johnson":libertarianPartyID, "Stein":greenPartyID},
+  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID, "Johnson":libertarianPartyID, "Stein":greenPartyID, "McMullin":independent2016EMPartyID},
+  2020: {"Biden":democraticPartyID, "Trump":republicanPartyID, "Jorgensen":libertarianPartyID, "Hawkins":greenPartyID}
 }
 
 const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
@@ -832,6 +837,7 @@ var CookProjectionMapSource = new MapSource(
 var PastElectionResultMapSource = new MapSource(
   "Past Elections",
   "https://map.jacksonjude.com/csv-sources/historical-president.csv",
+  //"./csv-sources/historical-president.csv",
   "https://en.wikipedia.org/wiki/",
   "./assets/wikipedia-large.png",
   {
@@ -902,7 +908,7 @@ var NYTElectionResultsMapSource = new MapSource(
 
 var CountyPastElectionMapSource = new MapSource(
   "County Election",
-  "/Users/jackson/Documents/GitHub/usa-2020/csv-sources/county-president.csv",
+  "./csv-sources/county-president.csv",
   null,
   null,
   {

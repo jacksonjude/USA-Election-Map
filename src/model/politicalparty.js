@@ -101,6 +101,14 @@ var ReformParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var IndependentRNParty = new PoliticalParty(
+  "INDRN",
+  ["Independent"],
+  "Nader",
+  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  defaultMarginNames
+)
+
 var Independent2016EMParty = new PoliticalParty(
   "IND2016EM",
   ["Independent"],
@@ -113,6 +121,14 @@ var Independent1980JAParty = new PoliticalParty(
   "IND1980JA",
   ["Independent"],
   "Anderson",
+  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  defaultMarginNames
+)
+
+var Independent1976EMParty = new PoliticalParty(
+  "IND1976EM",
+  ["Independent"],
+  "McCarthy",
   {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
   defaultMarginNames
 )
