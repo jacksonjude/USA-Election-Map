@@ -86,7 +86,33 @@
             </div>
           </div>
         </div>
-        <a id="clearMapButton">Clear</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="clearMapButton">Clear</a>
+          <div id="fillDropdownContent" class="dropdown-content" style="min-width: 175px">
+            <div id="fillDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden; display: none;">
+              <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(1)" style="display:flex; justify-content:center;">
+                Add +1 to all
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(5)" style="display:flex; justify-content:center;">
+                Add +5 to all
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(15)" style="display:flex; justify-content:center;">
+                Add +15 to all
+              </a>
+              <!-- <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(getStateMarginAvg())" style="display:flex; justify-content:center;">
+                Add state avg to all
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(this.value)" style="display:flex; justify-content:center;">
+                Add custom to all
+              </a> -->
+            </div>
+          </div>
+        </div>
       </div>
       <div class="loader" id="loader"></div>
       <div style="display: inline-block; margin-top: 4px; margin-right: 8px; float: right;">

@@ -1656,3 +1656,34 @@ async function loadComparePreset(comparePresetNum)
     break
   }
 }
+
+function addConstantMarginToMap(marginToAdd)
+{
+  if (currentMapState != kEditing || selectedParty == null || selectedParty.getID() == TossupParty.getID()) { return }
+
+  for (regionID in displayRegionDataArray)
+  {
+    if (displayRegionDataArray[regionID].partyID != selectedParty.getID())
+    {
+      displayRegionDataArray[regionID].margin -= marginToAdd
+
+      if (displayRegionDataArray[regionID].margin < 0)
+      {
+        displayRegionDataArray[regionID].margin *= -1
+        displayRegionDataArray[regionID].partyID = selectedParty.getID()
+      }
+    }
+    else
+    {
+      displayRegionDataArray[regionID].margin += marginToAdd
+    }
+
+    if (displayRegionDataArray[regionID].margin > 100)
+    {
+      displayRegionDataArray[regionID].margin = 100
+    }
+  }
+
+  CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+  loadDataMap()
+}
