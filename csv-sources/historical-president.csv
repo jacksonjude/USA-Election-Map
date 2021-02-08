@@ -1577,6 +1577,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/1992,Wyoming,WY,Fulani,independent,0.13507834544035500,20171015
 11/5/1996,Alabama,AL,Dole,republican,50.121843205163900,20171015
 11/5/1996,Alabama,AL,Clinton,democrat,43.156087695824100,20171015
+11/5/1996,Alabama,AL,Perot,independent,6.01,JJCooley
 11/5/1996,Alabama,AL,Browne,libertarian,0.34477162627277100,20171015
 11/5/1996,Alabama,AL,Hagelin,natural law,0.1106006521332500,20171015
 11/5/1996,Alaska,AK,Dole,republican,50.801258173992200,20171015
@@ -1744,6 +1745,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,Minnesota,MN,White,socialist equality party,0.015826739618662200,20171015
 11/5/1996,Mississippi,MS,Dole,republican,49.206752310492600,20171015
 11/5/1996,Mississippi,MS,Clinton,democrat,44.081100220728800,20171015
+11/5/1996,Mississippi,MS,Perot,independent,5.84,JJCooley
 11/5/1996,Mississippi,MS,Browne,libertarian,0.3142560834674900,20171015
 11/5/1996,Mississippi,MS,Phillips,u.s. taxpayers party,0.25887809795079100,20171015
 11/5/1996,Mississippi,MS,Hagelin,natural law,0.16188271725790600,20171015
@@ -1784,6 +1786,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,New Hampshire,NH,Phillips,u.s. taxpayers party,0.27064198937971800,20171015
 11/5/1996,New Jersey,NJ,Clinton,democrat,53.720292861183500,20171015
 11/5/1996,New Jersey,NJ,Dole,republican,35.863108203884400,20171015
+11/5/1996,New Jersey,NJ,Perot,independent,8.52,JJCooley
 11/5/1996,New Mexico,NM,Clinton,democrat,49.183202235673700,20171015
 11/5/1996,New Mexico,NM,Dole,republican,41.856119868938300,20171015
 11/5/1996,New Mexico,NM,Perot,reform party,5.8008466499063100,20171015
@@ -1850,8 +1853,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,Rhode Island,RI,Moorehead,workers world,0.047662121681909100,20171015
 11/5/1996,South Carolina,SC,Dole,republican,49.847676280797300,20171015
 11/5/1996,South Carolina,SC,Clinton,democrat,44.006252923450400,20171015
-11/5/1996,South Carolina,SC,Perot,patriot party,3.2093181774710400,20171015
-11/5/1996,South Carolina,SC,Perot,reform party,2.3877960183692700,20171015
+11/5/1996,South Carolina,SC,Perot,reform party,5.5971141958,JJCooley
 11/5/1996,South Carolina,SC,Browne,libertarian,0.37133253693763200,20171015
 11/5/1996,South Carolina,SC,Phillips,u.s. taxpayers party,0.17762406297438100,20171015
 11/5/1996,South Dakota,SD,Dole,republican,46.488855125900900,20171015
@@ -1859,6 +1861,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,South Dakota,SD,Browne,libertarian,0.45456510595196200,20171015
 11/5/1996,Tennessee,TN,Clinton,democrat,47.998711792640900,20171015
 11/5/1996,Tennessee,TN,Dole,republican,45.59039757563600,20171015
+11/5/1996,Tennessee,TN,Perot,independent,5.59,JJCooley
 11/5/1996,Texas,TX,Dole,republican,48.758741645050900,20171015
 11/5/1996,Texas,TX,Clinton,democrat,43.831771937065100,20171015
 11/5/1996,Texas,TX,Perot,independent,6.7455633322427400,20171015
@@ -1917,6 +1920,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,Wyoming,WY,Hagelin,natural law,0.27508495965893200,20171015
 11/7/2000,Alabama,AL,Bush,republican,56.483755353267700,20171015
 11/7/2000,Alabama,AL,Gore,democrat,41.566502947898100,20171015
+11/7/2000,Alabama,AL,Nader,green,1.0996403948,JJCooley
 11/7/2000,Alabama,AL,Browne,libertarian,0.35366374757542600,20171015
 11/7/2000,Alaska,AK,Bush,republican,58.620955315870600,20171015
 11/7/2000,Alaska,AK,Gore,democrat,27.666339823504700,20171015
@@ -2021,6 +2025,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Iowa,IA,McReynolds,socialist,0.0079082232217953600,20171015
 11/7/2000,Kansas,KS,Bush,republican,58.041663246957700,20171015
 11/7/2000,Kansas,KS,Gore,democrat,37.238392264245300,20171015
+11/7/2000,Kansas,KS,Nader,green,3.3655532094,JJCooley
 11/7/2000,Kansas,KS,Buchanan,reform party,0.68736150178695300,20171015
 11/7/2000,Kansas,KS,Browne,libertarian,0.42202317443500200,20171015
 11/7/2000,Kansas,KS,Phillips,constitution party,0.11695404657270500,20171015
@@ -2118,6 +2123,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,New Hampshire,NH,Buchanan,independence,0.45951279343362400,20171015
 11/7/2000,New Jersey,NJ,Gore,democrat,56.125608915087900,20171015
 11/7/2000,New Jersey,NJ,Bush,republican,40.2912438590800,20171015
+11/7/2000,New Jersey,NJ,Nader,green,2.966655016,JJCooley
 11/7/2000,New Mexico,NM,Gore,democrat,47.908554054844200,20171015
 11/7/2000,New Mexico,NM,Bush,republican,47.847411899332600,20171015
 11/7/2000,New Mexico,NM,Nader,green,3.5500872862739200,20171015
@@ -2143,10 +2149,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,North Carolina,NC,Buchanan,reform party,0.30442643027934900,20171015
 11/7/2000,North Dakota,ND,Bush,republican,60.658581261101200,20171015
 11/7/2000,North Dakota,ND,Gore,democrat,33.055339698046200,20171015
+11/7/2000,North Dakota,ND,Nader,green,3.2205884348,JJCooley
 11/7/2000,North Dakota,ND,Buchanan,reform party,2.528308170515100,20171015
 11/7/2000,North Dakota,ND,Phillips,constitution party,0.12939886767317900,20171015
 11/7/2000,Ohio,OH,Bush,republican,49.986473835165400,20171015
 11/7/2000,Ohio,OH,Gore,democrat,46.440428090356500,20171015
+11/7/2000,Ohio,OH,Nader,green,2.5065302027,JJCooley
 11/7/2000,Ohio,OH,Browne,libertarian,0.28653776543503400,20171015
 11/7/2000,Ohio,OH,Hagelin,natural law,0.13145475604200600,20171015
 11/7/2000,Oklahoma,OK,Bush,republican,60.307852108482300,20171015
@@ -2237,6 +2245,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Wisconsin,WI,Browne,libertarian,0.25552151595066100,20171015
 11/7/2000,Wyoming,WY,Bush,republican,69.222743138410900,20171015
 11/7/2000,Wyoming,WY,Gore,democrat,28.298382040556600,20171015
+11/7/2000,Wyoming,WY,Nader,green,2.12,JJCooley
 11/7/2000,Wyoming,WY,Buchanan,reform party,1.2745290699306600,20171015
 11/7/2000,Wyoming,WY,Browne,libertarian,0.67516352713287100,20171015
 11/7/2000,Wyoming,WY,Phillips,independent,0.33687993037814800,20171015
@@ -3333,6 +3342,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,North Dakota,ND,De La Fuente,american delta party,0.10570333372052500,20171015
 11/8/2016,Ohio,OH,Trump,republican,51.687650675786200,20171015
 11/8/2016,Ohio,OH,Clinton,democrat,43.5580762767200,20171015
+11/8/2016,Ohio,OH,Johnson,libertarian,3.17,JJCooley
 11/8/2016,Ohio,OH,Stein,green,0.84182860798178900,20171015
 11/8/2016,Oklahoma,OK,Trump,republican,65.322864819627400,20171015
 11/8/2016,Oklahoma,OK,Clinton,democrat,28.931680284543900,20171015
@@ -3364,13 +3374,14 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,South Dakota,SD,Castle,constitution party,1.0981023688640400,20171015
 11/8/2016,Tennessee,TN,Trump,republican,60.722033694214600,20171015
 11/8/2016,Tennessee,TN,Clinton,democrat,34.716332798650100,20171015
+1//8/2016,Tennessee,TN,Johnson,libertarian,2.81,JJCooley
 11/8/2016,Texas,TX,Trump,republican,52.234685579335400,20171015
 11/8/2016,Texas,TX,Clinton,democrat,43.23525798101200,20171015
 11/8/2016,Texas,TX,Johnson,libertarian,3.1607186617886500,20171015
 11/8/2016,Texas,TX,Stein,green,0.7978168907774200,20171015
 11/8/2016,Utah,UT,Trump,republican,45.540816588100400,20171015
 11/8/2016,Utah,UT,Clinton,democrat,27.46126859226900,20171015
-11/8/2016,Utah,UT,McMullin,no party affiliation,22.545405045623800,20171015
+11/8/2016,Utah,UT,McMullin,no party affiliation,21.538230381,JJCooley
 11/8/2016,Utah,UT,Johnson,libertarian,3.5010523133657500,20171015
 11/8/2016,Utah,UT,Castle,constitution party,0.70996900073100600,20171015
 11/8/2016,Utah,UT,Kopitke,independent american,0.24148845990999900,20171015
