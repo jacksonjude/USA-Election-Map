@@ -356,7 +356,7 @@ function addDivEventListeners()
     $(this).css('opacity', "0")
 
     setTimeout(function() {
-      if ($("#stateboxcontainer").css('opacity') == "0") { $("#stateboxcontainer").hide() }
+      if ($("#stateboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#stateboxcontainer").hide() }
     }, 200)
   })
 }
