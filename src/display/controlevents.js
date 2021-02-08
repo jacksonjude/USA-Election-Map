@@ -504,8 +504,8 @@ document.addEventListener('mousemove', function(e) {
   }
   if (true)//($("#stateboxcontainer").css('display') != "none")
   {
-    $("#stateboxcontainer").css("left", e.x+5)
-    $("#stateboxcontainer").css("top", e.y+5)
+    $("#stateboxcontainer").css("left", e.pageX+5)
+    $("#stateboxcontainer").css("top", e.pageY+5)
   }
 })
 
