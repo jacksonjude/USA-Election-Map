@@ -502,7 +502,7 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
-  if ($("#stateboxcontainer").css('display') != "none")
+  if (true)//($("#stateboxcontainer").css('display') != "none")
   {
     $("#stateboxcontainer").css("left", e.x+5)
     $("#stateboxcontainer").css("top", e.y+5)
