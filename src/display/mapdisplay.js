@@ -357,7 +357,6 @@ function addDivEventListeners()
 
     setTimeout(function() {
       if ($("#stateboxcontainer").css('opacity') == "0") { $("#stateboxcontainer").hide() }
-      console.log("test1", $("#stateboxcontainer").css('opacity'))
     }, 200)
   })
 }
@@ -628,6 +627,7 @@ function displayDataMap(dateIndex)
     regionData.partyID = currentMapDataForDate[regionNum].partyID
     regionData.chanceIncumbent = currentMapDataForDate[regionNum].chanceIncumbent
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
+    regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
@@ -980,6 +980,8 @@ function toggleEditing(stateToSet)
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
 
+    $("#fillDropdownContainer").css('display', "block")
+
     var currentMapIsCustom = (currentMapSource.getID() == CustomMapSource.getID())
     CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
 
@@ -1006,6 +1008,8 @@ function toggleEditing(stateToSet)
 
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
+
+    $("#fillDropdownContainer").css('display', "none")
 
     if (currentMapSource.getID() == CustomMapSource.getID())
     {
@@ -1304,6 +1308,25 @@ function updateStateBox(regionID)
     regionMarginString += decimalPadding(Math.round(regionData.chanceIncumbent*1000)/10)
     regionMarginString += "%</span></span>"
   }
+
+  if (regionData.partyVotesharePercentages)
+  {
+    var sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
+      return voteData2.voteshare - voteData1.voteshare
+    })
+
+    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>"
+    regionMarginString += "Voteshare<br>"
+
+    sortedPercentages.forEach(voteData => {
+      regionMarginString += "<span style='color: " + politicalParties[voteData.partyID].getMarginColors().lean + ";'>" + voteData.candidate + ": "
+      regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
+      regionMarginString += "%</span><br>"
+    })
+
+    regionMarginString += "</span>"
+  }
+
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
   $("#statebox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")

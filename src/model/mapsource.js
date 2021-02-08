@@ -404,7 +404,7 @@ var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, c
 
       var margin = columnMap.margin ? parseFloat(regionRow[columnMap.margin]) : null
 
-      if (margin == null)
+      if (margin == null && columnMap.percentIncumbent && columnMap.percentChallenger)
       {
         margin = parseFloat(regionRow[columnMap.percentIncumbent]) - parseFloat(regionRow[columnMap.percentChallenger])
       }
@@ -459,9 +459,11 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
     {
       var regionToFind = regionNames[regionNum]
 
+      var isMultipleElections = false
       var candidateArrayToTest = Object.keys(candidateNameToPartyIDMap)
       if (candidateArrayToTest.includes(currentMapDate.getFullYear().toString()))
       {
+        isMultipleElections = true
         candidateArrayToTest = Object.keys(candidateNameToPartyIDMap[currentMapDate.getFullYear()])
       }
 
@@ -488,12 +490,23 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
       var incumbentWinChance
       var challengerWinChance
 
+      var partyVotesharePercentages = null
+
       for (var rowNum in mapDataRows)
       {
         var partyID = candidateNameToPartyIDMap[mapDataRows[rowNum][columnMap.candidateName]]
         if (Object.keys(candidateNameToPartyIDMap).includes(currentMapDate.getFullYear().toString()))
         {
           partyID = candidateNameToPartyIDMap[currentMapDate.getFullYear().toString()][mapDataRows[rowNum][columnMap.candidateName]]
+        }
+
+        if (isMultipleElections && mapDataRows[rowNum][columnMap.percentAdjusted] >= 1)
+        {
+          if (partyVotesharePercentages == null)
+          {
+            partyVotesharePercentages = []
+          }
+          partyVotesharePercentages.push({partyID: partyID, candidate: mapDataRows[rowNum][columnMap.candidateName], voteshare: mapDataRows[rowNum][columnMap.percentAdjusted]})
         }
 
         if (!(mapDates[dateNum] in candidateNameData))
@@ -545,7 +558,29 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
         greaterMarginPartyID = partyIDs.incumbent
       }
 
-      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: greaterMarginPartyID, chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance, partyCandidates: candidateNameToPartyIDMap}
+      var compactPartyVotesharePercentages = []
+      partyVotesharePercentages.forEach(voteData => {
+        var compactVoteDataIndex
+        var compactVoteData = compactPartyVotesharePercentages.find((compactVoteData, index) => {
+          if (compactVoteData.candidate == voteData.candidate)
+          {
+            compactVoteDataIndex = index
+            return true
+          }
+          return false
+        })
+        if (compactVoteData)
+        {
+          compactVoteData.voteshare = parseInt(compactVoteData.voteshare)+parseInt(voteData.voteshare)
+          compactPartyVotesharePercentages[compactVoteDataIndex] = compactVoteData
+        }
+        else
+        {
+          compactPartyVotesharePercentages.push(voteData)
+        }
+      })
+
+      filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: greaterMarginPartyID, chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance, partyCandidates: candidateNameToPartyIDMap, partyVotesharePercentages: compactPartyVotesharePercentages}
     }
 
     filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -654,6 +689,13 @@ const democraticPartyID = DemocraticParty.getID()
 const republicanPartyID = RepublicanParty.getID()
 const tossupPartyID = TossupParty.getID()
 
+const reformPartyID = ReformParty.getID()
+const greenPartyID = GreenParty.getID()
+const libertarianPartyID = LibertarianParty.getID()
+
+const independent2016EMPartyID = Independent2016EMParty.getID()
+const independent1980JAPartyID = Independent1980JAParty.getID()
+
 const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID, tossup: tossupPartyID}
 const partyCandiateLastNames = {"Biden":democraticPartyID, "Trump":republicanPartyID}
 const partyCandiateFullNames = {"Joseph R. Biden Jr.":democraticPartyID, "Donald Trump":republicanPartyID}
@@ -665,16 +707,16 @@ partyIDToCandidateLastNames[republicanPartyID] = "Trump"
 
 const electionYearToCandidateData = {
   1976: {"Carter":democraticPartyID, "Ford":republicanPartyID},
-  1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID},
+  1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID, "Anderson":independent1980JAPartyID},
   1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID},
   1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID},
-  1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID},
-  1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID},
-  2000: {"Gore":democraticPartyID, "Bush":republicanPartyID},
+  1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID, "Perot":reformPartyID},
+  1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID, "Perot":reformPartyID},
+  2000: {"Gore":democraticPartyID, "Bush":republicanPartyID, "Nader":greenPartyID},
   2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID},
   2008: {"Obama":democraticPartyID, "McCain":republicanPartyID},
   2012: {"Obama":democraticPartyID, "Romney":republicanPartyID},
-  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID},
+  2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID, "Johnson":libertarianPartyID, "McMullin":independent2016EMPartyID},
   2020: {"Biden":democraticPartyID, "Trump":republicanPartyID}
 }
 

@@ -50,6 +50,8 @@ class PoliticalParty
 
 const defaultMarginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
+// Main Parties
+
 var DemocraticParty = new PoliticalParty(
   "DEM",
   ["Democratic", "Democrat"],
@@ -74,9 +76,57 @@ var TossupParty = new PoliticalParty(
   defaultMarginNames
 )
 
+// Third Parties
+
+var LibertarianParty = new PoliticalParty(
+  "LIB",
+  ["Libertarian"],
+  "Jorgensen",
+  {safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
+  defaultMarginNames
+)
+
+var GreenParty = new PoliticalParty(
+  "GRN",
+  ["Green"],
+  "Hawkins",
+  {safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
+)
+
+var ReformParty = new PoliticalParty(
+  "REF",
+  ["Reform"],
+  "Perot",
+  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  defaultMarginNames
+)
+
+var Independent2016EMParty = new PoliticalParty(
+  "IND2016EM",
+  ["Independent"],
+  "McMullin",
+  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  defaultMarginNames
+)
+
+var Independent1980JAParty = new PoliticalParty(
+  "IND1980JA",
+  ["Independent"],
+  "Anderson",
+  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  defaultMarginNames
+)
+
 var politicalParties = {}
 politicalParties[DemocraticParty.getID()] = DemocraticParty
 politicalParties[RepublicanParty.getID()] = RepublicanParty
 politicalParties[TossupParty.getID()] = TossupParty
+
+politicalParties[LibertarianParty.getID()] = LibertarianParty
+politicalParties[GreenParty.getID()] = GreenParty
+politicalParties[ReformParty.getID()] = ReformParty
+politicalParties[Independent2016EMParty.getID()] = Independent2016EMParty
+politicalParties[Independent1980JAParty.getID()] = Independent1980JAParty
+
 
 var politicalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]

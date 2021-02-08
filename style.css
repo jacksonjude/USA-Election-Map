@@ -222,7 +222,7 @@ body {
 .box {
   border: 1px solid white;
   /* max-width: 200px; */
-  background-color: rgba(68,68,68,0.8);
+  background-color: rgba(68,68,68,0.9);
   color: white;
   padding-left: 10px;
   padding-right: 10px;
