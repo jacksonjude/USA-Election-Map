@@ -558,27 +558,31 @@ var doubleLinePercentFilterFunction = function(rawMapData, mapDates, columnMap, 
         greaterMarginPartyID = partyIDs.incumbent
       }
 
-      var compactPartyVotesharePercentages = []
-      partyVotesharePercentages.forEach(voteData => {
-        var compactVoteDataIndex
-        var compactVoteData = compactPartyVotesharePercentages.find((compactVoteData, index) => {
-          if (compactVoteData.candidate == voteData.candidate)
+      var compactPartyVotesharePercentages
+      if (partyVotesharePercentages)
+      {
+        compactPartyVotesharePercentages = []
+        partyVotesharePercentages.forEach(voteData => {
+          var compactVoteDataIndex
+          var compactVoteData = compactPartyVotesharePercentages.find((compactVoteData, index) => {
+            if (compactVoteData.candidate == voteData.candidate)
+            {
+              compactVoteDataIndex = index
+              return true
+            }
+            return false
+          })
+          if (compactVoteData)
           {
-            compactVoteDataIndex = index
-            return true
+            compactVoteData.voteshare = parseInt(compactVoteData.voteshare)+parseInt(voteData.voteshare)
+            compactPartyVotesharePercentages[compactVoteDataIndex] = compactVoteData
           }
-          return false
+          else
+          {
+            compactPartyVotesharePercentages.push(voteData)
+          }
         })
-        if (compactVoteData)
-        {
-          compactVoteData.voteshare = parseInt(compactVoteData.voteshare)+parseInt(voteData.voteshare)
-          compactPartyVotesharePercentages[compactVoteDataIndex] = compactVoteData
-        }
-        else
-        {
-          compactPartyVotesharePercentages.push(voteData)
-        }
-      })
+      }
 
       filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: Math.abs(marginSum), partyID: greaterMarginPartyID, chanceIncumbent: incumbentWinChance, chanceChallenger: challengerWinChance, partyCandidates: candidateNameToPartyIDMap, partyVotesharePercentages: compactPartyVotesharePercentages}
     }
