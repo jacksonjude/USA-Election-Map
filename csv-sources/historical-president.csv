@@ -64,7 +64,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Illinois,IL,Hall,communist party use,0.19592136203683700,20171015
 11/2/1976,Illinois,IL,Macbride,libertarian,0.17065280150603200,20171015
 11/2/1976,Illinois,IL,Camejo,socialist workers,0.076568186352774500,20171015
-11/2/1976,Illinois,IL,"Julius """"Jules""""",socialist labor,0.051299625821969500,20171015
+11/2/1976,Illinois,IL,Levin,socialist labor,0.051299625821969500,20171015
 11/2/1976,Illinois,IL,Larouche,u.s. labor,0.04274262795571200,20171015
 11/2/1976,Indiana,IN,Ford,republican,53.322746471070900,20171015
 11/2/1976,Indiana,IN,Carter,democrat,45.700385792947300,20171015
@@ -80,7 +80,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Iowa,IA,Camejo,socialist workers,0.020479901946606900,20171015
 11/2/1976,Iowa,IA,Larouche,u.s. labor,0.01883838308829100,20171015
 11/2/1976,Iowa,IA,Zeidler,socialist u.s.a.,0.018213042570837400,20171015
-11/2/1976,Iowa,IA,"Julius """"Jules""""",socialist labor,0.012506810349072900,20171015
+11/2/1976,Iowa,IA,Levin,socialist labor,0.012506810349072900,20171015
 11/2/1976,Kansas,KS,Ford,republican,52.487824230433900,20171015
 11/2/1976,Kansas,KS,Carter,democrat,44.936393675385900,20171015
 11/2/1976,Kansas,KS,McCarthy,independent,1.3765275175002200,20171015
@@ -121,7 +121,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Massachusetts,MA,Anderson,american,0.29655850818705600,20171015
 11/2/1976,Massachusetts,MA,Larouche,u.s. labor,0.1932046296885100,20171015
 11/2/1976,Massachusetts,MA,Macbride,libertarian,0.0052991924030777700,20171015
-11/2/1976,Massachusetts,MA,"Julius """"Jules""""",socialist labor,0.00074581226413687100,20171015
+11/2/1976,Massachusetts,MA,Levin,socialist labor,0.00074581226413687100,20171015
 11/2/1976,Michigan,MI,Ford,republican,51.860751070081800,20171015
 11/2/1976,Michigan,MI,Carter,democrat,46.465074118397700,20171015
 11/2/1976,Michigan,MI,McCarthy,independent,1.3118942707149500,20171015
@@ -129,7 +129,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Michigan,MI,Wright,human rights,0.09595819903110700,20171015
 11/2/1976,Michigan,MI,Camejo,socialist workers,0.049403136715786800,20171015
 11/2/1976,Michigan,MI,Larouche,u.s. labor,0.037408361836898400,20171015
-11/2/1976,Michigan,MI,"Julius """"Jules""""",socialist labor,0.03143835972822800,20171015
+11/2/1976,Michigan,MI,Levin,socialist labor,0.03143835972822800,20171015
 11/2/1976,Minnesota,MN,Carter,democrat,54.896301458872100,20171015
 11/2/1976,Minnesota,MN,Ford,republican,42.021743333482100,20171015
 11/2/1976,Minnesota,MN,McCarthy,mccarthy '76,1.8200644022788500,20171015
@@ -139,7 +139,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Minnesota,MN,Hall,communist party use,0.0560019816085800,20171015
 11/2/1976,Minnesota,MN,Wright,people's,0.032565254873121200,20171015
 11/2/1976,Minnesota,MN,Larouche,international development bank,0.027847139206464200,20171015
-11/2/1976,Minnesota,MN,"Julius """"Jules""""",industrial government party,0.018975030398511500,20171015
+11/2/1976,Minnesota,MN,Levin,industrial government party,0.018975030398511500,20171015
 11/2/1976,Minnesota,MN,Zeidler,socialist,0.018154488543440800,20171015
 11/2/1976,Mississippi,MS,Carter,democrat,49.627012324470600,20171015
 11/2/1976,Mississippi,MS,Ford,republican,47.742162183266300,20171015
@@ -175,13 +175,13 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,New Hampshire,NH,Macbride,libertarian,0.27559646317872300,20171015
 11/2/1976,New Hampshire,NH,Larouche,u.s. labor,0.054765963836797400,20171015
 11/2/1976,New Hampshire,NH,Camejo,socialist workers,0.047404947192066600,20171015
-11/2/1976,New Hampshire,NH,"Julius """"Jules""""",socialist labor,0.019433083942089400,20171015
+11/2/1976,New Hampshire,NH,Levin,socialist labor,0.019433083942089400,20171015
 11/2/1976,New Jersey,NJ,Ford,republican,50.081340944616500,20171015
 11/2/1976,New Jersey,NJ,Carter,democrat,47.923915033876600,20171015
 11/2/1976,New Jersey,NJ,McCarthy,independent,1.0853310297790100,20171015
 11/2/1976,New Jersey,NJ,Macbride,libertarian,0.31345456186025300,20171015
 11/2/1976,New Jersey,NJ,Maddox,american independent party,0.25596522376057900,20171015
-11/2/1976,New Jersey,NJ,"Julius """"Jules""""",socialist labor,0.12227680336722300,20171015
+11/2/1976,New Jersey,NJ,Levin,socialist labor,0.12227680336722300,20171015
 11/2/1976,New Jersey,NJ,Hall,communist party use,0.055134033422768600,20171015
 11/2/1976,New Jersey,NJ,Larouche,u.s. labor,0.054735953759066300,20171015
 11/2/1976,New Jersey,NJ,Camejo,socialist workers,0.039277193485293600,20171015
@@ -226,7 +226,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Ohio,OH,Hall,communist party use,0.19017354765505300,20171015
 11/2/1976,Ohio,OH,Camejo,socialist workers,0.11757819570383400,20171015
 11/2/1976,Ohio,OH,Larouche,u.s. labor,0.10616826940855200,20171015
-11/2/1976,Ohio,OH,"Julius """"Jules""""",socialist labor,0.0016543176718106200,20171015
+11/2/1976,Ohio,OH,Levin,socialist labor,0.0016543176718106200,20171015
 11/2/1976,Ohio,OH,Bubar,prohibition,0.0015083484654743900,20171015
 11/2/1976,Oklahoma,OK,Ford,republican,49.961776185144300,20171015
 11/2/1976,Oklahoma,OK,Carter,democrat,48.74722019023100,20171015
@@ -247,7 +247,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Rhode Island,RI,Macbride,libertarian,0.17414219745533200,20171015
 11/2/1976,Rhode Island,RI,Camejo,socialist workers,0.11252265066344500,20171015
 11/2/1976,Rhode Island,RI,Hall,communist party use,0.081347543986127100,20171015
-11/2/1976,Rhode Island,RI,"Julius """"Jules""""",socialist labor,0.04578843793231100,20171015
+11/2/1976,Rhode Island,RI,Levin,socialist labor,0.04578843793231100,20171015
 11/2/1976,South Carolina,SC,Carter,democrat,56.169517669823600,20171015
 11/2/1976,South Carolina,SC,Ford,republican,43.129371043244100,20171015
 11/2/1976,South Carolina,SC,Anderson,american,0.37329472465776100,20171015
@@ -299,7 +299,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Washington,WA,Camejo,socialist workers,0.058179377628518600,20171015
 11/2/1976,Washington,WA,Larouche,u.s. labor,0.058050804418289800,20171015
 11/2/1976,Washington,WA,Hall,communist party use,0.052522156378452700,20171015
-11/2/1976,Washington,WA,"Julius """"Jules""""",socialist labor,0.045836349446556600,20171015
+11/2/1976,Washington,WA,Levin,socialist labor,0.045836349446556600,20171015
 11/2/1976,West Virginia,WV,Carter,democrat,58.069518645332300,20171015
 11/2/1976,West Virginia,WV,Ford,republican,41.930481354667700,20171015
 11/2/1976,Wisconsin,WI,Carter,democrat,49.503363574411700,20171015
@@ -309,7 +309,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Wisconsin,WI,Zeidler,socialist,0.20453654246631700,20171015
 11/2/1976,Wisconsin,WI,Macbride,libertarian,0.18150357677211100,20171015
 11/2/1976,Wisconsin,WI,Camejo,socialist workers,0.080472613613434500,20171015
-11/2/1976,Wisconsin,WI,"Julius """"Jules""""",socialist labor,0.018512032345136600,20171015
+11/2/1976,Wisconsin,WI,Levin,socialist labor,0.018512032345136600,20171015
 11/2/1976,Wyoming,WY,Ford,republican,59.303582507691400,20171015
 11/2/1976,Wyoming,WY,Carter,democrat,39.809265525159400,20171015
 11/4/1980,Alabama,AL,Reagan,republican,48.750120162840200,20171015
@@ -2211,7 +2211,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Vermont,VT,Bush,republican,40.697160797531800,20171015
 11/7/2000,Vermont,VT,Nader,progressive/green,6.9226796417358700,20171015
 11/7/2000,Vermont,VT,Buchanan,reform party,0.74479796675591600,20171015
-11/7/2000,Vermont,VT,"Dennis """"Denny""""",vermont grassroots,0.35473041847316400,20171015
+11/7/2000,Vermont,VT,Lane,vermont grassroots,0.35473041847316400,20171015
 11/7/2000,Vermont,VT,Browne,libertarian,0.26638759394919600,20171015
 11/7/2000,Vermont,VT,Hagelin,natural law,0.07441184065672700,20171015
 11/7/2000,Vermont,VT,McReynolds,liberty union party,0.054704595185995600,20171015
@@ -3171,7 +3171,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Colorado,CO,Kotlikoff,kotlikoff for president,0.014099603628489800,20171015
 11/8/2016,Colorado,CO,Lyttle,nonviolent resistance/pacifist,0.013739919862456900,20171015
 11/8/2016,Colorado,CO,Atwood,approval voting party,0.012121342915308900,20171015
-11/8/2016,Colorado,CO,"Emidio """"Mimi""""",socialist party usa,0.0097474300594916900,20171015
+11/8/2016,Colorado,CO,Soltysik,socialist party usa,0.0097474300594916900,20171015
 11/8/2016,Colorado,CO,Hedges,prohibition,0.0066541496716087200,20171015
 11/8/2016,Connecticut,CT,Clinton,democrat,54.566301096709900,20171015
 11/8/2016,Connecticut,CT,Trump,republican,40.926914378814800,20171015
@@ -3212,7 +3212,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Indiana,IN,Clinton,democrat,37.77483968675200,20171015
 11/8/2016,Indiana,IN,Johnson,libertarian,4.8992708480349600,20171015
 11/8/2016,Indiana,IN,Castle,constitution party,0.070823756708512500,20171015
-11/8/2016,Indiana,IN,"Emidio """"Mimi""""",socialist party usa,0.0020841270688617500,20171015
+11/8/2016,Indiana,IN,Soltysik,socialist party usa,0.0020841270688617500,20171015
 11/8/2016,Iowa,IA,Trump,republican,51.162061344677400,20171015
 11/8/2016,Iowa,IA,Clinton,democrat,41.752513445496200,20171015
 11/8/2016,Iowa,IA,Johnson,libertarian,3.7804519730706800,20171015
@@ -3259,7 +3259,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Michigan,MI,Johnson,libertarian,3.5867016830010500,20171015
 11/8/2016,Michigan,MI,Stein,green,1.0723057856130200,20171015
 11/8/2016,Michigan,MI,Castle,u.s. taxpayers party,0.33627932833314300,20171015
-11/8/2016,Michigan,MI,"Emidio """"Mimi""""",natural law,0.046027699131787200,20171015
+11/8/2016,Michigan,MI,Soltysik,natural law,0.046027699131787200,20171015
 11/8/2016,Minnesota,MN,Clinton,democrat,46.445033961766900,20171015
 11/8/2016,Minnesota,MN,Trump,republican,44.925193104277300,20171015
 11/8/2016,Minnesota,MN,Johnson,libertarian,3.8363451012672600,20171015
