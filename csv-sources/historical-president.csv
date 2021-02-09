@@ -1073,10 +1073,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1988,Maine,ME,Dukakis,democrat,43.883538875926700,20171015
 11/8/1988,Maine,ME,Paul,libertarian,0.4864558090931200,20171015
 11/8/1988,Maine,ME,Fulani,new alliance,0.25313718954660500,20171015
-11/8/1988,Maine 1st CD,ME-1,Bush,republican,100,JJCooley
-11/8/1988,Maine 1st CD,ME-1,Dukakis,democrat,0,JJCooley
-11/8/1988,Maine 2nd CD,ME-2,Bush,republican,100,JJCooley
-11/8/1988,Maine 2nd CD,ME-2,Dukakis,democrat,0,JJCooley
+11/8/1988,Maine 1st CD,ME-1,Bush,republican,55.9,JJCooley
+11/8/1988,Maine 1st CD,ME-1,Dukakis,democrat,43.3,JJCooley
+11/8/1988,Maine 2nd CD,ME-2,Bush,republican,54.7,JJCooley
+11/8/1988,Maine 2nd CD,ME-2,Dukakis,democrat,44.5,JJCooley
 11/8/1988,Maryland,MD,Bush,republican,51.107586630097100,20171015
 11/8/1988,Maryland,MD,Dukakis,democrat,48.199034274054800,20171015
 11/8/1988,Maryland,MD,Paul,libertarian,0.39361673582763900,20171015
@@ -1367,10 +1367,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/1992,Maine,ME,Marrou,libertarian,0.24738814920993300,20171015
 11/3/1992,Maine,ME,Fulani,new alliance,0.07637980335511900,20171015
 11/3/1992,Maine,ME,Phillips,taxpayers party,0.068285604540992700,20171015
-11/3/1992,Maine 1st CD,ME-1,Bush,republican,0,JJCooley
-11/3/1992,Maine 1st CD,ME-1,Clinton,democrat,100,JJCooley
-11/3/1992,Maine 2nd CD,ME-2,Bush,republican,0,JJCooley
-11/3/1992,Maine 2nd CD,ME-2,Clinton,democrat,100,JJCooley
+11/3/1992,Maine 1st CD,ME-1,Clinton,democrat,39.8,JJCooley
+11/3/1992,Maine 1st CD,ME-1,Bush,republican,31.8,JJCooley
+11/3/1992,Maine 1st CD,ME-1,Perot,reform party,28.0,JJCooley
+11/3/1992,Maine 2nd CD,ME-2,Clinton,democrat,37.6,JJCooley
+11/3/1992,Maine 2nd CD,ME-2,Perot,reform party,33.2,JJCooley
+11/3/1992,Maine 2nd CD,ME-2,Bush,republican,28.8,JJCooley
 11/3/1992,Maryland,MD,Clinton,democrat,49.812605185983900,20171015
 11/3/1992,Maryland,MD,Bush,republican,35.629402694776700,20171015
 11/3/1992,Maryland,MD,Perot,independent,14.180028016003400,20171015
@@ -1709,10 +1711,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,Maine,ME,Browne,libertarian,0.49447348311676700,20171015
 11/5/1996,Maine,ME,Phillips,u.s. taxpayers party,0.25037258808015200,20171015
 11/5/1996,Maine,ME,Hagelin,natural law,0.13616175686626600,20171015
-11/5/1996,Maine 1st CD,ME-1,Dole,republican,0,JJCooley
-11/5/1996,Maine 1st CD,ME-1,Clinton,democrat,100,JJCooley
-11/5/1996,Maine 2nd CD,ME-2,Dole,republican,0,JJCooley
-11/5/1996,Maine 2nd CD,ME-2,Clinton,democrat,100,JJCooley
+11/5/1996,Maine 1st CD,ME-1,Clinton,democrat,52.0,JJCooley
+11/5/1996,Maine 1st CD,ME-1,Dole,republican,31.8,JJCooley
+11/5/1996,Maine 1st CD,ME-1,Perot,reform party,12.6,JJCooley
+11/5/1996,Maine 2nd CD,ME-2,Clinton,democrat,51.2,JJCooley
+11/5/1996,Maine 2nd CD,ME-2,Dole,republican,29.6,JJCooley
+11/5/1996,Maine 2nd CD,ME-2,Perot,reform party,16.0,JJCooley
 11/5/1996,Maryland,MD,Clinton,democrat,54.254774351861700,20171015
 11/5/1996,Maryland,MD,Dole,republican,38.269497492798500,20171015
 11/5/1996,Maryland,MD,Perot,reform party,6.5031136467007700,20171015
