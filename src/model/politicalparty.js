@@ -141,8 +141,10 @@ politicalParties[TossupParty.getID()] = TossupParty
 politicalParties[LibertarianParty.getID()] = LibertarianParty
 politicalParties[GreenParty.getID()] = GreenParty
 politicalParties[ReformParty.getID()] = ReformParty
+politicalParties[IndependentRNParty.getID()] = IndependentRNParty
 politicalParties[Independent2016EMParty.getID()] = Independent2016EMParty
 politicalParties[Independent1980JAParty.getID()] = Independent1980JAParty
+politicalParties[Independent1976EMParty.getID()] = Independent1976EMParty
 
 
 var politicalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
