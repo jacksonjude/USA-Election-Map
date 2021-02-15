@@ -6,7 +6,7 @@ An interactive electoral vote map for US presidential elections. Created with HT
 
 * Interactive and detailed map sources
   * Displays projection data for the 2020 election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays presidential election results from 1976-2020, showing both victory margin and voteshare percentages
+  * Displays presidential election results from 1976-2020, showing both victory margin and voteshare percentages for each state / district
   * Pie chart to show electoral vote counts by party and by margin
   * Custom maps that can be downloaded and uploaded
 * Comparisons between different map sources
