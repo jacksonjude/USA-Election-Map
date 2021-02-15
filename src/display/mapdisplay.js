@@ -161,9 +161,6 @@ function resizeElements(initilizedPieChart)
   {
     $("#mapzoom").css("transform", "scale(" + mapZoom + ")")
     $("#mapzoom").css("transform-origin", "0 0")
-
-    $(".topnav").css("transform", "scale(" + topnavZoom + ")")
-    $(".topnav").css("transform-origin", "0 0")
   }
   else
   {
