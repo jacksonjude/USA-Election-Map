@@ -24,7 +24,7 @@ class MapSource
     var self = this
 
     var loadMapPromise = new Promise(async (resolve, reject) => {
-      reloadCache = reloadCache ? true : !(await CSVDatabase.isSourceUpdated(self.id))
+      reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
 
       if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
       {
@@ -248,7 +248,7 @@ class MapSource
     }
   }
 
-  setCandidateNames(shortNameOverride)
+  setCandidateNames(shortNameOverride, shouldResetCandidateNameData)
   {
     if (shortNameOverride)
     {
@@ -258,6 +258,11 @@ class MapSource
     else if (this.defaultShortCandidateNameOverride)
     {
       this.shortCandidateNameOverride = cloneObject(this.defaultShortCandidateNameOverride)
+    }
+
+    if (shouldResetCandidateNameData == true)
+    {
+      this.candidateNameData = null
     }
   }
 

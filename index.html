@@ -32,14 +32,13 @@
           </div>
         </div>
       </div>
-      <div style="border-left: 50px solid; display: inline-block;"></div>
+      <div style="border-left: 40px solid; display: inline-block;"></div>
       <div id="partyButtonDiv" style="display: inline-block;">
         <a id="DEM" class="active" onclick="selectParty(this)" style="min-width: 110px">Dem</a>
         <a id="REP" class="active" onclick="selectParty(this)" style="min-width: 110px">Rep</a>
       </div>
-      <div style="border-left: 50px solid; display: inline-block;"></div>
+      <div style="border-left: 40px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
-        <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="marginEditButton" style="min-width: 70px">Margins</a>
           <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 126px">
@@ -47,6 +46,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div style="border-left: 40px solid; display: inline-block;"></div>
+      <div style="display: inline-block; margin-top: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="compareButton" style="min-width: 70px" onclick="applyCompareToCustomMap()">Compare</a>
           <div id="compareDropdownContent" class="dropdown-content" style="min-width: 305px">
@@ -86,6 +88,7 @@
             </div>
           </div>
         </div>
+        <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="clearMapButton">Clear</a>
           <div id="fillDropdownContent" class="dropdown-content" style="min-width: 175px">
