@@ -17,12 +17,19 @@ An interactive electoral vote map for US presidential elections. Created with HT
 
 ## Development
 
-Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack (+JQuery, which is included locally). Just clone the repo and open index.html to run.
+Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack (+ JQuery & chart.js, which are included locally). Just clone the repo and open index.html to run.
 
-Since the site loads svg files for the map, Chrome (and Safari) might not load them due to CORS restrictions.
+Since the site loads svg files for the map, Chrome and Safari might not load them due to CORS restrictions.
 - Fixing this CORS issue on Safari is somewhat simple: go to Develop > Disable Cross-Origin Restrictions.
-- Chrome is a little more complicated: Run `"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir=~/chromeTemp` on Windows or `open -a <chrome executable path> --args --disable-web-security --user-data-dir` on Mac in the command prompt / Terminal. 
-- Alternatively, you can try running it on Firefox, which does not enforce these CORS restrictions.
+- Chrome is a little more complicated: Run `"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir=~/chromeTemp` on Windows or `open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args --disable-web-security --user-data-dir` on Mac in the command prompt / Terminal.
+- Alternatively, Firefox can be used without issue since it does not enforce CORS restrictions in the same way.
+
+Another way to fix this CORS issue is to run a local http server. On Mac, it is as simple as entering the repo directory and running:
+```
+brew install http-server
+http-server
+```
+Then open the address provided in the Terminal window (by default, it seems to be http://localhost:8080).
 
 ## TODO List
 - [ ] Past senate election results & 2022 senate projections
@@ -30,3 +37,5 @@ Since the site loads svg files for the map, Chrome (and Safari) might not load t
 - [ ] Full third-party support in past results and custom maps
 - [ ] More past presidential election results
 - [ ] Presidential election results by county
+
+If you have any questions / suggestions / feature ideas, feel free to open an issue, and it will be marked accordingly.
