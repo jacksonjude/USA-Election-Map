@@ -1,6 +1,6 @@
 # USA Election Map
 
-An interactive electoral vote map for US presidential elections. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPMS](https://www.yapms.com/app/?t=USA_2020_presidential).
+An interactive electoral vote map for US presidential elections. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPMS](https://www.yapms.com).
 
 ## Features
 
@@ -19,17 +19,27 @@ An interactive electoral vote map for US presidential elections. Created with HT
 
 Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack (+ JQuery & chart.js, which are included locally). Just clone the repo and open index.html to run.
 
-Since the site loads svg files for the map, Chrome and Safari might not load them due to CORS restrictions.
+Since the site uses separate svg files for the map, Chrome and Safari might prevent them from loading over the file protocol due to CORS restrictions (see [more info](https://stackoverflow.com/a/8456586/) and [solution](https://stackoverflow.com/a/13262673/)).
 - Fixing this CORS issue on Safari is somewhat simple: go to Develop > Disable Cross-Origin Restrictions.
-- Chrome is a little more complicated: Run `"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir=~/chromeTemp` on Windows or `open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --args --disable-web-security --user-data-dir` on Mac in the command prompt / Terminal.
-- Alternatively, Firefox can be used without issue since it does not enforce CORS restrictions in the same way.
+- Chrome is a little more complicated: 
+  - Mac: 
+    ```
+    open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
+    ```
+  - Windows: 
+    ```
+    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
+    ```
+- Alternatively, Firefox can be used without issue since it does not enforce CORS restrictions over the file protocol in the same way.
 
-Another way to fix this CORS issue is to run a local http server. On Mac, it is as simple as entering the repo directory and running:
+
+Another way to address the CORS issue is to run a local http server. On Mac (via [Homebrew](https://brew.sh)):
 ```
 brew install http-server
 http-server
 ```
 Then open the address provided in the Terminal window (by default, it seems to be http://localhost:8080).
+
 
 ## TODO List
 - [ ] Past senate election results & 2022 senate projections
