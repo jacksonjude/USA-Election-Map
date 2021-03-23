@@ -36,53 +36,68 @@ class CSVDatabase
 
   static async insertCSV(sourceID, csvText)
   {
-    var db = await CSVDatabase.openDatabase()
-    var transaction = db.transaction('CSVFiles', 'readwrite')
-    var store = transaction.objectStore('CSVFiles')
+    try
+    {
+      var db = await CSVDatabase.openDatabase()
+      var transaction = db.transaction('CSVFiles', 'readwrite')
+      var store = transaction.objectStore('CSVFiles')
 
-    store.put({text: csvText, updatedAt: Date.now()}, sourceID)
+      store.put({text: csvText, updatedAt: Date.now()}, sourceID)
 
-    transaction.oncomplete = function() {
-      db.close()
+      transaction.oncomplete = function() {
+        db.close()
+      }
+    }
+    catch (error)
+    {
+      console.log(error)
     }
   }
 
   static async fetchCSV(sourceID)
   {
     var fetchCSVPromise = new Promise(async (resolve, reject) => {
-      var db = await CSVDatabase.openDatabase()
-      var transaction = db.transaction('CSVFiles', 'readonly')
-      var store = transaction.objectStore('CSVFiles')
+      try
+      {
+        var db = await CSVDatabase.openDatabase()
+        var transaction = db.transaction('CSVFiles', 'readonly')
+        var store = transaction.objectStore('CSVFiles')
 
-      var query = store.get(sourceID)
+        var query = store.get(sourceID)
 
-      query.onsuccess = function(event) {
-        var textResult = query.result ? query.result.text : null
-        var updatedTime = query.result ? query.result.updatedAt : null
+        query.onsuccess = function(event) {
+          var textResult = query.result ? query.result.text : null
+          var updatedTime = query.result ? query.result.updatedAt : null
 
-        $.getJSON(sourceUpdatedTimesURL, null, data => {
-          // console.log(updatedTime, data[sourceID], updatedTime != null && updatedTime >= data[sourceID])
-          if (updatedTime && updatedTime >= data[sourceID])
-          {
+          $.getJSON(sourceUpdatedTimesURL, null, data => {
+            // console.log(updatedTime, data[sourceID], updatedTime != null && updatedTime >= data[sourceID])
+            if (updatedTime && updatedTime >= data[sourceID])
+            {
+              resolve(textResult)
+            }
+            else
+            {
+              resolve(null)
+            }
+          }).fail((callback, error) => {
+            console.log(error)
             resolve(textResult)
-          }
-          else
-          {
-            resolve(null)
-          }
-        }).fail((callback, error) => {
-          console.log(error)
-          resolve(textResult)
-        })
-      }
+          })
+        }
 
-      query.onerror = function(event) {
-        console.log(event.target.errorCode)
+        query.onerror = function(event) {
+          console.log(event.target.errorCode)
+          resolve(null)
+        }
+
+        transaction.oncomplete = function() {
+          db.close()
+        }
+      }
+      catch (error)
+      {
+        console.log(error)
         resolve(null)
-      }
-
-      transaction.oncomplete = function() {
-        db.close()
       }
     })
 
@@ -92,22 +107,30 @@ class CSVDatabase
   static async hasCSV(sourceID)
   {
     var hasCSVPromise = new Promise(async (resolve, reject) => {
-      var db = await CSVDatabase.openDatabase()
-      var transaction = db.transaction('CSVFiles', 'readonly')
-      var store = transaction.objectStore('CSVFiles')
+      try
+      {
+        var db = await CSVDatabase.openDatabase()
+        var transaction = db.transaction('CSVFiles', 'readonly')
+        var store = transaction.objectStore('CSVFiles')
 
-      var query = store.getAllKeys()
+        var query = store.getAllKeys()
 
-      query.onsuccess = function(event) {
-        resolve(query.result.includes(sourceID))
+        query.onsuccess = function(event) {
+          resolve(query.result.includes(sourceID))
+        }
+
+        query.onerror = function(event) {
+          console.log(event.target.errorCode)
+        }
+
+        transaction.oncomplete = function() {
+          db.close()
+        }
       }
-
-      query.onerror = function(event) {
-        console.log(event.target.errorCode)
-      }
-
-      transaction.oncomplete = function() {
-        db.close()
+      catch (error)
+      {
+        console.log(error)
+        resolve(false)
       }
     })
 
