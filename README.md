@@ -48,4 +48,4 @@ Then open the address provided in the Terminal window (by default, it seems to b
 - [ ] More past presidential election results
 - [ ] Presidential election results by county
 
-If you have any questions / suggestions / feature ideas, feel free to open an issue, and it will be marked accordingly.
+If you have any questions / suggestions / feature ideas, feel free to open an issue, and it will be marked accordingly. Alternatively, you can email **jjcooley0@gmail.com**.
