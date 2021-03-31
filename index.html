@@ -7,6 +7,7 @@
     <script src="./lib/chart.js-2.8.0.js"></script>
     <script src="./lib/chartjs-plugin-datalabels-0.7.0.js"></script>
     <script src="./src/model/csvdatabase.js"></script>
+    <script src="./src/model/maptype.js"></script>
     <script src="./src/model/politicalparty.js"></script>
     <script src="./src/model/mapsource.js"></script>
     <script src="./src/misclib.js"></script>
@@ -34,8 +35,8 @@
       </div>
       <div style="border-left: 40px solid; display: inline-block;"></div>
       <div id="partyButtonDiv" style="display: inline-block;">
-        <a id="DEM" class="active" onclick="selectParty(this)" style="min-width: 110px">Dem</a>
-        <a id="REP" class="active" onclick="selectParty(this)" style="min-width: 110px">Rep</a>
+        <a id="DEM" class="active" onclick="selectParty(this)" style="min-width: 120px">Dem</a>
+        <a id="REP" class="active" onclick="selectParty(this)" style="min-width: 120px">Rep</a>
       </div>
       <div style="border-left: 40px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
@@ -78,15 +79,15 @@
             </div>
             <div id="comparePresetsDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
               <div class='dropdown-separator'></div>
-              <a onclick="loadComparePreset(kPastElectionsVsPastElections)" style="">
+              <a onclick="loadComparePreset(1)" style="">
                 (1)&nbsp;&nbsp;Past Elections vs Past Elections
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="loadComparePreset(kPastElectionsVs538Projection)" style="">
+              <a onclick="loadComparePreset(2)" style="">
                 (2)&nbsp;&nbsp;Past Elections vs 538 Projection
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="loadComparePreset(kPastElectionsVs538PollAvg)" style="">
+              <a onclick="loadComparePreset(3)" style="">
                 (3)&nbsp;&nbsp;Past Elections vs 538 Poll Avg
               </a>
             </div>
