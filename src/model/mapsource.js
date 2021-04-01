@@ -1315,7 +1315,11 @@ function createSenateMapSources()
     {
       if (mapDate == null) { return }
 
-      var isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
+      var isSpecial = false
+      if (regionID != null && mapDate != null)
+      {
+        isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
+      }
 
       var linkToOpen = regionURL + mapDate.getFullYear() + "_United_States_Senate_"
       if (!shouldOpenHomepage)
