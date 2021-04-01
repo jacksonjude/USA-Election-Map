@@ -220,7 +220,7 @@ class MapSource
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.regionURL, regionID, this.regionIDToLinkMap, modelDate, false)
+      this.customOpenRegionLinkFunction(this.regionURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
     }
   }
 
@@ -233,7 +233,7 @@ class MapSource
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.regionURL, null, null, modelDate, true)
+      this.customOpenRegionLinkFunction(this.regionURL, null, null, modelDate, true, this.mapData)
     }
   }
 
@@ -1059,7 +1059,8 @@ function createSenateMapSources()
 
           if (mapDataRows.length == 0) { continue }
 
-          var shouldBeSpecialRegion = currentMapType.getMapSettings().seatArrangement == "election-type" ? (mapDataRows[0][columnMap.isSpecial] == "TRUE") : (stateClasses[regionNameToID[regionToFind]].indexOf(classNum) == 1)
+          var isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
+          var shouldBeSpecialRegion = currentMapType.getMapSettings().seatArrangement == "election-type" ? isSpecialElection : (stateClasses[regionNameToID[regionToFind]].indexOf(classNum) == 1)
 
           var marginSum = 0
           var partyVotesharePercentages = null
@@ -1134,7 +1135,7 @@ function createSenateMapSources()
             }
           }
 
-          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, partyVotesharePercentages: voteshareSortedCandidateData}
+          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, isSpecial: isSpecialElection, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, partyVotesharePercentages: voteshareSortedCandidateData}
         }
       }
 
@@ -1296,17 +1297,22 @@ function createSenateMapSources()
     false,
     true,
     doubleLineClassSeparatedFilterFunction,
-    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
+
+      var isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
 
       var linkToOpen = regionURL + mapDate.getFullYear() + "_United_States_Senate_"
       if (!shouldOpenHomepage)
       {
         var baseRegionID = regionID
-        if (regionID.endsWith("-S"))
+        if (isSpecial)
         {
           linkToOpen += "special_"
+        }
+        if (regionID.endsWith("-S"))
+        {
           baseRegionID = regionID.slice(0, regionID.length-2)
         }
         linkToOpen += "election"
