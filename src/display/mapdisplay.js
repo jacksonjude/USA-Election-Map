@@ -20,6 +20,9 @@ const regionStrokeAnimationDuration = 0.06
 const regionSelectColor = "#ffffff"
 const regionDeselectColor = "#181922" //#555
 
+const regionDisabledColor = "#28292F"
+const disabledBrightnessFactor = 1.0/2.0
+
 const mapRegionNameToID = currentMapType.getRegionNameToID()
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
@@ -91,6 +94,7 @@ $(async function() {
 
   createMapSourceDropdownItems()
   createMarginEditDropdownItems()
+  createSettingsDropdownItems()
   createCountdownDropdownItems()
 
   addDivEventListeners()
@@ -280,6 +284,73 @@ function createMarginEditDropdownItems()
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
     $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
+  }
+}
+
+function createSettingsDropdownItems()
+{
+  $("#settingsDropdownContainer").html("")
+  for (settingNum in currentMapType.getMapSettingsLayout())
+  {
+    var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
+    $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    switch (settingLayout.type)
+    {
+      case MapSettingType.optionCycle:
+      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14px; min-height: 25px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, true)'></a>")
+      cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), false)
+      break
+    }
+  }
+}
+
+function cycleMapSetting(settingID, settingDiv, shouldIncrement)
+{
+  var shouldIncrement = shouldIncrement || false
+
+  var currentMapSettings = currentMapType.getMapSettings()
+
+  var settingOptions = currentMapType.getMapSettingOptions(settingID)
+  var currentValueID = currentMapSettings[settingID]
+
+  var optionIndex = 0
+  for (optionNum in settingOptions)
+  {
+    if (settingOptions[optionNum].id == currentValueID)
+    {
+      optionIndex = parseInt(optionNum)
+      break
+    }
+  }
+
+  optionIndex += shouldIncrement ? 1 : 0
+  if (optionIndex >= settingOptions.length)
+  {
+    optionIndex = 0
+  }
+
+  var newValueID = settingOptions[optionIndex].id
+  var newValueTitle = settingOptions[optionIndex].title
+  $(settingDiv).html(currentMapType.getMapSettingLayout(settingID).title + "<span style='float: right'>" + newValueTitle + "</span>")
+
+  currentMapSettings[settingID] = newValueID
+  currentMapType.setMapSettings(currentMapSettings)
+
+  switch (currentMapType.getMapSettingLayout(settingID).reloadType)
+  {
+    case MapSettingReloadType.display:
+    if (showingDataMap)
+    {
+      displayDataMap()
+    }
+    break
+
+    case MapSettingReloadType.data:
+    if (showingDataMap)
+    {
+      loadDataMap()
+    }
+    break
   }
 }
 
@@ -631,6 +702,7 @@ function displayDataMap(dateIndex)
       continue
     }
 
+    regionData.region = currentMapDataForDate[regionNum].region
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID
     regionData.disabled = currentMapDataForDate[regionNum].disabled
@@ -1204,9 +1276,27 @@ function getBaseRegionID(regionID)
 function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
   var fillColor
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID())
+  var shouldHide = false
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
   {
-    fillColor = TossupParty.getMarginColors().safe
+    if (regionData.disabled == true)
+    {
+      fillColor = regionDisabledColor
+
+      var regionsToHide = currentMapType.getRegionsToHideOnDisable()
+      for (regexNum in regionsToHide)
+      {
+        if (regionsToHide[regexNum].test(regionData.region))
+        {
+          shouldHide = true
+          break
+        }
+      }
+    }
+    else
+    {
+      fillColor = TossupParty.getMarginColors().safe
+    }
   }
   else
   {
@@ -1218,6 +1308,17 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     var regionDiv = $("#" + regionIDsToUpdate[regionIDNum])
     regionDiv.css('animation-fill-mode', 'forwards')
     regionDiv.css('fill', fillColor)
+
+    regionDiv.css('opacity', shouldHide ? 0 : 1)
+
+    if (regionData.disabled == true)
+    {
+      regionDiv.css('pointer-events', 'none')
+    }
+    else
+    {
+      regionDiv.css('pointer-events', 'inherit')
+    }
   }
 
   displayPartyTotals(getPartyTotals())
@@ -1229,6 +1330,10 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
 function getMarginIndexForValue(margin, partyID)
 {
+  if (margin == 101)
+  {
+    return "current"
+  }
   for (marginName in marginValues)
   {
     if (Math.abs(margin) >= marginValues[marginName])
@@ -1307,7 +1412,7 @@ function getMDYDateString(date, delimiter, includeTime)
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID())
+  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
   {
     $("#stateboxcontainer").trigger('hide')
     return

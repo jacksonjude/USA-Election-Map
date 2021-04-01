@@ -54,7 +54,7 @@ class PoliticalParty
   }
 }
 
-const defaultMarginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
+const defaultMarginNames = {current: "Current", safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
 // Main Parties
 
@@ -63,7 +63,7 @@ var DemocraticParty = new PoliticalParty(
   ["Democratic", "Democrat"],
   "Dem",
   "Biden",
-  {safe: "#1c408c", likely: "#587ccc", lean: "#8aafff", tilt: "#949bb3"},
+  {current: "#10234E", safe: "#1c408c", likely: "#587ccc", lean: "#8aafff", tilt: "#949bb3"},
   defaultMarginNames
 )
 
@@ -72,7 +72,7 @@ var RepublicanParty = new PoliticalParty(
   ["Republican"],
   "Rep",
   "Trump",
-  {safe: "#be1c29", likely: "#ff5864", lean: "#ff8b98", tilt: "#cf8980"},
+  {current: "#600E15", safe: "#be1c29", likely: "#ff5864", lean: "#ff8b98", tilt: "#cf8980"},
   defaultMarginNames
 )
 
@@ -102,7 +102,7 @@ var LibertarianParty = new PoliticalParty(
   ["Libertarian"],
   "Lib",
   "Jorgensen",
-  {safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
+  {current: "#725B00", safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
   defaultMarginNames
 )
 
@@ -111,7 +111,7 @@ var GreenParty = new PoliticalParty(
   ["Green"],
   "Grn",
   "Hawkins",
-  {safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
+  {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
   defaultMarginNames
 )
 
@@ -165,7 +165,7 @@ var IndependentGenericParty = new PoliticalParty(
   ["Independent"],
   "Ind",
   "Generic",
-  {safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 

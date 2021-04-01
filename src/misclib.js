@@ -26,6 +26,17 @@ function getKeyByValue(object, value)
   return Object.keys(object).find(key => object[key] == value)
 }
 
+function multiplyBrightness(hexColorString, brightnessFactor)
+{
+  var rgb = hexToRGB(hexColorString)
+  if (!rgb) { return }
+
+  var hsv = RGBtoHSV(rgb)
+  hsv.v *= brightnessFactor
+
+  return RGBToHex(HSVtoRGB(hsv))
+}
+
 function adjustBrightness(hexColorString, minBrightness)
 {
   var rgb = hexToRGB(hexColorString)

@@ -121,7 +121,12 @@ function setupEVPieChart()
       datalabels: {
         color: function(context) {
           var value = context.dataset.data[context.dataIndex]
-          return value < Math.floor(minEVPieChartSliceLabelPercent*currentMapType.getTotalEV()) ? "rgb(0, 0, 0, 0)" : "#fff"
+          var evSum = 0
+          for (dataNum in context.dataset.data)
+          {
+            evSum += context.dataset.data[dataNum]
+          }
+          return (value == 0 || value < Math.floor(minEVPieChartSliceLabelPercent*evSum)) ? "rgb(0, 0, 0, 0)" : "#fff"
         },
         font: {
           family: "Bree5erif-Mono",
@@ -238,7 +243,16 @@ function updateEVPieChart()
         var marginKey = marginNames[marginKeyNum]
 
         regionMarginStrings.push(regionMarginStringsData[partyID][marginKey])
-        marginTotalsArray.push(marginTotalsData[partyID][marginKey])
+
+        if (marginKey == "current" && !currentMapType.getMapSettingValue("pieCurrentSeats"))
+        {
+          marginTotalsArray.push(0)
+        }
+        else
+        {
+          marginTotalsArray.push(marginTotalsData[partyID][marginKey])
+        }
+
         if (marginKey == "safe")
         {
           safeMarginTotalsArray.push(marginTotalsData[partyID][marginKey])
