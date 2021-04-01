@@ -1062,6 +1062,8 @@ function createSenateMapSources()
           var isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
           var shouldBeSpecialRegion = currentMapType.getMapSettings().seatArrangement == "election-type" ? isSpecialElection : (stateClasses[regionNameToID[regionToFind]].indexOf(classNum) == 1)
 
+          var isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
+
           var marginSum = 0
           var partyVotesharePercentages = null
 
@@ -1135,7 +1137,7 @@ function createSenateMapSources()
             }
           }
 
-          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, isSpecial: isSpecialElection, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, partyVotesharePercentages: voteshareSortedCandidateData}
+          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, partyVotesharePercentages: voteshareSortedCandidateData}
         }
       }
 
@@ -1149,6 +1151,7 @@ function createSenateMapSources()
       var filteredDateData = fullFilteredMapData[mapDate]
 
       var isOffyear = Object.values(filteredDateData)[0].offYear
+      var isRunoff = Object.values(filteredDateData)[0].isRunoff
 
       var regionIDsInFilteredDateData = Object.keys(filteredDateData)
       for (var regionNum in regionIDs)
@@ -1168,7 +1171,7 @@ function createSenateMapSources()
           }
           // console.log(Object.values(filteredDateData)[0].offYear, (new Date(parseInt(mapDate))).getFullYear(), classModulo6.indexOf((new Date(parseInt(mapDate))).getFullYear()%6)+1, stateClasses[regionIDs[regionNum]], stateClasses[regionIDs[regionNum]].indexOf(classModulo6.indexOf((new Date(parseInt(mapDate))).getFullYear()%6)+1))
           // ((currentMapType.getMapSettings().seatArrangement == "seat-class" || Object.values(filteredDateData)[0].offyear) ? 0 : Math.abs(stateClasses[regionIDs[regionNum]].indexOf(classModulo6.indexOf((new Date(parseInt(mapDate))).getFullYear()%6)+1)-1))
-          filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear}
+          filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear, runoff: isRunoff}
         }
         if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum] + "-S"))
         {
@@ -1184,7 +1187,7 @@ function createSenateMapSources()
             seatIndexToUse = Math.abs(seatIndex-1)
           }
           // ((currentMapType.getMapSettings().seatArrangement == "seat-class" || Object.values(filteredDateData)[0].offyear) ? 1 : Math.abs(stateClasses[regionIDs[regionNum]].indexOf(classModulo6.indexOf((new Date(parseInt(mapDate))).getFullYear()%6)+1)-1))
-          filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear}
+          filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear, runoff: isRunoff}
         }
       }
 
@@ -1194,17 +1197,28 @@ function createSenateMapSources()
     if (!currentMapType.getMapSettingValue("offYear"))
     {
       var filteredMapDates = []
-      // var removedOffYearMapData = {}
       for (mapDate in fullFilteredMapData)
       {
+        var offYear = Object.values(fullFilteredMapData[mapDate])[0].offYear
+        var runoff = Object.values(fullFilteredMapData[mapDate])[0].runoff
         //console.log(mapDate, mapDates, mapDates.indexOf(parseInt(mapDate)))
         // console.log(Object.values(fullFilteredMapData[mapDate])[0].offYear, mapDate)
-        if (!Object.values(fullFilteredMapData[mapDate])[0].offYear)
+        if (!offYear && !runoff)
         {
           filteredMapDates.push(parseInt(mapDate))
           //var removedDate = mapDates.splice(mapDates.indexOf(mapDate), 1)
           //console.log(mapDate, removedDate)
           // removedOffYearMapData[mapDate] = cloneObject(fullFilteredMapData[mapDate])
+        }
+        if (runoff)
+        {
+          for (regionID in fullFilteredMapData[mapDate])
+          {
+            if (fullFilteredMapData[mapDate][regionID].runoff)
+            {
+              fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID] = fullFilteredMapData[mapDate][regionID]
+            }
+          }
         }
       }
 
