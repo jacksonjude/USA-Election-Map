@@ -1,8 +1,10 @@
-var currentMapType = USASenateMapType
+var currentMapType = mapTypes[mapTypeIDs[0]]
 
 var mapSources = currentMapType.getMapSources()
 var mapSourceIDs = currentMapType.getMapSourceIDs()
 var currentCustomMapSource = currentMapType.getCustomMapSource()
+
+var mapRegionNameToID = currentMapType.getRegionNameToID()
 
 var currentMapSource = NullMapSource
 
@@ -22,8 +24,6 @@ const regionDeselectColor = "#181922" //#555
 
 const regionDisabledColor = "#28292F"
 const disabledBrightnessFactor = 1.0/2.0
-
-const mapRegionNameToID = currentMapType.getRegionNameToID()
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
@@ -72,12 +72,7 @@ const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 var selectedDropdownDivID = null
 
 $(async function() {
-  await loadMapSVGFile()
-  setOutlineDivProperties()
-  updateMapElectoralVoteText()
-
-  $("#loader").hide()
-  resizeElements(false)
+  reloadForNewMapType(true)
 
   preloadAssets([
     "assets/icon-download-none.png",
@@ -92,12 +87,73 @@ $(async function() {
     "assets/nyt-large.png"
   ])
 
-  createMapSourceDropdownItems()
   createMarginEditDropdownItems()
-  createSettingsDropdownItems()
   createCountdownDropdownItems()
 
   addDivEventListeners()
+
+  updateCountdownTimer()
+  setTimeout(function() {
+    setInterval(function() {
+      updateCountdownTimer()
+    }, 1000)
+  }, 1000-((new Date()).getTime()%1000))
+
+  $.ajaxSetup({cache: false})
+})
+
+function cycleMapType(buttonDiv)
+{
+  var newMapTypeIndex = mapTypeIDs.indexOf(currentMapType.getID())+1
+  if (newMapTypeIndex >= mapTypeIDs.length || newMapTypeIndex < 0)
+  {
+    newMapTypeIndex = 0
+  }
+
+  currentMapType = mapTypes[mapTypeIDs[newMapTypeIndex]]
+
+  $(buttonDiv).find("img").attr('src', currentMapType.getIconURL())
+
+  reloadForNewMapType()
+}
+
+async function reloadForNewMapType(initialLoad)
+{
+  if (initialLoad != true)
+  {
+    clearMap(true)
+  }
+
+  mapSources = currentMapType.getMapSources()
+  mapSourceIDs = currentMapType.getMapSourceIDs()
+  currentCustomMapSource = currentMapType.getCustomMapSource()
+  mapRegionNameToID = currentMapType.getRegionNameToID()
+
+  selectedParty = null
+  displayRegionDataArray = {}
+  regionIDsToIgnore = [/.+-button/, /.+-land/]
+  showingDataMap = false
+  ignoreMapUpdateClickArray = []
+  currentSliderDate = null
+  currentMapState = kViewing
+  showingCompareMap = false
+  compareMapSourceIDArray = [null, null]
+  compareMapDataArray = [null, null]
+  selectedCompareSlider = null
+
+  currentMapSource = NullMapSource
+
+  await loadMapSVGFile()
+  setOutlineDivProperties()
+  updateMapElectoralVoteText()
+
+  $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
+
+  $("#loader").hide()
+  resizeElements(false)
+
+  createMapSourceDropdownItems()
+  createSettingsDropdownItems()
 
   populateRegionsArray()
   for (partyNum in selectablePoliticalPartyIDs)
@@ -110,17 +166,8 @@ $(async function() {
   setupEVPieChart()
   updateEVPieChart()
 
-  updateCountdownTimer()
-  setTimeout(function() {
-    setInterval(function() {
-      updateCountdownTimer()
-    }, 1000)
-  }, 1000-((new Date()).getTime()%1000))
-
-  $.ajaxSetup({cache: false})
-
   updateIconsBasedOnLocalCSVData()
-})
+}
 
 function loadMapSVGFile()
 {
@@ -243,6 +290,7 @@ function preloadAssets(assetURLs)
 
 function createMapSourceDropdownItems()
 {
+  $("#mapSourcesDropdownContainer").html("")
   for (sourceNum in mapSourceIDs)
   {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
@@ -763,13 +811,17 @@ function updateMapElectoralVoteText()
   for (regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
+    
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+    if (regionEV == undefined) { continue }
+
     if (regionChildren.length == 1)
     {
-      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + regionEV
     }
     else if (regionChildren.length == 2)
     {
-      regionChildren[1].innerHTML = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+      regionChildren[1].innerHTML = regionEV
     }
   }
 }
@@ -912,9 +964,9 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
   updateCountdownTimer()
 }
 
-function clearMap()
+function clearMap(fullClear)
 {
-  if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n"))
+  if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
     updateMapSourceButton(true)
     currentMapSource = NullMapSource
@@ -922,12 +974,15 @@ function clearMap()
     toggleEditing(kViewing)
 
     currentSliderDate = null
+
+    if (fullClear)
+    {
+      clearCustomMap()
+    }
   }
   else
   {
-    currentCustomMapSource.setTextMapData("date\n" + getTodayString())
-    currentCustomMapSource.setIconURL("")
-    currentCustomMapSource.setCandidateNames()
+    clearCustomMap()
     loadDataMap(false, true)
   }
 
@@ -980,6 +1035,13 @@ function clearMap()
   $("#evPieChart").css("background-image", "")
 
   showingDataMap = false
+}
+
+function clearCustomMap()
+{
+  currentCustomMapSource.setTextMapData("date\n" + getTodayString())
+  currentCustomMapSource.setIconURL("")
+  currentCustomMapSource.setCandidateNames()
 }
 
 function toggleHelpBox(helpButtonDiv)

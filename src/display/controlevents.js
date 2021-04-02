@@ -143,13 +143,13 @@ function incrementSlider(keyString)
     }
 
     if (sliderDiv.value == 0) { return }
-    if (sliderDiv.value < 5)
+    if (sliderDiv.value < currentMapType.getSecondarySliderIncrement())
     {
       sliderDiv.value = 0
     }
     else
     {
-      sliderDiv.value -= 5
+      sliderDiv.value -= currentMapType.getSecondarySliderIncrement()
     }
     break
 
@@ -180,13 +180,13 @@ function incrementSlider(keyString)
     }
 
     if (sliderDiv.value == sliderDiv.max) { return }
-    if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
+    if (parseInt(sliderDiv.max)-sliderDiv.value < currentMapType.getSecondarySliderIncrement())
     {
       sliderDiv.value = sliderDiv.max
     }
     else
     {
-      sliderDiv.value -= -5 //WHY DO I HAVE TO DO THIS BS
+      sliderDiv.value -= -currentMapType.getSecondarySliderIncrement() //WHY DO I HAVE TO DO THIS BS
     }
     break
   }
