@@ -100,6 +100,11 @@ $(async function() {
   addDivEventListeners()
 
   populateRegionsArray()
+  for (partyNum in selectablePoliticalPartyIDs)
+  {
+    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+  }
   displayPartyTotals(getPartyTotals())
 
   setupEVPieChart()
@@ -599,13 +604,15 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
-  var previousValueWasLatest = $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max')
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
 
-  $("#" + sliderDivID).attr('max', mapDates.length+1)
+  var previousValueWasLatest = $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
+
+  $("#" + sliderDivID).attr('max', mapDates.length+(latestSliderTickEnabled ? 1 : 0))
 
   if (currentSliderDate == null || shouldSetToMax || previousValueWasLatest)
   {
-    $("#" + sliderDivID).val(mapDates.length+1)
+    $("#" + sliderDivID).val(mapDates.length+(latestSliderTickEnabled ? 1 : 0))
     currentSliderDate = endDate
   }
   else
@@ -633,7 +640,10 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
     {
       $("#" + sliderTickDivID).append("<span class='tick'></span>")
     }
-    $("#" + sliderTickDivID).append("<span class='tick'></span>")
+    if (latestSliderTickEnabled)
+    {
+      $("#" + sliderTickDivID).append("<span class='tick'></span>")
+    }
   }
 }
 
@@ -707,9 +717,11 @@ function displayDataMap(dateIndex)
     regionData.partyID = currentMapDataForDate[regionNum].partyID
     regionData.disabled = currentMapDataForDate[regionNum].disabled
     regionData.candidateName = currentMapDataForDate[regionNum].candidateName
+    regionData.candidateMap = currentMapDataForDate[regionNum].candidateMap
     regionData.chanceIncumbent = currentMapDataForDate[regionNum].chanceIncumbent
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
+    regionData.seatClass = currentMapDataForDate[regionNum].seatClass
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
@@ -942,6 +954,12 @@ function clearMap()
   displayRegionDataArray = {}
   populateRegionsArray()
 
+  for (partyNum in selectablePoliticalPartyIDs)
+  {
+    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+  }
+
   $('#outlines').children().each(function() {
     var regionDataCallback = getRegionData($(this).attr('id'))
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
@@ -1080,7 +1098,7 @@ function toggleEditing(stateToSet)
 
     if (!currentMapIsCustom)
     {
-      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(currentSliderDate.getTime()))
+      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames((currentSliderDate || new Date(getCurrentDateOrToday())).getTime()))
 
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
@@ -1140,6 +1158,7 @@ function leftClickRegion(div)
     if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = marginValues.safe
     }
     else if (selectedParty != null)
@@ -1193,7 +1212,8 @@ function rightClickRegion(div)
     if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.margin = marginValues.tilt
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.margin = 0.1 // Hardcoding tilt == 0.1
     }
     else if (selectedParty != null)
     {
@@ -1597,19 +1617,21 @@ function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, sw
       overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
     }
 
+    var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+
     if (compareSourcesToUpdate[0])
     {
       setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
-      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
+      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
       $("#compareItemImage-0").css('display', "block")
       $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
     }
     if (compareSourcesToUpdate[1])
     {
       setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
-      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
+      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
       $("#compareItemImage-1").css('display', "block")
       $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
     }
@@ -1769,33 +1791,13 @@ async function loadComparePreset(comparePresetNum)
   await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
   await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
 
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+
   if (defaultCompareSourceIDs[comparePresetNum][0] == defaultCompareSourceIDs[comparePresetNum][1])
   {
-    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
+    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
   }
-
-  //TODO
-  // switch (comparePresetNum)
-  // {
-  //   case kPastElectionsVsPastElections:
-  //   await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-  //   await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-  //
-  //   $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-  //   setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-  //   break
-  //
-  //   case kPastElectionsVs538Projection:
-  //   await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-  //   await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
-  //   break
-  //
-  //   case kPastElectionsVs538PollAvg:
-  //   await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-  //   await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
-  //   break
-  // }
 }
 
 function addConstantMarginToMap(marginToAdd)

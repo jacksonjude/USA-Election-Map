@@ -62,16 +62,16 @@ function jsonFileLoaded(e)
 
   if (jsonMapData.iconURL)
   {
-    CustomMapSource.setIconURL(jsonMapData.iconURL)
+    currentCustomMapSource.setIconURL(jsonMapData.iconURL)
   }
   else
   {
-    CustomMapSource.setIconURL("")
+    currentCustomMapSource.setIconURL("")
   }
 
-  CustomMapSource.setTextMapData(jsonMapData.mapData)
+  currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
-  currentMapSource = CustomMapSource
+  currentMapSource = currentCustomMapSource
   updateMapSourceButton()
   loadDataMap(false, true)
 }
@@ -81,9 +81,9 @@ function csvFileLoaded(e)
   var textMapData = e.target.result
   if (!textMapData) { return }
 
-  CustomMapSource.setTextMapData(textMapData)
+  currentCustomMapSource.setTextMapData(textMapData)
 
-  currentMapSource = CustomMapSource
+  currentMapSource = currentCustomMapSource
   updateMapSourceButton()
   loadDataMap(false, true)
 }

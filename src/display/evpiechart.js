@@ -183,29 +183,11 @@ function updateEVPieChart()
     var pieChartIndex
     if (regionParty == null || regionParty == TossupParty.getID())
     {
-      marginTotalsData[regionParty].safe += regionEV
-      regionMarginStringsData[regionParty].safe.push(regionString)
-
-      // pieChartIndex = 0
-      // for (partyIDNum in marginPartyPieChartOrder)
-      // {
-      //   if (marginPartyPieChartOrder[partyIDNum] == TossupParty.getID()) { break }
-      //   pieChartIndex += marginPieChartIndexes[marginPartyPieChartOrder[partyIDNum]].length
-      // }
+      marginTotalsData[TossupParty.getID()].safe += regionEV
+      regionMarginStringsData[TossupParty.getID()].safe.push(regionString)
     }
     else
     {
-      // pieChartIndex = 0
-      // for (partyIDNum in marginPartyPieChartOrder)
-      // {
-      //   if (marginPartyPieChartOrder[partyIDNum] == regionParty) { break }
-      //   pieChartIndex += marginPieChartIndexes[marginPartyPieChartOrder[partyIDNum]].length
-      // }
-      //
-      // if (!marginPieChartIndexes[regionParty]) { continue }
-      //
-      // pieChartIndex += marginPieChartIndexes[regionParty].indexOf(getMarginIndexForValue(regionMargin, regionParty))
-
       var marginKey = getMarginIndexForValue(regionMargin, regionParty)
 
       marginTotalsData[regionParty][marginKey] += regionEV

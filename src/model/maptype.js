@@ -180,7 +180,14 @@ var USAPresidentialMapType = new MapType(
   true,
   {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
   [],
-  []
+  [
+    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "disabled", reloadType: MapSettingReloadType.data}
+  ]
 )
 
 var USASenateMapType = new MapType(
@@ -198,14 +205,14 @@ var USASenateMapType = new MapType(
   [
     {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
       [
-        {id: "show", title: "Show", value: true},
-        {id: "hide", title: "Hide", value: false}
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
       ],
     defaultValue: "hide", reloadType: MapSettingReloadType.display},
     {id: "pieCurrentSeats", title: "Pie Current Seats", type: MapSettingType.optionCycle, options:
       [
-        {id: "show", title: "Show", value: true},
-        {id: "hide", title: "Hide", value: false}
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
       ],
     defaultValue: "show", reloadType: MapSettingReloadType.display},
     {id: "seatArrangement", title: "Seat Arrangement", type: MapSettingType.optionCycle, options:
@@ -216,9 +223,15 @@ var USASenateMapType = new MapType(
     defaultValue: "election-type", reloadType: MapSettingReloadType.data},
     {id: "offYear", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
       [
-        {id: "show", title: "Show", value: true},
-        {id: "hide", title: "Hide", value: false}
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
       ],
     defaultValue: "hide", reloadType: MapSettingReloadType.data},
+    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "disabled", reloadType: MapSettingReloadType.data}
   ]
 )

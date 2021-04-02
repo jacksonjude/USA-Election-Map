@@ -185,4 +185,4 @@ politicalParties[Independent1976EMParty.getID()] = Independent1976EMParty
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
 var selectablePoliticalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
-var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), TossupParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]
+var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]

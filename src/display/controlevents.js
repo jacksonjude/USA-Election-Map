@@ -54,7 +54,7 @@ function arrowKeyCycle(keyString)
     incrementSlider(keyString)
     var mapDatesLength = currentMapSource.getMapDates().length
 
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -80,7 +80,7 @@ function incrementSlider(keyString)
 {
   var sliderDiv = $("#dataMapDateSlider")[0]
 
-  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     switch (selectedCompareSlider)
     {
@@ -117,7 +117,7 @@ function incrementSlider(keyString)
     break
 
     case "down":
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -154,7 +154,7 @@ function incrementSlider(keyString)
     break
 
     case "up":
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -191,7 +191,7 @@ function incrementSlider(keyString)
     break
   }
 
-  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     switch (selectedCompareSlider)
     {
