@@ -403,6 +403,10 @@ document.addEventListener('keypress', async function(e) {
       selectedDropdownDivID = null
     }
   }
+  else if (e.which == 84 || e.which == 116)
+  {
+    cycleMapType($("#cycleMapTypeButton")[0])
+  }
 })
 
 var mouseIsDown = false

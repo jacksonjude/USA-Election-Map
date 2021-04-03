@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -11,6 +11,7 @@ class MapType
     this.evFunction = evFunction
     this.shouldDisplayEVOnMap = shouldDisplayEVOnMap
     this.secondarySliderIncrement = secondarySliderIncrement
+    this.customMapEnabled = customMapEnabled
     this.regionNameToID = regionNameToID
     this.regionsToHideOnDisable = regionsToHideOnDisable
     this.mapSettingsLayout = mapSettingsLayout
@@ -65,6 +66,11 @@ class MapType
   getSecondarySliderIncrement()
   {
     return this.secondarySliderIncrement
+  }
+
+  getCustomMapEnabled()
+  {
+    return this.customMapEnabled
   }
 
   setMapSources(mapSources)
@@ -199,6 +205,7 @@ var USAPresidentialMapType = new MapType(
   },
   true,
   5,
+  true,
   {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
   [],
   [
@@ -224,6 +231,7 @@ var USASenateMapType = new MapType(
   },
   false,
   3,
+  false,
   {"Alabama":"AL", "Alabama Special":"AL-S", "Alaska":"AK", "Alaska Special":"AK-S", "Arizona":"AZ", "Arizona Special":"AZ-S", "Arkansas":"AR", "Arkansas Special":"AR-S", "California":"CA", "California Special":"CA-S", "Colorado":"CO", "Colorado Special":"CO-S", "Connecticut":"CT", "Connecticut Special":"CT-S", "Delaware":"DE", "Delaware Special":"DE-S", "Florida":"FL", "Florida Special":"FL-S", "Georgia":"GA", "Georgia Special":"GA-S", "Hawaii":"HI", "Hawaii Special":"HI-S", "Idaho":"ID", "Idaho Special":"ID-S", "Illinois":"IL", "Illinois Special":"IL-S", "Indiana":"IN", "Indiana Special":"IN-S", "Iowa":"IA", "Iowa Special":"IA-S", "Kansas":"KS", "Kansas Special":"KS-S", "Kentucky":"KY", "Kentucky Special":"KY-S", "Louisiana":"LA", "Louisiana Special":"LA-S", "Maine":"ME", "Maine Special":"ME-S", "Maryland":"MD", "Maryland Special":"MD-S", "Massachusetts":"MA", "Massachusetts Special":"MA-S", "Michigan":"MI", "Michigan Special":"MI-S", "Minnesota":"MN", "Minnesota Special":"MN-S", "Mississippi":"MS", "Mississippi Special":"MS-S", "Missouri":"MO", "Missouri Special":"MO-S", "Montana":"MT", "Montana Special":"MT-S", "Nebraska":"NE", "Nebraska Special":"NE-S", "Nevada":"NV", "Nevada Special":"NV-S", "New Hampshire":"NH", "New Hampshire Special":"NH-S", "New Jersey":"NJ", "New Jersey Special":"NJ-S", "New Mexico":"NM", "New Mexico Special":"NM-S", "New York":"NY", "New York Special":"NY-S", "North Carolina":"NC", "North Carolina Special":"NC-S", "North Dakota":"ND", "North Dakota Special":"ND-S", "Ohio":"OH", "Ohio Special":"OH-S", "Oklahoma":"OK", "Oklahoma Special":"OK-S", "Oregon":"OR", "Oregon Special":"OR-S", "Pennsylvania":"PA", "Pennsylvania Special":"PA-S", "Rhode Island":"RI", "Rhode Island Special":"RI-S", "South Carolina":"SC", "South Carolina Special":"SC-S", "South Dakota":"SD", "South Dakota Special":"SD-S", "Tennessee":"TN", "Tennessee Special":"TN-S", "Texas":"TX", "Texas Special":"TX-S", "Utah":"UT", "Utah Special":"UT-S", "Vermont":"VT", "Vermont Special":"VT-S", "Virginia":"VA", "Virginia Special":"VA-S", "Washington":"WA", "Washington Special":"WA-S", "West Virginia":"WV", "West Virginia Special":"WV-S", "Wisconsin":"WI", "Wisconsin Special":"WI-S", "Wyoming":"WY", "Wyoming Special":"WY-S"},
   [/.+-S/],
   [

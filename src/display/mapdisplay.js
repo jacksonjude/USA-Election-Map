@@ -129,6 +129,21 @@ async function reloadForNewMapType(initialLoad)
   currentCustomMapSource = currentMapType.getCustomMapSource()
   mapRegionNameToID = currentMapType.getRegionNameToID()
 
+  if (currentMapType.getCustomMapEnabled())
+  {
+    $("#editDoneButton").removeClass('topnavdisable2')
+    $("#compareButton").removeClass('topnavdisable2')
+    $("#compareDropdownContent").removeClass('topnavdisable2')
+    $("#compareDropdownContent").css("opacity", "100%")
+  }
+  else
+  {
+    $("#editDoneButton").addClass('topnavdisable2')
+    $("#compareButton").addClass('topnavdisable2')
+    $("#compareDropdownContent").addClass('topnavdisable2')
+    $("#compareDropdownContent").css("opacity", "0%")
+  }
+
   selectedParty = null
   displayRegionDataArray = {}
   regionIDsToIgnore = [/.+-button/, /.+-land/]
@@ -824,7 +839,7 @@ function updateMapElectoralVoteText()
   for (regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
-    
+
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
     if (regionEV == undefined) { continue }
 
@@ -955,14 +970,20 @@ function toggleMarginEditing(marginID, div)
     $("#" + marginID + "-text").focus()
 
     $("#marginEditButton").addClass('active')
-    $("#editDoneButton").addClass('topnavdisable')
+    if (currentMapType.getCustomMapEnabled())
+    {
+      $("#editDoneButton").addClass('topnavdisable')
+    }
     $("#sourceToggleButton").addClass('topnavdisable')
     $("#mapSourcesDropdownContainer").hide()
   }
   else
   {
     $("#marginEditButton").removeClass('active')
-    $("#editDoneButton").removeClass('topnavdisable')
+    if (currentMapType.getCustomMapEnabled())
+    {
+      $("#editDoneButton").removeClass('topnavdisable')
+    }
     $("#sourceToggleButton").removeClass('topnavdisable')
     $("#mapSourcesDropdownContainer").show()
   }
@@ -1827,6 +1848,11 @@ function applyCompareToCustomMap()
       }
 
       resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+
+      if (compareMapDataArray[0][regionID].seatClass)
+      {
+        resultMapArray[regionID].seatClass = compareMapDataArray[0][regionID].seatClass
+      }
     }
   }
 

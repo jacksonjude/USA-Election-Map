@@ -1018,7 +1018,11 @@ function createPresidentialMapSources()
   presidentialMapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
   presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), CustomMapSource.getID()]
+  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  if (USAPresidentialMapType.getCustomMapEnabled())
+  {
+    presidentialMapSourceIDs.push(CustomMapSource.getID())
+  }
 
   const kPastElectionsVsPastElections = 1
   const kPastElectionsVs538Projection = 2
@@ -1461,7 +1465,11 @@ function createSenateMapSources()
   senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var senateMapSourceIDs = [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
+  var senateMapSourceIDs = [PastElectionResultMapSource.getID()]
+  if (USASenateMapType.getCustomMapEnabled())
+  {
+    senateMapSourceIDs.push(CustomMapSource.getID())
+  }
 
   const kPastElectionsVsPastElections = 1
 
