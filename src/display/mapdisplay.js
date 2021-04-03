@@ -54,7 +54,7 @@ const inaugurationDayTime2021 = 1611162000000
 const electionDayTime2022 = 1667926800000
 const electionDayTime2024 = 1730826000000
 
-const countdownTimes = {"2020 Presidential Election": electionDayTime2020, "2021 Inauguration Day": inaugurationDayTime2021, "2022 Midterm Election": electionDayTime2022, "2024 Presidential Election": electionDayTime2024}
+const countdownTimes = {"2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"}, "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"}, "2022 Midterm Election": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"}, "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}}
 var currentCountdownTimeName
 
 const kCSVFileType = "text/csv"
@@ -451,6 +451,7 @@ function createCountdownDropdownItems()
 
   updateCountdownTimer()
   $("[id='" + currentCountdownTimeName + "-countdown']").addClass("active")
+  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
 }
 
 function createComparePresetDropdownItems()
@@ -1013,6 +1014,7 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
   $(countdownButtonDiv).addClass("active")
 
   currentCountdownTimeName = countdownTimeName
+  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
   updateCountdownTimer()
 }
 
@@ -1608,21 +1610,28 @@ function updateCountdownTimer()
   var countdownTime
   if (currentCountdownTimeName != null)
   {
-    countdownTime = countdownTimes[currentCountdownTimeName]
+    countdownTime = countdownTimes[currentCountdownTimeName].time
   }
   else
   {
-    countdownTime = Object.values(countdownTimes).sort().slice(-1)[0]
+    countdownTime = Object.values(countdownTimes).map((timeData) => {return timeData.time}).sort().slice(-1)[0]
     for (timeName in countdownTimes)
     {
-      if (currentDate.getTime() < countdownTimes[timeName])
+      if (currentDate.getTime() < countdownTimes[timeName].time)
       {
-        countdownTime = countdownTimes[timeName]
+        countdownTime = countdownTimes[timeName].time
         break
       }
     }
 
-    currentCountdownTimeName = getKeyByValue(countdownTimes, countdownTime)
+    for (timeName in countdownTimes)
+    {
+      if (countdownTime == countdownTimes[timeName].time)
+      {
+        currentCountdownTimeName = timeName
+        break
+      }
+    }
   }
 
   var timeUntilDay = Math.abs(countdownTime-currentDate.getTime())
