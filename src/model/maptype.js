@@ -20,7 +20,7 @@ class MapType
     this.currentMapSettings = {}
     for (var settingNum in mapSettingsLayout)
     {
-      this.currentMapSettings[mapSettingsLayout[settingNum].id] = mapSettingsLayout[settingNum].defaultValue
+      this.currentMapSettings[mapSettingsLayout[settingNum].id] = getCookie(this.id + "-" + mapSettingsLayout[settingNum].id) || mapSettingsLayout[settingNum].defaultValue
     }
   }
 
@@ -148,6 +148,11 @@ class MapType
   setMapSettings(currentMapSettings)
   {
     this.currentMapSettings = currentMapSettings
+
+    for (var settingID in this.currentMapSettings)
+    {
+      setCookie(this.id + "-" + settingID, this.currentMapSettings[settingID])
+    }
   }
 
   getMapSettingLayout(settingID, self)

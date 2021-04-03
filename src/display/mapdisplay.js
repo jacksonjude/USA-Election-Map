@@ -122,7 +122,7 @@ async function reloadForNewMapType(initialLoad)
   var previousDateOverride
   if (initialLoad != true)
   {
-    previousDateOverride = currentSliderDate.getTime()
+    previousDateOverride = currentSliderDate ? currentSliderDate.getTime() : null
     clearMap(true, false)
   }
 
