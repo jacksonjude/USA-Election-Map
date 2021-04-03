@@ -1017,7 +1017,7 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
 {
-  shouldResetCurrentMapSource = shouldResetCurrentMapSource || true
+  shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
 
   if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
