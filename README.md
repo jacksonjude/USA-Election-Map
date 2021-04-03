@@ -42,7 +42,7 @@ Then open the address provided in the Terminal window (by default, it seems to b
 
 
 ## TODO List
-- [ ] Past senate election results & 2022 senate projections
+- [x] Past senate election results & 2022 senate projections
 - [ ] National popular vote totals for past elections
 - [ ] Full third-party support in past results and custom maps
 - [ ] More past presidential election results
