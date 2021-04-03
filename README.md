@@ -1,12 +1,12 @@
 # USA Election Map
 
-An interactive electoral vote map for US presidential elections. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPMS](https://www.yapms.com).
+An interactive electoral vote map for US presidential and senate elections. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPMS](https://www.yapms.com).
 
 ## Features
 
 * Interactive and detailed map sources
   * Displays projection data for the 2020 election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays presidential election results from 1976-2020, showing both victory margin and voteshare percentages for each state / district
+  * Displays presidential and senate election results from 1976-2020, showing both victory margin and voteshare percentages for each state / district
   * Pie chart to show electoral vote counts by party and by margin
   * Custom maps that can be downloaded and uploaded
 * Comparisons between different map sources
