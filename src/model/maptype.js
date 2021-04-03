@@ -191,7 +191,7 @@ var USAPresidentialMapType = new MapType(
   "Presidential",
   "P",
   "assets/usa-pres.png",
-  "src/display/usapresidentialmap.svg",
+  "svg-sources/usa-presidential-map.svg",
   538,
   function(decade, regionID)
   {
@@ -216,7 +216,7 @@ var USASenateMapType = new MapType(
   "Senate",
   "S",
   "assets/usa-senate.png",
-  "src/display/usasenatemap.svg",
+  "svg-sources/usa-senate-map.svg",
   100,
   function()
   {
