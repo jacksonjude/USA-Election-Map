@@ -1153,7 +1153,7 @@ function createSenateMapSources()
             }
           }
 
-          var voteshareSortedCandidateData = Object.values(candidateData).sort((cand1, cand2) => cand1.voteshare < cand2.voteshare)
+          var voteshareSortedCandidateData = Object.values(candidateData).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
           voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= 1.00)
 
           if (voteshareSortedCandidateData.length == 0)
