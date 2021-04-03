@@ -37,7 +37,7 @@ var ignoreMapUpdateClickArray = []
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
-const maxDateSliderTicks = 40
+const maxDateSliderTicks = 50
 
 const kEditing = 0
 const kViewing = 1
