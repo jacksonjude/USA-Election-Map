@@ -23,6 +23,7 @@ class CSVDatabase
 
       request.onerror = function(event) {
         console.error(`Database error: ${event.target.errorCode}`)
+        resolve(null)
       }
 
       request.onsuccess = function(event) {
@@ -39,6 +40,7 @@ class CSVDatabase
     try
     {
       var db = await CSVDatabase.openDatabase()
+      if (db == null) { return }
       var transaction = db.transaction('CSVFiles', 'readwrite')
       var store = transaction.objectStore('CSVFiles')
 
@@ -62,6 +64,7 @@ class CSVDatabase
       try
       {
         var db = await CSVDatabase.openDatabase()
+        if (db == null) { return resolve(null) }
         var transaction = db.transaction('CSVFiles', 'readonly')
         var store = transaction.objectStore('CSVFiles')
 
@@ -119,6 +122,7 @@ class CSVDatabase
       try
       {
         var db = await CSVDatabase.openDatabase()
+        if (db == null) { return resolve(false) }
         var transaction = db.transaction('CSVFiles', 'readonly')
         var store = transaction.objectStore('CSVFiles')
 
@@ -130,6 +134,7 @@ class CSVDatabase
 
         query.onerror = function(event) {
           console.log(event.target.errorCode)
+          resolve(false)
         }
 
         transaction.oncomplete = function() {
