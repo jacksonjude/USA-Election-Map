@@ -169,6 +169,7 @@ async function reloadForNewMapType(initialLoad)
   updateMapElectoralVoteText()
 
   $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
+  $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
   resizeElements(false)
