@@ -72,6 +72,9 @@ const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 var selectedDropdownDivID = null
 
 $(async function() {
+  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]]
+  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+
   reloadForNewMapType(true)
 
   preloadAssets([
@@ -111,6 +114,7 @@ function cycleMapType(buttonDiv)
   }
 
   currentMapType = mapTypes[mapTypeIDs[newMapTypeIndex]]
+  setCookie("currentMapType", currentMapType.getID())
 
   $(buttonDiv).find("img").attr('src', currentMapType.getIconURL())
 
@@ -1013,6 +1017,8 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
 {
+  shouldResetCurrentMapSource = shouldResetCurrentMapSource || true
+
   if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
     updateMapSourceButton(true)

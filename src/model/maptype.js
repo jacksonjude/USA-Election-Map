@@ -17,6 +17,8 @@ class MapType
     this.regionsToHideOnDisable = regionsToHideOnDisable
     this.mapSettingsLayout = mapSettingsLayout
 
+    this.currentMapSourceID = getCookie(this.id + "-currentMapSource")
+
     this.currentMapSettings = {}
     for (var settingNum in mapSettingsLayout)
     {
@@ -98,6 +100,7 @@ class MapType
   setCurrentMapSourceID(currentMapSourceID)
   {
     this.currentMapSourceID = currentMapSourceID
+    setCookie(this.id + "-currentMapSource", this.currentMapSourceID || "")
   }
 
   getCurrentMapSourceID()
