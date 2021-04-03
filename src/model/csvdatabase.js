@@ -56,6 +56,8 @@ class CSVDatabase
 
   static async fetchCSV(sourceID)
   {
+    var self = this
+
     var fetchCSVPromise = new Promise(async (resolve, reject) => {
       try
       {
@@ -69,8 +71,15 @@ class CSVDatabase
           var textResult = query.result ? query.result.text : null
           var updatedTime = query.result ? query.result.updatedAt : null
 
+          if (Date.now()-self.lastSourceUpdateCheck < 1000*60*5)
+          {
+            resolve(textResult)
+            return
+          }
+
           $.getJSON(sourceUpdatedTimesURL, null, data => {
             // console.log(updatedTime, data[sourceID], updatedTime != null && updatedTime >= data[sourceID])
+            self.lastSourceUpdateCheck = (new Date()).getTime()
             if (updatedTime && updatedTime >= data[sourceID])
             {
               resolve(textResult)
