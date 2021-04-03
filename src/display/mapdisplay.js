@@ -154,6 +154,7 @@ async function reloadForNewMapType(initialLoad)
 
   createMapSourceDropdownItems()
   createSettingsDropdownItems()
+  createComparePresetDropdownItems()
 
   populateRegionsArray()
   for (partyNum in selectablePoliticalPartyIDs)
@@ -418,6 +419,18 @@ function createCountdownDropdownItems()
 
   updateCountdownTimer()
   $("[id='" + currentCountdownTimeName + "-countdown']").addClass("active")
+}
+
+function createComparePresetDropdownItems()
+{
+  $("#comparePresetsDropdownContainer").html("")
+  for (comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
+  {
+    var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
+
+    $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + currentMapType.getMapSources()[compareIDPair[0]].getName() + " vs " + currentMapType.getMapSources()[compareIDPair[1]].getName() + "</a>")
+  }
 }
 
 function addDivEventListeners()
