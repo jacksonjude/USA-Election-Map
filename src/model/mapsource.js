@@ -1357,8 +1357,8 @@ function createSenateMapSources()
   var PastElectionResultMapSource = new MapSource(
     "Past-Senate-Elections",
     "Past Elections",
-    //"https://map.jacksonjude.com/csv-sources/historical-senate.csv",
-    "./csv-sources/historical-senate.csv",
+    "https://map.jacksonjude.com/csv-sources/historical-senate.csv",
+    //"./csv-sources/historical-senate.csv",
     "https://en.wikipedia.org/wiki/",
     "./assets/wikipedia-large.png",
     {
