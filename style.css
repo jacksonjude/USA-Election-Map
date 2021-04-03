@@ -48,6 +48,16 @@ body {
   background-color: #3d3d3d !important;
 }
 
+.topnavdisable2 {
+  background-color: #3d3d3d !important;
+  pointer-events: none;
+}
+
+.topnavdisable2:hover {
+  background-color: #3d3d3d !important;
+  pointer-events: none;
+}
+
 .topnav #DEM {
   background-color: rgb(84, 102, 140);
 }
@@ -241,7 +251,7 @@ body {
   height: 25px;
   animation: spin 0.5s linear infinite;
   display: inline-block;
-  margin-left: 80px;
+  margin-left: 5px;
   margin-bottom: 5px;
 }
 

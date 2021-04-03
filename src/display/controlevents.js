@@ -54,7 +54,7 @@ function arrowKeyCycle(keyString)
     incrementSlider(keyString)
     var mapDatesLength = currentMapSource.getMapDates().length
 
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -80,7 +80,7 @@ function incrementSlider(keyString)
 {
   var sliderDiv = $("#dataMapDateSlider")[0]
 
-  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     switch (selectedCompareSlider)
     {
@@ -117,7 +117,7 @@ function incrementSlider(keyString)
     break
 
     case "down":
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -143,18 +143,18 @@ function incrementSlider(keyString)
     }
 
     if (sliderDiv.value == 0) { return }
-    if (sliderDiv.value < 5)
+    if (sliderDiv.value < currentMapType.getSecondarySliderIncrement())
     {
       sliderDiv.value = 0
     }
     else
     {
-      sliderDiv.value -= 5
+      sliderDiv.value -= currentMapType.getSecondarySliderIncrement()
     }
     break
 
     case "up":
-    if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+    if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
     {
       switch (selectedCompareSlider)
       {
@@ -180,18 +180,18 @@ function incrementSlider(keyString)
     }
 
     if (sliderDiv.value == sliderDiv.max) { return }
-    if (parseInt(sliderDiv.max)-sliderDiv.value < 5)
+    if (parseInt(sliderDiv.max)-sliderDiv.value < currentMapType.getSecondarySliderIncrement())
     {
       sliderDiv.value = sliderDiv.max
     }
     else
     {
-      sliderDiv.value -= -5 //WHY DO I HAVE TO DO THIS BS
+      sliderDiv.value -= -currentMapType.getSecondarySliderIncrement() //WHY DO I HAVE TO DO THIS BS
     }
     break
   }
 
-  if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     switch (selectedCompareSlider)
     {
@@ -331,7 +331,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= politicalPartyIDs.length)
+  else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= selectablePoliticalPartyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -340,7 +340,7 @@ document.addEventListener('keypress', async function(e) {
     }
     else
     {
-      selectParty($("#" + politicalPartyIDs[partyToSelect-1]))
+      selectParty($("#" + selectablePoliticalPartyIDs[partyToSelect-1]))
     }
   }
   else if (e.which == 13)
@@ -402,6 +402,10 @@ document.addEventListener('keypress', async function(e) {
       removeActiveClassFromDropdownButton()
       selectedDropdownDivID = null
     }
+  }
+  else if (e.which == 84 || e.which == 116)
+  {
+    cycleMapType($("#cycleMapTypeButton")[0])
   }
 })
 

@@ -26,6 +26,17 @@ function getKeyByValue(object, value)
   return Object.keys(object).find(key => object[key] == value)
 }
 
+function multiplyBrightness(hexColorString, brightnessFactor)
+{
+  var rgb = hexToRGB(hexColorString)
+  if (!rgb) { return }
+
+  var hsv = RGBtoHSV(rgb)
+  hsv.v *= brightnessFactor
+
+  return RGBToHex(HSVtoRGB(hsv))
+}
+
 function adjustBrightness(hexColorString, minBrightness)
 {
   var rgb = hexToRGB(hexColorString)
@@ -113,4 +124,34 @@ function cloneObject(objectToClone)
   var newObject = JSON.parse(JSON.stringify(objectToClone))
 
   return newObject
+}
+
+function setCookie(cname, cvalue, exdays)
+{
+  exdays = exdays || 365*5
+
+  var d = new Date()
+  d.setTime(d.getTime() + (exdays*24*60*60*1000))
+  var expires = "expires="+ d.toUTCString()
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
+}
+
+function getCookie(cname)
+{
+  var name = cname + "="
+  var decodedCookie = decodeURIComponent(document.cookie)
+  var ca = decodedCookie.split(';')
+  for (var i = 0; i < ca.length; i++)
+  {
+    var c = ca[i]
+    while (c.charAt(0) == ' ')
+    {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) == 0)
+    {
+      return c.substring(name.length, c.length)
+    }
+  }
+  return null
 }

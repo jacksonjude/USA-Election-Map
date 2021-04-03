@@ -1,3 +1,11 @@
+var currentMapType = mapTypes[mapTypeIDs[0]]
+
+var mapSources = currentMapType.getMapSources()
+var mapSourceIDs = currentMapType.getMapSourceIDs()
+var currentCustomMapSource = currentMapType.getCustomMapSource()
+
+var mapRegionNameToID = currentMapType.getRegionNameToID()
+
 var currentMapSource = NullMapSource
 
 var selectedParty
@@ -14,16 +22,8 @@ const regionStrokeAnimationDuration = 0.06
 const regionSelectColor = "#ffffff"
 const regionDeselectColor = "#181922" //#555
 
-const mapRegionNameToID = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
-
-const regionEVArray = {
-  2020: {"AL":8, "AK":3, "AZ":12, "AR":6, "CA":55, "CO":10, "CT":7, "DE":3, "DC":3, "FL":31, "GA":16, "HI":4, "ID":4, "IL":19, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":15, "MN":9, "MS":6, "MO":10, "MT":4, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":27, "NC":16, "ND":3, "OH":17, "OK":7, "OR":8, "PA":19, "RI":3, "SC":9, "SD":3, "TN":11, "TX":41, "UT":6, "VT":3, "VA":13, "WA":12, "WV":4, "WI":10, "WY":3},
-  2010: {"AL":9, "AK":3, "AZ":11, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":29, "GA":16, "HI":4, "ID":4, "IL":20, "IN":11, "IA":6, "KS":6, "KY":8, "LA":8, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":11, "MI":16, "MN":10, "MS":6, "MO":10, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":6, "NH":4, "NJ":14, "NM":5, "NY":29, "NC":15, "ND":3, "OH":18, "OK":7, "OR":7, "PA":20, "RI":4, "SC":9, "SD":3, "TN":11, "TX":38, "UT":6, "VT":3, "VA":13, "WA":12, "WV":5, "WI":10, "WY":3},
-  2000: {"AL":9, "AK":3, "AZ":10, "AR":6, "CA":55, "CO":9, "CT":7, "DE":3, "DC":3, "FL":27, "GA":15, "HI":4, "ID":4, "IL":21, "IN":11, "IA":7, "KS":6, "KY":8, "LA":9, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":12, "MI":17, "MN":10, "MS":6, "MO":11, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":5, "NH":4, "NJ":15, "NM":5, "NY":31, "NC":15, "ND":3, "OH":20, "OK":7, "OR":7, "PA":21, "RI":4, "SC":8, "SD":3, "TN":11, "TX":34, "UT":5, "VT":3, "VA":13, "WA":11, "WV":5, "WI":10, "WY":3},
-  1990: {"AL":9, "AK":3, "AZ":8, "AR":6, "CA":54, "CO":8, "CT":8, "DE":3, "DC":3, "FL":25, "GA":13, "HI":4, "ID":4, "IL":22, "IN":12, "IA":7, "KS":6, "KY":8, "LA":9, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":12, "MI":18, "MN":10, "MS":7, "MO":11, "MT":3, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":4, "NH":4, "NJ":15, "NM":5, "NY":33, "NC":14, "ND":3, "OH":21, "OK":8, "OR":7, "PA":23, "RI":4, "SC":8, "SD":3, "TN":11, "TX":32, "UT":5, "VT":3, "VA":13, "WA":11, "WV":5, "WI":11, "WY":3},
-  1980: {"AL":9, "AK":3, "AZ":7, "AR":6, "CA":47, "CO":8, "CT":8, "DE":3, "DC":3, "FL":21, "GA":12, "HI":4, "ID":4, "IL":24, "IN":12, "IA":8, "KS":7, "KY":9, "LA":10, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":13, "MI":20, "MN":10, "MS":7, "MO":11, "MT":4, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":4, "NH":4, "NJ":16, "NM":5, "NY":36, "NC":13, "ND":3, "OH":23, "OK":8, "OR":7, "PA":25, "RI":4, "SC":8, "SD":3, "TN":11, "TX":29, "UT":5, "VT":3, "VA":12, "WA":10, "WV":6, "WI":11, "WY":3},
-  1970: {"AL":9, "AK":3, "AZ":6, "AR":6, "CA":45, "CO":7, "CT":8, "DE":3, "DC":3, "FL":17, "GA":12, "HI":4, "ID":4, "IL":26, "IN":13, "IA":8, "KS":7, "KY":9, "LA":10, "ME-D1":1, "ME-D2":1, "ME-AL":2, "MD":10, "MA":14, "MI":21, "MN":10, "MS":7, "MO":12, "MT":4, "NE-D1":1, "NE-D2":1, "NE-D3":1, "NE-AL":2, "NV":3, "NH":4, "NJ":17, "NM":4, "NY":41, "NC":13, "ND":3, "OH":25, "OK":8, "OR":6, "PA":27, "RI":4, "SC":8, "SD":4, "TN":10, "TX":26, "UT":4, "VT":3, "VA":12, "WA":9, "WV":6, "WI":11, "WY":3}
-}
+const regionDisabledColor = "#28292F"
+const disabledBrightnessFactor = 1.0/2.0
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
@@ -37,7 +37,7 @@ var ignoreMapUpdateClickArray = []
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
-const maxDateSliderTicks = 25
+const maxDateSliderTicks = 50
 
 const kEditing = 0
 const kViewing = 1
@@ -54,7 +54,7 @@ const inaugurationDayTime2021 = 1611162000000
 const electionDayTime2022 = 1667926800000
 const electionDayTime2024 = 1730826000000
 
-const countdownTimes = {"2020 Presidential Election": electionDayTime2020, "2021 Inauguration Day": inaugurationDayTime2021, "2022 Midterm Election": electionDayTime2022, "2024 Presidential Election": electionDayTime2024}
+const countdownTimes = {"2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"}, "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"}, "2022 Midterm Election": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"}, "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}}
 var currentCountdownTimeName
 
 const kCSVFileType = "text/csv"
@@ -71,17 +71,11 @@ const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 
 var selectedDropdownDivID = null
 
-const kPastElectionsVsPastElections = 1
-const kPastElectionsVs538Projection = 2
-const kPastElectionsVs538PollAvg = 3
-
 $(async function() {
-  await loadMapSVGFile()
-  setOutlineDivProperties()
-  updateMapElectoralVoteText()
+  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]]
+  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
 
-  $("#loader").hide()
-  resizeElements(false)
+  reloadForNewMapType(true)
 
   preloadAssets([
     "assets/icon-download-none.png",
@@ -96,17 +90,10 @@ $(async function() {
     "assets/nyt-large.png"
   ])
 
-  createMapSourceDropdownItems()
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
 
   addDivEventListeners()
-
-  populateRegionsArray()
-  displayPartyTotals(getPartyTotals())
-
-  setupEVPieChart()
-  updateEVPieChart()
 
   updateCountdownTimer()
   setTimeout(function() {
@@ -116,14 +103,109 @@ $(async function() {
   }, 1000-((new Date()).getTime()%1000))
 
   $.ajaxSetup({cache: false})
+})
+
+function cycleMapType(buttonDiv)
+{
+  var newMapTypeIndex = mapTypeIDs.indexOf(currentMapType.getID())+1
+  if (newMapTypeIndex >= mapTypeIDs.length || newMapTypeIndex < 0)
+  {
+    newMapTypeIndex = 0
+  }
+
+  currentMapType = mapTypes[mapTypeIDs[newMapTypeIndex]]
+  setCookie("currentMapType", currentMapType.getID())
+
+  $(buttonDiv).find("img").attr('src', currentMapType.getIconURL())
+
+  reloadForNewMapType()
+}
+
+async function reloadForNewMapType(initialLoad)
+{
+  var previousDateOverride
+  if (initialLoad != true)
+  {
+    previousDateOverride = currentSliderDate ? currentSliderDate.getTime() : null
+    clearMap(true, false)
+  }
+
+  mapSources = currentMapType.getMapSources()
+  mapSourceIDs = currentMapType.getMapSourceIDs()
+  currentCustomMapSource = currentMapType.getCustomMapSource()
+  mapRegionNameToID = currentMapType.getRegionNameToID()
+
+  if (currentMapType.getCustomMapEnabled())
+  {
+    $("#editDoneButton").removeClass('topnavdisable2')
+    $("#compareButton").removeClass('topnavdisable2')
+    $("#compareDropdownContent").removeClass('topnavdisable2')
+    $("#compareDropdownContent").css("opacity", "100%")
+  }
+  else
+  {
+    $("#editDoneButton").addClass('topnavdisable2')
+    $("#compareButton").addClass('topnavdisable2')
+    $("#compareDropdownContent").addClass('topnavdisable2')
+    $("#compareDropdownContent").css("opacity", "0%")
+  }
+
+  selectedParty = null
+  displayRegionDataArray = {}
+  regionIDsToIgnore = [/.+-button/, /.+-land/]
+  showingDataMap = false
+  ignoreMapUpdateClickArray = []
+  currentSliderDate = null
+  currentMapState = kViewing
+  showingCompareMap = false
+  compareMapSourceIDArray = [null, null]
+  compareMapDataArray = [null, null]
+  selectedCompareSlider = null
+
+  currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
+
+  await loadMapSVGFile()
+  setOutlineDivProperties()
+  updateMapElectoralVoteText()
+
+  $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
+  $("#helpbox").html(currentMapType.getControlsHelpHTML())
+
+  $("#loader").hide()
+  resizeElements(false)
+
+  createMapSourceDropdownItems()
+  createSettingsDropdownItems()
+  createComparePresetDropdownItems()
+
+  populateRegionsArray()
+  for (partyNum in selectablePoliticalPartyIDs)
+  {
+    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+  }
+  displayPartyTotals(getPartyTotals())
+
+  setupEVPieChart()
+  updateEVPieChart()
 
   updateIconsBasedOnLocalCSVData()
-})
+
+  if (currentMapSource.getID() != NullMapSource.getID())
+  {
+    updateMapSourceButton()
+    loadDataMap(false, false, previousDateOverride)
+  }
+  else
+  {
+    updateMapSourceButton(true)
+  }
+}
 
 function loadMapSVGFile()
 {
   var loadSVGFilePromise = new Promise((resolve, reject) => {
-    $('#mapzoom').load("src/display/usamap.svg", function() {
+    $('#mapzoom').load(currentMapType.getSVGPath(), function() {
       resolve()
     })
   })
@@ -241,18 +323,20 @@ function preloadAssets(assetURLs)
 
 function createMapSourceDropdownItems()
 {
+  $("#mapSourcesDropdownContainer").html("")
   for (sourceNum in mapSourceIDs)
   {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
 
     var mapSourceID = mapSourceIDs[sourceNum]
     var mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
+    var mapSourceName = mapSources[mapSourceID].getName()
 
     var divStringToAppend = ""
 
-    if (mapSourceID != CustomMapSource.getID())
+    if (mapSourceID != currentCustomMapSource.getID())
     {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceID
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
       divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
@@ -261,7 +345,7 @@ function createMapSourceDropdownItems()
     }
     else
     {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceID
+      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
 
       divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); downloadMapFile(currentMapSource, kJSONFileType)'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
@@ -289,6 +373,73 @@ function createMarginEditDropdownItems()
   }
 }
 
+function createSettingsDropdownItems()
+{
+  $("#settingsDropdownContainer").html("")
+  for (settingNum in currentMapType.getMapSettingsLayout())
+  {
+    var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
+    $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    switch (settingLayout.type)
+    {
+      case MapSettingType.optionCycle:
+      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14px; min-height: 25px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, true)'></a>")
+      cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), false)
+      break
+    }
+  }
+}
+
+function cycleMapSetting(settingID, settingDiv, shouldIncrement)
+{
+  var shouldIncrement = shouldIncrement || false
+
+  var currentMapSettings = currentMapType.getMapSettings()
+
+  var settingOptions = currentMapType.getMapSettingOptions(settingID)
+  var currentValueID = currentMapSettings[settingID]
+
+  var optionIndex = 0
+  for (optionNum in settingOptions)
+  {
+    if (settingOptions[optionNum].id == currentValueID)
+    {
+      optionIndex = parseInt(optionNum)
+      break
+    }
+  }
+
+  optionIndex += shouldIncrement ? 1 : 0
+  if (optionIndex >= settingOptions.length)
+  {
+    optionIndex = 0
+  }
+
+  var newValueID = settingOptions[optionIndex].id
+  var newValueTitle = settingOptions[optionIndex].title
+  $(settingDiv).html(currentMapType.getMapSettingLayout(settingID).title + "<span style='float: right'>" + newValueTitle + "</span>")
+
+  currentMapSettings[settingID] = newValueID
+  currentMapType.setMapSettings(currentMapSettings)
+
+  switch (currentMapType.getMapSettingLayout(settingID).reloadType)
+  {
+    case MapSettingReloadType.display:
+    if (showingDataMap)
+    {
+      displayDataMap()
+    }
+    break
+
+    case MapSettingReloadType.data:
+    if (showingDataMap)
+    {
+      loadDataMap()
+    }
+    break
+  }
+}
+
 function createCountdownDropdownItems()
 {
   $("#countdownsDropdownContainer").html("")
@@ -300,6 +451,19 @@ function createCountdownDropdownItems()
 
   updateCountdownTimer()
   $("[id='" + currentCountdownTimeName + "-countdown']").addClass("active")
+  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
+}
+
+function createComparePresetDropdownItems()
+{
+  $("#comparePresetsDropdownContainer").html("")
+  for (comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
+  {
+    var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
+
+    $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
+    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
+  }
 }
 
 function addDivEventListeners()
@@ -374,18 +538,20 @@ function getIconDivsToUpdateArrayForSourceID(mapSourceID)
   return iconDivDictionary
 }
 
-function loadDataMap(shouldSetToMax, forceDownload)
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
+
+    currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
     var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
 
     if (!loadedSuccessfully) { resolve(); return }
 
-    setDataMapDateSliderRange(shouldSetToMax)
+    setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
     displayDataMap()
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
@@ -524,28 +690,29 @@ function removeStatusImage(divID)
   $("#" + divID + " .status").remove()
 }
 
-function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates)
+function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
 {
   shouldSetToMax = shouldSetToMax || false
   sliderDivID = sliderDivID || "dataMapDateSlider"
   sliderTickDivID = sliderTickDivID || "dataMapSliderStepList"
   mapDates = mapDates || currentMapSource.getMapDates()
+  previousDate = previousDate || (currentSliderDate ? currentSliderDate.getTime() : null)
 
   var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
-  var previousValueWasLatest = $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max')
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+  var previousValueWasLatest = $("#" + sliderDivID).val() != null && $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
 
-  $("#" + sliderDivID).attr('max', mapDates.length+1)
+  $("#" + sliderDivID).attr('max', mapDates.length+(latestSliderTickEnabled ? 1 : 0))
 
-  if (currentSliderDate == null || shouldSetToMax || previousValueWasLatest)
+  if ((currentSliderDate == null && previousDate == null) || shouldSetToMax || previousValueWasLatest)
   {
-    $("#" + sliderDivID).val(mapDates.length+1)
+    $("#" + sliderDivID).val(mapDates.length+(latestSliderTickEnabled ? 1 : 0))
     currentSliderDate = endDate
   }
   else
   {
-    var previousDate = currentSliderDate.getTime()
     var closestDate = mapDates[0]
     var closestDateIndex = 0
     for (dateNum in mapDates)
@@ -568,7 +735,10 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
     {
       $("#" + sliderTickDivID).append("<span class='tick'></span>")
     }
-    $("#" + sliderTickDivID).append("<span class='tick'></span>")
+    if (latestSliderTickEnabled)
+    {
+      $("#" + sliderTickDivID).append("<span class='tick'></span>")
+    }
   }
 }
 
@@ -593,6 +763,17 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
 function displayDataMap(dateIndex)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
+
+  displayRegionDataArray = {}
+  populateRegionsArray()
+
+  $('#outlines').children().each(function() {
+    var regionDataCallback = getRegionData($(this).attr('id'))
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+    var regionData = regionDataCallback.regionData
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+  })
 
   var mapDates = currentMapSource.getMapDates()
   var dateToDisplay
@@ -626,11 +807,16 @@ function displayDataMap(dateIndex)
       continue
     }
 
+    regionData.region = currentMapDataForDate[regionNum].region
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID
+    regionData.disabled = currentMapDataForDate[regionNum].disabled
+    regionData.candidateName = currentMapDataForDate[regionNum].candidateName
+    regionData.candidateMap = currentMapDataForDate[regionNum].candidateMap
     regionData.chanceIncumbent = currentMapDataForDate[regionNum].chanceIncumbent
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
+    regionData.seatClass = currentMapDataForDate[regionNum].seatClass
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
@@ -648,6 +834,13 @@ function displayDataMap(dateIndex)
 function updatePoliticalPartyCandidateNames(mapDate)
 {
   var candidateNames = currentMapSource.getCandidateNames(mapDate)
+
+  if (!candidateNames)
+  {
+    console.log("No candidate names found!")
+    return
+  }
+
   for (partyID in politicalParties)
   {
     if (partyID in candidateNames)
@@ -659,17 +852,23 @@ function updatePoliticalPartyCandidateNames(mapDate)
 
 function updateMapElectoralVoteText()
 {
+  if (!currentMapType.getShouldDisplayEVOnMap()) { return }
+
   var regionIDs = Object.values(mapRegionNameToID)
   for (regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
+
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+    if (regionEV == undefined) { continue }
+
     if (regionChildren.length == 1)
     {
-      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
+      regionChildren[0].innerHTML = regionIDs[regionNum] + " " + regionEV
     }
     else if (regionChildren.length == 2)
     {
-      regionChildren[1].innerHTML = regionEVArray[getCurrentDecade()][regionIDs[regionNum]]
+      regionChildren[1].innerHTML = regionEV
     }
   }
 }
@@ -710,19 +909,19 @@ function updateMapSourceButton(revertToDefault)
   }
   else
   {
-    $("#sourceToggleButton").html("Source: " + currentMapSource.getID())
+    $("#sourceToggleButton").html("Source: " + currentMapSource.getName())
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentMapState == kEditing && currentMapSource.getID() == CustomMapSource.getID())
+  if (currentMapState == kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Done")
   }
-  else if (currentMapState == kEditing && currentMapSource.getID() != CustomMapSource.getID())
+  else if (currentMapState == kEditing && currentMapSource.getID() != currentCustomMapSource.getID())
   {
     toggleEditing(kViewing)
   }
-  else if (currentMapState != kEditing && currentMapSource.getID() == CustomMapSource.getID())
+  else if (currentMapState != kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Edit")
   }
@@ -731,11 +930,11 @@ function updateMapSourceButton(revertToDefault)
     $("#editDoneButton").html("Copy")
   }
 
-  if (showingCompareMap && currentMapSource.getID() != CustomMapSource.getID())
+  if (showingCompareMap && currentMapSource.getID() != currentCustomMapSource.getID())
   {
     updateCompareMapSlidersVisibility(false)
   }
-  else if (showingCompareMap && currentMapSource.getID() == CustomMapSource.getID())
+  else if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     updateCompareMapSlidersVisibility(true)
   }
@@ -790,14 +989,20 @@ function toggleMarginEditing(marginID, div)
     $("#" + marginID + "-text").focus()
 
     $("#marginEditButton").addClass('active')
-    $("#editDoneButton").addClass('topnavdisable')
+    if (currentMapType.getCustomMapEnabled())
+    {
+      $("#editDoneButton").addClass('topnavdisable')
+    }
     $("#sourceToggleButton").addClass('topnavdisable')
     $("#mapSourcesDropdownContainer").hide()
   }
   else
   {
     $("#marginEditButton").removeClass('active')
-    $("#editDoneButton").removeClass('topnavdisable')
+    if (currentMapType.getCustomMapEnabled())
+    {
+      $("#editDoneButton").removeClass('topnavdisable')
+    }
     $("#sourceToggleButton").removeClass('topnavdisable')
     $("#mapSourcesDropdownContainer").show()
   }
@@ -809,25 +1014,35 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
   $(countdownButtonDiv).addClass("active")
 
   currentCountdownTimeName = countdownTimeName
+  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
   updateCountdownTimer()
 }
 
-function clearMap()
+function clearMap(fullClear, shouldResetCurrentMapSource)
 {
-  if (currentMapSource != CustomMapSource || CustomMapSource.getTextMapData().startsWith("date\n"))
+  shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
+
+  if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
     updateMapSourceButton(true)
     currentMapSource = NullMapSource
+    if (shouldResetCurrentMapSource)
+    {
+      currentMapType.setCurrentMapSourceID(null)
+    }
 
     toggleEditing(kViewing)
 
     currentSliderDate = null
+
+    if (fullClear)
+    {
+      clearCustomMap()
+    }
   }
   else
   {
-    CustomMapSource.setTextMapData("date\n" + getTodayString())
-    CustomMapSource.setIconURL("")
-    CustomMapSource.setCandidateNames()
+    clearCustomMap()
     loadDataMap(false, true)
   }
 
@@ -854,6 +1069,12 @@ function clearMap()
   displayRegionDataArray = {}
   populateRegionsArray()
 
+  for (partyNum in selectablePoliticalPartyIDs)
+  {
+    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+  }
+
   $('#outlines').children().each(function() {
     var regionDataCallback = getRegionData($(this).attr('id'))
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
@@ -874,6 +1095,13 @@ function clearMap()
   $("#evPieChart").css("background-image", "")
 
   showingDataMap = false
+}
+
+function clearCustomMap()
+{
+  currentCustomMapSource.setTextMapData("date\n" + getTodayString())
+  currentCustomMapSource.setIconURL("")
+  currentCustomMapSource.setCandidateNames()
 }
 
 function toggleHelpBox(helpButtonDiv)
@@ -987,14 +1215,14 @@ function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "block")
 
-    var currentMapIsCustom = (currentMapSource.getID() == CustomMapSource.getID())
-    CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
+    var currentMapIsCustom = (currentMapSource.getID() == currentCustomMapSource.getID())
+    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
 
     if (!currentMapIsCustom)
     {
-      CustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(currentSliderDate.getTime()))
+      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames((currentSliderDate || new Date(getCurrentDateOrToday())).getTime()))
 
-      currentMapSource = CustomMapSource
+      currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
       updateMapSourceButton()
       loadDataMap()
@@ -1004,7 +1232,7 @@ function toggleEditing(stateToSet)
     case kViewing:
     selectAllParties()
 
-    if (currentMapSource.getID() == CustomMapSource.getID())
+    if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
     }
@@ -1019,9 +1247,9 @@ function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "none")
 
-    if (currentMapSource.getID() == CustomMapSource.getID())
+    if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
-      CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
     }
 
     if (showingDataMap && currentRegionID)
@@ -1052,6 +1280,7 @@ function leftClickRegion(div)
     if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = marginValues.safe
     }
     else if (selectedParty != null)
@@ -1105,7 +1334,8 @@ function rightClickRegion(div)
     if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.margin = marginValues.tilt
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.margin = 0.1 // Hardcoding tilt == 0.1
     }
     else if (selectedParty != null)
     {
@@ -1188,9 +1418,27 @@ function getBaseRegionID(regionID)
 function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
   var fillColor
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID())
+  var shouldHide = false
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
   {
-    fillColor = TossupParty.getMarginColors().tilt
+    if (regionData.disabled == true)
+    {
+      fillColor = regionDisabledColor
+
+      var regionsToHide = currentMapType.getRegionsToHideOnDisable()
+      for (regexNum in regionsToHide)
+      {
+        if (regionsToHide[regexNum].test(regionData.region))
+        {
+          shouldHide = true
+          break
+        }
+      }
+    }
+    else
+    {
+      fillColor = TossupParty.getMarginColors().safe
+    }
   }
   else
   {
@@ -1202,6 +1450,17 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     var regionDiv = $("#" + regionIDsToUpdate[regionIDNum])
     regionDiv.css('animation-fill-mode', 'forwards')
     regionDiv.css('fill', fillColor)
+
+    regionDiv.css('opacity', shouldHide ? 0 : 1)
+
+    if (regionData.disabled == true)
+    {
+      regionDiv.css('pointer-events', 'none')
+    }
+    else
+    {
+      regionDiv.css('pointer-events', 'inherit')
+    }
   }
 
   displayPartyTotals(getPartyTotals())
@@ -1213,6 +1472,10 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
 function getMarginIndexForValue(margin, partyID)
 {
+  if (margin == 101)
+  {
+    return "current"
+  }
   for (marginName in marginValues)
   {
     if (Math.abs(margin) >= marginValues[marginName])
@@ -1226,9 +1489,9 @@ function getPartyTotals()
 {
   var partyTotals = {}
 
-  for (partyIDNum in politicalPartyIDs)
+  for (partyIDNum in mainPoliticalPartyIDs)
   {
-    partyTotals[politicalPartyIDs[partyIDNum]] = 0
+    partyTotals[mainPoliticalPartyIDs[partyIDNum]] = 0
   }
 
   for (regionID in displayRegionDataArray)
@@ -1238,7 +1501,7 @@ function getPartyTotals()
     {
       partyIDToSet = TossupParty.getID()
     }
-    partyTotals[partyIDToSet] += regionEVArray[getCurrentDecade()][regionID]
+    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID)
   }
 
   return partyTotals
@@ -1291,7 +1554,7 @@ function getMDYDateString(date, delimiter, includeTime)
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID())
+  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
   {
     $("#stateboxcontainer").trigger('hide')
     return
@@ -1305,7 +1568,7 @@ function updateStateBox(regionID)
   }
 
   var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
-  var regionMarginString = politicalParties[regionData.partyID].getCandidateName() + " +" + roundedMarginValue
+  var regionMarginString = regionData.candidateName + " +" + roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
@@ -1347,21 +1610,28 @@ function updateCountdownTimer()
   var countdownTime
   if (currentCountdownTimeName != null)
   {
-    countdownTime = countdownTimes[currentCountdownTimeName]
+    countdownTime = countdownTimes[currentCountdownTimeName].time
   }
   else
   {
-    countdownTime = Object.values(countdownTimes).sort().slice(-1)[0]
+    countdownTime = Object.values(countdownTimes).map((timeData) => {return timeData.time}).sort().slice(-1)[0]
     for (timeName in countdownTimes)
     {
-      if (currentDate.getTime() < countdownTimes[timeName])
+      if (currentDate.getTime() < countdownTimes[timeName].time)
       {
-        countdownTime = countdownTimes[timeName]
+        countdownTime = countdownTimes[timeName].time
         break
       }
     }
 
-    currentCountdownTimeName = getKeyByValue(countdownTimes, countdownTime)
+    for (timeName in countdownTimes)
+    {
+      if (countdownTime == countdownTimes[timeName].time)
+      {
+        currentCountdownTimeName = timeName
+        break
+      }
+    }
   }
 
   var timeUntilDay = Math.abs(countdownTime-currentDate.getTime())
@@ -1476,19 +1746,21 @@ function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, sw
       overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
     }
 
+    var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+
     if (compareSourcesToUpdate[0])
     {
       setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
-      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+1)
+      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
       $("#compareItemImage-0").css('display', "block")
       $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
     }
     if (compareSourcesToUpdate[1])
     {
       setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
-      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+1)
+      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
       $("#compareItemImage-1").css('display', "block")
       $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
     }
@@ -1552,7 +1824,7 @@ function setMapCompareItem(compareArrayIndex)
 {
   if (!showingDataMap) { return }
   compareMapDataArray[compareArrayIndex] = cloneObject(displayRegionDataArray)
-  $("#compareItem-" + compareArrayIndex).html(currentMapSource.getID() + " : " + getMDYDateString(currentSliderDate))
+  $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getMDYDateString(currentSliderDate))
 }
 
 function setCompareSourceDate(compareArrayIndex, dateIndex)
@@ -1572,13 +1844,13 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
   }
   updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay")
 
-  $("#compareItem-" + compareArrayIndex).html(compareMapSourceIDArray[compareArrayIndex] + " (" + getMDYDateString(dateToDisplay) + ")")
+  $("#compareItem-" + compareArrayIndex).html(mapSources[compareMapSourceIDArray[compareArrayIndex]].getName() + " (" + getMDYDateString(dateToDisplay) + ")")
 
   compareMapDataArray[compareArrayIndex] = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapData()[dateToDisplay.getTime()]
 
   if (compareArrayIndex == 0)
   {
-    CustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()))
+    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()))
   }
 
   applyCompareToCustomMap()
@@ -1609,11 +1881,16 @@ function applyCompareToCustomMap()
       }
 
       resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+
+      if (compareMapDataArray[0][regionID].seatClass)
+      {
+        resultMapArray[regionID].seatClass = compareMapDataArray[0][regionID].seatClass
+      }
     }
   }
 
-  CustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime(), true)
-  currentMapSource = CustomMapSource
+  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime(), true)
+  currentMapSource = currentCustomMapSource
   updateMapSourceButton()
   loadDataMap()
 }
@@ -1643,25 +1920,17 @@ async function loadCompareItemMapSource(compareItemNum)
 
 async function loadComparePreset(comparePresetNum)
 {
-  switch (comparePresetNum)
+  var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
+
+  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
+  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+
+  if (defaultCompareSourceIDs[comparePresetNum][0] == defaultCompareSourceIDs[comparePresetNum][1])
   {
-    case kPastElectionsVsPastElections:
-    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-
-    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+1-2)
-    break
-
-    case kPastElectionsVs538Projection:
-    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-    await toggleCompareMapSourceCheckbox(FiveThirtyEightProjectionMapSource.getID(), true)
-    break
-
-    case kPastElectionsVs538PollAvg:
-    await toggleCompareMapSourceCheckbox(PastElectionResultMapSource.getID(), true)
-    await toggleCompareMapSourceCheckbox(FiveThirtyEightPollAverageMapSource.getID(), true)
-    break
+    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
   }
 }
 
@@ -1692,6 +1961,6 @@ function addConstantMarginToMap(marginToAdd)
     }
   }
 
-  CustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+  currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
   loadDataMap()
 }
