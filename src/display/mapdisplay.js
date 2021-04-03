@@ -119,9 +119,11 @@ function cycleMapType(buttonDiv)
 
 async function reloadForNewMapType(initialLoad)
 {
+  var previousDateOverride
   if (initialLoad != true)
   {
-    clearMap(true)
+    previousDateOverride = currentSliderDate.getTime()
+    clearMap(true, false)
   }
 
   mapSources = currentMapType.getMapSources()
@@ -156,7 +158,7 @@ async function reloadForNewMapType(initialLoad)
   compareMapDataArray = [null, null]
   selectedCompareSlider = null
 
-  currentMapSource = NullMapSource
+  currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
 
   await loadMapSVGFile()
   setOutlineDivProperties()
@@ -183,6 +185,16 @@ async function reloadForNewMapType(initialLoad)
   updateEVPieChart()
 
   updateIconsBasedOnLocalCSVData()
+
+  if (currentMapSource.getID() != NullMapSource.getID())
+  {
+    updateMapSourceButton()
+    loadDataMap(false, false, previousDateOverride)
+  }
+  else
+  {
+    updateMapSourceButton(true)
+  }
 }
 
 function loadMapSVGFile()
@@ -444,7 +456,7 @@ function createComparePresetDropdownItems()
     var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
 
     $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + currentMapType.getMapSources()[compareIDPair[0]].getName() + " vs " + currentMapType.getMapSources()[compareIDPair[1]].getName() + "</a>")
+    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
   }
 }
 
@@ -520,18 +532,20 @@ function getIconDivsToUpdateArrayForSourceID(mapSourceID)
   return iconDivDictionary
 }
 
-function loadDataMap(shouldSetToMax, forceDownload)
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
+
+    currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
     var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
 
     if (!loadedSuccessfully) { resolve(); return }
 
-    setDataMapDateSliderRange(shouldSetToMax)
+    setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
     displayDataMap()
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
@@ -670,30 +684,29 @@ function removeStatusImage(divID)
   $("#" + divID + " .status").remove()
 }
 
-function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates)
+function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
 {
   shouldSetToMax = shouldSetToMax || false
   sliderDivID = sliderDivID || "dataMapDateSlider"
   sliderTickDivID = sliderTickDivID || "dataMapSliderStepList"
   mapDates = mapDates || currentMapSource.getMapDates()
+  previousDate = previousDate || (currentSliderDate ? currentSliderDate.getTime() : null)
 
   var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
   var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
-
-  var previousValueWasLatest = $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
+  var previousValueWasLatest = $("#" + sliderDivID).val() != null && $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
 
   $("#" + sliderDivID).attr('max', mapDates.length+(latestSliderTickEnabled ? 1 : 0))
 
-  if (currentSliderDate == null || shouldSetToMax || previousValueWasLatest)
+  if ((currentSliderDate == null && previousDate == null) || shouldSetToMax || previousValueWasLatest)
   {
     $("#" + sliderDivID).val(mapDates.length+(latestSliderTickEnabled ? 1 : 0))
     currentSliderDate = endDate
   }
   else
   {
-    var previousDate = currentSliderDate.getTime()
     var closestDate = mapDates[0]
     var closestDateIndex = 0
     for (dateNum in mapDates)
@@ -998,12 +1011,16 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
   updateCountdownTimer()
 }
 
-function clearMap(fullClear)
+function clearMap(fullClear, shouldResetCurrentMapSource)
 {
   if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
     updateMapSourceButton(true)
     currentMapSource = NullMapSource
+    if (shouldResetCurrentMapSource)
+    {
+      currentMapType.setCurrentMapSourceID(null)
+    }
 
     toggleEditing(kViewing)
 

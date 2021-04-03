@@ -12,6 +12,7 @@ class MapType
     this.shouldDisplayEVOnMap = shouldDisplayEVOnMap
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
+
     this.regionNameToID = regionNameToID
     this.regionsToHideOnDisable = regionsToHideOnDisable
     this.mapSettingsLayout = mapSettingsLayout
@@ -92,6 +93,16 @@ class MapType
   getMapSourceIDs()
   {
     return this.mapSourceIDs
+  }
+
+  setCurrentMapSourceID(currentMapSourceID)
+  {
+    this.currentMapSourceID = currentMapSourceID
+  }
+
+  getCurrentMapSourceID()
+  {
+    return this.currentMapSourceID
   }
 
   setDefaultCompareSourceIDs(defaultCompareSourceIDs)
