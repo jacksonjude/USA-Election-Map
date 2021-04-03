@@ -21,7 +21,7 @@ Running a fork locally is simple since this code only uses the base HTML/CSS/JS 
 
 Since the site uses separate svg files for the map, Chrome and Safari might prevent them from loading over the file protocol due to CORS restrictions (see [more info](https://stackoverflow.com/a/8456586/) and [solution](https://stackoverflow.com/a/13262673/)).
 - Fixing this CORS issue on Safari is somewhat simple: go to Develop > Disable Cross-Origin Restrictions.
-- Chrome is a little more complicated: 
+- Chrome is a little more complicated, as it needs to be opened via command line to disable CORS: 
   - Mac: 
     ```
     open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
@@ -36,6 +36,7 @@ Since the site uses separate svg files for the map, Chrome and Safari might prev
 Another way to address the CORS issue is to run a local http server. On Mac (via [Homebrew](https://brew.sh)):
 ```
 brew install http-server
+cd <local repo path>
 http-server
 ```
 Then open the address provided in the Terminal window (by default, it seems to be http://localhost:8080).
