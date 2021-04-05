@@ -1861,6 +1861,12 @@ function applyCompareToCustomMap()
     {
       resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
     }
+    else if (compareMapDataArray[0][regionID].disabled == true || compareMapDataArray[1][regionID].disabled == true)
+    {
+      resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
+      resultMapArray[regionID].disabled = true
+      resultMapArray[regionID].margin = 101
+    }
     else
     {
       resultMapArray[regionID] = {}
@@ -1874,7 +1880,16 @@ function applyCompareToCustomMap()
         resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin+compareMapDataArray[1][regionID].margin
       }
 
-      resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+      if (resultMapArray[regionID].margin < 0)
+      {
+        var sortedVoteshareArray = compareMapDataArray[0][regionID].partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        resultMapArray[regionID].partyID = sortedVoteshareArray[1].partyID
+        resultMapArray[regionID].margin = Math.abs(resultMapArray[regionID].margin)
+      }
+      else
+      {
+        resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+      }
 
       if (compareMapDataArray[0][regionID].seatClass)
       {
