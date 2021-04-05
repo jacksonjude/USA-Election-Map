@@ -392,7 +392,7 @@ function createSettingsDropdownItems()
 
 function cycleMapSetting(settingID, settingDiv, shouldIncrement)
 {
-  var shouldIncrement = shouldIncrement || false
+  var shouldIncrement = shouldIncrement == null ? false : shouldIncrement
 
   var currentMapSettings = currentMapType.getMapSettings()
 
@@ -475,7 +475,7 @@ function addDivEventListeners()
     {
       for (mapSourceID in mapSources)
       {
-        mapSources[mapSourceID].clearMapData()
+        mapSources[mapSourceID].resetMapData()
         removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
         insertStatusImage(mapSourceID.replace(/\s/g, '') + "-icon", "./assets/icon-download-none.png", 24, 24, -1)
       }
@@ -692,7 +692,7 @@ function removeStatusImage(divID)
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
 {
-  shouldSetToMax = shouldSetToMax || false
+  shouldSetToMax = shouldSetToMax == null ? false : shouldSetToMax
   sliderDivID = sliderDivID || "dataMapDateSlider"
   sliderTickDivID = sliderTickDivID || "dataMapSliderStepList"
   mapDates = mapDates || currentMapSource.getMapDates()
@@ -901,7 +901,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 
 function updateMapSourceButton(revertToDefault)
 {
-  revertToDefault = revertToDefault || false
+  revertToDefault = revertToDefault == null ? false : revertToDefault
   $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
@@ -1020,6 +1020,7 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
 {
+  fullClear = fullClear == null ? false : fullClear
   shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
 
   if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
@@ -1037,12 +1038,12 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
     if (fullClear)
     {
-      clearCustomMap()
+      currentCustomMapSource.clearMapData(true)
     }
   }
   else
   {
-    clearCustomMap()
+    currentCustomMapSource.clearMapData()
     loadDataMap(false, true)
   }
 
@@ -1095,13 +1096,6 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   $("#evPieChart").css("background-image", "")
 
   showingDataMap = false
-}
-
-function clearCustomMap()
-{
-  currentCustomMapSource.setTextMapData("date\n" + getTodayString())
-  currentCustomMapSource.setIconURL("")
-  currentCustomMapSource.setCandidateNames()
 }
 
 function toggleHelpBox(helpButtonDiv)
