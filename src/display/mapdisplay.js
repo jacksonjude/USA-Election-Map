@@ -1857,13 +1857,28 @@ function applyCompareToCustomMap()
   var resultMapArray = {}
   for (regionID in compareMapDataArray[0])
   {
-    if (compareMapDataArray[0][regionID].partyID == TossupParty.getID())
+    var compareRegionData0 = compareMapDataArray[0][regionID]
+    var compareRegionData1 = compareMapDataArray[1][regionID]
+
+    if (currentMapType.getMapSettings()["seatArrangement"] == "election-type" && compareRegionData0.seatClass != compareRegionData1.seatClass)
     {
-      resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
+      if (regionID.endsWith("-S"))
+      {
+        compareRegionData1 = compareMapDataArray[1][regionID.replace("-S", "")]
+      }
+      else
+      {
+        compareRegionData1 = compareMapDataArray[1][regionID + "-S"]
+      }
     }
-    else if (compareMapDataArray[0][regionID].disabled == true || compareMapDataArray[1][regionID].disabled == true)
+
+    if (compareRegionData0.partyID == TossupParty.getID())
     {
-      resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
+      resultMapArray[regionID] = cloneObject(compareRegionData0)
+    }
+    else if (compareRegionData0.disabled == true || compareRegionData1.disabled == true)
+    {
+      resultMapArray[regionID] = cloneObject(compareRegionData0)
       resultMapArray[regionID].disabled = true
       resultMapArray[regionID].margin = 101
     }
@@ -1871,29 +1886,29 @@ function applyCompareToCustomMap()
     {
       resultMapArray[regionID] = {}
 
-      if (compareMapDataArray[0][regionID].partyID == compareMapDataArray[1][regionID].partyID)
+      if (compareRegionData0.partyID == compareRegionData1.partyID)
       {
-        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin-compareMapDataArray[1][regionID].margin
+        resultMapArray[regionID].margin = compareRegionData0.margin-compareRegionData1.margin
       }
       else
       {
-        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin+compareMapDataArray[1][regionID].margin
+        resultMapArray[regionID].margin = compareRegionData0.margin+compareRegionData1.margin
       }
 
       if (resultMapArray[regionID].margin < 0)
       {
-        var sortedVoteshareArray = compareMapDataArray[0][regionID].partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
         resultMapArray[regionID].partyID = sortedVoteshareArray[1].partyID
         resultMapArray[regionID].margin = Math.abs(resultMapArray[regionID].margin)
       }
       else
       {
-        resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
+        resultMapArray[regionID].partyID = compareRegionData0.partyID
       }
 
-      if (compareMapDataArray[0][regionID].seatClass)
+      if (compareRegionData0.seatClass)
       {
-        resultMapArray[regionID].seatClass = compareMapDataArray[0][regionID].seatClass
+        resultMapArray[regionID].seatClass = compareRegionData0.seatClass
       }
     }
   }

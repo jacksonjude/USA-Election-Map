@@ -407,7 +407,11 @@ class MapSource
     var rowCount = csvText.split("\n").length
     if (rowCount == 1)
     {
-      var mapDates = Object.keys(mapData)
+      var mapDates = []
+      if (mapData)
+      {
+        mapDates = Object.keys(mapData)
+      }
       var dateToUse = new Date()
       if (mapDates.length > 0)
       {

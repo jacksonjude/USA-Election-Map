@@ -226,7 +226,7 @@ var USAPresidentialMapType = new MapType(
   538,
   function(decade, regionID)
   {
-    return regionEVArray[decade][regionID]
+    return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
   5,
