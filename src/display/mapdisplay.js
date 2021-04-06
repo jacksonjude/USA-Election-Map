@@ -440,6 +440,18 @@ function cycleMapSetting(settingID, settingDiv, shouldIncrement)
   }
 }
 
+function toggleMapSettingDisable(settingID, disableOverride)
+{
+  if (($("#" + settingID).hasClass("topnavdisable2") && disableOverride == null) || (disableOverride != null && disableOverride == false))
+  {
+    $("#" + settingID).removeClass("topnavdisable2")
+  }
+  else
+  {
+    $("#" + settingID).addClass("topnavdisable2")
+  }
+}
+
 function createCountdownDropdownItems()
 {
   $("#countdownsDropdownContainer").html("")
@@ -1059,6 +1071,8 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     $(".compareitemtext").html("&lt;Empty&gt;")
     $(".compareitemimage").css('display', "none")
     $(".compareitemimage").attr('src', "")
+
+    toggleMapSettingDisable("seatArrangement", false)
   }
 
   marginValues = cloneObject(defaultMarginValues)
@@ -1706,6 +1720,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   await updateCompareMapSources(compareSourcesUpdated, false)
 
   showingCompareMap = true
+  toggleMapSettingDisable("seatArrangement", true)
   updateCompareMapSlidersVisibility()
 }
 
