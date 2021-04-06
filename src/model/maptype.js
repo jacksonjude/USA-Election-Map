@@ -226,7 +226,7 @@ var USAPresidentialMapType = new MapType(
   538,
   function(decade, regionID)
   {
-    return regionEVArray[decade][regionID]
+    return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
   5,
@@ -299,7 +299,7 @@ var USASenateMapType = new MapType(
   },
   false,
   3,
-  false,
+  true,
   `
   <h3 style='margin: 0px;'>Keyboard Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>

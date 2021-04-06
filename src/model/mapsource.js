@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, regionURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap)
+  constructor(id, name, dataURL, regionURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled)
   {
     this.id = id
     this.name = name
@@ -20,7 +20,8 @@ class MapSource
     this.filterMapDataFunction = organizeMapDataFunction
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
-    this.isCustomMap = isCustomMap || false
+    this.isCustomMap = isCustomMap == null ? false : isCustomMap
+    this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
   }
 
   loadMap(reloadCache, onlyAttemptLocalFetch)
@@ -168,8 +169,9 @@ class MapSource
     return finalArray
   }
 
-  setTextMapData(textData)
+  setTextMapData(textData, self)
   {
+    self = self || this
     this.textMapData = textData
   }
 
@@ -183,13 +185,44 @@ class MapSource
     return this.mapData
   }
 
-  clearMapData()
+  resetMapData()
   {
     this.rawMapData = null
     this.mapData = null
     this.mapDates = null
     this.startDate = null
     this.endDate = null
+  }
+
+  clearMapData(shouldFullClear)
+  {
+    shouldFullClear = shouldFullClear == null ? false : shouldFullClear
+
+    var mapIsClearExceptDisabled = true
+
+    for (var mapDate in this.mapData)
+    {
+      for (var regionID in this.mapData[mapDate])
+      {
+        if (!this.mapData[mapDate][regionID].disabled && this.mapData[mapDate][regionID].partyID != TossupParty.getID())
+        {
+          this.mapData[mapDate][regionID].partyID = TossupParty.getID()
+          this.mapData[mapDate][regionID].margin = 0
+
+          mapIsClearExceptDisabled = false
+        }
+      }
+    }
+
+    this.textMapData = this.convertArrayToCSV(this.mapData, this.columnMap, this.regionNameToIDMap, this.candidateNameToPartyIDMap, this.convertMapDataRowToCSVFunction)
+    this.rawMapData = this.convertCSVToArray(this, this.textMapData)
+
+    if (this.shouldClearDisabled || mapIsClearExceptDisabled || shouldFullClear)
+    {
+      this.setTextMapData("date\n" + getTodayString(), this)
+      this.setIconURL("", this)
+      this.setCandidateNames(null, null, this)
+    }
   }
 
   setDateRange(self)
@@ -261,8 +294,9 @@ class MapSource
     }
   }
 
-  setCandidateNames(shortNameOverride, shouldResetCandidateNameData)
+  setCandidateNames(shortNameOverride, shouldResetCandidateNameData, self)
   {
+    self = self || this
     if (shortNameOverride)
     {
       this.defaultShortCandidateNameOverride = cloneObject(this.shortCandidateNameOverride)
@@ -284,8 +318,9 @@ class MapSource
     return this.iconURL
   }
 
-  setIconURL(newIconURL)
+  setIconURL(newIconURL, self)
   {
+    self = self || this
     this.iconURL = newIconURL
   }
 
@@ -346,7 +381,7 @@ class MapSource
       var mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
       for (var regionID in mapData[mapDate])
       {
-        if (mapData[mapDate][regionID].partyID == TossupParty.getID()) { continue }
+        //if (mapData[mapDate][regionID].partyID == TossupParty.getID()) { continue }
 
         for (var candidateName in candidateNameToPartyIDs)
         {
@@ -372,7 +407,11 @@ class MapSource
     var rowCount = csvText.split("\n").length
     if (rowCount == 1)
     {
-      var mapDates = Object.keys(mapData)
+      var mapDates = []
+      if (mapData)
+      {
+        mapDates = Object.keys(mapData)
+      }
       var dateToUse = new Date()
       if (mapDates.length > 0)
       {
@@ -1101,7 +1140,6 @@ function createSenateMapSources()
 
           var isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
 
-          var marginSum = 0
           var partyVotesharePercentages = null
 
           var candidateData = {}
@@ -1154,7 +1192,10 @@ function createSenateMapSources()
           }
 
           var voteshareSortedCandidateData = Object.values(candidateData).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-          voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= 1.00)
+          if (!isCustomMap)
+          {
+            voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= 1.00)
+          }
 
           if (voteshareSortedCandidateData.length == 0)
           {
@@ -1162,9 +1203,22 @@ function createSenateMapSources()
             continue
           }
 
-          var greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-          var greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-          var topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          var greatestMarginPartyID
+          var greatestMarginCandidateName
+          var topTwoMargin
+
+          if (voteshareSortedCandidateData[0].voteshare > 0)
+          {
+            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          }
+          else
+          {
+            greatestMarginPartyID = TossupParty.getID()
+            greatestMarginCandidateName = null
+            topTwoMargin = 0
+          }
 
           for (var candidateDataNum in voteshareSortedCandidateData)
           {
@@ -1344,13 +1398,13 @@ function createSenateMapSources()
       return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
 
       case "isRunoff":
-      return (regionData.runoff || false).toString().toUpperCase()
+      return (regionData.runoff == null ? false : regionData.runoff).toString().toUpperCase()
 
       case "isOffyear":
-      return (regionData.offYear || false).toString().toUpperCase()
+      return (regionData.offYear == null ? false : regionData.offYear).toString().toUpperCase()
 
       case "isDisabled":
-      return (regionData.disabled || false).toString().toUpperCase()
+      return (regionData.disabled == null ? false : regionData.disabled).toString().toUpperCase()
     }
   }
 
@@ -1455,7 +1509,8 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction,
     null,
     customMapConvertMapDataToCSVFunction,
-    true
+    true,
+    false
   )
 
   var todayDate = new Date()

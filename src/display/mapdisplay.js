@@ -392,7 +392,7 @@ function createSettingsDropdownItems()
 
 function cycleMapSetting(settingID, settingDiv, shouldIncrement)
 {
-  var shouldIncrement = shouldIncrement || false
+  var shouldIncrement = shouldIncrement == null ? false : shouldIncrement
 
   var currentMapSettings = currentMapType.getMapSettings()
 
@@ -440,6 +440,18 @@ function cycleMapSetting(settingID, settingDiv, shouldIncrement)
   }
 }
 
+function toggleMapSettingDisable(settingID, disableOverride)
+{
+  if (($("#" + settingID).hasClass("topnavdisable2") && disableOverride == null) || (disableOverride != null && disableOverride == false))
+  {
+    $("#" + settingID).removeClass("topnavdisable2")
+  }
+  else
+  {
+    $("#" + settingID).addClass("topnavdisable2")
+  }
+}
+
 function createCountdownDropdownItems()
 {
   $("#countdownsDropdownContainer").html("")
@@ -475,7 +487,7 @@ function addDivEventListeners()
     {
       for (mapSourceID in mapSources)
       {
-        mapSources[mapSourceID].clearMapData()
+        mapSources[mapSourceID].resetMapData()
         removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
         insertStatusImage(mapSourceID.replace(/\s/g, '') + "-icon", "./assets/icon-download-none.png", 24, 24, -1)
       }
@@ -692,7 +704,7 @@ function removeStatusImage(divID)
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
 {
-  shouldSetToMax = shouldSetToMax || false
+  shouldSetToMax = shouldSetToMax == null ? false : shouldSetToMax
   sliderDivID = sliderDivID || "dataMapDateSlider"
   sliderTickDivID = sliderTickDivID || "dataMapSliderStepList"
   mapDates = mapDates || currentMapSource.getMapDates()
@@ -901,7 +913,7 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 
 function updateMapSourceButton(revertToDefault)
 {
-  revertToDefault = revertToDefault || false
+  revertToDefault = revertToDefault == null ? false : revertToDefault
   $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
@@ -1020,6 +1032,7 @@ function selectCountdownTime(countdownTimeName, countdownButtonDiv)
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
 {
+  fullClear = fullClear == null ? false : fullClear
   shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
 
   if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
@@ -1037,12 +1050,12 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
     if (fullClear)
     {
-      clearCustomMap()
+      currentCustomMapSource.clearMapData(true)
     }
   }
   else
   {
-    clearCustomMap()
+    currentCustomMapSource.clearMapData()
     loadDataMap(false, true)
   }
 
@@ -1058,6 +1071,8 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     $(".compareitemtext").html("&lt;Empty&gt;")
     $(".compareitemimage").css('display', "none")
     $(".compareitemimage").attr('src', "")
+
+    toggleMapSettingDisable("seatArrangement", false)
   }
 
   marginValues = cloneObject(defaultMarginValues)
@@ -1095,13 +1110,6 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   $("#evPieChart").css("background-image", "")
 
   showingDataMap = false
-}
-
-function clearCustomMap()
-{
-  currentCustomMapSource.setTextMapData("date\n" + getTodayString())
-  currentCustomMapSource.setIconURL("")
-  currentCustomMapSource.setCandidateNames()
 }
 
 function toggleHelpBox(helpButtonDiv)
@@ -1712,6 +1720,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   await updateCompareMapSources(compareSourcesUpdated, false)
 
   showingCompareMap = true
+  toggleMapSettingDisable("seatArrangement", true)
   updateCompareMapSlidersVisibility()
 }
 
@@ -1863,28 +1872,58 @@ function applyCompareToCustomMap()
   var resultMapArray = {}
   for (regionID in compareMapDataArray[0])
   {
-    if (compareMapDataArray[0][regionID].partyID == TossupParty.getID())
+    var compareRegionData0 = compareMapDataArray[0][regionID]
+    var compareRegionData1 = compareMapDataArray[1][regionID]
+
+    if (currentMapType.getMapSettings()["seatArrangement"] == "election-type" && compareRegionData0.seatClass != compareRegionData1.seatClass)
     {
-      resultMapArray[regionID] = cloneObject(compareMapDataArray[0][regionID])
+      if (regionID.endsWith("-S"))
+      {
+        compareRegionData1 = compareMapDataArray[1][regionID.replace("-S", "")]
+      }
+      else
+      {
+        compareRegionData1 = compareMapDataArray[1][regionID + "-S"]
+      }
+    }
+
+    if (compareRegionData0.partyID == TossupParty.getID())
+    {
+      resultMapArray[regionID] = cloneObject(compareRegionData0)
+    }
+    else if (compareRegionData0.disabled == true || compareRegionData1.disabled == true)
+    {
+      resultMapArray[regionID] = cloneObject(compareRegionData0)
+      resultMapArray[regionID].disabled = true
+      resultMapArray[regionID].margin = 101
     }
     else
     {
       resultMapArray[regionID] = {}
 
-      if (compareMapDataArray[0][regionID].partyID == compareMapDataArray[1][regionID].partyID)
+      if (compareRegionData0.partyID == compareRegionData1.partyID)
       {
-        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin-compareMapDataArray[1][regionID].margin
+        resultMapArray[regionID].margin = compareRegionData0.margin-compareRegionData1.margin
       }
       else
       {
-        resultMapArray[regionID].margin = compareMapDataArray[0][regionID].margin+compareMapDataArray[1][regionID].margin
+        resultMapArray[regionID].margin = compareRegionData0.margin+compareRegionData1.margin
       }
 
-      resultMapArray[regionID].partyID = compareMapDataArray[0][regionID].partyID
-
-      if (compareMapDataArray[0][regionID].seatClass)
+      if (resultMapArray[regionID].margin < 0)
       {
-        resultMapArray[regionID].seatClass = compareMapDataArray[0][regionID].seatClass
+        var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        resultMapArray[regionID].partyID = sortedVoteshareArray[1].partyID
+        resultMapArray[regionID].margin = Math.abs(resultMapArray[regionID].margin)
+      }
+      else
+      {
+        resultMapArray[regionID].partyID = compareRegionData0.partyID
+      }
+
+      if (compareRegionData0.seatClass)
+      {
+        resultMapArray[regionID].seatClass = compareRegionData0.seatClass
       }
     }
   }
