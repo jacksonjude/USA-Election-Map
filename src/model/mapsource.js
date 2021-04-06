@@ -1,11 +1,11 @@
 class MapSource
 {
-  constructor(id, name, dataURL, regionURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin)
   {
     this.id = id
     this.name = name
     this.dataURL = dataURL
-    this.regionURL = regionURL
+    this.homepageURL = homepageURL
     this.iconURL = iconURL
     this.columnMap = columnMap
     this.cycleYear = cycleYear
@@ -22,6 +22,10 @@ class MapSource
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
     this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
+    this.shouldShowVoteshare = shouldShowVoteshare == null ? false : shouldShowVoteshare
+    this.voteshareCutoffMargin = voteshareCutoffMargin
+
+    console.log(this.id, shouldShowVoteshare, this.shouldShowVoteshare)
   }
 
   loadMap(reloadCache, onlyAttemptLocalFetch)
@@ -57,7 +61,7 @@ class MapSource
 
       self.setDateRange(self)
 
-      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows, self.isCustomMap)
+      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin)
       self.mapData = filterMapDataCallback.mapData
 
       if (filterMapDataCallback.candidateNameData != null && self.shortCandidateNameOverride == null)
@@ -250,12 +254,12 @@ class MapSource
   {
     if (this.customOpenRegionLinkFunction == undefined)
     {
-      if (!this.regionURL) { return }
-      window.open(this.regionURL + this.regionIDToLinkMap[regionID])
+      if (!this.homepageURL) { return }
+      window.open(this.homepageURL + this.regionIDToLinkMap[regionID])
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.regionURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
+      this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
     }
   }
 
@@ -263,12 +267,12 @@ class MapSource
   {
     if (this.customOpenRegionLinkFunction == undefined)
     {
-      if (!this.regionURL) { return }
-      window.open(this.regionURL)
+      if (!this.homepageURL) { return }
+      window.open(this.homepageURL)
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.regionURL, null, null, modelDate, true, this.mapData)
+      this.customOpenRegionLinkFunction(this.homepageURL, null, null, modelDate, true, this.mapData)
     }
   }
 
@@ -327,6 +331,11 @@ class MapSource
   getAddDecimalPadding()
   {
     return this.addDecimalPadding
+  }
+
+  getShouldShowVoteshare()
+  {
+    return this.shouldShowVoteshare
   }
 
   updateMapData(displayRegionArray, dateToUpdate, resetMapData)
@@ -936,10 +945,10 @@ function createPresidentialMapSources()
     false,
     false,
     singleLineMarginFilterFunction,
-    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
-      window.open(regionURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
+      window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
     }
   )
 
@@ -967,17 +976,21 @@ function createPresidentialMapSources()
     false,
     true,
     doubleLinePercentFilterFunction,
-    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
 
-      var linkToOpen = regionURL + mapDate.getFullYear() + "_United_States_presidential_election"
+      var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_presidential_election"
       if (!shouldOpenHomepage)
       {
         linkToOpen += "_in_" + regionIDToLinkMap[regionID]
       }
       window.open(linkToOpen)
-    }
+    },
+    null,
+    null,
+    null,
+    true
   )
 
   var NYTElectionResultsMapSource = new MapSource(
@@ -1002,11 +1015,11 @@ function createPresidentialMapSources()
     false,
     false,
     doubleLinePercentFilterFunction,
-    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
 
-      var linkToOpen = regionURL
+      var linkToOpen = homepageURL
       if (!shouldOpenHomepage)
       {
         linkToOpen += regionIDToLinkMap[regionID] + ".html"
@@ -1090,7 +1103,7 @@ function createSenateMapSources()
 
   const classModulo6 = [2, 4, 0]
 
-  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, _, _, isCustomMap)
+  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, _, _, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -1192,9 +1205,9 @@ function createSenateMapSources()
           }
 
           var voteshareSortedCandidateData = Object.values(candidateData).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-          if (!isCustomMap)
+          if (!isCustomMap && voteshareCutoffMargin != null)
           {
-            voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= 1.00)
+            voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
           }
 
           if (voteshareSortedCandidateData.length == 0)
@@ -1408,6 +1421,56 @@ function createSenateMapSources()
     }
   }
 
+  var LTE2022SenateYouTubeIDs = {
+    1608364800000: "Wk-T-lXa5-g",
+    1612080000000: "yifvg3uHips",
+    1614412800000: "wtYw6nmWgQ0",
+    1617087600000: "TNHmvLFzD7U"
+  }
+
+  var LTESenateProjectionMapSource = new MapSource(
+    "LTE-2022-Senate-Projection",
+    "LTE Projection",
+    //"https://map.jacksonjude.com/csv-sources/lte-2022-senate.csv",
+    "./csv-sources/lte-2022-senate.csv",
+    "https://www.youtube.com/watch?v=",
+    "./assets/lte-large.png",
+    {
+      date: "date",
+      region: "region",
+      seatClass: "class",
+      isSpecial: "special",
+      isRunoff: "runoff",
+      isOffyear: "offyear",
+      isDisabled: "disabled",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    },
+    null,
+    null,
+    null,
+    incumbentChallengerPartyIDs,
+    regionNameToIDHistorical,
+    null,
+    null,
+    false,
+    true,
+    doubleLineClassSeparatedFilterFunction,
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+    {
+      if (mapDate == null) { return }
+
+      var linkToOpen = homepageURL
+      linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getTime()]
+      window.open(linkToOpen)
+    },
+    null,
+    null,
+    null,
+    false
+  )
+
   var PastElectionResultMapSource = new MapSource(
     "Past-Senate-Elections",
     "Past Elections",
@@ -1436,7 +1499,7 @@ function createSenateMapSources()
     false,
     true,
     doubleLineClassSeparatedFilterFunction,
-    function(regionURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
 
@@ -1446,7 +1509,7 @@ function createSenateMapSources()
         isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
       }
 
-      var linkToOpen = regionURL + mapDate.getFullYear() + "_United_States_Senate_"
+      var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_Senate_"
       if (!shouldOpenHomepage)
       {
         var baseRegionID = regionID
@@ -1466,7 +1529,12 @@ function createSenateMapSources()
         linkToOpen += "election"
       }
       window.open(linkToOpen)
-    }
+    },
+    null,
+    null,
+    null,
+    true,
+    1.0
   )
 
   var idsToPartyNames = {}
@@ -1517,10 +1585,11 @@ function createSenateMapSources()
   CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
   var senateMapSources = {}
+  senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
   senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var senateMapSourceIDs = [PastElectionResultMapSource.getID()]
+  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USASenateMapType.getCustomMapEnabled())
   {
     senateMapSourceIDs.push(CustomMapSource.getID())

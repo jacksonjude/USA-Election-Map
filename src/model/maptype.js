@@ -282,7 +282,13 @@ var USAPresidentialMapType = new MapType(
         {id: "enabled", title: "Enabled", value: true},
         {id: "disabled", title: "Disabled", value: false}
       ],
-    defaultValue: "disabled", reloadType: MapSettingReloadType.data}
+    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
+    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
   ]
 )
 
@@ -367,7 +373,13 @@ var USASenateMapType = new MapType(
         {id: "enabled", title: "Enabled", value: true},
         {id: "disabled", title: "Disabled", value: false}
       ],
-    defaultValue: "disabled", reloadType: MapSettingReloadType.data}
+    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
+    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
   ]
 )
 
