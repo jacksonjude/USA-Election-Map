@@ -572,6 +572,8 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
 
     if (!loadedSuccessfully) { resolve(); return }
 
+    shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
     displayDataMap()
     $("#dataMapDateSliderContainer").show()
@@ -1597,7 +1599,7 @@ function updateStateBox(regionID)
     regionMarginString += "%</span></span>"
   }
 
-  if (regionData.partyVotesharePercentages)
+  if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
   {
     var sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
       return voteData2.voteshare - voteData1.voteshare
