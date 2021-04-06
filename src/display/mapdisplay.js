@@ -347,7 +347,7 @@ function createMapSourceDropdownItems()
     {
       divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
 
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); downloadMapFile(currentMapSource, kJSONFileType)'>"
+      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;')'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
 
@@ -359,6 +359,15 @@ function createMapSourceDropdownItems()
     }
 
     $("#mapSourcesDropdownContainer").append(divStringToAppend)
+
+    if (mapSourceID == currentCustomMapSource.getID())
+    {
+      var customMapSourceID = mapSourceID
+      $("#" + mapSourceIDNoSpace + "-download-icon")[0].addEventListener('click', function(e) {
+        ignoreMapUpdateClickArray.push(customMapSourceID)
+        downloadMapFile(currentMapSource, e.altKey ? kCSVFileType : kJSONFileType)
+      })
+    }
   }
 }
 
