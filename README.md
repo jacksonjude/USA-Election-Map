@@ -1,6 +1,6 @@
 # USA Election Map
 
-An interactive US presidential and senatorial election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPMS](https://www.yapms.com).
+An interactive US presidential and senatorial election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
 
 ## Features
 
@@ -22,12 +22,12 @@ Running a fork locally is simple since this code only uses the base HTML/CSS/JS 
 
 Since the site uses separate svg files for the map, Chrome and Safari might prevent them from loading over the file protocol due to CORS restrictions (see [more info](https://stackoverflow.com/a/8456586/) and [solution](https://stackoverflow.com/a/13262673/)).
 - Fixing this CORS issue on Safari is somewhat simple: go to Develop > Disable Cross-Origin Restrictions.
-- Chrome is a little more complicated, as it needs to be opened via command line to disable CORS: 
-  - Mac: 
+- Chrome is a little more complicated, as it needs to be opened via command line to disable CORS:
+  - Mac:
     ```
     open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
     ```
-  - Windows: 
+  - Windows:
     ```
     "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
     ```
