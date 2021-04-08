@@ -48,6 +48,7 @@ Then open the address provided in the Terminal window (by default, it seems to b
 - [ ] More past election results
   - [ ] 1952-1972 presidential elections
   - [ ] 1900-1948 presidential elections
+- [ ] State delegate edit
 - [ ] National popular vote totals for past elections
 - [ ] Full third-party support in past results and custom maps
   - [x] Display in voteshare
