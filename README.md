@@ -45,9 +45,15 @@ Then open the address provided in the Terminal window (by default, it seems to b
 
 ## TODO List
 - [x] Past senate election results & 2022 senate projections
+- [ ] More past election results
+  - [ ] 1952-1972 presidential elections
+  - [ ] 1900-1948 presidential elections
 - [ ] National popular vote totals for past elections
 - [ ] Full third-party support in past results and custom maps
-- [ ] More past presidential election results
+  - [x] Display in voteshare
+  - [x] Display on pie chart
+  - [x] Display in past result maps
+  - [ ] Add / Edit parties in custom map
 - [ ] Presidential election results by county
 
 If you have any questions / suggestions / feature ideas, feel free to open an issue, and it will be marked accordingly. Alternatively, you can email **jjcooley0@gmail.com**.
