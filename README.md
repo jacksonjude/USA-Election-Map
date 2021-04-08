@@ -49,12 +49,12 @@ Then open the address provided in the Terminal window (by default, it seems to b
   - [ ] 1952-1972 presidential elections
   - [ ] 1900-1948 presidential elections
 - [ ] State delegate edit
-- [ ] National popular vote totals for past elections
 - [ ] Full third-party support in past results and custom maps
   - [x] Display in voteshare
   - [x] Display on pie chart
   - [x] Display in past result maps
   - [ ] Add / Edit parties in custom map
+- [ ] National popular vote totals for past elections
 - [ ] Presidential election results by county
 
 If you have any questions / suggestions / feature ideas, feel free to open an issue, and it will be marked accordingly. Alternatively, you can email **jjcooley0@gmail.com**.
