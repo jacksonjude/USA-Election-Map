@@ -24,8 +24,6 @@ class MapSource
     this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
     this.shouldShowVoteshare = shouldShowVoteshare == null ? false : shouldShowVoteshare
     this.voteshareCutoffMargin = voteshareCutoffMargin
-
-    console.log(this.id, shouldShowVoteshare, this.shouldShowVoteshare)
   }
 
   loadMap(reloadCache, onlyAttemptLocalFetch)

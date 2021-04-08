@@ -797,6 +797,7 @@ function displayDataMap(dateIndex)
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
+  displayPartyTotals(getPartyTotals())
 
   var mapDates = currentMapSource.getMapDates()
   var dateToDisplay
@@ -843,6 +844,7 @@ function displayDataMap(dateIndex)
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
+  displayPartyTotals(getPartyTotals())
 
   updateEVPieChart()
 
@@ -1108,6 +1110,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
+  displayPartyTotals(getPartyTotals())
 
   updateEVPieChart()
   if (currentRegionID != null)
@@ -1335,6 +1338,7 @@ function leftClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
+    displayPartyTotals(getPartyTotals())
   }
   else if (currentMapState == kViewing && showingDataMap && currentRegionID)
   {
@@ -1389,6 +1393,7 @@ function rightClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
+    displayPartyTotals(getPartyTotals())
   }
 }
 
@@ -1482,7 +1487,6 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     }
   }
 
-  displayPartyTotals(getPartyTotals())
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
   {
     updateEVPieChart()
@@ -1536,7 +1540,20 @@ function displayPartyTotals(partyTotals)
 
 function getCurrentDecade()
 {
-  return currentSliderDate == null ? Math.floor(((new Date()).getFullYear()-1)/10)*10 : (Math.floor((currentSliderDate.getFullYear()-1)/10)*10)
+  var dateForDecade
+  if (currentMapSource.getID() == currentCustomMapSource.getID() && showingCompareMap)
+  {
+    var compareDate = mapSources[compareMapSourceIDArray[0]].getMapDates()[$("#firstCompareDataMapDateSlider")[0].value-1]
+    if (compareDate != null)
+    {
+      dateForDecade = new Date(compareDate)
+    }
+  }
+  else if (currentSliderDate != null)
+  {
+    dateForDecade = currentSliderDate
+  }
+  return Math.floor(((dateForDecade || new Date()).getFullYear()-1)/10)*10
 }
 
 function getCurrentDateOrToday()
@@ -1587,7 +1604,7 @@ function updateStateBox(regionID)
   }
 
   var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
-  var regionMarginString = regionData.candidateName + " +" + roundedMarginValue
+  var regionMarginString = ((currentMapSource.getID() == currentCustomMapSource.getID() && showingCompareMap) ? currentMapSource.getCandidateNames()[regionData.partyID] : regionData.candidateName) + " +" + roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
