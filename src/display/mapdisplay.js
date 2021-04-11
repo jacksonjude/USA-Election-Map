@@ -95,6 +95,8 @@ $(async function() {
 
   addDivEventListeners()
 
+  addTextBoxSpacingCSS()
+
   updateCountdownTimer()
   setTimeout(function() {
     setInterval(function() {
@@ -547,6 +549,22 @@ function addDivEventListeners()
       if ($("#stateboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#stateboxcontainer").hide() }
     }, 200)
   })
+}
+
+function addTextBoxSpacingCSS()
+{
+  var browserName = bowser.getParser(navigator.userAgent).getResult().browser.name
+
+  switch (browserName)
+  {
+    case "Chrome":
+    $(".textbox").css('letter-spacing', "1px")
+    break
+
+    case "Firefox":
+    $(".textbox").css('letter-spacing', "0.8px")
+    break
+  }
 }
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
