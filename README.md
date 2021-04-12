@@ -25,7 +25,7 @@ Since the site uses separate svg files for the map, Chrome and Safari might prev
 - Chrome is a little more complicated, as it needs to be opened via command line to disable CORS:
   - Mac:
     ```
-    open -a "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
     ```
   - Windows:
     ```
