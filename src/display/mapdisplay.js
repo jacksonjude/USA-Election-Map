@@ -272,8 +272,22 @@ function resizeElements(initilizedPieChart)
   $("#evPieChart").css("background-position", "center")
   $("#evPieChart").css("background-repeat", "no-repeat")
 
-  //1.0*infoboxcontainerswidth*zoom/evpiechartwidth == 1.0
-  $("#infoboxcontainers").width($("#evPieChart").width())
+  const creditboxh3DefaultSize = 23
+  const creditboxh5DefaultSize = 17
+  const creditboxImageDefaultSize = 20
+
+  const helpboxh3DefaultSize = 23
+  const helpboxh5DefaultSize = 15
+
+  const defaultMapZoom = 120.634/100
+
+  $("#creditbox h3").css('font-size', (creditboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
+  $("#creditbox h5").css('font-size', (creditboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
+  $("#creditbox img").css('width', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
+  $("#creditbox img").css('height', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
+
+  $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
+  $("#helpbox h5").css('font-size', (helpboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
 
   if (initilizedPieChart == true || initilizedPieChart == null)
   {
