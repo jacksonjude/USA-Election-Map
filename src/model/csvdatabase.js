@@ -22,7 +22,7 @@ class CSVDatabase
       const request = indexedDB.open(this.databaseName, this.databaseVersion)
 
       request.onerror = function(event) {
-        console.error(`Database error: ${event.target.errorCode}`)
+        console.error(`Database error: ${event.target.errorCode || event.target.error.code}`)
         resolve(null)
       }
 
