@@ -281,6 +281,8 @@ function resizeElements(initilizedPieChart)
 
   const defaultMapZoom = 120.634/100
 
+  $("#infoboxcontainers").css('min-width', $("#evPieChart").width())
+
   $("#creditbox h3").css('font-size', (creditboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
   $("#creditbox h5").css('font-size', (creditboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
   $("#creditbox img").css('width', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
