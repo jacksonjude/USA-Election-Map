@@ -232,17 +232,16 @@ var USAPresidentialMapType = new MapType(
   5,
   true,
   `
-  <h3 style='margin: 0px;'>Keyboard Controls</h3>
+  <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #ec7039;'>1</span>, <span style='color: #ec7039;'>2</span>, <span style='color: #4a84ff;'>3</span>, <span style='color: #0c71c0;'>4</span>, 5, 6 keys: Change map source<br>
-    &#x2022; Source download buttons: Update selected source<br>
-    &#x2022; Clear button / 0 key: Clear map<br>
-    &#x2022; Slider / arrow keys: Select data map date<br>
-    &nbsp;&nbsp;&nbsp;Down: -5, Left: -1, Right: +1, Up: +5<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
+    &#x2022; Select Source / <span style='color: #ec7039;'>1</span>, <span style='color: #ec7039;'>2</span>, <span style='color: #4a84ff;'>3</span>, <span style='color: #0c71c0;'>4</span>, <span style='color: #aaa;'>5</span>, 6 keys: Change map source<br>
+    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
     &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1-6 keys: Force source update<br>
+    &#x2022; 1-6 keys: Force source <span style='color: #49BD49;'>update</span><br>
+    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
+    &#x2022; Slider / arrow keys: Select data map date<br>
+    &nbsp;&nbsp;&nbsp;* Down: -5, Left: -1, Right: +1, Up: +5<br>
+    &#x2022; Click state: View more poll / projection / result data<br>
     <br>
     &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
     &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
@@ -265,7 +264,6 @@ var USAPresidentialMapType = new MapType(
     <br>
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
     &#x2022; M key: Toggle margins dropdown selection<br>
     &#x2022; 1 key: <span style='color: #d9202f;'>15</span>/<span style='color: #ff5864;'>5</span>/<span style='color: #ff8b98;'>1</span> margins (default)<br>
     &#x2022; 2 key: <span style='color: #d9202f;'>5</span>/<span style='color: #ff5864;'>3</span>/<span style='color: #ff8b98;'>1</span> margins (election shift)<br>
@@ -307,25 +305,35 @@ var USASenateMapType = new MapType(
   3,
   true,
   `
-  <h3 style='margin: 0px;'>Keyboard Controls</h3>
+  <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / 1 key: Change map source<br>
-    &#x2022; Source download buttons: Update selected source<br>
-    &#x2022; Clear button / 0 key: Clear map<br>
+    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #aaa;'>2</span>, 3 keys: Change map source<br>
+    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
+    &#x2022; S key: Toggle source dropdown selection<br>
+    &#x2022; 1-2 keys: Force source <span style='color: #49BD49;'>update</span><br>
+    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
     &#x2022; Slider / arrow keys: Select data map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -3, Left: -1, Right: +1, Up: +3<br>
     &#x2022; Click state: View more poll / projection / result data<br>
     <br>
-    &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1 key: Force source update<br>
+    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
+    &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
+    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
+    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
+    <br>
+    &#x2022; Source checkbox: Select map source to compare<br>
+    &#x2022; Shift + 1-2 keys: Select map source to compare<br>
+    &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
+    &#x2022; Left/Right arrow keys: Adjust selected slider<br>
     <br>
     &#x2022; Settings dropdown: Click setting to toggle/cycle option<br>
     &#x2022; Map Current Seats: Show seats not up for election<br>
     &#x2022; Pie Current Seats: Show seats not up for election<br>
     &#x2022; Seat Arrangement:<br>
     &nbsp;&nbsp;&nbsp;* By Election (regular or special)<br>
-    &nbsp;&nbsp;&nbsp;* By Class (specific seat for the state: 1/2/3)<br>
-    &nbsp;&nbsp;&nbsp;** 1: 2018, 2: 2020, 3: 2016/2022<br>
+    &nbsp;&nbsp;&nbsp;* By Class (specific seat for the state: <span style='color: #D93314;'>1</span>/<span style='color: #F0A300;'>2</span>/<span style='color: #E8D500;'>3</span>)<br>
+    &nbsp;&nbsp;&nbsp;** <span style='color: #D93314;'>1: 2018</span>, <span style='color: #F0A300;'>2: 2020</span>, <span style='color: #E8D500;'>3: 2016/2022</span><br>
     &#x2022; Off Cycle Elections: Show elections not on election day<br>
     &nbsp;&nbsp;&nbsp;* Includes party flips and runoffs<br>
     &#x2022; Latest Tick: Include tick for latest date on slider<br>
@@ -334,11 +342,8 @@ var USASenateMapType = new MapType(
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>
     <br>
-    &#x2022; M key: Toggle margins dropdown selection<br>
-    &#x2022; 1 key: <span style='color: #d9202f;'>15</span>/<span style='color: #ff5864;'>5</span>/<span style='color: #ff8b98;'>1</span> margins (default)<br>
-    &#x2022; 2 key: <span style='color: #d9202f;'>5</span>/<span style='color: #ff5864;'>3</span>/<span style='color: #ff8b98;'>1</span> margins (election shift)<br>
-    <br>
     &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
+    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
   </h5>
   `,
   {"Alabama":"AL", "Alabama Special":"AL-S", "Alaska":"AK", "Alaska Special":"AK-S", "Arizona":"AZ", "Arizona Special":"AZ-S", "Arkansas":"AR", "Arkansas Special":"AR-S", "California":"CA", "California Special":"CA-S", "Colorado":"CO", "Colorado Special":"CO-S", "Connecticut":"CT", "Connecticut Special":"CT-S", "Delaware":"DE", "Delaware Special":"DE-S", "Florida":"FL", "Florida Special":"FL-S", "Georgia":"GA", "Georgia Special":"GA-S", "Hawaii":"HI", "Hawaii Special":"HI-S", "Idaho":"ID", "Idaho Special":"ID-S", "Illinois":"IL", "Illinois Special":"IL-S", "Indiana":"IN", "Indiana Special":"IN-S", "Iowa":"IA", "Iowa Special":"IA-S", "Kansas":"KS", "Kansas Special":"KS-S", "Kentucky":"KY", "Kentucky Special":"KY-S", "Louisiana":"LA", "Louisiana Special":"LA-S", "Maine":"ME", "Maine Special":"ME-S", "Maryland":"MD", "Maryland Special":"MD-S", "Massachusetts":"MA", "Massachusetts Special":"MA-S", "Michigan":"MI", "Michigan Special":"MI-S", "Minnesota":"MN", "Minnesota Special":"MN-S", "Mississippi":"MS", "Mississippi Special":"MS-S", "Missouri":"MO", "Missouri Special":"MO-S", "Montana":"MT", "Montana Special":"MT-S", "Nebraska":"NE", "Nebraska Special":"NE-S", "Nevada":"NV", "Nevada Special":"NV-S", "New Hampshire":"NH", "New Hampshire Special":"NH-S", "New Jersey":"NJ", "New Jersey Special":"NJ-S", "New Mexico":"NM", "New Mexico Special":"NM-S", "New York":"NY", "New York Special":"NY-S", "North Carolina":"NC", "North Carolina Special":"NC-S", "North Dakota":"ND", "North Dakota Special":"ND-S", "Ohio":"OH", "Ohio Special":"OH-S", "Oklahoma":"OK", "Oklahoma Special":"OK-S", "Oregon":"OR", "Oregon Special":"OR-S", "Pennsylvania":"PA", "Pennsylvania Special":"PA-S", "Rhode Island":"RI", "Rhode Island Special":"RI-S", "South Carolina":"SC", "South Carolina Special":"SC-S", "South Dakota":"SD", "South Dakota Special":"SD-S", "Tennessee":"TN", "Tennessee Special":"TN-S", "Texas":"TX", "Texas Special":"TX-S", "Utah":"UT", "Utah Special":"UT-S", "Vermont":"VT", "Vermont Special":"VT-S", "Virginia":"VA", "Virginia Special":"VA-S", "Washington":"WA", "Washington Special":"WA-S", "West Virginia":"WV", "West Virginia Special":"WV-S", "Wisconsin":"WI", "Wisconsin Special":"WI-S", "Wyoming":"WY", "Wyoming Special":"WY-S"},
