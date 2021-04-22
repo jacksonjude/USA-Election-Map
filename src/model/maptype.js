@@ -87,9 +87,9 @@ class MapType
     this.mapSources = mapSources
   }
 
-  getMapSources(self)
+  getMapSources(selfArg)
   {
-    var self = self || this
+    var self = selfArg || this
     return self.mapSources
   }
 
@@ -164,23 +164,23 @@ class MapType
     }
   }
 
-  getMapSettingLayout(settingID, self)
+  getMapSettingLayout(settingID, selfArg)
   {
-    var self = self || this
+    var self = selfArg || this
     return self.mapSettingsLayout.find(setting => setting.id == settingID)
   }
 
-  getMapSettingOptions(settingID, self)
+  getMapSettingOptions(settingID, selfArg)
   {
-    var self = self || this
+    var self = selfArg || this
     var settingLayout = self.getMapSettingLayout(settingID, self)
     if (settingLayout == null) { return }
     return settingLayout.options
   }
 
-  getMapSettingOptionData(settingID, self)
+  getMapSettingOptionData(settingID, selfArg)
   {
-    var self = self || this
+    var self = selfArg || this
     var codedValue = self.currentMapSettings[settingID]
     if (codedValue == null) { return }
     return self.getMapSettingOptions(settingID, self).find(option => option.id == codedValue)

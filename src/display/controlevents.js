@@ -50,6 +50,7 @@ function arrowKeyCycle(keyString)
 
     case 1:
     arrowKeysDown[keyString] = 2
+    /* falls through */
     case 2:
     incrementSlider(keyString)
     var mapDatesLength = currentMapSource.getMapDates().length
@@ -449,15 +450,15 @@ function mouseEnteredRegion(div)
   }
 
   $(div).css('stroke', regionSelectColor)
-  for (linkedRegionSetNum in linkedRegions)
+  for (var linkedRegionSetNum in linkedRegions)
   {
-    for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
     {
       if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
       {
-        for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', regionSelectColor)
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionSelectColor)
         }
       }
     }
@@ -478,15 +479,15 @@ function mouseLeftRegion(div)
   }
 
   $(div).css('stroke', regionDeselectColor)
-  for (linkedRegionSetNum in linkedRegions)
+  for (var linkedRegionSetNum in linkedRegions)
   {
-    for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
     {
       if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
       {
-        for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum]).css('stroke', regionDeselectColor)
+          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionDeselectColor)
         }
       }
     }

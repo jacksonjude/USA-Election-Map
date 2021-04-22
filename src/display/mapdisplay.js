@@ -181,7 +181,7 @@ async function reloadForNewMapType(initialLoad)
   createComparePresetDropdownItems()
 
   populateRegionsArray()
-  for (partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in selectablePoliticalPartyIDs)
   {
     if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
     politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
@@ -333,7 +333,7 @@ function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID,
 
 function preloadAssets(assetURLs)
 {
-  for (urlNum in assetURLs)
+  for (var urlNum in assetURLs)
   {
     (new Image()).src = assetURLs[urlNum]
   }
@@ -342,7 +342,7 @@ function preloadAssets(assetURLs)
 function createMapSourceDropdownItems()
 {
   $("#mapSourcesDropdownContainer").html("")
-  for (sourceNum in mapSourceIDs)
+  for (var sourceNum in mapSourceIDs)
   {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
 
@@ -392,7 +392,7 @@ function createMapSourceDropdownItems()
 function createMarginEditDropdownItems()
 {
   $("#marginsDropdownContainer").html("")
-  for (marginID in marginNames)
+  for (var marginID in marginNames)
   {
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
@@ -403,7 +403,7 @@ function createMarginEditDropdownItems()
 function createSettingsDropdownItems()
 {
   $("#settingsDropdownContainer").html("")
-  for (settingNum in currentMapType.getMapSettingsLayout())
+  for (var settingNum in currentMapType.getMapSettingsLayout())
   {
     var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
     $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
@@ -417,9 +417,9 @@ function createSettingsDropdownItems()
   }
 }
 
-function cycleMapSetting(settingID, settingDiv, shouldIncrement)
+function cycleMapSetting(settingID, settingDiv, shouldIncrementArg)
 {
-  var shouldIncrement = shouldIncrement == null ? false : shouldIncrement
+  var shouldIncrement = shouldIncrementArg == null ? false : shouldIncrementArg
 
   var currentMapSettings = currentMapType.getMapSettings()
 
@@ -427,7 +427,7 @@ function cycleMapSetting(settingID, settingDiv, shouldIncrement)
   var currentValueID = currentMapSettings[settingID]
 
   var optionIndex = 0
-  for (optionNum in settingOptions)
+  for (var optionNum in settingOptions)
   {
     if (settingOptions[optionNum].id == currentValueID)
     {
@@ -482,7 +482,7 @@ function toggleMapSettingDisable(settingID, disableOverride)
 function createCountdownDropdownItems()
 {
   $("#countdownsDropdownContainer").html("")
-  for (timeName in countdownTimes)
+  for (var timeName in countdownTimes)
   {
     $("#countdownsDropdownContainer").append("<div class='dropdown-separator'></div>")
     $("#countdownsDropdownContainer").append("<a id='" + timeName + "-countdown' style='padding-top: 14px; min-height: 25px;' onclick='selectCountdownTime(\"" + timeName + "\", this)'>" + timeName + "</a>")
@@ -496,7 +496,7 @@ function createCountdownDropdownItems()
 function createComparePresetDropdownItems()
 {
   $("#comparePresetsDropdownContainer").html("")
-  for (comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
+  for (var comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
   {
     var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
 
@@ -512,7 +512,7 @@ function addDivEventListeners()
 
     if (e.altKey)
     {
-      for (mapSourceID in mapSources)
+      for (var mapSourceID in mapSources)
       {
         mapSources[mapSourceID].resetMapData()
         removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
@@ -637,25 +637,25 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
     ignoreMapUpdateClickArray.push(mapIDToIgnore)
   }
   var downloadDataPromise = new Promise(async (resolve, reject) => {
-    for (divID in divsToUpdateStatus)
+    for (let divID in divsToUpdateStatus)
     {
       removeStatusImage(divID)
     }
 
-    for (divID in divsToUpdateStatus)
+    for (let divID in divsToUpdateStatus)
     {
       insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
     }
 
     var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch)
-    for (divID in divsToUpdateStatus)
+    for (let divID in divsToUpdateStatus)
     {
       removeStatusImage(divID)
     }
 
     if (!loadedSuccessfully)
     {
-      for (divID in divsToUpdateStatus)
+      for (let divID in divsToUpdateStatus)
       {
         insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
       }
@@ -663,7 +663,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
     }
     else
     {
-      for (divID in divsToUpdateStatus)
+      for (let divID in divsToUpdateStatus)
       {
         insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
       }
@@ -685,7 +685,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
 async function downloadAllMapData()
 {
   var sourcesLoaded = 0
-  for (sourceIDNum in mapSourceIDs)
+  for (var sourceIDNum in mapSourceIDs)
   {
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function(loadedSuccessfully) {
@@ -705,7 +705,7 @@ async function downloadAllMapData()
 
 async function fetchLocalCSVData()
 {
-  for (sourceIDNum in mapSourceIDs)
+  for (var sourceIDNum in mapSourceIDs)
   {
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     await downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, false, false, true)
@@ -714,13 +714,13 @@ async function fetchLocalCSVData()
 
 async function updateIconsBasedOnLocalCSVData()
 {
-  for (sourceIDNum in mapSourceIDs)
+  for (var sourceIDNum in mapSourceIDs)
   {
     var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     var csvIsStored = await CSVDatabase.hasCSV(mapSourceIDs[sourceIDNum])
     if (csvIsStored)
     {
-      for (divID in divsToUpdateStatus)
+      for (let divID in divsToUpdateStatus)
       {
         removeStatusImage(divID)
         insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
@@ -728,7 +728,7 @@ async function updateIconsBasedOnLocalCSVData()
     }
     else
     {
-      for (divID in divsToUpdateStatus)
+      for (let divID in divsToUpdateStatus)
       {
         removeStatusImage(divID)
         insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
@@ -772,7 +772,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   {
     var closestDate = mapDates[0]
     var closestDateIndex = 0
-    for (dateNum in mapDates)
+    for (let dateNum in mapDates)
     {
       if (Math.abs(previousDate-mapDates[dateNum]) < Math.abs(closestDate-previousDate))
       {
@@ -788,7 +788,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   $("#" + sliderTickDivID).empty()
   if (mapDates.length <= maxDateSliderTicks)
   {
-    for (dateNum in mapDates)
+    for (let dateNum in mapDates)
     {
       $("#" + sliderTickDivID).append("<span class='tick'></span>")
     }
@@ -853,7 +853,7 @@ function displayDataMap(dateIndex)
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
-  for (regionNum in currentMapDataForDate)
+  for (var regionNum in currentMapDataForDate)
   {
     var regionDataCallback = getRegionData(currentMapDataForDate[regionNum].region)
     var regionData = regionDataCallback.regionData
@@ -900,7 +900,7 @@ function updatePoliticalPartyCandidateNames(mapDate)
     return
   }
 
-  for (partyID in politicalParties)
+  for (var partyID in politicalParties)
   {
     if (partyID in candidateNames)
     {
@@ -914,7 +914,7 @@ function updateMapElectoralVoteText()
   if (!currentMapType.getShouldDisplayEVOnMap()) { return }
 
   var regionIDs = Object.values(mapRegionNameToID)
-  for (regionNum in regionIDs)
+  for (var regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
@@ -1131,7 +1131,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   displayRegionDataArray = {}
   populateRegionsArray()
 
-  for (partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in selectablePoliticalPartyIDs)
   {
     if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
     politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
@@ -1183,7 +1183,7 @@ function populateRegionsArray()
 {
   $('#outlines').children().each(function() {
     var regionID = $(this).attr('id')
-    for (regexNum in regionIDsToIgnore)
+    for (var regexNum in regionIDsToIgnore)
     {
       if (regionIDsToIgnore[regexNum].test(regionID))
       {
@@ -1345,7 +1345,7 @@ function leftClickRegion(div)
       var marginValueIndex = marginValueArray.indexOf(regionData.margin)
       if (marginValueIndex == -1)
       {
-        for (marginValueNum in marginValueArray)
+        for (var marginValueNum in marginValueArray)
         {
           if (regionData.margin >= marginValueArray[marginValueNum])
           {
@@ -1400,7 +1400,7 @@ function rightClickRegion(div)
       var marginValueIndex = marginValueArray.indexOf(regionData.margin)
       if (marginValueIndex == -1)
       {
-        for (marginValueNum in marginValueArray)
+        for (var marginValueNum in marginValueArray)
         {
           if (regionData.margin >= marginValueArray[marginValueNum])
           {
@@ -1447,15 +1447,15 @@ function getBaseRegionID(regionID)
   var linkedRegionIDs = [regionID]
   var foundRegion = regionID in displayRegionDataArray
 
-  for (linkedRegionSetNum in linkedRegions)
+  for (var linkedRegionSetNum in linkedRegions)
   {
-    for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
     {
       if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
       {
-        for (linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
         {
-          var linkedRegionToTest = linkedRegions[linkedRegionSetNum][linkedRegionIDNum]
+          var linkedRegionToTest = linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]
           if (regionID != linkedRegionToTest)
           {
             linkedRegionIDs.push(linkedRegionToTest)
@@ -1484,7 +1484,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
       fillColor = regionDisabledColor
 
       var regionsToHide = currentMapType.getRegionsToHideOnDisable()
-      for (regexNum in regionsToHide)
+      for (var regexNum in regionsToHide)
       {
         if (regionsToHide[regexNum].test(regionData.region))
         {
@@ -1503,7 +1503,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     fillColor = politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(regionData.margin, regionData.partyID)]
   }
 
-  for (regionIDNum in regionIDsToUpdate)
+  for (var regionIDNum in regionIDsToUpdate)
   {
     var regionDiv = $("#" + regionIDsToUpdate[regionIDNum])
     regionDiv.css('animation-fill-mode', 'forwards')
@@ -1533,7 +1533,7 @@ function getMarginIndexForValue(margin, partyID)
   {
     return "current"
   }
-  for (marginName in marginValues)
+  for (var marginName in marginValues)
   {
     if (Math.abs(margin) >= marginValues[marginName])
     {
@@ -1546,12 +1546,12 @@ function getPartyTotals()
 {
   var partyTotals = {}
 
-  for (partyIDNum in mainPoliticalPartyIDs)
+  for (var partyIDNum in mainPoliticalPartyIDs)
   {
     partyTotals[mainPoliticalPartyIDs[partyIDNum]] = 0
   }
 
-  for (regionID in displayRegionDataArray)
+  for (var regionID in displayRegionDataArray)
   {
     var partyIDToSet = displayRegionDataArray[regionID].partyID
     if (displayRegionDataArray[regionID].partyID == null)
@@ -1566,7 +1566,7 @@ function getPartyTotals()
 
 function displayPartyTotals(partyTotals)
 {
-  for (partyID in partyTotals)
+  for (var partyID in partyTotals)
   {
     $("#" + partyID).html(politicalParties[partyID].getCandidateName() + " (" + partyTotals[partyID] + ")")
   }
@@ -1685,7 +1685,7 @@ function updateCountdownTimer()
   else
   {
     countdownTime = Object.values(countdownTimes).map((timeData) => {return timeData.time}).sort().slice(-1)[0]
-    for (timeName in countdownTimes)
+    for (let timeName in countdownTimes)
     {
       if (currentDate.getTime() < countdownTimes[timeName].time)
       {
@@ -1694,7 +1694,7 @@ function updateCountdownTimer()
       }
     }
 
-    for (timeName in countdownTimes)
+    for (let timeName in countdownTimes)
     {
       if (countdownTime == countdownTimes[timeName].time)
       {
@@ -1791,14 +1791,14 @@ function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, sw
   var updateCompareMapSourcesPromise = new Promise(async (resolve, reject) => {
     if (compareSourcesToUpdate[0])
     {
-      var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])
+      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])
       $('.comparesourcecheckbox').prop('disabled', true)
       await downloadDataForMapSource(compareMapSourceIDArray[0], iconDivDictionary, null, false)
       $('.comparesourcecheckbox').prop('disabled', false)
     }
     if (compareSourcesToUpdate[1])
     {
-      var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[1])
+      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[1])
       $('.comparesourcecheckbox').prop('disabled', true)
       await downloadDataForMapSource(compareMapSourceIDArray[1], iconDivDictionary, null, false)
       $('.comparesourcecheckbox').prop('disabled', false)
@@ -1932,12 +1932,12 @@ function applyCompareToCustomMap()
   if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
 
   var resultMapArray = {}
-  for (regionID in compareMapDataArray[0])
+  for (var regionID in compareMapDataArray[0])
   {
     var compareRegionData0 = compareMapDataArray[0][regionID]
     var compareRegionData1 = compareMapDataArray[1][regionID]
 
-    if (currentMapType.getMapSettings()["seatArrangement"] == "election-type" && compareRegionData0.seatClass != compareRegionData1.seatClass)
+    if (currentMapType.getMapSettings().seatArrangement == "election-type" && compareRegionData0.seatClass != compareRegionData1.seatClass)
     {
       if (regionID.endsWith("-S"))
       {
@@ -2039,7 +2039,7 @@ function addConstantMarginToMap(marginToAdd)
 {
   if (currentMapState != kEditing || selectedParty == null || selectedParty.getID() == TossupParty.getID()) { return }
 
-  for (regionID in displayRegionDataArray)
+  for (var regionID in displayRegionDataArray)
   {
     if (displayRegionDataArray[regionID].partyID != selectedParty.getID())
     {

@@ -27,7 +27,7 @@ function setupEVPieChart()
   var partySectionBackgroundColors = []
   var partySectionLabels = []
 
-  for (partyNum in partyOrdering)
+  for (var partyNum in partyOrdering)
   {
     var partyID = partyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
@@ -39,7 +39,7 @@ function setupEVPieChart()
         marginNames.reverse()
       }
 
-      for (marginKeyNum in marginNames)
+      for (var marginKeyNum in marginNames)
       {
         var marginKey = marginNames[marginKeyNum]
 
@@ -122,7 +122,7 @@ function setupEVPieChart()
         color: function(context) {
           var value = context.dataset.data[context.dataIndex]
           var evSum = 0
-          for (dataNum in context.dataset.data)
+          for (var dataNum in context.dataset.data)
           {
             evSum += context.dataset.data[dataNum]
           }
@@ -150,16 +150,16 @@ function updateEVPieChart()
   var marginTotalsData = {} // TODO: Fix hardcoding of two parties for pie chart; Use object for marginTotals, etc
   var regionMarginStringsData = {}
 
-  for (partyNum in partyOrdering)
+  for (var partyNum in partyOrdering)
   {
-    var partyID = partyOrdering[partyNum].partyID
+    let partyID = partyOrdering[partyNum].partyID
 
     marginTotalsData[partyID] = {}
     regionMarginStringsData[partyID] = {}
 
     if (partyID != TossupParty.getID())
     {
-      for (marginKey in politicalParties[partyID].getMarginNames())
+      for (let marginKey in politicalParties[partyID].getMarginNames())
       {
         marginTotalsData[partyID][marginKey] = 0
         regionMarginStringsData[partyID][marginKey] = []
@@ -172,7 +172,7 @@ function updateEVPieChart()
     }
   }
 
-  for (regionID in displayRegionDataArray)
+  for (var regionID in displayRegionDataArray)
   {
     var regionParty = displayRegionDataArray[regionID].partyID
     var regionMargin = displayRegionDataArray[regionID].margin
@@ -188,7 +188,7 @@ function updateEVPieChart()
     }
     else
     {
-      var marginKey = getMarginIndexForValue(regionMargin, regionParty)
+      let marginKey = getMarginIndexForValue(regionMargin, regionParty)
 
       marginTotalsData[regionParty][marginKey] += regionEV
       regionMarginStringsData[regionParty][marginKey].push(regionString)
@@ -197,7 +197,7 @@ function updateEVPieChart()
 
   for (partyNum in regionMarginStringsData)
   {
-    for (marginKey in regionMarginStringsData[partyNum])
+    for (let marginKey in regionMarginStringsData[partyNum])
     {
       regionMarginStringsData[partyNum][marginKey].sort((marginString1, marginString2) => {
         return parseFloat(marginString1.split("+")[1]) > parseFloat(marginString2.split("+")[1]) ? 1 : -1
@@ -220,7 +220,7 @@ function updateEVPieChart()
         marginNames.reverse()
       }
 
-      for (marginKeyNum in marginNames)
+      for (var marginKeyNum in marginNames)
       {
         var marginKey = marginNames[marginKeyNum]
 

@@ -346,7 +346,7 @@ class MapSource
     {
       this.mapData[dateToUpdate] = {}
     }
-    for (regionID in displayRegionArray)
+    for (var regionID in displayRegionArray)
     {
       var regionData = displayRegionArray[regionID]
       regionData.region = regionID
@@ -564,7 +564,7 @@ function createPresidentialMapSources()
         }
 
         var marginSum = 0
-        if (!(mapDataRows.length > 0) && ev2016)
+        if (mapDataRows.length <= 0 && ev2016)
         {
           marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
         }
@@ -778,7 +778,7 @@ function createPresidentialMapSources()
         filteredDateData[regionID] = regionDataToFill
       }
 
-      for (var regionID in filteredDateData)
+      for (let regionID in filteredDateData)
       {
         filteredDateData[regionID].margin = Math.abs(filteredDateData[regionID].margin)
       }
@@ -805,10 +805,7 @@ function createPresidentialMapSources()
       {
         return regionData.margin
       }
-      else
-      {
-        return 0
-      }
+      return 0
 
       case "region":
       if (regionNameToID)
@@ -1101,7 +1098,7 @@ function createSenateMapSources()
 
   const classModulo6 = [2, 4, 0]
 
-  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, _, _, isCustomMap, voteshareCutoffMargin)
+  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, _, __, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -1135,7 +1132,7 @@ function createSenateMapSources()
           {
             if (isCustomMap)
             {
-              var partyIDToCandidateNames = {}
+              let partyIDToCandidateNames = {}
               for (var partyCandidateName in candidateNameToPartyIDMap)
               {
                 partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
@@ -1241,7 +1238,7 @@ function createSenateMapSources()
           }
 
           var partyIDToCandidateNames = {}
-          for (var partyCandidateName in candidateData)
+          for (let partyCandidateName in candidateData)
           {
             partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
           }
@@ -1255,17 +1252,17 @@ function createSenateMapSources()
     }
 
     var fullFilteredMapData = cloneObject(filteredMapData)
-    for (mapDate in fullFilteredMapData)
+    for (var mapDate in fullFilteredMapData)
     {
-      var filteredDateData = fullFilteredMapData[mapDate]
+      let filteredDateData = fullFilteredMapData[mapDate]
 
       if (Object.values(filteredDateData).length == 0) { continue }
 
-      var isOffyear = Object.values(filteredDateData)[0].offYear
+      let isOffyear = Object.values(filteredDateData)[0].offYear
       var isRunoff = Object.values(filteredDateData)[0].isRunoff
 
       var regionIDsInFilteredDateData = Object.keys(filteredDateData)
-      for (var regionNum in regionIDs)
+      for (let regionNum in regionIDs)
       {
         if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum]))
         {
@@ -1284,15 +1281,15 @@ function createSenateMapSources()
         }
         if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum] + "-S"))
         {
-          var seatIndexToUse
+          let seatIndexToUse
           if (currentMapType.getMapSettings().seatArrangement == "seat-class" || !regionIDsInFilteredDateData.includes(regionIDs[regionNum]))
           {
             seatIndexToUse = 1
           }
           else
           {
-            var usedSeatClass = filteredDateData[regionIDs[regionNum]].seatClass
-            var seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
+            let usedSeatClass = filteredDateData[regionIDs[regionNum]].seatClass
+            let seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
             seatIndexToUse = Math.abs(seatIndex-1)
           }
           filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
@@ -1318,7 +1315,7 @@ function createSenateMapSources()
         }
         if (runoff)
         {
-          for (regionID in fullFilteredMapData[mapDate])
+          for (var regionID in fullFilteredMapData[mapDate])
           {
             if (fullFilteredMapData[mapDate][regionID].runoff)
             {
@@ -1349,7 +1346,7 @@ function createSenateMapSources()
     }
     var earliestYear = startYear-(startYearMod6-electionYearMod6)
 
-    for (dateNum in reversedMapDates)
+    for (var dateNum in reversedMapDates)
     {
       if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
 
@@ -1390,10 +1387,7 @@ function createSenateMapSources()
       {
         return regionData.margin/100.0
       }
-      else
-      {
-        return 0
-      }
+      return 0
 
       case "region":
       var trimmedRegionID = regionID.replace("-S", "")
@@ -1537,7 +1531,7 @@ function createSenateMapSources()
 
   var idsToPartyNames = {}
   var partyNamesToIDs = {}
-  for (partyNum in mainPoliticalPartyIDs)
+  for (var partyNum in mainPoliticalPartyIDs)
   {
     if (mainPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
 
