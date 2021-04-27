@@ -615,7 +615,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
 
     $("#evPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
 
-    if (currentMapSource.getIconURL())
+    if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
     {
       $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
     }
