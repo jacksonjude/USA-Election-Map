@@ -922,8 +922,8 @@ function createPresidentialMapSources()
   var CookProjectionMapSource = new MapSource(
     "Cook-2020-Presidential",
     "Cook Political",
-    "https://map.jacksonjude.com/csv-sources/cook/cook-latest.csv",
-    "https://map.jacksonjude.com/csv-sources/cook/",
+    "https://map.jacksonjude.com/csv-sources/cook-pres-2020/cook-latest.csv",
+    "https://map.jacksonjude.com/csv-sources/cook-pres-2020/",
     "./assets/cookpolitical-large.png",
     {
       date: "date",
@@ -1413,7 +1413,7 @@ function createSenateMapSources()
     }
   }
 
-  var LTE2022SenateYouTubeIDs = {
+  const LTE2022SenateYouTubeIDs = {
     1608364800000: "Wk-T-lXa5-g",
     1612080000000: "yifvg3uHips",
     1614412800000: "wtYw6nmWgQ0",
@@ -1447,7 +1447,7 @@ function createSenateMapSources()
     null,
     null,
     false,
-    true,
+    false,
     doubleLineClassSeparatedFilterFunction,
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
@@ -1461,6 +1461,41 @@ function createSenateMapSources()
     null,
     null,
     false
+  )
+
+  var CookSenateProjectionMapSource = new MapSource(
+    "Cook-2020-Senate",
+    "Cook Political",
+    "https://map.jacksonjude.com/csv-sources/cook-senate-2022/cook-latest.csv",
+    "https://map.jacksonjude.com/csv-sources/cook-senate-2022/",
+    "./assets/cookpolitical-large.png",
+    {
+      date: "date",
+      region: "region",
+      seatClass: "class",
+      isSpecial: "special",
+      isRunoff: "runoff",
+      isOffyear: "offyear",
+      isDisabled: "disabled",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    },
+    null,
+    null,
+    null,
+    incumbentChallengerPartyIDs,
+    regionNameToIDHistorical,
+    null,
+    null,
+    false,
+    false,
+    doubleLineClassSeparatedFilterFunction,
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    {
+      if (mapDate == null) { return }
+      window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".html")
+    }
   )
 
   var PastElectionResultMapSource = new MapSource(
@@ -1578,10 +1613,11 @@ function createSenateMapSources()
 
   var senateMapSources = {}
   senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
+  senateMapSources[CookSenateProjectionMapSource.getID()] = CookSenateProjectionMapSource
   senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USASenateMapType.getCustomMapEnabled())
   {
     senateMapSourceIDs.push(CustomMapSource.getID())
