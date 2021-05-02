@@ -1677,7 +1677,7 @@ function updateStateBox(regionID)
     sortedPercentages.forEach(voteData => {
       var voteshareCandidateID = "#voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode()
 
-      $(voteshareCandidateID).css('background', "linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)/100*largestWidth) + "px, " + politicalParties[voteData.partyID].getMarginColors().lean + " " + ((1-parseFloat(voteData.voteshare))/100*largestWidth) + "px)")
+      $(voteshareCandidateID).css('background', "linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%)")
       $(voteshareCandidateID).css('width', largestWidth + "px")
     })
   }, 0)
