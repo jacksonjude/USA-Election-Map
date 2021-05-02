@@ -1656,17 +1656,31 @@ function updateStateBox(regionID)
       return voteData2.voteshare - voteData1.voteshare
     })
 
-    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>"
-    regionMarginString += "Voteshare<br>"
+    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
 
-    sortedPercentages.forEach(voteData => {
-      regionMarginString += "<span style='color: " + politicalParties[voteData.partyID].getMarginColors().lean + ";'>" + voteData.candidate + ": "
+    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; display: block; line-height: 100%; border-radius: 50px;'>"
+
+    sortedPercentages.forEach((voteData, i) => {
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff;" + (i == 0 ? " border-radius: 2px 2px 0px 0px;" : "") + (i == sortedPercentages.length-1 ? " border-radius: 0px 0px 2px 2px;" : "") + "'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
-      regionMarginString += "%</span><br>"
+      regionMarginString += "%</span></span><br>"
     })
 
-    regionMarginString += "</span>"
+    regionMarginString += "</div>"
   }
+
+  setTimeout(() => {
+    if (sortedPercentages == null) { return }
+
+    var largestWidth = $("#statebox").width()
+
+    sortedPercentages.forEach(voteData => {
+      var voteshareCandidateID = "#voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode()
+
+      $(voteshareCandidateID).css('background', "linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)/100*largestWidth) + "px, " + politicalParties[voteData.partyID].getMarginColors().lean + " " + ((1-parseFloat(voteData.voteshare))/100*largestWidth) + "px)")
+      $(voteshareCandidateID).css('width', largestWidth + "px")
+    })
+  }, 0)
 
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"

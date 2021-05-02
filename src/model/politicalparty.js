@@ -102,7 +102,8 @@ var LibertarianParty = new PoliticalParty(
   ["Libertarian"],
   "Lib",
   "Jorgensen",
-  {current: "#725B00", safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
+  {current: "#725B00", safe: "#FFA520", likely: "#e8c84c", lean: "#E6BF63", tilt: "#c7af59"},
+  // {current: "#725B00", safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
   defaultMarginNames
 )
 
@@ -111,7 +112,8 @@ var GreenParty = new PoliticalParty(
   ["Green"],
   "Grn",
   "Hawkins",
-  {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
+  {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#73D57F", tilt: "#8EB293"},
+  // {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
   defaultMarginNames
 )
 
@@ -120,7 +122,7 @@ var ReformParty = new PoliticalParty(
   ["Reform"],
   "Ref",
   "Perot",
-  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 
@@ -129,7 +131,7 @@ var IndependentRNParty = new PoliticalParty(
   ["Nader"],
   "Ind",
   "Nader",
-  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 
@@ -138,7 +140,7 @@ var Independent2016EMParty = new PoliticalParty(
   ["McMullin"],
   "Ind",
   "McMullin",
-  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 
@@ -147,7 +149,7 @@ var Independent1980JAParty = new PoliticalParty(
   ["Anderson"],
   "Ind",
   "Anderson",
-  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 
@@ -156,7 +158,7 @@ var Independent1976EMParty = new PoliticalParty(
   ["McCarthy"],
   "Ind",
   "McCarthy",
-  {safe: "#B18CFE", likely: "#B18CFE", lean: "#B18CFE", tilt: "#B18CFE"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
   defaultMarginNames
 )
 
