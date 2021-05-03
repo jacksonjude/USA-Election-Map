@@ -1661,7 +1661,7 @@ function updateStateBox(regionID)
     regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; display: block; line-height: 100%; border-radius: 50px;'>"
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "2px 2px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "2px 2px" : "0px 0px") + ";" + "'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + ";" + "'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
       regionMarginString += "%</span></span><br>"
     })
