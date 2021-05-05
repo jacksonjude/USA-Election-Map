@@ -102,7 +102,7 @@ var LibertarianParty = new PoliticalParty(
   ["Libertarian"],
   "Lib",
   "Jorgensen",
-  {current: "#725B00", safe: "#FF9D0A", likely: "#e8c84c", lean: "#D6AF56", tilt: "#c7af59"},
+  {current: "#725B00", safe: "#FF9D0A", likely: "#e8c84c", lean: "#E6BD5D", tilt: "#c7af59"},
   // {current: "#725B00", safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
   defaultMarginNames
 )
