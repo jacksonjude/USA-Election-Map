@@ -6,7 +6,7 @@ An interactive US presidential and senatorial election map. Created with HTML/CS
 
 * Interactive and detailed map sources
   * Displays projection data for the 2020 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays projection data for the 2022 senatorial election from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA)
+  * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ)
   * Displays presidential and senatorial election results from 1976-2020, showing both victory margin and voteshare percentages for each state & district
   * Pie chart to show electoral vote counts by party and by margin
   * Editable custom maps that can be downloaded and uploaded as JSON or CSV files
