@@ -1065,7 +1065,7 @@ function createPresidentialMapSources()
   presidentialMapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
   presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), JHKProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USAPresidentialMapType.getCustomMapEnabled())
   {
     presidentialMapSourceIDs.push(CustomMapSource.getID())
@@ -1424,8 +1424,8 @@ function createSenateMapSources()
   var LTESenateProjectionMapSource = new MapSource(
     "LTE-2022-Senate-Projection",
     "LTE Projection",
-    //"https://map.jacksonjude.com/csv-sources/lte-2022-senate.csv",
-    "./csv-sources/lte-2022-senate.csv",
+    "https://map.jacksonjude.com/csv-sources/lte-2022-senate.csv",
+    // "./csv-sources/lte-2022-senate.csv",
     "https://www.youtube.com/watch?v=",
     "./assets/lte-large.png",
     {
@@ -1456,6 +1456,57 @@ function createSenateMapSources()
 
       var linkToOpen = homepageURL
       linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getTime()]
+      window.open(linkToOpen)
+    },
+    null,
+    null,
+    null,
+    false
+  )
+
+  const PA2022SenateYouTubeIDs = {
+    1614240000000: "Tbsy6XZ_e-Q",
+    1615449600000: "xGtBqaMiAU4",
+    1616742000000: "KJtDSRW3I7Q",
+    1617778800000: "_cZ8OvgwN18",
+    1619161200000: "_nWQxmYO2iA"
+  }
+
+  var PASenateProjectionMapSource = new MapSource(
+    "PA-2022-Senate-Projection",
+    "PA Projection",
+    "https://map.jacksonjude.com/csv-sources/pa-2022-senate.csv",
+    // "./csv-sources/pa-2022-senate.csv",
+    "https://www.youtube.com/watch?v=",
+    "./assets/pa-large.png",
+    {
+      date: "date",
+      region: "region",
+      seatClass: "class",
+      isSpecial: "special",
+      isRunoff: "runoff",
+      isOffyear: "offyear",
+      isDisabled: "disabled",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    },
+    null,
+    null,
+    null,
+    incumbentChallengerPartyIDs,
+    regionNameToIDHistorical,
+    null,
+    null,
+    false,
+    false,
+    doubleLineClassSeparatedFilterFunction,
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+    {
+      if (mapDate == null) { return }
+
+      var linkToOpen = homepageURL
+      linkToOpen += PA2022SenateYouTubeIDs[mapDate.getTime()]
       window.open(linkToOpen)
     },
     null,
@@ -1614,11 +1665,12 @@ function createSenateMapSources()
 
   var senateMapSources = {}
   senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
+  senateMapSources[PASenateProjectionMapSource.getID()] = PASenateProjectionMapSource
   senateMapSources[CookSenateProjectionMapSource.getID()] = CookSenateProjectionMapSource
   senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USASenateMapType.getCustomMapEnabled())
   {
     senateMapSourceIDs.push(CustomMapSource.getID())
