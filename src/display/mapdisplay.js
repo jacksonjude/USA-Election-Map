@@ -1216,6 +1216,17 @@ function selectParty(div)
       selectedParty = politicalParties[partyID]
       $(div).addClass('active')
     }
+
+    if (selectedParty == null || selectedParty == TossupParty)
+    {
+      $(".partyShiftConstantButton").css('color', "gray")
+      $(".partyShiftText").css('color', "gray")
+    }
+    else
+    {
+      $(".partyShiftConstantButton").css('color', "white")
+      $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
+    }
   }
 }
 
@@ -1232,6 +1243,9 @@ function deselectAllParties()
     $(this).removeClass('active')
   })
   selectedParty = null
+
+  $(".partyShiftConstantButton").css('color', "gray")
+  $(".partyShiftText").css('color', "gray")
 }
 
 function toggleEditing(stateToSet)
@@ -1266,8 +1280,13 @@ function toggleEditing(stateToSet)
 
     $("#stateboxcontainer").trigger('hide')
 
+    $("#marginEditButton").hide()
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
+
+    $("#shiftButton").show()
+    $("#shiftButton").removeClass('topnavdisable')
+    $("#shiftDropdownContainer").show()
 
     $("#fillDropdownContainer").css('display', "block")
 
@@ -1298,8 +1317,13 @@ function toggleEditing(stateToSet)
     }
     $("#editDoneButton").removeClass('active')
 
+    $("#marginEditButton").show()
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
+
+    $("#shiftButton").hide()
+    $("#shiftButton").addClass('topnavdisable')
+    $("#shiftDropdownContainer").hide()
 
     $("#fillDropdownContainer").css('display', "none")
 
