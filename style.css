@@ -60,28 +60,28 @@ body {
 
 .topnav #DEM {
   background-color: rgb(84, 102, 140);
+  transition: background-color 0.05s linear;
 }
 
 .topnav #DEM:hover {
-  background-color: rgb(28, 64, 140);
+  background-color: rgb(56, 83, 140);
 }
 
 .topnav #DEM.active {
   background-color: rgb(28, 64, 140);
-  /* background-color: rgb(34, 78, 182); */
 }
 
 .topnav #REP {
   background-color: rgb(191, 85, 92);
+  transition: background-color 0.05s linear;
 }
 
 .topnav #REP:hover {
-  background-color: rgb(191, 29, 41);
+  background-color: rgb(191, 58, 66);
 }
 
 .topnav #REP.active {
   background-color: rgb(191, 29, 41);
-  /* background-color: rgb(217, 33, 45); */
 }
 
 /* The dropdown container */
