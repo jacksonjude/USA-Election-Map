@@ -56,15 +56,19 @@
             <div id="shiftDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(1)" style="display:flex; justify-content:center;">
-                Shift by&nbsp;<span class="partyShiftText">+1</span>
+                Shift All by&nbsp;<span class="partyShiftText">+1</span>
               </a>
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(5)" style="display:flex; justify-content:center;">
-                Shift by&nbsp;<span class="partyShiftText">+5</span>
+                Shift All by&nbsp;<span class="partyShiftText">+5</span>
               </a>
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(15)" style="display:flex; justify-content:center;">
-                Shift by&nbsp;<span class="partyShiftText">+15</span>
+                Shift All by&nbsp;<span class="partyShiftText">+15</span>
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="addConstantMarginToMap(-getTippingPointRegion().margin, politicalParties[getTippingPointRegion().partyID])" style="display:flex; justify-content:center;">
+                Shift by tipping point
               </a>
               <!-- <div class='dropdown-separator'></div>
               <a onclick="addConstantMarginToMap(getStateMarginAvg())" style="display:flex; justify-content:center;">
