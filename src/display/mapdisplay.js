@@ -23,7 +23,6 @@ const regionSelectColor = "#ffffff"
 const regionDeselectColor = "#181922" //#555
 
 const regionDisabledColor = "#28292F"
-const disabledBrightnessFactor = 1.0/2.0
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
@@ -54,7 +53,12 @@ const inaugurationDayTime2021 = 1611162000000
 const electionDayTime2022 = 1667926800000
 const electionDayTime2024 = 1730826000000
 
-const countdownTimes = {"2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"}, "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"}, "2022 Midterm Election": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"}, "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}}
+const countdownTimes = {
+  "2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
+  "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"},
+  "2022 Midterm Election": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"},
+  "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}
+}
 var currentCountdownTimeName
 
 const kCSVFileType = "text/csv"
@@ -72,7 +76,7 @@ const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 var selectedDropdownDivID = null
 
 $(async function() {
-  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]]
+  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
 
   reloadForNewMapType(true)
