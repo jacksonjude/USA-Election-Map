@@ -46,8 +46,8 @@ Then open the address provided in the Terminal window (by default, it seems to b
 ## TODO List
 - [x] Past senate election results & 2022 senate projections
 - [ ] More past election results
-  - [ ] 1952-1972 presidential elections
-  - [ ] 1900-1948 presidential elections
+  - [x] 1960-1972 presidential elections
+  - [ ] 1912-1956 presidential elections
 - [ ] State delegate edit controls
 - [ ] Full third-party support in past results and custom maps
   - [x] Display in voteshare
