@@ -1,4 +1,172 @@
 date,region,state_po,candidate,party,voteshare,version
+11/8/1960,Alabama,AL,Nixon,republican,42.1598553,JJCooley
+11/8/1960,Alabama,AL,Kennedy,democrat,56.38941101,JJCooley
+11/8/1960,Alabama,AL,Other,independent,1.450733693,JJCooley
+11/8/1960,Alaska,AK,Nixon,republican,50.94137783,JJCooley
+11/8/1960,Alaska,AK,Kennedy,democrat,49.05862217,JJCooley
+11/8/1960,Alaska,AK,Other,independent,0,JJCooley
+11/8/1960,Arizona,AZ,Nixon,republican,55.51969806,JJCooley
+11/8/1960,Arizona,AZ,Kennedy,democrat,44.36260794,JJCooley
+11/8/1960,Arizona,AZ,Other,independent,0.1176940006,JJCooley
+11/8/1960,Arkansas,AR,Nixon,republican,43.0581388,JJCooley
+11/8/1960,Arkansas,AR,Kennedy,democrat,50.18541034,JJCooley
+11/8/1960,Arkansas,AR,Other,independent,6.756450856,JJCooley
+11/8/1960,California,CA,Nixon,republican,50.09886918,JJCooley
+11/8/1960,California,CA,Kennedy,democrat,49.55137708,JJCooley
+11/8/1960,California,CA,Other,independent,0.3497537415,JJCooley
+11/8/1960,Colorado,CO,Nixon,republican,54.63418477,JJCooley
+11/8/1960,Colorado,CO,Kennedy,democrat,44.90740867,JJCooley
+11/8/1960,Colorado,CO,Other,independent,0.4584065652,JJCooley
+11/8/1960,Connecticut,CT,Nixon,republican,46.26877633,JJCooley
+11/8/1960,Connecticut,CT,Kennedy,democrat,53.72999706,JJCooley
+11/8/1960,Connecticut,CT,Other,independent,0.001226609578,JJCooley
+11/8/1960,Delaware,DE,Nixon,republican,48.99915092,JJCooley
+11/8/1960,Delaware,DE,Kennedy,democrat,50.63477779,JJCooley
+11/8/1960,Delaware,DE,Other,independent,0.3660712924,JJCooley
+11/8/1960,District of Columbia,DC,Nixon,republican,0.0,JJCooley
+11/8/1960,District of Columbia,DC,Kennedy,democrat,0.0,JJCooley
+11/8/1960,District of Columbia,DC,Other,independent,0.0,JJCooley
+11/8/1960,Florida,FL,Nixon,republican,51.51459419,JJCooley
+11/8/1960,Florida,FL,Kennedy,democrat,48.48540581,JJCooley
+11/8/1960,Florida,FL,Other,independent,0,JJCooley
+11/8/1960,Georgia,GA,Nixon,republican,37.42720042,JJCooley
+11/8/1960,Georgia,GA,Kennedy,democrat,62.54020937,JJCooley
+11/8/1960,Georgia,GA,Other,independent,0.03259021285,JJCooley
+11/8/1960,Hawaii,HI,Nixon,republican,49.96886928,JJCooley
+11/8/1960,Hawaii,HI,Kennedy,democrat,50.03113072,JJCooley
+11/8/1960,Hawaii,HI,Other,independent,0,JJCooley
+11/8/1960,Idaho,ID,Nixon,republican,53.78498918,JJCooley
+11/8/1960,Idaho,ID,Kennedy,democrat,46.21501082,JJCooley
+11/8/1960,Idaho,ID,Other,independent,0,JJCooley
+11/8/1960,Illinois,IL,Nixon,republican,49.79576068,JJCooley
+11/8/1960,Illinois,IL,Kennedy,democrat,49.98195446,JJCooley
+11/8/1960,Illinois,IL,Other,independent,0.2222848614,JJCooley
+11/8/1960,Indiana,IN,Nixon,republican,55.0314701,JJCooley
+11/8/1960,Indiana,IN,Kennedy,democrat,44.59941181,JJCooley
+11/8/1960,Indiana,IN,Other,independent,0.3691180878,JJCooley
+11/8/1960,Iowa,IA,Nixon,republican,56.71026291,JJCooley
+11/8/1960,Iowa,IA,Kennedy,democrat,43.22190908,JJCooley
+11/8/1960,Iowa,IA,Other,independent,0.06782801203,JJCooley
+11/8/1960,Kansas,KS,Nixon,republican,60.44992329,JJCooley
+11/8/1960,Kansas,KS,Kennedy,democrat,39.1045676,JJCooley
+11/8/1960,Kansas,KS,Other,independent,0.445509111,JJCooley
+11/8/1960,Kentucky,KY,Nixon,republican,53.59069493,JJCooley
+11/8/1960,Kentucky,KY,Kennedy,democrat,46.40930507,JJCooley
+11/8/1960,Kentucky,KY,Other,independent,0,JJCooley
+11/8/1960,Louisiana,LA,Nixon,republican,28.59049055,JJCooley
+11/8/1960,Louisiana,LA,Kennedy,democrat,50.42004429,JJCooley
+11/8/1960,Louisiana,LA,Other,independent,20.98946516,JJCooley
+11/8/1960,Maine,ME,Nixon,republican,57.04680006,JJCooley
+11/8/1960,Maine,ME,Kennedy,democrat,42.95177738,JJCooley
+11/8/1960,Maine,ME,Other,independent,0.001422566167,JJCooley
+11/8/1960,Maine-1,ME-1,Nixon,republican,57.04680006,JJCooley
+11/8/1960,Maine-1,ME-1,Kennedy,democrat,42.95177738,JJCooley
+11/8/1960,Maine-1,ME-1,Other,independent,0.001422566167,JJCooley
+11/8/1960,Maine-2,ME-2,Nixon,republican,57.04680006,JJCooley
+11/8/1960,Maine-2,ME-2,Kennedy,democrat,42.95177738,JJCooley
+11/8/1960,Maine-2,ME-2,Other,independent,0.001422566167,JJCooley
+11/8/1960,Maryland,MD,Nixon,republican,46.38636129,JJCooley
+11/8/1960,Maryland,MD,Kennedy,democrat,53.61335444,JJCooley
+11/8/1960,Maryland,MD,Other,independent,0.0002842661527,JJCooley
+11/8/1960,Massachusetts,MA,Nixon,republican,39.55286133,JJCooley
+11/8/1960,Massachusetts,MA,Kennedy,democrat,60.22215203,JJCooley
+11/8/1960,Massachusetts,MA,Other,independent,0.2249866369,JJCooley
+11/8/1960,Michigan,MI,Nixon,republican,48.83606477,JJCooley
+11/8/1960,Michigan,MI,Kennedy,democrat,50.85050256,JJCooley
+11/8/1960,Michigan,MI,Other,independent,0.3134326694,JJCooley
+11/8/1960,Minnesota,MN,Nixon,republican,49.15502887,JJCooley
+11/8/1960,Minnesota,MN,Kennedy,democrat,50.58301938,JJCooley
+11/8/1960,Minnesota,MN,Other,independent,0.2619517513,JJCooley
+11/8/1960,Mississippi,MS,Nixon,republican,24.67074263,JJCooley
+11/8/1960,Mississippi,MS,Kennedy,democrat,36.34223315,JJCooley
+11/8/1960,Mississippi,MS,Other,independent,38.98702422,JJCooley
+11/8/1960,Missouri,MO,Nixon,republican,49.74204181,JJCooley
+11/8/1960,Missouri,MO,Kennedy,democrat,50.25795819,JJCooley
+11/8/1960,Missouri,MO,Other,independent,0,JJCooley
+11/8/1960,Montana,MT,Nixon,republican,51.09932668,JJCooley
+11/8/1960,Montana,MT,Kennedy,democrat,48.59553496,JJCooley
+11/8/1960,Montana,MT,Other,independent,0.305138357,JJCooley
+11/8/1960,Nebraska,NE,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska,NE,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska,NE,Other,independent,0,JJCooley
+11/8/1960,Nebraska-1,NE-1,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska-1,NE-1,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska-1,NE-1,Other,independent,0,JJCooley
+11/8/1960,Nebraska-2,NE-2,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska-2,NE-2,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska-2,NE-2,Other,independent,0,JJCooley
+11/8/1960,Nebraska-3,NE-3,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska-3,NE-3,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska-3,NE-3,Other,independent,0,JJCooley
+11/8/1960,Nevada,NV,Nixon,republican,48.83794643,JJCooley
+11/8/1960,Nevada,NV,Kennedy,democrat,51.16205357,JJCooley
+11/8/1960,Nevada,NV,Other,independent,0,JJCooley
+11/8/1960,New Hampshire,NH,Nixon,republican,53.41779342,JJCooley
+11/8/1960,New Hampshire,NH,Kennedy,democrat,46.58220658,JJCooley
+11/8/1960,New Hampshire,NH,Other,independent,0,JJCooley
+11/8/1960,New Jersey,NJ,Nixon,republican,49.16225856,JJCooley
+11/8/1960,New Jersey,NJ,Kennedy,democrat,49.9588729,JJCooley
+11/8/1960,New Jersey,NJ,Other,independent,0.8788685343,JJCooley
+11/8/1960,New Mexico,NM,Nixon,republican,49.41483155,JJCooley
+11/8/1960,New Mexico,NM,Kennedy,democrat,50.15219844,JJCooley
+11/8/1960,New Mexico,NM,Other,independent,0.4329700071,JJCooley
+11/8/1960,New York,NY,Nixon,republican,47.26898447,JJCooley
+11/8/1960,New York,NY,Kennedy,democrat,52.53111371,JJCooley
+11/8/1960,New York,NY,Other,independent,0.1999018252,JJCooley
+11/8/1960,North Carolina,NC,Nixon,republican,47.8913541,JJCooley
+11/8/1960,North Carolina,NC,Kennedy,democrat,52.1086459,JJCooley
+11/8/1960,North Carolina,NC,Other,independent,0,JJCooley
+11/8/1960,North Dakota,ND,Nixon,republican,55.42127134,JJCooley
+11/8/1960,North Dakota,ND,Kennedy,democrat,44.52198211,JJCooley
+11/8/1960,North Dakota,ND,Other,independent,0.0567465548,JJCooley
+11/8/1960,Ohio,OH,Nixon,republican,53.28414538,JJCooley
+11/8/1960,Ohio,OH,Kennedy,democrat,46.71585462,JJCooley
+11/8/1960,Ohio,OH,Other,independent,0,JJCooley
+11/8/1960,Oklahoma,OK,Nixon,republican,59.01998561,JJCooley
+11/8/1960,Oklahoma,OK,Kennedy,democrat,40.98001439,JJCooley
+11/8/1960,Oklahoma,OK,Other,independent,0,JJCooley
+11/8/1960,Oregon,OR,Nixon,republican,52.55653827,JJCooley
+11/8/1960,Oregon,OR,Kennedy,democrat,47.31994627,JJCooley
+11/8/1960,Oregon,OR,Other,independent,0.1235154639,JJCooley
+11/8/1960,Pennsylvania,PA,Nixon,republican,48.7353644,JJCooley
+11/8/1960,Pennsylvania,PA,Kennedy,democrat,51.05884482,JJCooley
+11/8/1960,Pennsylvania,PA,Other,independent,0.2057907845,JJCooley
+11/8/1960,Rhode Island,RI,Nixon,republican,36.37219969,JJCooley
+11/8/1960,Rhode Island,RI,Kennedy,democrat,63.62755373,JJCooley
+11/8/1960,Rhode Island,RI,Other,independent,0.0002465878408,JJCooley
+11/8/1960,South Carolina,SC,Nixon,republican,48.76230967,JJCooley
+11/8/1960,South Carolina,SC,Kennedy,democrat,51.23743173,JJCooley
+11/8/1960,South Carolina,SC,Other,independent,0.0002586064217,JJCooley
+11/8/1960,South Dakota,SD,Nixon,republican,58.21356208,JJCooley
+11/8/1960,South Dakota,SD,Kennedy,democrat,41.78643792,JJCooley
+11/8/1960,South Dakota,SD,Other,independent,0,JJCooley
+11/8/1960,Tennessee,TN,Nixon,republican,52.91702162,JJCooley
+11/8/1960,Tennessee,TN,Kennedy,democrat,45.77454478,JJCooley
+11/8/1960,Tennessee,TN,Other,independent,1.308433607,JJCooley
+11/8/1960,Texas,TX,Nixon,republican,48.51879032,JJCooley
+11/8/1960,Texas,TX,Kennedy,democrat,50.5203186,JJCooley
+11/8/1960,Texas,TX,Other,independent,0.9608910797,JJCooley
+11/8/1960,Utah,UT,Nixon,republican,54.80546237,JJCooley
+11/8/1960,Utah,UT,Kennedy,democrat,45.16785025,JJCooley
+11/8/1960,Utah,UT,Other,independent,0.02668737607,JJCooley
+11/8/1960,Vermont,VT,Nixon,republican,58.64729507,JJCooley
+11/8/1960,Vermont,VT,Kennedy,democrat,41.34852143,JJCooley
+11/8/1960,Vermont,VT,Other,independent,0.004183500275,JJCooley
+11/8/1960,Virginia,VA,Nixon,republican,52.43651881,JJCooley
+11/8/1960,Virginia,VA,Kennedy,democrat,46.96707106,JJCooley
+11/8/1960,Virginia,VA,Other,independent,0.5964101321,JJCooley
+11/8/1960,Washington,WA,Nixon,republican,50.68356889,JJCooley
+11/8/1960,Washington,WA,Kennedy,democrat,48.26929087,JJCooley
+11/8/1960,Washington,WA,Other,independent,1.047140238,JJCooley
+11/8/1960,West Virginia,WV,Nixon,republican,47.2671259,JJCooley
+11/8/1960,West Virginia,WV,Kennedy,democrat,52.7328741,JJCooley
+11/8/1960,West Virginia,WV,Other,independent,0,JJCooley
+11/8/1960,Wisconsin,WI,Nixon,republican,51.77169157,JJCooley
+11/8/1960,Wisconsin,WI,Kennedy,democrat,48.04890688,JJCooley
+11/8/1960,Wisconsin,WI,Other,independent,0.1794015553,JJCooley
+11/8/1960,Wyoming,WY,Nixon,republican,55.01484565,JJCooley
+11/8/1960,Wyoming,WY,Kennedy,democrat,44.98515435,JJCooley
+11/8/1960,Wyoming,WY,Other,independent,0,JJCooley
 11/3/1964,Alabama,AL,Goldwater,republican,69.45102832,JJCooley
 11/3/1964,Alabama,AL,Johnson,democrat,0,JJCooley
 11/3/1964,Alabama,AL,Other,independent,30.54897168,JJCooley

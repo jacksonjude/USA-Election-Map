@@ -624,10 +624,10 @@ function createPresidentialMapSources()
           }
         }
 
-        if (marginSum == 0 && ev2016) //cuz JHK is stupid and made pollAvg = 0 if there are no polls with no any other indication of such fact
-        {
-          marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
-        }
+        // if (marginSum == 0 && ev2016) //cuz JHK is stupid and made pollAvg = 0 if there are no polls with no any other indication of such fact
+        // {
+        //   marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
+        // }
 
         //cuz JHK is stupid again and used % chances as 100x the size they should be instead of putting them in decimal form like everyone else does it
         challengerWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? challengerWinChance/100 : challengerWinChance
@@ -644,7 +644,7 @@ function createPresidentialMapSources()
         }
 
         var compactPartyVotesharePercentages
-        if (partyVotesharePercentages)
+        if (partyVotesharePercentages && marginSum != 0)
         {
           compactPartyVotesharePercentages = []
           partyVotesharePercentages.forEach(voteData => {
@@ -830,6 +830,7 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1960: {"Kennedy":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
     1964: {"Johnson":democraticPartyID, "Goldwater":republicanPartyID, "Other":independentGenericPartyID},
     1968: {"Humphrey":democraticPartyID, "Nixon":republicanPartyID, "Wallace":independent1968GWPartyID, "Other":independentGenericPartyID},
     1972: {"McGovern":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
