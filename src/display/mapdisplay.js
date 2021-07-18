@@ -1586,6 +1586,10 @@ function getPartyTotals()
     {
       partyIDToSet = TossupParty.getID()
     }
+    if (!(partyIDToSet in partyTotals))
+    {
+      partyTotals[partyIDToSet] = 0
+    }
     partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID)
   }
 

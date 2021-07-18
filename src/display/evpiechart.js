@@ -5,9 +5,9 @@ const kClockwiseDirection = 0
 const kCounterclockwiseDirection = 1
 
 const partyOrdering = [
-  {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
   {partyID: GreenParty.getID(), direction: kClockwiseDirection},
   {partyID: DemocraticParty.getID(), direction: kClockwiseDirection},
+  {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
   {partyID: TossupParty.getID(), direction: kClockwiseDirection},
   {partyID: RepublicanParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection}
@@ -147,7 +147,7 @@ function setupEVPieChart()
 
 function updateEVPieChart()
 {
-  var marginTotalsData = {} // TODO: Fix hardcoding of two parties for pie chart; Use object for marginTotals, etc
+  var marginTotalsData = {}
   var regionMarginStringsData = {}
 
   for (var partyNum in partyOrdering)
@@ -175,6 +175,11 @@ function updateEVPieChart()
   for (var regionID in displayRegionDataArray)
   {
     var regionParty = displayRegionDataArray[regionID].partyID
+    if (regionParty != null && !partyOrdering.some((orderingData) => orderingData.partyID == regionParty))
+    {
+      regionParty = IndependentGenericParty.getID()
+    }
+
     var regionMargin = displayRegionDataArray[regionID].margin
 
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionID)
@@ -254,6 +259,12 @@ function updateEVPieChart()
   for (partyNum in partyOrdering)
   {
     sortedPartyTotalsArray.push(partyTotals[partyOrdering[partyNum].partyID])
+    delete partyTotals[partyOrdering[partyNum].partyID]
+  }
+  var genericPartyOrderingIndex = partyOrdering.findIndex((orderingData) => orderingData.partyID == IndependentGenericParty.getID())
+  for (partyTotalNum in partyTotals)
+  {
+    sortedPartyTotalsArray[genericPartyOrderingIndex] += partyTotals[partyTotalNum]
   }
   evPieChart.data.datasets[1].data = sortedPartyTotalsArray
 

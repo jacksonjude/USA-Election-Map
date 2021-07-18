@@ -162,6 +162,15 @@ var Independent1976EMParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var Independent1968GWParty = new PoliticalParty(
+  "IND1976GW",
+  ["Wallace"],
+  "Ind",
+  "Wallace",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
@@ -183,6 +192,7 @@ politicalParties[IndependentRNParty.getID()] = IndependentRNParty
 politicalParties[Independent2016EMParty.getID()] = Independent2016EMParty
 politicalParties[Independent1980JAParty.getID()] = Independent1980JAParty
 politicalParties[Independent1976EMParty.getID()] = Independent1976EMParty
+politicalParties[Independent1968GWParty.getID()] = Independent1968GWParty
 
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 

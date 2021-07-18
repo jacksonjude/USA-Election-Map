@@ -447,6 +447,9 @@ const independentRNPartyID = IndependentRNParty.getID()
 const independent2016EMPartyID = Independent2016EMParty.getID()
 const independent1980JAPartyID = Independent1980JAParty.getID()
 const independent1976EMPartyID = Independent1976EMParty.getID()
+const independent1968GWPartyID = Independent1968GWParty.getID()
+
+const independentGenericPartyID = IndependentGenericParty.getID()
 
 const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID, tossup: tossupPartyID}
 const partyCandiateLastNames = {2020: {"Biden":democraticPartyID, "Trump":republicanPartyID}}
@@ -664,6 +667,13 @@ function createPresidentialMapSources()
               compactPartyVotesharePercentages.push(voteData)
             }
           })
+
+          compactPartyVotesharePercentages.sort((voteData1, voteData2) => {
+            return voteData2.voteshare - voteData1.voteshare
+          })
+
+          marginSum = compactPartyVotesharePercentages[0].voteshare - (compactPartyVotesharePercentages[1] || {voteshare: 0.0}).voteshare
+          greaterMarginPartyID = compactPartyVotesharePercentages[0].partyID
         }
 
         var candidateName
@@ -820,6 +830,9 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1964: {"Johnson":democraticPartyID, "Goldwater":republicanPartyID, "Other":independentGenericPartyID},
+    1968: {"Humphrey":democraticPartyID, "Nixon":republicanPartyID, "Wallace":independent1968GWPartyID, "Other":independentGenericPartyID},
+    1972: {"McGovern":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
     1976: {"Carter":democraticPartyID, "Ford":republicanPartyID, "McCarthy":independent1976EMPartyID},
     1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID, "Anderson":independent1980JAPartyID, "Clark":libertarianPartyID},
     1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID, "Bergland":libertarianPartyID},
