@@ -59,12 +59,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1960,Maine,ME,Nixon,republican,57.04680006,JJCooley
 11/8/1960,Maine,ME,Kennedy,democrat,42.95177738,JJCooley
 11/8/1960,Maine,ME,Other,independent,0.001422566167,JJCooley
-11/8/1960,Maine-1,ME-1,Nixon,republican,57.04680006,JJCooley
-11/8/1960,Maine-1,ME-1,Kennedy,democrat,42.95177738,JJCooley
-11/8/1960,Maine-1,ME-1,Other,independent,0.001422566167,JJCooley
-11/8/1960,Maine-2,ME-2,Nixon,republican,57.04680006,JJCooley
-11/8/1960,Maine-2,ME-2,Kennedy,democrat,42.95177738,JJCooley
-11/8/1960,Maine-2,ME-2,Other,independent,0.001422566167,JJCooley
+11/8/1960,Maine 1st CD,ME-1,Nixon,republican,57.04680006,JJCooley
+11/8/1960,Maine 1st CD,ME-1,Kennedy,democrat,42.95177738,JJCooley
+11/8/1960,Maine 1st CD,ME-1,Other,independent,0.001422566167,JJCooley
+11/8/1960,Maine 2nd CD,ME-2,Nixon,republican,57.04680006,JJCooley
+11/8/1960,Maine 2nd CD,ME-2,Kennedy,democrat,42.95177738,JJCooley
+11/8/1960,Maine 2nd CD,ME-2,Other,independent,0.001422566167,JJCooley
 11/8/1960,Maryland,MD,Nixon,republican,46.38636129,JJCooley
 11/8/1960,Maryland,MD,Kennedy,democrat,53.61335444,JJCooley
 11/8/1960,Maryland,MD,Other,independent,0.0002842661527,JJCooley
@@ -89,15 +89,15 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1960,Nebraska,NE,Nixon,republican,62.07080469,JJCooley
 11/8/1960,Nebraska,NE,Kennedy,democrat,37.92919531,JJCooley
 11/8/1960,Nebraska,NE,Other,independent,0,JJCooley
-11/8/1960,Nebraska-1,NE-1,Nixon,republican,62.07080469,JJCooley
-11/8/1960,Nebraska-1,NE-1,Kennedy,democrat,37.92919531,JJCooley
-11/8/1960,Nebraska-1,NE-1,Other,independent,0,JJCooley
-11/8/1960,Nebraska-2,NE-2,Nixon,republican,62.07080469,JJCooley
-11/8/1960,Nebraska-2,NE-2,Kennedy,democrat,37.92919531,JJCooley
-11/8/1960,Nebraska-2,NE-2,Other,independent,0,JJCooley
-11/8/1960,Nebraska-3,NE-3,Nixon,republican,62.07080469,JJCooley
-11/8/1960,Nebraska-3,NE-3,Kennedy,democrat,37.92919531,JJCooley
-11/8/1960,Nebraska-3,NE-3,Other,independent,0,JJCooley
+11/8/1960,Nebraska 1st CD,NE-1,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska 1st CD,NE-1,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska 1st CD,NE-1,Other,independent,0,JJCooley
+11/8/1960,Nebraska 2nd CD,NE-2,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska 2nd CD,NE-2,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska 2nd CD,NE-2,Other,independent,0,JJCooley
+11/8/1960,Nebraska 3rd CD,NE-3,Nixon,republican,62.07080469,JJCooley
+11/8/1960,Nebraska 3rd CD,NE-3,Kennedy,democrat,37.92919531,JJCooley
+11/8/1960,Nebraska 3rd CD,NE-3,Other,independent,0,JJCooley
 11/8/1960,Nevada,NV,Nixon,republican,48.83794643,JJCooley
 11/8/1960,Nevada,NV,Kennedy,democrat,51.16205357,JJCooley
 11/8/1960,Nevada,NV,Other,independent,0,JJCooley
