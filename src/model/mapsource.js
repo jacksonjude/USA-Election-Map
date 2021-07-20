@@ -1602,7 +1602,7 @@ function createSenateMapSources()
   )
 
   var CookSenateProjectionMapSource = new MapSource(
-    "Cook-2020-Senate",
+    "Cook-2022-Senate",
     "Cook Political",
     "https://map.jacksonjude.com/csv-sources/cook-senate-2022/cook-latest.csv",
     "https://map.jacksonjude.com/csv-sources/cook-senate-2022/",
