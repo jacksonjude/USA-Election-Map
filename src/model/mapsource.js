@@ -964,8 +964,8 @@ function createPresidentialMapSources()
   var PastElectionResultMapSource = new MapSource(
     "Past-Presidential-Elections",
     "Past Elections",
-    "https://map.jacksonjude.com/csv-sources/historical-president.csv",
-    //"./csv-sources/historical-president.csv",
+    "https://map.jacksonjude.com/csv-sources/past-president.csv",
+    //"./csv-sources/past-president.csv",
     "https://en.wikipedia.org/wiki/",
     "./assets/wikipedia-large.png",
     {
@@ -1569,8 +1569,8 @@ function createSenateMapSources()
   var PastElectionResultMapSource = new MapSource(
     "Past-Senate-Elections",
     "Past Elections",
-    "https://map.jacksonjude.com/csv-sources/historical-senate.csv",
-    //"./csv-sources/historical-senate.csv",
+    "https://map.jacksonjude.com/csv-sources/past-senate.csv",
+    //"./csv-sources/past-senate.csv",
     "https://en.wikipedia.org/wiki/",
     "./assets/wikipedia-large.png",
     {
