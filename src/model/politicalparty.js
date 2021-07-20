@@ -122,7 +122,7 @@ var ReformParty = new PoliticalParty(
   ["Reform"],
   "Ref",
   "Perot",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
@@ -131,7 +131,7 @@ var IndependentRNParty = new PoliticalParty(
   ["Nader"],
   "Ind",
   "Nader",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
@@ -140,7 +140,7 @@ var Independent2016EMParty = new PoliticalParty(
   ["McMullin"],
   "Ind",
   "McMullin",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
@@ -149,7 +149,7 @@ var Independent1980JAParty = new PoliticalParty(
   ["Anderson"],
   "Ind",
   "Anderson",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
@@ -158,16 +158,88 @@ var Independent1976EMParty = new PoliticalParty(
   ["McCarthy"],
   "Ind",
   "McCarthy",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
 var Independent1968GWParty = new PoliticalParty(
-  "IND1976GW",
+  "IND1968GW",
   ["Wallace"],
   "Ind",
   "Wallace",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1948SMParty = new PoliticalParty(
+  "IND1948SM",
+  ["Thurmond"],
+  "Ind",
+  "Thurmond",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1948GWParty = new PoliticalParty(
+  "IND1948GW",
+  ["Wallace"],
+  "Ind",
+  "Wallace",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1932NTParty = new PoliticalParty(
+  "IND1932NT",
+  ["Thomas"],
+  "Ind",
+  "Thomas",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1924RLParty = new PoliticalParty(
+  "IND1924RL",
+  ["La Follette"],
+  "Ind",
+  "La Follette",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1920EDParty = new PoliticalParty(
+  "IND1920ED",
+  ["Debs"],
+  "Ind",
+  "Debs",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1916ABParty = new PoliticalParty(
+  "IND1916AB",
+  ["Benson"],
+  "Ind",
+  "Benson",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1912TRParty = new PoliticalParty(
+  "IND1912TR",
+  ["Roosevelt"],
+  "Ind",
+  "Roosevelt",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
+var Independent1912EDParty = new PoliticalParty(
+  "IND1912ED",
+  ["Debs"],
+  "Ind",
+  "Debs",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 
@@ -176,7 +248,7 @@ var IndependentGenericParty = new PoliticalParty(
   ["Independent"],
   "Ind",
   "Generic",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#CDA7FF", tilt: "#E2BDFF"},
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   defaultMarginNames
 )
 

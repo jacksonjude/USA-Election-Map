@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath)
   {
     this.id = id
     this.name = name
@@ -24,6 +24,7 @@ class MapSource
     this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
     this.shouldShowVoteshare = shouldShowVoteshare == null ? false : shouldShowVoteshare
     this.voteshareCutoffMargin = voteshareCutoffMargin
+    this.overrideSVGPath = overrideSVGPath
   }
 
   loadMap(reloadCache, onlyAttemptLocalFetch)
@@ -336,6 +337,11 @@ class MapSource
     return this.shouldShowVoteshare
   }
 
+  getOverrideSVGPath()
+  {
+    return this.overrideSVGPath
+  }
+
   updateMapData(displayRegionArray, dateToUpdate, resetMapData)
   {
     if (!this.mapData || resetMapData)
@@ -448,6 +454,14 @@ const independent2016EMPartyID = Independent2016EMParty.getID()
 const independent1980JAPartyID = Independent1980JAParty.getID()
 const independent1976EMPartyID = Independent1976EMParty.getID()
 const independent1968GWPartyID = Independent1968GWParty.getID()
+const independent1948SMPartyID = Independent1948SMParty.getID()
+const independent1948GWPartyID = Independent1948GWParty.getID()
+const independent1932NTPartyID = Independent1932NTParty.getID()
+const independent1924RLPartyID = Independent1924RLParty.getID()
+const independent1920EDPartyID = Independent1920EDParty.getID()
+const independent1916ABPartyID = Independent1916ABParty.getID()
+const independent1912TRPartyID = Independent1912TRParty.getID()
+const independent1912EDPartyID = Independent1912EDParty.getID()
 
 const independentGenericPartyID = IndependentGenericParty.getID()
 
@@ -830,6 +844,18 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1912: {"Wilson":democraticPartyID, "Taft":republicanPartyID, "Roosevelt":independent1912TRPartyID, "Debs":independent1912EDPartyID, "Other":independentGenericPartyID},
+    1916: {"Wilson":democraticPartyID, "Hughes":republicanPartyID, "Benson":independent1916ABPartyID, "Other":independentGenericPartyID},
+    1920: {"Cox":democraticPartyID, "Harding":republicanPartyID, "Debs":independent1920EDPartyID, "Other":independentGenericPartyID},
+    1924: {"Davis":democraticPartyID, "Coolidge":republicanPartyID, "La Follette":independent1924RLPartyID, "Other":independentGenericPartyID},
+    1928: {"Smith":democraticPartyID, "Hoover":republicanPartyID, "Other":independentGenericPartyID},
+    1932: {"Roosevelt":democraticPartyID, "Hoover":republicanPartyID, "Thomas":independent1932NTPartyID, "Other":independentGenericPartyID},
+    1936: {"Roosevelt":democraticPartyID, "Landon":republicanPartyID, "Other":independentGenericPartyID},
+    1940: {"Roosevelt":democraticPartyID, "Willkie":republicanPartyID, "Other":independentGenericPartyID},
+    1944: {"Roosevelt":democraticPartyID, "Dewey":republicanPartyID, "Other":independentGenericPartyID},
+    1948: {"Truman":democraticPartyID, "Dewey":republicanPartyID, "Thurmond":independent1948SMPartyID, "Wallace":independent1948GWPartyID, "Other":independentGenericPartyID},
+    1952: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
+    1956: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
     1960: {"Kennedy":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
     1964: {"Johnson":democraticPartyID, "Goldwater":republicanPartyID, "Other":independentGenericPartyID},
     1968: {"Humphrey":democraticPartyID, "Nixon":republicanPartyID, "Wallace":independent1968GWPartyID, "Other":independentGenericPartyID},
@@ -1002,6 +1028,49 @@ function createPresidentialMapSources()
     true
   )
 
+  var HistoricalElectionResultMapSource = new MapSource(
+    "Historical-Presidential-Elections",
+    "Older Elections",
+    //"https://map.jacksonjude.com/csv-sources/historical-president.csv",
+    "./csv-sources/historical-president.csv",
+    "https://en.wikipedia.org/wiki/",
+    "./assets/wikipedia-large.png",
+    {
+      date: "date",
+      region: "region",
+      percentAdjusted: "voteshare",
+      partyCandidateName: "candidate",
+      candidateName: "candidate"
+    },
+    null,
+    electionYearToCandidateData,
+    null,
+    incumbentChallengerPartyIDs,
+    regionNameToIDHistorical,
+    ev2016,
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
+    false,
+    true,
+    doubleLinePercentFilterFunction,
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
+    {
+      if (mapDate == null) { return }
+
+      var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_presidential_election"
+      if (!shouldOpenHomepage)
+      {
+        linkToOpen += "_in_" + regionIDToLinkMap[regionID]
+      }
+      window.open(linkToOpen)
+    },
+    null,
+    null,
+    null,
+    true,
+    null,
+    "svg-sources/usa-presidential-historical-map.svg"
+  )
+
   var NYTElectionResultsMapSource = new MapSource(
     "2020-Presidential-Results",
     "2020 Results",
@@ -1076,10 +1145,11 @@ function createPresidentialMapSources()
   presidentialMapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
   presidentialMapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
   presidentialMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+  presidentialMapSources[HistoricalElectionResultMapSource.getID()] = HistoricalElectionResultMapSource
   presidentialMapSources[NYTElectionResultsMapSource.getID()] = NYTElectionResultsMapSource
   presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID()]
   if (USAPresidentialMapType.getCustomMapEnabled())
   {
     presidentialMapSourceIDs.push(CustomMapSource.getID())

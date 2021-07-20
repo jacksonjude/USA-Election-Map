@@ -171,8 +171,6 @@ async function reloadForNewMapType(initialLoad)
   currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
 
   await loadMapSVGFile()
-  setOutlineDivProperties()
-  updateMapElectoralVoteText()
 
   $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
   $("#helpbox").html(currentMapType.getControlsHelpHTML())
@@ -212,6 +210,8 @@ function loadMapSVGFile()
 {
   var loadSVGFilePromise = new Promise((resolve, reject) => {
     $('#mapzoom').load(currentMapType.getSVGPath(), function() {
+      setOutlineDivProperties()
+      updateMapElectoralVoteText()
       resolve()
     })
   })
@@ -329,7 +329,7 @@ function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID,
   }
   else
   {
-    $("#" + dateDisplayDivID).css("zoom", (100*$(window).width()/1800) + "%")
+    $("#" + dateDisplayDivID).css("zoom", (100*($(window).width()-1800)/6000+100) + "%")
   }
 
   $("#" + dateDisplayDivID).css("margin-top", ($("#" + sliderDivID).height()/4-1))
@@ -604,6 +604,25 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     $("#dateDisplay").hide()
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
+
+    var shouldReloadSVG = false
+    var currentSVGPath = currentMapType.getSVGPath()
+    var newOverrideSVGPath = currentMapSource.getOverrideSVGPath()
+
+    if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
+    {
+      currentMapType.setOverrideSVGPath(newOverrideSVGPath)
+      shouldReloadSVG = true
+    }
+    else if (newOverrideSVGPath == null && currentSVGPath != null)
+    {
+      shouldReloadSVG = currentMapType.resetOverrideSVGPath()
+    }
+
+    if (shouldReloadSVG)
+    {
+      await loadMapSVGFile()
+    }
 
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
     var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
