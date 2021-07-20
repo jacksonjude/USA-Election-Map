@@ -1031,8 +1031,8 @@ function createPresidentialMapSources()
   var HistoricalElectionResultMapSource = new MapSource(
     "Historical-Presidential-Elections",
     "Older Elections",
-    //"https://map.jacksonjude.com/csv-sources/historical-president.csv",
-    "./csv-sources/historical-president.csv",
+    "https://map.jacksonjude.com/csv-sources/historical-president.csv",
+    //"./csv-sources/historical-president.csv",
     "https://en.wikipedia.org/wiki/",
     "./assets/wikipedia-large.png",
     {
