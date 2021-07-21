@@ -83,7 +83,7 @@
     <text id="CO-text" x="317.33667" y="277.56671" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-65" x="317.33667" y="277.56671">CO</tspan><tspan id="tspan300" x="317.33667" y="292.56671">9</tspan></text>
     <text id="ND-text" x="414.06073" y="96.523651" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-93" x="414.06073" y="96.523651">ND</tspan><tspan id="tspan280" x="414.06073" y="111.52365">3</tspan></text>
     <text id="SD-text" x="413.7551" y="160.07703" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-45" x="413.7551" y="160.07703">SD</tspan><tspan id="tspan354" x="413.7551" y="175.07703">3</tspan></text>
-    <text id="NE-text" x="420.86453" y="227.96211" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-47" x="420.86453" y="227.96211">NE</tspan><tspan id="tspan304" x="420.86453" y="242.96211">5</tspan></text>
+    <text id="NE-AL-text" x="420.86453" y="227.96211" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-47" x="420.86453" y="227.96211">NE</tspan><tspan id="tspan304" x="420.86453" y="242.96211">5</tspan></text>
     <text id="KS-text" x="440.67682" y="292.60141" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-43" x="440.67682" y="292.60141">KS</tspan><tspan id="tspan302" x="440.67682" y="307.60141">6</tspan></text>
     <text id="OK-text" x="457.82797" y="358.8862" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-78" x="457.82797" y="358.8862">OK</tspan><tspan id="tspan306" x="457.82797" y="373.8862">7</tspan></text>
     <text id="AR-text" x="542.90167" y="374.47449" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-88" x="542.90167" y="374.47449">AR</tspan><tspan id="tspan344" x="542.90167" y="389.47449">6</tspan></text>
@@ -97,7 +97,7 @@
     <text id="TN-text" x="648.97949" y="342.21976" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-72" x="648.97949" y="342.21976">TN</tspan><tspan id="tspan336" x="648.97949" y="357.21976">11</tspan></text>
     <text id="MI-text" x="658.43652" y="182.30766" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-22" x="658.43652" y="182.30766">MI</tspan><tspan id="tspan346" x="658.43652" y="197.30766">16</tspan></text>
     <text id="WV-text" x="741.71759" y="273.23007" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-106" x="741.71759" y="273.23007">WV</tspan><tspan id="tspan328" x="741.71759" y="288.23007">5</tspan></text>
-    <text id="ME-text" x="891.76605" y="77.754997" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-59-0-7-1-7-7-5-9-9" x="891.76605" y="77.754997">ME</tspan><tspan id="tspan352" x="891.76605" y="92.754997">4</tspan></text>
+    <text id="ME-AL-text" x="891.76605" y="77.754997" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-59-0-7-1-7-7-5-9-9" x="891.76605" y="77.754997">ME</tspan><tspan id="tspan352" x="891.76605" y="92.754997">4</tspan></text>
     <text id="MD-text" x="896.20734" y="415.54175" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-59-0" x="896.20734" y="415.54175">MD 10</tspan></text>
     <text id="DE-text" x="893.83398" y="391.00787" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-59-0-7" x="893.83398" y="391.00787">DE 3</tspan></text>
     <text id="NJ-text" x="894.80182" y="365.79587" xml:space="preserve" text-anchor="middle"><tspan id="tspan8988-2-59-0-7-1" x="894.80182" y="365.79587">NJ 14</tspan></text>
