@@ -185,7 +185,6 @@ function updateEVPieChart()
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionID)
     var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
 
-    var pieChartIndex
     if (regionParty == null || regionParty == TossupParty.getID())
     {
       marginTotalsData[TossupParty.getID()].safe += regionEV
