@@ -180,8 +180,8 @@ var Independent1948SMParty = new PoliticalParty(
   defaultMarginNames
 )
 
-var Independent1948GWParty = new PoliticalParty(
-  "IND1948GW",
+var Independent1948HWParty = new PoliticalParty(
+  "IND1948HW",
   ["Wallace"],
   "Ind",
   "Wallace",
@@ -266,7 +266,7 @@ politicalParties[Independent1980JAParty.getID()] = Independent1980JAParty
 politicalParties[Independent1976EMParty.getID()] = Independent1976EMParty
 politicalParties[Independent1968GWParty.getID()] = Independent1968GWParty
 politicalParties[Independent1948SMParty.getID()] = Independent1948SMParty
-politicalParties[Independent1948GWParty.getID()] = Independent1948GWParty
+politicalParties[Independent1948HWParty.getID()] = Independent1948HWParty
 politicalParties[Independent1932NTParty.getID()] = Independent1932NTParty
 politicalParties[Independent1924RLParty.getID()] = Independent1924RLParty
 politicalParties[Independent1920EDParty.getID()] = Independent1920EDParty

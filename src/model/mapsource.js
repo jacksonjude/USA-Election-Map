@@ -455,7 +455,7 @@ const independent1980JAPartyID = Independent1980JAParty.getID()
 const independent1976EMPartyID = Independent1976EMParty.getID()
 const independent1968GWPartyID = Independent1968GWParty.getID()
 const independent1948SMPartyID = Independent1948SMParty.getID()
-const independent1948GWPartyID = Independent1948GWParty.getID()
+const independent1948HWPartyID = Independent1948HWParty.getID()
 const independent1932NTPartyID = Independent1932NTParty.getID()
 const independent1924RLPartyID = Independent1924RLParty.getID()
 const independent1920EDPartyID = Independent1920EDParty.getID()
@@ -853,7 +853,7 @@ function createPresidentialMapSources()
     1936: {"Roosevelt":democraticPartyID, "Landon":republicanPartyID, "Other":independentGenericPartyID},
     1940: {"Roosevelt":democraticPartyID, "Willkie":republicanPartyID, "Other":independentGenericPartyID},
     1944: {"Roosevelt":democraticPartyID, "Dewey":republicanPartyID, "Other":independentGenericPartyID},
-    1948: {"Truman":democraticPartyID, "Dewey":republicanPartyID, "Thurmond":independent1948SMPartyID, "Wallace":independent1948GWPartyID, "Other":independentGenericPartyID},
+    1948: {"Truman":democraticPartyID, "Dewey":republicanPartyID, "Thurmond":independent1948SMPartyID, "Wallace":independent1948HWPartyID, "Other":independentGenericPartyID},
     1952: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
     1956: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
     1960: {"Kennedy":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
