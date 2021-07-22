@@ -1675,7 +1675,7 @@ function getMDYDateString(date, delimiter, includeTime)
 function updateStateBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionID == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
+  if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
   {
     $("#stateboxcontainer").trigger('hide')
     return
