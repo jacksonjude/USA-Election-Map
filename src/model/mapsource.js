@@ -371,7 +371,7 @@ class MapSource
     this.rawMapData = this.convertCSVToArray(this, this.textMapData)
   }
 
-  convertArrayToCSV(mapData, columnMap, regionNameToID, candidateNameToPartyIDs, convertMapDataRowToCSVFunction) // TODO: Make usable for senate too
+  convertArrayToCSV(mapData, columnMap, regionNameToID, candidateNameToPartyIDs, convertMapDataRowToCSVFunction)
   {
     var csvText = ""
 
@@ -1283,7 +1283,9 @@ function createSenateMapSources()
             }
           }
 
-          var voteshareSortedCandidateData = Object.values(candidateData).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          var voteshareSortedCandidateData = Object.values(candidateData)
+          voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
+          voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
           if (!isCustomMap && voteshareCutoffMargin != null)
           {
             voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
