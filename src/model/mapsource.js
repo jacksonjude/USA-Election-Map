@@ -1603,11 +1603,17 @@ function createSenateMapSources()
     false
   )
 
+  const Cook2022SenateRatingIDs = {
+    1610611200000: "231206",
+    1611561600000: "231216",
+    1626418800000: ""
+  }
+
   var CookSenateProjectionMapSource = new MapSource(
     "Cook-2022-Senate",
     "Cook Political",
     "https://map.jacksonjude.com/csv-sources/cook-senate-2022/cook-latest.csv",
-    "https://map.jacksonjude.com/csv-sources/cook-senate-2022/",
+    "https://cookpolitical.com/ratings/senate-race-ratings/",
     "./assets/cookpolitical-large.png",
     {
       date: "date",
@@ -1634,7 +1640,7 @@ function createSenateMapSources()
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
-      window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".html")
+      window.open(homepageURL + Cook2022SenateRatingIDs[mapDate.getTime()] || "")
     }
   )
 
