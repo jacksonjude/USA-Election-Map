@@ -199,3 +199,14 @@ String.prototype.hashCode = function() {
   }
   return hash
 }
+
+function moveLastToFirst(array, times)
+{
+  if (array.length <= 0) { return }
+
+  for (i=0; i < times; i++)
+  {
+    var lastElement = array.pop()
+    array.unshift(lastElement)
+  }
+}
