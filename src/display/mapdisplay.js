@@ -237,14 +237,20 @@ function setOutlineDivProperties()
     outlineDiv.css('cursor', "pointer")
 
     outlineDiv.attr('oncontextmenu', "rightClickRegion(this); return false;")
-    outlineDiv.attr('onclick', "leftClickRegion(this)")
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
     outlineDiv.bind('click', function(e) {
-      if (!e.altKey) { return }
-
-      altClickRegion(e.target)
+      if (e.altKey)
+      {
+        altClickRegion(e.target)
+        return
+      }
+      else
+      {
+        leftClickRegion(this)
+        return
+      }
     })
 
     // outlineDiv.css('stroke', regionDeselectColor)
