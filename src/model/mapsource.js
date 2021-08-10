@@ -599,7 +599,7 @@ function createPresidentialMapSources()
             partyID = candidateNameToPartyIDMap[currentMapDate.getFullYear().toString()][mapDataRows[rowNum][columnMap.candidateName]]
           }
 
-          if (isMultipleElections && mapDataRows[rowNum][columnMap.percentAdjusted] >= 1)
+          if (mapDataRows[rowNum][columnMap.percentAdjusted] >= 1)
           {
             if (partyVotesharePercentages == null)
             {
