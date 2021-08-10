@@ -2052,8 +2052,8 @@ function createGovernorMapSources()
   var LTEGovernorProjectionMapSource = new MapSource(
     "LTE-2022-Governor-Projection",
     "LTE Projection",
-    // "https://map.jacksonjude.com/csv-sources/lte-2022-governor.csv",
-    "./csv-sources/lte-2022-governor.csv",
+    "https://map.jacksonjude.com/csv-sources/lte-2022-governor.csv",
+    // "./csv-sources/lte-2022-governor.csv",
     "https://www.youtube.com/watch?v=",
     "./assets/lte-large.png",
     {
@@ -2103,8 +2103,8 @@ function createGovernorMapSources()
   var CookGovernorProjectionMapSource = new MapSource(
     "Cook-2022-Governor",
     "Cook Political",
-    // "https://map.jacksonjude.com/csv-sources/cook-governor-2022.csv",
-    "./csv-sources/cook-governor-2022.csv",
+    "https://map.jacksonjude.com/csv-sources/cook-governor-2022.csv",
+    // "./csv-sources/cook-governor-2022.csv",
     "https://cookpolitical.com/ratings/governor-race-ratings/",
     "./assets/cookpolitical-large.png",
     {
@@ -2138,8 +2138,8 @@ function createGovernorMapSources()
   var PastElectionResultMapSource = new MapSource(
     "Past-Governor-Elections",
     "Past Elections",
-    // "https://map.jacksonjude.com/csv-sources/past-governor.csv",
-    "./csv-sources/past-governor.csv",
+    "https://map.jacksonjude.com/csv-sources/past-governor.csv",
+    // "./csv-sources/past-governor.csv",
     "https://en.wikipedia.org/wiki/",
     "./assets/wikipedia-large.png",
     {
