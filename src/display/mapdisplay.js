@@ -174,6 +174,8 @@ async function reloadForNewMapType(initialLoad)
   compareMapDataArray = [null, null]
   selectedCompareSlider = null
 
+  createMapTypeDropdownItems()
+
   currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
 
   await loadMapSVGFile()
@@ -183,8 +185,6 @@ async function reloadForNewMapType(initialLoad)
 
   $("#loader").hide()
   resizeElements(false)
-
-  createMapTypeDropdownItems()
 
   createMapSourceDropdownItems()
   createSettingsDropdownItems()
