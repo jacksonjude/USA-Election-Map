@@ -234,6 +234,12 @@ function setOutlineDivProperties()
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
+    outlineDiv.bind('click', function(e) {
+      if (!e.altKey) { return }
+
+      altClickRegion(e.target)
+    })
+
     // outlineDiv.css('stroke', regionDeselectColor)
     // outlineDiv.css('stroke-width', 0.5)
   })
@@ -1381,7 +1387,13 @@ function leftClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (selectedParty != null && regionData.partyID != selectedParty.getID())
+    if (regionData.disabled)
+    {
+      regionData.partyID = selectedParty.getID() || TossupParty.getID()
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.margin = 101
+    }
+    else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
@@ -1436,7 +1448,13 @@ function rightClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (selectedParty != null && regionData.partyID != selectedParty.getID())
+    if (selectedParty != null && regionData.disabled)
+    {
+      regionData.partyID = selectedParty.getID()
+      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.margin = 101
+    }
+    else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
@@ -1472,6 +1490,30 @@ function rightClickRegion(div)
     {
       regionData.partyID = TossupParty.getID()
       regionData.margin = 0
+    }
+
+    updateRegionFillColors(regionIDsToFill, regionData)
+    displayPartyTotals(getPartyTotals())
+  }
+}
+
+function altClickRegion(div)
+{
+  if (currentMapState == kEditing)
+  {
+    var regionDataCallback = getRegionData($(div).attr('id'))
+    var regionData = regionDataCallback.regionData
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+    if (regionData.disabled)
+    {
+      regionData.disabled = false
+      regionData.margin = 100
+    }
+    else
+    {
+      regionData.disabled = true
+      regionData.margin = 101
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
@@ -1559,7 +1601,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
     regionDiv.css('opacity', shouldHide ? 0 : 1)
 
-    if (regionData.disabled == true)
+    if (regionData.disabled == true && currentMapState != kEditing)
     {
       regionDiv.css('pointer-events', 'none')
     }
