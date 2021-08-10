@@ -91,7 +91,8 @@ $(async function() {
     "assets/jhk-large.png",
     "assets/cookpolitical-large.png",
     "assets/wikipedia-large.png",
-    "assets/nyt-large.png"
+    "assets/lte-large.png",
+    "assets/pa-large.png"
   ])
 
   createMarginEditDropdownItems()

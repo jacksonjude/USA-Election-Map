@@ -14,7 +14,7 @@ const partyOrdering = [
 ]
 
 var evPieChartCutoutPercent = 55
-const minEVPieChartSliceLabelPercent = 0.039
+const minEVPieChartSliceLabelPercent = 0.04
 const minEVPieChartSliceLabelBrightness = 0.7
 
 function setupEVPieChart()
