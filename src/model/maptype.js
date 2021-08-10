@@ -326,10 +326,10 @@ var USASenateMapType = new MapType(
   `
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #aaa;'>2</span>, 3 keys: Change map source<br>
+    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #BCBCBC;'>2</span>, <span style='color: #0A5EA0;'>3</span>, <span style='color: #aaa;'>4</span>, 5 keys: Change map source<br>
     &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
     &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1-2 keys: Force source <span style='color: #49BD49;'>update</span><br>
+    &#x2022; 1-4 keys: Force source <span style='color: #49BD49;'>update</span><br>
     &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
     &#x2022; Slider / arrow keys: Select data map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -3, Left: -1, Right: +1, Up: +3<br>
@@ -407,8 +407,97 @@ var USASenateMapType = new MapType(
   ]
 )
 
+var USAGovernorMapType = new MapType(
+  "USA-Governor",
+  "Governor",
+  "G",
+  "assets/usa-governor.png",
+  "svg-sources/usa-governor-map.svg",
+  50,
+  function()
+  {
+    return 1
+  },
+  false,
+  4,
+  true,
+  `
+  <h3 style='margin: 0px;'>Controls</h3>
+  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
+    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
+    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
+    &#x2022; S key: Toggle source dropdown selection<br>
+    &#x2022; 1-3 keys: Force source <span style='color: #49BD49;'>update</span><br>
+    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
+    &#x2022; Slider / arrow keys: Select data map date<br>
+    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
+    &#x2022; Click state: View more poll / projection / result data<br>
+    <br>
+    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
+    &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
+    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
+    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
+    <br>
+    &#x2022; Source checkbox: Select map source to compare<br>
+    &#x2022; Shift + 1-2 keys: Select map source to compare<br>
+    &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
+    &#x2022; Left/Right arrow keys: Adjust selected slider<br>
+    <br>
+    &#x2022; Settings dropdown: Click setting to toggle/cycle option<br>
+    &#x2022; Map Current Seats: Show seats not up for election<br>
+    &#x2022; Pie Current Seats: Show seats not up for election<br>
+    &#x2022; Off Cycle Elections: Show elections not on election day<br>
+    &nbsp;&nbsp;&nbsp;* Includes party flips and runoffs<br>
+    &#x2022; Latest Tick: Include tick for latest date on slider<br>
+    <!-- &nbsp;&nbsp;&nbsp;* Will set to maximum on source change when selected<br> -->
+    <br>
+    &#x2022; Margins button / enter key: Apply entered margins<br>
+    &#x2022; Margin dropdown button: Edit margin value<br>
+    <br>
+    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
+    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
+  </h5>
+  `,
+  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  [],
+  [
+    {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+    defaultValue: "hide", reloadType: MapSettingReloadType.display},
+    {id: "pieCurrentSeats", title: "Pie Current Seats", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+    defaultValue: "show", reloadType: MapSettingReloadType.display},
+    {id: "offYear", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+    defaultValue: "hide", reloadType: MapSettingReloadType.data},
+    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
+    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+      [
+        {id: "enabled", title: "Enabled", value: true},
+        {id: "disabled", title: "Disabled", value: false}
+      ],
+    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+  ]
+)
+
 var mapTypes = {}
 mapTypes[USAPresidentialMapType.getID()] = USAPresidentialMapType
 mapTypes[USASenateMapType.getID()] = USASenateMapType
+mapTypes[USAGovernorMapType.getID()] = USAGovernorMapType
 
-var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID()]
+var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID(), USAGovernorMapType.getID()]
