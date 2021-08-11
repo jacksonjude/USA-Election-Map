@@ -368,9 +368,7 @@ function createMapTypeDropdownItems()
   $("#mapTypesDropdownContainer").html("")
 
   var dropdownMapTypeIDs = cloneObject(mapTypeIDs)
-  moveLastToFirst(dropdownMapTypeIDs, mapTypeIDs.length-mapTypeIDs.indexOf(currentMapType.getID()))
-
-  console.log(dropdownMapTypeIDs)
+  //moveLastToFirst(dropdownMapTypeIDs, mapTypeIDs.length-mapTypeIDs.indexOf(currentMapType.getID()))
 
   for (var typeIndex in dropdownMapTypeIDs)
   {
