@@ -6,8 +6,9 @@ An interactive US presidential and senatorial election map. Created with HTML/CS
 
 * Interactive and detailed map sources
   * Displays projection data for the 2020 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ)
-  * Displays presidential and senatorial election results from 1976-2020, showing both victory margin and voteshare percentages for each state & district
+  * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA), [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ), and [The Cook Political Report](https://cookpolitical.com)
+  * Displays projection data for the 2022 governor elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [The Cook Political Report](https://cookpolitical.com)
+  * Displays presidential (1912-2020), senatorial (1960-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
   * Pie chart to show electoral vote counts by party and by margin
   * Editable custom maps that can be downloaded and uploaded as JSON or CSV files
 * Comparisons between different map sources
@@ -49,13 +50,13 @@ Then open the address provided in the Terminal window (by default, it seems to b
 - [x] More past election results
   - [x] 1960-1972 presidential elections
   - [x] 1912-1956 presidential elections
-- [ ] Past governor elections (1990-2020)
-- [ ] State delegate edit controls
+- [x] Past governor elections & 2022 governor projections (1980-2020)
 - [ ] Full third-party support in past results and custom maps
   - [x] Display in voteshare
   - [x] Display on pie chart
   - [x] Display in past result maps
   - [ ] Add & Edit parties in custom map
+- [ ] State delegate edit controls
 - [ ] Custom countdown timer events
 - [ ] National popular vote totals for past elections
 - [ ] Presidential election results by county
