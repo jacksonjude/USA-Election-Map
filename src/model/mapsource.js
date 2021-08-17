@@ -127,6 +127,8 @@ class MapSource
     var dateChangeCount = 0
     for (var rowNum in rowSplitStringArray)
     {
+      if (rowSplitStringArray[rowNum] == "") { continue }
+
       var rowDataArray = {}
       var columnSplitStringArray = rowSplitStringArray[rowNum].split(columnDelimiter)
       for (var columnNum in columnSplitStringArray)
