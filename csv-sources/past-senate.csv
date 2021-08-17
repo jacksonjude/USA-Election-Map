@@ -204,7 +204,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/06/1962,Colorado,CO,3,FALSE,FALSE,FALSE,Benson,socialist,FALSE,0.005780478739705660,kachang
 11/06/1962,Colorado,CO,3,FALSE,FALSE,FALSE,Carroll,democratic,FALSE,0.45576450336135,kachang
 11/06/1962,Colorado,CO,3,FALSE,FALSE,FALSE,Dominick,republican,FALSE,0.5357538748443220,kachang
-11/06/1962,Hawaii,HI,3,FALSE,FALSE,FALSE,Dillingham II,republican,FALSE,0.3059008662616300,kachang
+11/06/1962,Hawaii,HI,3,FALSE,FALSE,FALSE,Dillingham,republican,FALSE,0.3059008662616300,kachang
 11/06/1962,Hawaii,HI,3,FALSE,FALSE,FALSE,Inouye,democratic,FALSE,0.6940991337383700,kachang
 11/06/1962,Alaska,AK,3,FALSE,FALSE,FALSE,Stevens,republican,FALSE,0.4185902614255510,kachang
 11/06/1962,Alaska,AK,3,FALSE,FALSE,FALSE,Gruening,democratic,FALSE,0.5814097385744490,kachang
@@ -226,7 +226,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/06/1962,Washington,WA,3,FALSE,FALSE,FALSE,Magnuson,democratic,FALSE,0.520939241689982,kachang
 11/06/1962,Maryland,MD,3,FALSE,FALSE,FALSE,Miller,republican,FALSE,0.37967056685862000,kachang
 11/06/1962,Maryland,MD,3,FALSE,FALSE,FALSE,Brewster,democratic,FALSE,0.6203294331413800,kachang
-11/06/1962,North Carolina,NC,3,FALSE,FALSE,FALSE,Greene Jr.,republican,FALSE,0.3955395957720240,kachang
+11/06/1962,North Carolina,NC,3,FALSE,FALSE,FALSE,Greene,republican,FALSE,0.3955395957720240,kachang
 11/06/1962,North Carolina,NC,3,FALSE,FALSE,FALSE,Ervin,democratic,FALSE,0.6044604042279760,kachang
 11/06/1962,California,CA,3,FALSE,FALSE,FALSE,Brothers,independent,FALSE,5.02987551235215E-05,kachang
 11/06/1962,California,CA,3,FALSE,FALSE,FALSE,Pauling,independent,FALSE,0.0004771297405027010,kachang
@@ -400,7 +400,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Peine,independent,FALSE,0.0010158711243846300,kachang
 11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Ellsworth,independent,FALSE,0.0013346342044701300,kachang
 11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Snell,conservative,FALSE,0.010580253074052800,kachang
-11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Dodge Jr.,prohibition,FALSE,0.013948119074395400,kachang
+11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Dodge,prohibition,FALSE,0.013948119074395400,kachang
 11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Breeding,democratic,FALSE,0.45166494127460500,kachang
 11/08/1966,Kansas,KS,2,FALSE,FALSE,FALSE,Pearson,republican,FALSE,0.5214561812480920,kachang
 11/08/1966,Nebraska,NE,2,FALSE,FALSE,FALSE,Others,independent,FALSE,0.0004225924085912010,kachang
@@ -441,7 +441,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1966,Georgia,GA,2,FALSE,FALSE,FALSE,Russell,democratic,FALSE,0.9994804618820590,kachang
 11/08/1966,South Carolina,SC,2,FALSE,FALSE,FALSE,Morrah,democratic,FALSE,0.3781186103444800,kachang
 11/08/1966,South Carolina,SC,2,FALSE,FALSE,FALSE,Thurmond,republican,FALSE,0.6218813896555200,kachang
-11/08/1966,North Carolina,NC,2,FALSE,FALSE,FALSE,Shugart Jr.,independent,FALSE,2.21734406527861E-06,kachang
+11/08/1966,North Carolina,NC,2,FALSE,FALSE,FALSE,Shugart,independent,FALSE,2.21734406527861E-06,kachang
 11/08/1966,North Carolina,NC,2,FALSE,FALSE,FALSE,Badgley,independent republican,FALSE,3.9912193175015E-05,kachang
 11/08/1966,North Carolina,NC,2,FALSE,FALSE,FALSE,Shallcross,republican,FALSE,0.4440253664161070,kachang
 11/08/1966,North Carolina,NC,2,FALSE,FALSE,FALSE,Jordan,democratic,FALSE,0.555932504046653,kachang
@@ -461,7 +461,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1966,Massachusetts,MA,2,FALSE,FALSE,FALSE,Shaw,prohibition,FALSE,0.002416561622321370,kachang
 11/08/1966,Massachusetts,MA,2,FALSE,FALSE,FALSE,Gilfedder,socialist labor,FALSE,0.003395086574707660,kachang
 11/08/1966,Massachusetts,MA,2,FALSE,FALSE,FALSE,Peabody,democratic,FALSE,0.3873903784546510,kachang
-11/08/1966,Massachusetts,MA,2,FALSE,FALSE,FALSE,Brooke III,republican,FALSE,0.6067519721752900,kachang
+11/08/1966,Massachusetts,MA,2,FALSE,FALSE,FALSE,Brooke,republican,FALSE,0.6067519721752900,kachang
 11/08/1966,Rhode Island,RI,2,FALSE,FALSE,FALSE,Briggs,republican,FALSE,0.3234053842285970,kachang
 11/08/1966,Rhode Island,RI,2,FALSE,FALSE,FALSE,Pell,democratic,FALSE,0.6765946157714030,kachang
 11/08/1966,New Hampshire,NH,2,FALSE,FALSE,FALSE,Write-In,nonpartisan,FALSE,0.00029654826541069800,kachang
@@ -558,7 +558,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1968,North Carolina,NC,3,FALSE,FALSE,FALSE,Ervin,democratic,FALSE,0.6055575383532210,kachang
 11/05/1968,Maryland,MD,3,FALSE,FALSE,FALSE,Mahoney,american,FALSE,0.13092016327653600,kachang
 11/05/1968,Maryland,MD,3,FALSE,FALSE,FALSE,Brewster,democratic,FALSE,0.39123142570679500,kachang
-11/05/1968,Maryland,MD,3,FALSE,FALSE,FALSE,Mathias Jr.,republican,FALSE,0.4778484110166690,kachang
+11/05/1968,Maryland,MD,3,FALSE,FALSE,FALSE,Mathias,republican,FALSE,0.4778484110166690,kachang
 11/05/1968,New York,NY,3,FALSE,FALSE,FALSE,Garza,socialist workers,FALSE,0.0007565044722496260,kachang
 11/05/1968,New York,NY,3,FALSE,FALSE,FALSE,Emanuel,socialist labor,FALSE,0.0012100425019072100,kachang
 11/05/1968,New York,NY,3,FALSE,FALSE,FALSE,Ferguson,freedom & peace,FALSE,0.0013332650620587400,kachang
@@ -659,7 +659,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1970,Maryland,MD,1,FALSE,FALSE,FALSE,Beall,republican,FALSE,0.5070840783378820,kachang
 11/03/1970,Delaware,DE,1,FALSE,FALSE,FALSE,Gies,american,FALSE,0.010654178977818200,kachang
 11/03/1970,Delaware,DE,1,FALSE,FALSE,FALSE,Zimmerman,democratic,FALSE,0.4010183412929960,kachang
-11/03/1970,Delaware,DE,1,FALSE,FALSE,FALSE,Roth Jr.,republican,FALSE,0.5883274797291860,kachang
+11/03/1970,Delaware,DE,1,FALSE,FALSE,FALSE,Roth,republican,FALSE,0.5883274797291860,kachang
 11/03/1970,Pennsylvania,PA,1,FALSE,FALSE,FALSE,Others,independent,FALSE,1.64640445846327E-05,kachang
 11/03/1970,Pennsylvania,PA,1,FALSE,FALSE,FALSE,Mimms,consumer,FALSE,0.0010789437217796000,kachang
 11/03/1970,Pennsylvania,PA,1,FALSE,FALSE,FALSE,Maisel,socialist workers,FALSE,0.0010893709500165300,kachang
@@ -696,7 +696,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Fisher,socialist labor,FALSE,0.0015458681644510300,kachang
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Henderson,socialist workers,FALSE,0.0024613310691717700,kachang
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Smith,republican,FALSE,0.42222927303076800,kachang
-11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Stevenson III,democratic,FALSE,0.5737421345205360,kachang
+11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Stevenson,democratic,FALSE,0.5737421345205360,kachang
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Write-In,nonpartisan,FALSE,0.0006587430621741320,kachang
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Sanders,liberty union,FALSE,0.022018837248416200,kachang
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Major,democratic,FALSE,0.33416493805012100,kachang
@@ -706,7 +706,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,Stone,alabama conservative,FALSE,0.006505571787243640,kachang
 11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,Couch,prohibition,FALSE,0.010299695842161400,kachang
 11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,LeFlore,alabama national democratic,FALSE,0.029893473402600500,kachang
-11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,Blount Jr.,republican,FALSE,0.3306282281688020,kachang
+11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,Blount,republican,FALSE,0.3306282281688020,kachang
 11/07/1972,Alabama,AL,2,FALSE,FALSE,FALSE,Sparkman,democratic,FALSE,0.6226730307991920,kachang
 11/07/1972,New Jersey,NJ,2,FALSE,FALSE,FALSE,Levin,socialist labor,FALSE,0.0036025555292493600,kachang
 11/07/1972,New Jersey,NJ,2,FALSE,FALSE,FALSE,Wiley,concerned voter's voice,FALSE,0.011978192683352300,kachang
@@ -806,7 +806,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/07/1972,Massachusetts,MA,2,FALSE,FALSE,FALSE,Write-In,nonpartisan,FALSE,4.09165993159757E-05,kachang
 11/07/1972,Massachusetts,MA,2,FALSE,FALSE,FALSE,Gurewitz,socialist workers,FALSE,0.017450296877346400,kachang
 11/07/1972,Massachusetts,MA,2,FALSE,FALSE,FALSE,Droney,democratic,FALSE,0.3472756293985340,kachang
-11/07/1972,Massachusetts,MA,2,FALSE,FALSE,FALSE,Brooke III,republican,FALSE,0.6352331571248030,kachang
+11/07/1972,Massachusetts,MA,2,FALSE,FALSE,FALSE,Brooke,republican,FALSE,0.6352331571248030,kachang
 11/07/1972,New Hampshire,NH,2,FALSE,FALSE,FALSE,Powell,republican,FALSE,0.4311801866519500,kachang
 11/07/1972,New Hampshire,NH,2,FALSE,FALSE,FALSE,McIntyre,democratic,FALSE,0.5688198133480500,kachang
 11/07/1972,Maine,ME,2,FALSE,FALSE,FALSE,Smith,republican,FALSE,0.4676841280767130,kachang
@@ -820,7 +820,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Others,other,FALSE,0.0001631459704788750,kachang
 11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Rochon,american,FALSE,0.002472076230646000,kachang
 11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Capozzi,george wallace party,FALSE,0.017682442359699100,kachang
-11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Brannen III,republican,FALSE,0.3429337516752420,kachang
+11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Brannen,republican,FALSE,0.3429337516752420,kachang
 11/05/1974,Connecticut,CT,3,FALSE,FALSE,FALSE,Ribicoff,democratic,FALSE,0.6367485837639340,kachang
 11/05/1974,Hawaii,HI,3,FALSE,FALSE,FALSE,Kimmel,people's,FALSE,0.17091690945204400,kachang
 11/05/1974,Hawaii,HI,3,FALSE,FALSE,FALSE,Inouye,democratic,FALSE,0.8290830905479560,kachang
@@ -891,7 +891,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1974,Illinois,IL,3,FALSE,FALSE,FALSE,Flory,communist,FALSE,0.0020149821626217200,kachang
 11/05/1974,Illinois,IL,3,FALSE,FALSE,FALSE,Heisler,socialist workers,FALSE,0.004258807012535910,kachang
 11/05/1974,Illinois,IL,3,FALSE,FALSE,FALSE,Burditt,republican,FALSE,0.3722155471673260,kachang
-11/05/1974,Illinois,IL,3,FALSE,FALSE,FALSE,Stevenson III,democratic,FALSE,0.6215106636575170,kachang
+11/05/1974,Illinois,IL,3,FALSE,FALSE,FALSE,Stevenson,democratic,FALSE,0.6215106636575170,kachang
 11/05/1974,Indiana,IN,3,FALSE,FALSE,FALSE,Lee,american,FALSE,0.028290143972143400,kachang
 11/05/1974,Indiana,IN,3,FALSE,FALSE,FALSE,Lugar,republican,FALSE,0.4644194051494090,kachang
 11/05/1974,Indiana,IN,3,FALSE,FALSE,FALSE,Bayh,democratic,FALSE,0.507290450878448,kachang
@@ -918,7 +918,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1974,North Carolina,NC,3,FALSE,FALSE,FALSE,Stevens,republican,FALSE,0.370054819597075,kachang
 11/05/1974,North Carolina,NC,3,FALSE,FALSE,FALSE,Morgan,democratic,FALSE,0.6210813395816310,kachang
 11/05/1974,Maryland,MD,3,FALSE,FALSE,FALSE,Mikulski,democratic,FALSE,0.426713344710442,kachang
-11/05/1974,Maryland,MD,3,FALSE,FALSE,FALSE,Mathias Jr.,republican,FALSE,0.573286655289558,kachang
+11/05/1974,Maryland,MD,3,FALSE,FALSE,FALSE,Mathias,republican,FALSE,0.573286655289558,kachang
 11/05/1974,Pennsylvania,PA,3,FALSE,FALSE,FALSE,Others,independent,FALSE,0.00010638872946553800,kachang
 11/05/1974,Pennsylvania,PA,3,FALSE,FALSE,FALSE,Shankey,constitutional,FALSE,0.010927560201644000,kachang
 11/05/1974,Pennsylvania,PA,3,FALSE,FALSE,FALSE,Flaherty,democratic,FALSE,0.4589440142250360,kachang
