@@ -394,13 +394,24 @@ class MapSource
       var mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
       for (var regionID in mapData[mapDate])
       {
-        //if (mapData[mapDate][regionID].partyID == TossupParty.getID()) { continue }
+        var regionData = mapData[mapDate][regionID]
 
-        for (var candidateName in candidateNameToPartyIDs)
+        var candidatesToAdd = cloneObject(candidateNameToPartyIDs)
+
+        if (regionData.margin == 0 && !regionData.disabled)
         {
+          var independentPartyNameToID = {}
+          independentPartyNameToID[IndependentGenericParty.getNames()[0]] = IndependentGenericParty.getID()
+
+          candidatesToAdd = independentPartyNameToID
+        }
+
+        for (var candidateName in candidatesToAdd)
+        {
+          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && !(regionData.margin == 0 && !regionData.disabled)) { continue }
+
           for (var columnTitleNum in columnTitles)
           {
-            var regionData = mapData[mapDate][regionID]
             var columnTitle = columnTitles[columnTitleNum]
             csvText += convertMapDataRowToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
 
@@ -1111,6 +1122,16 @@ function createPresidentialMapSources()
     }
   )
 
+  var idsToPartyNames = {}
+  var partyNamesToIDs = {}
+  for (var partyNum in mainPoliticalPartyIDs)
+  {
+    if (mainPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+
+    partyNamesToIDs[politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]] = mainPoliticalPartyIDs[partyNum]
+    idsToPartyNames[mainPoliticalPartyIDs[partyNum]] = politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]
+  }
+
   var CustomMapSource = new MapSource(
     "Custom-Presidential",
     "Custom",
@@ -1123,9 +1144,9 @@ function createPresidentialMapSources()
       candidateName: "candidate",
       percentAdjusted: "percent"
     },
-    currentCycleYear, // Needs to be here until all previous presidential candidate names are listed in "partyCandidate/ID" constants
-    partyCandiateLastNames,
-    partyIDToCandidateLastNames,
+    null, //currentCycleYear, // Needs to be here until all previous presidential candidate names are listed in "partyCandidate/ID" constants
+    partyNamesToIDs,
+    idsToPartyNames,
     incumbentChallengerPartyIDs,
     regionNameToIDCustom, //null,
     null,
@@ -1134,7 +1155,9 @@ function createPresidentialMapSources()
     true,
     doubleLinePercentFilterFunction, //doubleLinePercentCopyFunction,
     null,
-    customMapConvertMapDataToCSVFunction
+    customMapConvertMapDataToCSVFunction,
+    true,
+    false
   )
 
   var todayDate = new Date()
