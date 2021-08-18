@@ -4,10 +4,12 @@
   <head>
     <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/discord-invite.css">
     <script src="./lib/jquery-3.5.1.min.js"></script>
     <script src="./lib/chart.js-2.8.0.js"></script>
     <script src="./lib/chartjs-plugin-datalabels-0.7.0.js"></script>
     <script src="./lib/bowser-2.9.0.min.js"></script>
+    <script src="./lib/discord-invite.js"></script>
     <script src="./src/misclib.js"></script>
     <script src="./src/model/csvdatabase.js"></script>
     <script src="./src/model/maptype.js"></script>
@@ -160,21 +162,41 @@
         </div>
       </div>
       <div id="creditboxcontainer" class="boxcontainer textbox">
-        <div id="creditbox" class="box">
-          <h4 style="margin: 0px;">Sources for <a href="https://map.jacksonjude.com/" style="color: white;">map.jacksonjude.com</a></h4>
-          <h5 style="margin: 0px; margin-bottom: 10px; text-align: left;">
-            <a href="https://www.yapms.com"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.yapms.com/" style="color: white;">YAPms</a>: <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">presidential</a> and <a href="https://www.yapms.com/app/?t=USA_2020_senate" style="color: white;">senate</a> map outlines<br>
-            <a href="https://fivethirtyeight.com"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://fivethirtyeight.com" style="color: white;">FiveThirtyEight</a>: 2020 <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">poll</a> and <a href="https://projects.fivethirtyeight.com/2020-election-forecast/" style="color: white;">projection</a> data<br>
-            <!-- <a href="https://jhkforecasts.com"><img src="./assets/jhk.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://jhkforecasts.com" style="color: white;">JHK</a>: <a href="https://projects.jhkforecasts.com/presidential-forecast/" style="color: white;">2020 presidential projection data</a><br> -->
-            <a href="https://cookpolitical.com"><img src="./assets/cookpolitical.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://cookpolitical.com/" style="color: white;">Cook Political</a>: 2020 pres and 2022 senate data<br>
-            <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA"><img src="./assets/lte.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA" style="color: white;">Let's Talk Elections</a>: <a href="https://www.youtube.com/playlist?list=PLYs1aUsYMVipo2uDLV3mVDqXj3Xc9a9am" style="color: white;">2022 senate projections</a><br>
-            <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ"><img src="./assets/pa.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ" style="color: white;">Political Analysis</a>: <a href="https://youtube.com/playlist?list=PLsvuE1oEoI9ROWu7--ar8nWIrFc62XI0c" style="color: white;">2022 senate projections</a><br>
-            <!-- <a href="https://www.nytimes.com/interactive/2020/11/03/us/elections/results-president.html"><img src="./assets/nyt.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.nytimes.com/interactive/2020/11/03/us/elections/results-president.html" style="color: white;">The NYT</a> for the election results data<br> -->
-            <a href="https://electionlab.mit.edu/data"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://electionlab.mit.edu/data" style="color: white;">MIT Election Data</a>: past <a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" style="color: white;">pres</a> and <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" style="color: white;">senate</a> results<br>
-            <a href="https://uselectionatlas.org"><img src="./assets/daveleip.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://uselectionatlas.org" style="color: white;">Dave Leip's Atlas</a>: past <a href="https://uselectionatlas.org/RESULTS" style="color: white;">presidential results</a><br>
-            <a href="https://github.com/jacksonjude/USA-Election-Map"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Source code and update notes on <a href="https://github.com/jacksonjude/USA-Election-Map" style="color: white;">GitHub</a><br>
-            <a href="https://discord.gg/44HMc8AY3G"><img src="./assets/discord.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; Join the <a href="https://discord.gg/44HMc8AY3G" style="color: white;">Discord server</a> for updates!
-          </h5>
+        <div id="creditbox" class="box" style="padding: 0">
+          <div class="tab">
+            <button class="tablinks active" onclick="selectCreditBoxTab(this, $('#linkscontainer'))">Links</button>
+            <button class="tablinks" onclick="selectCreditBoxTab(this, $('#sourcescontainer'))">Sources</button>
+          </div>
+          <div class="tabcontent" id="linkscontainer">
+            <div style="position: relative; margin-top: 10px" id="discordInviteBox"></div>
+            <script>
+            discordInvite.init({
+              inviteCode: '44HMc8AY3G',
+              title: 'jacksonjude.com',
+              width: '380px',
+              introText: "Join the Discord Server"
+            })
+            discordInvite.render()
+            </script>
+            <br>
+            <span style="position: relative; margin: 10px 0px 10px 0px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; font-size: 14px">
+              <span style="width: 90px; margin-right: 5px"><a href="https://jacksonjude.com"><img class="large-image" style="width: 80px; height: 80px" src="./assets/jacksonjude-large.png" /></a></span>
+              <span style="width: 90px; margin-right: 20px">Homepage for other projects and socials</span>
+              <span style="width: 90px;"><a href="https://github.com/jacksonjude/USA-Election-Map"><img class="large-image" style="width: 80px; height: 80px;" src="./assets/github-large.png" /></a></span>
+              <span style="width: 90px;">Election Map source code on GitHub</span>
+            </span>
+          </div>
+          <div class="tabcontent" id="sourcescontainer" style="display: none">
+            <h5 style="margin: 15px 10px 20px 10px; text-align: left;">
+              <a href="https://www.yapms.com"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.yapms.com/" style="color: white;">YAPms</a>: <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">presidential</a> and <a href="https://www.yapms.com/app/?t=USA_2020_senate" style="color: white;">senate</a> map outlines<br>
+              <a href="https://fivethirtyeight.com"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://fivethirtyeight.com" style="color: white;">FiveThirtyEight</a>: 2020 <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">poll</a> and <a href="https://projects.fivethirtyeight.com/2020-election-forecast/" style="color: white;">projection</a> data<br>
+              <a href="https://cookpolitical.com"><img src="./assets/cookpolitical.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://cookpolitical.com/" style="color: white;">Cook Political</a>: 2020 pres and 2022 senate data<br>
+              <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA"><img src="./assets/lte.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA" style="color: white;">Let's Talk Elections</a>: <a href="https://www.youtube.com/playlist?list=PLYs1aUsYMVipo2uDLV3mVDqXj3Xc9a9am" style="color: white;">2022 senate projections</a><br>
+              <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ"><img src="./assets/pa.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ" style="color: white;">Political Analysis</a>: <a href="https://youtube.com/playlist?list=PLsvuE1oEoI9ROWu7--ar8nWIrFc62XI0c" style="color: white;">2022 senate projections</a><br>
+              <a href="https://electionlab.mit.edu/data"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://electionlab.mit.edu/data" style="color: white;">MIT Election Data</a>: past <a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" style="color: white;">pres</a> and <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" style="color: white;">senate</a> results<br>
+              <a href="https://uselectionatlas.org"><img src="./assets/daveleip.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://uselectionatlas.org" style="color: white;">Dave Leip's Atlas</a>: past <a href="https://uselectionatlas.org/RESULTS" style="color: white;">presidential results</a><br>
+            </h5>
+          </div>
         </div>
       </div>
     </div>

@@ -264,3 +264,36 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.tab {
+  overflow: hidden;
+  background-color: #555;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab button {
+  background-color: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  transition: 0.3s;
+  color: white;
+  border-radius: 4px;
+  width: 48%;
+  font-family: "Bree5erif-Regular";
+  font-size: 16px;
+  margin: 3px;
+}
+
+.tab button:hover {
+  background-color: #666;
+}
+
+.tab button.active {
+  background-color: #888;
+}

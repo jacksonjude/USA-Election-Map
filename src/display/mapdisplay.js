@@ -296,9 +296,14 @@ function resizeElements(initilizedPieChart)
   $("#evPieChart").css("background-position", "center")
   $("#evPieChart").css("background-repeat", "no-repeat")
 
-  const creditboxh3DefaultSize = 23
-  const creditboxh5DefaultSize = 17
-  const creditboxImageDefaultSize = 20
+  // const creditboxh3DefaultSize = 23
+  // const creditboxh5DefaultSize = 17
+  // const creditboxImageDefaultSize = 20
+
+  // $("#creditbox h3").css('font-size', (creditboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
+  // $("#creditbox h5").css('font-size', (creditboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
+  // $("#creditbox img:not(.large-image)").css('width', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
+  // $("#creditbox img:not(.large-image)").css('height', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
 
   const helpboxh3DefaultSize = 23
   const helpboxh5DefaultSize = 15
@@ -307,10 +312,7 @@ function resizeElements(initilizedPieChart)
 
   $("#infoboxcontainers").css('min-width', $("#evPieChart").width())
 
-  $("#creditbox h3").css('font-size', (creditboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
-  $("#creditbox h5").css('font-size', (creditboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
-  $("#creditbox img").css('width', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
-  $("#creditbox img").css('height', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
+  $("#creditbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
   $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
   $("#helpbox h5").css('font-size', (helpboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
@@ -1244,6 +1246,14 @@ function toggleHelpBox(helpButtonDiv)
     $("#evPieChartContainer").show()
     $("#creditboxcontainer").show()
   }
+}
+
+function selectCreditBoxTab(buttonDiv, contentDiv)
+{
+  $(buttonDiv).parent().children().removeClass('active')
+  $(buttonDiv).addClass('active')
+  $("#creditbox .tabcontent").hide()
+  $(contentDiv).show()
 }
 
 function populateRegionsArray()
