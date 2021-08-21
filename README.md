@@ -59,6 +59,8 @@ Then open the address provided in the Terminal window (by default, it seems to b
 - [ ] State delegate edit controls
 - [ ] Custom countdown timer events
 - [ ] National popular vote totals for past elections
+- [ ] Popularity rating source
+- [ ] Past house election results
 - [ ] Presidential election results by county
 
 If you have any questions, suggestions, or feature ideas, feel free to open an issue here on GitHub. Alternatively, you can email **jjcooley0@gmail.com**.
