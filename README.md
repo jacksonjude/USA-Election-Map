@@ -1,6 +1,6 @@
 # USA Election Map
 
-An interactive US presidential and senatorial election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
+An interactive USA presidential, senatorial, and governor election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
 
 ## Features
 
