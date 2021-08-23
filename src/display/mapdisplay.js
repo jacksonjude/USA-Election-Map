@@ -1552,6 +1552,8 @@ function altClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
+    regionData.partyID = selectedParty.getID()
+
     if (regionData.disabled)
     {
       regionData.disabled = false
