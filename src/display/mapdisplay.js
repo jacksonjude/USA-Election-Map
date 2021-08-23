@@ -205,12 +205,12 @@ async function reloadForNewMapType(initialLoad)
 
   if (currentMapSource.getID() != NullMapSource.getID())
   {
-    updateMapSourceButton()
+    updateNavBarForNewSource()
     loadDataMap(false, false, previousDateOverride)
   }
   else
   {
-    updateMapSourceButton(true)
+    updateNavBarForNewSource(true)
   }
 }
 
@@ -1023,11 +1023,11 @@ function updateMapSource(sourceID, buttonDiv, forceDownload)
 
   currentMapSource = mapSources[sourceID]
 
-  updateMapSourceButton()
+  updateNavBarForNewSource()
   loadDataMap(false, forceDownload)
 }
 
-function updateMapSourceButton(revertToDefault)
+function updateNavBarForNewSource(revertToDefault)
 {
   revertToDefault = revertToDefault == null ? false : revertToDefault
   $("#mapSourcesDropdownContainer .active").removeClass("active")
@@ -1151,9 +1151,9 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   fullClear = fullClear == null ? false : fullClear
   shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
 
-  if (currentMapSource != currentCustomMapSource || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
+  if (currentMapSource.getID() != currentCustomMapSource.getID() || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
-    updateMapSourceButton(true)
+    updateNavBarForNewSource(true)
     currentMapSource = NullMapSource
     if (shouldResetCurrentMapSource)
     {
@@ -1376,7 +1376,7 @@ function toggleEditing(stateToSet)
 
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
-      updateMapSourceButton()
+      updateNavBarForNewSource()
       loadDataMap()
     }
     break
@@ -1650,7 +1650,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
     regionDiv.css('opacity', shouldHide ? 0 : 1)
 
-    if (regionData.disabled == true && currentMapState != kEditing)
+    if (regionData.disabled == true && currentMapSource.getID() != currentCustomMapSource.getID())
     {
       regionDiv.css('pointer-events', 'none')
     }
@@ -2149,14 +2149,14 @@ function applyCompareToCustomMap()
 
   currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime(), true)
   currentMapSource = currentCustomMapSource
-  updateMapSourceButton()
+  updateNavBarForNewSource()
   loadDataMap()
 }
 
 async function loadCompareItemMapSource(compareItemNum)
 {
   currentMapSource = mapSources[compareMapSourceIDArray[compareItemNum]]
-  updateMapSourceButton()
+  updateNavBarForNewSource()
   await loadDataMap()
 
   var dateIndexToSet

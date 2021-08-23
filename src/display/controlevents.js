@@ -274,7 +274,7 @@ document.addEventListener('keypress', async function(e) {
   if (currentMapState == kViewing && !editMarginID && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
-    updateMapSourceButton()
+    updateNavBarForNewSource()
     await loadDataMap()
     if (currentRegionID)
     {
@@ -323,7 +323,7 @@ document.addEventListener('keypress', async function(e) {
       if (e.which >= mapSourceIDs.length+49) { return }
 
       currentMapSource = mapSources[mapSourceIDs[e.which-49]]
-      updateMapSourceButton()
+      updateNavBarForNewSource()
       await loadDataMap(true, true)
       if (currentRegionID)
       {

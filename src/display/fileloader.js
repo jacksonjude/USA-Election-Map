@@ -74,7 +74,7 @@ function jsonFileLoaded(e)
   currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
   currentMapSource = currentCustomMapSource
-  updateMapSourceButton()
+  updateNavBarForNewSource()
   loadDataMap(false, true)
 }
 
@@ -86,7 +86,7 @@ function csvFileLoaded(e)
   currentCustomMapSource.setTextMapData(textMapData)
 
   currentMapSource = currentCustomMapSource
-  updateMapSourceButton()
+  updateNavBarForNewSource()
   loadDataMap(false, true)
 }
 
