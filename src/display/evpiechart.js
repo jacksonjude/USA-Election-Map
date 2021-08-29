@@ -19,65 +19,7 @@ const minEVPieChartSliceLabelBrightness = 0.7
 
 function setupEVPieChart()
 {
-  var marginSectionData = []
-  var marginSectionBackgroundColors = []
-  var marginSectionLabels = []
-
-  var partySectionData = []
-  var partySectionBackgroundColors = []
-  var partySectionLabels = []
-
-  for (var partyNum in partyOrdering)
-  {
-    var partyID = partyOrdering[partyNum].partyID
-    if (partyID != TossupParty.getID())
-    {
-      var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-      if (partyOrdering[partyNum].direction == kClockwiseDirection) {}
-      else if (partyOrdering[partyNum].direction == kCounterclockwiseDirection)
-      {
-        marginNames.reverse()
-      }
-
-      for (var marginKeyNum in marginNames)
-      {
-        var marginKey = marginNames[marginKeyNum]
-
-        marginSectionData.push(0)
-        marginSectionBackgroundColors.push(politicalParties[partyID].getMarginColors()[marginKey])
-        marginSectionLabels.push(politicalParties[partyID].getMarginNames()[marginKey] + " " + politicalParties[partyID].getShortName())
-      }
-
-      partySectionData.push(0)
-      partySectionBackgroundColors.push(politicalParties[partyID].getMarginColors().safe)
-      partySectionLabels.push(politicalParties[partyID].getNames()[0])
-    }
-    else
-    {
-      marginSectionData.push(currentMapType.getTotalEV())
-      marginSectionBackgroundColors.push(TossupParty.getMarginColors().safe)
-      marginSectionLabels.push(TossupParty.getNames()[0])
-
-      partySectionData.push(currentMapType.getTotalEV())
-      partySectionBackgroundColors.push(TossupParty.getMarginColors().safe)
-      partySectionLabels.push(TossupParty.getNames()[0])
-    }
-  }
-
-  var data = {
-    datasets: [
-      {
-        data: marginSectionData,
-        backgroundColor: marginSectionBackgroundColors,
-        labels: marginSectionLabels
-      },
-      {
-        data: partySectionData,
-        backgroundColor: partySectionBackgroundColors,
-        labels: partySectionLabels
-      }
-    ],
-  }
+  var data = setupEVPieChartDatasets()
 
   var options = {
     responsive: false,
@@ -143,6 +85,71 @@ function setupEVPieChart()
     data: data,
     options: options
   })
+}
+
+function setupEVPieChartDatasets()
+{
+  var marginSectionData = []
+  var marginSectionBackgroundColors = []
+  var marginSectionLabels = []
+
+  var partySectionData = []
+  var partySectionBackgroundColors = []
+  var partySectionLabels = []
+
+  for (var partyNum in partyOrdering)
+  {
+    var partyID = partyOrdering[partyNum].partyID
+    if (partyID != TossupParty.getID())
+    {
+      var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
+      if (partyOrdering[partyNum].direction == kClockwiseDirection) {}
+      else if (partyOrdering[partyNum].direction == kCounterclockwiseDirection)
+      {
+        marginNames.reverse()
+      }
+
+      for (var marginKeyNum in marginNames)
+      {
+        var marginKey = marginNames[marginKeyNum]
+
+        marginSectionData.push(0)
+        marginSectionBackgroundColors.push(politicalParties[partyID].getMarginColors()[marginKey])
+        marginSectionLabels.push(politicalParties[partyID].getMarginNames()[marginKey] + " " + politicalParties[partyID].getShortName())
+      }
+
+      partySectionData.push(0)
+      partySectionBackgroundColors.push(politicalParties[partyID].getMarginColors().safe)
+      partySectionLabels.push(politicalParties[partyID].getNames()[0])
+    }
+    else
+    {
+      marginSectionData.push(currentMapType.getTotalEV())
+      marginSectionBackgroundColors.push(TossupParty.getMarginColors().safe)
+      marginSectionLabels.push(TossupParty.getNames()[0])
+
+      partySectionData.push(currentMapType.getTotalEV())
+      partySectionBackgroundColors.push(TossupParty.getMarginColors().safe)
+      partySectionLabels.push(TossupParty.getNames()[0])
+    }
+  }
+
+  var data = {
+    datasets: [
+      {
+        data: marginSectionData,
+        backgroundColor: marginSectionBackgroundColors,
+        labels: marginSectionLabels
+      },
+      {
+        data: partySectionData,
+        backgroundColor: partySectionBackgroundColors,
+        labels: partySectionLabels
+      }
+    ],
+  }
+
+  return data
 }
 
 function updateEVPieChart()
@@ -277,6 +284,10 @@ function updateEVPieChart()
     evPieChart.data.datasets[0].hidden = false
     evPieChart.data.datasets[0].data = marginTotalsArray
   }
+
+  var preloadedData = setupEVPieChartDatasets()
+  evPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
+  evPieChart.data.datasets[0].backgroundColor = preloadedData.datasets[0].backgroundColor
 
   evPieChart.update()
 }

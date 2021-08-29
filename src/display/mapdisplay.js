@@ -97,6 +97,7 @@ $(async function() {
 
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
+  createPartyDropdowns()
 
   addDivEventListeners()
 
@@ -555,6 +556,49 @@ function createComparePresetDropdownItems()
   }
 }
 
+function createPartyDropdowns()
+{
+  $("#partyDropdownsContainer").html("")
+  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  {
+    var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
+    var marginColors = currentPoliticalParty.getMarginColors()
+
+    var dropdownDiv = '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 135px">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<div class="partyDropdownContainer">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">'
+    dropdownDiv += '<div class="dropdown-separator"></div>'
+    dropdownDiv += '<a class="" onclick="" style="display:flex; justify-content:center;">' + currentPoliticalParty.getNames()[0] + '</a>'
+    dropdownDiv += '<div class="dropdown-separator"></div>'
+    dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" onclick="" style="display:flex; justify-content:center;">'
+    for (var marginName in marginColors)
+    {
+      dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}" onclick="$(\'#' + currentPoliticalParty.getID() + 'DropdownContent\').css(\'display\', \'block\')"></button>'
+    }
+    dropdownDiv += '</a>'
+    dropdownDiv += '</div>'
+    dropdownDiv += '</div>'
+    dropdownDiv += '</div>'
+    dropdownDiv += '</div>'
+
+    $("#partyDropdownsContainer").append(dropdownDiv)
+  }
+
+  jscolor.install()
+}
+
+function updatePartyColor(partyID, margin)
+{
+  var party = politicalParties[partyID]
+  var marginColors = party.getMarginColors()
+  marginColors[margin] = $("#" + partyID + "-" + margin + "-color-picker")[0].getAttribute('data-current-color')
+  party.setMarginColors(marginColors)
+
+  displayDataMap()
+}
+
 function addDivEventListeners()
 {
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
@@ -614,6 +658,10 @@ function addDivEventListeners()
     setTimeout(function() {
       if ($("#stateboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#stateboxcontainer").hide() }
     }, 200)
+  })
+
+  $('.jscolor-picker-wrap').on('DOMNodeRemoved', function() {
+
   })
 }
 
@@ -1058,6 +1106,8 @@ function updateNavBarForNewSource(revertToDefault)
     $("#editDoneButton").html("Copy")
   }
 
+  updatePartyDropdownVisibility()
+
   if (showingCompareMap && currentMapSource.getID() != currentCustomMapSource.getID())
   {
     updateCompareMapSlidersVisibility(false)
@@ -1065,6 +1115,22 @@ function updateNavBarForNewSource(revertToDefault)
   else if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     updateCompareMapSlidersVisibility(true)
+  }
+}
+
+function updatePartyDropdownVisibility()
+{
+  if (currentMapState != kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  {
+    $(".partyDropdownContainer").each(function() {
+      $(this).css("display", "block")
+    })
+  }
+  else
+  {
+    $(".partyDropdownContainer").each(function() {
+      $(this).css("display", "none")
+    })
   }
 }
 
@@ -1309,14 +1375,14 @@ function selectParty(div)
 
 function selectAllParties()
 {
-  $("#partyButtonDiv").children().each(function() {
+  $(".partyDropdownButton").each(function() {
     $(this).addClass('active')
   })
 }
 
 function deselectAllParties()
 {
-  $("#partyButtonDiv").children().each(function() {
+  $(".partyDropdownButton").each(function() {
     $(this).removeClass('active')
   })
   selectedParty = null
@@ -1415,6 +1481,8 @@ function toggleEditing(stateToSet)
     }
     break
   }
+
+  updatePartyDropdownVisibility()
 }
 
 function leftClickRegion(div)

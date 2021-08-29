@@ -838,6 +838,9 @@ function createPresidentialMapSources()
       case "candidateName":
       return candidateName
 
+      case "partyID":
+      return candidateNameToPartyIDs[candidateName] || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
+
       case "percentAdjusted":
       if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
       {
@@ -1054,6 +1057,7 @@ function createPresidentialMapSources()
       region: "region",
       percentAdjusted: "voteshare",
       partyCandidateName: "candidate",
+      partyID: "party",
       candidateName: "candidate"
     },
     null,

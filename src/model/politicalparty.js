@@ -48,6 +48,11 @@ class PoliticalParty
     return this.marginColors
   }
 
+  setMarginColors(marginColors)
+  {
+    this.marginColors = marginColors
+  }
+
   getMarginNames()
   {
     return this.marginNames
@@ -276,5 +281,6 @@ politicalParties[Independent1912EDParty.getID()] = Independent1912EDParty
 
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
+var dropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
 var selectablePoliticalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
 var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]
