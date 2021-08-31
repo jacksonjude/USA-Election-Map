@@ -172,7 +172,16 @@ var Independent1968GWParty = new PoliticalParty(
   ["Wallace"],
   "Ind",
   "Wallace",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  defaultMarginNames
+)
+
+var Independent1960HBParty = new PoliticalParty(
+  "IND1960HB",
+  ["Byrd"],
+  "Ind",
+  "Byrd",
+  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
   defaultMarginNames
 )
 
@@ -181,7 +190,7 @@ var Independent1948SMParty = new PoliticalParty(
   ["Thurmond"],
   "Ind",
   "Thurmond",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
   defaultMarginNames
 )
 
@@ -190,7 +199,7 @@ var Independent1948HWParty = new PoliticalParty(
   ["Wallace"],
   "Ind",
   "Wallace",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
   defaultMarginNames
 )
 
@@ -199,7 +208,7 @@ var Independent1932NTParty = new PoliticalParty(
   ["Thomas"],
   "Ind",
   "Thomas",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -208,7 +217,7 @@ var Independent1924RLParty = new PoliticalParty(
   ["La Follette"],
   "Ind",
   "La Follette",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
   defaultMarginNames
 )
 
@@ -217,7 +226,7 @@ var Independent1920EDParty = new PoliticalParty(
   ["Debs"],
   "Ind",
   "Debs",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -226,7 +235,7 @@ var Independent1916ABParty = new PoliticalParty(
   ["Benson"],
   "Ind",
   "Benson",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -235,7 +244,7 @@ var Independent1912TRParty = new PoliticalParty(
   ["Roosevelt"],
   "Ind",
   "Roosevelt",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
   defaultMarginNames
 )
 
@@ -244,7 +253,7 @@ var Independent1912EDParty = new PoliticalParty(
   ["Debs"],
   "Ind",
   "Debs",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -270,6 +279,7 @@ politicalParties[Independent2016EMParty.getID()] = Independent2016EMParty
 politicalParties[Independent1980JAParty.getID()] = Independent1980JAParty
 politicalParties[Independent1976EMParty.getID()] = Independent1976EMParty
 politicalParties[Independent1968GWParty.getID()] = Independent1968GWParty
+politicalParties[Independent1960HBParty.getID()] = Independent1960HBParty
 politicalParties[Independent1948SMParty.getID()] = Independent1948SMParty
 politicalParties[Independent1948HWParty.getID()] = Independent1948HWParty
 politicalParties[Independent1932NTParty.getID()] = Independent1932NTParty

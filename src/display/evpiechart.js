@@ -4,7 +4,7 @@ var regionMarginStrings = []
 const kClockwiseDirection = 0
 const kCounterclockwiseDirection = 1
 
-const partyOrdering = [
+var partyOrdering = [
   {partyID: GreenParty.getID(), direction: kClockwiseDirection},
   {partyID: DemocraticParty.getID(), direction: kClockwiseDirection},
   {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
@@ -87,8 +87,10 @@ function setupEVPieChart()
   })
 }
 
-function setupEVPieChartDatasets()
+function setupEVPieChartDatasets(partyOrderingArg)
 {
+  var fullPartyOrdering = partyOrderingArg || partyOrdering
+
   var marginSectionData = []
   var marginSectionBackgroundColors = []
   var marginSectionLabels = []
@@ -97,14 +99,14 @@ function setupEVPieChartDatasets()
   var partySectionBackgroundColors = []
   var partySectionLabels = []
 
-  for (var partyNum in partyOrdering)
+  for (var partyNum in fullPartyOrdering)
   {
-    var partyID = partyOrdering[partyNum].partyID
+    var partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
       var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-      if (partyOrdering[partyNum].direction == kClockwiseDirection) {}
-      else if (partyOrdering[partyNum].direction == kCounterclockwiseDirection)
+      if (fullPartyOrdering[partyNum].direction == kClockwiseDirection) {}
+      else if (fullPartyOrdering[partyNum].direction == kCounterclockwiseDirection)
       {
         marginNames.reverse()
       }
@@ -179,12 +181,24 @@ function updateEVPieChart()
     }
   }
 
+  var fullPartyOrdering = cloneObject(partyOrdering)
+
   for (var regionID in displayRegionDataArray)
   {
     var regionParty = displayRegionDataArray[regionID].partyID
-    if (regionParty != null && !partyOrdering.some((orderingData) => orderingData.partyID == regionParty))
+    if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
     {
-      regionParty = IndependentGenericParty.getID()
+      var genericOrderingIndex = fullPartyOrdering.findIndex(partyOrderData => partyOrderData.partyID == IndependentGenericParty.getID())
+      fullPartyOrdering.splice(genericOrderingIndex, 0, {partyID: regionParty, direction: kClockwiseDirection})
+
+      marginTotalsData[regionParty] = {}
+      regionMarginStringsData[regionParty] = {}
+
+      for (let marginKey in politicalParties[regionParty].getMarginNames())
+      {
+        marginTotalsData[regionParty][marginKey] = 0
+        regionMarginStringsData[regionParty][marginKey] = []
+      }
     }
 
     var regionMargin = displayRegionDataArray[regionID].margin
@@ -219,14 +233,14 @@ function updateEVPieChart()
   regionMarginStrings = []
   var marginTotalsArray = []
   var safeMarginTotalsArray = []
-  for (partyNum in partyOrdering)
+  for (partyNum in fullPartyOrdering)
   {
-    var partyID = partyOrdering[partyNum].partyID
+    var partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
       var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-      if (partyOrdering[partyNum].direction == kClockwiseDirection) {}
-      else if (partyOrdering[partyNum].direction == kCounterclockwiseDirection)
+      if (fullPartyOrdering[partyNum].direction == kClockwiseDirection) {}
+      else if (fullPartyOrdering[partyNum].direction == kCounterclockwiseDirection)
       {
         marginNames.reverse()
       }
@@ -262,12 +276,12 @@ function updateEVPieChart()
 
   var partyTotals = getPartyTotals()
   var sortedPartyTotalsArray = []
-  for (partyNum in partyOrdering)
+  for (partyNum in fullPartyOrdering)
   {
-    sortedPartyTotalsArray.push(partyTotals[partyOrdering[partyNum].partyID])
-    delete partyTotals[partyOrdering[partyNum].partyID]
+    sortedPartyTotalsArray.push(partyTotals[fullPartyOrdering[partyNum].partyID] || 0)
+    delete partyTotals[fullPartyOrdering[partyNum].partyID]
   }
-  var genericPartyOrderingIndex = partyOrdering.findIndex((orderingData) => orderingData.partyID == IndependentGenericParty.getID())
+  var genericPartyOrderingIndex = fullPartyOrdering.findIndex((orderingData) => orderingData.partyID == IndependentGenericParty.getID())
   for (partyTotalNum in partyTotals)
   {
     sortedPartyTotalsArray[genericPartyOrderingIndex] += partyTotals[partyTotalNum]
@@ -285,9 +299,13 @@ function updateEVPieChart()
     evPieChart.data.datasets[0].data = marginTotalsArray
   }
 
-  var preloadedData = setupEVPieChartDatasets()
+  var preloadedData = setupEVPieChartDatasets(fullPartyOrdering)
   evPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
+  evPieChart.data.datasets[1].labels = preloadedData.datasets[1].labels
   evPieChart.data.datasets[0].backgroundColor = preloadedData.datasets[0].backgroundColor
+  evPieChart.data.datasets[0].labels = preloadedData.datasets[0].labels
 
   evPieChart.update()
+
+  partyOrdering = fullPartyOrdering // To avoid transitions of colors between dataslices on every date load
 }
