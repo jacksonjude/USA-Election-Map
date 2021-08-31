@@ -461,17 +461,15 @@ function createSettingsDropdownItems()
     switch (settingLayout.type)
     {
       case MapSettingType.optionCycle:
-      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14px; min-height: 25px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, true)'></a>")
-      cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), false)
+      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14px; min-height: 25px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, 1)' oncontextmenu='cycleMapSetting(\"" + settingLayout.id + "\", this, -1); return false'></a>")
+      cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), 0)
       break
     }
   }
 }
 
-function cycleMapSetting(settingID, settingDiv, shouldIncrementArg)
+function cycleMapSetting(settingID, settingDiv, incrementAmount)
 {
-  var shouldIncrement = shouldIncrementArg == null ? false : shouldIncrementArg
-
   var currentMapSettings = currentMapType.getMapSettings()
 
   var settingOptions = currentMapType.getMapSettingOptions(settingID)
@@ -487,10 +485,14 @@ function cycleMapSetting(settingID, settingDiv, shouldIncrementArg)
     }
   }
 
-  optionIndex += shouldIncrement ? 1 : 0
+  optionIndex += incrementAmount == null ? 1 : incrementAmount
   if (optionIndex >= settingOptions.length)
   {
     optionIndex = 0
+  }
+  else if (optionIndex < 0)
+  {
+    optionIndex = settingOptions.length-1
   }
 
   var newValueID = settingOptions[optionIndex].id
@@ -1504,7 +1506,7 @@ function leftClickRegion(div)
 
     if (regionData.disabled)
     {
-      regionData.partyID = selectedParty.getID() || TossupParty.getID()
+      regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = 101
     }
@@ -1563,9 +1565,9 @@ function rightClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (selectedParty != null && regionData.disabled)
+    if (regionData.disabled)
     {
-      regionData.partyID = selectedParty.getID()
+      regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = 101
     }
@@ -1620,7 +1622,7 @@ function altClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    regionData.partyID = selectedParty.getID()
+    regionData.partyID = (selectedParty || TossupParty).getID()
 
     if (regionData.disabled)
     {
@@ -1793,6 +1795,10 @@ function getCurrentDecade()
     {
       dateForDecade = new Date(compareDate)
     }
+  }
+  else if (currentMapSource.getID() == currentCustomMapSource.getID() && currentMapType.getID() == USAPresidentialMapType.getID() && currentMapType.getMapSettingValue("evDecadeOverrideToggle"))
+  {
+    return currentMapType.getMapSettingValue("evDecadeOverrideSelection")
   }
   else if (currentSliderDate != null)
   {
