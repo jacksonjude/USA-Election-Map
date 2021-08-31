@@ -7,8 +7,13 @@ const kCounterclockwiseDirection = 1
 var partyOrdering = [
   {partyID: GreenParty.getID(), direction: kClockwiseDirection},
   {partyID: DemocraticParty.getID(), direction: kClockwiseDirection},
+  {partyID: Independent1948SMParty.getID(), direction: kClockwiseDirection},
+  {partyID: Independent1960HBParty.getID(), direction: kClockwiseDirection},
+  {partyID: Independent1968GWParty.getID(), direction: kClockwiseDirection},
   {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
   {partyID: TossupParty.getID(), direction: kClockwiseDirection},
+  {partyID: Independent1912TRParty.getID(), direction: kCounterclockwiseDirection},
+  {partyID: Independent1924RLParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: RepublicanParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection}
 ]
