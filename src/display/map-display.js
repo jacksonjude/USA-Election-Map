@@ -134,6 +134,10 @@ async function reloadForNewMapType(initialLoad)
   createMapTypeDropdownItems()
 
   currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
+  if (currentMapSource.getID() == NullMapSource.getID())
+  {
+    $("#sourceToggleButton").addClass('active')
+  }
 
   await loadMapSVGFile()
 
@@ -405,6 +409,11 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
+
+    if (selectedDropdownDivID != "mapSourcesDropdownContent")
+    {
+      $("#sourceToggleButton").removeClass('active')
+    }
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
