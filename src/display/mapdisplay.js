@@ -471,7 +471,7 @@ function createSettingsDropdownItems()
 function cycleMapSetting(settingID, settingDiv, incrementAmount)
 {
   var currentMapSettings = currentMapType.getMapSettings()
-
+  var settingsLayout = currentMapType.getMapSettingLayout(settingID)
   var settingOptions = currentMapType.getMapSettingOptions(settingID)
   var currentValueID = currentMapSettings[settingID]
 
@@ -497,12 +497,30 @@ function cycleMapSetting(settingID, settingDiv, incrementAmount)
 
   var newValueID = settingOptions[optionIndex].id
   var newValueTitle = settingOptions[optionIndex].title
-  $(settingDiv).html(currentMapType.getMapSettingLayout(settingID).title + "<span style='float: right'>" + newValueTitle + "</span>")
+  $(settingDiv).html(settingsLayout.title + "<span style='float: right'>" + newValueTitle + "</span>")
+
+  if (settingsLayout.shouldShowActive != null)
+  {
+    var showActive = settingsLayout.shouldShowActive(settingOptions[optionIndex].value)
+    if (showActive)
+    {
+      $(settingDiv).addClass("active")
+      $("#settingsButton").addClass("active")
+    }
+    else
+    {
+      $(settingDiv).removeClass("active")
+      if ($(settingDiv).parent().find(".active").length == 0)
+      {
+        $("#settingsButton").removeClass("active")
+      }
+    }
+  }
 
   currentMapSettings[settingID] = newValueID
   currentMapType.setMapSettings(currentMapSettings)
 
-  switch (currentMapType.getMapSettingLayout(settingID).reloadType)
+  switch (settingsLayout.reloadType)
   {
     case MapSettingReloadType.display:
     if (showingDataMap)

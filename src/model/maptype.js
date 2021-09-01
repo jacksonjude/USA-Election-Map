@@ -304,6 +304,9 @@ var USAPresidentialMapType = new MapType(
         {id: "enabled", title: "Enabled", value: true},
         {id: "disabled", title: "Disabled", value: false}
       ],
+      shouldShowActive: (value) => {
+        return value
+      },
     defaultValue: "disabled", reloadType: MapSettingReloadType.display},
     {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
       [
@@ -384,24 +387,36 @@ var USASenateMapType = new MapType(
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return value
+      },
     defaultValue: "hide", reloadType: MapSettingReloadType.display},
     {id: "pieCurrentSeats", title: "Pie Current Seats", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return !value
+      },
     defaultValue: "show", reloadType: MapSettingReloadType.display},
     {id: "seatArrangement", title: "Seat Arrangement", type: MapSettingType.optionCycle, options:
       [
         {id: "election-type", title: "Election", value: 0},
         {id: "seat-class", title: "Class", value: 1}
       ],
+      shouldShowActive: (value) => {
+        return value == 1
+      },
     defaultValue: "election-type", reloadType: MapSettingReloadType.data},
     {id: "offYear", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return value
+      },
     defaultValue: "hide", reloadType: MapSettingReloadType.data},
     {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
       [
@@ -478,18 +493,27 @@ var USAGovernorMapType = new MapType(
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return value
+      },
     defaultValue: "hide", reloadType: MapSettingReloadType.display},
     {id: "pieCurrentSeats", title: "Pie Current Seats", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return !value
+      },
     defaultValue: "show", reloadType: MapSettingReloadType.display},
     {id: "offYear", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
       ],
+      shouldShowActive: (value) => {
+        return value
+      },
     defaultValue: "hide", reloadType: MapSettingReloadType.data},
     {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
       [
