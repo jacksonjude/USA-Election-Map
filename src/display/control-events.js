@@ -1,3 +1,5 @@
+const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
+
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {}
 

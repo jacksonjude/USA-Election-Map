@@ -19,12 +19,12 @@ var partyOrdering = [
 ]
 
 var evPieChartCutoutPercent = 55
-const minEVPieChartSliceLabelPercent = 0.04
-const minEVPieChartSliceLabelBrightness = 0.7
+const minTotalsPieChartSliceLabelPercent = 0.04
+const minTotalsPieChartSliceLabelBrightness = 0.7
 
-function setupEVPieChart()
+function setupTotalsPieChart()
 {
-  var data = setupEVPieChartDatasets()
+  var data = setupTotalsPieChartDatasets()
 
   var options = {
     responsive: false,
@@ -60,7 +60,7 @@ function setupEVPieChart()
         },
         labelTextColor: function(tooltipItem, chart) {
           var color = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor[tooltipItem.index]
-          return adjustBrightness(color, minEVPieChartSliceLabelBrightness)
+          return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
         }
       }
     },
@@ -73,7 +73,7 @@ function setupEVPieChart()
           {
             evSum += context.dataset.data[dataNum]
           }
-          return (value == 0 || value < Math.floor(minEVPieChartSliceLabelPercent*evSum)) ? "rgb(0, 0, 0, 0)" : "#fff"
+          return (value == 0 || value < Math.floor(minTotalsPieChartSliceLabelPercent*evSum)) ? "rgb(0, 0, 0, 0)" : "#fff"
         },
         font: {
           family: "Bree5erif-Mono",
@@ -92,7 +92,7 @@ function setupEVPieChart()
   })
 }
 
-function setupEVPieChartDatasets(partyOrderingArg)
+function setupTotalsPieChartDatasets(partyOrderingArg)
 {
   var fullPartyOrdering = partyOrderingArg || partyOrdering
 
@@ -159,7 +159,7 @@ function setupEVPieChartDatasets(partyOrderingArg)
   return data
 }
 
-function updateEVPieChart()
+function updateTotalsPieChart()
 {
   var marginTotalsData = {}
   var regionMarginStringsData = {}
@@ -304,7 +304,7 @@ function updateEVPieChart()
     evPieChart.data.datasets[0].data = marginTotalsArray
   }
 
-  var preloadedData = setupEVPieChartDatasets(fullPartyOrdering)
+  var preloadedData = setupTotalsPieChartDatasets(fullPartyOrdering)
   evPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
   evPieChart.data.datasets[1].labels = preloadedData.datasets[1].labels
   evPieChart.data.datasets[0].backgroundColor = preloadedData.datasets[0].backgroundColor

@@ -1,3 +1,8 @@
+const kCSVFileType = "text/csv"
+const kJSONFileType = "application/json"
+const kPNGFileType = "image/png"
+const kJPEGFileType = "image/jpeg"
+
 $("html").on('dragenter', function(e) {
   e.stopPropagation()
   e.preventDefault()

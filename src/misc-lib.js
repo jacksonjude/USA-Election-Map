@@ -210,3 +210,23 @@ function moveLastToFirst(array, times)
     array.unshift(lastElement)
   }
 }
+
+function getTodayString(delimiter, includeTime)
+{
+  var currentTimeDate = new Date()
+  return getMDYDateString(currentTimeDate, delimiter, includeTime)
+}
+
+function getMDYDateString(date, delimiter, includeTime)
+{
+  delimiter = delimiter || "/"
+
+  var dateString = (date.getMonth()+1) + delimiter + date.getDate() + delimiter + date.getFullYear()
+
+  if (includeTime)
+  {
+    dateString += delimiter + zeroPadding(date.getHours()) + delimiter + zeroPadding(date.getMinutes())
+  }
+
+  return dateString
+}
