@@ -98,7 +98,7 @@ function csvFileLoaded(e)
 function imageFileLoaded(e)
 {
   var backgroundURL = "url('" + e.target.result + "')"
-	$("#evPieChart").css("background-image", backgroundURL)
+	$("#totalsPieChart").css("background-image", backgroundURL)
 }
 
 function downloadMapFile(mapSourceToDownload, fileType)
@@ -108,7 +108,7 @@ function downloadMapFile(mapSourceToDownload, fileType)
   var downloadLinkDiv = $(document.createElement("a"))
   downloadLinkDiv.hide()
 
-  var pieChartIconURL = $("#evPieChart").css("background-image")
+  var pieChartIconURL = $("#totalsPieChart").css("background-image")
   if (pieChartIconURL)
   {
     pieChartIconURL = pieChartIconURL.replace("url(\"", "").replace("\")", "")

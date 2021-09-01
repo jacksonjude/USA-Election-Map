@@ -141,7 +141,7 @@ async function reloadForNewMapType(initialLoad)
 
   await loadMapSVGFile()
 
-  $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
+  $("#totalsPieChartContainer").html("<canvas id='totalsPieChart'></canvas>")
   $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
@@ -251,11 +251,11 @@ function resizeElements(initilizedPieChart)
   setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
   setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
 
-  $("#evPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
-  $("#evPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
-  $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
-  $("#evPieChart").css("background-position", "center")
-  $("#evPieChart").css("background-repeat", "no-repeat")
+  $("#totalsPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
+  $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  $("#totalsPieChart").css("background-size", $("#totalsPieChart").width()*totalsPieChartCutoutPercent/100.0*0.5)
+  $("#totalsPieChart").css("background-position", "center")
+  $("#totalsPieChart").css("background-repeat", "no-repeat")
 
   // const creditboxh3DefaultSize = 23
   // const creditboxh5DefaultSize = 17
@@ -271,7 +271,7 @@ function resizeElements(initilizedPieChart)
 
   const defaultMapZoom = 120.634/100
 
-  $("#infoboxcontainers").css('min-width', $("#evPieChart").width())
+  $("#infoboxcontainers").css('min-width', $("#totalsPieChart").width())
 
   $("#creditbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
@@ -448,15 +448,15 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
-    $("#evPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
+    $("#totalsPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
 
     if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
     {
-      $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
+      $("#totalsPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
     }
     else
     {
-      $("#evPieChart").css("background-image", "")
+      $("#totalsPieChart").css("background-image", "")
     }
 
     resolve()
@@ -752,7 +752,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
 
-  $("#evPieChart").css("background-image", "")
+  $("#totalsPieChart").css("background-image", "")
 
   showingDataMap = false
 }
@@ -764,14 +764,14 @@ function toggleHelpBox(helpButtonDiv)
   {
     $("#helpboxcontainer").show()
     $("#toggleHelpBoxButton").addClass('active')
-    $("#evPieChartContainer").hide()
+    $("#totalsPieChartContainer").hide()
     $("#creditboxcontainer").hide()
   }
   else
   {
     $("#helpboxcontainer").hide()
     $("#toggleHelpBoxButton").removeClass('active')
-    $("#evPieChartContainer").show()
+    $("#totalsPieChartContainer").show()
     $("#creditboxcontainer").show()
   }
 }

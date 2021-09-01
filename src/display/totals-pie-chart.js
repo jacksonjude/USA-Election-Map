@@ -1,4 +1,4 @@
-var evPieChart
+var totalsPieChart
 var regionMarginStrings = []
 
 const kClockwiseDirection = 0
@@ -18,7 +18,7 @@ var partyOrdering = [
   {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection}
 ]
 
-var evPieChartCutoutPercent = 55
+var totalsPieChartCutoutPercent = 55
 const minTotalsPieChartSliceLabelPercent = 0.04
 const minTotalsPieChartSliceLabelBrightness = 0.7
 
@@ -28,7 +28,7 @@ function setupTotalsPieChart()
 
   var options = {
     responsive: false,
-    cutoutPercentage: evPieChartCutoutPercent,
+    cutoutPercentage: totalsPieChartCutoutPercent,
     rotation: 0.5*Math.PI,
     elements: {
       arc: {
@@ -84,8 +84,8 @@ function setupTotalsPieChart()
     }
   }
 
-  var ctx = document.getElementById('evPieChart').getContext('2d')
-  evPieChart = new Chart(ctx, {
+  var ctx = document.getElementById('totalsPieChart').getContext('2d')
+  totalsPieChart = new Chart(ctx, {
     type: 'doughnut',
     data: data,
     options: options
@@ -291,26 +291,26 @@ function updateTotalsPieChart()
   {
     sortedPartyTotalsArray[genericPartyOrderingIndex] += partyTotals[partyTotalNum]
   }
-  evPieChart.data.datasets[1].data = sortedPartyTotalsArray
+  totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
   if (safeMarginTotalsArray.toString() == sortedPartyTotalsArray.toString())
   {
-    evPieChart.data.datasets[0].hidden = true
-    evPieChart.data.datasets[0].data = []
+    totalsPieChart.data.datasets[0].hidden = true
+    totalsPieChart.data.datasets[0].data = []
   }
   else
   {
-    evPieChart.data.datasets[0].hidden = false
-    evPieChart.data.datasets[0].data = marginTotalsArray
+    totalsPieChart.data.datasets[0].hidden = false
+    totalsPieChart.data.datasets[0].data = marginTotalsArray
   }
 
   var preloadedData = setupTotalsPieChartDatasets(fullPartyOrdering)
-  evPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
-  evPieChart.data.datasets[1].labels = preloadedData.datasets[1].labels
-  evPieChart.data.datasets[0].backgroundColor = preloadedData.datasets[0].backgroundColor
-  evPieChart.data.datasets[0].labels = preloadedData.datasets[0].labels
+  totalsPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
+  totalsPieChart.data.datasets[1].labels = preloadedData.datasets[1].labels
+  totalsPieChart.data.datasets[0].backgroundColor = preloadedData.datasets[0].backgroundColor
+  totalsPieChart.data.datasets[0].labels = preloadedData.datasets[0].labels
 
-  evPieChart.update()
+  totalsPieChart.update()
 
   partyOrdering = fullPartyOrdering // To avoid transitions of colors between dataslices on every date load
 }
