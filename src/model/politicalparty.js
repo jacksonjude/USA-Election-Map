@@ -136,7 +136,7 @@ var IndependentRNParty = new PoliticalParty(
   ["Nader"],
   "Ind",
   "Nader",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
   defaultMarginNames
 )
 
@@ -145,7 +145,7 @@ var Independent2016EMParty = new PoliticalParty(
   ["McMullin"],
   "Ind",
   "McMullin",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
   defaultMarginNames
 )
 
@@ -154,7 +154,7 @@ var Independent1980JAParty = new PoliticalParty(
   ["Anderson"],
   "Ind",
   "Anderson",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
   defaultMarginNames
 )
 
@@ -163,7 +163,7 @@ var Independent1976EMParty = new PoliticalParty(
   ["McCarthy"],
   "Ind",
   "McCarthy",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
   defaultMarginNames
 )
 
@@ -208,7 +208,7 @@ var Independent1932NTParty = new PoliticalParty(
   ["Thomas"],
   "Ind",
   "Thomas",
-  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -226,7 +226,7 @@ var Independent1920EDParty = new PoliticalParty(
   ["Debs"],
   "Ind",
   "Debs",
-  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -235,7 +235,7 @@ var Independent1916ABParty = new PoliticalParty(
   ["Benson"],
   "Ind",
   "Benson",
-  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
@@ -253,7 +253,7 @@ var Independent1912EDParty = new PoliticalParty(
   ["Debs"],
   "Ind",
   "Debs",
-  {current: "#461C81", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   defaultMarginNames
 )
 
