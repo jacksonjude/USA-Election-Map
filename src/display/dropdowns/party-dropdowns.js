@@ -43,7 +43,7 @@ function updatePartyColor(partyID, margin)
 
 function updatePartyDropdownVisibility()
 {
-  if (currentMapState != kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  if (currentMapState != kEditing)
   {
     $(".partyDropdownContainer").each(function() {
       $(this).css("display", "block")
