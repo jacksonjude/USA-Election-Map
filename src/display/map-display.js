@@ -417,25 +417,6 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
-    var shouldReloadSVG = false
-    var currentSVGPath = currentMapType.getSVGPath()
-    var newOverrideSVGPath = currentMapSource.getOverrideSVGPath()
-
-    if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
-    {
-      currentMapType.setOverrideSVGPath(newOverrideSVGPath)
-      shouldReloadSVG = true
-    }
-    else if (newOverrideSVGPath == null && currentSVGPath != null)
-    {
-      shouldReloadSVG = currentMapType.resetOverrideSVGPath()
-    }
-
-    if (shouldReloadSVG)
-    {
-      await loadMapSVGFile()
-    }
-
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
     var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
 
@@ -444,7 +425,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    displayDataMap()
+    await displayDataMap()
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
@@ -535,21 +516,9 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
-function displayDataMap(dateIndex)
+async function displayDataMap(dateIndex)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
-
-  displayRegionDataArray = {}
-  populateRegionsArray()
-
-  $('#outlines').children().each(function() {
-    var regionDataCallback = getRegionData($(this).attr('id'))
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
-    var regionData = regionDataCallback.regionData
-
-    updateRegionFillColors(regionIDsToFill, regionData, false)
-  })
-  displayPartyTotals(getPartyTotals())
 
   var mapDates = currentMapSource.getMapDates()
   var dateToDisplay
@@ -566,8 +535,35 @@ function displayDataMap(dateIndex)
 
   updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
-  updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
-  updateMapElectoralVoteText()
+  var shouldReloadSVG = false
+  var currentSVGPath = currentMapType.getSVGPath()
+  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(dateToDisplay)
+
+  if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
+  {
+    currentMapType.setOverrideSVGPath(newOverrideSVGPath)
+    shouldReloadSVG = true
+  }
+  else if (newOverrideSVGPath == null && currentSVGPath != null)
+  {
+    shouldReloadSVG = currentMapType.resetOverrideSVGPath()
+  }
+
+  if (shouldReloadSVG)
+  {
+    await loadMapSVGFile()
+  }
+
+  displayRegionDataArray = {}
+  populateRegionsArray()
+
+  $('#outlines').children().each(function() {
+    var regionDataCallback = getRegionData($(this).attr('id'))
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+    var regionData = regionDataCallback.regionData
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+  })
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
@@ -579,7 +575,6 @@ function displayDataMap(dateIndex)
 
     if (regionData == null)
     {
-      console.log(currentMapDataForDate[regionNum].region)
       continue
     }
 
@@ -596,9 +591,13 @@ function displayDataMap(dateIndex)
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
+
+  updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
   displayPartyTotals(getPartyTotals())
 
   updateTotalsPieChart()
+
+  updateMapElectoralVoteText()
 
   if (currentRegionID && currentMapState == kViewing)
   {
@@ -617,7 +616,7 @@ function updateMapElectoralVoteText()
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}).disabled, currentMapSource.getShouldSetDisabledWorthToZero())
     if (regionEV == undefined) { continue }
 
     if (regionChildren.length == 1)
@@ -843,7 +842,7 @@ function toggleEditing(stateToSet)
     $("#fillDropdownContainer").css('display', "block")
 
     var currentMapIsCustom = (currentMapSource.getID() == currentCustomMapSource.getID())
-    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
+    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
 
     if (!currentMapIsCustom)
     {
@@ -1178,7 +1177,7 @@ function getPartyTotals()
     {
       partyTotals[partyIDToSet] = 0
     }
-    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID)
+    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled, currentMapSource.getShouldSetDisabledWorthToZero())
   }
 
   return partyTotals

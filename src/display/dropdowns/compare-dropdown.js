@@ -36,7 +36,7 @@ async function loadCompareItemMapSource(compareItemNum)
   }
 
   $("#dataMapDateSlider").val(dateIndexToSet)
-  displayDataMap(dateIndexToSet)
+  await displayDataMap(dateIndexToSet)
   updateCompareMapSlidersVisibility(false)
 }
 

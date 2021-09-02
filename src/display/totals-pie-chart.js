@@ -5,6 +5,7 @@ const kClockwiseDirection = 0
 const kCounterclockwiseDirection = 1
 
 var partyOrdering = [
+  {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: kClockwiseDirection},
   {partyID: GreenParty.getID(), direction: kClockwiseDirection},
   {partyID: DemocraticParty.getID(), direction: kClockwiseDirection},
   {partyID: Independent1948SMParty.getID(), direction: kClockwiseDirection},
@@ -12,10 +13,12 @@ var partyOrdering = [
   {partyID: Independent1968GWParty.getID(), direction: kClockwiseDirection},
   {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
   {partyID: TossupParty.getID(), direction: kClockwiseDirection},
-  {partyID: Independent1912TRParty.getID(), direction: kCounterclockwiseDirection},
+  {partyID: Independent1860JohnBellParty.getID(), direction: kCounterclockwiseDirection},
+  {partyID: Independent1892JWParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: Independent1924RLParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: RepublicanParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection}
+  {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection},
+  {partyID: Independent1912TRParty.getID(), direction: kCounterclockwiseDirection}
 ]
 
 var totalsPieChartCutoutPercent = 55
@@ -208,7 +211,7 @@ function updateTotalsPieChart()
 
     var regionMargin = displayRegionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID)
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled, currentMapSource.getShouldSetDisabledWorthToZero())
     var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
 
     if (regionParty == null || regionParty == TossupParty.getID())

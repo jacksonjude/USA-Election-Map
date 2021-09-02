@@ -1,4 +1,1843 @@
 date,region,state_po,candidate,party,voteshare
+11/6/1860,Alabama,AL,Lincoln,republican,0
+11/6/1860,Alabama,AL,Douglas,democrat,15.11062782
+11/6/1860,Alabama,AL,Breckenridge,independent,54.00346197
+11/6/1860,Alabama,AL,Bell,independent,30.88591021
+11/6/1860,Alabama,AL,Other,independent,0
+11/6/1860,Arkansas,AK,Lincoln,republican,0
+11/6/1860,Arkansas,AK,Douglas,democrat,9.892524745
+11/6/1860,Arkansas,AK,Breckenridge,independent,53.0580588
+11/6/1860,Arkansas,AK,Bell,independent,37.04941646
+11/6/1860,Arkansas,AK,Other,independent,0
+11/6/1860,California,CA,Lincoln,republican,32.32410058
+11/6/1860,California,CA,Douglas,democrat,31.71155082
+11/6/1860,California,CA,Breckenridge,independent,28.3483689
+11/6/1860,California,CA,Bell,independent,7.603461657
+11/6/1860,California,CA,Other,independent,0.01251804685
+11/6/1860,Connecticut,CT,Lincoln,republican,53.85596631
+11/6/1860,Connecticut,CT,Douglas,democrat,21.50473714
+11/6/1860,Connecticut,CT,Breckenridge,independent,20.50653291
+11/6/1860,Connecticut,CT,Bell,independent,4.132763639
+11/6/1860,Connecticut,CT,Other,independent,0
+11/6/1860,Delaware,DE,Lincoln,republican,23.71703382
+11/6/1860,Delaware,DE,Douglas,democrat,6.614955011
+11/6/1860,Delaware,DE,Breckenridge,independent,45.54142104
+11/6/1860,Delaware,DE,Bell,independent,24.12659013
+11/6/1860,Delaware,DE,Other,independent,0
+11/6/1860,Florida,FL,Lincoln,republican,0
+11/6/1860,Florida,FL,Douglas,democrat,1.676565672
+11/6/1860,Florida,FL,Breckenridge,independent,62.22840388
+11/6/1860,Florida,FL,Bell,independent,36.09503045
+11/6/1860,Florida,FL,Other,independent,0
+11/6/1860,Georgia,GA,Lincoln,republican,0
+11/6/1860,Georgia,GA,Douglas,democrat,10.85206668
+11/6/1860,Georgia,GA,Breckenridge,independent,48.89192912
+11/6/1860,Georgia,GA,Bell,independent,40.2560042
+11/6/1860,Georgia,GA,Other,independent,0
+11/6/1860,Illinois,IL,Lincoln,republican,50.68832324
+11/6/1860,Illinois,IL,Douglas,democrat,47.16839483
+11/6/1860,Illinois,IL,Breckenridge,independent,0.6862623872
+11/6/1860,Illinois,IL,Bell,independent,1.446715303
+11/6/1860,Illinois,IL,Other,independent,0.01030424005
+11/6/1860,Indiana,IN,Lincoln,republican,51.08821465
+11/6/1860,Indiana,IN,Douglas,democrat,42.44422969
+11/6/1860,Indiana,IN,Breckenridge,independent,4.517845397
+11/6/1860,Indiana,IN,Bell,independent,1.949710263
+11/6/1860,Indiana,IN,Other,independent,0
+11/6/1860,Iowa,IA,Lincoln,republican,54.6081607
+11/6/1860,Iowa,IA,Douglas,democrat,43.21844973
+11/6/1860,Iowa,IA,Breckenridge,independent,0.8039521823
+11/6/1860,Iowa,IA,Bell,independent,1.369437389
+11/6/1860,Iowa,IA,Other,independent,0
+11/6/1860,Kentucky,KY,Lincoln,republican,0.9328664442
+11/6/1860,Kentucky,KY,Douglas,democrat,17.54322372
+11/6/1860,Kentucky,KY,Breckenridge,independent,36.34554358
+11/6/1860,Kentucky,KY,Bell,independent,45.17836625
+11/6/1860,Kentucky,KY,Other,independent,0
+11/6/1860,Louisiana,LA,Lincoln,republican,0
+11/6/1860,Louisiana,LA,Douglas,democrat,15.09602059
+11/6/1860,Louisiana,LA,Breckenridge,independent,44.90397941
+11/6/1860,Louisiana,LA,Bell,independent,40
+11/6/1860,Louisiana,LA,Other,independent,0
+11/6/1860,Maine,ME,Lincoln,republican,62.2396401
+11/6/1860,Maine,ME,Douglas,democrat,29.4228978
+11/6/1860,Maine,ME,Breckenridge,independent,6.310073525
+11/6/1860,Maine,ME,Bell,independent,2.027388573
+11/6/1860,Maine,ME,Other,independent,0
+11/6/1860,Maryland,MD,Lincoln,republican,2.47994638
+11/6/1860,Maryland,MD,Douglas,democrat,6.449590279
+11/6/1860,Maryland,MD,Breckenridge,independent,45.9254935
+11/6/1860,Maryland,MD,Bell,independent,45.14496984
+11/6/1860,Maryland,MD,Other,independent,0
+11/6/1860,Massachusetts,MA,Lincoln,republican,62.80110198
+11/6/1860,Massachusetts,MA,Douglas,democrat,20.23240481
+11/6/1860,Massachusetts,MA,Breckenridge,independent,3.62794038
+11/6/1860,Massachusetts,MA,Bell,independent,13.14547081
+11/6/1860,Massachusetts,MA,Other,independent,0.1930820128
+11/6/1860,Michigan,MI,Lincoln,republican,57.23103999
+11/6/1860,Michigan,MI,Douglas,democrat,41.98603679
+11/6/1860,Michigan,MI,Breckenridge,independent,0.5208704036
+11/6/1860,Michigan,MI,Bell,independent,0.2620528117
+11/6/1860,Michigan,MI,Other,independent,0
+11/6/1860,Minnesota,MN,Lincoln,republican,63.53168092
+11/6/1860,Minnesota,MN,Douglas,democrat,34.31499554
+11/6/1860,Minnesota,MN,Breckenridge,independent,2.153323545
+11/6/1860,Minnesota,MN,Bell,independent,0
+11/6/1860,Minnesota,MN,Other,independent,0
+11/6/1860,Mississippi,MS,Lincoln,republican,0
+11/6/1860,Mississippi,MS,Douglas,democrat,4.749981909
+11/6/1860,Mississippi,MS,Breckenridge,independent,59.0028222
+11/6/1860,Mississippi,MS,Bell,independent,36.24719589
+11/6/1860,Mississippi,MS,Other,independent,0
+11/6/1860,Missouri,MO,Lincoln,republican,10.28490665
+11/6/1860,Missouri,MO,Douglas,democrat,35.51578553
+11/6/1860,Missouri,MO,Breckenridge,independent,18.94263815
+11/6/1860,Missouri,MO,Bell,independent,35.25666967
+11/6/1860,Missouri,MO,Other,independent,0
+11/6/1860,New Hampshire,NH,Lincoln,republican,56.89610724
+11/6/1860,New Hampshire,NH,Douglas,democrat,39.25663073
+11/6/1860,New Hampshire,NH,Breckenridge,independent,3.222480021
+11/6/1860,New Hampshire,NH,Bell,independent,0.6247820087
+11/6/1860,New Hampshire,NH,Other,independent,0
+11/6/1860,New Jersey,NJ,Lincoln,republican,48.13430681
+11/6/1860,New Jersey,NJ,Douglas,democrat,51.86569319
+11/6/1860,New Jersey,NJ,Breckenridge,independent,0
+11/6/1860,New Jersey,NJ,Bell,independent,0
+11/6/1860,New Jersey,NJ,Other,independent,0
+11/6/1860,New York,NY,Lincoln,republican,53.71291968
+11/6/1860,New York,NY,Douglas,democrat,46.28708032
+11/6/1860,New York,NY,Breckenridge,independent,0
+11/6/1860,New York,NY,Bell,independent,0
+11/6/1860,New York,NY,Other,independent,0
+11/6/1860,North Carolina,NC,Lincoln,republican,0
+11/6/1860,North Carolina,NC,Douglas,democrat,2.830052113
+11/6/1860,North Carolina,NC,Breckenridge,independent,50.50665895
+11/6/1860,North Carolina,NC,Bell,independent,46.66328894
+11/6/1860,North Carolina,NC,Other,independent,0
+11/6/1860,Ohio,OH,Lincoln,republican,51.2424283
+11/6/1860,Ohio,OH,Douglas,democrat,43.298095
+11/6/1860,Ohio,OH,Breckenridge,independent,2.611224825
+11/6/1860,Ohio,OH,Bell,independent,2.816833078
+11/6/1860,Ohio,OH,Other,independent,0.03141878936
+11/6/1860,Oregon,OR,Lincoln,republican,36.20350925
+11/6/1860,Oregon,OR,Douglas,democrat,27.98590881
+11/6/1860,Oregon,OR,Breckenridge,independent,34.37436488
+11/6/1860,Oregon,OR,Bell,independent,1.436217058
+11/6/1860,Oregon,OR,Other,independent,0
+11/6/1860,Pennsylvania,PA,Lincoln,republican,56.25658527
+11/6/1860,Pennsylvania,PA,Douglas,democrat,3.518791374
+11/6/1860,Pennsylvania,PA,Breckenridge,independent,37.54307975
+11/6/1860,Pennsylvania,PA,Bell,independent,2.681543609
+11/6/1860,Pennsylvania,PA,Other,independent,0
+11/6/1860,Rhode Island,RI,Lincoln,republican,61.37035738
+11/6/1860,Rhode Island,RI,Douglas,democrat,38.62964262
+11/6/1860,Rhode Island,RI,Breckenridge,independent,0
+11/6/1860,Rhode Island,RI,Bell,independent,0
+11/6/1860,Rhode Island,RI,Other,independent,0
+11/6/1860,South Carolina,SC,Lincoln,republican,0
+11/6/1860,South Carolina,SC,Douglas,democrat,0
+11/6/1860,South Carolina,SC,Breckenridge,independent,100
+11/6/1860,South Carolina,SC,Bell,independent,0
+11/6/1860,South Carolina,SC,Other,independent,0
+11/6/1860,Tennessee,TN,Lincoln,republican,0
+11/6/1860,Tennessee,TN,Douglas,democrat,7.721106594
+11/6/1860,Tennessee,TN,Breckenridge,independent,44.55463841
+11/6/1860,Tennessee,TN,Bell,independent,47.72425499
+11/6/1860,Tennessee,TN,Other,independent,0
+11/6/1860,Texas,TX,Lincoln,republican,0
+11/6/1860,Texas,TX,Douglas,democrat,0
+11/6/1860,Texas,TX,Breckenridge,independent,75.48979138
+11/6/1860,Texas,TX,Bell,independent,24.51020862
+11/6/1860,Texas,TX,Other,independent,0
+11/6/1860,Vermont,VT,Lincoln,republican,75.86052147
+11/6/1860,Vermont,VT,Douglas,democrat,19.40717139
+11/6/1860,Vermont,VT,Breckenridge,independent,4.187048423
+11/6/1860,Vermont,VT,Bell,independent,0.4869182785
+11/6/1860,Vermont,VT,Other,independent,0.0583404389
+11/6/1860,Virginia,VA,Lincoln,republican,1.130678107
+11/6/1860,Virginia,VA,Douglas,democrat,9.705736079
+11/6/1860,Virginia,VA,Breckenridge,independent,44.53505581
+11/6/1860,Virginia,VA,Bell,independent,44.62853
+11/6/1860,Virginia,VA,Other,independent,0
+11/6/1860,Wisconsin,WI,Lincoln,republican,56.58516391
+11/6/1860,Wisconsin,WI,Douglas,democrat,42.72553439
+11/6/1860,Wisconsin,WI,Breckenridge,independent,0.5835080134
+11/6/1860,Wisconsin,WI,Bell,independent,0.1057936826
+11/6/1860,Wisconsin,WI,Other,independent,0
+11/8/1864,California,CA,Lincoln,republican,58.60137879
+11/8/1864,California,CA,McClellan,democrat,41.39862121
+11/8/1864,California,CA,Other,independent,0
+11/8/1864,Connecticut,CT,Lincoln,republican,51.38248583
+11/8/1864,Connecticut,CT,McClellan,democrat,48.61751417
+11/8/1864,Connecticut,CT,Other,independent,0
+11/8/1864,Delaware,DE,Lincoln,republican,48.19170311
+11/8/1864,Delaware,DE,McClellan,democrat,51.80829689
+11/8/1864,Delaware,DE,Other,independent,0
+11/8/1864,Illinois,IL,Lincoln,republican,54.42056536
+11/8/1864,Illinois,IL,McClellan,democrat,45.57943464
+11/8/1864,Illinois,IL,Other,independent,0
+11/8/1864,Indiana,IN,Lincoln,republican,53.59676471
+11/8/1864,Indiana,IN,McClellan,democrat,46.40323529
+11/8/1864,Indiana,IN,Other,independent,0
+11/8/1864,Iowa,IA,Lincoln,republican,64.11881905
+11/8/1864,Iowa,IA,McClellan,democrat,35.88118095
+11/8/1864,Iowa,IA,Other,independent,0
+11/8/1864,Kansas,KS,Lincoln,republican,79.18906395
+11/8/1864,Kansas,KS,McClellan,democrat,17.77571826
+11/8/1864,Kansas,KS,Other,independent,3.035217794
+11/8/1864,Kentucky,KY,Lincoln,republican,30.1743984
+11/8/1864,Kentucky,KY,McClellan,democrat,69.8256016
+11/8/1864,Kentucky,KY,Other,independent,0
+11/8/1864,Maine,ME,Lincoln,republican,59.06513236
+11/8/1864,Maine,ME,McClellan,democrat,40.93486764
+11/8/1864,Maine,ME,Other,independent,0
+11/8/1864,Maryland,MD,Lincoln,republican,55.0856061
+11/8/1864,Maryland,MD,McClellan,democrat,44.9143939
+11/8/1864,Maryland,MD,Other,independent,0
+11/8/1864,Massachusetts,MA,Lincoln,republican,72.22177902
+11/8/1864,Massachusetts,MA,McClellan,democrat,27.77651148
+11/8/1864,Massachusetts,MA,Other,independent,0.001709499117
+11/8/1864,Michigan,MI,Lincoln,republican,53.60146822
+11/8/1864,Michigan,MI,McClellan,democrat,46.39853178
+11/8/1864,Michigan,MI,Other,independent,0
+11/8/1864,Minnesota,MN,Lincoln,republican,59.0613361
+11/8/1864,Minnesota,MN,McClellan,democrat,40.9386639
+11/8/1864,Minnesota,MN,Other,independent,0
+11/8/1864,Missouri,MO,Lincoln,republican,69.7199701
+11/8/1864,Missouri,MO,McClellan,democrat,30.2800299
+11/8/1864,Missouri,MO,Other,independent,0
+11/8/1864,Nevada,NV,Lincoln,republican,59.84165652
+11/8/1864,Nevada,NV,McClellan,democrat,40.15834348
+11/8/1864,Nevada,NV,Other,independent,0
+11/8/1864,New Hampshire,NH,Lincoln,republican,52.55780554
+11/8/1864,New Hampshire,NH,McClellan,democrat,47.44219446
+11/8/1864,New Hampshire,NH,Other,independent,0
+11/8/1864,New Jersey,NJ,Lincoln,republican,47.16459413
+11/8/1864,New Jersey,NJ,McClellan,democrat,52.83540587
+11/8/1864,New Jersey,NJ,Other,independent,0
+11/8/1864,New York,NY,Lincoln,republican,50.46180416
+11/8/1864,New York,NY,McClellan,democrat,49.53819584
+11/8/1864,New York,NY,Other,independent,0
+11/8/1864,Ohio,OH,Lincoln,republican,56.37184273
+11/8/1864,Ohio,OH,McClellan,democrat,43.62815727
+11/8/1864,Ohio,OH,Other,independent,0
+11/8/1864,Oregon,OR,Lincoln,republican,53.9002453
+11/8/1864,Oregon,OR,McClellan,democrat,46.0997547
+11/8/1864,Oregon,OR,Other,independent,0
+11/8/1864,Pennsylvania,PA,Lincoln,republican,51.7526414
+11/8/1864,Pennsylvania,PA,McClellan,democrat,48.2473586
+11/8/1864,Pennsylvania,PA,Other,independent,0
+11/8/1864,Rhode Island,RI,Lincoln,republican,62.2414408
+11/8/1864,Rhode Island,RI,McClellan,democrat,37.7585592
+11/8/1864,Rhode Island,RI,Other,independent,0
+11/8/1864,Vermont,VT,Lincoln,republican,76.10060637
+11/8/1864,Vermont,VT,McClellan,democrat,23.89939363
+11/8/1864,Vermont,VT,Other,independent,0
+11/8/1864,West Virginia,WV,Lincoln,republican,68.23694699
+11/8/1864,West Virginia,WV,McClellan,democrat,31.76305301
+11/8/1864,West Virginia,WV,Other,independent,0
+11/8/1864,Wisconsin,WI,Lincoln,republican,55.88381031
+11/8/1864,Wisconsin,WI,McClellan,democrat,44.11618969
+11/8/1864,Wisconsin,WI,Other,independent,0
+11/3/1868,Alabama,AL,Grant,republican,51.25005014
+11/3/1868,Alabama,AL,Seymour,democrat,48.74593901
+11/3/1868,Alabama,AL,Other,independent,0.00401085605
+11/3/1868,Arkansas,AK,Grant,republican,53.68293275
+11/3/1868,Arkansas,AK,Seymour,democrat,46.31706725
+11/3/1868,Arkansas,AK,Other,independent,0
+11/3/1868,California,CA,Grant,republican,50.23928729
+11/3/1868,California,CA,Seymour,democrat,49.76071271
+11/3/1868,California,CA,Other,independent,0
+11/3/1868,Connecticut,CT,Grant,republican,51.49241625
+11/3/1868,Connecticut,CT,Seymour,democrat,48.50758375
+11/3/1868,Connecticut,CT,Other,independent,0
+11/3/1868,Delaware,DE,Grant,republican,40.99940768
+11/3/1868,Delaware,DE,Seymour,democrat,59.00059232
+11/3/1868,Delaware,DE,Other,independent,0
+11/3/1868,Florida,FL,Grant,republican,100,
+11/3/1868,Florida,FL,Seymour,democrat,0,
+11/3/1868,Florida,FL,Other,independent,0,
+11/3/1868,Georgia,GA,Grant,republican,35.73421935
+11/3/1868,Georgia,GA,Seymour,democrat,64.26578065
+11/3/1868,Georgia,GA,Other,independent,0
+11/3/1868,Illinois,IL,Grant,republican,55.69489564
+11/3/1868,Illinois,IL,Seymour,democrat,44.30510436
+11/3/1868,Illinois,IL,Other,independent,0
+11/3/1868,Indiana,IN,Grant,republican,51.39317443
+11/3/1868,Indiana,IN,Seymour,democrat,48.60682557
+11/3/1868,Indiana,IN,Other,independent,0
+11/3/1868,Iowa,IA,Grant,republican,61.92121951
+11/3/1868,Iowa,IA,Seymour,democrat,38.07878049
+11/3/1868,Iowa,IA,Other,independent,0
+11/3/1868,Kansas,KS,Grant,republican,68.82191153
+11/3/1868,Kansas,KS,Seymour,democrat,31.17121247
+11/3/1868,Kansas,KS,Other,independent,0.00687600275
+11/3/1868,Kentucky,KY,Grant,republican,25.45173845
+11/3/1868,Kentucky,KY,Seymour,democrat,74.54826155
+11/3/1868,Kentucky,KY,Other,independent,0
+11/3/1868,Louisiana,LA,Grant,republican,29.30970675
+11/3/1868,Louisiana,LA,Seymour,democrat,70.69029325
+11/3/1868,Louisiana,LA,Other,independent,0
+11/3/1868,Maine,ME,Grant,republican,62.4121386
+11/3/1868,Maine,ME,Seymour,democrat,37.5878614
+11/3/1868,Maine,ME,Other,independent,0
+11/3/1868,Maryland,MD,Grant,republican,32.80133628
+11/3/1868,Maryland,MD,Seymour,democrat,67.19866372
+11/3/1868,Maryland,MD,Other,independent,0
+11/3/1868,Massachusetts,MA,Grant,republican,69.75622481
+11/3/1868,Massachusetts,MA,Seymour,democrat,30.2304765
+11/3/1868,Massachusetts,MA,Other,independent,0.01329868854
+11/3/1868,Michigan,MI,Grant,republican,56.98076412
+11/3/1868,Michigan,MI,Seymour,democrat,43.01923588
+11/3/1868,Michigan,MI,Other,independent,0
+11/3/1868,Minnesota,MN,Grant,republican,60.8788883
+11/3/1868,Minnesota,MN,Seymour,democrat,39.1211117
+11/3/1868,Minnesota,MN,Other,independent,0
+11/3/1868,Missouri,MO,Grant,republican,56.96185929
+11/3/1868,Missouri,MO,Seymour,democrat,43.03814071
+11/3/1868,Missouri,MO,Other,independent,0
+11/3/1868,Nebraska,NE,Grant,republican,63.90687332
+11/3/1868,Nebraska,NE,Seymour,democrat,36.09312668
+11/3/1868,Nebraska,NE,Other,independent,0
+11/3/1868,Nevada,NV,Grant,republican,55.39408446
+11/3/1868,Nevada,NV,Seymour,democrat,44.60591554
+11/3/1868,Nevada,NV,Other,independent,0
+11/3/1868,New Hampshire,NH,Grant,republican,55.2207777
+11/3/1868,New Hampshire,NH,Seymour,democrat,44.76311783
+11/3/1868,New Hampshire,NH,Other,independent,0.01610447412
+11/3/1868,New Jersey,NJ,Grant,republican,49.12034426
+11/3/1868,New Jersey,NJ,Seymour,democrat,50.87965574
+11/3/1868,New Jersey,NJ,Other,independent,0
+11/3/1868,New York,NY,Grant,republican,49.41190038
+11/3/1868,New York,NY,Seymour,democrat,50.58809962
+11/3/1868,New York,NY,Other,independent,0
+11/3/1868,North Carolina,NC,Grant,republican,53.4105059
+11/3/1868,North Carolina,NC,Seymour,democrat,46.5894941
+11/3/1868,North Carolina,NC,Other,independent,0
+11/3/1868,Ohio,OH,Grant,republican,54.00414042
+11/3/1868,Ohio,OH,Seymour,democrat,45.99585958
+11/3/1868,Ohio,OH,Other,independent,0
+11/3/1868,Oregon,OR,Grant,republican,49.62872408
+11/3/1868,Oregon,OR,Seymour,democrat,50.37127592
+11/3/1868,Oregon,OR,Other,independent,0
+11/3/1868,Pennsylvania,PA,Grant,republican,52.20372692
+11/3/1868,Pennsylvania,PA,Seymour,democrat,47.79627308
+11/3/1868,Pennsylvania,PA,Other,independent,0
+11/3/1868,Rhode Island,RI,Grant,republican,66.49096771
+11/3/1868,Rhode Island,RI,Seymour,democrat,33.50903229
+11/3/1868,Rhode Island,RI,Other,independent,0
+11/3/1868,South Carolina,SC,Grant,republican,57.93393963
+11/3/1868,South Carolina,SC,Seymour,democrat,42.06606037
+11/3/1868,South Carolina,SC,Other,independent,0
+11/3/1868,Tennessee,TN,Grant,republican,68.42684003
+11/3/1868,Tennessee,TN,Seymour,democrat,31.57315997
+11/3/1868,Tennessee,TN,Other,independent,0
+11/3/1868,Vermont,VT,Grant,republican,78.57219099
+11/3/1868,Vermont,VT,Seymour,democrat,21.42780901
+11/3/1868,Vermont,VT,Other,independent,0
+11/3/1868,West Virginia,WV,Grant,republican,58.82889641
+11/3/1868,West Virginia,WV,Seymour,democrat,41.17110359
+11/3/1868,West Virginia,WV,Other,independent,0
+11/3/1868,Wisconsin,WI,Grant,republican,56.24912837
+11/3/1868,Wisconsin,WI,Seymour,democrat,43.75087163
+11/3/1868,Wisconsin,WI,Other,independent,0
+11/5/1872,Alabama,AL,Grant,republican,53.19003512
+11/5/1872,Alabama,AL,Greeley,democrat,46.80996488
+11/5/1872,Alabama,AL,Other,independent,0
+11/5/1872,Arkansas,AK,Grant,republican,52.17276166
+11/5/1872,Arkansas,AK,Greeley,democrat,47.82723834
+11/5/1872,Arkansas,AK,Other,independent,0
+11/5/1872,California,CA,Grant,republican,56.38356736
+11/5/1872,California,CA,Greeley,democrat,42.50874354
+11/5/1872,California,CA,Other,independent,1.107689095
+11/5/1872,Connecticut,CT,Grant,republican,52.40550365
+11/5/1872,Connecticut,CT,Greeley,democrat,47.59449635
+11/5/1872,Connecticut,CT,Other,independent,0
+11/5/1872,Delaware,DE,Grant,republican,50.99899184
+11/5/1872,Delaware,DE,Greeley,democrat,46.76473284
+11/5/1872,Delaware,DE,Other,independent,2.236275318
+11/5/1872,Florida,FL,Grant,republican,53.51913227
+11/5/1872,Florida,FL,Greeley,democrat,46.48086773
+11/5/1872,Florida,FL,Other,independent,0
+11/5/1872,Georgia,GA,Grant,republican,45.03045225
+11/5/1872,Georgia,GA,Greeley,democrat,54.96954775
+11/5/1872,Georgia,GA,Other,independent,0
+11/5/1872,Illinois,IL,Grant,republican,56.26798086
+11/5/1872,Illinois,IL,Greeley,democrat,42.99917901
+11/5/1872,Illinois,IL,Other,independent,0.7328401218
+11/5/1872,Indiana,IN,Grant,republican,53.00373581
+11/5/1872,Indiana,IN,Greeley,democrat,46.59278579
+11/5/1872,Indiana,IN,Other,independent,0.4034783995
+11/5/1872,Iowa,IA,Grant,republican,60.80743189
+11/5/1872,Iowa,IA,Greeley,democrat,32.90227162
+11/5/1872,Iowa,IA,Other,independent,6.29029649
+11/5/1872,Kansas,KS,Grant,republican,66.46470073
+11/5/1872,Kansas,KS,Greeley,democrat,32.80205349
+11/5/1872,Kansas,KS,Other,independent,0.7332457816
+11/5/1872,Kentucky,KY,Grant,republican,46.44152039
+11/5/1872,Kentucky,KY,Greeley,democrat,52.31642556
+11/5/1872,Kentucky,KY,Other,independent,1.242054046
+11/5/1872,Louisiana,LA,Grant,republican,55.68566811
+11/5/1872,Louisiana,LA,Greeley,democrat,44.31433189
+11/5/1872,Louisiana,LA,Other,independent,0
+11/5/1872,Maine,ME,Grant,republican,67.85678778
+11/5/1872,Maine,ME,Greeley,democrat,32.14321222
+11/5/1872,Maine,ME,Other,independent,0
+11/5/1872,Maryland,MD,Grant,republican,49.65525449
+11/5/1872,Maryland,MD,Greeley,democrat,50.34474551
+11/5/1872,Maryland,MD,Other,independent,0
+11/5/1872,Massachusetts,MA,Grant,republican,69.19642857
+11/5/1872,Massachusetts,MA,Greeley,democrat,30.69261241
+11/5/1872,Massachusetts,MA,Other,independent,0.1109590178
+11/5/1872,Michigan,MI,Grant,republican,62.65742476
+11/5/1872,Michigan,MI,Greeley,democrat,35.4704116
+11/5/1872,Michigan,MI,Other,independent,1.872163645
+11/5/1872,Minnesota,MN,Grant,republican,61.27212134
+11/5/1872,Minnesota,MN,Greeley,democrat,38.72787866
+11/5/1872,Minnesota,MN,Other,independent,0
+11/5/1872,Mississippi,MS,Grant,republican,63.47667565
+11/5/1872,Mississippi,MS,Greeley,democrat,36.52332435
+11/5/1872,Mississippi,MS,Other,independent,0
+11/5/1872,Missouri,MO,Grant,republican,43.65210449
+11/5/1872,Missouri,MO,Greeley,democrat,55.45834417
+11/5/1872,Missouri,MO,Other,independent,0.8895513424
+11/5/1872,Nebraska,NE,Grant,republican,70.68101188
+11/5/1872,Nebraska,NE,Greeley,democrat,29.31898812
+11/5/1872,Nebraska,NE,Other,independent,0
+11/5/1872,Nevada,NV,Grant,republican,57.43054133
+11/5/1872,Nevada,NV,Greeley,democrat,42.56945867
+11/5/1872,Nevada,NV,Other,independent,0
+11/5/1872,New Hampshire,NH,Grant,republican,53.94015035
+11/5/1872,New Hampshire,NH,Greeley,democrat,45.60560764
+11/5/1872,New Hampshire,NH,Other,independent,0.4542420109
+11/5/1872,New Jersey,NJ,Grant,republican,54.52079566
+11/5/1872,New Jersey,NJ,Greeley,democrat,45.47920434
+11/5/1872,New Jersey,NJ,Other,independent,0
+11/5/1872,New York,NY,Grant,republican,53.22794135
+11/5/1872,New York,NY,Greeley,democrat,46.77205865
+11/5/1872,New York,NY,Other,independent,0
+11/5/1872,North Carolina,NC,Grant,republican,57.38089039
+11/5/1872,North Carolina,NC,Greeley,democrat,42.4610839
+11/5/1872,North Carolina,NC,Other,independent,0.1580257079
+11/5/1872,Ohio,OH,Grant,republican,53.23627407
+11/5/1872,Ohio,OH,Greeley,democrat,46.1474097
+11/5/1872,Ohio,OH,Other,independent,0.6163162309
+11/5/1872,Oregon,OR,Grant,republican,58.6588574
+11/5/1872,Oregon,OR,Greeley,democrat,38.42755745
+11/5/1872,Oregon,OR,Other,independent,2.913585149
+11/5/1872,Pennsylvania,PA,Grant,republican,62.06507806
+11/5/1872,Pennsylvania,PA,Greeley,democrat,37.64518111
+11/5/1872,Pennsylvania,PA,Other,independent,0.2897408311
+11/5/1872,Rhode Island,RI,Grant,republican,71.94377172
+11/5/1872,Rhode Island,RI,Greeley,democrat,28.05622828
+11/5/1872,Rhode Island,RI,Other,independent,0
+11/5/1872,South Carolina,SC,Grant,republican,75.73440054
+11/5/1872,South Carolina,SC,Greeley,democrat,23.78053891
+11/5/1872,South Carolina,SC,Other,independent,0.485060554
+11/5/1872,Tennessee,TN,Grant,republican,47.83966132
+11/5/1872,Tennessee,TN,Greeley,democrat,52.16033868
+11/5/1872,Tennessee,TN,Other,independent,0
+11/5/1872,Texas,TX,Grant,republican,40.71221504
+11/5/1872,Texas,TX,Greeley,democrat,57.07497813
+11/5/1872,Texas,TX,Other,independent,2.212806834
+11/5/1872,Vermont,VT,Grant,republican,78.29369573
+11/5/1872,Vermont,VT,Greeley,democrat,20.62287656
+11/5/1872,Vermont,VT,Other,independent,1.083427709
+11/5/1872,Virginia,VA,Grant,republican,50.46734523
+11/5/1872,Virginia,VA,Greeley,democrat,49.4867572
+11/5/1872,Virginia,VA,Other,independent,0.04589756743
+11/5/1872,West Virginia,WV,Grant,republican,51.73931836
+11/5/1872,West Virginia,WV,Greeley,democrat,47.27616181
+11/5/1872,West Virginia,WV,Other,independent,0.9845198265
+11/5/1872,Wisconsin,WI,Grant,republican,54.59764437
+11/5/1872,Wisconsin,WI,Greeley,democrat,44.96866956
+11/5/1872,Wisconsin,WI,Other,independent,0.4336860716
+11/7/1876,Alabama,AL,Hayes,republican,40.01654057
+11/7/1876,Alabama,AL,Tildon,democrat,59.9822946
+11/7/1876,Alabama,AL,Other,independent,0.001164829149
+11/7/1876,Arkansas,AK,Hayes,republican,39.86652363
+11/7/1876,Arkansas,AK,Tildon,democrat,59.91582943
+11/7/1876,Arkansas,AK,Other,independent,0.2176469375
+11/7/1876,California,CA,Hayes,republican,50.87685513
+11/7/1876,California,CA,Tildon,democrat,49.08077851
+11/7/1876,California,CA,Other,independent,0.04236635341
+11/7/1876,Connecticut,CT,Hayes,republican,48.33461608
+11/7/1876,Connecticut,CT,Tildon,democrat,50.70414463
+11/7/1876,Connecticut,CT,Other,independent,0.9612392945
+11/7/1876,Colorado,CO,Hayes,republican,100
+11/7/1876,Colorado,CO,Tildon,democrat,0
+11/7/1876,Colorado,CO,Other,independent,0
+11/7/1876,Delaware,DE,Hayes,republican,44.55310156
+11/7/1876,Delaware,DE,Tildon,democrat,55.44689844
+11/7/1876,Delaware,DE,Other,independent,0
+11/7/1876,Florida,FL,Hayes,republican,50.98554814
+11/7/1876,Florida,FL,Tildon,democrat,49.01445186
+11/7/1876,Florida,FL,Other,independent,0
+11/7/1876,Georgia,GA,Hayes,republican,27.96668327
+11/7/1876,Georgia,GA,Tildon,democrat,72.03331673
+11/7/1876,Georgia,GA,Other,independent,0
+11/7/1876,Illinois,IL,Hayes,republican,50.20181261
+11/7/1876,Illinois,IL,Tildon,democrat,46.66156647
+11/7/1876,Illinois,IL,Other,independent,3.136620915
+11/7/1876,Indiana,IN,Hayes,republican,47.39252377
+11/7/1876,Indiana,IN,Tildon,democrat,48.64904274
+11/7/1876,Indiana,IN,Other,independent,3.958433487
+11/7/1876,Iowa,IA,Hayes,republican,58.49739482
+11/7/1876,Iowa,IA,Tildon,democrat,38.28249305
+11/7/1876,Iowa,IA,Other,independent,3.220112129
+11/7/1876,Kansas,KS,Hayes,republican,63.09633138
+11/7/1876,Kansas,KS,Tildon,democrat,30.53313355
+11/7/1876,Kansas,KS,Other,independent,6.370535067
+11/7/1876,Kentucky,KY,Hayes,republican,37.43601943
+11/7/1876,Kentucky,KY,Tildon,democrat,61.41367323
+11/7/1876,Kentucky,KY,Other,independent,1.150307337
+11/7/1876,Louisiana,LA,Hayes,republican,51.64823107
+11/7/1876,Louisiana,LA,Tildon,democrat,48.35176893
+11/7/1876,Louisiana,LA,Other,independent,0
+11/7/1876,Maine,ME,Hayes,republican,56.64488017
+11/7/1876,Maine,ME,Tildon,democrat,42.6476996
+11/7/1876,Maine,ME,Other,independent,0.707420223
+11/7/1876,Maryland,MD,Hayes,republican,43.95483607
+11/7/1876,Maryland,MD,Tildon,democrat,56.04516393
+11/7/1876,Maryland,MD,Other,independent,0
+11/7/1876,Massachusetts,MA,Hayes,republican,57.80140205
+11/7/1876,Massachusetts,MA,Tildon,democrat,41.89854403
+11/7/1876,Massachusetts,MA,Other,independent,0.300053925
+11/7/1876,Michigan,MI,Hayes,republican,52.4104255
+11/7/1876,Michigan,MI,Tildon,democrat,44.49207097
+11/7/1876,Michigan,MI,Other,independent,3.097503533
+11/7/1876,Minnesota,MN,Hayes,republican,58.79911344
+11/7/1876,Minnesota,MN,Tildon,democrat,39.15937941
+11/7/1876,Minnesota,MN,Other,independent,2.041507153
+11/7/1876,Mississippi,MS,Hayes,republican,31.92394523
+11/7/1876,Mississippi,MS,Tildon,democrat,68.07605477
+11/7/1876,Mississippi,MS,Other,independent,0
+11/7/1876,Missouri,MO,Hayes,republican,41.36419383
+11/7/1876,Missouri,MO,Tildon,democrat,57.63840164
+11/7/1876,Missouri,MO,Other,independent,0.9974045235
+11/7/1876,Nebraska,NE,Hayes,republican,64.69956211
+11/7/1876,Nebraska,NE,Tildon,democrat,35.30043789
+11/7/1876,Nebraska,NE,Other,independent,0
+11/7/1876,Nevada,NV,Hayes,republican,52.72967345
+11/7/1876,Nevada,NV,Tildon,democrat,47.27032655
+11/7/1876,Nevada,NV,Other,independent,0
+11/7/1876,New Hampshire,NH,Hayes,republican,51.8336432
+11/7/1876,New Hampshire,NH,Tildon,democrat,48.05280693
+11/7/1876,New Hampshire,NH,Other,independent,0.1135498684
+11/7/1876,New Jersey,NJ,Hayes,republican,47.01193953
+11/7/1876,New Jersey,NJ,Tildon,democrat,52.66379948
+11/7/1876,New Jersey,NJ,Other,independent,0.3242609892
+11/7/1876,New York,NY,Hayes,republican,48.17386064
+11/7/1876,New York,NY,Tildon,democrat,51.39807563
+11/7/1876,New York,NY,Other,independent,0.428063728
+11/7/1876,North Carolina,NC,Hayes,republican,46.37832338
+11/7/1876,North Carolina,NC,Tildon,democrat,53.62167662
+11/7/1876,North Carolina,NC,Other,independent,0
+11/7/1876,Ohio,OH,Hayes,republican,50.20853292
+11/7/1876,Ohio,OH,Tildon,democrat,49.0674092
+11/7/1876,Ohio,OH,Other,independent,0.7240578821
+11/7/1876,Oregon,OR,Hayes,republican,50.91529735
+11/7/1876,Oregon,OR,Tildon,democrat,47.37793247
+11/7/1876,Oregon,OR,Other,independent,1.706770188
+11/7/1876,Pennsylvania,PA,Hayes,republican,50.61759463
+11/7/1876,Pennsylvania,PA,Tildon,democrat,48.24866632
+11/7/1876,Pennsylvania,PA,Other,independent,1.133739046
+11/7/1876,Rhode Island,RI,Hayes,republican,59.28944305
+11/7/1876,Rhode Island,RI,Tildon,democrat,40.22984189
+11/7/1876,Rhode Island,RI,Other,independent,0.4807150637
+11/7/1876,South Carolina,SC,Hayes,republican,50.24331766
+11/7/1876,South Carolina,SC,Tildon,democrat,49.75668234
+11/7/1876,South Carolina,SC,Other,independent,0
+11/7/1876,Tennessee,TN,Hayes,republican,40.21046677
+11/7/1876,Tennessee,TN,Tildon,democrat,59.78953323
+11/7/1876,Tennessee,TN,Other,independent,0
+11/7/1876,Texas,TX,Hayes,republican,29.95553475
+11/7/1876,Texas,TX,Tildon,democrat,70.04446525
+11/7/1876,Texas,TX,Other,independent,0
+11/7/1876,Vermont,VT,Hayes,republican,68.3020154
+11/7/1876,Vermont,VT,Tildon,democrat,31.37576875
+11/7/1876,Vermont,VT,Other,independent,0.3222158536
+11/7/1876,Virginia,VA,Hayes,republican,40.42439735
+11/7/1876,Virginia,VA,Tildon,democrat,59.57560265
+11/7/1876,Virginia,VA,Other,independent,0
+11/7/1876,West Virginia,WV,Hayes,republican,42.14577458
+11/7/1876,West Virginia,WV,Tildon,democrat,56.74631449
+11/7/1876,West Virginia,WV,Other,independent,1.107910926
+11/7/1876,Wisconsin,WI,Hayes,republican,50.57489589
+11/7/1876,Wisconsin,WI,Tildon,democrat,48.18704628
+11/7/1876,Wisconsin,WI,Other,independent,1.238057836
+11/2/1880,Alabama,AL,Garfield,republican,37.09628576
+11/2/1880,Alabama,AL,Hancock,democrat,59.99262683
+11/2/1880,Alabama,AL,Weaver,independent,2.911087412
+11/2/1880,Alabama,AL,Other,independent,0
+11/2/1880,Arkansas,AR,Garfield,republican,38.6566084
+11/2/1880,Arkansas,AR,Hancock,democrat,56.12682329
+11/2/1880,Arkansas,AR,Weaver,independent,3.784842074
+11/2/1880,Arkansas,AR,Other,independent,1.431726237
+11/2/1880,California,CA,Garfield,republican,48.88745448
+11/2/1880,California,CA,Hancock,democrat,48.9751428
+11/2/1880,California,CA,Weaver,independent,2.058848604
+11/2/1880,California,CA,Other,independent,0.07855411709
+11/2/1880,Colorado,CO,Garfield,republican,51.26433347
+11/2/1880,Colorado,CO,Hancock,democrat,46.02958204
+11/2/1880,Colorado,CO,Weaver,independent,2.679938744
+11/2/1880,Colorado,CO,Other,independent,0.02614574385
+11/2/1880,Connecticut,CN,Garfield,republican,50.50603172
+11/2/1880,Connecticut,CN,Hancock,democrat,48.5029895
+11/2/1880,Connecticut,CN,Weaver,independent,0.6536243016
+11/2/1880,Connecticut,CN,Other,independent,0.3373544782
+11/2/1880,Delaware,DE,Garfield,republican,48.02770045
+11/2/1880,Delaware,DE,Hancock,democrat,51.53438794
+11/2/1880,Delaware,DE,Weaver,independent,0.437911603
+11/2/1880,Delaware,DE,Other,independent,0
+11/2/1880,Florida,FL,Garfield,republican,45.82509977
+11/2/1880,Florida,FL,Hancock,democrat,54.17490023
+11/2/1880,Florida,FL,Weaver,independent,0
+11/2/1880,Florida,FL,Other,independent,0
+11/2/1880,Georgia,GA,Garfield,republican,34.59488984
+11/2/1880,Georgia,GA,Hancock,democrat,65.40511016
+11/2/1880,Georgia,GA,Weaver,independent,0
+11/2/1880,Georgia,GA,Other,independent,0
+11/2/1880,Illinois,IL,Garfield,republican,51.10612963
+11/2/1880,Illinois,IL,Hancock,democrat,44.56351789
+11/2/1880,Illinois,IL,Weaver,independent,4.235543664
+11/2/1880,Illinois,IL,Other,independent,0.09480881561
+11/2/1880,Indiana,IN,Garfield,republican,49.32606996
+11/2/1880,Indiana,IN,Hancock,democrat,47.91489615
+11/2/1880,Indiana,IN,Weaver,independent,2.759033892
+11/2/1880,Indiana,IN,Other,independent,0
+11/2/1880,Iowa,IA,Garfield,republican,56.99480581
+11/2/1880,Iowa,IA,Hancock,democrat,32.80306693
+11/2/1880,Iowa,IA,Weaver,independent,10.01865695
+11/2/1880,Iowa,IA,Other,independent,0.1834703162
+11/2/1880,Kansas,KS,Garfield,republican,60.40122046
+11/2/1880,Kansas,KS,Hancock,democrat,29.71684987
+11/2/1880,Kansas,KS,Weaver,independent,9.86453716
+11/2/1880,Kansas,KS,Other,independent,0.01739251426
+11/2/1880,Kentucky,KY,Garfield,republican,39.86836588
+11/2/1880,Kentucky,KY,Hancock,democrat,55.73671678
+11/2/1880,Kentucky,KY,Weaver,independent,4.307685396
+11/2/1880,Kentucky,KY,Other,independent,0.08723193962
+11/2/1880,Louisiana,LA,Garfield,republican,37.31308993
+11/2/1880,Louisiana,LA,Hancock,democrat,62.26857613
+11/2/1880,Louisiana,LA,Weaver,independent,0.4183339396
+11/2/1880,Louisiana,LA,Other,independent,0
+11/2/1880,Maine,ME,Garfield,republican,51.4596638
+11/2/1880,Maine,ME,Hancock,democrat,45.31594199
+11/2/1880,Maine,ME,Weaver,independent,3.063869412
+11/2/1880,Maine,ME,Other,independent,0.160524798
+11/2/1880,Maryland,MD,Garfield,republican,45.58967838
+11/2/1880,Maryland,MD,Hancock,democrat,54.41032162
+11/2/1880,Maryland,MD,Weaver,independent,0
+11/2/1880,Maryland,MD,Other,independent,0
+11/2/1880,Massachusetts,MA,Garfield,republican,58.52585336
+11/2/1880,Massachusetts,MA,Hancock,democrat,39.57982747
+11/2/1880,Massachusetts,MA,Weaver,independent,1.611251838
+11/2/1880,Massachusetts,MA,Other,independent,0.2830673303
+11/2/1880,Michigan,MI,Garfield,republican,52.49108556
+11/2/1880,Michigan,MI,Hancock,democrat,37.27126224
+11/2/1880,Michigan,MI,Weaver,independent,9.883057333
+11/2/1880,Michigan,MI,Other,independent,0.354594864
+11/2/1880,Minnesota,MN,Garfield,republican,62.28162101
+11/2/1880,Minnesota,MN,Hancock,democrat,35.36180938
+11/2/1880,Minnesota,MN,Weaver,independent,2.1668767
+11/2/1880,Minnesota,MN,Other,independent,0.1896929097
+11/2/1880,Mississippi,MS,Garfield,republican,29.76389791
+11/2/1880,Mississippi,MS,Hancock,democrat,64.70598285
+11/2/1880,Mississippi,MS,Weaver,independent,4.951822872
+11/2/1880,Mississippi,MS,Other,independent,0.5782963748
+11/2/1880,Missouri,MO,Garfield,republican,38.6738621
+11/2/1880,Missouri,MO,Hancock,democrat,52.50585846
+11/2/1880,Missouri,MO,Weaver,independent,8.820279444
+11/2/1880,Missouri,MO,Other,independent,0
+11/2/1880,Nebraska,NE,Garfield,republican,62.86763024
+11/2/1880,Nebraska,NE,Hancock,democrat,32.61560628
+11/2/1880,Nebraska,NE,Weaver,independent,4.516763482
+11/2/1880,Nebraska,NE,Other,independent,0
+11/2/1880,Nevada,NV,Garfield,republican,47.59880076
+11/2/1880,Nevada,NV,Hancock,democrat,52.40119924
+11/2/1880,Nevada,NV,Weaver,independent,0
+11/2/1880,Nevada,NV,Other,independent,0
+11/2/1880,New Hampshire,NH,Garfield,republican,51.94011186
+11/2/1880,New Hampshire,NH,Hancock,democrat,47.24007364
+11/2/1880,New Hampshire,NH,Weaver,independent,0.6113870844
+11/2/1880,New Hampshire,NH,Other,independent,0.2084274152
+11/2/1880,New Jersey,NJ,Garfield,republican,49.02044501
+11/2/1880,New Jersey,NJ,Hancock,democrat,49.83775739
+11/2/1880,New Jersey,NJ,Weaver,independent,1.064132592
+11/2/1880,New Jersey,NJ,Other,independent,0.07766500764
+11/2/1880,New York,NY,Garfield,republican,50.32352155
+11/2/1880,New York,NY,Hancock,democrat,48.41826359
+11/2/1880,New York,NY,Weaver,independent,1.120798591
+11/2/1880,New York,NY,Other,independent,0.1374162662
+11/2/1880,North Carolina,NC,Garfield,republican,47.98419563
+11/2/1880,North Carolina,NC,Hancock,democrat,51.54847974
+11/2/1880,North Carolina,NC,Weaver,independent,0.4673246288
+11/2/1880,North Carolina,NC,Other,independent,0
+11/2/1880,Ohio,OH,Garfield,republican,51.73311337
+11/2/1880,Ohio,OH,Hancock,democrat,47.01193296
+11/2/1880,Ohio,OH,Weaver,independent,0.8905232928
+11/2/1880,Ohio,OH,Other,independent,0.364430381
+11/2/1880,Oregon,OR,Garfield,republican,50.50829189
+11/2/1880,Oregon,OR,Hancock,democrat,48.88175783
+11/2/1880,Oregon,OR,Weaver,independent,0.6099502731
+11/2/1880,Oregon,OR,Other,independent,0
+11/2/1880,Pennsylvania,PA,Garfield,republican,50.83592159
+11/2/1880,Pennsylvania,PA,Hancock,democrat,46.57475054
+11/2/1880,Pennsylvania,PA,Weaver,independent,2.362643078
+11/2/1880,Pennsylvania,PA,Other,independent,0.2266847893
+11/2/1880,Rhode Island,RI,Garfield,republican,62.23704464
+11/2/1880,Rhode Island,RI,Hancock,democrat,36.87018984
+11/2/1880,Rhode Island,RI,Weaver,independent,0.807251582
+11/2/1880,Rhode Island,RI,Other,independent,0.08551393877
+11/2/1880,South Carolina,SC,Garfield,republican,34.13214915
+11/2/1880,South Carolina,SC,Hancock,democrat,65.51271254
+11/2/1880,South Carolina,SC,Weaver,independent,0.333936028
+11/2/1880,South Carolina,SC,Other,independent,0.02120228749
+11/2/1880,Tennessee,TN,Garfield,republican,44.26361592
+11/2/1880,Tennessee,TN,Hancock,democrat,53.26292942
+11/2/1880,Tennessee,TN,Weaver,independent,2.473454656
+11/2/1880,Tennessee,TN,Other,independent,0
+11/2/1880,Texas,TX,Garfield,republican,23.94984404
+11/2/1880,Texas,TX,Hancock,democrat,64.71293944
+11/2/1880,Texas,TX,Weaver,independent,11.33721652
+11/2/1880,Texas,TX,Other,independent,0
+11/2/1880,Vermont,VT,Garfield,republican,69.8067932
+11/2/1880,Vermont,VT,Hancock,democrat,28.14812521
+11/2/1880,Vermont,VT,Weaver,independent,1.876335263
+11/2/1880,Vermont,VT,Other,independent,0.1687463232
+11/2/1880,Virginia,VA,Garfield,republican,39.47385831
+11/2/1880,Virginia,VA,Hancock,democrat,60.52614169
+11/2/1880,Virginia,VA,Weaver,independent,0
+11/2/1880,Virginia,VA,Other,independent,0
+11/2/1880,West Virginia,WV,Garfield,republican,41.05343525
+11/2/1880,West Virginia,WV,Hancock,democrat,50.94947666
+11/2/1880,West Virginia,WV,Weaver,independent,7.997088094
+11/2/1880,West Virginia,WV,Other,independent,0
+11/2/1880,Wisconsin,WI,Garfield,republican,54.04379704
+11/2/1880,Wisconsin,WI,Hancock,democrat,42.9077762
+11/2/1880,Wisconsin,WI,Weaver,independent,2.988917874
+11/2/1880,Wisconsin,WI,Other,independent,0.05950888329
+11/4/1884,Alabama,AL,Cleveland,democrat,60.36556788
+11/4/1884,Alabama,AL,Blaine,republican,38.69447482
+11/4/1884,Alabama,AL,Other,independent,0.9399572983
+11/4/1884,Arkansas,AK,Cleveland,democrat,57.82682324
+11/4/1884,Arkansas,AK,Blaine,republican,40.70472813
+11/4/1884,Arkansas,AK,Other,independent,1.468448628
+11/4/1884,California,CA,Cleveland,democrat,45.32661888
+11/4/1884,California,CA,Blaine,republican,51.9671249
+11/4/1884,California,CA,Other,independent,2.706256219
+11/4/1884,Colorado,CO,Cleveland,democrat,41.67681414
+11/4/1884,Colorado,CO,Blaine,republican,54.24615523
+11/4/1884,Colorado,CO,Other,independent,4.077030623
+11/4/1884,Connecticut,CT,Cleveland,democrat,48.94613754
+11/4/1884,Connecticut,CT,Blaine,republican,48.01066612
+11/4/1884,Connecticut,CT,Other,independent,3.04319634
+11/4/1884,Delaware,DE,Cleveland,democrat,56.5534952
+11/4/1884,Delaware,DE,Blaine,republican,43.19970651
+11/4/1884,Delaware,DE,Other,independent,0.2467982924
+11/4/1884,Florida,FL,Cleveland,democrat,52.95715953
+11/4/1884,Florida,FL,Blaine,republican,46.72612102
+11/4/1884,Florida,FL,Other,independent,0.3167194532
+11/4/1884,Georgia,GA,Cleveland,democrat,65.91950421
+11/4/1884,Georgia,GA,Blaine,republican,33.84374347
+11/4/1884,Georgia,GA,Other,independent,0.2367523153
+11/4/1884,Illinois,IL,Cleveland,democrat,46.43450726
+11/4/1884,Illinois,IL,Blaine,republican,50.16858192
+11/4/1884,Illinois,IL,Other,independent,3.396910818
+11/4/1884,Indiana,IN,Cleveland,democrat,49.46278456
+11/4/1884,Indiana,IN,Blaine,republican,48.14730322
+11/4/1884,Indiana,IN,Other,independent,2.38991222
+11/4/1884,Iowa,IA,Cleveland,democrat,47.00835894
+11/4/1884,Iowa,IA,Blaine,republican,52.2503917
+11/4/1884,Iowa,IA,Other,independent,0.7412493604
+11/4/1884,Kansas,KS,Cleveland,democrat,33.903584
+11/4/1884,Kansas,KS,Blaine,republican,58.08055731
+11/4/1884,Kansas,KS,Other,independent,8.015858686
+11/4/1884,Kentucky,KY,Cleveland,democrat,55.32423566
+11/4/1884,Kentucky,KY,Blaine,republican,42.92880885
+11/4/1884,Kentucky,KY,Other,independent,1.746955487
+11/4/1884,Louisiana,LA,Cleveland,democrat,57.21624512
+11/4/1884,Louisiana,LA,Blaine,republican,42.36510389
+11/4/1884,Louisiana,LA,Other,independent,0.4186509932
+11/4/1884,Maine,ME,Cleveland,democrat,39.966741
+11/4/1884,Maine,ME,Blaine,republican,55.34251404
+11/4/1884,Maine,ME,Other,independent,4.690744956
+11/4/1884,Maryland,MD,Cleveland,democrat,52.07317532
+11/4/1884,Maryland,MD,Blaine,republican,46.0963665
+11/4/1884,Maryland,MD,Other,independent,1.830458179
+11/4/1884,Massachusetts,MA,Cleveland,democrat,40.32922082
+11/4/1884,Massachusetts,MA,Blaine,republican,48.36263073
+11/4/1884,Massachusetts,MA,Other,independent,11.30814845
+11/4/1884,Michigan,MI,Cleveland,democrat,47.20030111
+11/4/1884,Michigan,MI,Blaine,republican,48.0248563
+11/4/1884,Michigan,MI,Other,independent,4.774842592
+11/4/1884,Minnesota,MN,Cleveland,democrat,36.87301662
+11/4/1884,Minnesota,MN,Blaine,republican,58.77632001
+11/4/1884,Minnesota,MN,Other,independent,4.350663362
+11/4/1884,Mississippi,MS,Cleveland,democrat,64.34193955
+11/4/1884,Mississippi,MS,Blaine,republican,35.65806045
+11/4/1884,Mississippi,MS,Other,independent,0
+11/4/1884,Missouri,MO,Cleveland,democrat,53.4874498
+11/4/1884,Missouri,MO,Blaine,republican,46.02214527
+11/4/1884,Missouri,MO,Other,independent,0.490404924
+11/4/1884,Nebraska,NE,Cleveland,democrat,40.52920225
+11/4/1884,Nebraska,NE,Blaine,republican,57.3106213
+11/4/1884,Nebraska,NE,Other,independent,2.16017645
+11/4/1884,Nevada,NV,Cleveland,democrat,43.58834102
+11/4/1884,Nevada,NV,Blaine,republican,56.20848636
+11/4/1884,Nevada,NV,Other,independent,0.2031726186
+11/4/1884,New Hampshire,NH,Cleveland,democrat,46.34100206
+11/4/1884,New Hampshire,NH,Blaine,republican,51.13612182
+11/4/1884,New Hampshire,NH,Other,independent,2.522876126
+11/4/1884,New Jersey,NJ,Cleveland,democrat,48.97957619
+11/4/1884,New Jersey,NJ,Blaine,republican,47.30933884
+11/4/1884,New Jersey,NJ,Other,independent,3.711084964
+11/4/1884,New York,NY,Cleveland,democrat,48.24956797
+11/4/1884,New York,NY,Blaine,republican,48.15112464
+11/4/1884,New York,NY,Other,independent,3.599307384
+11/4/1884,North Carolina,NC,Cleveland,democrat,53.25202343
+11/4/1884,North Carolina,NC,Blaine,republican,46.58774166
+11/4/1884,North Carolina,NC,Other,independent,0.1602349118
+11/4/1884,Ohio,OH,Cleveland,democrat,46.93796918
+11/4/1884,Ohio,OH,Blaine,republican,50.99119308
+11/4/1884,Ohio,OH,Other,independent,2.070837741
+11/4/1884,Oregon,OR,Cleveland,democrat,46.70285866
+11/4/1884,Oregon,OR,Blaine,republican,50.98515622
+11/4/1884,Oregon,OR,Other,independent,2.311985118
+11/4/1884,Pennsylvania,PA,Cleveland,democrat,43.4562058
+11/4/1884,Pennsylvania,PA,Blaine,republican,52.97301364
+11/4/1884,Pennsylvania,PA,Other,independent,3.57078056
+11/4/1884,Rhode Island,RI,Cleveland,democrat,37.81086937
+11/4/1884,Rhode Island,RI,Blaine,republican,58.06963474
+11/4/1884,Rhode Island,RI,Other,independent,4.119495896
+11/4/1884,South Carolina,SC,Cleveland,democrat,75.25427746
+11/4/1884,South Carolina,SC,Blaine,republican,23.41292074
+11/4/1884,South Carolina,SC,Other,independent,1.332801793
+11/4/1884,Tennessee,TN,Cleveland,democrat,51.45435383
+11/4/1884,Tennessee,TN,Blaine,republican,47.73519298
+11/4/1884,Tennessee,TN,Other,independent,0.8104531922
+11/4/1884,Texas,TX,Cleveland,democrat,69.26084751
+11/4/1884,Texas,TX,Blaine,republican,28.63189929
+11/4/1884,Texas,TX,Other,independent,2.107253193
+11/4/1884,Vermont,VT,Cleveland,democrat,29.17627649
+11/4/1884,Vermont,VT,Blaine,republican,66.52076564
+11/4/1884,Vermont,VT,Other,independent,4.302957863
+11/4/1884,Virginia,VA,Cleveland,democrat,51.0535938
+11/4/1884,Virginia,VA,Blaine,republican,48.90078848
+11/4/1884,Virginia,VA,Other,independent,0.04561771652
+11/4/1884,West Virginia,WV,Cleveland,democrat,50.93722804
+11/4/1884,West Virginia,WV,Blaine,republican,47.74755004
+11/4/1884,West Virginia,WV,Other,independent,1.315221915
+11/4/1884,Wisconsin,WI,Cleveland,democrat,45.79017306
+11/4/1884,Wisconsin,WI,Blaine,republican,50.38066503
+11/4/1884,Wisconsin,WI,Other,independent,3.829161912
+11/6/1888,Alabama,AL,Cleveland,democrat,67.00402662
+11/6/1888,Alabama,AL,Harrison,republican,32.6567096
+11/6/1888,Alabama,AL,Fisk,independent,0.3392637862
+11/6/1888,Alabama,AL,Other,independent,0
+11/6/1888,Arkansas,AR,Cleveland,democrat,54.79631728
+11/6/1888,Arkansas,AR,Harrison,republican,38.04454405
+11/6/1888,Arkansas,AR,Fisk,independent,0.3909383795
+11/6/1888,Arkansas,AR,Other,independent,6.768200283
+11/6/1888,California,CA,Cleveland,democrat,46.8407211
+11/6/1888,California,CA,Harrison,republican,49.6604188
+11/6/1888,California,CA,Fisk,independent,2.292123387
+11/6/1888,California,CA,Other,independent,1.206736718
+11/6/1888,Colorado,CO,Cleveland,democrat,40.83810062
+11/6/1888,Colorado,CO,Harrison,republican,55.21936789
+11/6/1888,Colorado,CO,Fisk,independent,2.373132056
+11/6/1888,Colorado,CO,Other,independent,1.56939943
+11/6/1888,Connecticut,CN,Cleveland,democrat,48.65630155
+11/6/1888,Connecticut,CN,Harrison,republican,48.43808856
+11/6/1888,Connecticut,CN,Fisk,independent,2.74974347
+11/6/1888,Connecticut,CN,Other,independent,0.1558664225
+11/6/1888,Delaware,DE,Cleveland,democrat,55.14715764
+11/6/1888,Delaware,DE,Harrison,republican,43.50893697
+11/6/1888,Delaware,DE,Fisk,independent,1.340545626
+11/6/1888,Delaware,DE,Other,independent,0.003359763473
+11/6/1888,Florida,FL,Cleveland,democrat,59.48421053
+11/6/1888,Florida,FL,Harrison,republican,39.89323308
+11/6/1888,Florida,FL,Fisk,independent,0.622556391
+11/6/1888,Florida,FL,Other,independent,0
+11/6/1888,Georgia,GA,Cleveland,democrat,70.30629093
+11/6/1888,Georgia,GA,Harrison,republican,28.33365982
+11/6/1888,Georgia,GA,Fisk,independent,1.264901774
+11/6/1888,Georgia,GA,Other,independent,0.09514747859
+11/6/1888,Illinois,IL,Cleveland,democrat,46.58263496
+11/6/1888,Illinois,IL,Harrison,republican,49.5411286
+11/6/1888,Illinois,IL,Fisk,independent,2.902196137
+11/6/1888,Illinois,IL,Other,independent,0.9740403015
+11/6/1888,Indiana,IN,Cleveland,democrat,48.61038944
+11/6/1888,Indiana,IN,Harrison,republican,49.04767492
+11/6/1888,Indiana,IN,Fisk,independent,1.840212013
+11/6/1888,Indiana,IN,Other,independent,0.5017236274
+11/6/1888,Iowa,IA,Cleveland,democrat,44.5091368
+11/6/1888,Iowa,IA,Harrison,republican,52.35948384
+11/6/1888,Iowa,IA,Fisk,independent,0.8784193401
+11/6/1888,Iowa,IA,Other,independent,2.252960026
+11/6/1888,Kansas,KS,Cleveland,democrat,31.02681874
+11/6/1888,Kansas,KS,Harrison,republican,55.23314278
+11/6/1888,Kansas,KS,Fisk,independent,2.047114743
+11/6/1888,Kansas,KS,Other,independent,11.69292373
+11/6/1888,Kentucky,KY,Cleveland,democrat,53.30445272
+11/6/1888,Kentucky,KY,Harrison,republican,44.98474779
+11/6/1888,Kentucky,KY,Fisk,independent,1.514492501
+11/6/1888,Kentucky,KY,Other,independent,0.1963069928
+11/6/1888,Louisiana,LA,Cleveland,democrat,73.37239302
+11/6/1888,Louisiana,LA,Harrison,republican,26.4558939
+11/6/1888,Louisiana,LA,Fisk,independent,0.138060764
+11/6/1888,Louisiana,LA,Other,independent,0.03365231122
+11/6/1888,Maine,ME,Cleveland,democrat,39.35346542
+11/6/1888,Maine,ME,Harrison,republican,57.48793401
+11/6/1888,Maine,ME,Fisk,independent,2.098196533
+11/6/1888,Maine,ME,Other,independent,1.060404045
+11/6/1888,Maryland,MD,Cleveland,democrat,50.3401425
+11/6/1888,Maryland,MD,Harrison,republican,47.39998388
+11/6/1888,Maryland,MD,Fisk,independent,2.259873614
+11/6/1888,Maryland,MD,Other,independent,0
+11/6/1888,Massachusetts,MA,Cleveland,democrat,44.03575381
+11/6/1888,Massachusetts,MA,Harrison,republican,53.41924164
+11/6/1888,Massachusetts,MA,Fisk,independent,2.527574998
+11/6/1888,Massachusetts,MA,Other,independent,0.01742954831
+11/6/1888,Michigan,MI,Cleveland,democrat,44.90718535
+11/6/1888,Michigan,MI,Harrison,republican,49.72841407
+11/6/1888,Michigan,MI,Fisk,independent,4.406171375
+11/6/1888,Michigan,MI,Other,independent,0.9582292009
+11/6/1888,Minnesota,MN,Cleveland,democrat,39.64715043
+11/6/1888,Minnesota,MN,Harrison,republican,54.12081964
+11/6/1888,Minnesota,MN,Fisk,independent,5.815371176
+11/6/1888,Minnesota,MN,Other,independent,0.4166587538
+11/6/1888,Mississippi,MS,Cleveland,democrat,73.80080493
+11/6/1888,Mississippi,MS,Harrison,republican,25.99191612
+11/6/1888,Mississippi,MS,Fisk,independent,0.2072789456
+11/6/1888,Mississippi,MS,Other,independent,0
+11/6/1888,Missouri,MO,Cleveland,democrat,50.24225104
+11/6/1888,Missouri,MO,Harrison,republican,45.31456191
+11/6/1888,Missouri,MO,Fisk,independent,0.8706076416
+11/6/1888,Missouri,MO,Other,independent,3.572579408
+11/6/1888,Nebraska,NE,Cleveland,democrat,39.75285246
+11/6/1888,Nebraska,NE,Harrison,republican,53.50833037
+11/6/1888,Nebraska,NE,Fisk,independent,4.653263058
+11/6/1888,Nebraska,NE,Other,independent,2.085554108
+11/6/1888,Nevada,NV,Cleveland,democrat,41.93679752
+11/6/1888,Nevada,NV,Harrison,republican,57.72927187
+11/6/1888,Nevada,NV,Fisk,independent,0.3339306076
+11/6/1888,Nevada,NV,Other,independent,0
+11/6/1888,New Hampshire,NH,Cleveland,democrat,47.84059008
+11/6/1888,New Hampshire,NH,Harrison,republican,50.34182859
+11/6/1888,New Hampshire,NH,Fisk,independent,1.753729289
+11/6/1888,New Hampshire,NH,Other,independent,0.06385203941
+11/6/1888,New Jersey,NJ,Cleveland,democrat,49.87080359
+11/6/1888,New Jersey,NJ,Harrison,republican,47.5179476
+11/6/1888,New Jersey,NJ,Fisk,independent,2.611248811
+11/6/1888,New Jersey,NJ,Other,independent,0
+11/6/1888,New York,NY,Cleveland,democrat,48.18836626
+11/6/1888,New York,NY,Harrison,republican,49.27743781
+11/6/1888,New York,NY,Fisk,independent,2.290664581
+11/6/1888,New York,NY,Other,independent,0.2435313408
+11/6/1888,North Carolina,NC,Cleveland,democrat,51.79312446
+11/6/1888,North Carolina,NC,Harrison,republican,47.19939208
+11/6/1888,North Carolina,NC,Fisk,independent,0.9945266018
+11/6/1888,North Carolina,NC,Other,independent,0.01295686066
+11/6/1888,Ohio,OH,Cleveland,democrat,47.17674904
+11/6/1888,Ohio,OH,Harrison,republican,49.50896103
+11/6/1888,Ohio,OH,Fisk,independent,2.89827824
+11/6/1888,Ohio,OH,Other,independent,0.4160116902
+11/6/1888,Oregon,OR,Cleveland,democrat,42.87908428
+11/6/1888,Oregon,OR,Harrison,republican,53.82277335
+11/6/1888,Oregon,OR,Fisk,independent,2.711267036
+11/6/1888,Oregon,OR,Other,independent,0.5868753335
+11/6/1888,Pennsylvania,PA,Cleveland,democrat,44.77218596
+11/6/1888,Pennsylvania,PA,Harrison,republican,52.73735725
+11/6/1888,Pennsylvania,PA,Fisk,independent,2.09980673
+11/6/1888,Pennsylvania,PA,Other,independent,0.3906500609
+11/6/1888,Rhode Island,RI,Cleveland,democrat,42.99202943
+11/6/1888,Rhode Island,RI,Harrison,republican,53.87860208
+11/6/1888,Rhode Island,RI,Fisk,independent,3.068056407
+11/6/1888,Rhode Island,RI,Other,independent,0.06131207848
+11/6/1888,South Carolina,SC,Cleveland,democrat,82.28308562
+11/6/1888,South Carolina,SC,Harrison,republican,17.1706439
+11/6/1888,South Carolina,SC,Fisk,independent,0
+11/6/1888,South Carolina,SC,Other,independent,0.5462704851
+11/6/1888,Tennessee,TN,Cleveland,democrat,52.25621843
+11/6/1888,Tennessee,TN,Harrison,republican,45.76251095
+11/6/1888,Tennessee,TN,Fisk,independent,1.965465238
+11/6/1888,Tennessee,TN,Other,independent,0.01580538305
+11/6/1888,Texas,TX,Cleveland,democrat,65.6991494
+11/6/1888,Texas,TX,Harrison,republican,24.73252721
+11/6/1888,Texas,TX,Fisk,independent,1.328343305
+11/6/1888,Texas,TX,Other,independent,8.239980085
+11/6/1888,Vermont,VT,Cleveland,democrat,25.64933081
+11/6/1888,Vermont,VT,Harrison,republican,69.04601846
+11/6/1888,Vermont,VT,Fisk,independent,2.230642303
+11/6/1888,Vermont,VT,Other,independent,3.074008434
+11/6/1888,Virginia,VA,Cleveland,democrat,49.9870103
+11/6/1888,Virginia,VA,Harrison,republican,49.45920082
+11/6/1888,Virginia,VA,Fisk,independent,0.5537888828
+11/6/1888,Virginia,VA,Other,independent,0
+11/6/1888,West Virginia,WV,Cleveland,democrat,49.34583542
+11/6/1888,West Virginia,WV,Harrison,republican,49.02847466
+11/6/1888,West Virginia,WV,Fisk,independent,0.6798795785
+11/6/1888,West Virginia,WV,Other,independent,0.9458103362
+11/6/1888,Wisconsin,WI,Cleveland,democrat,43.77492146
+11/6/1888,Wisconsin,WI,Harrison,republican,49.78737444
+11/6/1888,Wisconsin,WI,Fisk,independent,4.026067781
+11/6/1888,Wisconsin,WI,Other,independent,2.411636314
+11/8/1892,Alabama,AL,Cleveland,democrat,59.40191706
+11/8/1892,Alabama,AL,Harrison,republican,3.949377104
+11/8/1892,Alabama,AL,Weaver,independent,36.54549911
+11/8/1892,Alabama,AL,Bidwell,independent,0.1032067188
+11/8/1892,Alabama,AL,Other,independent,0
+11/8/1892,Arkansas,AK,Cleveland,democrat,59.30041791
+11/8/1892,Arkansas,AK,Harrison,republican,31.7802818
+11/8/1892,Arkansas,AK,Weaver,independent,7.987604394
+11/8/1892,Arkansas,AK,Bidwell,independent,0.07629104019
+11/8/1892,Arkansas,AK,Other,independent,0.8554048489
+11/8/1892,California,CA,Cleveland,democrat,43.83162283
+11/8/1892,California,CA,Harrison,republican,43.77709943
+11/8/1892,California,CA,Weaver,independent,9.388039717
+11/8/1892,California,CA,Bidwell,independent,3.002867115
+11/8/1892,California,CA,Other,independent,0.0003709074994
+11/8/1892,Colorado,CO,Cleveland,democrat,0
+11/8/1892,Colorado,CO,Harrison,republican,41.13280293
+11/8/1892,Colorado,CO,Weaver,independent,57.07043274
+11/8/1892,Colorado,CO,Bidwell,independent,1.796764333
+11/8/1892,Colorado,CO,Other,independent,0
+11/8/1892,Connecticut,CT,Cleveland,democrat,50.05923631
+11/8/1892,Connecticut,CT,Harrison,republican,46.80093563
+11/8/1892,Connecticut,CT,Weaver,independent,0.4915094626
+11/8/1892,Connecticut,CT,Bidwell,independent,2.446003828
+11/8/1892,Connecticut,CT,Other,independent,0.2023147726
+11/8/1892,Delaware,DE,Cleveland,democrat,49.90197395
+11/8/1892,Delaware,DE,Harrison,republican,48.54840876
+11/8/1892,Delaware,DE,Weaver,independent,0
+11/8/1892,Delaware,DE,Bidwell,independent,1.514703908
+11/8/1892,Delaware,DE,Other,independent,0.03491338794
+11/8/1892,Florida,FL,Cleveland,democrat,85.00747089
+11/8/1892,Florida,FL,Harrison,republican,0
+11/8/1892,Florida,FL,Weaver,independent,13.65340701
+11/8/1892,Florida,FL,Bidwell,independent,1.3391221
+11/8/1892,Florida,FL,Other,independent,0
+11/8/1892,Georgia,GA,Cleveland,democrat,58.014754
+11/8/1892,Georgia,GA,Harrison,republican,21.69536495
+11/8/1892,Georgia,GA,Weaver,independent,18.79610624
+11/8/1892,Georgia,GA,Bidwell,independent,0.4427991359
+11/8/1892,Georgia,GA,Other,independent,1.050975682
+11/8/1892,Idaho,ID,Cleveland,democrat,0
+11/8/1892,Idaho,ID,Harrison,republican,44.30875457
+11/8/1892,Idaho,ID,Weaver,independent,54.20724481
+11/8/1892,Idaho,ID,Bidwell,independent,1.484000618
+11/8/1892,Idaho,ID,Other,independent,0
+11/8/1892,Illinois,IL,Cleveland,democrat,48.79327692
+11/8/1892,Illinois,IL,Harrison,republican,45.70358509
+11/8/1892,Illinois,IL,Weaver,independent,2.54187332
+11/8/1892,Illinois,IL,Bidwell,independent,2.961264676
+11/8/1892,Illinois,IL,Other,independent,0
+11/8/1892,Indiana,IN,Cleveland,democrat,47.45914565
+11/8/1892,Indiana,IN,Harrison,republican,46.17214552
+11/8/1892,Indiana,IN,Weaver,independent,4.011466494
+11/8/1892,Indiana,IN,Bidwell,independent,2.357242334
+11/8/1892,Indiana,IN,Other,independent,0
+11/8/1892,Iowa,IA,Cleveland,democrat,44.31073272
+11/8/1892,Iowa,IA,Harrison,republican,49.59732286
+11/8/1892,Iowa,IA,Weaver,independent,4.6473162
+11/8/1892,Iowa,IA,Bidwell,independent,1.444628226
+11/8/1892,Iowa,IA,Other,independent,0
+11/8/1892,Kansas,KS,Cleveland,democrat,0
+11/8/1892,Kansas,KS,Harrison,republican,48.39599267
+11/8/1892,Kansas,KS,Weaver,independent,50.20267463
+11/8/1892,Kansas,KS,Bidwell,independent,1.401332697
+11/8/1892,Kansas,KS,Other,independent,0
+11/8/1892,Kentucky,KY,Cleveland,democrat,51.47536848
+11/8/1892,Kentucky,KY,Harrison,republican,39.74077638
+11/8/1892,Kentucky,KY,Weaver,independent,6.894245212
+11/8/1892,Kentucky,KY,Bidwell,independent,1.889609932
+11/8/1892,Kentucky,KY,Other,independent,0
+11/8/1892,Louisiana,LA,Cleveland,democrat,76.53126061
+11/8/1892,Louisiana,LA,Harrison,republican,23.46873939
+11/8/1892,Louisiana,LA,Weaver,independent,0
+11/8/1892,Louisiana,LA,Bidwell,independent,0
+11/8/1892,Louisiana,LA,Other,independent,0
+11/8/1892,Maine,ME,Cleveland,democrat,41.26113129
+11/8/1892,Maine,ME,Harrison,republican,54.04504899
+11/8/1892,Maine,ME,Weaver,independent,2.057517754
+11/8/1892,Maine,ME,Bidwell,independent,2.632867043
+11/8/1892,Maine,ME,Other,independent,0.003434921126
+11/8/1892,Maryland,MD,Cleveland,democrat,53.38928613
+11/8/1892,Maryland,MD,Harrison,republican,43.48188958
+11/8/1892,Maryland,MD,Weaver,independent,0.3732270543
+11/8/1892,Maryland,MD,Bidwell,independent,2.755597234
+11/8/1892,Maryland,MD,Other,independent,0
+11/8/1892,Massachusetts,MA,Cleveland,democrat,45.21747803
+11/8/1892,Massachusetts,MA,Harrison,republican,51.86687398
+11/8/1892,Massachusetts,MA,Weaver,independent,0.8209130804
+11/8/1892,Massachusetts,MA,Bidwell,independent,1.927994926
+11/8/1892,Massachusetts,MA,Other,independent,0.1667399777
+11/8/1892,Michigan,MI,Cleveland,democrat,43.26277505
+11/8/1892,Michigan,MI,Harrison,republican,47.7868017
+11/8/1892,Michigan,MI,Weaver,independent,4.276625648
+11/8/1892,Michigan,MI,Bidwell,independent,4.475318907
+11/8/1892,Michigan,MI,Other,independent,0.1984786877
+11/8/1892,Minnesota,MN,Cleveland,democrat,37.76409044
+11/8/1892,Minnesota,MN,Harrison,republican,45.96015537
+11/8/1892,Minnesota,MN,Weaver,independent,10.96887419
+11/8/1892,Minnesota,MN,Bidwell,independent,5.30688001
+11/8/1892,Minnesota,MN,Other,independent,0
+11/8/1892,Mississippi,MS,Cleveland,democrat,76.22003465
+11/8/1892,Mississippi,MS,Harrison,republican,2.661893791
+11/8/1892,Mississippi,MS,Weaver,independent,19.26540871
+11/8/1892,Mississippi,MS,Bidwell,independent,1.852662846
+11/8/1892,Mississippi,MS,Other,independent,0
+11/8/1892,Missouri,MO,Cleveland,democrat,49.5584241
+11/8/1892,Missouri,MO,Harrison,republican,42.0334464
+11/8/1892,Missouri,MO,Weaver,independent,7.608067461
+11/8/1892,Missouri,MO,Bidwell,independent,0.8000620404
+11/8/1892,Missouri,MO,Other,independent,0
+11/8/1892,Montana,MT,Cleveland,democrat,39.78767909
+11/8/1892,Montana,MT,Harrison,republican,42.44393963
+11/8/1892,Montana,MT,Weaver,independent,16.50435213
+11/8/1892,Montana,MT,Bidwell,independent,1.264029149
+11/8/1892,Montana,MT,Other,independent,0
+11/8/1892,Nebraska,NE,Cleveland,democrat,12.45953884
+11/8/1892,Nebraska,NE,Harrison,republican,43.56467791
+11/8/1892,Nebraska,NE,Weaver,independent,41.52713395
+11/8/1892,Nebraska,NE,Bidwell,independent,2.448649297
+11/8/1892,Nebraska,NE,Other,independent,0
+11/8/1892,Nevada,NV,Cleveland,democrat,6.563706564
+11/8/1892,Nevada,NV,Harrison,republican,25.84114727
+11/8/1892,Nevada,NV,Weaver,independent,66.77698106
+11/8/1892,Nevada,NV,Bidwell,independent,0.8181651039
+11/8/1892,Nevada,NV,Other,independent,0
+11/8/1892,New Hampshire,NH,Cleveland,democrat,47.1078821
+11/8/1892,New Hampshire,NH,Harrison,republican,51.11218081
+11/8/1892,New Hampshire,NH,Weaver,independent,0.3280009851
+11/8/1892,New Hampshire,NH,Bidwell,independent,1.451936101
+11/8/1892,New Hampshire,NH,Other,independent,0
+11/8/1892,New Jersey,NJ,Cleveland,democrat,50.66775664
+11/8/1892,New Jersey,NJ,Harrison,republican,46.23529795
+11/8/1892,New Jersey,NJ,Weaver,independent,0.2917455268
+11/8/1892,New Jersey,NJ,Bidwell,independent,2.409196056
+11/8/1892,New Jersey,NJ,Other,independent,0.3960038268
+11/8/1892,New York,NY,Cleveland,democrat,48.98798842
+11/8/1892,New York,NY,Harrison,republican,45.58297358
+11/8/1892,New York,NY,Weaver,independent,1.228986088
+11/8/1892,New York,NY,Bidwell,independent,2.856837222
+11/8/1892,New York,NY,Other,independent,1.343214694
+11/8/1892,North Carolina,NC,Cleveland,democrat,47.43675741
+11/8/1892,North Carolina,NC,Harrison,republican,35.8033325
+11/8/1892,North Carolina,NC,Weaver,independent,15.81903165
+11/8/1892,North Carolina,NC,Bidwell,independent,0.9408784386
+11/8/1892,North Carolina,NC,Other,independent,0
+11/8/1892,North Dakota,ND,Cleveland,democrat,0
+11/8/1892,North Dakota,ND,Harrison,republican,48.5049006
+11/8/1892,North Dakota,ND,Weaver,independent,49.00603577
+11/8/1892,North Dakota,ND,Bidwell,independent,2.489063625
+11/8/1892,North Dakota,ND,Other,independent,0
+11/8/1892,Ohio,OH,Cleveland,democrat,47.53376995
+11/8/1892,Ohio,OH,Harrison,republican,47.65986327
+11/8/1892,Ohio,OH,Weaver,independent,1.746721809
+11/8/1892,Ohio,OH,Bidwell,independent,3.059644963
+11/8/1892,Ohio,OH,Other,independent,0
+11/8/1892,Oregon,OR,Cleveland,democrat,18.14602948
+11/8/1892,Oregon,OR,Harrison,republican,44.59364768
+11/8/1892,Oregon,OR,Weaver,independent,34.35425718
+11/8/1892,Oregon,OR,Bidwell,independent,2.906065664
+11/8/1892,Oregon,OR,Other,independent,0
+11/8/1892,Pennsylvania,PA,Cleveland,democrat,45.09067706
+11/8/1892,Pennsylvania,PA,Harrison,republican,51.4462468
+11/8/1892,Pennsylvania,PA,Weaver,independent,0.8687849573
+11/8/1892,Pennsylvania,PA,Bidwell,independent,2.50476067
+11/8/1892,Pennsylvania,PA,Other,independent,0.08953051316
+11/8/1892,Rhode Island,RI,Cleveland,democrat,45.74780059
+11/8/1892,Rhode Island,RI,Harrison,republican,50.7086999
+11/8/1892,Rhode Island,RI,Weaver,independent,0.4286036544
+11/8/1892,Rhode Island,RI,Bidwell,independent,3.109256335
+11/8/1892,Rhode Island,RI,Other,independent,0.005639521769
+11/8/1892,South Carolina,SC,Cleveland,democrat,77.55588335
+11/8/1892,South Carolina,SC,Harrison,republican,18.92800408
+11/8/1892,South Carolina,SC,Weaver,independent,3.413990696
+11/8/1892,South Carolina,SC,Bidwell,independent,0
+11/8/1892,South Carolina,SC,Other,independent,0.1021218654
+11/8/1892,South Dakota,SD,Cleveland,democrat,12.87847631
+11/8/1892,South Dakota,SD,Harrison,republican,49.47740133
+11/8/1892,South Dakota,SD,Weaver,independent,37.64412236
+11/8/1892,South Dakota,SD,Bidwell,independent,0
+11/8/1892,South Dakota,SD,Other,independent,0
+11/8/1892,Tennessee,TN,Cleveland,democrat,51.35550103
+11/8/1892,Tennessee,TN,Harrison,republican,37.83398311
+11/8/1892,Tennessee,TN,Weaver,independent,9.000797796
+11/8/1892,Tennessee,TN,Bidwell,independent,1.809718062
+11/8/1892,Tennessee,TN,Other,independent,0
+11/8/1892,Texas,TX,Cleveland,democrat,56.6506769
+11/8/1892,Texas,TX,Harrison,republican,19.22183136
+11/8/1892,Texas,TX,Weaver,independent,23.61463478
+11/8/1892,Texas,TX,Bidwell,independent,0.5128569567
+11/8/1892,Texas,TX,Other,independent,0
+11/8/1892,Vermont,VT,Cleveland,democrat,29.25836978
+11/8/1892,Vermont,VT,Harrison,republican,68.09090257
+11/8/1892,Vermont,VT,Weaver,independent,0.07885869955
+11/8/1892,Vermont,VT,Bidwell,independent,2.552154276
+11/8/1892,Vermont,VT,Other,independent,0.01971467489
+11/8/1892,Virginia,VA,Cleveland,democrat,56.16518044
+11/8/1892,Virginia,VA,Harrison,republican,38.7006481
+11/8/1892,Virginia,VA,Weaver,independent,4.200343556
+11/8/1892,Virginia,VA,Bidwell,independent,0.9338279074
+11/8/1892,Virginia,VA,Other,independent,0
+11/8/1892,Washington,WA,Cleveland,democrat,33.87784333
+11/8/1892,Washington,WA,Harrison,republican,41.44641862
+11/8/1892,Washington,WA,Weaver,independent,21.78608373
+11/8/1892,Washington,WA,Bidwell,independent,2.88965431
+11/8/1892,Washington,WA,Other,independent,0
+11/8/1892,West Virginia,WV,Cleveland,democrat,49.37309664
+11/8/1892,West Virginia,WV,Harrison,republican,46.9327036
+11/8/1892,West Virginia,WV,Weaver,independent,2.435716833
+11/8/1892,West Virginia,WV,Bidwell,independent,1.258482923
+11/8/1892,West Virginia,WV,Other,independent,0
+11/8/1892,Wisconsin,WI,Cleveland,democrat,47.72176188
+11/8/1892,Wisconsin,WI,Harrison,republican,46.04675697
+11/8/1892,Wisconsin,WI,Weaver,independent,2.69631655
+11/8/1892,Wisconsin,WI,Bidwell,independent,3.535164607
+11/8/1892,Wisconsin,WI,Other,independent,0
+11/8/1892,Wyoming,WY,Cleveland,democrat,0
+11/8/1892,Wyoming,WY,Harrison,republican,50.51688079
+11/8/1892,Wyoming,WY,Weaver,independent,46.14281446
+11/8/1892,Wyoming,WY,Bidwell,independent,3.167015238
+11/8/1892,Wyoming,WY,Other,independent,0.173289513
+11/3/1896,Alabama,AL,McKinley,republican,28.611882
+11/3/1896,Alabama,AL,Bryan,democrat,66.96371672
+11/3/1896,Alabama,AL,Other,independent,4.424401275
+11/3/1896,Arkansas,AK,McKinley,republican,25.11734417
+11/3/1896,Arkansas,AK,Bryan,democrat,73.72294053
+11/3/1896,Arkansas,AK,Other,independent,1.159715294
+11/3/1896,California,CA,McKinley,republican,49.1550471
+11/3/1896,California,CA,Bryan,democrat,48.51098623
+11/3/1896,California,CA,Other,independent,2.333966671
+11/3/1896,Colorado,CO,McKinley,republican,13.86047199
+11/3/1896,Colorado,CO,Bryan,democrat,84.94557848
+11/3/1896,Colorado,CO,Other,independent,1.19394953
+11/3/1896,Connecticut,CT,McKinley,republican,63.2404381
+11/3/1896,Connecticut,CT,Bryan,democrat,32.53626928
+11/3/1896,Connecticut,CT,Other,independent,4.22329262
+11/3/1896,Delaware,DE,McKinley,republican,53.17765758
+11/3/1896,Delaware,DE,Bryan,democrat,43.0986062
+11/3/1896,Delaware,DE,Other,independent,3.723736218
+11/3/1896,Florida,FL,McKinley,republican,24.30304595
+11/3/1896,Florida,FL,Bryan,democrat,70.46119429
+11/3/1896,Florida,FL,Other,independent,5.235759766
+11/3/1896,Georgia,GA,McKinley,republican,36.55526834
+11/3/1896,Georgia,GA,Bryan,democrat,57.78249631
+11/3/1896,Georgia,GA,Other,independent,5.662235352
+11/3/1896,Idaho,ID,McKinley,republican,21.31595827
+11/3/1896,Idaho,ID,Bryan,democrat,78.10337261
+11/3/1896,Idaho,ID,Other,independent,0.5806691199
+11/3/1896,Illinois,IL,McKinley,republican,55.65562868
+11/3/1896,Illinois,IL,Bryan,democrat,42.68276026
+11/3/1896,Illinois,IL,Other,independent,1.661611064
+11/3/1896,Indiana,IN,McKinley,republican,50.8153108
+11/3/1896,Indiana,IN,Bryan,democrat,47.96168377
+11/3/1896,Indiana,IN,Other,independent,1.223005435
+11/3/1896,Iowa,IA,McKinley,republican,55.46825118
+11/3/1896,Iowa,IA,Bryan,democrat,42.8994894
+11/3/1896,Iowa,IA,Other,independent,1.632259413
+11/3/1896,Kansas,KS,McKinley,republican,47.63007888
+11/3/1896,Kansas,KS,Bryan,democrat,51.31565968
+11/3/1896,Kansas,KS,Other,independent,1.054261434
+11/3/1896,Kentucky,KY,McKinley,republican,48.92516281
+11/3/1896,Kentucky,KY,Bryan,democrat,48.86304516
+11/3/1896,Kentucky,KY,Other,independent,2.211792038
+11/3/1896,Louisiana,LA,McKinley,republican,21.80887912
+11/3/1896,Louisiana,LA,Bryan,democrat,76.37610593
+11/3/1896,Louisiana,LA,Other,independent,1.815014944
+11/3/1896,Maine,ME,McKinley,republican,67.89704355
+11/3/1896,Maine,ME,Bryan,democrat,29.20730626
+11/3/1896,Maine,ME,Other,independent,2.895650191
+11/3/1896,Maryland,MD,McKinley,republican,54.72908983
+11/3/1896,Maryland,MD,Bryan,democrat,41.61854793
+11/3/1896,Maryland,MD,Other,independent,3.652362247
+11/3/1896,Massachusetts,MA,McKinley,republican,69.47167105
+11/3/1896,Massachusetts,MA,Bryan,democrat,26.32455773
+11/3/1896,Massachusetts,MA,Other,independent,4.203771217
+11/3/1896,Michigan,MI,McKinley,republican,53.76540777
+11/3/1896,Michigan,MI,Bryan,democrat,43.47003675
+11/3/1896,Michigan,MI,Other,independent,2.764555477
+11/3/1896,Minnesota,MN,McKinley,republican,56.61922625
+11/3/1896,Minnesota,MN,Bryan,democrat,40.88664041
+11/3/1896,Minnesota,MN,Other,independent,2.494133344
+11/3/1896,Mississippi,MS,McKinley,republican,6.924746016
+11/3/1896,Mississippi,MS,Bryan,democrat,91.03907114
+11/3/1896,Mississippi,MS,Other,independent,2.03618284
+11/3/1896,Missouri,MO,McKinley,republican,45.24963422
+11/3/1896,Missouri,MO,Bryan,democrat,53.96405433
+11/3/1896,Missouri,MO,Other,independent,0.786311444
+11/3/1896,Montana,MT,McKinley,republican,19.7056066
+11/3/1896,Montana,MT,Bryan,democrat,79.93249578
+11/3/1896,Montana,MT,Other,independent,0.3618976186
+11/3/1896,Nebraska,NE,McKinley,republican,46.17935138
+11/3/1896,Nebraska,NE,Bryan,democrat,51.53058938
+11/3/1896,Nebraska,NE,Other,independent,2.290059234
+11/3/1896,Nevada,NV,McKinley,republican,18.78999418
+11/3/1896,Nevada,NV,Bryan,democrat,81.21000582
+11/3/1896,Nevada,NV,Other,independent,0
+11/3/1896,New Hampshire,NH,McKinley,republican,68.65543205
+11/3/1896,New Hampshire,NH,Bryan,democrat,25.87546313
+11/3/1896,New Hampshire,NH,Other,independent,5.469104817
+11/3/1896,New Jersey,NJ,McKinley,republican,59.67899658
+11/3/1896,New Jersey,NJ,Bryan,democrat,36.0159047
+11/3/1896,New Jersey,NJ,Other,independent,4.305098717
+11/3/1896,New York,NY,McKinley,republican,57.57790706
+11/3/1896,New York,NY,Bryan,democrat,38.7231051
+11/3/1896,New York,NY,Other,independent,3.698987833
+11/3/1896,North Carolina,NC,McKinley,republican,46.81698693
+11/3/1896,North Carolina,NC,Bryan,democrat,52.63764687
+11/3/1896,North Carolina,NC,Other,independent,0.5453661982
+11/3/1896,North Dakota,ND,McKinley,republican,55.56962292
+11/3/1896,North Dakota,ND,Bryan,democrat,43.64963812
+11/3/1896,North Dakota,ND,Other,independent,0.7807389589
+11/3/1896,Ohio,OH,McKinley,republican,51.85779285
+11/3/1896,Ohio,OH,Bryan,democrat,47.07673803
+11/3/1896,Ohio,OH,Other,independent,1.065469119
+11/3/1896,Oregon,OR,McKinley,republican,50.07391135
+11/3/1896,Oregon,OR,Bryan,democrat,47.9797565
+11/3/1896,Oregon,OR,Other,independent,1.946332149
+11/3/1896,Pennsylvania,PA,McKinley,republican,60.97851979
+11/3/1896,Pennsylvania,PA,Bryan,democrat,36.27296742
+11/3/1896,Pennsylvania,PA,Other,independent,2.748512796
+11/3/1896,Rhode Island,RI,McKinley,republican,68.3343981
+11/3/1896,Rhode Island,RI,Bryan,democrat,26.39226066
+11/3/1896,Rhode Island,RI,Other,independent,5.273341243
+11/3/1896,South Carolina,SC,McKinley,republican,13.50924019
+11/3/1896,South Carolina,SC,Bryan,democrat,85.2954829
+11/3/1896,South Carolina,SC,Other,independent,1.195276915
+11/3/1896,South Dakota,SD,McKinley,republican,49.47799879
+11/3/1896,South Dakota,SD,Bryan,democrat,49.69861362
+11/3/1896,South Dakota,SD,Other,independent,0.8233875829
+11/3/1896,Tennessee,TN,McKinley,republican,46.33269243
+11/3/1896,Tennessee,TN,Bryan,democrat,52.09300007
+11/3/1896,Tennessee,TN,Other,independent,1.574307501
+11/3/1896,Texas,TX,McKinley,republican,30.74968887
+11/3/1896,Texas,TX,Bryan,democrat,67.99624073
+11/3/1896,Texas,TX,Other,independent,1.254070406
+11/3/1896,Utah,UT,McKinley,republican,17.26980632
+11/3/1896,Utah,UT,Bryan,democrat,82.70331161
+11/3/1896,Utah,UT,Other,independent,0.02688206454
+11/3/1896,Vermont,VT,McKinley,republican,80.07737247
+11/3/1896,Vermont,VT,Bryan,democrat,16.66483938
+11/3/1896,Vermont,VT,Other,independent,3.25778815
+11/3/1896,Virginia,VA,McKinley,republican,45.9419562
+11/3/1896,Virginia,VA,Bryan,democrat,52.50140834
+11/3/1896,Virginia,VA,Other,independent,1.556635468
+11/3/1896,Washington,WA,McKinley,republican,41.83772694
+11/3/1896,Washington,WA,Bryan,democrat,56.96974878
+11/3/1896,Washington,WA,Other,independent,1.192524283
+11/3/1896,West Virginia,WV,McKinley,republican,52.23065371
+11/3/1896,West Virginia,WV,Bryan,democrat,46.82861066
+11/3/1896,West Virginia,WV,Other,independent,0.9407356374
+11/3/1896,Wisconsin,WI,McKinley,republican,59.93062276
+11/3/1896,Wisconsin,WI,Bryan,democrat,36.99590308
+11/3/1896,Wisconsin,WI,Other,independent,3.073474159
+11/3/1896,Wyoming,WY,McKinley,republican,47.75270245
+11/3/1896,Wyoming,WY,Bryan,democrat,51.49345723
+11/3/1896,Wyoming,WY,Other,independent,0.7538403186
+11/6/1900,Alabama,AL,McKinley,republican,34.82453723
+11/6/1900,Alabama,AL,Bryan,democrat,60.82270871
+11/6/1900,Alabama,AL,Other,independent,4.352754052
+11/6/1900,Arkansas,AK,McKinley,republican,35.03667902
+11/6/1900,Arkansas,AK,Bryan,democrat,63.45862074
+11/6/1900,Arkansas,AK,Other,independent,1.504700233
+11/6/1900,California,CA,McKinley,republican,54.37386965
+11/6/1900,California,CA,Bryan,democrat,41.24863038
+11/6/1900,California,CA,Other,independent,4.377499967
+11/6/1900,Colorado,CO,McKinley,republican,42.03642145
+11/6/1900,Colorado,CO,Bryan,democrat,55.43295635
+11/6/1900,Colorado,CO,Other,independent,2.5306222
+11/6/1900,Connecticut,CT,McKinley,republican,56.9227781
+11/6/1900,Connecticut,CT,Bryan,democrat,41.07439163
+11/6/1900,Connecticut,CT,Other,independent,2.002830267
+11/6/1900,Delaware,DE,McKinley,republican,53.66881802
+11/6/1900,Delaware,DE,Bryan,democrat,44.89747315
+11/6/1900,Delaware,DE,Other,independent,1.433708829
+11/6/1900,Florida,FL,McKinley,republican,18.5502787
+11/6/1900,Florida,FL,Bryan,democrat,71.30822972
+11/6/1900,Florida,FL,Other,independent,10.14149159
+11/6/1900,Georgia,GA,McKinley,republican,28.21843341
+11/6/1900,Georgia,GA,Bryan,democrat,66.86434396
+11/6/1900,Georgia,GA,Other,independent,4.917222634
+11/6/1900,Idaho,ID,McKinley,republican,46.96273785
+11/6/1900,Idaho,ID,Bryan,democrat,50.78910108
+11/6/1900,Idaho,ID,Other,independent,2.248161066
+11/6/1900,Illinois,IL,McKinley,republican,52.83033704
+11/6/1900,Illinois,IL,Bryan,democrat,44.44406161
+11/6/1900,Illinois,IL,Other,independent,2.725601358
+11/6/1900,Indiana,IN,McKinley,republican,50.60473367
+11/6/1900,Indiana,IN,Bryan,democrat,46.61749692
+11/6/1900,Indiana,IN,Other,independent,2.777769412
+11/6/1900,Iowa,IA,McKinley,republican,58.03810655
+11/6/1900,Iowa,IA,Bryan,democrat,39.45753316
+11/6/1900,Iowa,IA,Other,independent,2.504360287
+11/6/1900,Kansas,KS,McKinley,republican,52.56440698
+11/6/1900,Kansas,KS,Bryan,democrat,45.96286811
+11/6/1900,Kansas,KS,Other,independent,1.472724909
+11/6/1900,Kentucky,KY,McKinley,republican,48.50501319
+11/6/1900,Kentucky,KY,Bryan,democrat,50.21216619
+11/6/1900,Kentucky,KY,Other,independent,1.282820625
+11/6/1900,Louisiana,LA,McKinley,republican,20.9613289
+11/6/1900,Louisiana,LA,Bryan,democrat,79.03278061
+11/6/1900,Louisiana,LA,Other,independent,0.005890495685
+11/6/1900,Maine,ME,McKinley,republican,61.88867759
+11/6/1900,Maine,ME,Bryan,democrat,34.83863643
+11/6/1900,Maine,ME,Other,independent,3.272685987
+11/6/1900,Maryland,MD,McKinley,republican,51.50056347
+11/6/1900,Maryland,MD,Bryan,democrat,46.22627953
+11/6/1900,Maryland,MD,Other,independent,2.273157007
+11/6/1900,Massachusetts,MA,McKinley,republican,57.58526919
+11/6/1900,Massachusetts,MA,Bryan,democrat,37.84847784
+11/6/1900,Massachusetts,MA,Other,independent,4.566252977
+11/6/1900,Michigan,MI,McKinley,republican,58.09720801
+11/6/1900,Michigan,MI,Bryan,democrat,38.88559257
+11/6/1900,Michigan,MI,Other,independent,3.017199414
+11/6/1900,Minnesota,MN,McKinley,republican,60.21320789
+11/6/1900,Minnesota,MN,Bryan,democrat,35.69303628
+11/6/1900,Minnesota,MN,Other,independent,4.093755829
+11/6/1900,Mississippi,MS,McKinley,republican,9.663872661
+11/6/1900,Mississippi,MS,Bryan,democrat,87.55566844
+11/6/1900,Mississippi,MS,Other,independent,2.780458894
+11/6/1900,Missouri,MO,McKinley,republican,45.94298887
+11/6/1900,Missouri,MO,Bryan,democrat,51.47647355
+11/6/1900,Missouri,MO,Other,independent,2.58053758
+11/6/1900,Montana,MT,McKinley,republican,39.79109246
+11/6/1900,Montana,MT,Bryan,democrat,58.42990479
+11/6/1900,Montana,MT,Other,independent,1.779002756
+11/6/1900,Nebraska,NE,McKinley,republican,50.46390258
+11/6/1900,Nebraska,NE,Bryan,democrat,47.22404009
+11/6/1900,Nebraska,NE,Other,independent,2.312057325
+11/6/1900,Nevada,NV,McKinley,republican,37.75009808
+11/6/1900,Nevada,NV,Bryan,democrat,62.24990192
+11/6/1900,Nevada,NV,Other,independent,0
+11/6/1900,New Hampshire,NH,McKinley,republican,59.3293924
+11/6/1900,New Hampshire,NH,Bryan,democrat,38.42297865
+11/6/1900,New Hampshire,NH,Other,independent,2.247628946
+11/6/1900,New Jersey,NJ,McKinley,republican,55.27185536
+11/6/1900,New Jersey,NJ,Bryan,democrat,41.09584602
+11/6/1900,New Jersey,NJ,Other,independent,3.63229862
+11/6/1900,New York,NY,McKinley,republican,53.10017428
+11/6/1900,New York,NY,Bryan,democrat,43.82710547
+11/6/1900,New York,NY,Other,independent,3.072720249
+11/6/1900,North Carolina,NC,McKinley,republican,45.46626191
+11/6/1900,North Carolina,NC,Bryan,democrat,53.92249366
+11/6/1900,North Carolina,NC,Other,independent,0.6112444362
+11/6/1900,North Dakota,ND,McKinley,republican,62.11693862
+11/6/1900,North Dakota,ND,Bryan,democrat,35.52629302
+11/6/1900,North Dakota,ND,Other,independent,2.356768355
+11/6/1900,Ohio,OH,McKinley,republican,52.29613691
+11/6/1900,Ohio,OH,Bryan,democrat,45.65852589
+11/6/1900,Ohio,OH,Other,independent,2.045337202
+11/6/1900,Oregon,OR,McKinley,republican,55.46119566
+11/6/1900,Oregon,OR,Bryan,democrat,39.41093801
+11/6/1900,Oregon,OR,Other,independent,5.127866332
+11/6/1900,Pennsylvania,PA,McKinley,republican,60.74487943
+11/6/1900,Pennsylvania,PA,Bryan,democrat,36.15993727
+11/6/1900,Pennsylvania,PA,Other,independent,3.095183301
+11/6/1900,Rhode Island,RI,McKinley,republican,59.74393436
+11/6/1900,Rhode Island,RI,Bryan,democrat,35.03572186
+11/6/1900,Rhode Island,RI,Other,independent,5.220343779
+11/6/1900,South Carolina,SC,McKinley,republican,7.043611745
+11/6/1900,South Carolina,SC,Bryan,democrat,92.95638825
+11/6/1900,South Carolina,SC,Other,independent,0
+11/6/1900,South Dakota,SD,McKinley,republican,56.72880862
+11/6/1900,South Dakota,SD,Bryan,democrat,41.1385294
+11/6/1900,South Dakota,SD,Other,independent,2.132661978
+11/6/1900,Tennessee,TN,McKinley,republican,44.95289564
+11/6/1900,Tennessee,TN,Bryan,democrat,53.03439714
+11/6/1900,Tennessee,TN,Other,independent,2.012707223
+11/6/1900,Texas,TX,McKinley,republican,30.83293605
+11/6/1900,Texas,TX,Bryan,democrat,63.11735024
+11/6/1900,Texas,TX,Other,independent,6.049713717
+11/6/1900,Utah,UT,McKinley,republican,50.58429643
+11/6/1900,Utah,UT,Bryan,democrat,48.29539967
+11/6/1900,Utah,UT,Other,independent,1.120303899
+11/6/1900,Vermont,VT,McKinley,republican,75.72938163
+11/6/1900,Vermont,VT,Bryan,democrat,22.85810859
+11/6/1900,Vermont,VT,Other,independent,1.412509784
+11/6/1900,Virginia,VA,McKinley,republican,43.81737116
+11/6/1900,Virginia,VA,Bryan,democrat,55.28939321
+11/6/1900,Virginia,VA,Other,independent,0.8932356325
+11/6/1900,Washington,WA,McKinley,republican,53.43551207
+11/6/1900,Washington,WA,Bryan,democrat,41.69580745
+11/6/1900,Washington,WA,Other,independent,4.868680481
+11/6/1900,West Virginia,WV,McKinley,republican,54.27136361
+11/6/1900,West Virginia,WV,Bryan,democrat,44.7503578
+11/6/1900,West Virginia,WV,Other,independent,0.978278592
+11/6/1900,Wisconsin,WI,McKinley,republican,60.05862134
+11/6/1900,Wisconsin,WI,Bryan,democrat,35.96895826
+11/6/1900,Wisconsin,WI,Other,independent,3.972420401
+11/6/1900,Wyoming,WY,McKinley,republican,58.66245392
+11/6/1900,Wyoming,WY,Bryan,democrat,41.17146676
+11/6/1900,Wyoming,WY,Other,independent,0.166079313
+11/8/1904,Alabama,AL,Roosevelt,republican,20.64587257
+11/8/1904,Alabama,AL,Parker,democrat,73.36763287
+11/8/1904,Alabama,AL,Debs,independent,0.7836832193
+11/8/1904,Alabama,AL,Other,independent,5.202811337
+11/8/1904,Arkansas,AR,Roosevelt,republican,40.25047028
+11/8/1904,Arkansas,AR,Parker,democrat,55.34568506
+11/8/1904,Arkansas,AR,Debs,independent,1.55985604
+11/8/1904,Arkansas,AR,Other,independent,2.843988627
+11/8/1904,California,CA,Roosevelt,republican,61.83778376
+11/8/1904,California,CA,Parker,democrat,26.93881487
+11/8/1904,California,CA,Debs,independent,8.899354582
+11/8/1904,California,CA,Other,independent,2.324046788
+11/8/1904,Colorado,CO,Roosevelt,republican,55.26435668
+11/8/1904,Colorado,CO,Parker,democrat,41.08270714
+11/8/1904,Colorado,CO,Debs,independent,1.766345053
+11/8/1904,Colorado,CO,Other,independent,1.886591126
+11/8/1904,Connecticut,CN,Roosevelt,republican,58.12282868
+11/8/1904,Connecticut,CN,Parker,democrat,38.14668704
+11/8/1904,Connecticut,CN,Debs,independent,2.376941108
+11/8/1904,Connecticut,CN,Other,independent,1.353543175
+11/8/1904,Delaware,DE,Roosevelt,republican,54.05189712
+11/8/1904,Delaware,DE,Parker,democrat,44.11483035
+11/8/1904,Delaware,DE,Debs,independent,0.3329076979
+11/8/1904,Delaware,DE,Other,independent,1.50036483
+11/8/1904,Florida,FL,Roosevelt,republican,21.15037269
+11/8/1904,Florida,FL,Parker,democrat,68.80358188
+11/8/1904,Florida,FL,Debs,independent,5.945203389
+11/8/1904,Florida,FL,Other,independent,4.100842046
+11/8/1904,Georgia,GA,Roosevelt,republican,18.32562259
+11/8/1904,Georgia,GA,Parker,democrat,63.72131373
+11/8/1904,Georgia,GA,Debs,independent,0.1496343121
+11/8/1904,Georgia,GA,Other,independent,17.80342937
+11/8/1904,Idaho,ID,Roosevelt,republican,65.83675494
+11/8/1904,Idaho,ID,Parker,democrat,25.46226129
+11/8/1904,Idaho,ID,Debs,independent,6.818870732
+11/8/1904,Idaho,ID,Other,independent,1.882113037
+11/8/1904,Illinois,IL,Roosevelt,republican,58.76874944
+11/8/1904,Illinois,IL,Parker,democrat,30.43254104
+11/8/1904,Illinois,IL,Debs,independent,6.43056798
+11/8/1904,Illinois,IL,Other,independent,4.36814154
+11/8/1904,Indiana,IN,Roosevelt,republican,53.98667517
+11/8/1904,Indiana,IN,Parker,democrat,40.21563066
+11/8/1904,Indiana,IN,Debs,independent,1.760959271
+11/8/1904,Indiana,IN,Other,independent,4.036734903
+11/8/1904,Iowa,IA,Roosevelt,republican,63.39486477
+11/8/1904,Iowa,IA,Parker,democrat,30.70934986
+11/8/1904,Iowa,IA,Debs,independent,3.05476524
+11/8/1904,Iowa,IA,Other,independent,2.841020134
+11/8/1904,Kansas,KS,Roosevelt,republican,64.81444846
+11/8/1904,Kansas,KS,Parker,democrat,26.22770201
+11/8/1904,Kansas,KS,Debs,independent,4.829848947
+11/8/1904,Kansas,KS,Other,independent,4.128000584
+11/8/1904,Kentucky,KY,Roosevelt,republican,47.12900222
+11/8/1904,Kentucky,KY,Parker,democrat,49.81580287
+11/8/1904,Kentucky,KY,Debs,independent,0.825560964
+11/8/1904,Kentucky,KY,Other,independent,2.229633945
+11/8/1904,Louisiana,LA,Roosevelt,republican,9.655338725
+11/8/1904,Louisiana,LA,Parker,democrat,88.49892409
+11/8/1904,Louisiana,LA,Debs,independent,1.845737182
+11/8/1904,Louisiana,LA,Other,independent,0
+11/8/1904,Maine,ME,Roosevelt,republican,67.43967925
+11/8/1904,Maine,ME,Parker,democrat,28.49015182
+11/8/1904,Maine,ME,Debs,independent,2.166496604
+11/8/1904,Maine,ME,Other,independent,1.903672325
+11/8/1904,Maryland,MD,Roosevelt,republican,48.8326666
+11/8/1904,Maryland,MD,Parker,democrat,48.809922
+11/8/1904,Maryland,MD,Debs,independent,1.002100531
+11/8/1904,Maryland,MD,Other,independent,1.355310865
+11/8/1904,Massachusetts,MA,Roosevelt,republican,57.92334013
+11/8/1904,Massachusetts,MA,Parker,democrat,37.23717112
+11/8/1904,Massachusetts,MA,Debs,independent,3.056330023
+11/8/1904,Massachusetts,MA,Other,independent,1.783158732
+11/8/1904,Michigan,MI,Roosevelt,republican,69.51204414
+11/8/1904,Michigan,MI,Parker,democrat,25.78762616
+11/8/1904,Michigan,MI,Debs,independent,1.722197144
+11/8/1904,Michigan,MI,Other,independent,2.978132553
+11/8/1904,Minnesota,MN,Roosevelt,republican,73.97766851
+11/8/1904,Minnesota,MN,Parker,democrat,18.84415762
+11/8/1904,Minnesota,MN,Debs,independent,3.992351294
+11/8/1904,Minnesota,MN,Other,independent,3.185822577
+11/8/1904,Mississippi,MS,Roosevelt,republican,5.585735938
+11/8/1904,Mississippi,MS,Parker,democrat,91.07474328
+11/8/1904,Mississippi,MS,Debs,independent,0.7867713424
+11/8/1904,Mississippi,MS,Other,independent,2.552749442
+11/8/1904,Missouri,MO,Roosevelt,republican,49.92521678
+11/8/1904,Missouri,MO,Parker,democrat,46.02111325
+11/8/1904,Missouri,MO,Debs,independent,2.020467151
+11/8/1904,Missouri,MO,Other,independent,2.033202819
+11/8/1904,Montana,MT,Roosevelt,republican,54.20520142
+11/8/1904,Montana,MT,Parker,democrat,33.78592266
+11/8/1904,Montana,MT,Debs,independent,8.807646949
+11/8/1904,Montana,MT,Other,independent,3.201228974
+11/8/1904,Nebraska,NE,Roosevelt,republican,61.3816384
+11/8/1904,Nebraska,NE,Parker,democrat,23.44417274
+11/8/1904,Nebraska,NE,Debs,independent,3.283539773
+11/8/1904,Nebraska,NE,Other,independent,11.89064909
+11/8/1904,Nevada,NV,Roosevelt,republican,56.65703673
+11/8/1904,Nevada,NV,Parker,democrat,32.86834503
+11/8/1904,Nevada,NV,Debs,independent,7.635163021
+11/8/1904,Nevada,NV,Other,independent,2.839455221
+11/8/1904,New Hampshire,NH,Roosevelt,republican,60.07364603
+11/8/1904,New Hampshire,NH,Parker,democrat,37.79239361
+11/8/1904,New Hampshire,NH,Debs,independent,1.208948437
+11/8/1904,New Hampshire,NH,Other,independent,0.9250119231
+11/8/1904,New Jersey,NJ,Roosevelt,republican,56.67915857
+11/8/1904,New Jersey,NJ,Parker,democrat,38.04580774
+11/8/1904,New Jersey,NJ,Debs,independent,2.216406541
+11/8/1904,New Jersey,NJ,Other,independent,3.058627155
+11/8/1904,New York,NY,Roosevelt,republican,53.13072934
+11/8/1904,New York,NY,Parker,democrat,42.2792486
+11/8/1904,New York,NY,Debs,independent,2.27986673
+11/8/1904,New York,NY,Other,independent,2.310155337
+11/8/1904,North Carolina,NC,Roosevelt,republican,39.67028843
+11/8/1904,North Carolina,NC,Parker,democrat,59.71138207
+11/8/1904,North Carolina,NC,Debs,independent,0.05966759376
+11/8/1904,North Carolina,NC,Other,independent,0.5586619061
+11/8/1904,North Dakota,ND,Roosevelt,republican,75.12069015
+11/8/1904,North Dakota,ND,Parker,democrat,20.38592282
+11/8/1904,North Dakota,ND,Debs,independent,2.869426115
+11/8/1904,North Dakota,ND,Other,independent,1.623960922
+11/8/1904,Ohio,OH,Roosevelt,republican,59.74703129
+11/8/1904,Ohio,OH,Parker,democrat,34.31664697
+11/8/1904,Ohio,OH,Debs,independent,3.610140652
+11/8/1904,Ohio,OH,Other,independent,2.326181086
+11/8/1904,Oregon,OR,Roosevelt,republican,67.05747942
+11/8/1904,Oregon,OR,Parker,democrat,19.43452315
+11/8/1904,Oregon,OR,Debs,independent,8.451094793
+11/8/1904,Oregon,OR,Other,independent,5.056902633
+11/8/1904,Pennsylvania,PA,Roosevelt,republican,67.99734463
+11/8/1904,Pennsylvania,PA,Parker,democrat,27.32979823
+11/8/1904,Pennsylvania,PA,Debs,independent,1.767795604
+11/8/1904,Pennsylvania,PA,Other,independent,2.905061541
+11/8/1904,Rhode Island,RI,Roosevelt,republican,60.5992193
+11/8/1904,Rhode Island,RI,Parker,democrat,36.178921
+11/8/1904,Rhode Island,RI,Debs,independent,1.392449313
+11/8/1904,Rhode Island,RI,Other,independent,1.829410394
+11/8/1904,South Carolina,SC,Roosevelt,republican,4.633694982
+11/8/1904,South Carolina,SC,Parker,democrat,95.36449073
+11/8/1904,South Carolina,SC,Debs,independent,0
+11/8/1904,South Carolina,SC,Other,independent,0.001814289343
+11/8/1904,South Dakota,SD,Roosevelt,republican,71.09127669
+11/8/1904,South Dakota,SD,Parker,democrat,21.66674885
+11/8/1904,South Dakota,SD,Debs,independent,3.094827161
+11/8/1904,South Dakota,SD,Other,independent,4.147147295
+11/8/1904,Tennessee,TN,Roosevelt,republican,43.40391349
+11/8/1904,Tennessee,TN,Parker,democrat,54.23398558
+11/8/1904,Tennessee,TN,Debs,independent,0.5577754892
+11/8/1904,Tennessee,TN,Other,independent,1.804325438
+11/8/1904,Texas,TX,Roosevelt,republican,21.89754196
+11/8/1904,Texas,TX,Parker,democrat,71.4505487
+11/8/1904,Texas,TX,Debs,independent,1.192694267
+11/8/1904,Texas,TX,Other,independent,5.45921507
+11/8/1904,Utah,UT,Roosevelt,republican,61.4190731
+11/8/1904,Utah,UT,Parker,democrat,32.86352191
+11/8/1904,Utah,UT,Debs,independent,5.67216146
+11/8/1904,Utah,UT,Other,independent,0.04524352821
+11/8/1904,Vermont,VT,Roosevelt,republican,77.97371261
+11/8/1904,Vermont,VT,Parker,democrat,18.84250694
+11/8/1904,Vermont,VT,Debs,independent,1.655488745
+11/8/1904,Vermont,VT,Other,independent,1.528291705
+11/8/1904,Virginia,VA,Roosevelt,republican,36.94501955
+11/8/1904,Virginia,VA,Parker,democrat,61.8426501
+11/8/1904,Virginia,VA,Debs,independent,0.1548960969
+11/8/1904,Virginia,VA,Other,independent,1.057434246
+11/8/1904,Washington,WA,Roosevelt,republican,69.95473679
+11/8/1904,Washington,WA,Parker,democrat,19.35777225
+11/8/1904,Washington,WA,Debs,independent,6.905222837
+11/8/1904,Washington,WA,Other,independent,3.782268121
+11/8/1904,West Virginia,WV,Roosevelt,republican,55.26155692
+11/8/1904,West Virginia,WV,Parker,democrat,42.02536815
+11/8/1904,West Virginia,WV,Debs,independent,0.6554549015
+11/8/1904,West Virginia,WV,Other,independent,2.057620028
+11/8/1904,Wisconsin,WI,Roosevelt,republican,63.2135955
+11/8/1904,Wisconsin,WI,Parker,democrat,28.00936314
+11/8/1904,Wisconsin,WI,Debs,independent,6.368378206
+11/8/1904,Wisconsin,WI,Other,independent,2.408663159
+11/8/1904,Wyoming,WY,Roosevelt,republican,66.72202683
+11/8/1904,Wyoming,WY,Parker,democrat,29.08036994
+11/8/1904,Wyoming,WY,Debs,independent,3.490946984
+11/8/1904,Wyoming,WY,Other,independent,0.7066562459
+11/3/1908,Alabama,AL,Taft,republican,24.17946861
+11/3/1908,Alabama,AL,Bryan,democrat,70.87828308
+11/3/1908,Alabama,AL,Debs,independent,1.381847292
+11/3/1908,Alabama,AL,Other,independent,3.560401022
+11/3/1908,Arkansas,AR,Taft,republican,37.29630752
+11/3/1908,Arkansas,AR,Bryan,democrat,57.31382804
+11/3/1908,Arkansas,AR,Debs,independent,3.847927178
+11/3/1908,Arkansas,AR,Other,independent,1.541937269
+11/3/1908,California,CA,Taft,republican,55.45775058
+11/3/1908,California,CA,Bryan,democrat,32.97801069
+11/3/1908,California,CA,Debs,independent,7.413145989
+11/3/1908,California,CA,Other,independent,4.15109274
+11/3/1908,Colorado,CO,Taft,republican,46.87862411
+11/3/1908,Colorado,CO,Bryan,democrat,47.9970287
+11/3/1908,Colorado,CO,Debs,independent,3.016774174
+11/3/1908,Colorado,CO,Other,independent,2.107573013
+11/3/1908,Connecticut,CN,Taft,republican,59.42800903
+11/3/1908,Connecticut,CN,Bryan,democrat,35.923117
+11/3/1908,Connecticut,CN,Debs,independent,2.691010142
+11/3/1908,Connecticut,CN,Other,independent,1.957863823
+11/3/1908,Delaware,DE,Taft,republican,52.10490137
+11/3/1908,Delaware,DE,Bryan,democrat,45.94121691
+11/3/1908,Delaware,DE,Debs,independent,0.4978440644
+11/3/1908,Delaware,DE,Other,independent,1.456037661
+11/3/1908,Florida,FL,Taft,republican,21.58427877
+11/3/1908,Florida,FL,Bryan,democrat,63.01458671
+11/3/1908,Florida,FL,Debs,independent,7.591166937
+11/3/1908,Florida,FL,Other,independent,7.809967585
+11/3/1908,Georgia,GA,Taft,republican,31.21037855
+11/3/1908,Georgia,GA,Bryan,democrat,54.60212522
+11/3/1908,Georgia,GA,Debs,independent,0.4407414116
+11/3/1908,Georgia,GA,Other,independent,13.74675481
+11/3/1908,Idaho,ID,Taft,republican,54.0850832
+11/3/1908,Idaho,ID,Bryan,democrat,37.16814159
+11/3/1908,Idaho,ID,Debs,independent,6.578068309
+11/3/1908,Idaho,ID,Other,independent,2.168706896
+11/3/1908,Illinois,IL,Taft,republican,54.52757575
+11/3/1908,Illinois,IL,Bryan,democrat,39.02258724
+11/3/1908,Illinois,IL,Debs,independent,3.004620629
+11/3/1908,Illinois,IL,Other,independent,3.445216377
+11/3/1908,Indiana,IN,Taft,republican,48.39556471
+11/3/1908,Indiana,IN,Bryan,democrat,46.90747525
+11/3/1908,Indiana,IN,Debs,independent,1.868744158
+11/3/1908,Indiana,IN,Other,independent,2.828215874
+11/3/1908,Iowa,IA,Taft,republican,55.62373552
+11/3/1908,Iowa,IA,Bryan,democrat,40.57873472
+11/3/1908,Iowa,IA,Debs,independent,1.674923045
+11/3/1908,Iowa,IA,Other,independent,2.122606711
+11/3/1908,Kansas,KS,Taft,republican,52.45859778
+11/3/1908,Kansas,KS,Bryan,democrat,42.88089247
+11/3/1908,Kansas,KS,Debs,independent,3.303665952
+11/3/1908,Kansas,KS,Other,independent,1.356843802
+11/3/1908,Kentucky,KY,Taft,republican,48.03380346
+11/3/1908,Kentucky,KY,Bryan,democrat,49.74170554
+11/3/1908,Kentucky,KY,Debs,independent,0.8340822344
+11/3/1908,Kentucky,KY,Other,independent,1.390408768
+11/3/1908,Louisiana,LA,Taft,republican,11.92539638
+11/3/1908,Louisiana,LA,Bryan,democrat,84.62531784
+11/3/1908,Louisiana,LA,Debs,independent,3.346779025
+11/3/1908,Louisiana,LA,Other,independent,0.1025067561
+11/3/1908,Maine,ME,Taft,republican,62.99559886
+11/3/1908,Maine,ME,Bryan,democrat,33.29352242
+11/3/1908,Maine,ME,Debs,independent,1.653250075
+11/3/1908,Maine,ME,Other,independent,2.057628649
+11/3/1908,Maryland,MD,Taft,republican,48.84606194
+11/3/1908,Maryland,MD,Bryan,democrat,48.59242614
+11/3/1908,Maryland,MD,Debs,independent,0.9738776092
+11/3/1908,Maryland,MD,Other,independent,1.587634312
+11/3/1908,Massachusetts,MA,Taft,republican,58.20856651
+11/3/1908,Massachusetts,MA,Bryan,democrat,34.04170105
+11/3/1908,Massachusetts,MA,Debs,independent,2.359061453
+11/3/1908,Massachusetts,MA,Other,independent,5.390670994
+11/3/1908,Michigan,MI,Taft,republican,61.93455512
+11/3/1908,Michigan,MI,Bryan,democrat,32.44024879
+11/3/1908,Michigan,MI,Debs,independent,2.138309064
+11/3/1908,Michigan,MI,Other,independent,3.486887031
+11/3/1908,Minnesota,MN,Taft,republican,59.1127786
+11/3/1908,Minnesota,MN,Bryan,democrat,33.02133388
+11/3/1908,Minnesota,MN,Debs,independent,4.38479463
+11/3/1908,Minnesota,MN,Other,independent,3.481092894
+11/3/1908,Mississippi,MS,Taft,republican,6.521284228
+11/3/1908,Mississippi,MS,Bryan,democrat,90.10970943
+11/3/1908,Mississippi,MS,Debs,independent,1.461796006
+11/3/1908,Mississippi,MS,Other,independent,1.907210331
+11/3/1908,Missouri,MO,Taft,republican,48.49698363
+11/3/1908,Missouri,MO,Bryan,democrat,48.40912551
+11/3/1908,Missouri,MO,Debs,independent,2.155387351
+11/3/1908,Missouri,MO,Other,independent,0.9385035066
+11/3/1908,Montana,MT,Taft,republican,46.98061666
+11/3/1908,Montana,MT,Bryan,democrat,42.61137427
+11/3/1908,Montana,MT,Debs,independent,8.507454012
+11/3/1908,Montana,MT,Other,independent,1.900555055
+11/3/1908,Nebraska,NE,Taft,republican,47.60025337
+11/3/1908,Nebraska,NE,Bryan,democrat,49.1377404
+11/3/1908,Nebraska,NE,Debs,independent,1.320844531
+11/3/1908,Nebraska,NE,Other,independent,1.941161699
+11/3/1908,Nevada,NV,Taft,republican,43.93296909
+11/3/1908,Nevada,NV,Bryan,democrat,45.71475169
+11/3/1908,Nevada,NV,Debs,independent,8.574573922
+11/3/1908,Nevada,NV,Other,independent,1.777705292
+11/3/1908,New Hampshire,NH,Taft,republican,59.31808036
+11/3/1908,New Hampshire,NH,Bryan,democrat,37.56138393
+11/3/1908,New Hampshire,NH,Debs,independent,1.449776786
+11/3/1908,New Hampshire,NH,Other,independent,1.670758929
+11/3/1908,New Jersey,NJ,Taft,republican,56.79091092
+11/3/1908,New Jersey,NJ,Bryan,democrat,39.07700804
+11/3/1908,New Jersey,NJ,Debs,independent,2.194572751
+11/3/1908,New Jersey,NJ,Other,independent,1.937508294
+11/3/1908,New York,NY,Taft,republican,53.10647908
+11/3/1908,New York,NY,Bryan,democrat,40.74025697
+11/3/1908,New York,NY,Debs,independent,2.346934416
+11/3/1908,New York,NY,Other,independent,3.806329539
+11/3/1908,North Carolina,NC,Taft,republican,45.49007341
+11/3/1908,North Carolina,NC,Bryan,democrat,54.2173159
+11/3/1908,North Carolina,NC,Debs,independent,0.1472952319
+11/3/1908,North Carolina,NC,Other,independent,0.1453154573
+11/3/1908,North Dakota,ND,Taft,republican,61.02089394
+11/3/1908,North Dakota,ND,Bryan,democrat,34.78973816
+11/3/1908,North Dakota,ND,Debs,independent,2.561227189
+11/3/1908,North Dakota,ND,Other,independent,1.628140704
+11/3/1908,Ohio,OH,Taft,republican,51.02857469
+11/3/1908,Ohio,OH,Bryan,democrat,44.82369074
+11/3/1908,Ohio,OH,Debs,independent,3.013235231
+11/3/1908,Ohio,OH,Other,independent,1.134499337
+11/3/1908,Oklahoma,OK,Taft,republican,43.32602566
+11/3/1908,Oklahoma,OK,Bryan,democrat,47.98868944
+11/3/1908,Oklahoma,OK,Debs,independent,8.523705502
+11/3/1908,Oklahoma,OK,Other,independent,0.1615793994
+11/3/1908,Oregon,OR,Taft,republican,56.38972306
+11/3/1908,Oregon,OR,Bryan,democrat,34.31269107
+11/3/1908,Oregon,OR,Debs,independent,6.618330042
+11/3/1908,Oregon,OR,Other,independent,2.679255832
+11/3/1908,Pennsylvania,PA,Taft,republican,58.84090102
+11/3/1908,Pennsylvania,PA,Bryan,democrat,35.40826068
+11/3/1908,Pennsylvania,PA,Debs,independent,2.675766302
+11/3/1908,Pennsylvania,PA,Other,independent,3.075071995
+11/3/1908,Rhode Island,RI,Taft,republican,60.76302944
+11/3/1908,Rhode Island,RI,Bryan,democrat,34.1634747
+11/3/1908,Rhode Island,RI,Debs,independent,1.887522989
+11/3/1908,Rhode Island,RI,Other,independent,3.185972869
+11/3/1908,South Carolina,SC,Taft,republican,5.943144669
+11/3/1908,South Carolina,SC,Bryan,democrat,93.83690625
+11/3/1908,South Carolina,SC,Debs,independent,0.150650055
+11/3/1908,South Carolina,SC,Other,independent,0.06929902529
+11/3/1908,South Dakota,SD,Taft,republican,58.84208234
+11/3/1908,South Dakota,SD,Bryan,democrat,35.08255282
+11/3/1908,South Dakota,SD,Debs,independent,2.479634067
+11/3/1908,South Dakota,SD,Other,independent,3.595730778
+11/3/1908,Tennessee,TN,Taft,republican,45.8733183
+11/3/1908,Tennessee,TN,Bryan,democrat,52.72882806
+11/3/1908,Tennessee,TN,Debs,independent,0.7271171942
+11/3/1908,Tennessee,TN,Other,independent,0.6707364492
+11/3/1908,Texas,TX,Taft,republican,22.35385029
+11/3/1908,Texas,TX,Bryan,democrat,73.97338617
+11/3/1908,Texas,TX,Debs,independent,2.679085094
+11/3/1908,Texas,TX,Other,independent,0.9936784485
+11/3/1908,Utah,UT,Taft,republican,56.18848572
+11/3/1908,Utah,UT,Bryan,democrat,39.22274498
+11/3/1908,Utah,UT,Debs,independent,4.506826991
+11/3/1908,Utah,UT,Other,independent,0.08194230893
+11/3/1908,Vermont,VT,Taft,republican,75.07545128
+11/3/1908,Vermont,VT,Bryan,democrat,21.8210808
+11/3/1908,Vermont,VT,Debs,independent,0
+11/3/1908,Vermont,VT,Other,independent,3.103467912
+11/3/1908,Virginia,VA,Taft,republican,38.35552475
+11/3/1908,Virginia,VA,Bryan,democrat,60.51581367
+11/3/1908,Virginia,VA,Debs,independent,0.1860431182
+11/3/1908,Virginia,VA,Other,independent,0.9426184657
+11/3/1908,Washington,WA,Taft,republican,57.68032239
+11/3/1908,Washington,WA,Bryan,democrat,31.91827234
+11/3/1908,Washington,WA,Debs,independent,7.709961442
+11/3/1908,Washington,WA,Other,independent,2.69144383
+11/3/1908,West Virginia,WV,Taft,republican,53.41585789
+11/3/1908,West Virginia,WV,Bryan,democrat,43.16770307
+11/3/1908,West Virginia,WV,Debs,independent,1.425388892
+11/3/1908,West Virginia,WV,Other,independent,1.991050154
+11/3/1908,Wisconsin,WI,Taft,republican,54.51686798
+11/3/1908,Wisconsin,WI,Bryan,democrat,36.6740677
+11/3/1908,Wisconsin,WI,Debs,independent,6.193763327
+11/3/1908,Wisconsin,WI,Other,independent,2.615300996
+11/3/1908,Wyoming,WY,Taft,republican,55.42822197
+11/3/1908,Wyoming,WY,Bryan,democrat,39.66603738
+11/3/1908,Wyoming,WY,Debs,independent,4.560078705
+11/3/1908,Wyoming,WY,Other,independent,0.3456619426
 11/5/1912,Alabama,AL,Taft,republican,8.243897887
 11/5/1912,Alabama,AL,Wilson,democrat,69.94035752
 11/5/1912,Alabama,AL,Roosevelt,independent,19.24170053

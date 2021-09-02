@@ -70,9 +70,9 @@ class MapType
     return this.totalEV
   }
 
-  getEV(decade, regionID)
+  getEV(decade, regionID, disabled, shouldSetDisabledWorthToZero)
   {
-    return this.evFunction(decade, regionID)
+    return this.evFunction(decade, regionID, disabled, shouldSetDisabledWorthToZero)
   }
 
   getShouldDisplayEVOnMap()
@@ -219,7 +219,13 @@ const regionEVArray = {
   1940: {"AL":11, "AK":0, "AZ":4, "AR":9, "CA":25, "CO":6, "CT":8, "DE":3, "DC":0, "FL":8, "GA":12, "HI":0, "ID":4, "IL":28, "IN":13, "IA":10, "KS":8, "KY":11, "LA":10, "ME-D1":0, "ME-D2":0, "ME-AL":5, "MD":8, "MA":16, "MI":19, "MN":11, "MS":9, "MO":15, "MT":4, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":6, "NV":3, "NH":4, "NJ":16, "NM":4, "NY":47, "NC":14, "ND":4, "OH":25, "OK":10, "OR":6, "PA":35, "RI":4, "SC":8, "SD":4, "TN":12, "TX":23, "UT":4, "VT":3, "VA":11, "WA":8, "WV":8, "WI":12, "WY":3},
   1930: {"AL":11, "AK":0, "AZ":3, "AR":9, "CA":22, "CO":6, "CT":8, "DE":3, "DC":0, "FL":7, "GA":12, "HI":0, "ID":4, "IL":29, "IN":14, "IA":11, "KS":9, "KY":11, "LA":10, "ME-D1":0, "ME-D2":0, "ME-AL":5, "MD":8, "MA":17, "MI":19, "MN":11, "MS":9, "MO":15, "MT":4, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":7, "NV":3, "NH":4, "NJ":16, "NM":3, "NY":47, "NC":13, "ND":4, "OH":26, "OK":11, "OR":5, "PA":36, "RI":4, "SC":8, "SD":4, "TN":11, "TX":23, "UT":4, "VT":3, "VA":11, "WA":8, "WV":8, "WI":12, "WY":3},
   1920: {"AL":12, "AK":0, "AZ":3, "AR":9, "CA":13, "CO":6, "CT":7, "DE":3, "DC":0, "FL":6, "GA":14, "HI":0, "ID":4, "IL":29, "IN":15, "IA":13, "KS":10, "KY":13, "LA":10, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":18, "MI":15, "MN":12, "MS":10, "MO":18, "MT":4, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":8, "NV":3, "NH":4, "NJ":14, "NM":3, "NY":45, "NC":12, "ND":5, "OH":24, "OK":10, "OR":5, "PA":38, "RI":5, "SC":9, "SD":5, "TN":12, "TX":20, "UT":4, "VT":4, "VA":12, "WA":7, "WV":8, "WI":13, "WY":3},
-  1910: {"AL":12, "AK":0, "AZ":3, "AR":9, "CA":13, "CO":6, "CT":7, "DE":3, "DC":0, "FL":6, "GA":14, "HI":0, "ID":4, "IL":29, "IN":15, "IA":13, "KS":10, "KY":13, "LA":10, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":18, "MI":15, "MN":12, "MS":10, "MO":18, "MT":4, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":8, "NV":3, "NH":4, "NJ":14, "NM":3, "NY":45, "NC":12, "ND":5, "OH":24, "OK":10, "OR":5, "PA":38, "RI":5, "SC":9, "SD":5, "TN":12, "TX":20, "UT":4, "VT":4, "VA":12, "WA":7, "WV":8, "WI":13, "WY":3}
+  1910: {"AL":12, "AK":0, "AZ":3, "AR":9, "CA":13, "CO":6, "CT":7, "DE":3, "DC":0, "FL":6, "GA":14, "HI":0, "ID":4, "IL":29, "IN":15, "IA":13, "KS":10, "KY":13, "LA":10, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":18, "MI":15, "MN":12, "MS":10, "MO":18, "MT":4, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":8, "NV":3, "NH":4, "NJ":14, "NM":3, "NY":45, "NC":12, "ND":5, "OH":24, "OK":10, "OR":5, "PA":38, "RI":5, "SC":9, "SD":5, "TN":12, "TX":20, "UT":4, "VT":4, "VA":12, "WA":7, "WV":8, "WI":13, "WY":3},
+  1900: {"AL":11, "AK":0, "AZ":0, "AR":9, "CA":10, "CO":5, "CT":7, "DE":3, "DC":0, "FL":5, "GA":13, "HI":0, "ID":3, "IL":27, "IN":15, "IA":13, "KS":10, "KY":13, "LA":9, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":16, "MI":14, "MN":11, "MS":10, "MO":18, "MT":3, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":8, "NV":3, "NH":4, "NJ":12, "NM":0, "NY":39, "NC":12, "ND":4, "OH":23, "OK":7, "OR":4, "PA":34, "RI":4, "SC":9, "SD":4, "TN":12, "TX":18, "UT":3, "VT":4, "VA":12, "WA":5, "WV":7, "WI":13, "WY":3},
+  1890: {"AL":11, "AK":0, "AZ":0, "AR":8, "CA":9, "CO":4, "CT":6, "DE":3, "DC":0, "FL":4, "GA":13, "HI":0, "ID":3, "IL":24, "IN":15, "IA":13, "KS":10, "KY":13, "LA":8, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":15, "MI":14, "MN":9, "MS":9, "MO":17, "MT":3, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":8, "NV":3, "NH":4, "NJ":10, "NM":0, "NY":36, "NC":11, "ND":3, "OH":23, "OK":0, "OR":4, "PA":32, "RI":4, "SC":9, "SD":4, "TN":12, "TX":15, "UT":3, "VT":4, "VA":12, "WA":4, "WV":6, "WI":12, "WY":3},
+  1880: {"AL":10, "AK":0, "AZ":0, "AR":7, "CA":8, "CO":3, "CT":6, "DE":3, "DC":0, "FL":4, "GA":12, "HI":0, "ID":0, "IL":22, "IN":15, "IA":13, "KS":9, "KY":13, "LA":8, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":14, "MI":13, "MN":7, "MS":9, "MO":16, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":5, "NV":3, "NH":4, "NJ":9, "NM":0, "NY":36, "NC":11, "ND":0, "OH":23, "OK":0, "OR":3, "PA":30, "RI":4, "SC":9, "SD":0, "TN":12, "TX":13, "UT":0, "VT":4, "VA":12, "WA":0, "WV":6, "WI":11, "WY":0},
+  1870: {"AL":10, "AK":0, "AZ":0, "AR":6, "CA":6, "CO":3, "CT":6, "DE":3, "DC":0, "FL":4, "GA":11, "HI":0, "ID":0, "IL":21, "IN":15, "IA":11, "KS":5, "KY":12, "LA":8, "ME-D1":0, "ME-D2":0, "ME-AL":7, "MD":8, "MA":13, "MI":11, "MN":5, "MS":8, "MO":15, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":3, "NV":3, "NH":5, "NJ":9, "NM":0, "NY":35, "NC":10, "ND":0, "OH":22, "OK":0, "OR":3, "PA":29, "RI":4, "SC":7, "SD":0, "TN":12, "TX":8, "UT":0, "VT":5, "VA":11, "WA":0, "WV":5, "WI":10, "WY":0},
+  1860: {"AL":8, "AK":0, "AZ":0, "AR":5, "CA":5, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":9, "HI":0, "ID":0, "IL":16, "IN":13, "IA":8, "KS":3, "KY":11, "LA":7, "ME-D1":0, "ME-D2":0, "ME-AL":7, "MD":7, "MA":12, "MI":8, "MN":4, "MS":0, "MO":11, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":3, "NV":3, "NH":5, "NJ":7, "NM":0, "NY":33, "NC":9, "ND":0, "OH":21, "OK":0, "OR":3, "PA":26, "RI":4, "SC":6, "SD":0, "TN":10, "TX":0, "UT":0, "VT":5, "VA":0, "WA":0, "WV":5, "WI":8, "WY":0},
+  1850: {"AL":9, "AK":0, "AZ":0, "AR":4, "CA":4, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":10, "HI":0, "ID":0, "IL":11, "IN":13, "IA":4, "KS":0, "KY":12, "LA":6, "ME-D1":0, "ME-D2":0, "ME-AL":8, "MD":8, "MA":13, "MI":6, "MN":4, "MS":7, "MO":9, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":5, "NJ":7, "NM":0, "NY":35, "NC":10, "ND":0, "OH":23, "OK":0, "OR":3, "PA":27, "RI":4, "SC":8, "SD":0, "TN":12, "TX":4, "UT":0, "VT":5, "VA":15, "WA":0, "WV":0, "WI":5, "WY":0}
 }
 
 var MapSettingType =
@@ -243,8 +249,9 @@ var USAPresidentialMapType = new MapType(
   "assets/usa-pres.png",
   "svg-sources/usa-presidential-map.svg",
   538,
-  function(decade, regionID)
+  function(decade, regionID, disabled, shouldSetDisabledWorthToZero)
   {
+    if (shouldSetDisabledWorthToZero && disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,

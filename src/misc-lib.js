@@ -26,6 +26,18 @@ function getKeyByValue(object, value)
   return Object.keys(object).find(key => object[key] == value)
 }
 
+function invertObject(object)
+{
+  var newObject = {}
+  var keys = Object.keys(object)
+  for (var i in keys)
+  {
+    newObject[object[keys[i]]] = keys[i]
+  }
+
+  return newObject
+}
+
 function multiplyBrightness(hexColorString, brightnessFactor)
 {
   var rgb = hexToRGB(hexColorString)
