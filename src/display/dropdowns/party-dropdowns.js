@@ -1,3 +1,5 @@
+var dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs
+
 function createPartyDropdowns()
 {
   $("#partyDropdownsContainer").html("")
@@ -6,11 +8,18 @@ function createPartyDropdowns()
     var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
     var marginColors = currentPoliticalParty.getMarginColors()
 
-    var dropdownDiv = '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 135px">' + currentPoliticalParty.getID() + '</a>'
+    var dropdownDiv = ""
+
+    if (partyIDNum != 0 && partyIDNum%2 == 0)
+    {
+      dropdownDiv += "<br><br>"
+    }
+
+    dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 150px;' + ((partyIDNum%2 == 0) ? "margin-right: 15px; margin-left: 0px;" : "margin-left: 15px; margin-right: 0px;") + ' background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px">'
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: ' + ((partyIDNum%2 == 0) ? "0px" : " 15px") + '; overflow: hidden;">'
     dropdownDiv += '<div class="dropdown-separator"></div>'
     dropdownDiv += '<a class="" onclick="" style="display:flex; justify-content:center;">' + currentPoliticalParty.getNames()[0] + '</a>'
     dropdownDiv += '<div class="dropdown-separator"></div>'
@@ -27,6 +36,7 @@ function createPartyDropdowns()
 
     $("#partyDropdownsContainer").append(dropdownDiv)
   }
+  $("#partyDropdownsContainer").append("</div>")
 
   jscolor.install()
 }
@@ -112,9 +122,43 @@ function selectParty(div)
 
 function displayPartyTotals(partyTotals)
 {
-  for (var partyID in partyTotals)
+  if (currentMapSource.getID() != NullMapSource.getID() && currentMapSource.getID() != currentCustomMapSource.getID())
   {
-    $("#" + partyID).html(politicalParties[partyID].getCandidateName() + " (" + partyTotals[partyID] + ")")
+    var partyIDs = Object.keys(partyTotals).filter((partyID) => !(partyTotals[partyID] == 0 || partyID == TossupParty.getID()))
+
+    var topPartyIDs = partyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, 4)
+
+    // Enforce Dems on left, Reps on right
+    // if (topPartyIDs.length >= 2 && topPartyIDs[1] == DemocraticParty.getID())
+    // {
+    //   var tempPartyID = topPartyIDs[0]
+    //   topPartyIDs[0] = DemocraticParty.getID()
+    //   topPartyIDs[1] = tempPartyID
+    // }
+    // if (topPartyIDs.length >= 2 && topPartyIDs[0] == RepublicanParty.getID())
+    // {
+    //   var tempPartyID = topPartyIDs[1]
+    //   topPartyIDs[1] = RepublicanParty.getID()
+    //   topPartyIDs[0] = tempPartyID
+    // }
+
+    // topPartyIDs.sort((party1, party2) => partyOrdering.findIndex((partyOrderInfo) => party1 == partyOrderInfo.partyID)-partyOrdering.findIndex((partyOrderInfo) => party2 == partyOrderInfo.partyID))
+
+    if (topPartyIDs.length == 0)
+    {
+      topPartyIDs = defaultDropdownPoliticalPartyIDs
+    }
+
+    if (topPartyIDs != dropdownPoliticalPartyIDs)
+    {
+      dropdownPoliticalPartyIDs = topPartyIDs
+      createPartyDropdowns()
+    }
+  }
+
+  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  {
+    $("#" + dropdownPoliticalPartyIDs[partyIDNum]).html(politicalParties[dropdownPoliticalPartyIDs[partyIDNum]].getCandidateName() + " (" + (partyTotals[dropdownPoliticalPartyIDs[partyIDNum]] || 0) + ")")
   }
 }
 

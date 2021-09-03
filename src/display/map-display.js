@@ -272,7 +272,11 @@ function resizeElements(initilizedPieChart)
   const defaultMapZoom = 120.634/100
 
   $("#infoboxcontainers").css('min-width', $("#totalsPieChart").width())
+  $("#partyDropdownsBoxContainer").css('min-width', $("#totalsPieChart").width())
+  $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
 
+  $("#discordInvite").css("width", $("#totalsPieChart").width())
+  // $("#discordInvite").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
   $("#creditbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
   $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")

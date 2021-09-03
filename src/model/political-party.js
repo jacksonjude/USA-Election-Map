@@ -341,7 +341,7 @@ politicalParties[Independent1860JohnBellParty.getID()] = Independent1860JohnBell
 
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
-var dropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
+var defaultDropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
 var selectablePoliticalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
 var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]
 var majorThirdPartyCandidates = [
