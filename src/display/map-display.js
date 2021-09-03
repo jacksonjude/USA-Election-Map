@@ -271,13 +271,12 @@ function resizeElements(initilizedPieChart)
 
   const defaultMapZoom = 120.634/100
 
-  $("#infoboxcontainers").css('min-width', $("#totalsPieChart").width())
+  $("#helpboxcontainer").css('min-width', $("#totalsPieChart").width())
   $("#partyDropdownsBoxContainer").css('min-width', $("#totalsPieChart").width())
   $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
 
   $("#discordInvite").css("width", $("#totalsPieChart").width())
   // $("#discordInvite").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
-  $("#creditbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
   $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
   $("#helpbox h5").css('font-size', (helpboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
@@ -768,14 +767,16 @@ function toggleHelpBox(helpButtonDiv)
     $("#helpboxcontainer").show()
     $("#toggleHelpBoxButton").addClass('active')
     $("#totalsPieChartContainer").hide()
-    $("#creditboxcontainer").hide()
+    $("#partyDropdownsBoxContainer").hide()
+    $("#discordInviteContainer").hide()
   }
   else
   {
     $("#helpboxcontainer").hide()
     $("#toggleHelpBoxButton").removeClass('active')
     $("#totalsPieChartContainer").show()
-    $("#creditboxcontainer").show()
+    $("#partyDropdownsBoxContainer").show()
+    $("#discordInviteContainer").show()
   }
 }
 

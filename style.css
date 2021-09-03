@@ -30,6 +30,7 @@ body {
   font-size: 17px;
   margin-left: 4px;
   border-radius: 4px;
+  transition: background-color .1s;
 }
 
 .topnav a:hover, .dropdown-content a:hover {
@@ -296,4 +297,9 @@ body {
 
 .tab button.active {
   background-color: #888;
+}
+
+#homepageButton {
+  font-weight: bold;
+  text-decoration: underline;
 }
