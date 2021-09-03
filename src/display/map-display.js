@@ -1128,7 +1128,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     regionDiv.css('animation-fill-mode', 'forwards')
     regionDiv.css('fill', fillColor)
 
-    regionDiv.css('opacity', shouldHide ? 0 : 1)
+    regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
     if (regionData.disabled == true && currentMapSource.getID() != currentCustomMapSource.getID())
     {
@@ -1237,7 +1237,7 @@ function updateStateBox(regionID)
   }
 
   var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
-  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames()[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +" + roundedMarginValue
+  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +" + roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {

@@ -64,7 +64,7 @@ class MapSource
       var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin)
       self.mapData = filterMapDataCallback.mapData
 
-      if (filterMapDataCallback.candidateNameData != null && self.shortCandidateNameOverride == null)
+      if (filterMapDataCallback.candidateNameData != null)
       {
         self.candidateNameData = filterMapDataCallback.candidateNameData
       }
@@ -415,7 +415,7 @@ class MapSource
 
         var candidatesToAdd = cloneObject(candidateNameToPartyIDs)
 
-        if (regionData.margin == 0 && !regionData.disabled)
+        if (regionData.margin == 0)
         {
           var independentPartyNameToID = {}
           independentPartyNameToID[IndependentGenericParty.getNames()[0]] = IndependentGenericParty.getID()
@@ -425,7 +425,7 @@ class MapSource
 
         for (var candidateName in candidatesToAdd)
         {
-          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && !(regionData.margin == 0 && !regionData.disabled)) { continue }
+          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && regionData.margin != 0) { continue }
 
           for (var columnTitleNum in columnTitles)
           {
@@ -884,7 +884,7 @@ function createPresidentialMapSources()
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
 
-        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null}
+        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null}
       }
 
       filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -924,6 +924,9 @@ function createPresidentialMapSources()
       {
         return regionID
       }
+
+      case "disabled":
+      return regionData.disabled || false
     }
   }
 
@@ -1193,6 +1196,7 @@ function createPresidentialMapSources()
     {
       date: "date",
       region: "region",
+      disabled: "disabled",
       candidateName: "candidate",
       partyID: "party",
       percentAdjusted: "percent"
