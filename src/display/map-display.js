@@ -276,6 +276,8 @@ function resizeElements(initilizedPieChart)
   $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
 
   $("#discordInvite").css("width", $("#totalsPieChart").width())
+  $("#discordInvite").css("border-radius", "5px")
+  $("#discordInvite").css("border", "1px solid gray")
   // $("#discordInvite").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
   $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")

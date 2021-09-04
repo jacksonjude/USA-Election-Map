@@ -14,12 +14,18 @@ function createPartyDropdowns()
     {
       dropdownDiv += "<br><br>"
     }
+    else if (partyIDNum%2 == 1)
+    {
+      dropdownDiv += '<div class="dropdown" style="width: 30px;" onmouseenter="deselectDropdownButton()">'
+      dropdownDiv += '<a style="visibility: hidden"></a>'
+      dropdownDiv += '</div>'
+    }
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 150px;' + ((partyIDNum%2 == 0) ? "margin-right: 15px; margin-left: 0px;" : "margin-left: 15px; margin-right: 0px;") + ' background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 150px; margin: 0px; background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px">'
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: ' + ((partyIDNum%2 == 0) ? "0px" : " 15px") + '; overflow: hidden;">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
     dropdownDiv += '<div class="dropdown-separator"></div>'
     dropdownDiv += '<a class="" onclick="" style="display:flex; justify-content:center;">' + currentPoliticalParty.getNames()[0] + '</a>'
     dropdownDiv += '<div class="dropdown-separator"></div>'

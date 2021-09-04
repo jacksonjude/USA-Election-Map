@@ -131,7 +131,7 @@ body {
 }
 
 .dropdown-separator {
-  border-top: 1px solid white;
+  border-top: 1px solid gray;
   height: 0px;
   width: 100%;
 }
@@ -264,7 +264,7 @@ body {
 }
 
 .box {
-  border: 1px solid white;
+  border: 1px solid gray;
   /* max-width: 200px; */
   background-color: rgba(68,68,68,0.9);
   color: white;
