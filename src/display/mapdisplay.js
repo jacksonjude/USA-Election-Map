@@ -1650,7 +1650,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     regionDiv.css('animation-fill-mode', 'forwards')
     regionDiv.css('fill', fillColor)
 
-    regionDiv.css('opacity', shouldHide ? 0 : 1)
+    regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
     if (regionData.disabled == true && currentMapSource.getID() != currentCustomMapSource.getID())
     {
