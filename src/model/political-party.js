@@ -133,7 +133,7 @@ var ReformParty = new PoliticalParty(
 
 var IndependentRNParty = new PoliticalParty(
   "INDRN",
-  ["Nader"],
+  ["None"],
   "Ind",
   "Nader",
   {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
@@ -142,7 +142,7 @@ var IndependentRNParty = new PoliticalParty(
 
 var Independent2016EMParty = new PoliticalParty(
   "IND2016EM",
-  ["McMullin"],
+  ["None"],
   "Ind",
   "McMullin",
   {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
@@ -151,7 +151,7 @@ var Independent2016EMParty = new PoliticalParty(
 
 var Independent1980JAParty = new PoliticalParty(
   "IND1980JA",
-  ["Anderson"],
+  ["None"],
   "Ind",
   "Anderson",
   {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
@@ -160,7 +160,7 @@ var Independent1980JAParty = new PoliticalParty(
 
 var Independent1976EMParty = new PoliticalParty(
   "IND1976EM",
-  ["McCarthy"],
+  ["None"],
   "Ind",
   "McCarthy",
   {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
@@ -169,7 +169,7 @@ var Independent1976EMParty = new PoliticalParty(
 
 var Independent1968GWParty = new PoliticalParty(
   "IND1968GW",
-  ["Wallace"],
+  ["Dixiecrat"],
   "Ind",
   "Wallace",
   {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
@@ -178,7 +178,7 @@ var Independent1968GWParty = new PoliticalParty(
 
 var Independent1960HBParty = new PoliticalParty(
   "IND1960HB",
-  ["Byrd"],
+  ["Dixiecrat"],
   "Ind",
   "Byrd",
   {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
@@ -187,7 +187,7 @@ var Independent1960HBParty = new PoliticalParty(
 
 var Independent1948SMParty = new PoliticalParty(
   "IND1948SM",
-  ["Thurmond"],
+  ["Dixiecrat"],
   "Ind",
   "Thurmond",
   {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
@@ -196,7 +196,7 @@ var Independent1948SMParty = new PoliticalParty(
 
 var Independent1948HWParty = new PoliticalParty(
   "IND1948HW",
-  ["Wallace"],
+  ["Progressive"],
   "Ind",
   "Wallace",
   {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
@@ -205,7 +205,7 @@ var Independent1948HWParty = new PoliticalParty(
 
 var Independent1932NTParty = new PoliticalParty(
   "IND1932NT",
-  ["Thomas"],
+  ["Socialist"],
   "Ind",
   "Thomas",
   {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
@@ -214,7 +214,7 @@ var Independent1932NTParty = new PoliticalParty(
 
 var Independent1924RLParty = new PoliticalParty(
   "IND1924RL",
-  ["La Follette"],
+  ["Progressive"],
   "Ind",
   "La Follette",
   {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
@@ -223,7 +223,7 @@ var Independent1924RLParty = new PoliticalParty(
 
 var Independent1920EDParty = new PoliticalParty(
   "IND1920ED",
-  ["Debs"],
+  ["Socialist"],
   "Ind",
   "Debs",
   {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
@@ -232,7 +232,7 @@ var Independent1920EDParty = new PoliticalParty(
 
 var Independent1916ABParty = new PoliticalParty(
   "IND1916AB",
-  ["Benson"],
+  ["Socialist"],
   "Ind",
   "Benson",
   {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
@@ -241,7 +241,7 @@ var Independent1916ABParty = new PoliticalParty(
 
 var Independent1912TRParty = new PoliticalParty(
   "IND1912TR",
-  ["Roosevelt"],
+  ["Progressive"],
   "Ind",
   "Roosevelt",
   {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
@@ -250,7 +250,7 @@ var Independent1912TRParty = new PoliticalParty(
 
 var Independent1912EDParty = new PoliticalParty(
   "IND1912ED",
-  ["Debs"],
+  ["Socialist"],
   "Ind",
   "Debs",
   {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
@@ -259,7 +259,7 @@ var Independent1912EDParty = new PoliticalParty(
 
 var Independent1892JWParty = new PoliticalParty(
   "IND1892JW",
-  ["Weaver"],
+  ["Populist"],
   "Ind",
   "Weaver",
   {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
@@ -268,7 +268,7 @@ var Independent1892JWParty = new PoliticalParty(
 
 var Independent1892JBParty = new PoliticalParty(
   "IND1892JB",
-  ["Bidwell"],
+  ["Prohibition"],
   "Ind",
   "Bidwell",
   {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
@@ -277,7 +277,7 @@ var Independent1892JBParty = new PoliticalParty(
 
 var Independent1888CFParty = new PoliticalParty(
   "IND1888CF",
-  ["Fisk"],
+  ["Prohibition"],
   "Ind",
   "Fisk",
   {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
@@ -286,7 +286,7 @@ var Independent1888CFParty = new PoliticalParty(
 
 var Independent1860JohnBreckenridgeParty = new PoliticalParty(
   "IND1860JohnBreckenridge",
-  ["Breckenridge"],
+  ["Southern Democratic"],
   "Ind",
   "Breckenridge",
   {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
@@ -295,7 +295,7 @@ var Independent1860JohnBreckenridgeParty = new PoliticalParty(
 
 var Independent1860JohnBellParty = new PoliticalParty(
   "IND1860JohnBell",
-  ["Bell"],
+  ["Constitutional Union"],
   "Ind",
   "Bell",
   {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
