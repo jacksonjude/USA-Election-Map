@@ -1143,6 +1143,8 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     }
   }
 
+  $("#" + regionData.region + "-text").css('fill', regionData.disabled && !currentMapType.getMapSettingValue("mapCurrentSeats") ? 'gray' : 'white')
+
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
   {
     updateTotalsPieChart()
