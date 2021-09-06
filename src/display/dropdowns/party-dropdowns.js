@@ -1,4 +1,10 @@
 var dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs
+const maxPartiesToDisplay = 4
+const partyDropdownHeight = 98
+const partyDropdownWidth = 212
+const partyButtonWidth = 150
+const shouldReversePartyDropdownsIfNeeded = true
+const shouldAlignPartyDropdownsToLeadingTrailing = true
 
 function createPartyDropdowns()
 {
@@ -22,11 +28,18 @@ function createPartyDropdowns()
     }
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 150px; margin: 0px; background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; margin: 0px; background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px">'
+
+    var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
+    var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px; ' + (shouldReverseOrder ? 'margin-top: -' + partyDropdownHeight + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
-    dropdownDiv += '<div class="dropdown-separator"></div>'
+
+    if (!shouldReverseOrder)
+    {
+      dropdownDiv += '<div class="dropdown-separator"></div>'
+    }
     dropdownDiv += '<a class="" onclick="" style="display:flex; justify-content:center;">' + currentPoliticalParty.getNames()[0] + '</a>'
     dropdownDiv += '<div class="dropdown-separator"></div>'
     dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" onclick="" style="display:flex; justify-content:center;">'
@@ -35,6 +48,11 @@ function createPartyDropdowns()
       dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}" onclick="$(\'#' + currentPoliticalParty.getID() + 'DropdownContent\').css(\'display\', \'block\')"></button>'
     }
     dropdownDiv += '</a>'
+    if (shouldReverseOrder)
+    {
+      dropdownDiv += '<div class="dropdown-separator"></div>'
+    }
+
     dropdownDiv += '</div>'
     dropdownDiv += '</div>'
     dropdownDiv += '</div>'
@@ -132,7 +150,7 @@ function displayPartyTotals(partyTotals)
   {
     var partyIDs = Object.keys(partyTotals).filter((partyID) => !(partyTotals[partyID] == 0 || partyID == TossupParty.getID()))
 
-    var topPartyIDs = partyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, 4)
+    var topPartyIDs = partyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, maxPartiesToDisplay)
 
     // Enforce Dems on left, Reps on right
     // if (topPartyIDs.length >= 2 && topPartyIDs[1] == DemocraticParty.getID())
