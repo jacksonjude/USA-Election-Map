@@ -40,10 +40,11 @@ const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 55
 
-const kEditing = 0
-const kViewing = 1
-
-var currentMapState = kViewing
+const MapState = {
+  editing: 0,
+  viewing: 1
+}
+var currentMapState = MapState.viewing
 
 var showingHelpBox = false
 
@@ -127,7 +128,7 @@ async function reloadForNewMapType(initialLoad)
   showingDataMap = false
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
-  currentMapState = kViewing
+  currentMapState = MapState.viewing
   showingCompareMap = false
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
@@ -350,7 +351,7 @@ function addDivEventListeners()
   })
 
   document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
-    if (currentMapState == kEditing) { return }
+    if (currentMapState == MapState.editing) { return }
     if (!e.altKey)
     {
       toggleMapSource(this)
@@ -612,7 +613,7 @@ async function displayDataMap(dateIndex)
 
   updateMapElectoralVoteText()
 
-  if (currentRegionID && currentMapState == kViewing)
+  if (currentRegionID && currentMapState == MapState.viewing)
   {
     updateRegionBox(currentRegionID)
   }
@@ -657,15 +658,15 @@ function updateNavBarForNewSource(revertToDefault)
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentMapState == kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  if (currentMapState == MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Done")
   }
-  else if (currentMapState == kEditing && currentMapSource.getID() != currentCustomMapSource.getID())
+  else if (currentMapState == MapState.editing && currentMapSource.getID() != currentCustomMapSource.getID())
   {
-    toggleEditing(kViewing)
+    toggleEditing(MapState.viewing)
   }
-  else if (currentMapState != kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (currentMapState != MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Edit")
   }
@@ -700,7 +701,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
       currentMapType.setCurrentMapSourceID(null)
     }
 
-    toggleEditing(kViewing)
+    toggleEditing(MapState.viewing)
 
     currentSliderDate = null
 
@@ -826,12 +827,12 @@ function toggleEditing(stateToSet)
   {
     switch (currentMapState)
     {
-      case kEditing:
-      currentMapState = kViewing
+      case MapState.editing:
+      currentMapState = MapState.viewing
       break
 
-      case kViewing:
-      currentMapState = kEditing
+      case MapState.viewing:
+      currentMapState = MapState.editing
       break
     }
   }
@@ -842,7 +843,7 @@ function toggleEditing(stateToSet)
 
   switch (currentMapState)
   {
-    case kEditing:
+    case MapState.editing:
     deselectAllParties()
 
     $("#editDoneButton").html("Done")
@@ -874,7 +875,7 @@ function toggleEditing(stateToSet)
     }
     break
 
-    case kViewing:
+    case MapState.viewing:
     selectAllParties()
 
     if (currentMapSource.getID() == currentCustomMapSource.getID())
@@ -914,7 +915,7 @@ function toggleEditing(stateToSet)
 
 function leftClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     if (ignoreNextClick)
     {
@@ -976,7 +977,7 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == kViewing && showingDataMap && currentRegionID)
+  else if (currentMapState == MapState.viewing && showingDataMap && currentRegionID)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
@@ -984,7 +985,7 @@ function leftClickRegion(div)
 
 function rightClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
@@ -1037,7 +1038,7 @@ function rightClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == kViewing && currentMapSource.getID() == currentCustomMapSource.getID() && currentRegionID)
+  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID() && currentRegionID)
   {
     editingRegionEVs = !editingRegionEVs
     updateRegionBox(currentRegionID)
@@ -1046,7 +1047,7 @@ function rightClickRegion(div)
 
 function altClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData

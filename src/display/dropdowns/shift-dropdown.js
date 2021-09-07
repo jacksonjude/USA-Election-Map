@@ -2,7 +2,7 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 {
   var partyToShift = partyToShift || selectedParty
 
-  if (currentMapState != kEditing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }
+  if (currentMapState != MapState.editing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }
 
   for (var regionID in displayRegionDataArray)
   {
