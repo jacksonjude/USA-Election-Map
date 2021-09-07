@@ -1524,7 +1524,8 @@ function createSenateMapSources()
     1619852400000: "RbpHQboaeWM",
     1622876400000: "DsLq1N8YEkc",
     1625295600000: "AU_GCaD594k",
-    1628319600000: "zlC6UzT2xCQ"
+    1628319600000: "zlC6UzT2xCQ",
+    1630652400000: "hY5HsIqfSyQ"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
@@ -2072,7 +2073,8 @@ function createGovernorMapSources()
   }
 
   const LTE2022GovernorYouTubeIDs = {
-    1625814000000: "XXjRhuaFWuc"
+    1625814000000: "XXjRhuaFWuc",
+    1630911600000: "QCN0K03rmRI"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
@@ -2123,7 +2125,8 @@ function createGovernorMapSources()
     1619766000000: "231826",
     1624604400000: "231836",
     1625814000000: "231846",
-    1628233200000: ""
+    1628233200000: "231881",
+    1630393200000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
