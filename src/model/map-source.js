@@ -491,6 +491,12 @@ const independent1920EDPartyID = Independent1920EDParty.getID()
 const independent1916ABPartyID = Independent1916ABParty.getID()
 const independent1912TRPartyID = Independent1912TRParty.getID()
 const independent1912EDPartyID = Independent1912EDParty.getID()
+const independent1892JWPartyID = Independent1892JWParty.getID()
+const independent1892JBPartyID = Independent1892JBParty.getID()
+const independent1888CFPartyID = Independent1888CFParty.getID()
+const independent1860JohnBreckenridgePartyID = Independent1860JohnBreckenridgeParty.getID()
+const independent1860JohnBellPartyID = Independent1860JohnBellParty.getID()
+const independent1856MFPartyID = Independent1856MFParty.getID()
 
 const independentGenericPartyID = IndependentGenericParty.getID()
 
@@ -784,22 +790,33 @@ function createPresidentialMapSources()
 
         var candidateData = {}
 
+        var currentCandidateToPartyIDMap = candidateNameToPartyIDMap
+        if (Object.keys(currentCandidateToPartyIDMap).includes(currentMapDate.getFullYear().toString()))
+        {
+          currentCandidateToPartyIDMap = currentCandidateToPartyIDMap[currentMapDate.getFullYear()]
+        }
+
         for (var rowNum in mapDataRows)
         {
           var row = mapDataRows[rowNum]
 
           var candidateName = row[columnMap.candidateName]
+          var currentPartyName = row[columnMap.partyID]
           var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
 
-          var currentPartyName = row[columnMap.partyID]
-          var foundParty = Object.values(politicalParties).find(party => {
-            var partyNames = cloneObject(party.getNames())
-            for (var nameNum in partyNames)
-            {
-              partyNames[nameNum] = partyNames[nameNum].toLowerCase()
-            }
-            return partyNames.includes(currentPartyName)
-          })
+          var foundParty = currentCandidateToPartyIDMap[candidateName] ? politicalParties[currentCandidateToPartyIDMap[candidateName]] : null
+
+          if (!foundParty)
+          {
+            foundParty = Object.values(politicalParties).find(party => {
+              var partyNames = cloneObject(party.getNames())
+              for (var nameNum in partyNames)
+              {
+                partyNames[nameNum] = partyNames[nameNum].toLowerCase()
+              }
+              return partyNames.includes(currentPartyName)
+            })
+          }
 
           if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
           {
@@ -932,6 +949,20 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1856: {"Buchanan":democraticPartyID, "Fremont":republicanPartyID, "Fillmore":independent1856MFPartyID, "Other":independentGenericPartyID},
+    1860: {"Douglas":democraticPartyID, "Lincoln":republicanPartyID, "Breckenridge":independent1860JohnBreckenridgePartyID, "Bell":independent1860JohnBellPartyID, "Other":independentGenericPartyID},
+    1864: {"McClellan":democraticPartyID, "Lincoln":republicanPartyID, "Other":independentGenericPartyID},
+    1868: {"Seymour":democraticPartyID, "Grant":republicanPartyID, "Other":independentGenericPartyID},
+    1872: {"Greeley":democraticPartyID, "Grant":republicanPartyID, "Other":independentGenericPartyID},
+    1876: {"Tildon":democraticPartyID, "Hayes":republicanPartyID, "Other":independentGenericPartyID},
+    1880: {"Hancock":democraticPartyID, "Garfield":republicanPartyID, "Weaver":independent1892JWPartyID, "Other":independentGenericPartyID},
+    1884: {"Cleveland":democraticPartyID, "Blaine":republicanPartyID, "Other":independentGenericPartyID},
+    1888: {"Cleveland":democraticPartyID, "Harrison":republicanPartyID, "Fisk":independent1888CFPartyID, "Other":independentGenericPartyID},
+    1892: {"Cleveland":democraticPartyID, "Harrison":republicanPartyID, "Weaver":independent1892JWPartyID, "Bidwell":independent1892JBPartyID, "Other":independentGenericPartyID},
+    1896: {"Bryan":democraticPartyID, "McKinley":republicanPartyID, "Other":independentGenericPartyID},
+    1900: {"Bryan":democraticPartyID, "McKinley":republicanPartyID, "Other":independentGenericPartyID},
+    1904: {"Parker":democraticPartyID, "Roosevelt":republicanPartyID, "Debs":independent1912EDPartyID, "Other":independentGenericPartyID},
+    1908: {"Bryan":democraticPartyID, "Taft":republicanPartyID, "Debs":independent1912EDPartyID, "Other":independentGenericPartyID},
     1912: {"Wilson":democraticPartyID, "Taft":republicanPartyID, "Roosevelt":independent1912TRPartyID, "Debs":independent1912EDPartyID, "Other":independentGenericPartyID},
     1916: {"Wilson":democraticPartyID, "Hughes":republicanPartyID, "Benson":independent1916ABPartyID, "Other":independentGenericPartyID},
     1920: {"Cox":democraticPartyID, "Harding":republicanPartyID, "Debs":independent1920EDPartyID, "Other":independentGenericPartyID},

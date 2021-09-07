@@ -66,6 +66,17 @@ class PoliticalParty
 
 const defaultMarginNames = {current: "Current", safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
+const PoliticalPartyColors = {
+  blue: {current: "#10234E", safe: "#1c408c", likely: "#587ccc", lean: "#8aafff", tilt: "#949bb3"},
+  red: {current: "#600E15", safe: "#be1c29", likely: "#ff5864", lean: "#ff8b98", tilt: "#cf8980"},
+  yellow: {current: "#725B00", safe: "#FF9D0A", likely: "#e8c84c", lean: "#E6BD5D", tilt: "#c7af59"},
+  green: {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  purple: {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  gray: {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
+  orange: {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"}
+}
+
 // Main Parties
 
 var DemocraticParty = new PoliticalParty(
@@ -73,7 +84,7 @@ var DemocraticParty = new PoliticalParty(
   ["Democratic", "Democrat"],
   "Dem",
   "Biden",
-  {current: "#10234E", safe: "#1c408c", likely: "#587ccc", lean: "#8aafff", tilt: "#949bb3"},
+  PoliticalPartyColors.blue,
   defaultMarginNames
 )
 
@@ -82,7 +93,7 @@ var RepublicanParty = new PoliticalParty(
   ["Republican"],
   "Rep",
   "Trump",
-  {current: "#600E15", safe: "#be1c29", likely: "#ff5864", lean: "#ff8b98", tilt: "#cf8980"},
+  PoliticalPartyColors.red,
   defaultMarginNames
 )
 
@@ -91,19 +102,9 @@ var TossupParty = new PoliticalParty(
   ["Tossup"],
   "Tossup",
   null,
-  {safe: "#6c6e74", likely: "#6c6e74", lean: "#6c6e74", tilt: "#6c6e74"},
+  {current: "#6c6e74", safe: "#6c6e74", likely: "#6c6e74", lean: "#6c6e74", tilt: "#6c6e74"},
   defaultMarginNames
 )
-
-// var DisabledParty = new PoliticalParty(
-//   "Disabled",
-//   ["Disabled"],
-//   "Disabled",
-//   null,
-//   {safe: "#28292F", likely: "#28292F", lean: "#28292F", tilt: "#28292F"},
-//   defaultMarginNames
-// )
-// Add disabled tag; Remove -S regions if disabled && tossup party
 
 // Third Parties
 
@@ -112,8 +113,7 @@ var LibertarianParty = new PoliticalParty(
   ["Libertarian"],
   "Lib",
   "Jorgensen",
-  {current: "#725B00", safe: "#FF9D0A", likely: "#e8c84c", lean: "#E6BD5D", tilt: "#c7af59"},
-  // {current: "#725B00", safe: "#e6b701", likely: "#e8c84c", lean: "#ffe78a", tilt: "#c7af59"},
+  PoliticalPartyColors.yellow,
   defaultMarginNames
 )
 
@@ -122,8 +122,7 @@ var GreenParty = new PoliticalParty(
   ["Green"],
   "Grn",
   "Hawkins",
-  {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#73D57F", tilt: "#8EB293"},
-  // {current: "#0E4714", safe: "#1C8C28", likely: "#50C85D", lean: "#8AFF97", tilt: "#8EB293"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -132,7 +131,7 @@ var ReformParty = new PoliticalParty(
   ["Reform"],
   "Ref",
   "Perot",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  PoliticalPartyColors.purple,
   defaultMarginNames
 )
 
@@ -141,7 +140,7 @@ var IndependentRNParty = new PoliticalParty(
   ["None"],
   "Ind",
   "Nader",
-  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
+  PoliticalPartyColors.gray,
   defaultMarginNames
 )
 
@@ -150,7 +149,7 @@ var Independent2016EMParty = new PoliticalParty(
   ["None"],
   "Ind",
   "McMullin",
-  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
+  PoliticalPartyColors.gray,
   defaultMarginNames
 )
 
@@ -159,7 +158,7 @@ var Independent1980JAParty = new PoliticalParty(
   ["None"],
   "Ind",
   "Anderson",
-  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
+  PoliticalPartyColors.gray,
   defaultMarginNames
 )
 
@@ -168,7 +167,7 @@ var Independent1976EMParty = new PoliticalParty(
   ["None"],
   "Ind",
   "McCarthy",
-  {current: "#363636", safe: "#6A6A6A", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"},
+  PoliticalPartyColors.gray,
   defaultMarginNames
 )
 
@@ -177,7 +176,7 @@ var Independent1968GWParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Wallace",
-  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  PoliticalPartyColors.orange,
   defaultMarginNames
 )
 
@@ -186,7 +185,7 @@ var Independent1960HBParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Byrd",
-  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  PoliticalPartyColors.orange,
   defaultMarginNames
 )
 
@@ -195,7 +194,7 @@ var Independent1948SMParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Thurmond",
-  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  PoliticalPartyColors.orange,
   defaultMarginNames
 )
 
@@ -204,7 +203,7 @@ var Independent1948HWParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "Wallace",
-  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -213,7 +212,7 @@ var Independent1932NTParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Thomas",
-  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  PoliticalPartyColors.scarlet,
   defaultMarginNames
 )
 
@@ -222,7 +221,7 @@ var Independent1924RLParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "La Follette",
-  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -231,7 +230,7 @@ var Independent1920EDParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Debs",
-  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  PoliticalPartyColors.scarlet,
   defaultMarginNames
 )
 
@@ -240,7 +239,7 @@ var Independent1916ABParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Benson",
-  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  PoliticalPartyColors.scarlet,
   defaultMarginNames
 )
 
@@ -249,7 +248,7 @@ var Independent1912TRParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "Roosevelt",
-  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -258,7 +257,7 @@ var Independent1912EDParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Debs",
-  {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  PoliticalPartyColors.scarlet,
   defaultMarginNames
 )
 
@@ -267,7 +266,7 @@ var Independent1892JWParty = new PoliticalParty(
   ["Populist"],
   "Ind",
   "Weaver",
-  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -276,7 +275,7 @@ var Independent1892JBParty = new PoliticalParty(
   ["Prohibition"],
   "Ind",
   "Bidwell",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  PoliticalPartyColors.purple,
   defaultMarginNames
 )
 
@@ -285,7 +284,7 @@ var Independent1888CFParty = new PoliticalParty(
   ["Prohibition"],
   "Ind",
   "Fisk",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  PoliticalPartyColors.purple,
   defaultMarginNames
 )
 
@@ -294,7 +293,7 @@ var Independent1860JohnBreckenridgeParty = new PoliticalParty(
   ["Southern Democratic"],
   "Ind",
   "Breckenridge",
-  {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
+  PoliticalPartyColors.green,
   defaultMarginNames
 )
 
@@ -303,7 +302,7 @@ var Independent1860JohnBellParty = new PoliticalParty(
   ["Constitutional Union"],
   "Ind",
   "Bell",
-  {current: "#814E1C", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5C29F", tilt: "#BFAD9C"},
+  PoliticalPartyColors.orange,
   defaultMarginNames
 )
 
@@ -312,7 +311,7 @@ var Independent1856MFParty = new PoliticalParty(
   ["Know Nothing"],
   "Ind",
   "Fillmore",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  PoliticalPartyColors.purple,
   defaultMarginNames
 )
 
@@ -321,7 +320,7 @@ var IndependentGenericParty = new PoliticalParty(
   ["Independent"],
   "Ind",
   "Generic",
-  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  PoliticalPartyColors.gray,
   defaultMarginNames
 )
 
