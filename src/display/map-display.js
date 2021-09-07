@@ -157,10 +157,10 @@ async function reloadForNewMapType(initialLoad)
   createComparePresetDropdownItems()
 
   populateRegionsArray()
-  for (var partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in dropdownPoliticalPartyIDs)
   {
-    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
   }
   displayPartyTotals(getPartyTotals())
 
@@ -748,10 +748,10 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   displayRegionDataArray = {}
   populateRegionsArray()
 
-  for (var partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in dropdownPoliticalPartyIDs)
   {
-    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
   }
 
   $('#outlines').children().each(function() {

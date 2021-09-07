@@ -62,6 +62,39 @@ function createPartyDropdowns()
   }
   $("#partyDropdownsContainer").append("</div>")
 
+  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  {
+    $("#" + dropdownPoliticalPartyIDs[partyIDNum]).hover(function() {
+      var marginColors = politicalParties[this.id].getMarginColors()
+      var partyButton = $(this)
+
+      if (!partyButton.hasClass("active"))
+      {
+        partyButton.css("background-color", multiplySaturation(marginColors.safe, 0.8))
+      }
+      else
+      {
+        partyButton.css("background-color", marginColors.safe)
+      }
+
+      partyButton.addClass("hover")
+    }, function() {
+      var marginColors = politicalParties[this.id].getMarginColors()
+      var partyButton = $(this)
+
+      if (!partyButton.hasClass("active"))
+      {
+        partyButton.css("background-color", multiplySaturation(marginColors.safe, 0.5))
+      }
+      else
+      {
+        partyButton.css("background-color", marginColors.safe)
+      }
+
+      partyButton.removeClass("hover")
+    })
+  }
+
   jscolor.install()
 }
 
@@ -95,6 +128,9 @@ function selectAllParties()
 {
   $(".partyDropdownButton").each(function() {
     $(this).addClass('active')
+
+    var marginColors = politicalParties[this.id].getMarginColors()
+    $(this).css("background-color", marginColors.safe)
   })
 }
 
@@ -102,6 +138,16 @@ function deselectAllParties()
 {
   $(".partyDropdownButton").each(function() {
     $(this).removeClass('active')
+
+    var marginColors = politicalParties[this.id].getMarginColors()
+    if (!$(this).hasClass("hover"))
+    {
+      $(this).css("background-color", multiplySaturation(marginColors.safe, 0.5))
+    }
+    else
+    {
+      $(this).css("background-color", multiplySaturation(marginColors.safe, 0.8))
+    }
   })
   selectedParty = null
 
@@ -117,18 +163,46 @@ function selectParty(div)
 
     if (selectedParty != null)
     {
+      var selectedPartyDiv = $("#" + selectedParty.getID())
+      var marginColors = selectedParty.getMarginColors()
       $("#" + selectedParty.getID()).removeClass('active')
+
+      if (!selectedPartyDiv.hasClass("hover"))
+      {
+        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.5))
+      }
+      else
+      {
+        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.8))
+      }
     }
 
     if (selectedParty != null && selectedParty.getID() == partyID)
     {
       selectedParty = null
       $(div).removeClass('active')
+
+      if (partyID == null || partyID == TossupParty.getID()) { return }
+
+      var marginColors = politicalParties[partyID].getMarginColors()
+      if (!$(div).hasClass("hover"))
+      {
+        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.5))
+      }
+      else
+      {
+        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.8))
+      }
     }
     else
     {
       selectedParty = politicalParties[partyID]
       $(div).addClass('active')
+
+      if (partyID == null || partyID == TossupParty.getID()) { return }
+
+      var marginColors = politicalParties[partyID].getMarginColors()
+      $(div).css("background-color", marginColors.safe)
     }
 
     if (selectedParty == null || selectedParty == TossupParty)

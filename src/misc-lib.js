@@ -63,6 +63,17 @@ function adjustBrightness(hexColorString, minBrightness)
   return RGBToHex(HSVtoRGB(hsv))
 }
 
+function multiplySaturation(hexColorString, saturationFactor)
+{
+  var rgb = hexToRGB(hexColorString)
+  if (!rgb) { return }
+
+  var hsv = RGBtoHSV(rgb)
+  hsv.s *= saturationFactor
+
+  return RGBToHex(HSVtoRGB(hsv))
+}
+
 function hexToRGB(hex)
 {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)

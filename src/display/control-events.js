@@ -334,7 +334,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentMapState == MapState.editing && e.which >= 48 && e.which <= 57 && e.which-48 <= selectablePoliticalPartyIDs.length)
+  else if (currentMapState == MapState.editing && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -343,7 +343,7 @@ document.addEventListener('keypress', async function(e) {
     }
     else
     {
-      selectParty($("#" + selectablePoliticalPartyIDs[partyToSelect-1]))
+      selectParty($("#" + dropdownPoliticalPartyIDs[partyToSelect-1]))
     }
   }
   else if (e.which == 13)

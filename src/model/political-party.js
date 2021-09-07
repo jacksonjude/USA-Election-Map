@@ -357,7 +357,6 @@ politicalParties[Independent1856MFParty.getID()] = Independent1856MFParty
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
 var defaultDropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
-var selectablePoliticalPartyIDs = [DemocraticParty.getID(), TossupParty.getID(), RepublicanParty.getID()]
 var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]
 var majorThirdPartyCandidates = [
   Independent2016EMParty.getID(),
