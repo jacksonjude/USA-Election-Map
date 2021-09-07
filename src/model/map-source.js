@@ -2341,6 +2341,10 @@ function createGovernorMapSources()
   USAGovernorMapType.setCustomSourceID(CustomMapSource.getID())
 }
 
+var mainTwoPartyIDsToNames = {}
+mainTwoPartyIDsToNames[DemocraticParty.getID()] = DemocraticParty.getNames()[0]
+mainTwoPartyIDsToNames[RepublicanParty.getID()] = RepublicanParty.getNames()[0]
+
 var NullMapSource = new MapSource(
   "None",
   "None",
@@ -2349,8 +2353,8 @@ var NullMapSource = new MapSource(
   null,
   null,
   null,
-  partyCandiateLastNames,
-  partyIDToCandidateLastNames
+  invertObject(mainTwoPartyIDsToNames),
+  mainTwoPartyIDsToNames
 )
 
 createPresidentialMapSources()
