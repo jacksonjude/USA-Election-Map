@@ -249,9 +249,10 @@ var USAPresidentialMapType = new MapType(
   "assets/usa-pres.png",
   "svg-sources/usa-presidential-map.svg",
   538,
-  function(decade, regionID, disabled, shouldSetDisabledWorthToZero)
+  function(decade, regionID, disabled)
   {
-    if (shouldSetDisabledWorthToZero && disabled) return 0
+    if (currentMapSource.getID() == currentCustomMapSource.getID() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
+    if (currentMapSource.getShouldSetDisabledWorthToZero() && disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,

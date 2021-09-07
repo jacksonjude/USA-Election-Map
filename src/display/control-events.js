@@ -273,17 +273,17 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == kViewing && !editMarginID && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == kViewing && !editMarginID && !editingRegionEVs && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateNavBarForNewSource()
     await loadDataMap()
     if (currentRegionID)
     {
-      updateStateBox(currentRegionID)
+      updateRegionBox(currentRegionID)
     }
   }
-  else if (currentMapState == kViewing && !editMarginID && e.which == 48)
+  else if (currentMapState == kViewing && !editMarginID && !editingRegionEVs && e.which == 48)
   {
     clearMap()
   }
@@ -329,7 +329,7 @@ document.addEventListener('keypress', async function(e) {
       await loadDataMap(true, true)
       if (currentRegionID)
       {
-        updateStateBox(currentRegionID)
+        updateRegionBox(currentRegionID)
       }
       break
     }
@@ -448,7 +448,7 @@ function mouseEnteredRegion(div)
   }
   else if (currentMapState == kViewing && showingDataMap)
   {
-    updateStateBox(regionID)
+    updateRegionBox(regionID)
   }
 
   $(div).css('stroke', regionSelectColor)
@@ -477,7 +477,7 @@ function mouseLeftRegion(div)
 
   if (currentMapState == kViewing)
   {
-    $("#stateboxcontainer").trigger('hide')
+    $("#regionboxcontainer").trigger('hide')
   }
 
   $(div).css('stroke', regionDeselectColor)
@@ -509,11 +509,8 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
-  if (true)//($("#stateboxcontainer").css('display') != "none")
-  {
-    $("#stateboxcontainer").css("left", e.pageX+5)
-    $("#stateboxcontainer").css("top", e.pageY+5)
-  }
+  $("#regionboxcontainer").css("left", e.pageX+5)
+  $("#regionboxcontainer").css("top", e.pageY+5)
 })
 
 document.addEventListener('mouseup', function() {

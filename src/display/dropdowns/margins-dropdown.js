@@ -1,3 +1,5 @@
+var editMarginID = null
+
 function createMarginEditDropdownItems()
 {
   $("#marginsDropdownContainer").html("")
@@ -54,25 +56,13 @@ function toggleMarginEditing(marginID, div)
 
   if (marginID)
   {
-    $(div).html(marginNames[marginID] + "<input class='marginTextInput' type='text' id='" + marginID + "-text' value='" + marginValues[marginID] + "'>")
+    $(div).html(marginNames[marginID] + "<input class='textInput' type='text' id='" + marginID + "-text' value='" + marginValues[marginID] + "'>")
     $("#" + marginID + "-text").focus()
 
     $("#marginEditButton").addClass('active')
-    if (currentMapType.getCustomMapEnabled())
-    {
-      $("#editDoneButton").addClass('topnavdisable')
-    }
-    $("#sourceToggleButton").addClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").hide()
   }
   else
   {
     $("#marginEditButton").removeClass('active')
-    if (currentMapType.getCustomMapEnabled())
-    {
-      $("#editDoneButton").removeClass('topnavdisable')
-    }
-    $("#sourceToggleButton").removeClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").show()
   }
 }

@@ -6,6 +6,8 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 
   for (var regionID in displayRegionDataArray)
   {
+    if (displayRegionDataArray[regionID].disabled) { continue }
+
     if (displayRegionDataArray[regionID].partyID != partyToShift.getID())
     {
       displayRegionDataArray[regionID].margin -= marginToAdd
@@ -53,7 +55,7 @@ function getTippingPointRegion()
       return (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
     })
     tippingPointRegion = nextClosestState
-    greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region)
+    greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region, displayRegionDataArray[nextClosestState.region].disabled, currentMapSource.getShouldSetDisabledWorthToZero(), currentMapSource.getID() == currentCustomMapSource.getID())
     checkedStates.push(nextClosestState.region)
   }
 

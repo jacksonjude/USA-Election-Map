@@ -13,7 +13,6 @@ var selectedParty
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
 var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
-var editMarginID = null
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
 const regionFillAnimationDuration = 0.1
@@ -30,6 +29,9 @@ var displayRegionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
 
 var showingDataMap = false
+
+var editingRegionEVs = false
+var overrideRegionEVs = {}
 
 var ignoreMapUpdateClickArray = []
 
@@ -348,7 +350,7 @@ function addDivEventListeners()
   })
 
   document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
-    if (currentMapState == kEditing || editMarginID) { return }
+    if (currentMapState == kEditing) { return }
     if (!e.altKey)
     {
       toggleMapSource(this)
@@ -379,16 +381,16 @@ function addDivEventListeners()
     }
   })
 
-  $("#stateboxcontainer").on('show', function() {
+  $("#regionboxcontainer").on('show', function() {
     $(this).show()
     $(this).css('opacity', "1")
   })
 
-  $("#stateboxcontainer").on('hide', function() {
+  $("#regionboxcontainer").on('hide', function() {
     $(this).css('opacity', "0")
 
     setTimeout(function() {
-      if ($("#stateboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#stateboxcontainer").hide() }
+      if ($("#regionboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#regionboxcontainer").hide() }
     }, 200)
   })
 }
@@ -419,6 +421,12 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     {
       $("#sourceToggleButton").removeClass('active')
     }
+
+    if (editMarginID)
+    {
+      toggleMarginEditing(editMarginID)
+    }
+    editingRegionEVs = false
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
@@ -606,7 +614,7 @@ async function displayDataMap(dateIndex)
 
   if (currentRegionID && currentMapState == kViewing)
   {
-    updateStateBox(currentRegionID)
+    updateRegionBox(currentRegionID)
   }
 
   showingDataMap = true
@@ -621,7 +629,7 @@ function updateMapElectoralVoteText()
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}).disabled, currentMapSource.getShouldSetDisabledWorthToZero())
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}).disabled)
     if (regionEV == undefined) { continue }
 
     if (regionChildren.length == 1)
@@ -750,7 +758,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   updateTotalsPieChart()
   if (currentRegionID != null)
   {
-    updateStateBox(currentRegionID)
+    updateRegionBox(currentRegionID)
   }
 
   $("#dataMapDateSliderContainer").hide()
@@ -808,7 +816,11 @@ function populateRegionsArray()
 
 function toggleEditing(stateToSet)
 {
-  if (editMarginID) { return }
+  if (editMarginID)
+  {
+    toggleMarginEditing(editMarginID)
+  }
+  editingRegionEVs = false
 
   if (stateToSet == null)
   {
@@ -836,7 +848,7 @@ function toggleEditing(stateToSet)
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
 
-    $("#stateboxcontainer").trigger('hide')
+    $("#regionboxcontainer").trigger('hide')
 
     $("#marginEditButton").hide()
     $("#marginEditButton").addClass('topnavdisable')
@@ -892,7 +904,7 @@ function toggleEditing(stateToSet)
 
     if (showingDataMap && currentRegionID)
     {
-      updateStateBox(currentRegionID)
+      updateRegionBox(currentRegionID)
     }
     break
   }
@@ -1024,6 +1036,11 @@ function rightClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
+  }
+  else if (currentMapState == kViewing && currentMapSource.getID() == currentCustomMapSource.getID() && currentRegionID)
+  {
+    editingRegionEVs = !editingRegionEVs
+    updateRegionBox(currentRegionID)
   }
 }
 
@@ -1186,7 +1203,7 @@ function getPartyTotals()
     {
       partyTotals[partyIDToSet] = 0
     }
-    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled, currentMapSource.getShouldSetDisabledWorthToZero())
+    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
   }
 
   return partyTotals
@@ -1225,15 +1242,22 @@ function getCurrentDateOrToday()
   return dateToUse
 }
 
-function updateStateBox(regionID)
+function updateRegionBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
   if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
   {
-    $("#stateboxcontainer").trigger('hide')
+    $("#regionboxcontainer").trigger('hide')
     return
   }
-  $("#stateboxcontainer").trigger('show')
+  $("#regionboxcontainer").trigger('show')
+
+  if (editingRegionEVs)
+  {
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inline' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
+    $("#regionEV-text").focus()
+    return
+  }
 
   var decimalPlaceToRound = Math.floor(-Math.log(regionData.margin)/Math.log(10)+2)
   if (decimalPlaceToRound <= 0)
@@ -1276,7 +1300,7 @@ function updateStateBox(regionID)
   setTimeout(() => {
     if (sortedPercentages == null) { return }
 
-    var largestWidth = $("#statebox").width()
+    var largestWidth = $("#regionbox").width()
 
     sortedPercentages.forEach(voteData => {
       var voteshareCandidateID = "#voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode()
@@ -1288,7 +1312,42 @@ function updateStateBox(regionID)
 
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#statebox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+  $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+}
+
+function applyRegionEVEdit(regionID)
+{
+  var regionData = getRegionData(regionID).regionData
+
+  var shouldRefreshEV = false
+
+  var newEV = parseInt($("#regionEV-text").val())
+  if ($("#regionEV-text").val() == "")
+  {
+    delete overrideRegionEVs[regionID]
+    shouldRefreshEV = true
+  }
+
+  var currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled)
+  if (!isNaN(newEV) && newEV > 0 && newEV != currentEV)
+  {
+    overrideRegionEVs[regionID] = newEV
+    shouldRefreshEV = true
+
+    $("#regionEV-text").val(newEV)
+  }
+  else
+  {
+    $("#regionEV-text").val(currentEV)
+    $("#regionEV-text").select()
+  }
+
+  if (shouldRefreshEV)
+  {
+    updateMapElectoralVoteText()
+    displayPartyTotals(getPartyTotals())
+    updateTotalsPieChart()
+  }
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
