@@ -13,6 +13,7 @@ var partyOrdering = [
   {partyID: Independent1968GWParty.getID(), direction: kClockwiseDirection},
   {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
   {partyID: TossupParty.getID(), direction: kClockwiseDirection},
+  {partyID: Independent1856MFParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: Independent1860JohnBellParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: Independent1892JWParty.getID(), direction: kCounterclockwiseDirection},
   {partyID: Independent1924RLParty.getID(), direction: kCounterclockwiseDirection},

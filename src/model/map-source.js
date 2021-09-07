@@ -808,9 +808,10 @@ function createPresidentialMapSources()
 
           if (!foundParty || foundParty.getID() == IndependentGenericParty.getID())
           {
-            var foundParty = Object.values(politicalParties).find(party => {
-              return majorThirdPartyCandidates.includes(party.getID()) && party.getCandidateName() == candidateName
+            var foundPartyID = majorThirdPartyCandidates.find(partyID => {
+              return politicalParties[partyID].getDefaultCandidateName() == candidateName
             })
+            foundParty = politicalParties[foundPartyID]
           }
 
           var currentPartyID

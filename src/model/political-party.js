@@ -43,6 +43,11 @@ class PoliticalParty
     return this.candidateName
   }
 
+  getDefaultCandidateName()
+  {
+    return this.defaultCandidateName
+  }
+
   getMarginColors()
   {
     return this.marginColors
@@ -302,6 +307,15 @@ var Independent1860JohnBellParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var Independent1856MFParty = new PoliticalParty(
+  "IND1856MF",
+  ["Know Nothing"],
+  "Ind",
+  "Fillmore",
+  {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
@@ -338,6 +352,7 @@ politicalParties[Independent1892JBParty.getID()] = Independent1892JBParty
 politicalParties[Independent1888CFParty.getID()] = Independent1888CFParty
 politicalParties[Independent1860JohnBreckenridgeParty.getID()] = Independent1860JohnBreckenridgeParty
 politicalParties[Independent1860JohnBellParty.getID()] = Independent1860JohnBellParty
+politicalParties[Independent1856MFParty.getID()] = Independent1856MFParty
 
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
@@ -362,5 +377,6 @@ var majorThirdPartyCandidates = [
   Independent1892JBParty.getID(),
   Independent1888CFParty.getID(),
   Independent1860JohnBreckenridgeParty.getID(),
-  Independent1860JohnBellParty.getID()
+  Independent1860JohnBellParty.getID(),
+  Independent1856MFParty.getID()
 ]

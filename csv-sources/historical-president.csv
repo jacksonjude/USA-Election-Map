@@ -1,4 +1,128 @@
 date,region,state_po,candidate,party,voteshare
+11/4/1856,Alabama,AL,Fremont,republican,0
+11/4/1856,Alabama,AL,Buchanan,democrat,62.07780478
+11/4/1856,Alabama,AL,Fillmore,independent,37.92219522
+11/4/1856,Alabama,AL,Other,independent,0
+11/4/1856,Arkansas,AR,Fremont,republican,0
+11/4/1856,Arkansas,AR,Buchanan,democrat,67.12211262
+11/4/1856,Arkansas,AR,Fillmore,independent,32.87788738
+11/4/1856,Arkansas,AR,Other,independent,0
+11/4/1856,California,CA,Fremont,republican,18.7782867
+11/4/1856,California,CA,Buchanan,democrat,48.38057231
+11/4/1856,California,CA,Fillmore,independent,32.82844315
+11/4/1856,California,CA,Other,independent,0.01269783683
+11/4/1856,Connecticut,CN,Fremont,republican,53.1775573
+11/4/1856,Connecticut,CN,Buchanan,democrat,43.56708038
+11/4/1856,Connecticut,CN,Fillmore,independent,3.255362322
+11/4/1856,Connecticut,CN,Other,independent,0
+11/4/1856,Delaware,DE,Fremont,republican,2.123578572
+11/4/1856,Delaware,DE,Buchanan,democrat,54.82942869
+11/4/1856,Delaware,DE,Fillmore,independent,42.98534046
+11/4/1856,Delaware,DE,Other,independent,0.06165228113
+11/4/1856,Florida,FL,Fremont,republican,0
+11/4/1856,Florida,FL,Buchanan,democrat,56.81351086
+11/4/1856,Florida,FL,Fillmore,independent,43.18648914
+11/4/1856,Florida,FL,Other,independent,0
+11/4/1856,Georgia,GA,Fremont,republican,0
+11/4/1856,Georgia,GA,Buchanan,democrat,57.14098162
+11/4/1856,Georgia,GA,Fillmore,independent,42.85901838
+11/4/1856,Georgia,GA,Other,independent,0
+11/4/1856,Illinois,IL,Fremont,republican,40.22621107
+11/4/1856,Illinois,IL,Buchanan,democrat,44.09235629
+11/4/1856,Illinois,IL,Fillmore,independent,15.68143264
+11/4/1856,Illinois,IL,Other,independent,0
+11/4/1856,Indiana,IN,Fremont,republican,40.08605494
+11/4/1856,Indiana,IN,Buchanan,democrat,50.40542664
+11/4/1856,Indiana,IN,Fillmore,independent,9.508518419
+11/4/1856,Indiana,IN,Other,independent,0
+11/4/1856,Iowa,IA,Fremont,republican,48.82786264
+11/4/1856,Iowa,IA,Buchanan,democrat,40.69764923
+11/4/1856,Iowa,IA,Fillmore,independent,10.47448814
+11/4/1856,Iowa,IA,Other,independent,0
+11/4/1856,Kentucky,KY,Fremont,republican,0
+11/4/1856,Kentucky,KY,Buchanan,democrat,52.54332737
+11/4/1856,Kentucky,KY,Fillmore,independent,47.45667263
+11/4/1856,Kentucky,KY,Other,independent,0
+11/4/1856,Louisiana,LA,Fremont,republican,0
+11/4/1856,Louisiana,LA,Buchanan,democrat,51.69687216
+11/4/1856,Louisiana,LA,Fillmore,independent,48.30312784
+11/4/1856,Louisiana,LA,Other,independent,0
+11/4/1856,Maine,ME,Fremont,republican,61.33614127
+11/4/1856,Maine,ME,Buchanan,democrat,35.68270291
+11/4/1856,Maine,ME,Fillmore,independent,2.981155813
+11/4/1856,Maine,ME,Other,independent,0
+11/4/1856,Maryland,MD,Fremont,republican,0.3281142068
+11/4/1856,Maryland,MD,Buchanan,democrat,45.04144601
+11/4/1856,Maryland,MD,Fillmore,independent,54.63043979
+11/4/1856,Maryland,MD,Other,independent,0
+11/4/1856,Massachusetts,MA,Fremont,republican,63.61262702
+11/4/1856,Massachusetts,MA,Buchanan,democrat,23.07818969
+11/4/1856,Massachusetts,MA,Fillmore,independent,11.54144712
+11/4/1856,Massachusetts,MA,Other,independent,1.767736169
+11/4/1856,Michigan,MI,Fremont,republican,57.1530969
+11/4/1856,Michigan,MI,Buchanan,democrat,41.52483653
+11/4/1856,Michigan,MI,Fillmore,independent,1.322066565
+11/4/1856,Michigan,MI,Other,independent,0
+11/4/1856,Mississippi,MS,Fremont,republican,0
+11/4/1856,Mississippi,MS,Buchanan,democrat,59.44305665
+11/4/1856,Mississippi,MS,Fillmore,independent,40.55694335
+11/4/1856,Mississippi,MS,Other,independent,0
+11/4/1856,Missouri,MO,Fremont,republican,0
+11/4/1856,Missouri,MO,Buchanan,democrat,54.43344665
+11/4/1856,Missouri,MO,Fillmore,independent,45.56655335
+11/4/1856,Missouri,MO,Other,independent,0
+11/4/1856,New Hampshire,NH,Fremont,republican,53.70625161
+11/4/1856,New Hampshire,NH,Buchanan,democrat,45.70613696
+11/4/1856,New Hampshire,NH,Fillmore,independent,0.5876114312
+11/4/1856,New Hampshire,NH,Other,independent,0
+11/4/1856,New Jersey,NJ,Fremont,republican,28.51020162
+11/4/1856,New Jersey,NJ,Buchanan,democrat,47.22825868
+11/4/1856,New Jersey,NJ,Fillmore,independent,24.2615397
+11/4/1856,New Jersey,NJ,Other,independent,0
+11/4/1856,New York,NY,Fremont,republican,46.27166438
+11/4/1856,New York,NY,Buchanan,democrat,32.83865841
+11/4/1856,New York,NY,Fillmore,independent,20.88967721
+11/4/1856,New York,NY,Other,independent,0
+11/4/1856,North Carolina,NC,Fremont,republican,0
+11/4/1856,North Carolina,NC,Buchanan,democrat,56.7811871
+11/4/1856,North Carolina,NC,Fillmore,independent,43.2188129
+11/4/1856,North Carolina,NC,Other,independent,0
+11/4/1856,Ohio,OH,Fremont,republican,48.51189013
+11/4/1856,Ohio,OH,Buchanan,democrat,44.21095118
+11/4/1856,Ohio,OH,Fillmore,independent,7.277158684
+11/4/1856,Ohio,OH,Other,independent,0
+11/4/1856,Pennsylvania,PA,Fremont,republican,32.00749303
+11/4/1856,Pennsylvania,PA,Buchanan,democrat,50.13158438
+11/4/1856,Pennsylvania,PA,Fillmore,independent,17.86092259
+11/4/1856,Pennsylvania,PA,Other,independent,0
+11/4/1856,Rhode Island,RI,Fremont,republican,57.84986379
+11/4/1856,Rhode Island,RI,Buchanan,democrat,33.69992937
+11/4/1856,Rhode Island,RI,Fillmore,independent,8.450206841
+11/4/1856,Rhode Island,RI,Other,independent,0
+11/4/1856,South Carolina,SC,Fremont,republican,0
+11/4/1856,South Carolina,SC,Buchanan,democrat,100
+11/4/1856,South Carolina,SC,Fillmore,independent,0
+11/4/1856,South Carolina,SC,Other,independent,0
+11/4/1856,Tennessee,TN,Fremont,republican,0
+11/4/1856,Tennessee,TN,Buchanan,democrat,52.18068303
+11/4/1856,Tennessee,TN,Fillmore,independent,47.81931697
+11/4/1856,Tennessee,TN,Other,independent,0
+11/4/1856,Texas,TX,Fremont,republican,0
+11/4/1856,Texas,TX,Buchanan,democrat,66.58904461
+11/4/1856,Texas,TX,Fillmore,independent,33.41095539
+11/4/1856,Texas,TX,Other,independent,0
+11/4/1856,Vermont,VT,Fremont,republican,77.95578151
+11/4/1856,Vermont,VT,Buchanan,democrat,20.84220068
+11/4/1856,Vermont,VT,Fillmore,independent,1.073933948
+11/4/1856,Vermont,VT,Other,independent,0.1280838654
+11/4/1856,Virginia,VA,Fremont,republican,0
+11/4/1856,Virginia,VA,Buchanan,democrat,59.96219206
+11/4/1856,Virginia,VA,Fillmore,independent,40.03780794
+11/4/1856,Virginia,VA,Other,independent,0
+11/4/1856,Wisconsin,WI,Fremont,republican,55.2998862
+11/4/1856,Wisconsin,WI,Buchanan,democrat,44.21564362
+11/4/1856,Wisconsin,WI,Fillmore,independent,0.4844701787
+11/4/1856,Wisconsin,WI,Other,independent,0
 11/6/1860,Alabama,AL,Lincoln,republican,0
 11/6/1860,Alabama,AL,Douglas,democrat,15.11062782
 11/6/1860,Alabama,AL,Breckenridge,independent,54.00346197
