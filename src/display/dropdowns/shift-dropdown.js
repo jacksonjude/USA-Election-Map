@@ -1,6 +1,8 @@
 function addConstantMarginToMap(marginToAdd, partyToShift)
 {
+  if (!marginToAdd) { return }
   var partyToShift = partyToShift || selectedParty
+  if (partyToShift.getID() == TossupParty.getID()) { return }
 
   if (currentMapState != MapState.editing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }
 
@@ -39,7 +41,7 @@ function getTippingPointRegion()
   partyTotals[TossupParty.getID()] = 0
 
   var greatestEVCount = Math.max.apply(null, Object.values(partyTotals))
-  var majorityEVCount = Math.floor(currentMapType.getTotalEV()/2)+1
+  var majorityEVCount = Math.floor(getCurrentTotalEV()/2)+1
 
   if (Math.max.apply(null, Object.values(partyTotals)) < majorityEVCount) // If candidate with most EVs is less than 1/2 +1 of total, return 0
   {
@@ -60,4 +62,14 @@ function getTippingPointRegion()
   }
 
   return tippingPointRegion
+}
+
+function getCurrentTotalEV()
+{
+  var totalEV = 0
+  for (regionID in displayRegionDataArray)
+  {
+    totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+  }
+  return totalEV
 }
