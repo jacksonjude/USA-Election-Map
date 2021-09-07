@@ -33,6 +33,8 @@ var showingDataMap = false
 var editingRegionEVs = false
 var overrideRegionEVs = {}
 
+var editingRegionMarginValue = false
+
 var ignoreMapUpdateClickArray = []
 
 var currentSliderDate
@@ -210,9 +212,13 @@ function setOutlineDivProperties()
         altClickRegion(e.target)
         return
       }
+      else if (e.shiftKey)
+      {
+        shiftClickRegion(e.target)
+      }
       else
       {
-        leftClickRegion(this)
+        leftClickRegion(e.target)
         return
       }
     })
@@ -428,6 +434,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
       toggleMarginEditing(editMarginID)
     }
     editingRegionEVs = false
+    editingRegionMarginValue = false
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
@@ -822,6 +829,7 @@ function toggleEditing(stateToSet)
     toggleMarginEditing(editMarginID)
   }
   editingRegionEVs = false
+  editingRegionMarginValue = false
 
   if (stateToSet == null)
   {
@@ -977,7 +985,7 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == MapState.viewing && showingDataMap && currentRegionID)
+  else if (currentMapState == MapState.viewing && showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
@@ -1038,7 +1046,24 @@ function rightClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID() && currentRegionID)
+}
+
+function shiftClickRegion(div)
+{
+  if (currentMapState == MapState.editing)
+  {
+    editingRegionMarginValue = !editingRegionMarginValue
+
+    if (editingRegionMarginValue)
+    {
+      updateRegionBox(currentRegionID)
+    }
+    else
+    {
+      $("#regionboxcontainer").trigger('hide')
+    }
+  }
+  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     editingRegionEVs = !editingRegionEVs
     updateRegionBox(currentRegionID)
@@ -1260,14 +1285,17 @@ function updateRegionBox(regionID)
     return
   }
 
-  var decimalPlaceToRound = Math.floor(-Math.log(regionData.margin)/Math.log(10)+2)
-  if (decimalPlaceToRound <= 0)
+  var roundedMarginValue = getRoundedMarginValue(regionData.margin)
+  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +"
+
+  if (editingRegionMarginValue)
   {
-    decimalPlaceToRound = 1
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inline' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
+    $("#regionMargin-text").focus()
+    return
   }
 
-  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
-  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +" + roundedMarginValue
+  regionMarginString += roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
@@ -1316,6 +1344,17 @@ function updateRegionBox(regionID)
   $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 }
 
+function getRoundedMarginValue(fullMarginValue)
+{
+  var decimalPlaceToRound = Math.floor(-Math.log(fullMarginValue)/Math.log(10)+2)
+  if (decimalPlaceToRound <= 0 || !isFinite(decimalPlaceToRound))
+  {
+    decimalPlaceToRound = 1
+  }
+
+  return decimalPadding(Math.round(fullMarginValue*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
+}
+
 function applyRegionEVEdit(regionID)
 {
   var regionData = getRegionData(regionID).regionData
@@ -1349,6 +1388,35 @@ function applyRegionEVEdit(regionID)
     displayPartyTotals(getPartyTotals())
     updateTotalsPieChart()
   }
+}
+
+function applyRegionMarginValue(regionID)
+{
+  var regionDataCallback = getRegionData(regionID)
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+  var regionData = regionDataCallback.regionData
+
+  var newMarginString = $("#regionMargin-text").val()
+  var newMargin = parseFloat(newMarginString)
+  if (newMarginString == "")
+  {
+    newMargin = 1
+  }
+  var newMarginIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newMarginString) && !isNaN(newMargin) && newMargin >= 0
+
+  var currentMargin = getRoundedMarginValue(regionData.margin)
+  if (newMarginIsValid && newMargin != currentMargin)
+  {
+    regionData.margin = newMargin
+  }
+  else if (!newMarginIsValid)
+  {
+    $("#regionMargin-text").val(currentMargin)
+    $("#regionMargin-text").select()
+  }
+
+  updateRegionFillColors(regionIDsToFill, regionData, false)
+  displayPartyTotals(getPartyTotals())
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)

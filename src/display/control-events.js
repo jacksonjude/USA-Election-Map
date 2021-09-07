@@ -4,7 +4,7 @@ var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {}
 
 document.addEventListener('keydown', function(e) {
-  if (e.which >= 37 && e.which <= 40 && showingDataMap)
+  if (e.which >= 37 && e.which <= 40 && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && showingDataMap)
   {
     switch (e.which)
     {
@@ -273,7 +273,7 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateNavBarForNewSource()
@@ -283,7 +283,7 @@ document.addEventListener('keypress', async function(e) {
       updateRegionBox(currentRegionID)
     }
   }
-  else if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && e.which == 48)
+  else if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && e.which == 48)
   {
     clearMap()
   }
@@ -451,6 +451,11 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
+  if (editingRegionMarginValue)
+  {
+    updateRegionBox(regionID)
+  }
+
   $(div).css('stroke', regionSelectColor)
   for (var linkedRegionSetNum in linkedRegions)
   {
@@ -475,10 +480,7 @@ function mouseLeftRegion(div)
     currentRegionID = null
   }
 
-  if (currentMapState == MapState.viewing)
-  {
-    $("#regionboxcontainer").trigger('hide')
-  }
+  $("#regionboxcontainer").trigger('hide')
 
   $(div).css('stroke', regionDeselectColor)
   for (var linkedRegionSetNum in linkedRegions)
