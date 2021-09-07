@@ -1150,7 +1150,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
     regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
-    if (regionData.disabled == true && currentMapSource.getID() != currentCustomMapSource.getID())
+    if (regionData.disabled == true && (currentMapSource.getID() != currentCustomMapSource.getID() || !currentMapType.getMapSettingValue("mapCurrentSeats")))
     {
       regionDiv.css('pointer-events', 'none')
     }
