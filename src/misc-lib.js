@@ -253,3 +253,9 @@ function getMDYDateString(date, delimiter, includeTime)
 
   return dateString
 }
+
+String.prototype.toTitle = function() {
+  if (this.length == 0) { return "" }
+  if (this.length == 1) { return this.toUpperCase() }
+  return this.charAt(0).toUpperCase() + this.slice(1)
+}

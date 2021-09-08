@@ -4,7 +4,7 @@ var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {}
 
 document.addEventListener('keydown', function(e) {
-  if (e.which >= 37 && e.which <= 40 && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && showingDataMap)
+  if (e.which >= 37 && e.which <= 40 && !isEditingTextbox() && showingDataMap)
   {
     switch (e.which)
     {
@@ -273,7 +273,7 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == MapState.viewing && !isEditingTextbox() && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateNavBarForNewSource()
@@ -283,7 +283,7 @@ document.addEventListener('keypress', async function(e) {
       updateRegionBox(currentRegionID)
     }
   }
-  else if (currentMapState == MapState.viewing && !editMarginID && !editingRegionEVs && !editingRegionMarginValue && e.which == 48)
+  else if (currentMapState == MapState.viewing && !isEditingTextbox() && e.which == 48)
   {
     clearMap()
   }
@@ -334,7 +334,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentMapState == MapState.editing && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
+  else if (currentMapState == MapState.editing && !isEditingTextbox() && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -352,21 +352,35 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleMarginEditing()
     }
+    else if (editCandidateNamePartyID)
+    {
+      toggleCandidateNameEditing()
+    }
+    else if (editingRegionEVs)
+    {
+      editingRegionEVs = false
+      updateRegionBox(currentRegionID)
+    }
+    else if (editingRegionMarginValue)
+    {
+      editingRegionMarginValue = false
+      $("#regionboxcontainer").trigger('hide')
+    }
     else
     {
       toggleEditing()
     }
   }
-  else if (e.which == 82 || e.which == 114)
+  else if ((e.which == 82 || e.which == 114) && !isEditingTextbox())
   {
     resizeElements()
   }
-  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1)
+  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
     var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.which)]
     toggleCompareMapSourceCheckbox(mapSourceIDToCompare, false)
   }
-  else if (e.which == 99 || e.which == 109 || e.which == 115)
+  else if ((e.which == 99 || e.which == 109 || e.which == 115) && !isEditingTextbox())
   {
     removeActiveClassFromDropdownButton()
 
@@ -406,7 +420,7 @@ document.addEventListener('keypress', async function(e) {
       selectedDropdownDivID = null
     }
   }
-  else if (e.which == 84 || e.which == 116)
+  else if ((e.which == 84 || e.which == 116) && !isEditingTextbox())
   {
     cycleMapType($("#cycleMapTypeButton")[0])
   }
@@ -528,3 +542,8 @@ document.addEventListener('mouseup', function() {
     startRegionID = null
   }
 })
+
+function isEditingTextbox()
+{
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID
+}
