@@ -129,7 +129,7 @@ function removeStatusImage(divID)
   $("#" + divID + " .status").remove()
 }
 
-function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch)
+function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch, resetCandidateNames)
 {
   if (mapIDToIgnore != null)
   {
@@ -146,7 +146,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
       insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
     }
 
-    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch)
+    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
     for (let divID in divsToUpdateStatus)
     {
       removeStatusImage(divID)

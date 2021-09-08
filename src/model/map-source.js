@@ -28,12 +28,13 @@ class MapSource
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
   }
 
-  loadMap(reloadCache, onlyAttemptLocalFetch)
+  loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
     var self = this
 
     var loadMapPromise = new Promise(async (resolve, reject) => {
       reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
+      resetCandidateNames = resetCandidateNames != null ? resetCandidateNames : true
 
       if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
       {
@@ -64,7 +65,7 @@ class MapSource
       var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin)
       self.mapData = filterMapDataCallback.mapData
 
-      if (filterMapDataCallback.candidateNameData != null)
+      if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
       {
         self.candidateNameData = filterMapDataCallback.candidateNameData
       }
@@ -307,22 +308,22 @@ class MapSource
     self = self || this
     if (shortNameOverride && !dateToSet)
     {
-      this.defaultShortCandidateNameOverride = cloneObject(this.shortCandidateNameOverride)
-      this.shortCandidateNameOverride = shortNameOverride
+      self.defaultShortCandidateNameOverride = cloneObject(self.shortCandidateNameOverride)
+      self.shortCandidateNameOverride = shortNameOverride
     }
     else if (shortNameOverride && dateToSet)
     {
-      if (this.candidateNameData == null) { this.candidateNameData = {} }
-      this.candidateNameData[dateToSet] = cloneObject(shortNameOverride)
+      if (self.candidateNameData == null) { self.candidateNameData = {} }
+      self.candidateNameData[dateToSet] = cloneObject(shortNameOverride)
     }
-    else if (this.defaultShortCandidateNameOverride)
+    else if (self.defaultShortCandidateNameOverride)
     {
-      this.shortCandidateNameOverride = cloneObject(this.defaultShortCandidateNameOverride)
+      self.shortCandidateNameOverride = cloneObject(self.defaultShortCandidateNameOverride)
     }
 
     if (shouldResetCandidateNameData == true)
     {
-      this.candidateNameData = null
+      self.candidateNameData = null
     }
   }
 

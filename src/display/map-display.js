@@ -400,6 +400,8 @@ function addDivEventListeners()
       if ($("#regionboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#regionboxcontainer").hide() }
     }, 200)
   })
+
+  createPartyDropdownsBoxHoverHandler()
 }
 
 function addTextBoxSpacingCSS()
@@ -418,7 +420,7 @@ function addTextBoxSpacingCSS()
   }
 }
 
-function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
@@ -443,7 +445,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
-    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
+    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
     if (!loadedSuccessfully) { resolve(); return }
 
@@ -826,7 +828,7 @@ function populateRegionsArray()
   })
 }
 
-function toggleEditing(stateToSet)
+async function toggleEditing(stateToSet)
 {
   if (editMarginID)
   {
@@ -860,8 +862,6 @@ function toggleEditing(stateToSet)
   switch (currentMapState)
   {
     case MapState.editing:
-    deselectAllParties()
-
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
 
@@ -887,13 +887,12 @@ function toggleEditing(stateToSet)
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
       updateNavBarForNewSource()
-      loadDataMap()
+      await loadDataMap()
     }
+    deselectAllParties()
     break
 
     case MapState.viewing:
-    selectAllParties()
-
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
@@ -924,6 +923,8 @@ function toggleEditing(stateToSet)
     {
       updateRegionBox(currentRegionID)
     }
+
+    selectAllParties()
     break
   }
 

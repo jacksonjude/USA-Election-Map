@@ -1,4 +1,6 @@
 var dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs
+const addButtonPartyID = "ADDPARTY"
+
 const maxPartiesToDisplay = 4
 const partyDropdownHeight = 146
 const partyDropdownWidth = 212
@@ -13,9 +15,6 @@ function createPartyDropdowns()
   $("#partyDropdownsContainer").html("")
   for (var partyIDNum in dropdownPoliticalPartyIDs)
   {
-    var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
-    var marginColors = currentPoliticalParty.getMarginColors()
-
     var dropdownDiv = ""
 
     if (partyIDNum != 0 && partyIDNum%2 == 0)
@@ -28,6 +27,16 @@ function createPartyDropdowns()
       dropdownDiv += '<a style="visibility: hidden"></a>'
       dropdownDiv += '</div>'
     }
+
+    if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
+    {
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + partyButtonWidth + 'px; padding: 12px 14px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray">' + "+" + '</a>'
+      $("#partyDropdownsContainer").append(dropdownDiv)
+      continue
+    }
+
+    var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
+    var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; margin: 0px; background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
@@ -71,6 +80,8 @@ function createPartyDropdowns()
   for (var partyIDNum in dropdownPoliticalPartyIDs)
   {
     $("#" + dropdownPoliticalPartyIDs[partyIDNum]).hover(function() {
+      if (politicalParties[this.id] == null) { return }
+
       var marginColors = politicalParties[this.id].getMarginColors()
       var partyButton = $(this)
 
@@ -85,6 +96,8 @@ function createPartyDropdowns()
 
       partyButton.addClass("hover")
     }, function() {
+      if (politicalParties[this.id] == null) { return }
+
       var marginColors = politicalParties[this.id].getMarginColors()
       var partyButton = $(this)
 
@@ -288,7 +301,7 @@ async function toggleCandidateNameEditing(partyID, div)
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
-      await loadDataMap()
+      await loadDataMap(null, null, null, false)
     }
     else
     {
@@ -302,6 +315,45 @@ async function toggleCandidateNameEditing(partyID, div)
     $(div).css("padding", "9px 16px")
     $("#" + partyID + "-candidate-text").focus().select()
   }
+}
+
+function createPartyDropdownsBoxHoverHandler()
+{
+  $("#partyDropdownsBox").hover(function() {
+    if (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapState == MapState.editing || dropdownPoliticalPartyIDs.includes(addButtonPartyID) || dropdownPoliticalPartyIDs.length >= maxPartiesToDisplay) { return }
+
+    dropdownPoliticalPartyIDs.push(addButtonPartyID)
+    displayPartyTotals(getPartyTotals(), true)
+  }, function() {
+    if (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapState == MapState.editing || !dropdownPoliticalPartyIDs.includes(addButtonPartyID)) { return }
+
+    dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
+    displayPartyTotals(getPartyTotals(), true)
+  })
+}
+
+function createNewCustomParty()
+{
+  // Find first color which is not already in use by another dropdown party; Default to "gray"
+  var colorIDToUse = Object.keys(PoliticalPartyColors).find(colorID => !dropdownPoliticalPartyIDs.some(partyID => politicalParties[partyID] != null && JSON.stringify(politicalParties[partyID].getMarginColors()) == JSON.stringify(PoliticalPartyColors[colorID]))) || "gray"
+
+  var customPoliticalParty = new PoliticalParty(
+    "CUSTOM" + dropdownPoliticalPartyIDs.reduce((customCount, partyID) => customCount + (partyID.startsWith("CUSTOM") ? 1 : 0), 0),
+    ["Custom"],
+    "Custom",
+    "Custom",
+    cloneObject(PoliticalPartyColors[colorIDToUse]),
+    defaultMarginNames
+  )
+
+  politicalParties[customPoliticalParty.getID()] = customPoliticalParty
+  dropdownPoliticalPartyIDs.push(customPoliticalParty.getID())
+
+  var currentCandidateNames = currentMapSource.getCandidateNames(getCurrentDateOrToday())
+  currentCandidateNames[customPoliticalParty.getID()] = customPoliticalParty.getCandidateName()
+  currentMapSource.setCandidateNames(currentCandidateNames, currentSliderDate.getTime())
+
+  displayPartyTotals(getPartyTotals(), true)
 }
 
 function displayPartyTotals(partyTotals, overrideCreateDropdowns)
@@ -325,7 +377,11 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
   }
   else if (currentMapSource.getID() == currentCustomMapSource.getID() && overrideCreateDropdowns)
   {
-    var sortedDropdownPartyIDs = dropdownPoliticalPartyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, maxPartiesToDisplay)
+    var sortedDropdownPartyIDs = dropdownPoliticalPartyIDs.sort((party1, party2) => {
+      if (party1 == addButtonPartyID) { return 1 }
+      if (party2 == addButtonPartyID) { return -1 }
+      return partyTotals[party2]-partyTotals[party1]
+    }).slice(0, maxPartiesToDisplay)
     if (JSON.stringify(sortedDropdownPartyIDs) != JSON.stringify(dropdownPoliticalPartyIDs) || overrideCreateDropdowns)
     {
       dropdownPoliticalPartyIDs = sortedDropdownPartyIDs
@@ -335,6 +391,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
 
   for (var partyIDNum in dropdownPoliticalPartyIDs)
   {
+    if (politicalParties[dropdownPoliticalPartyIDs[partyIDNum]] == null) { continue }
     $("#" + dropdownPoliticalPartyIDs[partyIDNum]).html(politicalParties[dropdownPoliticalPartyIDs[partyIDNum]].getCandidateName() + " (" + (partyTotals[dropdownPoliticalPartyIDs[partyIDNum]] || 0) + ")")
   }
 }
