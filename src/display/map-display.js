@@ -874,7 +874,7 @@ function toggleEditing(stateToSet)
 
     if (!currentMapIsCustom)
     {
-      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames((currentSliderDate || new Date(getCurrentDateOrToday())).getTime()))
+      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()))
 
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
@@ -909,6 +909,7 @@ function toggleEditing(stateToSet)
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+      displayPartyTotals(getPartyTotals(), true)
     }
 
     if (showingDataMap && currentRegionID)
@@ -1280,7 +1281,7 @@ function updateRegionBox(regionID)
 
   if (editingRegionEVs)
   {
-    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inline' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
     $("#regionEV-text").focus()
     return
   }
@@ -1290,7 +1291,7 @@ function updateRegionBox(regionID)
 
   if (editingRegionMarginValue)
   {
-    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inline' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
     $("#regionMargin-text").focus()
     return
   }
@@ -1376,7 +1377,7 @@ function applyRegionEVEdit(regionID)
 
     $("#regionEV-text").val(newEV)
   }
-  else
+  else if ($("#regionEV-text").val() != currentEV)
   {
     $("#regionEV-text").val(currentEV)
     $("#regionEV-text").select()

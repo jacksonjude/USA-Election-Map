@@ -1,10 +1,12 @@
 var dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs
 const maxPartiesToDisplay = 4
-const partyDropdownHeight = 98
+const partyDropdownHeight = 146
 const partyDropdownWidth = 212
 const partyButtonWidth = 150
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
+
+var editCandidateNamePartyID = null
 
 function createPartyDropdowns()
 {

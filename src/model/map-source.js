@@ -290,7 +290,7 @@ class MapSource
 
   getCandidateNames(date)
   {
-    if (this.candidateNameData == null || date == null || this.candidateNameData[date] == null)
+    if (this.candidateNameData == null || date == null || this.candidateNameData[date] == null || JSON.stringify(this.candidateNameData[date]) == "{}")
     {
       return this.shortCandidateNameOverride
     }
