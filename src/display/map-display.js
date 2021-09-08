@@ -1316,29 +1316,16 @@ function updateRegionBox(regionID)
 
     regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
 
-    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + ";" + "'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
       regionMarginString += "%</span></span><br>"
     })
 
     regionMarginString += "</div>"
   }
-
-  setTimeout(() => {
-    if (sortedPercentages == null) { return }
-
-    var largestWidth = $("#regionbox").width()
-
-    sortedPercentages.forEach(voteData => {
-      var voteshareCandidateID = "#voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode()
-
-      $(voteshareCandidateID).css('background', "linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%)")
-      $(voteshareCandidateID).css('width', largestWidth + "px")
-    })
-  }, 0)
 
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
