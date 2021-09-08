@@ -52,7 +52,7 @@ function createPartyDropdowns()
     dropdownDiv += '</a>'
     var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors()) || 'custom'
     dropdownDiv += '<div class="dropdown-separator"></div>'
-    dropdownDiv += '<a onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
 
     if (shouldReverseOrder)
     {
@@ -111,6 +111,9 @@ function updatePartyColor(partyID, margin)
   marginColors[margin] = $("#" + partyID + "-" + margin + "-color-picker")[0].getAttribute('data-current-color')
   party.setMarginColors(marginColors)
 
+  $("#" + partyID + "-color-preset").data("color-preset", "custom")
+  $("#" + partyID + "-color-preset").html("Preset: " + "custom".toTitle())
+
   displayDataMap()
 }
 
@@ -131,7 +134,7 @@ function cyclePartyColorPreset(partyID, div, incrementAmount)
 
   $("#" + partyID).css("background-color", PoliticalPartyColors[nextPresetID].safe)
 
-  politicalParties[partyID].setMarginColors(PoliticalPartyColors[nextPresetID])
+  politicalParties[partyID].setMarginColors(cloneObject(PoliticalPartyColors[nextPresetID]))
 
   displayDataMap()
 }

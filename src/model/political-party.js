@@ -84,7 +84,7 @@ var DemocraticParty = new PoliticalParty(
   ["Democratic", "Democrat"],
   "Dem",
   "Biden",
-  PoliticalPartyColors.blue,
+  cloneObject(PoliticalPartyColors.blue),
   defaultMarginNames
 )
 
@@ -93,7 +93,7 @@ var RepublicanParty = new PoliticalParty(
   ["Republican"],
   "Rep",
   "Trump",
-  PoliticalPartyColors.red,
+  cloneObject(PoliticalPartyColors.red),
   defaultMarginNames
 )
 
@@ -113,7 +113,7 @@ var LibertarianParty = new PoliticalParty(
   ["Libertarian"],
   "Lib",
   "Jorgensen",
-  PoliticalPartyColors.yellow,
+  cloneObject(PoliticalPartyColors.yellow),
   defaultMarginNames
 )
 
@@ -122,7 +122,7 @@ var GreenParty = new PoliticalParty(
   ["Green"],
   "Grn",
   "Hawkins",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -131,7 +131,7 @@ var ReformParty = new PoliticalParty(
   ["Reform"],
   "Ref",
   "Perot",
-  PoliticalPartyColors.purple,
+  cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
 
@@ -140,7 +140,7 @@ var IndependentRNParty = new PoliticalParty(
   ["None"],
   "Ind",
   "Nader",
-  PoliticalPartyColors.gray,
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
@@ -149,7 +149,7 @@ var Independent2016EMParty = new PoliticalParty(
   ["None"],
   "Ind",
   "McMullin",
-  PoliticalPartyColors.gray,
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
@@ -158,7 +158,7 @@ var Independent1980JAParty = new PoliticalParty(
   ["None"],
   "Ind",
   "Anderson",
-  PoliticalPartyColors.gray,
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
@@ -167,7 +167,7 @@ var Independent1976EMParty = new PoliticalParty(
   ["None"],
   "Ind",
   "McCarthy",
-  PoliticalPartyColors.gray,
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
@@ -176,7 +176,7 @@ var Independent1968GWParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Wallace",
-  PoliticalPartyColors.orange,
+  cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
 
@@ -185,7 +185,7 @@ var Independent1960HBParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Byrd",
-  PoliticalPartyColors.orange,
+  cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
 
@@ -194,7 +194,7 @@ var Independent1948SMParty = new PoliticalParty(
   ["Dixiecrat"],
   "Ind",
   "Thurmond",
-  PoliticalPartyColors.orange,
+  cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
 
@@ -203,7 +203,7 @@ var Independent1948HWParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "Wallace",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -212,7 +212,7 @@ var Independent1932NTParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Thomas",
-  PoliticalPartyColors.scarlet,
+  cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
 
@@ -221,7 +221,7 @@ var Independent1924RLParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "La Follette",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -230,7 +230,7 @@ var Independent1920EDParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Debs",
-  PoliticalPartyColors.scarlet,
+  cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
 
@@ -239,7 +239,7 @@ var Independent1916ABParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Benson",
-  PoliticalPartyColors.scarlet,
+  cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
 
@@ -248,7 +248,7 @@ var Independent1912TRParty = new PoliticalParty(
   ["Progressive"],
   "Ind",
   "Roosevelt",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -257,7 +257,7 @@ var Independent1912EDParty = new PoliticalParty(
   ["Socialist"],
   "Ind",
   "Debs",
-  PoliticalPartyColors.scarlet,
+  cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
 
@@ -266,7 +266,7 @@ var Independent1892JWParty = new PoliticalParty(
   ["Populist"],
   "Ind",
   "Weaver",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -275,7 +275,7 @@ var Independent1892JBParty = new PoliticalParty(
   ["Prohibition"],
   "Ind",
   "Bidwell",
-  PoliticalPartyColors.purple,
+  cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
 
@@ -284,7 +284,7 @@ var Independent1888CFParty = new PoliticalParty(
   ["Prohibition"],
   "Ind",
   "Fisk",
-  PoliticalPartyColors.purple,
+  cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
 
@@ -293,7 +293,7 @@ var Independent1860JohnBreckenridgeParty = new PoliticalParty(
   ["Southern Democratic"],
   "Ind",
   "Breckenridge",
-  PoliticalPartyColors.green,
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -302,7 +302,7 @@ var Independent1860JohnBellParty = new PoliticalParty(
   ["Constitutional Union"],
   "Ind",
   "Bell",
-  PoliticalPartyColors.orange,
+  cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
 
@@ -311,7 +311,7 @@ var Independent1856MFParty = new PoliticalParty(
   ["Know Nothing"],
   "Ind",
   "Fillmore",
-  PoliticalPartyColors.purple,
+  cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
 
@@ -320,7 +320,7 @@ var IndependentGenericParty = new PoliticalParty(
   ["Independent"],
   "Ind",
   "Generic",
-  PoliticalPartyColors.gray,
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
