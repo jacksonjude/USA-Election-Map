@@ -227,7 +227,9 @@ class MapSource
     {
       this.setTextMapData("date\n" + getTodayString(), this)
       this.setIconURL("", this)
-      this.setCandidateNames(null, null, this)
+      this.setCandidateNames(null, null, null, this)
+
+      overrideRegionEVs = {}
     }
   }
 
@@ -300,13 +302,18 @@ class MapSource
     }
   }
 
-  setCandidateNames(shortNameOverride, shouldResetCandidateNameData, self)
+  setCandidateNames(shortNameOverride, dateToSet, shouldResetCandidateNameData, self)
   {
     self = self || this
-    if (shortNameOverride)
+    if (shortNameOverride && !dateToSet)
     {
       this.defaultShortCandidateNameOverride = cloneObject(this.shortCandidateNameOverride)
       this.shortCandidateNameOverride = shortNameOverride
+    }
+    else if (shortNameOverride && dateToSet)
+    {
+      if (this.candidateNameData == null) { this.candidateNameData = {} }
+      this.candidateNameData[dateToSet] = cloneObject(shortNameOverride)
     }
     else if (this.defaultShortCandidateNameOverride)
     {
@@ -402,8 +409,6 @@ class MapSource
       }
     }
     csvText += "\n"
-
-    var candidateNames = Object.keys(candidateNameToPartyIDs)
 
     for (var mapDate in mapData)
     {

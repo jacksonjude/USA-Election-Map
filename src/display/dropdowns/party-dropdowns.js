@@ -50,7 +50,7 @@ function createPartyDropdowns()
       dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}" onclick="$(\'#' + currentPoliticalParty.getID() + 'DropdownContent\').css(\'display\', \'block\')"></button>'
     }
     dropdownDiv += '</a>'
-    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors()) || 'custom'
+    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
     dropdownDiv += '<div class="dropdown-separator"></div>'
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
 
@@ -269,7 +269,7 @@ async function toggleCandidateNameEditing(partyID, div)
     if (candidateNameToSet != currentCandidateNames[editCandidateNamePartyID])
     {
       currentCandidateNames[editCandidateNamePartyID] = candidateNameToSet
-      currentMapSource.setCandidateNames(currentCandidateNames)
+      currentMapSource.setCandidateNames(currentCandidateNames, currentSliderDate.getTime())
       shouldRefreshMap = true
     }
 
@@ -285,7 +285,15 @@ async function toggleCandidateNameEditing(partyID, div)
   displayPartyTotals(getPartyTotals())
   if (shouldRefreshMap && showingDataMap)
   {
-    await displayDataMap()
+    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    {
+      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      await loadDataMap()
+    }
+    else
+    {
+      await displayDataMap()
+    }
   }
 
   if (partyID)

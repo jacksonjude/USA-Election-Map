@@ -433,6 +433,10 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     {
       toggleMarginEditing(editMarginID)
     }
+    if (editCandidateNamePartyID)
+    {
+      toggleCandidateNameEditing(editCandidateNamePartyID)
+    }
     editingRegionEVs = false
     editingRegionMarginValue = false
 
@@ -446,7 +450,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
     shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    await displayDataMap()
+    await displayDataMap(null, true)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
@@ -537,7 +541,7 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
-async function displayDataMap(dateIndex)
+async function displayDataMap(dateIndex, reloadPartyDropdowns)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
@@ -614,7 +618,7 @@ async function displayDataMap(dateIndex)
   }
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals(getPartyTotals(), reloadPartyDropdowns)
 
   updateTotalsPieChart()
 
@@ -827,6 +831,10 @@ function toggleEditing(stateToSet)
   if (editMarginID)
   {
     toggleMarginEditing(editMarginID)
+  }
+  if (editCandidateNamePartyID)
+  {
+    toggleCandidateNameEditing(editCandidateNamePartyID)
   }
   editingRegionEVs = false
   editingRegionMarginValue = false

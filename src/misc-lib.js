@@ -21,9 +21,9 @@ function decimalPadding(num, shouldAddDecimalPadding)
   return num.toString()
 }
 
-function getKeyByValue(object, value)
+function getKeyByValue(object, value, shouldStringifyToCompare)
 {
-  return Object.keys(object).find(key => object[key] == value)
+  return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)
 }
 
 function invertObject(object)
