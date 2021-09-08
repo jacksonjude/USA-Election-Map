@@ -1282,7 +1282,7 @@ function updateRegionBox(regionID)
   if (editingRegionEVs)
   {
     $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
-    $("#regionEV-text").focus()
+    $("#regionEV-text").focus().select()
     return
   }
 
@@ -1292,7 +1292,7 @@ function updateRegionBox(regionID)
   if (editingRegionMarginValue)
   {
     $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
-    $("#regionMargin-text").focus()
+    $("#regionMargin-text").focus().select()
     return
   }
 
