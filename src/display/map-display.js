@@ -13,7 +13,6 @@ var selectedParty
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
 var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
-var editMarginID = null
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
 const regionFillAnimationDuration = 0.1
@@ -31,6 +30,11 @@ var regionIDsToIgnore = [/.+-button/, /.+-land/]
 
 var showingDataMap = false
 
+var editingRegionEVs = false
+var overrideRegionEVs = {}
+
+var editingRegionMarginValue = false
+
 var ignoreMapUpdateClickArray = []
 
 var currentSliderDate
@@ -38,42 +42,18 @@ const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 55
 
-const kEditing = 0
-const kViewing = 1
-
-var currentMapState = kViewing
+const MapState = {
+  editing: 0,
+  viewing: 1
+}
+var currentMapState = MapState.viewing
 
 var showingHelpBox = false
-
-const electionDayTime2020 = 1604361600000 //1604390400000 PST
-const electorsCastVotesTime = 1607965200000
-const congressCountsVotesTime = 1609952400000
-const inaugurationDayTime2021 = 1611162000000
-
-const electionDayTime2021 = 1635868800000
-const electionDayTime2022 = 1667926800000
-const electionDayTime2024 = 1730826000000
-
-const countdownTimes = {
-  "2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
-  "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"},
-  "2021 Governor Elections": {time: electionDayTime2021, url: "https://en.wikipedia.org/wiki/2021_United_States_gubernatorial_elections"},
-  "2022 Midterm Elections": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"},
-  "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}
-}
-var currentCountdownTimeName
-
-const kCSVFileType = "text/csv"
-const kJSONFileType = "application/json"
-const kPNGFileType = "image/png"
-const kJPEGFileType = "image/jpeg"
 
 var showingCompareMap = false
 var compareMapSourceIDArray = [null, null]
 var compareMapDataArray = [null, null]
 var selectedCompareSlider = null
-
-const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
 
 var selectedDropdownDivID = null
 
@@ -99,6 +79,7 @@ $(async function() {
 
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
+  createPartyDropdowns()
 
   addDivEventListeners()
 
@@ -113,27 +94,6 @@ $(async function() {
 
   $.ajaxSetup({cache: false})
 })
-
-function cycleMapType(buttonDiv)
-{
-  var newMapTypeIndex = mapTypeIDs.indexOf(currentMapType.getID())+1
-  if (newMapTypeIndex >= mapTypeIDs.length || newMapTypeIndex < 0)
-  {
-    newMapTypeIndex = 0
-  }
-
-  setMapType(mapTypeIDs[newMapTypeIndex], buttonDiv)
-}
-
-function setMapType(newMapTypeID, buttonDiv)
-{
-  currentMapType = mapTypes[newMapTypeID]
-  setCookie("currentMapType", currentMapType.getID())
-
-  $(buttonDiv || "#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
-
-  reloadForNewMapType()
-}
 
 async function reloadForNewMapType(initialLoad)
 {
@@ -170,7 +130,7 @@ async function reloadForNewMapType(initialLoad)
   showingDataMap = false
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
-  currentMapState = kViewing
+  currentMapState = MapState.viewing
   showingCompareMap = false
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
@@ -179,10 +139,14 @@ async function reloadForNewMapType(initialLoad)
   createMapTypeDropdownItems()
 
   currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
+  if (currentMapSource.getID() == NullMapSource.getID())
+  {
+    $("#sourceToggleButton").addClass('active')
+  }
 
   await loadMapSVGFile()
 
-  $("#evPieChartContainer").html("<canvas id='evPieChart'></canvas>")
+  $("#totalsPieChartContainer").html("<canvas id='totalsPieChart'></canvas>")
   $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
@@ -193,15 +157,15 @@ async function reloadForNewMapType(initialLoad)
   createComparePresetDropdownItems()
 
   populateRegionsArray()
-  for (var partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in dropdownPoliticalPartyIDs)
   {
-    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
   }
   displayPartyTotals(getPartyTotals())
 
-  setupEVPieChart()
-  updateEVPieChart()
+  setupTotalsPieChart()
+  updateTotalsPieChart()
 
   updateIconsBasedOnLocalCSVData()
 
@@ -248,9 +212,13 @@ function setOutlineDivProperties()
         altClickRegion(e.target)
         return
       }
+      else if (e.shiftKey)
+      {
+        shiftClickRegion(e.target)
+      }
       else
       {
-        leftClickRegion(this)
+        leftClickRegion(e.target)
         return
       }
     })
@@ -292,11 +260,19 @@ function resizeElements(initilizedPieChart)
   setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
   setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
 
-  $("#evPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
-  $("#evPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
-  $("#evPieChart").css("background-size", $("#evPieChart").width()*evPieChartCutoutPercent/100.0*0.5)
-  $("#evPieChart").css("background-position", "center")
-  $("#evPieChart").css("background-repeat", "no-repeat")
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#totalsPieChart").width(windowWidth-windowWidth*0.15-mapWidth)
+    $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  }
+  else
+  {
+    $("#totalsPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
+    $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  }
+  $("#totalsPieChart").css("background-size", $("#totalsPieChart").width()*totalsPieChartCutoutPercent/100.0*0.5)
+  $("#totalsPieChart").css("background-position", "center")
+  $("#totalsPieChart").css("background-repeat", "no-repeat")
 
   // const creditboxh3DefaultSize = 23
   // const creditboxh5DefaultSize = 17
@@ -312,16 +288,21 @@ function resizeElements(initilizedPieChart)
 
   const defaultMapZoom = 120.634/100
 
-  $("#infoboxcontainers").css('min-width', $("#evPieChart").width())
+  $("#helpboxcontainer").css('width', $("#totalsPieChart").width())
+  $("#partyDropdownsBoxContainer").css('width', $("#totalsPieChart").width())
+  $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
 
-  $("#creditbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
+  $("#discordInvite").css("width", $("#totalsPieChart").width())
+  $("#discordInvite").css("border-radius", "5px")
+  $("#discordInvite").css("border", "1px solid gray")
+  // $("#discordInvite").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
   $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
   $("#helpbox h5").css('font-size', (helpboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
 
   if (initilizedPieChart == true || initilizedPieChart == null)
   {
-    updateEVPieChart()
+    updateTotalsPieChart()
   }
 }
 
@@ -367,196 +348,6 @@ function preloadAssets(assetURLs)
   }
 }
 
-function createMapTypeDropdownItems()
-{
-  $("#mapTypesDropdownContainer").html("")
-
-  var dropdownMapTypeIDs = cloneObject(mapTypeIDs)
-  //moveLastToFirst(dropdownMapTypeIDs, mapTypeIDs.length-mapTypeIDs.indexOf(currentMapType.getID()))
-
-  for (var typeIndex in dropdownMapTypeIDs)
-  {
-    var typeID = dropdownMapTypeIDs[typeIndex]
-    if (currentMapType.getID() == typeID) { continue }
-
-    $("#mapTypesDropdownContainer").append("<div class='dropdown-separator'></div>")
-
-    var mapType = mapTypes[typeID]
-
-    var divStringToAppend = "<a onclick='setMapType(\"" + typeID + "\")' style='padding: 0; padding-left: 3px; padding-right: 3px; margin-top: 0px;'>"
-    divStringToAppend += "<img src='" + mapType.getIconURL() + "' style='position: relative; top: 2px; padding-top: 1px; width: 45px; height: 45px;'/>"
-    divStringToAppend += "</a>"
-
-    $("#mapTypesDropdownContainer").append(divStringToAppend)
-  }
-}
-
-function createMapSourceDropdownItems()
-{
-  $("#mapSourcesDropdownContainer").html("")
-  for (var sourceNum in mapSourceIDs)
-  {
-    $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
-
-    var mapSourceID = mapSourceIDs[sourceNum]
-    var mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
-    var mapSourceName = mapSources[mapSourceID].getName()
-
-    var divStringToAppend = ""
-
-    if (mapSourceID != currentCustomMapSource.getID())
-    {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
-      divStringToAppend += "</span>"
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='position: relative; top: -2px; right: -4px; float: right; width: 20px; height: 20px;' />"
-      divStringToAppend += "</a>"
-    }
-    else
-    {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
-
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;')'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
-      divStringToAppend += "</span>"
-
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); $(\"#uploadFileInput\").click()'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 6px' />"
-      divStringToAppend += "</span>"
-
-      divStringToAppend += "</a>"
-    }
-
-    $("#mapSourcesDropdownContainer").append(divStringToAppend)
-
-    if (mapSourceID == currentCustomMapSource.getID())
-    {
-      var customMapSourceID = mapSourceID
-      $("#" + mapSourceIDNoSpace + "-download-icon")[0].addEventListener('click', function(e) {
-        ignoreMapUpdateClickArray.push(customMapSourceID)
-        downloadMapFile(currentMapSource, e.altKey ? kCSVFileType : kJSONFileType)
-      })
-    }
-  }
-}
-
-function createMarginEditDropdownItems()
-{
-  $("#marginsDropdownContainer").html("")
-  for (var marginID in marginNames)
-  {
-    if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
-    $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14px; min-height: 25px;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
-  }
-}
-
-function createSettingsDropdownItems()
-{
-  $("#settingsDropdownContainer").html("")
-  for (var settingNum in currentMapType.getMapSettingsLayout())
-  {
-    var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
-    $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    switch (settingLayout.type)
-    {
-      case MapSettingType.optionCycle:
-      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14px; min-height: 25px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, true)'></a>")
-      cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), false)
-      break
-    }
-  }
-}
-
-function cycleMapSetting(settingID, settingDiv, shouldIncrementArg)
-{
-  var shouldIncrement = shouldIncrementArg == null ? false : shouldIncrementArg
-
-  var currentMapSettings = currentMapType.getMapSettings()
-
-  var settingOptions = currentMapType.getMapSettingOptions(settingID)
-  var currentValueID = currentMapSettings[settingID]
-
-  var optionIndex = 0
-  for (var optionNum in settingOptions)
-  {
-    if (settingOptions[optionNum].id == currentValueID)
-    {
-      optionIndex = parseInt(optionNum)
-      break
-    }
-  }
-
-  optionIndex += shouldIncrement ? 1 : 0
-  if (optionIndex >= settingOptions.length)
-  {
-    optionIndex = 0
-  }
-
-  var newValueID = settingOptions[optionIndex].id
-  var newValueTitle = settingOptions[optionIndex].title
-  $(settingDiv).html(currentMapType.getMapSettingLayout(settingID).title + "<span style='float: right'>" + newValueTitle + "</span>")
-
-  currentMapSettings[settingID] = newValueID
-  currentMapType.setMapSettings(currentMapSettings)
-
-  switch (currentMapType.getMapSettingLayout(settingID).reloadType)
-  {
-    case MapSettingReloadType.display:
-    if (showingDataMap)
-    {
-      displayDataMap()
-    }
-    break
-
-    case MapSettingReloadType.data:
-    if (showingDataMap)
-    {
-      loadDataMap()
-    }
-    break
-  }
-}
-
-function toggleMapSettingDisable(settingID, disableOverride)
-{
-  if (($("#" + settingID).hasClass("topnavdisable2") && disableOverride == null) || (disableOverride != null && disableOverride == false))
-  {
-    $("#" + settingID).removeClass("topnavdisable2")
-  }
-  else
-  {
-    $("#" + settingID).addClass("topnavdisable2")
-  }
-}
-
-function createCountdownDropdownItems()
-{
-  $("#countdownsDropdownContainer").html("")
-  for (var timeName in countdownTimes)
-  {
-    $("#countdownsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#countdownsDropdownContainer").append("<a id='" + timeName + "-countdown' style='padding-top: 14px; min-height: 25px;' onclick='selectCountdownTime(\"" + timeName + "\", this)'>" + timeName + "</a>")
-  }
-
-  updateCountdownTimer()
-  $("[id='" + currentCountdownTimeName + "-countdown']").addClass("active")
-  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
-}
-
-function createComparePresetDropdownItems()
-{
-  $("#comparePresetsDropdownContainer").html("")
-  for (var comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
-  {
-    var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
-
-    $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
-  }
-}
-
 function addDivEventListeners()
 {
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
@@ -574,7 +365,7 @@ function addDivEventListeners()
   })
 
   document.getElementById("sourceToggleButton").addEventListener('click', function(e) {
-    if (currentMapState == kEditing || editMarginID) { return }
+    if (currentMapState == MapState.editing) { return }
     if (!e.altKey)
     {
       toggleMapSource(this)
@@ -605,18 +396,20 @@ function addDivEventListeners()
     }
   })
 
-  $("#stateboxcontainer").on('show', function() {
+  $("#regionboxcontainer").on('show', function() {
     $(this).show()
     $(this).css('opacity', "1")
   })
 
-  $("#stateboxcontainer").on('hide', function() {
+  $("#regionboxcontainer").on('hide', function() {
     $(this).css('opacity', "0")
 
     setTimeout(function() {
-      if ($("#stateboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#stateboxcontainer").hide() }
+      if ($("#regionboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#regionboxcontainer").hide() }
     }, 200)
   })
+
+  createPartyDropdownsBoxHoverHandler()
 }
 
 function addTextBoxSpacingCSS()
@@ -635,187 +428,61 @@ function addTextBoxSpacingCSS()
   }
 }
 
-function getIconDivsToUpdateArrayForSourceID(mapSourceID)
-{
-  var iconDivID = mapSourceID.replace(/\s/g, '') + "-icon"
-  //{"sourceToggleButton":{loading: "./assets/icon-loading.png", error: "./assets/icon-error.png", success: "./assets/icon-success.png"}}
-  var iconDivDictionary = {}
-  iconDivDictionary[iconDivID] = {loading: "./assets/icon-loading.png", error: "./assets/icon-download-none.png", success: "./assets/icon-download-complete.png", top: -1, width: 24, height: 24}
-
-  return iconDivDictionary
-}
-
-function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride)
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames)
 {
   var loadDataMapPromise = new Promise(async (resolve, reject) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
 
+    if (selectedDropdownDivID != "mapSourcesDropdownContent")
+    {
+      $("#sourceToggleButton").removeClass('active')
+    }
+
+    if (editMarginID)
+    {
+      toggleMarginEditing(editMarginID)
+    }
+    if (editCandidateNamePartyID)
+    {
+      toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
+    }
+    if (editPartyMarginColor)
+    {
+      toggleMarginHexColorEditing()
+    }
+    editingRegionEVs = false
+    editingRegionMarginValue = false
+
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
-    var shouldReloadSVG = false
-    var currentSVGPath = currentMapType.getSVGPath()
-    var newOverrideSVGPath = currentMapSource.getOverrideSVGPath()
-
-    if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
-    {
-      currentMapType.setOverrideSVGPath(newOverrideSVGPath)
-      shouldReloadSVG = true
-    }
-    else if (newOverrideSVGPath == null && currentSVGPath != null)
-    {
-      shouldReloadSVG = currentMapType.resetOverrideSVGPath()
-    }
-
-    if (shouldReloadSVG)
-    {
-      await loadMapSVGFile()
-    }
-
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
-    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload)
+    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
     if (!loadedSuccessfully) { resolve(); return }
 
     shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    displayDataMap()
+    await displayDataMap(null, true)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
-    $("#evPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
+    $("#totalsPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
 
     if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
     {
-      $("#evPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
+      $("#totalsPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
     }
     else
     {
-      $("#evPieChart").css("background-image", "")
+      $("#totalsPieChart").css("background-image", "")
     }
 
     resolve()
   })
 
   return loadDataMapPromise
-}
-
-function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch)
-{
-  if (mapIDToIgnore != null)
-  {
-    ignoreMapUpdateClickArray.push(mapIDToIgnore)
-  }
-  var downloadDataPromise = new Promise(async (resolve, reject) => {
-    for (let divID in divsToUpdateStatus)
-    {
-      removeStatusImage(divID)
-    }
-
-    for (let divID in divsToUpdateStatus)
-    {
-      insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
-    }
-
-    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch)
-    for (let divID in divsToUpdateStatus)
-    {
-      removeStatusImage(divID)
-    }
-
-    if (!loadedSuccessfully)
-    {
-      for (let divID in divsToUpdateStatus)
-      {
-        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
-      }
-      resolve(false)
-    }
-    else
-    {
-      for (let divID in divsToUpdateStatus)
-      {
-        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
-      }
-
-      if (refreshMap && currentMapSource.getID() == mapSourceID)
-      {
-        setDataMapDateSliderRange()
-        displayDataMap()
-        $("#dataMapDateSliderContainer").show()
-        $("#dateDisplay").show()
-      }
-      resolve(true)
-    }
-  })
-
-  return downloadDataPromise
-}
-
-async function downloadAllMapData()
-{
-  var sourcesLoaded = 0
-  for (var sourceIDNum in mapSourceIDs)
-  {
-    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function(loadedSuccessfully) {
-      if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID() && loadedSuccessfully)
-      {
-        loadDataMap(true)
-      }
-
-      sourcesLoaded += 1
-      if (sourcesLoaded < mapSourceIDs.length)
-      {
-        $("#loader").show()
-      }
-    })
-  }
-}
-
-async function fetchLocalCSVData()
-{
-  for (var sourceIDNum in mapSourceIDs)
-  {
-    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    await downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, false, false, true)
-  }
-}
-
-async function updateIconsBasedOnLocalCSVData()
-{
-  for (var sourceIDNum in mapSourceIDs)
-  {
-    var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    var csvIsStored = await CSVDatabase.hasCSV(mapSourceIDs[sourceIDNum])
-    if (csvIsStored)
-    {
-      for (let divID in divsToUpdateStatus)
-      {
-        removeStatusImage(divID)
-        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
-      }
-    }
-    else
-    {
-      for (let divID in divsToUpdateStatus)
-      {
-        removeStatusImage(divID)
-        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
-      }
-    }
-  }
-}
-
-function insertStatusImage(divID, icon, width, height, top)
-{
-  $("#" + divID).html($("#" + divID).html() + ('<span class="status">&nbsp;&nbsp;&nbsp;<img src="' + icon + '" style="position: relative; top: ' + (top || 2) + 'px; width: ' + (width || 16) + 'px; height: ' + (height || 16) + 'px;" /></span>'))
-}
-
-function removeStatusImage(divID)
-{
-  $("#" + divID + " .status").remove()
 }
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
@@ -888,21 +555,9 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
-function displayDataMap(dateIndex)
+async function displayDataMap(dateIndex, reloadPartyDropdowns)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
-
-  displayRegionDataArray = {}
-  populateRegionsArray()
-
-  $('#outlines').children().each(function() {
-    var regionDataCallback = getRegionData($(this).attr('id'))
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
-    var regionData = regionDataCallback.regionData
-
-    updateRegionFillColors(regionIDsToFill, regionData, false)
-  })
-  displayPartyTotals(getPartyTotals())
 
   var mapDates = currentMapSource.getMapDates()
   var dateToDisplay
@@ -919,8 +574,35 @@ function displayDataMap(dateIndex)
 
   updateSliderDateDisplay(dateToDisplay, overrideDateString)
 
-  updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
-  updateMapElectoralVoteText()
+  var shouldReloadSVG = false
+  var currentSVGPath = currentMapType.getSVGPath()
+  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(dateToDisplay)
+
+  if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
+  {
+    currentMapType.setOverrideSVGPath(newOverrideSVGPath)
+    shouldReloadSVG = true
+  }
+  else if (newOverrideSVGPath == null && currentSVGPath != null)
+  {
+    shouldReloadSVG = currentMapType.resetOverrideSVGPath()
+  }
+
+  if (shouldReloadSVG)
+  {
+    await loadMapSVGFile()
+  }
+
+  displayRegionDataArray = {}
+  populateRegionsArray()
+
+  $('#outlines').children().each(function() {
+    var regionDataCallback = getRegionData($(this).attr('id'))
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+    var regionData = regionDataCallback.regionData
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+  })
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
@@ -932,7 +614,6 @@ function displayDataMap(dateIndex)
 
     if (regionData == null)
     {
-      console.log(currentMapDataForDate[regionNum].region)
       continue
     }
 
@@ -949,35 +630,20 @@ function displayDataMap(dateIndex)
 
     updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
   }
-  displayPartyTotals(getPartyTotals())
 
-  updateEVPieChart()
+  updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
+  displayPartyTotals(getPartyTotals(), reloadPartyDropdowns)
 
-  if (currentRegionID && currentMapState == kViewing)
+  updateTotalsPieChart()
+
+  updateMapElectoralVoteText()
+
+  if (currentRegionID && currentMapState == MapState.viewing)
   {
-    updateStateBox(currentRegionID)
+    updateRegionBox(currentRegionID)
   }
 
   showingDataMap = true
-}
-
-function updatePoliticalPartyCandidateNames(mapDate)
-{
-  var candidateNames = currentMapSource.getCandidateNames(mapDate)
-
-  if (!candidateNames)
-  {
-    console.log("No candidate names found!")
-    return
-  }
-
-  for (var partyID in politicalParties)
-  {
-    if (partyID in candidateNames)
-    {
-      politicalParties[partyID].setCandidateName(candidateNames[partyID])
-    }
-  }
 }
 
 function updateMapElectoralVoteText()
@@ -989,7 +655,7 @@ function updateMapElectoralVoteText()
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum])
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}).disabled)
     if (regionEV == undefined) { continue }
 
     if (regionChildren.length == 1)
@@ -1001,32 +667,6 @@ function updateMapElectoralVoteText()
       regionChildren[1].innerHTML = regionEV
     }
   }
-}
-
-function toggleMapSource(buttonDiv)
-{
-  var mapSourceArrayIndex = mapSourceIDs.indexOf(currentMapSource.getID())
-  mapSourceArrayIndex++
-  if (mapSourceArrayIndex > mapSourceIDs.length-1)
-  {
-    mapSourceArrayIndex = 0
-  }
-
-  updateMapSource(mapSourceIDs[mapSourceArrayIndex], buttonDiv)
-}
-
-function updateMapSource(sourceID, buttonDiv, forceDownload)
-{
-  if (ignoreMapUpdateClickArray.includes(sourceID.replace(/\s/g, '')))
-  {
-    ignoreMapUpdateClickArray.splice(ignoreMapUpdateClickArray.indexOf(sourceID), 1)
-    return
-  }
-
-  currentMapSource = mapSources[sourceID]
-
-  updateNavBarForNewSource()
-  loadDataMap(false, forceDownload)
 }
 
 function updateNavBarForNewSource(revertToDefault)
@@ -1043,15 +683,15 @@ function updateNavBarForNewSource(revertToDefault)
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentMapState == kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  if (currentMapState == MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Done")
   }
-  else if (currentMapState == kEditing && currentMapSource.getID() != currentCustomMapSource.getID())
+  else if (currentMapState == MapState.editing && currentMapSource.getID() != currentCustomMapSource.getID())
   {
-    toggleEditing(kViewing)
+    toggleEditing(MapState.viewing)
   }
-  else if (currentMapState != kEditing && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (currentMapState != MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
   {
     $("#editDoneButton").html("Edit")
   }
@@ -1059,6 +699,8 @@ function updateNavBarForNewSource(revertToDefault)
   {
     $("#editDoneButton").html("Copy")
   }
+
+  updatePartyDropdownVisibility()
 
   if (showingCompareMap && currentMapSource.getID() != currentCustomMapSource.getID())
   {
@@ -1068,84 +710,6 @@ function updateNavBarForNewSource(revertToDefault)
   {
     updateCompareMapSlidersVisibility(true)
   }
-}
-
-function toggleMarginEditing(marginID, div)
-{
-  if (editMarginID)
-  {
-    var marginValueToSet = parseFloat($("#" + editMarginID + "-text").val()) || defaultMarginValues[editMarginID]
-    marginValueToSet = Math.round(marginValueToSet*Math.pow(10, 1))/Math.pow(10, 1)
-    if (marginValueToSet > 100)
-    {
-      marginValueToSet = 100
-    }
-
-    var marginIDArray = Object.keys(marginNames)
-    if (marginValueToSet < marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]])
-    {
-      marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]]
-    }
-    if (marginIDArray.indexOf(editMarginID) > 0 && marginValueToSet > marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)-1]])
-    {
-      marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)-1]]
-    }
-
-    var shouldRefreshMap = false
-    if (marginValueToSet != marginValues[editMarginID])
-    {
-      shouldRefreshMap = true
-    }
-
-    marginValues[editMarginID] = marginValueToSet
-
-    if (shouldRefreshMap && showingDataMap)
-    {
-      displayDataMap()
-    }
-
-    $("#" + editMarginID + "-edit").html(marginNames[editMarginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[editMarginID] + "</span>")
-  }
-
-  if (marginID == editMarginID)
-  {
-    marginID = null
-  }
-  editMarginID = marginID
-
-  if (marginID)
-  {
-    $(div).html(marginNames[marginID] + "<input class='marginTextInput' type='text' id='" + marginID + "-text' value='" + marginValues[marginID] + "'>")
-    $("#" + marginID + "-text").focus()
-
-    $("#marginEditButton").addClass('active')
-    if (currentMapType.getCustomMapEnabled())
-    {
-      $("#editDoneButton").addClass('topnavdisable')
-    }
-    $("#sourceToggleButton").addClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").hide()
-  }
-  else
-  {
-    $("#marginEditButton").removeClass('active')
-    if (currentMapType.getCustomMapEnabled())
-    {
-      $("#editDoneButton").removeClass('topnavdisable')
-    }
-    $("#sourceToggleButton").removeClass('topnavdisable')
-    $("#mapSourcesDropdownContainer").show()
-  }
-}
-
-function selectCountdownTime(countdownTimeName, countdownButtonDiv)
-{
-  $("#countdownsDropdownContainer .active").removeClass("active")
-  $(countdownButtonDiv).addClass("active")
-
-  currentCountdownTimeName = countdownTimeName
-  $("#countdownDisplay").attr('href', countdownTimes[currentCountdownTimeName].url)
-  updateCountdownTimer()
 }
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
@@ -1162,7 +726,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
       currentMapType.setCurrentMapSourceID(null)
     }
 
-    toggleEditing(kViewing)
+    toggleEditing(MapState.viewing)
 
     currentSliderDate = null
 
@@ -1202,10 +766,10 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   displayRegionDataArray = {}
   populateRegionsArray()
 
-  for (var partyNum in selectablePoliticalPartyIDs)
+  for (var partyNum in dropdownPoliticalPartyIDs)
   {
-    if (selectablePoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[selectablePoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[selectablePoliticalPartyIDs[partyNum]].getNames()[0])
+    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
   }
 
   $('#outlines').children().each(function() {
@@ -1217,16 +781,16 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   })
   displayPartyTotals(getPartyTotals())
 
-  updateEVPieChart()
+  updateTotalsPieChart()
   if (currentRegionID != null)
   {
-    updateStateBox(currentRegionID)
+    updateRegionBox(currentRegionID)
   }
 
   $("#dataMapDateSliderContainer").hide()
   $("#dateDisplay").hide()
 
-  $("#evPieChart").css("background-image", "")
+  $("#totalsPieChart").css("background-image", "")
 
   showingDataMap = false
 }
@@ -1238,15 +802,17 @@ function toggleHelpBox(helpButtonDiv)
   {
     $("#helpboxcontainer").show()
     $("#toggleHelpBoxButton").addClass('active')
-    $("#evPieChartContainer").hide()
-    $("#creditboxcontainer").hide()
+    $("#totalsPieChartContainer").hide()
+    $("#partyDropdownsBoxContainer").hide()
+    $("#discordInviteContainer").hide()
   }
   else
   {
     $("#helpboxcontainer").hide()
     $("#toggleHelpBoxButton").removeClass('active')
-    $("#evPieChartContainer").show()
-    $("#creditboxcontainer").show()
+    $("#totalsPieChartContainer").show()
+    $("#partyDropdownsBoxContainer").show()
+    $("#discordInviteContainer").show()
   }
 }
 
@@ -1274,73 +840,33 @@ function populateRegionsArray()
   })
 }
 
-function selectParty(div)
+async function toggleEditing(stateToSet)
 {
-  if (currentMapState == kEditing)
+  if (editMarginID)
   {
-    var partyID = $(div).attr('id')
-
-    if (selectedParty != null)
-    {
-      $("#" + selectedParty.getID()).removeClass('active')
-    }
-
-    if (selectedParty != null && selectedParty.getID() == partyID)
-    {
-      selectedParty = null
-      $(div).removeClass('active')
-    }
-    else
-    {
-      selectedParty = politicalParties[partyID]
-      $(div).addClass('active')
-    }
-
-    if (selectedParty == null || selectedParty == TossupParty)
-    {
-      $(".partyShiftConstantButton").css('color', "gray")
-      $(".partyShiftText").css('color', "gray")
-    }
-    else
-    {
-      $(".partyShiftConstantButton").css('color', "white")
-      $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
-    }
+    toggleMarginEditing(editMarginID)
   }
-}
-
-function selectAllParties()
-{
-  $("#partyButtonDiv").children().each(function() {
-    $(this).addClass('active')
-  })
-}
-
-function deselectAllParties()
-{
-  $("#partyButtonDiv").children().each(function() {
-    $(this).removeClass('active')
-  })
-  selectedParty = null
-
-  $(".partyShiftConstantButton").css('color', "gray")
-  $(".partyShiftText").css('color', "gray")
-}
-
-function toggleEditing(stateToSet)
-{
-  if (editMarginID) { return }
+  if (editCandidateNamePartyID)
+  {
+    toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
+  }
+  if (editPartyMarginColor)
+  {
+    toggleMarginHexColorEditing()
+  }
+  editingRegionEVs = false
+  editingRegionMarginValue = false
 
   if (stateToSet == null)
   {
     switch (currentMapState)
     {
-      case kEditing:
-      currentMapState = kViewing
+      case MapState.editing:
+      currentMapState = MapState.viewing
       break
 
-      case kViewing:
-      currentMapState = kEditing
+      case MapState.viewing:
+      currentMapState = MapState.editing
       break
     }
   }
@@ -1351,13 +877,11 @@ function toggleEditing(stateToSet)
 
   switch (currentMapState)
   {
-    case kEditing:
-    deselectAllParties()
-
+    case MapState.editing:
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
 
-    $("#stateboxcontainer").trigger('hide')
+    $("#regionboxcontainer").trigger('hide')
 
     $("#marginEditButton").hide()
     $("#marginEditButton").addClass('topnavdisable')
@@ -1370,22 +894,23 @@ function toggleEditing(stateToSet)
     $("#fillDropdownContainer").css('display', "block")
 
     var currentMapIsCustom = (currentMapSource.getID() == currentCustomMapSource.getID())
-    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom)
+    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
 
     if (!currentMapIsCustom)
     {
-      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames((currentSliderDate || new Date(getCurrentDateOrToday())).getTime()))
+      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()), getCurrentDateOrToday())
+
+      currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
       updateNavBarForNewSource()
-      loadDataMap()
+      await loadDataMap()
     }
+    deselectAllParties()
     break
 
-    case kViewing:
-    selectAllParties()
-
+    case MapState.viewing:
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
       $("#editDoneButton").html("Edit")
@@ -1408,20 +933,25 @@ function toggleEditing(stateToSet)
 
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
-      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      displayPartyTotals(getPartyTotals(), true)
     }
 
     if (showingDataMap && currentRegionID)
     {
-      updateStateBox(currentRegionID)
+      updateRegionBox(currentRegionID)
     }
+
+    selectAllParties()
     break
   }
+
+  updatePartyDropdownVisibility()
 }
 
 function leftClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     if (ignoreNextClick)
     {
@@ -1438,7 +968,7 @@ function leftClickRegion(div)
 
     if (regionData.disabled)
     {
-      regionData.partyID = selectedParty.getID() || TossupParty.getID()
+      regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = 101
     }
@@ -1483,7 +1013,7 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == kViewing && showingDataMap && currentRegionID)
+  else if (currentMapState == MapState.viewing && showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
@@ -1491,15 +1021,15 @@ function leftClickRegion(div)
 
 function rightClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (selectedParty != null && regionData.disabled)
+    if (regionData.disabled)
     {
-      regionData.partyID = selectedParty.getID()
+      regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap[regionData.partyID]
       regionData.margin = 101
     }
@@ -1546,15 +1076,37 @@ function rightClickRegion(div)
   }
 }
 
+function shiftClickRegion(div)
+{
+  if (currentMapState == MapState.editing)
+  {
+    editingRegionMarginValue = !editingRegionMarginValue
+
+    if (editingRegionMarginValue)
+    {
+      updateRegionBox(currentRegionID)
+    }
+    else
+    {
+      $("#regionboxcontainer").trigger('hide')
+    }
+  }
+  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID())
+  {
+    editingRegionEVs = !editingRegionEVs
+    updateRegionBox(currentRegionID)
+  }
+}
+
 function altClickRegion(div)
 {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    regionData.partyID = selectedParty.getID()
+    regionData.partyID = (selectedParty || TossupParty).getID()
 
     if (regionData.disabled)
     {
@@ -1652,7 +1204,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
     regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
-    if (regionData.disabled == true && currentMapSource.getID() != currentCustomMapSource.getID())
+    if (regionData.disabled == true && (currentMapSource.getID() != currentCustomMapSource.getID() || !currentMapType.getMapSettingValue("mapCurrentSeats")))
     {
       regionDiv.css('pointer-events', 'none')
     }
@@ -1662,9 +1214,11 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
     }
   }
 
+  $("#" + regionData.region + "-text").css('fill', regionData.disabled && !currentMapType.getMapSettingValue("mapCurrentSeats") ? 'gray' : 'white')
+
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
   {
-    updateEVPieChart()
+    updateTotalsPieChart()
   }
 }
 
@@ -1703,18 +1257,10 @@ function getPartyTotals()
     {
       partyTotals[partyIDToSet] = 0
     }
-    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID)
+    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
   }
 
   return partyTotals
-}
-
-function displayPartyTotals(partyTotals)
-{
-  for (var partyID in partyTotals)
-  {
-    $("#" + partyID).html(politicalParties[partyID].getCandidateName() + " (" + partyTotals[partyID] + ")")
-  }
 }
 
 function getCurrentDecade()
@@ -1727,6 +1273,10 @@ function getCurrentDecade()
     {
       dateForDecade = new Date(compareDate)
     }
+  }
+  else if (currentMapType.getID() == USAPresidentialMapType.getID() && currentMapType.getMapSettingValue("evDecadeOverrideToggle"))
+  {
+    return currentMapType.getMapSettingValue("evDecadeOverrideSelection")
   }
   else if (currentSliderDate != null)
   {
@@ -1746,44 +1296,34 @@ function getCurrentDateOrToday()
   return dateToUse
 }
 
-function getTodayString(delimiter, includeTime)
-{
-  var currentTimeDate = new Date()
-  return getMDYDateString(currentTimeDate, delimiter, includeTime)
-}
-
-function getMDYDateString(date, delimiter, includeTime)
-{
-  delimiter = delimiter || "/"
-
-  var dateString = (date.getMonth()+1) + delimiter + date.getDate() + delimiter + date.getFullYear()
-
-  if (includeTime)
-  {
-    dateString += delimiter + zeroPadding(date.getHours()) + delimiter + zeroPadding(date.getMinutes())
-  }
-
-  return dateString
-}
-
-function updateStateBox(regionID)
+function updateRegionBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
   if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
   {
-    $("#stateboxcontainer").trigger('hide')
+    $("#regionboxcontainer").trigger('hide')
     return
   }
-  $("#stateboxcontainer").trigger('show')
+  $("#regionboxcontainer").trigger('show')
 
-  var decimalPlaceToRound = Math.floor(-Math.log(regionData.margin)/Math.log(10)+2)
-  if (decimalPlaceToRound <= 0)
+  if (editingRegionEVs)
   {
-    decimalPlaceToRound = 1
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
+    $("#regionEV-text").focus().select()
+    return
   }
 
-  var roundedMarginValue = decimalPadding(Math.round(regionData.margin*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
-  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames()[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +" + roundedMarginValue
+  var roundedMarginValue = getRoundedMarginValue(regionData.margin)
+  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +"
+
+  if (editingRegionMarginValue)
+  {
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
+    $("#regionMargin-text").focus().select()
+    return
+  }
+
+  regionMarginString += roundedMarginValue
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
@@ -1803,10 +1343,10 @@ function updateStateBox(regionID)
 
     regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
 
-    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + ";" + "'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
       regionMarginString += "%</span></span><br>"
     })
@@ -1814,74 +1354,84 @@ function updateStateBox(regionID)
     regionMarginString += "</div>"
   }
 
-  setTimeout(() => {
-    if (sortedPercentages == null) { return }
-
-    var largestWidth = $("#statebox").width()
-
-    sortedPercentages.forEach(voteData => {
-      var voteshareCandidateID = "#voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode()
-
-      $(voteshareCandidateID).css('background', "linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%)")
-      $(voteshareCandidateID).css('width', largestWidth + "px")
-    })
-  }, 0)
-
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#statebox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+  $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 }
 
-function updateCountdownTimer()
+function getRoundedMarginValue(fullMarginValue)
 {
-  var currentDate = new Date()
-
-  var countdownTime
-  if (currentCountdownTimeName != null)
+  var decimalPlaceToRound = Math.floor(-Math.log(fullMarginValue)/Math.log(10)+2)
+  if (decimalPlaceToRound <= 0 || !isFinite(decimalPlaceToRound))
   {
-    countdownTime = countdownTimes[currentCountdownTimeName].time
-  }
-  else
-  {
-    countdownTime = Object.values(countdownTimes).map((timeData) => {return timeData.time}).sort().slice(-1)[0]
-    for (let timeName in countdownTimes)
-    {
-      if (currentDate.getTime() < countdownTimes[timeName].time)
-      {
-        countdownTime = countdownTimes[timeName].time
-        break
-      }
-    }
-
-    for (let timeName in countdownTimes)
-    {
-      if (countdownTime == countdownTimes[timeName].time)
-      {
-        currentCountdownTimeName = timeName
-        break
-      }
-    }
+    decimalPlaceToRound = 1
   }
 
-  var timeUntilDay = Math.abs(countdownTime-currentDate.getTime())
-  var timeHasPassed = Math.sign(countdownTime-currentDate.getTime()) == -1
-
-  var daysUntilDay = Math.floor(timeUntilDay/(1000*60*60*24))
-  var hoursUntilDay = Math.floor(timeUntilDay/(1000*60*60)%24)
-  var minutesUntilDay = Math.floor(timeUntilDay/(1000*60)%60)
-  var secondsUntilDay = Math.floor(timeUntilDay/1000%60)
-
-  $("#countdownDisplay").html((timeHasPassed ? "+" : "–") + " " + daysUntilDay + "<span style='font-size: 16px;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16px;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16px;'> s" + "</span>")
+  return decimalPadding(Math.round(fullMarginValue*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
 }
 
-async function toggleCompareMapSourceCheckbox(mapSourceID, overrideAdd)
+function applyRegionEVEdit(regionID)
 {
-  var checkboxID = mapSourceID.replace(/\s/g, '') + '-compare'
-  if (!$('#' + checkboxID).prop('disabled') || overrideAdd)
+  var regionData = getRegionData(regionID).regionData
+
+  var shouldRefreshEV = false
+
+  var newEV = parseInt($("#regionEV-text").val())
+  if ($("#regionEV-text").val() == "")
   {
-    $('#' + checkboxID).prop('checked', !$('#' + checkboxID).prop('checked') || overrideAdd)
-    await addCompareMapSource(mapSourceID)
+    delete overrideRegionEVs[regionID]
+    shouldRefreshEV = true
   }
+
+  var currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled)
+  if (!isNaN(newEV) && newEV > 0 && newEV != currentEV)
+  {
+    overrideRegionEVs[regionID] = newEV
+    shouldRefreshEV = true
+
+    $("#regionEV-text").val(newEV)
+  }
+  else if ($("#regionEV-text").val() != currentEV)
+  {
+    $("#regionEV-text").val(currentEV)
+    $("#regionEV-text").select()
+  }
+
+  if (shouldRefreshEV)
+  {
+    updateMapElectoralVoteText()
+    displayPartyTotals(getPartyTotals())
+    updateTotalsPieChart()
+  }
+}
+
+function applyRegionMarginValue(regionID)
+{
+  var regionDataCallback = getRegionData(regionID)
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+  var regionData = regionDataCallback.regionData
+
+  var newMarginString = $("#regionMargin-text").val()
+  var newMargin = parseFloat(newMarginString)
+  if (newMarginString == "")
+  {
+    newMargin = 1
+  }
+  var newMarginIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newMarginString) && !isNaN(newMargin) && newMargin >= 0
+
+  var currentMargin = getRoundedMarginValue(regionData.margin)
+  if (newMarginIsValid && newMargin != currentMargin)
+  {
+    regionData.margin = newMargin
+  }
+  else if (!newMarginIsValid)
+  {
+    $("#regionMargin-text").val(currentMargin)
+    $("#regionMargin-text").select()
+  }
+
+  updateRegionFillColors(regionIDsToFill, regionData, false)
+  displayPartyTotals(getPartyTotals())
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
@@ -2006,13 +1556,6 @@ function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
   return mapSources[firstMapSourceID].getMapDates().slice(-1)[0] < mapSources[secondMapSourceID].getMapDates().slice(-1)[0]
 }
 
-function swapCompareMapSources()
-{
-  var tempSourceID = compareMapSourceIDArray[0]
-  compareMapSourceIDArray[0] = compareMapSourceIDArray[1]
-  compareMapSourceIDArray[1] = tempSourceID
-}
-
 function updateCompareMapSlidersVisibility(overrideShowHide)
 {
   var showCompareSliders = overrideShowHide
@@ -2080,7 +1623,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
 
   if (compareArrayIndex == 0)
   {
-    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()))
+    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
   }
 
   applyCompareToCustomMap()
@@ -2153,105 +1696,4 @@ function applyCompareToCustomMap()
   currentMapSource = currentCustomMapSource
   updateNavBarForNewSource()
   loadDataMap()
-}
-
-async function loadCompareItemMapSource(compareItemNum)
-{
-  currentMapSource = mapSources[compareMapSourceIDArray[compareItemNum]]
-  updateNavBarForNewSource()
-  await loadDataMap()
-
-  var dateIndexToSet
-  switch (compareItemNum)
-  {
-    case 0:
-    dateIndexToSet = $("#firstCompareDataMapDateSlider")[0].value
-    break
-
-    case 1:
-    dateIndexToSet = $("#secondCompareDataMapDateSlider")[0].value
-    break
-  }
-
-  $("#dataMapDateSlider").val(dateIndexToSet)
-  displayDataMap(dateIndexToSet)
-  updateCompareMapSlidersVisibility(false)
-}
-
-async function loadComparePreset(comparePresetNum)
-{
-  var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
-
-  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
-  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
-
-  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
-
-  if (defaultCompareSourceIDs[comparePresetNum][0] == defaultCompareSourceIDs[comparePresetNum][1])
-  {
-    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
-    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
-  }
-}
-
-function addConstantMarginToMap(marginToAdd, partyToShift)
-{
-  var partyToShift = partyToShift || selectedParty
-
-  if (currentMapState != kEditing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }
-
-  for (var regionID in displayRegionDataArray)
-  {
-    if (displayRegionDataArray[regionID].partyID != partyToShift.getID())
-    {
-      displayRegionDataArray[regionID].margin -= marginToAdd
-
-      if (displayRegionDataArray[regionID].margin < 0)
-      {
-        displayRegionDataArray[regionID].margin *= -1
-        displayRegionDataArray[regionID].partyID = partyToShift.getID()
-      }
-    }
-    else
-    {
-      displayRegionDataArray[regionID].margin += marginToAdd
-    }
-
-    if (displayRegionDataArray[regionID].margin > 100)
-    {
-      displayRegionDataArray[regionID].margin = 100
-    }
-  }
-
-  currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
-  loadDataMap()
-}
-
-function getTippingPointRegion()
-{
-  var partyTotals = getPartyTotals()
-  partyTotals[TossupParty.getID()] = 0
-
-  var greatestEVCount = Math.max.apply(null, Object.values(partyTotals))
-  var majorityEVCount = Math.floor(currentMapType.getTotalEV()/2)+1
-
-  if (Math.max.apply(null, Object.values(partyTotals)) < majorityEVCount) // If candidate with most EVs is less than 1/2 +1 of total, return 0
-  {
-    return 0
-  }
-
-  var winnerPartyID = getKeyByValue(partyTotals, greatestEVCount)
-  var tippingPointRegion
-  var checkedStates = []
-  while (greatestEVCount >= majorityEVCount)
-  {
-    var nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
-      return (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
-    })
-    tippingPointRegion = nextClosestState
-    greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region)
-    checkedStates.push(nextClosestState.region)
-  }
-
-  return tippingPointRegion
 }

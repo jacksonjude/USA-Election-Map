@@ -21,9 +21,21 @@ function decimalPadding(num, shouldAddDecimalPadding)
   return num.toString()
 }
 
-function getKeyByValue(object, value)
+function getKeyByValue(object, value, shouldStringifyToCompare)
 {
-  return Object.keys(object).find(key => object[key] == value)
+  return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)
+}
+
+function invertObject(object)
+{
+  var newObject = {}
+  var keys = Object.keys(object)
+  for (var i in keys)
+  {
+    newObject[object[keys[i]]] = keys[i]
+  }
+
+  return newObject
 }
 
 function multiplyBrightness(hexColorString, brightnessFactor)
@@ -47,6 +59,17 @@ function adjustBrightness(hexColorString, minBrightness)
   {
     hsv.v = minBrightness
   }
+
+  return RGBToHex(HSVtoRGB(hsv))
+}
+
+function multiplySaturation(hexColorString, saturationFactor)
+{
+  var rgb = hexToRGB(hexColorString)
+  if (!rgb) { return }
+
+  var hsv = RGBtoHSV(rgb)
+  hsv.s *= saturationFactor
 
   return RGBToHex(HSVtoRGB(hsv))
 }
@@ -159,6 +182,19 @@ function cloneObject(objectToClone)
   return newObject
 }
 
+function mergeObject(object1, object2)
+{
+  var newObject = cloneObject(object1)
+  object2 = cloneObject(object2)
+
+  for (var key in object2)
+  {
+    newObject[key] = object2[key]
+  }
+
+  return newObject
+}
+
 function setCookie(cname, cvalue, exdays)
 {
   exdays = exdays || 365*5
@@ -209,4 +245,30 @@ function moveLastToFirst(array, times)
     var lastElement = array.pop()
     array.unshift(lastElement)
   }
+}
+
+function getTodayString(delimiter, includeTime)
+{
+  var currentTimeDate = new Date()
+  return getMDYDateString(currentTimeDate, delimiter, includeTime)
+}
+
+function getMDYDateString(date, delimiter, includeTime)
+{
+  delimiter = delimiter || "/"
+
+  var dateString = (date.getMonth()+1) + delimiter + date.getDate() + delimiter + date.getFullYear()
+
+  if (includeTime)
+  {
+    dateString += delimiter + zeroPadding(date.getHours()) + delimiter + zeroPadding(date.getMinutes())
+  }
+
+  return dateString
+}
+
+String.prototype.toTitle = function() {
+  if (this.length == 0) { return "" }
+  if (this.length == 1) { return this.toUpperCase() }
+  return this.charAt(0).toUpperCase() + this.slice(1)
 }

@@ -1,3 +1,8 @@
+const kCSVFileType = "text/csv"
+const kJSONFileType = "application/json"
+const kPNGFileType = "image/png"
+const kJPEGFileType = "image/jpeg"
+
 $("html").on('dragenter', function(e) {
   e.stopPropagation()
   e.preventDefault()
@@ -71,6 +76,27 @@ function jsonFileLoaded(e)
     currentCustomMapSource.setIconURL("")
   }
 
+  if (jsonMapData.customParties)
+  {
+    for (partyNum in jsonMapData.customParties)
+    {
+      var currentParty = jsonMapData.customParties[partyNum]
+      politicalParties[currentParty.id] = new PoliticalParty(
+        currentParty.id,
+        currentParty.names,
+        currentParty.shortName,
+        currentParty.candidateName,
+        currentParty.marginColors,
+        currentParty.marginNames
+      )
+    }
+  }
+
+  if (jsonMapData.partyIDs)
+  {
+    currentCustomMapSource.setDropdownPartyIDs(jsonMapData.partyIDs)
+  }
+
   currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
   currentMapSource = currentCustomMapSource
@@ -93,7 +119,7 @@ function csvFileLoaded(e)
 function imageFileLoaded(e)
 {
   var backgroundURL = "url('" + e.target.result + "')"
-	$("#evPieChart").css("background-image", backgroundURL)
+	$("#totalsPieChart").css("background-image", backgroundURL)
 }
 
 function downloadMapFile(mapSourceToDownload, fileType)
@@ -103,13 +129,13 @@ function downloadMapFile(mapSourceToDownload, fileType)
   var downloadLinkDiv = $(document.createElement("a"))
   downloadLinkDiv.hide()
 
-  var pieChartIconURL = $("#evPieChart").css("background-image")
+  var pieChartIconURL = $("#totalsPieChart").css("background-image")
   if (pieChartIconURL)
   {
     pieChartIconURL = pieChartIconURL.replace("url(\"", "").replace("\")", "")
   }
 
-  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType, pieChartIconURL)
+  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType, pieChartIconURL, mapSourceToDownload.getDropdownPartyIDs())
   downloadLinkDiv.attr('href', window.URL.createObjectURL(fileToDownload))
   downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
 
@@ -118,13 +144,21 @@ function downloadMapFile(mapSourceToDownload, fileType)
   downloadLinkDiv.remove()
 }
 
-function getMapFileBlob(textMapData, fileType, pieChartIconURL)
+function getMapFileBlob(textMapData, fileType, pieChartIconURL, partyIDs)
 {
   var dataString
   switch (fileType)
   {
     case kJSONFileType:
-    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues, iconURL: pieChartIconURL})
+    var customParties = []
+    for (var partyNum in partyIDs)
+    {
+      if (partyIDs[partyNum].startsWith(customPartyIDPrefix))
+      {
+        customParties.push(politicalParties[partyIDs[partyNum]])
+      }
+    }
+    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues, iconURL: pieChartIconURL, partyIDs: partyIDs, customParties: customParties})
     break
 
     case kCSVFileType:

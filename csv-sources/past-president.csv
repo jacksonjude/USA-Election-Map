@@ -23,9 +23,6 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1960,Delaware,DE,Nixon,republican,48.99915092,JJCooley
 11/8/1960,Delaware,DE,Kennedy,democrat,50.63477779,JJCooley
 11/8/1960,Delaware,DE,Other,independent,0.3660712924,JJCooley
-11/8/1960,District of Columbia,DC,Nixon,republican,0.0,JJCooley
-11/8/1960,District of Columbia,DC,Kennedy,democrat,0.0,JJCooley
-11/8/1960,District of Columbia,DC,Other,independent,0.0,JJCooley
 11/8/1960,Florida,FL,Nixon,republican,51.51459419,JJCooley
 11/8/1960,Florida,FL,Kennedy,democrat,48.48540581,JJCooley
 11/8/1960,Florida,FL,Other,independent,0,JJCooley
@@ -79,7 +76,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1960,Minnesota,MN,Other,independent,0.2619517513,JJCooley
 11/8/1960,Mississippi,MS,Nixon,republican,24.67074263,JJCooley
 11/8/1960,Mississippi,MS,Kennedy,democrat,36.34223315,JJCooley
-11/8/1960,Mississippi,MS,Other,independent,38.98702422,JJCooley
+11/8/1960,Mississippi,MS,Byrd,independent,38.98702422,JJCooley
 11/8/1960,Missouri,MO,Nixon,republican,49.74204181,JJCooley
 11/8/1960,Missouri,MO,Kennedy,democrat,50.25795819,JJCooley
 11/8/1960,Missouri,MO,Other,independent,0,JJCooley
@@ -3090,7 +3087,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/2004,Louisiana,LA,Calero,socialist,0.050692036358284100,20171015
 11/2/2004,Maine,ME,Kerry,democrat,53.572855692593500,20171015
 11/2/2004,Maine,ME,Bush,republican,44.576457437846900,20171015
-11/2/2004,Maine,ME,The Better Life,independent,1.0892984426636700,20171015
+11/2/2004,Maine,ME,Nader,independent,1.0892984426636700,20171015
 11/2/2004,Maine,ME,Cobb,green,0.39635397541957400,20171015
 11/2/2004,Maine,ME,Badnarik,libertarian,0.26527096788128800,20171015
 11/2/2004,Maine,ME,Peroutka,constitution party,0.099223491802924600,20171015

@@ -8,17 +8,26 @@
     <script src="./lib/jquery-3.5.1.min.js"></script>
     <script src="./lib/chart.js-2.8.0.js"></script>
     <script src="./lib/chartjs-plugin-datalabels-0.7.0.js"></script>
+    <script src="./lib/jscolor.min.js"></script>
     <script src="./lib/bowser-2.9.0.min.js"></script>
     <script src="./lib/discord-invite.js"></script>
-    <script src="./src/misclib.js"></script>
-    <script src="./src/model/csvdatabase.js"></script>
-    <script src="./src/model/maptype.js"></script>
-    <script src="./src/model/politicalparty.js"></script>
-    <script src="./src/model/mapsource.js"></script>
-    <script src="./src/display/evpiechart.js"></script>
-    <script src="./src/display/mapdisplay.js"></script>
-    <script src="./src/display/controlevents.js"></script>
-    <script src="./src/display/fileloader.js"></script>
+    <script src="./src/misc-lib.js"></script>
+    <script src="./src/model/csv-database.js"></script>
+    <script src="./src/model/map-type.js"></script>
+    <script src="./src/model/political-party.js"></script>
+    <script src="./src/model/map-source.js"></script>
+    <script src="./src/display/dropdowns/map-type-dropdown.js"></script>
+    <script src="./src/display/dropdowns/map-source-dropdown.js"></script>
+    <script src="./src/display/dropdowns/party-dropdowns.js"></script>
+    <script src="./src/display/dropdowns/margins-dropdown.js"></script>
+    <script src="./src/display/dropdowns/shift-dropdown.js"></script>
+    <script src="./src/display/dropdowns/settings-dropdown.js"></script>
+    <script src="./src/display/dropdowns/compare-dropdown.js"></script>
+    <script src="./src/display/dropdowns/countdown-dropdown.js"></script>
+    <script src="./src/display/totals-pie-chart.js"></script>
+    <script src="./src/display/map-display.js"></script>
+    <script src="./src/display/control-events.js"></script>
+    <script src="./src/display/file-loader.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107565763-1"></script>
     <script>
@@ -58,12 +67,51 @@
           </div>
         </div>
       </div>
-      <div style="border-left: 20px solid; display: inline-block;"></div>
-      <div id="partyButtonDiv" style="display: inline-block;">
-        <a id="DEM" class="active" onclick="selectParty(this)" style="min-width: 135px">Dem</a>
-        <a id="REP" class="active" onclick="selectParty(this)" style="min-width: 135px">Rep</a>
+      <div style="border-left: 40px solid; display: inline-block;"></div>
+      <div style="display: inline-block; margin-top: 4px;">
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="homepageButton" href="https://jacksonjude.com" style="min-width: 250px">map.jacksonjude.com</a>
+          <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 275px">
+            <div id="homepageDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+              <h5 style="margin: 0; text-align: left;">
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://www.yapms.com"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://www.yapms.com/" style="color: white;">YAPms</a>: <a class="not-dropdown-item" href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">pres</a>, <a class="not-dropdown-item" href="https://www.yapms.com/app/?t=USA_2022_senate" style="color: white;">senate</a>, and <a class="not-dropdown-item" href="https://www.yapms.com/app/?t=USA_2022_governors" style="color: white;">governor</a> map outlines<br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://fivethirtyeight.com"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://fivethirtyeight.com" style="color: white;">FiveThirtyEight</a>: 2020 <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">poll</a> and <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/2020-election-forecast/" style="color: white;">projection</a> data<br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://cookpolitical.com"><img src="./assets/cookpolitical.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://cookpolitical.com/" style="color: white;">Cook Political</a>: pres, senate, and governor data<br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA"><img src="./assets/lte.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA" style="color: white;">Let's Talk Elections</a>: <a class="not-dropdown-item" href="https://www.youtube.com/playlist?list=PLYs1aUsYMVipo2uDLV3mVDqXj3Xc9a9am" style="color: white;">2022 senate projections</a><br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ"><img src="./assets/pa.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ" style="color: white;">Political Analysis</a>: <a class="not-dropdown-item" href="https://youtube.com/playlist?list=PLsvuE1oEoI9ROWu7--ar8nWIrFc62XI0c" style="color: white;">2022 senate projections</a><br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://electionlab.mit.edu/data"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://electionlab.mit.edu/data" style="color: white;">MIT Election Data</a>: past <a class="not-dropdown-item" href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" style="color: white;">pres</a> and <a class="not-dropdown-item" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" style="color: white;">senate</a> results<br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://uselectionatlas.org"><img src="./assets/daveleip.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://uselectionatlas.org" style="color: white;">Dave Leip's Atlas</a>: past <a class="not-dropdown-item" href="https://uselectionatlas.org/RESULTS" style="color: white;">presidential results</a><br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item">
+                  <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map" style="color: white;">Source code and update notes on GitHub</a><br>
+                </div>
+              </h5>
+            </div>
+          </div>
+        </div>
       </div>
-      <div style="border-left: 20px solid; display: inline-block;"></div>
+      <div style="border-left: 40px solid; display: inline-block;"></div>
       <div style="display: inline-block; margin-top: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="marginEditButton" style="min-width: 70px">Margins</a>
@@ -89,7 +137,7 @@
                 Shift All by&nbsp;<span class="partyShiftText">+15</span>
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="addConstantMarginToMap(-getTippingPointRegion().margin, politicalParties[getTippingPointRegion().partyID])" style="display:flex; justify-content:center;">
+              <a onclick="addConstantMarginToMap(getTippingPointRegion().margin, politicalParties[dropdownPoliticalPartyIDs[1]])" style="display:flex; justify-content:center;">
                 Shift by tipping point
               </a>
             </div>
@@ -153,51 +201,33 @@
     <input type='file' id='uploadFileInput' style='display: none'>
     <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px;">
     </div>
-    <div id="evPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
-      <canvas id="evPieChart"></canvas>
+    <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
+      <canvas id="totalsPieChart"></canvas>
     </div>
-    <div id="infoboxcontainers" style="display: inline-block; vertical-align: top; float: right; padding-top: 15px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
-      <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none;">
-        <div id="helpbox" class="box">
+    <div style="display: flex; flex-direction: column; float: right;">
+      <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px; float: right;">
+        <div id="partyDropdownsBox" class="box" style="padding: 10px;">
+          <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
+            <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
+            </div>
+          </div>
         </div>
       </div>
-      <div id="creditboxcontainer" class="boxcontainer textbox">
-        <div id="creditbox" class="box" style="padding: 0">
-          <div class="tab">
-            <button class="tablinks active" onclick="selectCreditBoxTab(this, $('#linkscontainer'))">Links</button>
-            <button class="tablinks" onclick="selectCreditBoxTab(this, $('#sourcescontainer'))">Sources</button>
-          </div>
-          <div class="tabcontent" id="linkscontainer">
-            <div style="position: relative; margin-top: 10px" id="discordInviteBox"></div>
-            <script>
-            discordInvite.init({
-              inviteCode: '44HMc8AY3G',
-              title: 'jacksonjude.com',
-              width: '380px',
-              introText: "Join the Discord Server"
-            })
-            discordInvite.render()
-            </script>
-            <br>
-            <span style="position: relative; margin: 10px 0px 10px 0px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; font-size: 14px">
-              <span style="width: 90px; margin-right: 5px"><a href="https://jacksonjude.com"><img class="large-image" style="width: 80px; height: 80px" src="./assets/jacksonjude-large.png" /></a></span>
-              <span style="width: 90px; margin-right: 20px">Homepage for other projects and socials</span>
-              <span style="width: 90px;"><a href="https://github.com/jacksonjude/USA-Election-Map"><img class="large-image" style="width: 80px; height: 80px;" src="./assets/github-large.png" /></a></span>
-              <span style="width: 90px;">Election Map source code on GitHub</span>
-            </span>
-          </div>
-          <div class="tabcontent" id="sourcescontainer" style="display: none">
-            <h5 style="margin: 15px 10px 20px 10px; text-align: left;">
-              <a href="https://www.yapms.com"><img src="./assets/yapms.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.yapms.com/" style="color: white;">YAPms</a>: <a href="https://www.yapms.com/app/?t=USA_2020_presidential" style="color: white;">presidential</a> and <a href="https://www.yapms.com/app/?t=USA_2020_senate" style="color: white;">senate</a> map outlines<br>
-              <a href="https://fivethirtyeight.com"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://fivethirtyeight.com" style="color: white;">FiveThirtyEight</a>: 2020 <a href="https://projects.fivethirtyeight.com/polls/president-general/" style="color: white;">poll</a> and <a href="https://projects.fivethirtyeight.com/2020-election-forecast/" style="color: white;">projection</a> data<br>
-              <a href="https://cookpolitical.com"><img src="./assets/cookpolitical.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://cookpolitical.com/" style="color: white;">Cook Political</a>: 2020 pres and 2022 senate data<br>
-              <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA"><img src="./assets/lte.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA" style="color: white;">Let's Talk Elections</a>: <a href="https://www.youtube.com/playlist?list=PLYs1aUsYMVipo2uDLV3mVDqXj3Xc9a9am" style="color: white;">2022 senate projections</a><br>
-              <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ"><img src="./assets/pa.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ" style="color: white;">Political Analysis</a>: <a href="https://youtube.com/playlist?list=PLsvuE1oEoI9ROWu7--ar8nWIrFc62XI0c" style="color: white;">2022 senate projections</a><br>
-              <a href="https://electionlab.mit.edu/data"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://electionlab.mit.edu/data" style="color: white;">MIT Election Data</a>: past <a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" style="color: white;">pres</a> and <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" style="color: white;">senate</a> results<br>
-              <a href="https://uselectionatlas.org"><img src="./assets/daveleip.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a href="https://uselectionatlas.org" style="color: white;">Dave Leip's Atlas</a>: past <a href="https://uselectionatlas.org/RESULTS" style="color: white;">presidential results</a><br>
-            </h5>
-          </div>
-        </div>
+      <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none; float: right">
+        <div id="discordInviteBox" style="background-color: transparent"></div>
+        <script>
+        discordInvite.init({
+          inviteCode: '44HMc8AY3G',
+          title: 'jacksonjude.com',
+          introText: "Join the Discord Server",
+          width: 466
+        })
+        discordInvite.render()
+        </script>
+      </div>
+    </div>
+    <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; float: right; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
+      <div id="helpbox" class="box">
       </div>
     </div>
     <div id="sliderDateDisplayContainer" style="position: relative; float: left; left: 45px;">
@@ -230,8 +260,8 @@
       </span>
       <h3 id="secondCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
     </div>
-    <div id="stateboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; pointer-events: none; user-select: none; -webkit-user-select: none; transition: opacity 0.1s linear">
-      <div id="statebox" class="box">
+    <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; pointer-events: none; user-select: none; -webkit-user-select: none; transition: opacity 0.1s linear">
+      <div id="regionbox" class="box">
       </div>
     </div>
   </body>

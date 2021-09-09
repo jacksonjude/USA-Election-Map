@@ -1,8 +1,10 @@
+const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
+
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {}
 
 document.addEventListener('keydown', function(e) {
-  if (e.which >= 37 && e.which <= 40 && showingDataMap)
+  if (e.which >= 37 && e.which <= 40 && !isEditingTextbox() && showingDataMap)
   {
     switch (e.which)
     {
@@ -244,6 +246,13 @@ function deselectDropdownButton()
   $('.dropdown-content').css('display', '')
   removeActiveClassFromDropdownButton()
   selectedDropdownDivID = null
+
+  $('.dropdown-content').each((i, div) => {
+    if ($(div).css("display") == "none" && $(div).find(".jscolor-active").length > 0)
+    {
+      jscolor.hide()
+    }
+  })
 }
 
 function removeActiveClassFromDropdownButton()
@@ -271,17 +280,17 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == kViewing && !editMarginID && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentMapState == MapState.viewing && !isEditingTextbox() && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateNavBarForNewSource()
     await loadDataMap()
     if (currentRegionID)
     {
-      updateStateBox(currentRegionID)
+      updateRegionBox(currentRegionID)
     }
   }
-  else if (currentMapState == kViewing && !editMarginID && e.which == 48)
+  else if (currentMapState == MapState.viewing && !isEditingTextbox() && e.which == 48)
   {
     clearMap()
   }
@@ -327,12 +336,12 @@ document.addEventListener('keypress', async function(e) {
       await loadDataMap(true, true)
       if (currentRegionID)
       {
-        updateStateBox(currentRegionID)
+        updateRegionBox(currentRegionID)
       }
       break
     }
   }
-  else if (currentMapState == kEditing && e.which >= 48 && e.which <= 57 && e.which-48 <= selectablePoliticalPartyIDs.length)
+  else if (currentMapState == MapState.editing && !isEditingTextbox() && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -341,7 +350,7 @@ document.addEventListener('keypress', async function(e) {
     }
     else
     {
-      selectParty($("#" + selectablePoliticalPartyIDs[partyToSelect-1]))
+      selectParty($("#" + dropdownPoliticalPartyIDs[partyToSelect-1]))
     }
   }
   else if (e.which == 13)
@@ -350,21 +359,39 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleMarginEditing()
     }
+    else if (editCandidateNamePartyID)
+    {
+      toggleCandidateNameEditing()
+    }
+    else if (editPartyMarginColor)
+    {
+      toggleMarginHexColorEditing()
+    }
+    else if (editingRegionEVs)
+    {
+      editingRegionEVs = false
+      updateRegionBox(currentRegionID)
+    }
+    else if (editingRegionMarginValue)
+    {
+      editingRegionMarginValue = false
+      $("#regionboxcontainer").trigger('hide')
+    }
     else
     {
       toggleEditing()
     }
   }
-  else if (e.which == 82 || e.which == 114)
+  else if ((e.which == 82 || e.which == 114) && !isEditingTextbox())
   {
     resizeElements()
   }
-  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1)
+  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
     var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.which)]
     toggleCompareMapSourceCheckbox(mapSourceIDToCompare, false)
   }
-  else if (e.which == 99 || e.which == 109 || e.which == 115)
+  else if ((e.which == 99 || e.which == 109 || e.which == 115) && !isEditingTextbox())
   {
     removeActiveClassFromDropdownButton()
 
@@ -404,7 +431,7 @@ document.addEventListener('keypress', async function(e) {
       selectedDropdownDivID = null
     }
   }
-  else if (e.which == 84 || e.which == 116)
+  else if ((e.which == 84 || e.which == 116) && !isEditingTextbox())
   {
     cycleMapType($("#cycleMapTypeButton")[0])
   }
@@ -418,7 +445,7 @@ var currentRegionID
 var ignoreNextClick = false
 
 document.addEventListener('mousedown', function(e) {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     startRegionID = currentRegionID
     mouseIsDown = true
@@ -426,7 +453,7 @@ document.addEventListener('mousedown', function(e) {
 })
 
 document.oncontextmenu = function() {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     regionIDsChanged = []
     mouseIsDown = false
@@ -439,14 +466,19 @@ function mouseEnteredRegion(div)
 {
   var regionID = getBaseRegionID($(div).attr('id')).baseID
   currentRegionID = regionID
-  if (currentMapState == kEditing && mouseIsDown && !regionIDsChanged.includes(regionID))
+  if (currentMapState == MapState.editing && mouseIsDown && !regionIDsChanged.includes(regionID))
   {
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentMapState == kViewing && showingDataMap)
+  else if (currentMapState == MapState.viewing && showingDataMap)
   {
-    updateStateBox(regionID)
+    updateRegionBox(regionID)
+  }
+
+  if (editingRegionMarginValue)
+  {
+    updateRegionBox(regionID)
   }
 
   $(div).css('stroke', regionSelectColor)
@@ -473,10 +505,7 @@ function mouseLeftRegion(div)
     currentRegionID = null
   }
 
-  if (currentMapState == kViewing)
-  {
-    $("#stateboxcontainer").trigger('hide')
-  }
+  $("#regionboxcontainer").trigger('hide')
 
   $(div).css('stroke', regionDeselectColor)
   for (var linkedRegionSetNum in linkedRegions)
@@ -495,7 +524,7 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     if (mouseIsDown)
     {
@@ -507,15 +536,12 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
-  if (true)//($("#stateboxcontainer").css('display') != "none")
-  {
-    $("#stateboxcontainer").css("left", e.pageX+5)
-    $("#stateboxcontainer").css("top", e.pageY+5)
-  }
+  $("#regionboxcontainer").css("left", e.pageX+5)
+  $("#regionboxcontainer").css("top", e.pageY+5)
 })
 
 document.addEventListener('mouseup', function() {
-  if (currentMapState == kEditing)
+  if (currentMapState == MapState.editing)
   {
     regionIDsChanged = []
     mouseIsDown = false
@@ -527,3 +553,8 @@ document.addEventListener('mouseup', function() {
     startRegionID = null
   }
 })
+
+function isEditingTextbox()
+{
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID || editPartyMarginColor
+}
