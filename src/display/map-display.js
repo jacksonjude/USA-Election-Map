@@ -882,7 +882,7 @@ async function toggleEditing(stateToSet)
 
     if (!currentMapIsCustom)
     {
-      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()), getCurrentDateOrToday())
 
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
@@ -1605,7 +1605,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
 
   if (compareArrayIndex == 0)
   {
-    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()))
+    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
   }
 
   applyCompareToCustomMap()

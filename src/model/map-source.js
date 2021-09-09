@@ -69,6 +69,14 @@ class MapSource
       {
         self.candidateNameData = filterMapDataCallback.candidateNameData
       }
+      for (var date in self.candidateNameData)
+      {
+        if (Object.keys(self.candidateNameData[date]).length == 0)
+        {
+          self.candidateNameData[date] = cloneObject(this.shortCandidateNameOverride)
+        }
+      }
+
       if (filterMapDataCallback.mapDates != null)
       {
         self.mapDates = filterMapDataCallback.mapDates
@@ -228,7 +236,7 @@ class MapSource
     {
       this.setTextMapData("date\n" + getTodayString(), this)
       this.setIconURL("", this)
-      this.setCandidateNames(null, null, null, this)
+      this.setCandidateNames(null, null, this)
 
       overrideRegionEVs = {}
     }
@@ -303,28 +311,12 @@ class MapSource
     }
   }
 
-  setCandidateNames(shortNameOverride, dateToSet, shouldResetCandidateNameData, self)
+  setCandidateNames(candidateNamesToSet, dateToSet, self)
   {
     self = self || this
-    if (shortNameOverride && !dateToSet)
-    {
-      self.defaultShortCandidateNameOverride = cloneObject(self.shortCandidateNameOverride)
-      self.shortCandidateNameOverride = shortNameOverride
-    }
-    else if (shortNameOverride && dateToSet)
-    {
-      if (self.candidateNameData == null) { self.candidateNameData = {} }
-      self.candidateNameData[dateToSet] = cloneObject(shortNameOverride)
-    }
-    else if (self.defaultShortCandidateNameOverride)
-    {
-      self.shortCandidateNameOverride = cloneObject(self.defaultShortCandidateNameOverride)
-    }
 
-    if (shouldResetCandidateNameData == true)
-    {
-      self.candidateNameData = null
-    }
+    if (self.candidateNameData == null) { self.candidateNameData = {} }
+    self.candidateNameData[dateToSet] = cloneObject(candidateNamesToSet)
   }
 
   getIconURL()
