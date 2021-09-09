@@ -246,9 +246,12 @@ class MapSource
     {
       this.setTextMapData("date\n" + getTodayString(), this)
       this.setIconURL("", this)
-      for (var date in candidateNameData)
+      if (this.candidateNameData != null)
       {
-        candidateNameData[date] = cloneObject(shortCandidateNameOverride)
+        for (var date in this.candidateNameData)
+        {
+          candidateNameData[date] = cloneObject(shortCandidateNameOverride)
+        }
       }
       dropdownPoliticalPartyIDs = cloneObject(defaultDropdownPoliticalPartyIDs)
 
