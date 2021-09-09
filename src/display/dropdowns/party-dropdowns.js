@@ -44,7 +44,7 @@ function createPartyDropdowns()
     var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
     var marginColors = currentPoliticalParty.getMarginColors()
 
-    dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" onmouseenter="deselectDropdownButton()">'
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 0px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
@@ -63,7 +63,7 @@ function createPartyDropdowns()
     dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" style="display:flex; justify-content:center; padding: 8px 0px;">'
     for (var marginName in marginColors)
     {
-      dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}" onclick="$(\'#' + currentPoliticalParty.getID() + 'DropdownContent\').css(\'display\', \'block\')"></button>'
+      dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}"></button>'
     }
     dropdownDiv += '</a>'
     var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
@@ -89,6 +89,15 @@ function createPartyDropdowns()
     dropdownDiv += '</div>'
 
     $("#partyDropdownsContainer").append(dropdownDiv)
+
+    $("#" + currentPoliticalParty.getID() + "Dropdown").hover(function() {
+
+    }, function() {
+      if ($(this).find(".jscolor-active").length > 0)
+      {
+        $(this).find(".dropdown-content").css("display", "block")
+      }
+    })
   }
   $("#partyDropdownsContainer").append("</div>")
 
@@ -141,6 +150,8 @@ function updatePartyColor(partyID, margin)
 
   $("#" + partyID + "-color-preset").data("color-preset", "custom")
   $("#" + partyID + "-color-preset").html("Preset: " + "custom".toTitle())
+
+  $("#" + partyID).css("background-color", marginColors.safe)
 
   displayDataMap()
 }

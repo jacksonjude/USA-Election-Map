@@ -246,6 +246,13 @@ function deselectDropdownButton()
   $('.dropdown-content').css('display', '')
   removeActiveClassFromDropdownButton()
   selectedDropdownDivID = null
+
+  $('.dropdown-content').each((i, div) => {
+    if ($(div).css("display") == "none" && $(div).find(".jscolor-active").length > 0)
+    {
+      jscolor.hide()
+    }
+  })
 }
 
 function removeActiveClassFromDropdownButton()
