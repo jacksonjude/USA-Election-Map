@@ -502,7 +502,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
     {
       dropdownPoliticalPartyIDs = cloneObject(currentMapSource.getDropdownPartyIDs())
     }
-    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsBox").hasClass("showingAddPartyButton"))
+    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsBox").hasClass("showingAddPartyButton") && currentMapState != MapState.editing)
     {
       dropdownPoliticalPartyIDs.push(addButtonPartyID)
     }

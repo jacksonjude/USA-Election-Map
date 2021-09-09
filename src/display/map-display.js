@@ -907,6 +907,10 @@ async function toggleEditing(stateToSet)
       updateNavBarForNewSource()
       await loadDataMap()
     }
+    else
+    {
+      displayPartyTotals(getPartyTotals(), true)
+    }
     deselectAllParties()
     break
 
