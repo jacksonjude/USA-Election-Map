@@ -39,7 +39,7 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; margin: 0px; background-color: ' + marginColors.safe + '">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; max-height: 23px' + '; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
@@ -287,6 +287,7 @@ async function toggleCandidateNameEditing(partyID, div)
     }
 
     $("#" + editCandidateNamePartyID + "-candidate-text").parent().css("padding", "14px 16px")
+    $("#" + editCandidateNamePartyID + "-candidate-text").parent().css("max-height", "23px")
   }
 
   if (partyID == editCandidateNamePartyID)
@@ -313,19 +314,30 @@ async function toggleCandidateNameEditing(partyID, div)
   {
     $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] + "'>")
     $(div).css("padding", "9px 16px")
+    $(div).css("max-height", "none")
     $("#" + partyID + "-candidate-text").focus().select()
   }
 }
 
 function createPartyDropdownsBoxHoverHandler()
 {
-  $("#partyDropdownsBox").hover(function() {
+  $("#partyDropdownsBox").hover(async function() {
     if (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapState == MapState.editing || dropdownPoliticalPartyIDs.includes(addButtonPartyID) || dropdownPoliticalPartyIDs.length >= maxPartiesToDisplay) { return }
+
+    if (editCandidateNamePartyID)
+    {
+      await toggleCandidateNameEditing(editCandidateNamePartyID)
+    }
 
     dropdownPoliticalPartyIDs.push(addButtonPartyID)
     displayPartyTotals(getPartyTotals(), true)
-  }, function() {
+  }, async function() {
     if (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapState == MapState.editing || !dropdownPoliticalPartyIDs.includes(addButtonPartyID)) { return }
+
+    if (editCandidateNamePartyID)
+    {
+      await toggleCandidateNameEditing(editCandidateNamePartyID)
+    }
 
     dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
     displayPartyTotals(getPartyTotals(), true)
