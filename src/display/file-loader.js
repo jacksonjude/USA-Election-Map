@@ -76,6 +76,27 @@ function jsonFileLoaded(e)
     currentCustomMapSource.setIconURL("")
   }
 
+  if (jsonMapData.customParties)
+  {
+    for (partyNum in jsonMapData.customParties)
+    {
+      var currentParty = jsonMapData.customParties[partyNum]
+      politicalParties[currentParty.id] = new PoliticalParty(
+        currentParty.id,
+        currentParty.names,
+        currentParty.shortName,
+        currentParty.candidateName,
+        currentParty.marginColors,
+        currentParty.marginNames
+      )
+    }
+  }
+
+  if (jsonMapData.partyIDs)
+  {
+    currentCustomMapSource.setDropdownPartyIDs(jsonMapData.partyIDs)
+  }
+
   currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
   currentMapSource = currentCustomMapSource
@@ -114,7 +135,7 @@ function downloadMapFile(mapSourceToDownload, fileType)
     pieChartIconURL = pieChartIconURL.replace("url(\"", "").replace("\")", "")
   }
 
-  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType, pieChartIconURL)
+  var fileToDownload = getMapFileBlob(mapSourceToDownload.getTextMapData(), fileType, pieChartIconURL, mapSourceToDownload.getDropdownPartyIDs())
   downloadLinkDiv.attr('href', window.URL.createObjectURL(fileToDownload))
   downloadLinkDiv.attr('download', "custom-map-" + getTodayString("-", true))
 
@@ -123,13 +144,21 @@ function downloadMapFile(mapSourceToDownload, fileType)
   downloadLinkDiv.remove()
 }
 
-function getMapFileBlob(textMapData, fileType, pieChartIconURL)
+function getMapFileBlob(textMapData, fileType, pieChartIconURL, partyIDs)
 {
   var dataString
   switch (fileType)
   {
     case kJSONFileType:
-    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues, iconURL: pieChartIconURL})
+    var customParties = []
+    for (var partyNum in partyIDs)
+    {
+      if (partyIDs[partyNum].startsWith(customPartyIDPrefix))
+      {
+        customParties.push(politicalParties[partyIDs[partyNum]])
+      }
+    }
+    dataString = JSON.stringify({mapData: textMapData, marginValues: marginValues, iconURL: pieChartIconURL, partyIDs: partyIDs, customParties: customParties})
     break
 
     case kCSVFileType:

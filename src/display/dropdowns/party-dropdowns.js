@@ -448,6 +448,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
     if (JSON.stringify(sortedDropdownPartyIDs) != JSON.stringify(dropdownPoliticalPartyIDs) || overrideCreateDropdowns)
     {
       dropdownPoliticalPartyIDs = cloneObject(sortedDropdownPartyIDs)
+      currentMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
       createPartyDropdowns()
     }
   }

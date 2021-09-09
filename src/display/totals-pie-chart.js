@@ -1,25 +1,27 @@
 var totalsPieChart
 var regionMarginStrings = []
 
-const kClockwiseDirection = 0
-const kCounterclockwiseDirection = 1
+const PieChartDirection = {
+  clockwise: 0,
+  counterclockwise: 1
+}
 
 var partyOrdering = [
-  {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: kClockwiseDirection},
-  {partyID: GreenParty.getID(), direction: kClockwiseDirection},
-  {partyID: DemocraticParty.getID(), direction: kClockwiseDirection},
-  {partyID: Independent1948SMParty.getID(), direction: kClockwiseDirection},
-  {partyID: Independent1960HBParty.getID(), direction: kClockwiseDirection},
-  {partyID: Independent1968GWParty.getID(), direction: kClockwiseDirection},
-  {partyID: IndependentGenericParty.getID(), direction: kClockwiseDirection},
-  {partyID: TossupParty.getID(), direction: kClockwiseDirection},
-  {partyID: Independent1856MFParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: Independent1860JohnBellParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: Independent1892JWParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: Independent1924RLParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: RepublicanParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: LibertarianParty.getID(), direction: kCounterclockwiseDirection},
-  {partyID: Independent1912TRParty.getID(), direction: kCounterclockwiseDirection}
+  {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: GreenParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: DemocraticParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1948SMParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1960HBParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1968GWParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: IndependentGenericParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: TossupParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1856MFParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1860JohnBellParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1892JWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1924RLParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: RepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: LibertarianParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1912TRParty.getID(), direction: PieChartDirection.counterclockwise}
 ]
 
 var totalsPieChartCutoutPercent = 55
@@ -28,6 +30,11 @@ const minTotalsPieChartSliceLabelBrightness = 0.7
 
 function setupTotalsPieChart()
 {
+  for (var customPartyOn=1; customPartyOn <= maxPartiesToDisplay; customPartyOn++)
+  {
+    insertPartyIntoTotalsPieChartOrdering(customPartyIDPrefix + customPartyOn)
+  }
+
   var data = setupTotalsPieChartDatasets()
 
   var options = {
@@ -113,25 +120,41 @@ function setupTotalsPieChartDatasets(partyOrderingArg)
     var partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
-      var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-      if (fullPartyOrdering[partyNum].direction == kClockwiseDirection) {}
-      else if (fullPartyOrdering[partyNum].direction == kCounterclockwiseDirection)
+      if (politicalParties[partyID] != null)
       {
-        marginNames.reverse()
-      }
+        var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
+        if (fullPartyOrdering[partyNum].direction == PieChartDirection.clockwise) {}
+        else if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
+        {
+          marginNames.reverse()
+        }
 
-      for (var marginKeyNum in marginNames)
+        for (var marginKeyNum in marginNames)
+        {
+          var marginKey = marginNames[marginKeyNum]
+
+          marginSectionData.push(0)
+          marginSectionBackgroundColors.push(politicalParties[partyID].getMarginColors()[marginKey])
+          marginSectionLabels.push(politicalParties[partyID].getMarginNames()[marginKey] + " " + politicalParties[partyID].getShortName())
+        }
+
+        partySectionData.push(0)
+        partySectionBackgroundColors.push(politicalParties[partyID].getMarginColors().safe)
+        partySectionLabels.push(politicalParties[partyID].getNames()[0])
+      }
+      else
       {
-        var marginKey = marginNames[marginKeyNum]
+        for (var marginKey in defaultMarginNames)
+        {
+          marginSectionData.push(0)
+          marginSectionBackgroundColors.push("#000")
+          marginSectionLabels.push(defaultMarginNames[marginKey])
+        }
 
-        marginSectionData.push(0)
-        marginSectionBackgroundColors.push(politicalParties[partyID].getMarginColors()[marginKey])
-        marginSectionLabels.push(politicalParties[partyID].getMarginNames()[marginKey] + " " + politicalParties[partyID].getShortName())
+        partySectionData.push(0)
+        partySectionBackgroundColors.push("#000")
+        partySectionLabels.push("null")
       }
-
-      partySectionData.push(0)
-      partySectionBackgroundColors.push(politicalParties[partyID].getMarginColors().safe)
-      partySectionLabels.push(politicalParties[partyID].getNames()[0])
     }
     else
     {
@@ -177,7 +200,12 @@ function updateTotalsPieChart()
 
     if (partyID != TossupParty.getID())
     {
-      for (let marginKey in politicalParties[partyID].getMarginNames())
+      var marginNames = defaultMarginNames
+      if (politicalParties[partyID] != null)
+      {
+        marginNames = politicalParties[partyID].getMarginNames()
+      }
+      for (let marginKey in marginNames)
       {
         marginTotalsData[partyID][marginKey] = 0
         regionMarginStringsData[partyID][marginKey] = []
@@ -197,8 +225,7 @@ function updateTotalsPieChart()
     var regionParty = displayRegionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
     {
-      var genericOrderingIndex = fullPartyOrdering.findIndex(partyOrderData => partyOrderData.partyID == IndependentGenericParty.getID())
-      fullPartyOrdering.splice(genericOrderingIndex, 0, {partyID: regionParty, direction: kClockwiseDirection})
+      insertPartyIntoTotalsPieChartOrdering(regionParty, fullPartyOrdering)
 
       marginTotalsData[regionParty] = {}
       regionMarginStringsData[regionParty] = {}
@@ -247,9 +274,13 @@ function updateTotalsPieChart()
     var partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
-      var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-      if (fullPartyOrdering[partyNum].direction == kClockwiseDirection) {}
-      else if (fullPartyOrdering[partyNum].direction == kCounterclockwiseDirection)
+      var marginNames = Object.keys(defaultMarginNames)
+      if (politicalParties[partyID] != null)
+      {
+        marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
+      }
+      if (fullPartyOrdering[partyNum].direction == PieChartDirection.clockwise) {}
+      else if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
       {
         marginNames.reverse()
       }
@@ -317,4 +348,14 @@ function updateTotalsPieChart()
   totalsPieChart.update()
 
   partyOrdering = fullPartyOrdering // To avoid transitions of colors between dataslices on every date load
+}
+
+function insertPartyIntoTotalsPieChartOrdering(partyID, orderingObject)
+{
+  orderingObject = orderingObject || partyOrdering
+
+  if (orderingObject.some(partyOrderData => partyOrderData.partyID == partyID)) { return }
+
+  var genericOrderingIndex = orderingObject.findIndex(partyOrderData => partyOrderData.partyID == IndependentGenericParty.getID())
+  orderingObject.splice(genericOrderingIndex, 0, {partyID: partyID, direction: PieChartDirection.clockwise})
 }
