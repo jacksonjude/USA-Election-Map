@@ -262,6 +262,8 @@ function selectAllParties()
   $(".partyDropdownButton").each(function() {
     $(this).addClass('active')
 
+    if (politicalParties[this.id] == null) { return }
+
     var marginColors = politicalParties[this.id].getMarginColors()
     $(this).css("background-color", marginColors.safe)
   })
@@ -271,6 +273,8 @@ function deselectAllParties()
 {
   $(".partyDropdownButton").each(function() {
     $(this).removeClass('active')
+
+    if (politicalParties[this.id] == null) { return }
 
     var marginColors = politicalParties[this.id].getMarginColors()
     if (!$(this).hasClass("hover"))
