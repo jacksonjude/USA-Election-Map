@@ -44,7 +44,7 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; max-height: 23px' + '; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 16px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
@@ -290,9 +290,6 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
       currentMapSource.setCandidateNames(currentCandidateNames, currentSliderDate.getTime())
       shouldRefreshMap = true
     }
-
-    $("#" + editCandidateNamePartyID + "-candidate-text").parent().css("padding", "14px 16px")
-    $("#" + editCandidateNamePartyID + "-candidate-text").parent().css("max-height", "23px")
   }
 
   if (partyID == editCandidateNamePartyID)
@@ -318,8 +315,6 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
   if (partyID)
   {
     $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] + "'>")
-    $(div).css("padding", "9px 16px")
-    $(div).css("max-height", "none")
     $("#" + partyID + "-candidate-text").focus().select()
   }
 }
