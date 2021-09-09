@@ -1,10 +1,11 @@
 var dropdownPoliticalPartyIDs = cloneObject(defaultDropdownPoliticalPartyIDs)
 const addButtonPartyID = "ADDPARTY"
+const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
-const partyDropdownHeight = 146
-const partyDropdownWidth = 212
-const partyButtonWidth = 150
+const partyDropdownHeight = 161
+const partyDropdownWidth = 205
+const partyButtonWidth = 205
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
 
@@ -28,14 +29,14 @@ function createPartyDropdowns()
     }
     else if (partyIDNum%2 == 1)
     {
-      dropdownDiv += '<div class="dropdown" style="width: 30px;" onmouseenter="deselectDropdownButton()">'
+      dropdownDiv += '<div class="dropdown" style="width: 15px;" onmouseenter="deselectDropdownButton()">'
       dropdownDiv += '<a style="visibility: hidden"></a>'
       dropdownDiv += '</div>'
     }
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
-      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + partyButtonWidth + 'px; padding: 12px 14px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray">' + "+" + '</a>'
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'px; padding: 12px 0px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
       continue
     }
@@ -44,21 +45,22 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 16px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 0px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="min-width: 200px; ' + (shouldReverseOrder ? 'margin-top: -' + partyDropdownHeight + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + partyDropdownHeight + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
 
     if (!shouldReverseOrder)
     {
       dropdownDiv += '<div class="dropdown-separator"></div>'
     }
-    dropdownDiv += '<a class="" onclick="" style="display:flex; justify-content:center;">' + currentPoliticalParty.getNames()[0] + '</a>'
+    dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
     dropdownDiv += '<div class="dropdown-separator"></div>'
-    dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" onclick="" style="display:flex; justify-content:center;">'
+
+    dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" style="display:flex; justify-content:center; padding: 8px 0px;">'
     for (var marginName in marginColors)
     {
       dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}" onclick="$(\'#' + currentPoliticalParty.getID() + 'DropdownContent\').css(\'display\', \'block\')"></button>'
@@ -66,7 +68,15 @@ function createPartyDropdowns()
     dropdownDiv += '</a>'
     var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
     dropdownDiv += '<div class="dropdown-separator"></div>'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+
+    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    {
+      dropdownDiv += '<div class="dropdown-separator"></div>'
+
+      dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+    }
 
     if (shouldReverseOrder)
     {
@@ -340,7 +350,7 @@ function createNewCustomParty()
   var colorIDToUse = Object.keys(PoliticalPartyColors).find(colorID => !dropdownPoliticalPartyIDs.some(partyID => politicalParties[partyID] != null && JSON.stringify(politicalParties[partyID].getMarginColors()) == JSON.stringify(PoliticalPartyColors[colorID]))) || "gray"
 
   var customPoliticalParty = new PoliticalParty(
-    "CUSTOM" + dropdownPoliticalPartyIDs.reduce((customCount, partyID) => customCount + (partyID.startsWith("CUSTOM") ? 1 : 0), 0),
+    customPartyIDPrefix + dropdownPoliticalPartyIDs.reduce((customCount, partyID) => customCount + (partyID.startsWith(customPartyIDPrefix) ? 1 : 0), 0),
     ["Custom"],
     "Custom",
     "Custom",
@@ -356,6 +366,30 @@ function createNewCustomParty()
   currentMapSource.setCandidateNames(currentCandidateNames, currentSliderDate.getTime())
 
   displayPartyTotals(getPartyTotals(), true)
+}
+
+async function deleteParty(partyID)
+{
+  dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(partyID), 1)
+
+  var currentCandidateNames = currentMapSource.getCandidateNames(getCurrentDateOrToday())
+  if (partyID.startsWith(customPartyIDPrefix))
+  {
+    delete politicalParties[partyID]
+    delete currentCandidateNames[partyID]
+  }
+
+  for (var regionData in displayRegionDataArray)
+  {
+    if (displayRegionDataArray[regionData].partyID == partyID)
+    {
+      displayRegionDataArray[regionData].margin = 0
+      displayRegionDataArray[regionData].partyID = TossupParty.getID()
+    }
+  }
+
+  currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentCandidateNames)
+  await loadDataMap(null, null, null, false)
 }
 
 function displayPartyTotals(partyTotals, overrideCreateDropdowns)
