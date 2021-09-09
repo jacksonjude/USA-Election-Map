@@ -260,8 +260,16 @@ function resizeElements(initilizedPieChart)
   setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
   setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
 
-  $("#totalsPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
-  $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  if (navigator.userAgent.indexOf("Firefox") != -1)
+  {
+    $("#totalsPieChart").width(windowWidth-windowWidth*0.15-mapWidth)
+    $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  }
+  else
+  {
+    $("#totalsPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
+    $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
+  }
   $("#totalsPieChart").css("background-size", $("#totalsPieChart").width()*totalsPieChartCutoutPercent/100.0*0.5)
   $("#totalsPieChart").css("background-position", "center")
   $("#totalsPieChart").css("background-repeat", "no-repeat")
