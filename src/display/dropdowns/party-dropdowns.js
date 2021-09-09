@@ -3,7 +3,8 @@ const addButtonPartyID = "ADDPARTY"
 const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
-const partyDropdownHeight = 161
+const partyDropdownHeightExtended = 161
+const partyDropdownHeight = 121
 const partyDropdownWidth = 195
 const partyButtonWidth = 195
 const shouldReversePartyDropdownsIfNeeded = true
@@ -36,7 +37,7 @@ function createPartyDropdowns()
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
-      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'px; padding: 12px 0px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray">' + "+" + '</a>'
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'px; padding: 12px 0px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
       continue
     }
@@ -50,7 +51,7 @@ function createPartyDropdowns()
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + partyDropdownHeight + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + (currentMapSource.getID() == currentCustomMapSource.getID() ? partyDropdownHeightExtended : partyDropdownHeight) + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
 
     if (!shouldReverseOrder)
@@ -104,6 +105,11 @@ function createPartyDropdowns()
   for (var partyIDNum in dropdownPoliticalPartyIDs)
   {
     $("#" + dropdownPoliticalPartyIDs[partyIDNum]).hover(function() {
+      if (this.id == addButtonPartyID)
+      {
+        $(this).css("border-color", "#bbb")
+        $(this).css("color", "#bbb")
+      }
       if (politicalParties[this.id] == null) { return }
 
       var marginColors = politicalParties[this.id].getMarginColors()
@@ -120,6 +126,11 @@ function createPartyDropdowns()
 
       partyButton.addClass("hover")
     }, function() {
+      if (this.id == addButtonPartyID)
+      {
+        $(this).css("border-color", "gray")
+        $(this).css("color", "gray")
+      }
       if (politicalParties[this.id] == null) { return }
 
       var marginColors = politicalParties[this.id].getMarginColors()
