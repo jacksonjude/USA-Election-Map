@@ -439,6 +439,10 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     {
       toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
     }
+    if (editPartyMarginColor)
+    {
+      toggleMarginHexColorEditing()
+    }
     editingRegionEVs = false
     editingRegionMarginValue = false
 
@@ -837,6 +841,10 @@ async function toggleEditing(stateToSet)
   if (editCandidateNamePartyID)
   {
     toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
+  }
+  if (editPartyMarginColor)
+  {
+    toggleMarginHexColorEditing()
   }
   editingRegionEVs = false
   editingRegionMarginValue = false

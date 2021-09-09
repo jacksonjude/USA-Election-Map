@@ -3,20 +3,25 @@ const addButtonPartyID = "ADDPARTY"
 const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
-const partyDropdownHeightExtended = 161
-const partyDropdownHeight = 121
+const partyDropdownHeightExtended = 158
+const partyDropdownHeight = 119
 const partyDropdownWidth = 195
 const partyButtonWidth = 195
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
 
 var editCandidateNamePartyID = null
+var editPartyMarginColor = null
 
 function createPartyDropdowns()
 {
   if (editCandidateNamePartyID)
   {
     toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
+  }
+  if (editPartyMarginColor)
+  {
+    toggleMarginHexColorEditing()
   }
 
   $("#partyDropdownsContainer").html("")
@@ -61,15 +66,10 @@ function createPartyDropdowns()
     dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
     dropdownDiv += '<div class="dropdown-separator"></div>'
 
-    dropdownDiv += '<a class="' + currentPoliticalParty.getID() + 'ColorPicker" style="display:flex; justify-content:center; padding: 8px 0px;">'
-    for (var marginName in marginColors)
-    {
-      dropdownDiv += '<button id="' + currentPoliticalParty.getID() + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + currentPoliticalParty.getID() + '\\\', \\\'' + marginName + '\\\')\'}"></button>'
-    }
-    dropdownDiv += '</a>'
-    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
+    dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
     dropdownDiv += '<div class="dropdown-separator"></div>'
 
+    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
 
     if (currentMapSource.getID() == currentCustomMapSource.getID())
@@ -152,11 +152,24 @@ function createPartyDropdowns()
   jscolor.install()
 }
 
-function updatePartyColor(partyID, margin)
+function createPartyMarginColorPickers(partyID)
+{
+  var marginColors = politicalParties[partyID].getMarginColors()
+  var pickersDiv = '<a id="' + partyID + '-color-pickers" style="display:flex; justify-content:center; align-items:center; padding: 0px 0px; height: 39px">'
+  for (var marginName in marginColors)
+  {
+    pickersDiv += '<button id="' + partyID + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + partyID + '\\\', \\\'' + marginName + '\\\')\'}" oncontextmenu="toggleMarginHexColorEditing(\'' + partyID + '\', \'' + marginName + '\'); jscolor.hide(); return false;"></button>'
+  }
+  pickersDiv += '</a>'
+  return pickersDiv
+}
+
+async function updatePartyColor(partyID, margin, newColor)
 {
   var party = politicalParties[partyID]
   var marginColors = party.getMarginColors()
-  marginColors[margin] = $("#" + partyID + "-" + margin + "-color-picker")[0].getAttribute('data-current-color')
+  newColor = newColor || $("#" + partyID + "-" + margin + "-color-picker")[0].getAttribute('data-current-color')
+  marginColors[margin] = newColor
   party.setMarginColors(marginColors)
 
   $("#" + partyID + "-color-preset").data("color-preset", "custom")
@@ -164,7 +177,46 @@ function updatePartyColor(partyID, margin)
 
   $("#" + partyID).css("background-color", marginColors.safe)
 
-  displayDataMap()
+  await displayDataMap()
+}
+
+async function toggleMarginHexColorEditing(partyID, margin)
+{
+  var newMarginColor = null
+
+  if (editPartyMarginColor)
+  {
+    var currentMarginColor = politicalParties[editPartyMarginColor.partyID].getMarginColors()[editPartyMarginColor.margin]
+    var marginColorToSet = $("#" + editPartyMarginColor.partyID + "-hex-color-text").val()
+    if (!marginColorToSet.startsWith("#"))
+    {
+      marginColorToSet = "#" + marginColorToSet
+    }
+    if (!/#([0-9a-fA-F]{3})\1?/.test(marginColorToSet))
+    {
+      marginColorToSet = currentMarginColor
+    }
+
+    if (marginColorToSet != currentMarginColor)
+    {
+      await updatePartyColor(editPartyMarginColor.partyID, editPartyMarginColor.margin, marginColorToSet)
+    }
+
+    $("#" + editPartyMarginColor.partyID + "-color-pickers").replaceWith(createPartyMarginColorPickers(editPartyMarginColor.partyID))
+    jscolor.install()
+  }
+
+  if (editPartyMarginColor != null && partyID == editPartyMarginColor.partyID)
+  {
+    partyID = null
+  }
+  editPartyMarginColor = partyID ? {partyID: partyID, margin: margin} : null
+
+  if (partyID)
+  {
+    $("#" + partyID + "-color-pickers").html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-hex-color-text' value='" + politicalParties[partyID].getMarginColors()[margin] + "'>")
+    $("#" + partyID + "-hex-color-text").focus().select()
+  }
 }
 
 function cyclePartyColorPreset(partyID, div, incrementAmount)
@@ -360,7 +412,7 @@ function createPartyDropdownsBoxHoverHandler()
     $("#partyDropdownsBox").addClass("showingAddPartyButton")
     displayPartyTotals(getPartyTotals(), true)
   }, function() {
-    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID)) { return }
+    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) || $("#partyDropdownsBox").find(".jscolor-active").length > 0) { return }
 
     dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
     $("#partyDropdownsBox").removeClass("showingAddPartyButton")

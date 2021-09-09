@@ -363,6 +363,10 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleCandidateNameEditing()
     }
+    else if (editPartyMarginColor)
+    {
+      toggleMarginHexColorEditing()
+    }
     else if (editingRegionEVs)
     {
       editingRegionEVs = false
@@ -552,5 +556,5 @@ document.addEventListener('mouseup', function() {
 
 function isEditingTextbox()
 {
-  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID || editPartyMarginColor
 }
