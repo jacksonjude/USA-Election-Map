@@ -250,7 +250,7 @@ class MapSource
       {
         for (var date in this.candidateNameData)
         {
-          this.candidateNameData[date] = cloneObject(shortCandidateNameOverride)
+          this.candidateNameData[date] = cloneObject(this.shortCandidateNameOverride)
         }
       }
       dropdownPoliticalPartyIDs = cloneObject(defaultDropdownPoliticalPartyIDs)
