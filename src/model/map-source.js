@@ -67,13 +67,23 @@ class MapSource
 
       if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
       {
-        self.candidateNameData = filterMapDataCallback.candidateNameData
+        if (self.candidateNameData != null)
+        {
+          for (var date in filterMapDataCallback.candidateNameData)
+          {
+            self.candidateNameData[date] = mergeObject(self.candidateNameData[date], filterMapDataCallback.candidateNameData[date])
+          }
+        }
+        else
+        {
+          self.candidateNameData = filterMapDataCallback.candidateNameData
+        }
       }
       for (var date in self.candidateNameData)
       {
         if (Object.keys(self.candidateNameData[date]).length == 0)
         {
-          self.candidateNameData[date] = cloneObject(this.shortCandidateNameOverride)
+          self.candidateNameData[date] = cloneObject(self.shortCandidateNameOverride)
         }
       }
 
@@ -236,7 +246,11 @@ class MapSource
     {
       this.setTextMapData("date\n" + getTodayString(), this)
       this.setIconURL("", this)
-      this.setCandidateNames(null, null, this)
+      for (var date in candidateNameData)
+      {
+        candidateNameData[date] = cloneObject(shortCandidateNameOverride)
+      }
+      dropdownPoliticalPartyIDs = cloneObject(defaultDropdownPoliticalPartyIDs)
 
       overrideRegionEVs = {}
     }
@@ -353,6 +367,21 @@ class MapSource
   getShouldSetDisabledWorthToZero()
   {
     return this.shouldSetDisabledWorthToZero
+  }
+
+  getDropdownPartyIDs()
+  {
+    return this.dropdownPartyIDs
+  }
+
+  setDropdownPartyIDs(partyIDs)
+  {
+    var dropdownPartyIDs = cloneObject(partyIDs)
+    if (dropdownPartyIDs.includes(addButtonPartyID))
+    {
+      dropdownPartyIDs.splice(dropdownPartyIDs.indexOf(addButtonPartyID), 1)
+    }
+    this.dropdownPartyIDs = dropdownPartyIDs
   }
 
   updateMapData(displayRegionArray, dateToUpdate, resetMapData, candidateNames)

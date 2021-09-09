@@ -182,6 +182,19 @@ function cloneObject(objectToClone)
   return newObject
 }
 
+function mergeObject(object1, object2)
+{
+  var newObject = cloneObject(object1)
+  object2 = cloneObject(object2)
+
+  for (var key in object2)
+  {
+    newObject[key] = object2[key]
+  }
+
+  return newObject
+}
+
 function setCookie(cname, cvalue, exdays)
 {
   exdays = exdays || 365*5

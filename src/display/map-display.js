@@ -884,6 +884,8 @@ async function toggleEditing(stateToSet)
     {
       currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()), getCurrentDateOrToday())
 
+      currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
+
       currentMapSource = currentCustomMapSource
       updatePoliticalPartyCandidateNames()
       updateNavBarForNewSource()
@@ -915,7 +917,7 @@ async function toggleEditing(stateToSet)
 
     if (currentMapSource.getID() == currentCustomMapSource.getID())
     {
-      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
+      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       displayPartyTotals(getPartyTotals(), true)
     }
 
