@@ -280,8 +280,8 @@ function resizeElements(initilizedPieChart)
 
   const defaultMapZoom = 120.634/100
 
-  $("#helpboxcontainer").css('min-width', $("#totalsPieChart").width())
-  $("#partyDropdownsBoxContainer").css('min-width', $("#totalsPieChart").width())
+  $("#helpboxcontainer").css('width', $("#totalsPieChart").width())
+  $("#partyDropdownsBoxContainer").css('width', $("#totalsPieChart").width())
   $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
 
   $("#discordInvite").css("width", $("#totalsPieChart").width())

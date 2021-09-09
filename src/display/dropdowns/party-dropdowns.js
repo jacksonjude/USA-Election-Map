@@ -4,8 +4,8 @@ const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
 const partyDropdownHeight = 161
-const partyDropdownWidth = 205
-const partyButtonWidth = 205
+const partyDropdownWidth = 195
+const partyButtonWidth = 195
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
 

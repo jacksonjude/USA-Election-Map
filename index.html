@@ -204,29 +204,31 @@
     <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
       <canvas id="totalsPieChart"></canvas>
     </div>
-    <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; vertical-align: top; float: right; margin-top: 10px; margin-right: 45px; padding: 5px;">
-      <div id="partyDropdownsBox" class="box" style="padding: 10px;">
-        <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
-          <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
+    <div style="display: flex; flex-direction: column; float: right;">
+      <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px; float: right;">
+        <div id="partyDropdownsBox" class="box" style="padding: 10px;">
+          <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
+            <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
+            </div>
           </div>
         </div>
+      </div>
+      <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none; float: right">
+        <div id="discordInviteBox" style="background-color: transparent"></div>
+        <script>
+        discordInvite.init({
+          inviteCode: '44HMc8AY3G',
+          title: 'jacksonjude.com',
+          introText: "Join the Discord Server",
+          width: 466
+        })
+        discordInvite.render()
+        </script>
       </div>
     </div>
     <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; float: right; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
       <div id="helpbox" class="box">
       </div>
-    </div>
-    <div id="discordInviteContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none">
-      <div id="discordInviteBox" style="background-color: transparent"></div>
-      <script>
-      discordInvite.init({
-        inviteCode: '44HMc8AY3G',
-        title: 'jacksonjude.com',
-        introText: "Join the Discord Server",
-        width: 466
-      })
-      discordInvite.render()
-      </script>
     </div>
     <div id="sliderDateDisplayContainer" style="position: relative; float: left; left: 45px;">
       <span style="display: inline-block; float: left;">
