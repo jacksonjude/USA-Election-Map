@@ -12,6 +12,27 @@ body {
   font-family: 'Bree5erif-Regular';
 }
 
+.background {
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: -1;
+
+  display: block;
+
+  background: url(assets/space-60d.jpeg);
+  background-size: cover;
+
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+
+  min-width: 100%;
+  min-height: 100%;
+}
+
 .topnav {
   user-select: none;
   -webkit-user-select: none;
@@ -168,6 +189,14 @@ body {
   text-decoration: underline !important;
   font-size: 17px !important;
   margin-left: 0px !important;
+}
+
+.deletebutton {
+  transition: background-color .3s !important;
+}
+
+.deletebutton:hover {
+  background-color: #C50000 !important;
 }
 
 .slidecontainer {
