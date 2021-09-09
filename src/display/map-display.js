@@ -437,7 +437,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     }
     if (editCandidateNamePartyID)
     {
-      toggleCandidateNameEditing(editCandidateNamePartyID)
+      toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
     }
     editingRegionEVs = false
     editingRegionMarginValue = false
@@ -836,7 +836,7 @@ async function toggleEditing(stateToSet)
   }
   if (editCandidateNamePartyID)
   {
-    toggleCandidateNameEditing(editCandidateNamePartyID)
+    toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
   }
   editingRegionEVs = false
   editingRegionMarginValue = false
