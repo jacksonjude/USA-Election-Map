@@ -122,7 +122,7 @@ class MapSource
 
         CSVDatabase.insertCSV(self.id, data)
         resolve(data)
-      }).fail(function() {
+      }, "text").fail(function() {
         $("#loader").hide()
 
         resolve(null)
