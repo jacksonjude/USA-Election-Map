@@ -1,3 +1,5 @@
+const browserName = bowser.getParser(navigator.userAgent).getResult().browser.name
+
 function zeroPadding(num)
 {
   if (num < 10)

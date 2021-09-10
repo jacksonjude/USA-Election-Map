@@ -6,7 +6,7 @@ const maxPartiesToDisplay = 4
 const partyDropdownHeightExtended = 158
 const partyDropdownHeight = 119
 const partyDropdownWidth = 195
-const partyButtonWidth = 195
+const partyButtonWidth = browserName != "Firefox" ? 195 : 170
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
 
