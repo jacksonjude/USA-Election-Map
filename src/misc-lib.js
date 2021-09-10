@@ -177,7 +177,7 @@ function HSVtoRGB(h, s, v) {
 
 function cloneObject(objectToClone)
 {
-  var newObject = JSON.parse(JSON.stringify(objectToClone))
+  var newObject = JSON.parse(JSON.stringify(objectToClone) || "{}")
 
   return newObject
 }
