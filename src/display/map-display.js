@@ -138,7 +138,7 @@ async function reloadForNewMapType(initialLoad)
 
   createMapTypeDropdownItems()
 
-  currentMapSource = currentMapType.getCurrentMapSourceID() ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
+  currentMapSource = (currentMapType.getCurrentMapSourceID() && currentMapType.getCurrentMapSourceID() in mapSources) ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
   if (currentMapSource.getID() == NullMapSource.getID())
   {
     $("#sourceToggleButton").addClass('active')
