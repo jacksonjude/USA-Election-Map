@@ -506,6 +506,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
     {
       dropdownPoliticalPartyIDs.push(addButtonPartyID)
     }
+    dropdownPoliticalPartyIDs = dropdownPoliticalPartyIDs.slice(0, maxPartiesToDisplay)
 
     var sortedDropdownPartyIDs = cloneObject(dropdownPoliticalPartyIDs).sort((party1, party2) => {
       if (party1 == addButtonPartyID) { return 1 }
