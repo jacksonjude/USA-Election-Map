@@ -1138,11 +1138,12 @@ function createPresidentialMapSources()
 
   var getPresidentialSVGFromDate = function(dateTime)
   {
-    if (dateTime < -3318077222000)
+    var dateYear = (new Date(dateTime)).getFullYear()
+    if (dateYear < 1864)
     {
       return "svg-sources/usa-presidential-pre-civil-war-map.svg"
     }
-    else if (dateTime < -288633600000)
+    else if (dateYear < 1960)
     {
       return "svg-sources/usa-presidential-historical-map.svg"
     }
