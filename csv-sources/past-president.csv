@@ -758,10 +758,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Colorado,CO,Camejo,socialist workers,0.10375055481580100,20171015
 11/2/1976,Colorado,CO,Larouche,u.s. labor,0.052245154608669900,20171015
 11/2/1976,Colorado,CO,Hall,communist party use,0.037265127977511500,20171015
-11/2/1976,Connecticut,CT,Ford,republican,51.881444507359200,20171015
-11/2/1976,Connecticut,CT,Carter,democrat,46.733700964038800,20171015
-11/2/1976,Connecticut,CT,Maddox,american independent party,0.51220646948292500,20171015
-11/2/1976,Connecticut,CT,Larouche,u.s. labor,0.12904342682790500,20171015
+11/2/1976,Connecticut,CT,Ford,republican,52.0627914349784,20171015
+11/2/1976,Connecticut,CT,Carter,democrat,46.8970544166378,20171015
+11/2/1976,Connecticut,CT,Maddox,american independent party,0.396662820678004,20171015
+11/2/1976,Connecticut,CT,Larouche,u.s. labor,0.51399684117418,20171015
 11/2/1976,Delaware,DE,Carter,democrat,51.969088702353600,20171015
 11/2/1976,Delaware,DE,Ford,republican,46.587620203529100,20171015
 11/2/1976,Delaware,DE,Anderson,american,0.27372030452975300,20171015
@@ -919,14 +919,14 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,New Mexico,NM,Macbride,libertarian,0.26644902662089800,20171015
 11/2/1976,New Mexico,NM,Zeidler,socialist,0.057610600350464500,20171015
 11/2/1976,New Mexico,NM,Bubar,prohibition,0.050649319474783400,20171015
-11/2/1976,New York,NY,Carter,democrat,48.650832855697600,20171015
-11/2/1976,New York,NY,Ford,republican,42.378553812072800,20171015
-11/2/1976,New York,NY,Ford,conservative,4.1221835614737400,20171015
-11/2/1976,New York,NY,Carter,liberal party,2.1803732366844600,20171015
-11/2/1976,New York,NY,Macbride,free libertarian,0.18291122934281800,20171015
-11/2/1976,New York,NY,Hall,communist party use,0.15401314465448400,20171015
-11/2/1976,New York,NY,Camejo,socialist workers,0.10491489386589800,20171015
-11/2/1976,New York,NY,Larouche,labor,0.081175574684977900,20171015
+11/2/1976,New York,NY,Carter,democrat,49.7172894421265,20171015
+11/2/1976,New York,NY,Ford,republican,43.3075181315587,20171015
+11/2/1976,New York,NY,Ford,conservative,4.21254439502086,20171015
+11/2/1976,New York,NY,Carter,liberal party,2.22816837733565,20171015
+11/2/1976,New York,NY,Macbride,free libertarian,0.186920757521771,20171015
+11/2/1976,New York,NY,Hall,communist party use,0.157389208801229,20171015
+11/2/1976,New York,NY,Camejo,socialist workers,0.107214693746193,20171015
+11/2/1976,New York,NY,Larouche,labor,0.0829549938890996,20171015
 11/2/1976,North Carolina,NC,Carter,democrat,55.269186712485700,20171015
 11/2/1976,North Carolina,NC,Ford,republican,44.219402040400400,20171015
 11/2/1976,North Carolina,NC,Anderson,american,0.33416651469152600,20171015
@@ -2190,16 +2190,16 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/1992,New Mexico,NM,Warren,socialist workers,0.032106051727586300,20171015
 11/3/1992,New Mexico,NM,La Riva,workers world,0.031755165916355800,20171015
 11/3/1992,New Mexico,NM,Dodge,prohibition,0.021053148673827100,20171015
-11/3/1992,New York,NY,Clinton,democrat,47.27630691275800,20171015
-11/3/1992,New York,NY,Bush,republican,28.839743075433200,20171015
-11/3/1992,New York,NY,Perot,independent,15.406899875583200,20171015
-11/3/1992,New York,NY,Bush,conservative,2.5002005810635700,20171015
-11/3/1992,New York,NY,Bush,right-to-life,1.8074755149848200,20171015
-11/3/1992,New York,NY,Clinton,liberal party,1.3780201575493600,20171015
-11/3/1992,New York,NY,Warren,socialist workers,0.21854860672438100,20171015
-11/3/1992,New York,NY,Marrou,libertarian,0.19000111873381900,20171015
-11/3/1992,New York,NY,Fulani,new alliance,0.15987158291795200,20171015
-11/3/1992,New York,NY,Hagelin,natural law,0.062434387391530800,20171015
+11/3/1992,New York,NY,Clinton,democrat,48.320265369962,20171015
+11/3/1992,New York,NY,Bush,republican,29.4765841413555,20171015
+11/3/1992,New York,NY,Perot,independent,15.747116031936,20171015
+11/3/1992,New York,NY,Bush,conservative,2.55541017148535,20171015
+11/3/1992,New York,NY,Bush,right-to-life,1.84738830583669,20171015
+11/3/1992,New York,NY,Clinton,liberal party,1.40844968751087,20171015
+11/3/1992,New York,NY,Warren,socialist workers,0.223374611148143,20171015
+11/3/1992,New York,NY,Marrou,libertarian,0.194196735687285,20171015
+11/3/1992,New York,NY,Fulani,new alliance,0.163401877519046,20171015
+11/3/1992,New York,NY,Hagelin,natural law,0.0638130675591256,20171015
 11/3/1992,North Carolina,NC,Bush,republican,43.442808737102100,20171015
 11/3/1992,North Carolina,NC,Clinton,democrat,42.653368302161300,20171015
 11/3/1992,North Carolina,NC,Perot,independent,13.701552539387800,20171015
@@ -2523,18 +2523,18 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,New Mexico,NM,Browne,libertarian,0.53877721310473100,20171015
 11/5/1996,New Mexico,NM,Phillips,u.s. taxpayers party,0.12822034477425700,20171015
 11/5/1996,New Mexico,NM,Hagelin,natural law,0.11581192431223200,20171015
-11/5/1996,New York,NY,Clinton,democrat,56.678939030418600,20171015
-11/5/1996,New York,NY,Dole,republican,27.002207907311700,20171015
-11/5/1996,New York,NY,Perot,independence,7.8187282783121800,20171015
-11/5/1996,New York,NY,Dole,conservative,2.8480870627067700,20171015
-11/5/1996,New York,NY,Clinton,liberal party,1.6546803146823100,20171015
-11/5/1996,New York,NY,Nader,green,1.1796005329292200,20171015
-11/5/1996,New York,NY,Phillips,right-to-life,0.36619859611447400,20171015
-11/5/1996,New York,NY,Browne,libertarian,0.18977721986933300,20171015
-11/5/1996,New York,NY,Dole,freedom,0.17693386791909300,20171015
-11/5/1996,New York,NY,Hagelin,natural law,0.077821084187007300,20171015
-11/5/1996,New York,NY,Moorehead,workers world,0.053935866170719700,20171015
-11/5/1996,New York,NY,Harris,socialist workers,0.042894000104672500,20171015
+11/5/1996,New York,NY,Clinton,democrat,57.7827020315766,20171015
+11/5/1996,New York,NY,Dole,republican,27.5280476380391,20171015
+11/5/1996,New York,NY,Perot,independence,7.97098982620526,20171015
+11/5/1996,New York,NY,Dole,conservative,2.90355057662692,20171015
+11/5/1996,New York,NY,Clinton,liberal party,1.686903481547,20171015
+11/5/1996,New York,NY,Nader,green,1.20257201839924,20171015
+11/5/1996,New York,NY,Phillips,right-to-life,0.373329930405158,20171015
+11/5/1996,New York,NY,Browne,libertarian,0.193472932550934,20171015
+11/5/1996,New York,NY,Dole,freedom,0.180379469767004,20171015
+11/5/1996,New York,NY,Hagelin,natural law,0.0793365683316474,20171015
+11/5/1996,New York,NY,Moorehead,workers world,0.0549862106996231,20171015
+11/5/1996,New York,NY,Harris,socialist workers,0.0437293158515287,20171015
 11/5/1996,North Carolina,NC,Dole,republican,48.729413663289800,20171015
 11/5/1996,North Carolina,NC,Clinton,democrat,44.035532137401600,20171015
 11/5/1996,North Carolina,NC,Perot,reform party,6.6801229188089500,20171015
@@ -2743,15 +2743,15 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Indiana,IN,Gore,democrat,41.01210293083900,20171015
 11/7/2000,Indiana,IN,Buchanan,independent,0.77110828799319100,20171015
 11/7/2000,Indiana,IN,Browne,libertarian,0.70613312769233100,20171015
-11/7/2000,Iowa,IA,Gore,democrat,47.191915578608500,20171015
-11/7/2000,Iowa,IA,Bush,republican,46.885638223177500,20171015
-11/7/2000,Iowa,IA,Nader,green,2.1709920459534300,20171015
-11/7/2000,Iowa,IA,Buchanan,reform party,0.42357034844961900,20171015
-11/7/2000,Iowa,IA,Browne,libertarian,0.2371727880256200,20171015
-11/7/2000,Iowa,IA,Hagelin,nominated by petition,0.16858558101789900,20171015
-11/7/2000,Iowa,IA,Phillips,constitution party,0.045305989111780900,20171015
-11/7/2000,Iowa,IA,Harris,socialist workers,0.014042639365804800,20171015
-11/7/2000,Iowa,IA,McReynolds,socialist,0.0079082232217953600,20171015
+11/7/2000,Iowa,IA,Gore,democrat,48.5356459553818,20171015
+11/7/2000,Iowa,IA,Bush,republican,48.2206477378886,20171015
+11/7/2000,Iowa,IA,Nader,green,2.23280831096648,20171015
+11/7/2000,Iowa,IA,Buchanan,reform party,0.435630980804416,20171015
+11/7/2000,Iowa,IA,Browne,libertarian,0.243925984540459,20171015
+11/7/2000,Iowa,IA,Hagelin,nominated by petition,0.173385843171327,20171015
+11/7/2000,Iowa,IA,Phillips,constitution party,0.0887832813783908,20171015
+11/7/2000,Iowa,IA,Harris,socialist workers,0.0465960201069808,20171015
+11/7/2000,Iowa,IA,McReynolds,socialist,0.0144424858406629,20171015
 11/7/2000,Kansas,KS,Bush,republican,58.041663246957700,20171015
 11/7/2000,Kansas,KS,Gore,democrat,37.238392264245300,20171015
 11/7/2000,Kansas,KS,Nader,green,3.3655532094,JJCooley
@@ -2788,12 +2788,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Maryland,MD,Browne,libertarian,0.26219477269540200,20171015
 11/7/2000,Maryland,MD,Buchanan,reform party,0.20975581815632100,20171015
 11/7/2000,Maryland,MD,Phillips,constitution party,0.045328587821916900,20171015
-11/7/2000,Massachusetts,MA,Gore,democrat,59.126126020679100,20171015
-11/7/2000,Massachusetts,MA,Bush,republican,32.13290299360200,20171015
-11/7/2000,Massachusetts,MA,Nader,green,6.3484376531658800,20171015
-11/7/2000,Massachusetts,MA,Browne,libertarian,0.59861797741301600,20171015
-11/7/2000,Massachusetts,MA,Buchanan,reform party,0.40779615239995800,20171015
-11/7/2000,Massachusetts,MA,Hagelin,unenrolled,0.10548785572889800,20171015
+11/7/2000,Massachusetts,MA,Gore,democrat,59.8047238897468,20171015
+11/7/2000,Massachusetts,MA,Bush,republican,32.5016962998096,20171015
+11/7/2000,Massachusetts,MA,Nader,green,6.42129945814598,20171015
+11/7/2000,Massachusetts,MA,Browne,libertarian,0.605488390057944,20171015
+11/7/2000,Massachusetts,MA,Buchanan,reform party,0.41247647933252,20171015
+11/7/2000,Massachusetts,MA,Hagelin,unenrolled,0.147616929997018,20171015
 11/7/2000,Michigan,MI,Gore,democrat,51.279798870691300,20171015
 11/7/2000,Michigan,MI,Bush,republican,46.146214732140600,20171015
 11/7/2000,Michigan,MI,Nader,green,1.9885405815615900,20171015
@@ -2838,13 +2838,13 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Nebraska 2nd CD,NE-2,Gore,democrat,38.52,JJCooley
 11/7/2000,Nebraska 3rd CD,NE-3,Bush,republican,71.35,JJCooley
 11/7/2000,Nebraska 3rd CD,NE-3,Gore,democrat,24.94,JJCooley
-11/7/2000,Nevada,NV,Bush,republican,49.485089247915300,20171015
-11/7/2000,Nevada,NV,Gore,democrat,45.941262762008800,20171015
-11/7/2000,Nevada,NV,Nader,green,2.4626451775933400,20171015
-11/7/2000,Nevada,NV,Buchanan,citizens first,0.77892968137230800,20171015
-11/7/2000,Nevada,NV,Browne,libertarian,0.54329811987017300,20171015
-11/7/2000,Nevada,NV,Phillips,independent american,0.10189916413149400,20171015
-11/7/2000,Nevada,NV,Hagelin,natural law,0.068096864918792400,20171015
+11/7/2000,Nevada,NV,Bush,republican,49.5221439479777,20171015
+11/7/2000,Nevada,NV,Gore,democrat,45.9756638258042,20171015
+11/7/2000,Nevada,NV,Nader,green,2.46448921950178,20171015
+11/7/2000,Nevada,NV,Buchanan,citizens first,0.779512948092681,20171015
+11/7/2000,Nevada,NV,Browne,libertarian,0.543704944414339,20171015
+11/7/2000,Nevada,NV,Phillips,independent american,0.101975466771762,20171015
+11/7/2000,Nevada,NV,Hagelin,natural law,0.068147856216234,20171015
 11/7/2000,New Hampshire,NH,Bush,republican,48.070309850443100,20171015
 11/7/2000,New Hampshire,NH,Gore,democrat,46.803179160787300,20171015
 11/7/2000,New Hampshire,NH,Nader,green,3.9006749478545200,20171015
@@ -2860,18 +2860,18 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,New Mexico,NM,Buchanan,reform party,0.23254065702758900,20171015
 11/7/2000,New Mexico,NM,Hagelin,natural law,0.060306880163045700,20171015
 11/7/2000,New Mexico,NM,Phillips,constitution party,0.057299888908378600,20171015
-11/7/2000,New York,NY,Gore,democrat,56.639270482305500,20171015
-11/7/2000,New York,NY,Bush,republican,32.449816564574500,20171015
-11/7/2000,New York,NY,Nader,green,3.5060698556007200,20171015
-11/7/2000,New York,NY,Bush,conservative,2.0803524029070900,20171015
-11/7/2000,New York,NY,Gore,working families,1.2700038720068300,20171015
-11/7/2000,New York,NY,Gore,liberal party,1.1075376263520600,20171015
-11/7/2000,New York,NY,Buchanan,right-to-life,0.36169859695426100,20171015
-11/7/2000,New York,NY,Hagelin,independence,0.35000355592463700,20171015
-11/7/2000,New York,NY,Browne,libertarian,0.10989603051055200,20171015
-11/7/2000,New York,NY,Buchanan,reform party,0.092295999477027600,20171015
-11/7/2000,New York,NY,Harris,socialist workers,0.025703228995081300,20171015
-11/7/2000,New York,NY,Phillips,constitution party,0.021522323663852300,20171015
+11/7/2000,New York,NY,Gore,democrat,57.7868012000588,20171015
+11/7/2000,New York,NY,Bush,republican,33.1072607896894,20171015
+11/7/2000,New York,NY,Nader,green,3.57710401306127,20171015
+11/7/2000,New York,NY,Bush,conservative,2.12250104404882,20171015
+11/7/2000,New York,NY,Gore,working families,1.29573457867701,20171015
+11/7/2000,New York,NY,Gore,liberal party,1.12997671210447,20171015
+11/7/2000,New York,NY,Buchanan,right-to-life,0.369026732487061,20171015
+11/7/2000,New York,NY,Hagelin,independence,0.357094745982812,20171015
+11/7/2000,New York,NY,Browne,libertarian,0.112122561143735,20171015
+11/7/2000,New York,NY,Buchanan,reform party,0.094165947547046,20171015
+11/7/2000,New York,NY,Harris,socialist workers,0.0262239850812057,20171015
+11/7/2000,New York,NY,Phillips,constitution party,0.0219583731982371,20171015
 11/7/2000,North Carolina,NC,Bush,republican,55.957756287328600,20171015
 11/7/2000,North Carolina,NC,Gore,democrat,43.145671168683300,20171015
 11/7/2000,North Carolina,NC,Browne,libertarian,0.47653679772486400,20171015
@@ -2968,11 +2968,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,West Virginia,WV,Buchanan,reform party,0.48894964543821900,20171015
 11/7/2000,West Virginia,WV,Browne,libertarian,0.29500527676802600,20171015
 11/7/2000,West Virginia,WV,Hagelin,natural law,0.056624966827335500,20171015
-11/7/2000,Wisconsin,WI,Gore,democrat,47.832819660687400,20171015
-11/7/2000,Wisconsin,WI,Bush,republican,47.613163514144300,20171015
-11/7/2000,Wisconsin,WI,Nader,green,3.6200164164877600,20171015
-11/7/2000,Wisconsin,WI,Browne,libertarian,0.25552151595066100,20171015
-11/7/2000,Wyoming,WY,Bush,republican,69.222743138410900,20171015
+11/7/2000,Wisconsin,WI,Gore,democrat,47.9464768228627,20171015
+11/7/2000,Wisconsin,WI,Bush,republican,47.7262987440052,20171015
+11/7/2000,Wisconsin,WI,Nader,green,3.62861805853697,20171015
+11/7/2000,Wisconsin,WI,Buchanan,reform party,0.442477705426572,20171015
+11/7/2000,Wisconsin,WI,Browne,libertarian,0.25612866916855,20171015
+11/7/2000,Wyoming,WY,Bush,republican,47.9464768228627,20171015
 11/7/2000,Wyoming,WY,Gore,democrat,28.298382040556600,20171015
 11/7/2000,Wyoming,WY,Nader,green,2.12,JJCooley
 11/7/2000,Wyoming,WY,Buchanan,reform party,1.2745290699306600,20171015
@@ -3101,11 +3102,11 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/2004,Maryland,MD,Badnarik,libertarian,0.25559528872537100,20171015
 11/2/2004,Maryland,MD,Cobb,green,0.15233378546940400,20171015
 11/2/2004,Maryland,MD,Peroutka,constitution party,0.14348399782236500,20171015
-11/2/2004,Massachusetts,MA,Kerry,democrat,61.616660204853700,20171015
-11/2/2004,Massachusetts,MA,Bush,republican,36.588401871249900,20171015
-11/2/2004,Massachusetts,MA,Badnarik,libertarian,0.51314196119154700,20171015
-11/2/2004,Massachusetts,MA,Cobb,green-rainbow,0.36287492036598300,20171015
-11/2/2004,Massachusetts,MA,Nader,independent,0.16416990184306800,20171015
+11/2/2004,Massachusetts,MA,Kerry,democrat,61.6847831662576,20171015
+11/2/2004,Massachusetts,MA,Bush,republican,36.628853760077,20171015
+11/2/2004,Massachusetts,MA,Badnarik,libertarian,0.513709287461759,20171015
+11/2/2004,Massachusetts,MA,Cobb,green-rainbow,0.363276112415542,20171015
+11/2/2004,Massachusetts,MA,Nader,independent,0.164351406972521,20171015
 11/2/2004,Michigan,MI,Kerry,democrat,51.230706729056500,20171015
 11/2/2004,Michigan,MI,Bush,republican,47.812058557810200,20171015
 11/2/2004,Michigan,MI,Nader,no party affiliation,0.49666766682123600,20171015
@@ -3168,14 +3169,14 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/2004,New Mexico,NM,Badnarik,libertarian,0.31495271742579700,20171015
 11/2/2004,New Mexico,NM,Cobb,green,0.16210412744081700,20171015
 11/2/2004,New Mexico,NM,Peroutka,constitution party,0.10194313397787100,20171015
-11/2/2004,New York,NY,Kerry,democrat,56.130581265491900,20171015
-11/2/2004,New York,NY,Bush,republican,37.686529992349900,20171015
-11/2/2004,New York,NY,Bush,conservative,2.0887277656302800,20171015
-11/2/2004,New York,NY,Kerry,working families,1.792699132925700,20171015
-11/2/2004,New York,NY,Nader,independence,1.1310954791356800,20171015
-11/2/2004,New York,NY,Nader,peace and justice,0.20979379630104500,20171015
-11/2/2004,New York,NY,Badnarik,libertarian,0.15583492855921100,20171015
-11/2/2004,New York,NY,Calero,socialist workers,0.032289394605402100,20171015
+11/2/2004,New York,NY,Kerry,democrat,56.5652095321955,20171015
+11/2/2004,New York,NY,Bush,republican,37.9783429548983,20171015
+11/2/2004,New York,NY,Bush,conservative,2.104901126175,20171015
+11/2/2004,New York,NY,Kerry,working families,1.80658029537402,20171015
+11/2/2004,New York,NY,Nader,independence,1.13985373633683,20171015
+11/2/2004,New York,NY,Nader,peace and justice,0.211418263961913,20171015
+11/2/2004,New York,NY,Badnarik,libertarian,0.15704158388621,20171015
+11/2/2004,New York,NY,Calero,socialist workers,0.032539416666351,20171015
 11/2/2004,North Carolina,NC,Bush,republican,56.017197337794500,20171015
 11/2/2004,North Carolina,NC,Kerry,democrat,43.583146220501700,20171015
 11/2/2004,North Carolina,NC,Badnarik,libertarian,0.33507502270061200,20171015
@@ -3333,12 +3334,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/2008,Georgia,GA,McCain,republican,52.204517992929500,20171015
 11/4/2008,Georgia,GA,Obama,democrat,46.990179096065100,20171015
 11/4/2008,Georgia,GA,Barr,libertarian,0.73209587191800400,20171015
-11/4/2008,Hawaii,HI,Obama,democrat,71.452910117878200,20171015
-11/4/2008,Hawaii,HI,McCain,republican,26.436201936570300,20171015
-11/4/2008,Hawaii,HI,Nader,independent,0.83869807746281200,20171015
-11/4/2008,Hawaii,HI,Barr,libertarian,0.2881174571989900,20171015
-11/4/2008,Hawaii,HI,Baldwin,constitution party,0.22211794835812500,20171015
-11/4/2008,Hawaii,HI,McKinney,green,0.21466285433623400,20171015
+11/4/2008,Hawaii,HI,Obama,democrat,71.8461178919148,20171015
+11/4/2008,Hawaii,HI,McCain,republican,26.5816812473543,20171015
+11/4/2008,Hawaii,HI,Nader,independent,0.843313461267109,20171015
+11/4/2008,Hawaii,HI,Barr,libertarian,0.289702977282348,20171015
+11/4/2008,Hawaii,HI,Baldwin,constitution party,0.223340270918583,20171015
+11/4/2008,Hawaii,HI,McKinney,green,0.215844151262876,20171015
 11/4/2008,Idaho,ID,McCain,republican,61.517091473038600,20171015
 11/4/2008,Idaho,ID,Obama,democrat,36.090987632837900,20171015
 11/4/2008,Idaho,ID,Nader,independent,1.095215852925100,20171015
@@ -3396,12 +3397,12 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/2008,Maryland,MD,Barr,libertarian,0.37399357652162400,20171015
 11/4/2008,Maryland,MD,McKinney,green,0.18038483110629400,20171015
 11/4/2008,Maryland,MD,Baldwin,constitution party,0.142879074143600,20171015
-11/4/2008,Massachusetts,MA,Obama,democrat,61.363199102802300,20171015
-11/4/2008,Massachusetts,MA,McCain,republican,35.734959289331800,20171015
-11/4/2008,Massachusetts,MA,Nader,independent,0.92945686344966700,20171015
-11/4/2008,Massachusetts,MA,Barr,libertarian,0.42504096848367500,20171015
-11/4/2008,Massachusetts,MA,McKinney,green,0.21108638589491800,20171015
-11/4/2008,Massachusetts,MA,Baldwin,constitution party,0.16020006477612800,20171015
+11/4/2008,Massachusetts,MA,Obama,democrat,61.8015667067513,20171015
+11/4/2008,Massachusetts,MA,McCain,republican,35.990243379958,20171015
+11/4/2008,Massachusetts,MA,Nader,independent,0.936096735297316,20171015
+11/4/2008,Massachusetts,MA,Barr,libertarian,0.428077384342994,20171015
+11/4/2008,Massachusetts,MA,McKinney,green,0.212594348885178,20171015
+11/4/2008,Massachusetts,MA,Baldwin,constitution party,0.161344505085224,20171015
 11/4/2008,Michigan,MI,Obama,democrat,57.433247307459500,20171015
 11/4/2008,Michigan,MI,McCain,republican,40.959705661952700,20171015
 11/4/2008,Michigan,MI,Nader,natural law,0.661488852758200,20171015
@@ -3471,16 +3472,16 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/2008,New Mexico,NM,Barr,libertarian,0.29247444462379500,20171015
 11/4/2008,New Mexico,NM,Baldwin,constitution party,0.19237301814835200,20171015
 11/4/2008,New Mexico,NM,McKinney,green,0.18695236328506100,20171015
-11/4/2008,New York,NY,Obama,democrat,60.156961540757700,20171015
-11/4/2008,New York,NY,McCain,republican,31.317237111175200,20171015
-11/4/2008,New York,NY,McCain,conservative,2.2076480257300600,20171015
-11/4/2008,New York,NY,McCain,independence,2.1234472487052900,20171015
-11/4/2008,New York,NY,Obama,working families,2.0669853311679200,20171015
-11/4/2008,New York,NY,Nader,populist,0.53417376983920900,20171015
-11/4/2008,New York,NY,Barr,libertarian,0.25376782937208500,20171015
-11/4/2008,New York,NY,McKinney,green,0.1657727078889600,20171015
-11/4/2008,New York,NY,Harris,socialist workers,0.046814181627887700,20171015
-11/4/2008,New York,NY,La Riva,socialism and liberation party,0.021225019000859700,20171015
+11/4/2008,New York,NY,Obama,democrat,60.8241270037466,20171015
+11/4/2008,New York,NY,McCain,republican,31.6645581603385,20171015
+11/4/2008,New York,NY,McCain,conservative,2.23213175096284,20171015
+11/4/2008,New York,NY,McCain,independence,2.14699715266537,20171015
+11/4/2008,New York,NY,Obama,working families,2.08990904922382,20171015
+11/4/2008,New York,NY,Nader,populist,0.540097976802851,20171015
+11/4/2008,New York,NY,Barr,libertarian,0.256582219046005,20171015
+11/4/2008,New York,NY,McKinney,green,0.167611195448455,20171015
+11/4/2008,New York,NY,Harris,socialist workers,0.0473333701699995,20171015
+11/4/2008,New York,NY,La Riva,socialism and liberation party,0.0214604131974078,20171015
 11/4/2008,North Carolina,NC,Obama,democrat,49.703666399047400,20171015
 11/4/2008,North Carolina,NC,McCain,republican,49.374798618648600,20171015
 11/4/2008,North Carolina,NC,Barr,libertarian,0.59668033063541300,20171015
@@ -3575,9 +3576,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/2008,Wisconsin,WI,Wamboldt,we the people,0.025608220372814100,20171015
 11/4/2008,Wisconsin,WI,Moore,socialist party usa,0.018100051048847700,20171015
 11/4/2008,Wisconsin,WI,La Riva,socialism and liberation party,0.0079439112936609300,20171015
-11/4/2008,Wyoming,WY,McCain,republican,64.713774597495500,20171015
-11/4/2008,Wyoming,WY,Obama,democrat,32.509493770203700,20171015
-11/4/2008,Wyoming,WY,Barr,libertarian,0.62533345887079100,20171015
+11/4/2008,Wyoming,WY,McCain,republican,64.7762881982895,20171015
+11/4/2008,Wyoming,WY,Obama,democrat,32.540897988675,20171015
+11/4/2008,Wyoming,WY,Barr,libertarian,0.625937531905536,20171015
 11/6/2012,Alabama,AL,Romney,republican,60.545822329822800,20171015
 11/6/2012,Alabama,AL,Obama,democrat,38.359033098752500,20171015
 11/6/2012,Alaska,AK,Romney,republican,54.801577397294500,20171015
@@ -3641,10 +3642,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/2012,Georgia,GA,Romney,republican,53.329242177524500,20171015
 11/6/2012,Georgia,GA,Obama,democrat,45.507959666882100,20171015
 11/6/2012,Georgia,GA,Johnson,libertarian,1.1627981555933900,20171015
-11/6/2012,Hawaii,HI,Obama,democrat,70.147932445631900,20171015
-11/6/2012,Hawaii,HI,Romney,republican,27.682147685395900,20171015
-11/6/2012,Hawaii,HI,Johnson,libertarian,0.87839893494129100,20171015
-11/6/2012,Hawaii,HI,Stein,green,0.72833911688882100,20171015
+11/6/2012,Hawaii,HI,Obama,democrat,70.5452303558571,20171015
+11/6/2012,Hawaii,HI,Romney,republican,27.8389314856095,20171015
+11/6/2012,Hawaii,HI,Johnson,libertarian,0.883373936328063,20171015
+11/6/2012,Hawaii,HI,Stein,green,0.732464222205352,20171015
 11/6/2012,Idaho,ID,Romney,republican,64.529783495892800,20171015
 11/6/2012,Idaho,ID,Obama,democrat,32.622333559209800,20171015
 11/6/2012,Idaho,ID,Johnson,libertarian,1.449237590337800,20171015
@@ -3695,10 +3696,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/2012,Maryland,MD,Romney,republican,35.897732338945400,20171015
 11/6/2012,Maryland,MD,Johnson,libertarian,1.1153067213528300,20171015
 11/6/2012,Maryland,MD,Stein,green,0.63198867369918700,20171015
-11/6/2012,Massachusetts,MA,Obama,democrat,60.338308320216500,20171015
-11/6/2012,Massachusetts,MA,Romney,republican,37.319122315334900,20171015
-11/6/2012,Massachusetts,MA,Johnson,libertarian,0.97104575220872100,20171015
-11/6/2012,Massachusetts,MA,Stein,green-rainbow,0.64980296439038300,20171015
+11/6/2012,Massachusetts,MA,Obama,democrat,60.6512410792839,20171015
+11/6/2012,Massachusetts,MA,Romney,republican,37.5126705973009,20171015
+11/6/2012,Massachusetts,MA,Johnson,libertarian,0.976081889861218,20171015
+11/6/2012,Massachusetts,MA,Stein,green-rainbow,0.653173039557518,20171015
 11/6/2012,Michigan,MI,Obama,democrat,54.208204210518800,20171015
 11/6/2012,Michigan,MI,Romney,republican,44.710916027420200,20171015
 11/6/2012,Michigan,MI,Stein,green,0.46284465249237900,20171015
@@ -3759,14 +3760,14 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/2012,New Mexico,NM,Johnson,libertarian,3.5454821513783600,20171015
 11/6/2012,New Mexico,NM,Stein,green,0.34334577765075400,20171015
 11/6/2012,New Mexico,NM,Goode,constitution party,0.12529377690562600,20171015
-11/6/2012,New York,NY,Obama,democrat,60.760984174874500,20171015
-11/6/2012,New York,NY,Romney,republican,31.241597328231400,20171015
-11/6/2012,New York,NY,Romney,conservative,3.6819299279000200,20171015
-11/6/2012,New York,NY,Obama,working families,2.0745746955366400,20171015
-11/6/2012,New York,NY,Johnson,libertarian,0.66170337613169100,20171015
-11/6/2012,New York,NY,Stein,green,0.56002823747355500,20171015
-11/6/2012,New York,NY,Goode,constitution party,0.088101591955017900,20171015
-11/6/2012,New York,NY,Lindsay,socialism and liberation party,0.028650581498609500,20171015
+11/6/2012,New York,NY,Obama,democrat,61.3113210262498,20171015
+11/6/2012,New York,NY,Romney,republican,31.5245651329672,20171015
+11/6/2012,New York,NY,Romney,conservative,3.71527865901459,20171015
+11/6/2012,New York,NY,Obama,working families,2.09336495908139,20171015
+11/6/2012,New York,NY,Johnson,libertarian,0.667696691702693,20171015
+11/6/2012,New York,NY,Stein,green,0.565100640119395,20171015
+11/6/2012,New York,NY,Goode,constitution party,0.0888995637682809,20171015
+11/6/2012,New York,NY,Lindsay,socialism and liberation party,0.0289100814232097,20171015
 11/6/2012,North Carolina,NC,Romney,republican,50.39306410214300,20171015
 11/6/2012,North Carolina,NC,Obama,democrat,48.350968577067600,20171015
 11/6/2012,North Carolina,NC,Johnson,libertarian,0.98804271878104600,20171015
@@ -3846,13 +3847,13 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/2012,West Virginia,WV,Obama,democrat,35.539304156387300,20171015
 11/6/2012,West Virginia,WV,Johnson,libertarian,0.93998251889063600,20171015
 11/6/2012,West Virginia,WV,Stein,mountain party,0.65718231961792100,20171015
-11/6/2012,Wisconsin,WI,Obama,democrat,52.776162535154600,20171015
-11/6/2012,Wisconsin,WI,Romney,republican,45.938346713619800,20171015
-11/6/2012,Wisconsin,WI,Goode,constitution party,0.16051134421250800,20171015
-11/6/2012,Wyoming,WY,Romney,republican,68.193585187135300,20171015
-11/6/2012,Wyoming,WY,Obama,democrat,27.636906115252800,20171015
-11/6/2012,Wyoming,WY,Johnson,libertarian,2.1244430616551200,20171015
-11/6/2012,Wyoming,WY,Goode,constitution party,0.57917599052257500,20171015
+11/6/2012,Wisconsin,WI,Obama,democrat,52.8277616530126,20171015
+11/6/2012,Wisconsin,WI,Romney,republican,45.8854907747731,20171015
+11/6/2012,Wisconsin,WI,Goode,constitution party,0.160668275739351,20171015
+11/6/2012,Wyoming,WY,Romney,republican,68.6426216870566,20171015
+11/6/2012,Wyoming,WY,Obama,democrat,27.8188877423603,20171015
+11/6/2012,Wyoming,WY,Johnson,libertarian,2.13843195040572,20171015
+11/6/2012,Wyoming,WY,Goode,constitution party,0.582989709348312,20171015
 11/8/2016,Alabama,AL,Trump,republican,62.083092364409100,20171015
 11/8/2016,Alabama,AL,Clinton,democrat,34.357945757973600,20171015
 11/8/2016,Alabama,AL,Johnson,libertarian,2.0941690857748900,20171015
@@ -3910,10 +3911,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Delaware,DE,Trump,republican,41.922824339319300,20171015
 11/8/2016,Delaware,DE,Johnson,libertarian,3.3417876310604900,20171015
 11/8/2016,Delaware,DE,Stein,green,1.3820512239860500,20171015
-11/8/2016,District of Columbia,DC,Clinton,democrat,90.483883867871700,20171015
-11/8/2016,District of Columbia,DC,Trump,republican,4.0703831080540700,20171015
-11/8/2016,District of Columbia,DC,Johnson,libertarian,1.5695433096056900,20171015
-11/8/2016,District of Columbia,DC,Stein,green,1.3622330640646200,20171015
+11/8/2016,District of Columbia,DC,Clinton,democrat,90.8638215299999,20171015
+11/8/2016,District of Columbia,DC,Trump,republican,4.08747445930838,20171015
+11/8/2016,District of Columbia,DC,Johnson,libertarian,1.5761337496948,20171015
+11/8/2016,District of Columbia,DC,Stein,green,1.36795301797808,20171015
 11/8/2016,Florida,FL,Trump,republican,49.021941416590700,20171015
 11/8/2016,Florida,FL,Clinton,democrat,47.823315805805100,20171015
 11/8/2016,Florida,FL,Johnson,libertarian,2.1978996052988700,20171015
@@ -3923,11 +3924,11 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Georgia,GA,Trump,republican,50.77132605477100,20171015
 11/8/2016,Georgia,GA,Clinton,democrat,45.639983357360800,20171015
 11/8/2016,Georgia,GA,Johnson,libertarian,3.0453016138110600,20171015
-11/8/2016,Hawaii,HI,Clinton,democrat,60.98079805512900,20171015
-11/8/2016,Hawaii,HI,Trump,republican,29.439707172625600,20171015
-11/8/2016,Hawaii,HI,Johnson,libertarian,3.6452621188857200,20171015
-11/8/2016,Hawaii,HI,Stein,green,2.9102233676975900,20171015
-11/8/2016,Hawaii,HI,Castle,constitution party,1.0300138919353700,20171015
+11/8/2016,Hawaii,HI,Clinton,democrat,62.2214917342174,20171015
+11/8/2016,Hawaii,HI,Trump,republican,30.0386770085117,20171015
+11/8/2016,Hawaii,HI,Johnson,libertarian,3.7194273284888,20171015
+11/8/2016,Hawaii,HI,Stein,green,2.96943373968671,20171015
+11/8/2016,Hawaii,HI,Castle,constitution party,1.05097018909537,20171015
 11/8/2016,Idaho,ID,Trump,republican,59.261432369196900,20171015
 11/8/2016,Idaho,ID,Clinton,democrat,27.492013820979200,20171015
 11/8/2016,Idaho,ID,McMullin,independent,8.8008054994168800,20171015
@@ -3979,10 +3980,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Maryland,MD,Stein,green,1.2923134225866700,20171015
 11/8/2016,Maryland,MD,Trump,republican,0.0093117033370412400,20171015
 11/8/2016,Maryland,MD,Clinton,democrat,0.0028042967578734200,20171015
-11/8/2016,Massachusetts,MA,Clinton,democrat,59.050065096671300,20171015
-11/8/2016,Massachusetts,MA,Trump,republican,32.286202790855200,20171015
-11/8/2016,Massachusetts,MA,Johnson,libertarian,4.0847976261542100,20171015
-11/8/2016,Massachusetts,MA,Stein,green,1.4105807913470400,20171015
+11/8/2016,Massachusetts,MA,Clinton,democrat,60.0050645915876,20171015
+11/8/2016,Massachusetts,MA,Trump,republican,32.8083581400077,20171015
+11/8/2016,Massachusetts,MA,Johnson,libertarian,4.15085986780333,20171015
+11/8/2016,Massachusetts,MA,Stein,green,1.43339370342546,20171015
 11/8/2016,Michigan,MI,Trump,republican,47.497564219996100,20171015
 11/8/2016,Michigan,MI,Clinton,democrat,47.274530950866800,20171015
 11/8/2016,Michigan,MI,Johnson,libertarian,3.5867016830010500,20171015
@@ -4052,14 +4053,14 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,New Mexico,NM,Castle,constitution party,0.18964849890833100,20171015
 11/8/2016,New Mexico,NM,La Riva,socialism and liberation party,0.148311639833200,20171015
 11/8/2016,New Mexico,NM,De La Fuente,american delta party,0.059500024426325800,20171015
-11/8/2016,New York,NY,Clinton,democrat,56.13614259984900,20171015
-11/8/2016,New York,NY,Trump,republican,32.390602305742900,20171015
-11/8/2016,New York,NY,Trump,conservative,3.7476140990022700,20171015
-11/8/2016,New York,NY,Clinton,working families,1.7949178706612200,20171015
-11/8/2016,New York,NY,Johnson,independence,1.5272329803165400,20171015
-11/8/2016,New York,NY,Stein,green,1.3833996147695900,20171015
-11/8/2016,New York,NY,Johnson,libertarian,0.73623918942682500,20171015
-11/8/2016,New York,NY,Clinton,women's equality,0.46518340484414200,20171015
+11/8/2016,New York,NY,Clinton,democrat,56.7223422845415,20171015
+11/8/2016,New York,NY,Trump,republican,32.7288400253165,20171015
+11/8/2016,New York,NY,Trump,conservative,3.78674842675336,20171015
+11/8/2016,New York,NY,Clinton,working families,1.81366123707546,20171015
+11/8/2016,New York,NY,Johnson,independence,1.54318105672598,20171015
+11/8/2016,New York,NY,Stein,green,1.3978457163438,20171015
+11/8/2016,New York,NY,Johnson,libertarian,0.743927341136442,20171015
+11/8/2016,New York,NY,Clinton,women's equality,0.627433722642617,20171015
 11/8/2016,North Carolina,NC,Trump,republican,49.828094696180400,20171015
 11/8/2016,North Carolina,NC,Clinton,democrat,46.172866168209500,20171015
 11/8/2016,North Carolina,NC,Johnson,libertarian,2.7443687357167400,20171015
@@ -4144,10 +4145,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Wisconsin,WI,Castle,constitution party,0.40864875762310400,20171015
 11/8/2016,Wisconsin,WI,Moorehead,workers world party,0.059472808830200100,20171015
 11/8/2016,Wisconsin,WI,De La Fuente,american delta party,0.050467886363254500,20171015
-11/8/2016,Wyoming,WY,Trump,republican,67.398411054608400,20171015
-11/8/2016,Wyoming,WY,Clinton,democrat,21.62890087639300,20171015
-11/8/2016,Wyoming,WY,Johnson,libertarian,5.1343184382583400,20171015
-11/8/2016,Wyoming,WY,Castle,constitution party,0.78906286226563800,20171015
+11/8/2016,Wyoming,WY,Trump,republican,68.1726330765412,20171015
+11/8/2016,Wyoming,WY,Clinton,democrat,21.8773573474979,20171015
+11/8/2016,Wyoming,WY,Johnson,libertarian,5.19329760913664,20171015
+11/8/2016,Wyoming,WY,Castle,constitution party,0.798127020234591,20171015
 11/3/2020,Alabama,AL,Trump,republican,62.03,20201214
 11/3/2020,Alabama,AL,Biden,democrat,36.57,20201214
 11/3/2020,Alabama,AL,Jorgensen,libertarian,1.08,20201214
