@@ -1124,6 +1124,7 @@ function altClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
+    updateMapElectoralVoteText()
     displayPartyTotals(getPartyTotals())
   }
 }
@@ -1208,7 +1209,7 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
 
     regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
-    if (regionData.disabled == true && (currentMapSource.getID() != currentCustomMapSource.getID() || !currentMapType.getMapSettingValue("mapCurrentSeats")))
+    if (regionData.disabled == true && (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapType.getMapSettingValue("mapCurrentSeats") === false))
     {
       regionDiv.css('pointer-events', 'none')
     }
