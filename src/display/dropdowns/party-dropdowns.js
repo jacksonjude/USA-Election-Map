@@ -428,13 +428,18 @@ function createNewCustomParty()
 {
   // Find first color which is not already in use by another dropdown party; Default to "gray"
   var colorIDToUse = Object.keys(PoliticalPartyColors).find(colorID => !dropdownPoliticalPartyIDs.some(partyID => politicalParties[partyID] != null && JSON.stringify(politicalParties[partyID].getMarginColors()) == JSON.stringify(PoliticalPartyColors[colorID]))) || "gray"
-  var customPartyNumber = dropdownPoliticalPartyIDs.reduce((customCount, partyID) => customCount + (partyID.startsWith(customPartyIDPrefix) ? 1 : 0), 1)
+
+  var customPartyNumber = 1
+  while (Object.keys(politicalParties).includes(customPartyIDPrefix + customPartyNumber))
+  {
+    customPartyNumber++
+  }
 
   var customPoliticalParty = new PoliticalParty(
     customPartyIDPrefix + customPartyNumber,
     ["Custom"],
     "Custom",
-    "Custom-" + customPartyNumber,
+    "Custom" + (customPartyNumber == 1 ? "" : " " + customPartyNumber),
     cloneObject(PoliticalPartyColors[colorIDToUse]),
     defaultMarginNames
   )
