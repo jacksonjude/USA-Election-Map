@@ -262,32 +262,32 @@ var USAPresidentialMapType = new MapType(
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
     &#x2022; Select Source / <span style='color: #ec7039;'>1</span>, <span style='color: #ec7039;'>2</span>, <span style='color: #4a84ff;'>3</span>, <span style='color: #0c71c0;'>4</span>, <span style='color: #aaa;'>5</span>, 6 keys: Change map source<br>
-    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
-    &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1-6 keys: Force source <span style='color: #49BD49;'>update</span><br>
     &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select data map date<br>
+    &#x2022; Slider / arrow keys: Select map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -5, Left: -1, Right: +1, Up: +5<br>
     &#x2022; Click state: View more poll / projection / result data<br>
     <br>
     &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
+    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
     &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
     &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Shift click state: Enter specific margin<br>
+    &#x2022; Alt click state: Disable state<br>
     &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
+    <br>
+    &#x2022; Party buttons: Click to edit cadndiate name<br>
+    &#x2022; Left / right click preset button: Cycle preset colors<br>
+    &#x2022; Left click margin color: Select with color picker<br>
+    &#x2022; Right click margin color: Enter exact hex value<br>
     <br>
     &#x2022; Source checkbox: Select map source to compare<br>
     &#x2022; Shift + 1-5 keys: Select map source to compare<br>
-    &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
-    &#x2022; Left/Right arrow keys: Adjust selected slider<br>
+    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
     <br>
     &#x2022; C key: Toggle compare dropdown selection<br>
     &#x2022; 1 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #aaa;'>Past Results</span><br>
     &#x2022; 2 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Projection</span><br>
     &#x2022; 3 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Poll Avg</span><br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle option<br>
-    &#x2022; Latest Tick: Include tick for latest date on slider<br>
     <br>
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>
@@ -349,26 +349,29 @@ var USASenateMapType = new MapType(
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
     &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #BCBCBC;'>2</span>, <span style='color: #0A5EA0;'>3</span>, <span style='color: #aaa;'>4</span>, 5 keys: Change map source<br>
-    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
-    &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1-4 keys: Force source <span style='color: #49BD49;'>update</span><br>
     &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select data map date<br>
+    &#x2022; Slider / arrow keys: Select map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -3, Left: -1, Right: +1, Up: +3<br>
     &#x2022; Click state: View more poll / projection / result data<br>
     <br>
     &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
+    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
     &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
     &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Shift click state: Enter specific margin<br>
+    &#x2022; Alt click state: Disable state<br>
     &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
     <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-2 keys: Select map source to compare<br>
-    &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
-    &#x2022; Left/Right arrow keys: Adjust selected slider<br>
+    &#x2022; Party buttons: Click to edit cadndiate name<br>
+    &#x2022; Left / right click preset button: Cycle preset colors<br>
+    &#x2022; Left click margin color: Select with color picker<br>
+    &#x2022; Right click margin color: Enter exact hex value<br>
     <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle option<br>
+    &#x2022; Source checkbox: Select map source to compare<br>
+    &#x2022; Shift + 1-4 keys: Select map source to compare<br>
+    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
+    <br>
+    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
     &#x2022; Map Current Seats: Show seats not up for election<br>
     &#x2022; Pie Current Seats: Show seats not up for election<br>
     &#x2022; Seat Arrangement:<br>
@@ -376,9 +379,6 @@ var USASenateMapType = new MapType(
     &nbsp;&nbsp;&nbsp;* By Class (specific seat for the state: <span style='color: #D93314;'>1</span>/<span style='color: #F0A300;'>2</span>/<span style='color: #E8D500;'>3</span>)<br>
     &nbsp;&nbsp;&nbsp;** <span style='color: #D93314;'>1: 2018</span>, <span style='color: #F0A300;'>2: 2020</span>, <span style='color: #E8D500;'>3: 2016/2022</span><br>
     &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    &nbsp;&nbsp;&nbsp;* Includes party flips and runoffs<br>
-    &#x2022; Latest Tick: Include tick for latest date on slider<br>
-    <!-- &nbsp;&nbsp;&nbsp;* Will set to maximum on source change when selected<br> -->
     <br>
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>
@@ -459,32 +459,32 @@ var USAGovernorMapType = new MapType(
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
     &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
-    &#x2022; Source download buttons: <span style='color: #49BD49;'>Update</span> selected source<br>
-    &#x2022; S key: Toggle source dropdown selection<br>
-    &#x2022; 1-3 keys: Force source <span style='color: #49BD49;'>update</span><br>
     &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select data map date<br>
+    &#x2022; Slider / arrow keys: Select map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
     &#x2022; Click state: View more poll / projection / result data<br>
     <br>
     &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / <span style='color: #8aafff;'>1</span>, 2, <span style='color: #ff8b98;'>3</span> keys: Select party to fill<br>
+    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
     &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
     &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Shift click state: Enter specific margin<br>
+    &#x2022; Alt click state: Disable state<br>
     &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
     <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-2 keys: Select map source to compare<br>
-    &#x2022; Up/Down arrow keys: Select source slider to adjust<br>
-    &#x2022; Left/Right arrow keys: Adjust selected slider<br>
+    &#x2022; Party buttons: Click to edit cadndiate name<br>
+    &#x2022; Left / right click preset button: Cycle preset colors<br>
+    &#x2022; Left click margin color: Select with color picker<br>
+    &#x2022; Right click margin color: Enter exact hex value<br>
     <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle option<br>
+    &#x2022; Source checkbox: Select map source to compare<br>
+    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
+    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
+    <br>
+    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
     &#x2022; Map Current Seats: Show seats not up for election<br>
     &#x2022; Pie Current Seats: Show seats not up for election<br>
     &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    &nbsp;&nbsp;&nbsp;* Includes party flips and runoffs<br>
-    &#x2022; Latest Tick: Include tick for latest date on slider<br>
-    <!-- &nbsp;&nbsp;&nbsp;* Will set to maximum on source change when selected<br> -->
     <br>
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>

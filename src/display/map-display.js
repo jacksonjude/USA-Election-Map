@@ -233,6 +233,7 @@ function resizeElements(initilizedPieChart)
   var windowWidth = $(window).width()
 
   //1.0*svgdatawidth*zoom/windowwidth == 0.6
+  const defaultMapZoom = 120.634/100
   var mapZoom = 0.62*windowWidth/$("#svgdata").width()
   var topnavZoom = 0.85*mapZoom
   if (navigator.userAgent.indexOf("Firefox") != -1)
@@ -243,6 +244,7 @@ function resizeElements(initilizedPieChart)
   else
   {
     $("#mapzoom").css("zoom", (mapZoom*100) + "%")
+    $("#helpbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
     $(".topnav").css("zoom", (topnavZoom*100) + "%")
   }
@@ -274,20 +276,6 @@ function resizeElements(initilizedPieChart)
   $("#totalsPieChart").css("background-position", "center")
   $("#totalsPieChart").css("background-repeat", "no-repeat")
 
-  // const creditboxh3DefaultSize = 23
-  // const creditboxh5DefaultSize = 17
-  // const creditboxImageDefaultSize = 20
-
-  // $("#creditbox h3").css('font-size', (creditboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
-  // $("#creditbox h5").css('font-size', (creditboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
-  // $("#creditbox img:not(.large-image)").css('width', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
-  // $("#creditbox img:not(.large-image)").css('height', (creditboxImageDefaultSize*mapZoom/defaultMapZoom) + "px")
-
-  const helpboxh3DefaultSize = 23
-  const helpboxh5DefaultSize = 15
-
-  const defaultMapZoom = 120.634/100
-
   $("#helpboxcontainer").css('width', $("#totalsPieChart").width())
   $("#partyDropdownsBoxContainer").css('width', $("#totalsPieChart").width())
   $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
@@ -295,10 +283,6 @@ function resizeElements(initilizedPieChart)
   $("#discordInvite").css("width", $("#totalsPieChart").width())
   $("#discordInvite").css("border-radius", "5px")
   $("#discordInvite").css("border", "1px solid gray")
-  // $("#discordInvite").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
-
-  $("#helpbox h3").css('font-size', (helpboxh3DefaultSize*mapZoom/defaultMapZoom) + "px")
-  $("#helpbox h5").css('font-size', (helpboxh5DefaultSize*mapZoom/defaultMapZoom) + "px")
 
   if (initilizedPieChart == true || initilizedPieChart == null)
   {
