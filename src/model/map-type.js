@@ -16,14 +16,15 @@ class MapType
 
     this.regionNameToID = regionNameToID
     this.regionsToHideOnDisable = regionsToHideOnDisable
-    this.mapSettingsLayout = mapSettingsLayout
+    this.mapSettingsLayout = mapSettingsLayout.concat(globalMapSettings)
 
     this.currentMapSourceID = getCookie(this.id + "-currentMapSource")
 
     this.currentMapSettings = {}
-    for (var settingNum in mapSettingsLayout)
+    for (var settingNum in this.mapSettingsLayout)
     {
-      this.currentMapSettings[mapSettingsLayout[settingNum].id] = getCookie(this.id + "-" + mapSettingsLayout[settingNum].id) || mapSettingsLayout[settingNum].defaultValue
+      var isGlobal = globalMapSettings.some(setting => setting.id == this.mapSettingsLayout[settingNum].id)
+      this.currentMapSettings[this.mapSettingsLayout[settingNum].id] = getCookie((isGlobal ? "" : (this.id + "-")) + this.mapSettingsLayout[settingNum].id) || this.mapSettingsLayout[settingNum].defaultValue
     }
   }
 
@@ -164,7 +165,7 @@ class MapType
 
   getMapSettings()
   {
-    return this.currentMapSettings
+    return mergeObject(this.currentMapSettings, currentGlobalMapSettings)
   }
 
   setMapSettings(currentMapSettings)
@@ -173,7 +174,13 @@ class MapType
 
     for (var settingID in this.currentMapSettings)
     {
-      setCookie(this.id + "-" + settingID, this.currentMapSettings[settingID])
+      var isGlobal = globalMapSettings.some(setting => setting.id == settingID)
+      setCookie((isGlobal ? "" : (this.id + "-")) + settingID, this.currentMapSettings[settingID])
+
+      if (isGlobal)
+      {
+        currentGlobalMapSettings[settingID] = this.currentMapSettings[settingID]
+      }
     }
   }
 
@@ -228,18 +235,49 @@ const regionEVArray = {
   1850: {"AL":9, "AK":0, "AZ":0, "AR":4, "CA":4, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":10, "HI":0, "ID":0, "IL":11, "IN":13, "IA":4, "KS":0, "KY":12, "LA":6, "ME-D1":0, "ME-D2":0, "ME-AL":8, "MD":8, "MA":13, "MI":6, "MN":4, "MS":7, "MO":9, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":5, "NJ":7, "NM":0, "NY":35, "NC":10, "ND":0, "OH":23, "OK":0, "OR":3, "PA":27, "RI":4, "SC":8, "SD":0, "TN":12, "TX":4, "UT":0, "VT":5, "VA":15, "WA":0, "WV":0, "WI":5, "WY":0}
 }
 
-var MapSettingType =
+const MapSettingType =
 {
   optionCycle: 0,
   numericValue: 1, // TODO: Implement other setting types
   stringValue: 2
 }
 
-var MapSettingReloadType =
+const MapSettingReloadType =
 {
   none: 0,
   display: 1,
   data: 2
+}
+
+var globalMapSettings =
+[
+  {id: "mapFlipStates", title: "Flip States", type: MapSettingType.optionCycle, options:
+    [
+      {id: "show", title: "Shown", value: true},
+      {id: "hide", title: "Hidden", value: false}
+    ],
+    shouldShowActive: (value) => {
+      return value
+    },
+  defaultValue: "hide", reloadType: MapSettingReloadType.display},
+  {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
+    [
+      {id: "enabled", title: "Enabled", value: true},
+      {id: "disabled", title: "Disabled", value: false}
+    ],
+  defaultValue: "disabled", reloadType: MapSettingReloadType.data},
+  {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+    [
+      {id: "enabled", title: "Enabled", value: true},
+      {id: "disabled", title: "Disabled", value: false}
+    ],
+  defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+]
+
+var currentGlobalMapSettings = {}
+for (var settingNum in globalMapSettings)
+{
+  currentGlobalMapSettings[globalMapSettings[settingNum].id] = getCookie(globalMapSettings[settingNum].id) || globalMapSettings[settingNum].defaultValue
 }
 
 var USAPresidentialMapType = new MapType(
@@ -315,19 +353,7 @@ var USAPresidentialMapType = new MapType(
       shouldShowActive: (value) => {
         return value
       },
-    defaultValue: "disabled", reloadType: MapSettingReloadType.display},
-    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
-    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+    defaultValue: "disabled", reloadType: MapSettingReloadType.display}
   ]
 )
 
@@ -425,19 +451,7 @@ var USASenateMapType = new MapType(
       shouldShowActive: (value) => {
         return value
       },
-    defaultValue: "hide", reloadType: MapSettingReloadType.data},
-    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
-    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+    defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ]
 )
 
@@ -522,19 +536,7 @@ var USAGovernorMapType = new MapType(
       shouldShowActive: (value) => {
         return value
       },
-    defaultValue: "hide", reloadType: MapSettingReloadType.data},
-    {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "disabled", reloadType: MapSettingReloadType.data},
-    {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
-      [
-        {id: "enabled", title: "Enabled", value: true},
-        {id: "disabled", title: "Disabled", value: false}
-      ],
-    defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+    defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ]
 )
 

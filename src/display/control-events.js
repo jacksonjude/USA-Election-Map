@@ -481,16 +481,19 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
-  $(div).css('stroke', regionSelectColor)
-  for (var linkedRegionSetNum in linkedRegions)
+  if (!(currentMapType.getMapSettingValue("mapFlipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
-    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    $(div).css('stroke', regionSelectColor)
+    for (var linkedRegionSetNum in linkedRegions)
     {
-      if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
+      for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
       {
-        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+        if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionSelectColor)
+          for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+          {
+            $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionSelectColor)
+          }
         }
       }
     }
@@ -507,16 +510,19 @@ function mouseLeftRegion(div)
 
   $("#regionboxcontainer").trigger('hide')
 
-  $(div).css('stroke', regionDeselectColor)
-  for (var linkedRegionSetNum in linkedRegions)
+  if ($(div).css('stroke') != regionDeselectColor)
   {
-    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    $(div).css('stroke', regionDeselectColor)
+    for (var linkedRegionSetNum in linkedRegions)
     {
-      if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
+      for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
       {
-        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+        if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
         {
-          $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionDeselectColor)
+          for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+          {
+            $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionDeselectColor)
+          }
         }
       }
     }

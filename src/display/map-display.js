@@ -398,8 +398,6 @@ function addDivEventListeners()
 
 function addTextBoxSpacingCSS()
 {
-  var browserName = bowser.getParser(navigator.userAgent).getResult().browser.name
-
   switch (browserName)
   {
     case "Chrome":
@@ -611,8 +609,9 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
+    regionData.flip = currentMapDataForDate[regionNum].flip
 
-    updateRegionFillColors(regionsToFill, currentMapDataForDate[regionNum], false)
+    updateRegionFillColors(regionsToFill, regionData, false)
   }
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
@@ -1155,7 +1154,7 @@ function getBaseRegionID(regionID)
   return {baseID: regionID, linkedIDs: linkedRegionIDs}
 }
 
-function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
+async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
   var fillColor
   var shouldHide = false
@@ -1182,7 +1181,26 @@ function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieCh
   }
   else
   {
-    fillColor = politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(regionData.margin, regionData.partyID)]
+    var marginIndex = getMarginIndexForValue(regionData.margin, regionData.partyID)
+    fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
+
+    if (currentMapType.getMapSettingValue("mapFlipStates") && regionData.flip)
+    {
+      var patternID = regionData.partyID + "-" + marginIndex + "-flip-pattern"
+      if ($("#" + patternID).length == 0)
+      {
+        var patternHTML = '<pattern id="' + patternID + '" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
+        patternHTML += '<rect x1="0" y1="0" width="10" height="10" style="fill: ' + fillColor + ';"></rect>'
+        patternHTML += '<line x1="0" y1="0" x2="0" y2="10" style="stroke: ' + multiplyBrightness(fillColor, 0.77) + '; stroke-width: 10"></line>'
+        patternHTML += '</pattern>'
+
+        var tempDiv = document.createElement('div');
+        document.getElementById("svgdefinitions").appendChild(tempDiv)
+        tempDiv.outerHTML = patternHTML;
+      }
+
+      fillColor = "url(#" + patternID + ")"
+    }
   }
 
   for (var regionIDNum in regionIDsToUpdate)

@@ -932,7 +932,8 @@ function createPresidentialMapSources()
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
 
-        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null}
+        var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
+        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
       }
 
       filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -940,6 +941,33 @@ function createPresidentialMapSources()
     }
 
     return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
+  }
+
+  function mostRecentWinner(mapData, dateToStart, regionID)
+  {
+    var reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
+
+    var startYear = (new Date(parseInt(dateToStart))).getFullYear()
+
+    for (var dateNum in reversedMapDates)
+    {
+      if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
+
+      var currentYear = (new Date(parseInt(reversedMapDates[dateNum]))).getFullYear()
+
+      if (startYear-currentYear > 4)
+      {
+        return TossupParty.getID()
+      }
+
+      var mapDataFromDate = mapData[reversedMapDates[dateNum]]
+      if (regionID in mapDataFromDate)
+      {
+        return mapDataFromDate[regionID].partyID
+      }
+    }
+
+    return TossupParty.getID()
   }
 
   function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
@@ -1476,7 +1504,7 @@ function createSenateMapSources()
             partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
           }
 
-          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null}
+          filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection) != greatestMarginPartyID}
         }
       }
 
@@ -1564,11 +1592,13 @@ function createSenateMapSources()
     return {mapData: fullFilteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
   }
 
-  function mostRecentWinner(mapData, dateToStart, regionID, seatClass)
+  function mostRecentWinner(mapData, dateToStart, regionID, seatClass, isRunoffElection)
   {
     var reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
 
     var startYear = (new Date(parseInt(dateToStart))).getFullYear()
+
+    var shouldSkipNext = isRunoffElection || false // Skip first result if runoff (which should be primary)
 
     for (var dateNum in reversedMapDates)
     {
@@ -1584,11 +1614,25 @@ function createSenateMapSources()
       var mapDataFromDate = mapData[reversedMapDates[dateNum]]
       if (regionID in mapDataFromDate && mapDataFromDate[regionID].seatClass == seatClass)
       {
-        return mapDataFromDate[regionID].partyID
+        if (shouldSkipNext)
+        {
+          shouldSkipNext = false
+        }
+        else
+        {
+          return mapDataFromDate[regionID].partyID
+        }
       }
       else if ((regionID + "-S") in mapDataFromDate && mapDataFromDate[regionID + "-S"].seatClass == seatClass)
       {
-        return mapDataFromDate[regionID + "-S"].partyID
+        if (shouldSkipNext)
+        {
+          shouldSkipNext = false
+        }
+        else
+        {
+          return mapDataFromDate[regionID + "-S"].partyID
+        }
       }
     }
 
@@ -2065,7 +2109,7 @@ function createGovernorMapSources()
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
 
-        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null}
+        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]) != greatestMarginPartyID}
       }
 
       filteredMapData[mapDates[dateNum]] = filteredDateData
