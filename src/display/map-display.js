@@ -186,6 +186,8 @@ function loadMapSVGFile()
     $('#mapzoom').load(currentMapType.getSVGPath(), function() {
       setOutlineDivProperties()
       updateMapElectoralVoteText()
+      generateFlipPatternsFromPartyMap(politicalParties)
+
       resolve()
     })
   })
@@ -1186,18 +1188,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
     if (currentMapType.getMapSettingValue("mapFlipStates") && regionData.flip)
     {
-      var patternID = regionData.partyID + "-" + marginIndex + "-flip-pattern"
-      if ($("#" + patternID).length == 0)
-      {
-        var patternHTML = '<pattern id="' + patternID + '" width="10" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
-        patternHTML += '<rect x1="0" y1="0" width="10" height="10" style="fill: ' + fillColor + ';"></rect>'
-        patternHTML += '<line x1="0" y1="0" x2="0" y2="10" style="stroke: ' + multiplyBrightness(fillColor, 0.77) + '; stroke-width: 10"></line>'
-        patternHTML += '</pattern>'
-
-        var tempDiv = document.createElement('div');
-        document.getElementById("svgdefinitions").appendChild(tempDiv)
-        tempDiv.outerHTML = patternHTML;
-      }
+      var patternID = generateFlipPattern(regionData.partyID, marginIndex)
 
       fillColor = "url(#" + patternID + ")"
     }
@@ -1240,6 +1231,37 @@ function getMarginIndexForValue(margin, partyID)
     if (Math.abs(margin) >= marginValues[marginName])
     {
       return marginName
+    }
+  }
+}
+
+function generateFlipPattern(partyID, margin)
+{
+  var fillColor = politicalParties[partyID].getMarginColors()[margin]
+  var patternID = partyID + "-" + margin + "-flip-pattern"
+
+  if ($("#" + patternID).length == 0)
+  {
+    var patternHTML = '<pattern id="' + patternID + '" width="5" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
+    patternHTML += '<rect x1="0" y1="0" width="5" height="10" style="fill: ' + fillColor + ';"></rect>'
+    patternHTML += '<line x1="0" y1="0" x2="0" y2="10" style="stroke: ' + multiplyBrightness(fillColor, 0.8) + '; stroke-width: 5"></line>'
+    patternHTML += '</pattern>'
+
+    var tempDiv = document.createElement('div');
+    document.getElementById("svgdefinitions").appendChild(tempDiv)
+    tempDiv.outerHTML = patternHTML;
+  }
+
+  return patternID
+}
+
+function generateFlipPatternsFromPartyMap(partyMap)
+{
+  for (var partyID in partyMap)
+  {
+    for (var margin in partyMap[partyID].getMarginColors())
+    {
+      generateFlipPattern(partyID, margin)
     }
   }
 }
