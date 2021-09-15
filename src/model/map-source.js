@@ -352,6 +352,11 @@ class MapSource
     return this.addDecimalPadding
   }
 
+  isCustom()
+  {
+    return this.isCustomMap
+  }
+
   getShouldShowVoteshare()
   {
     return this.shouldShowVoteshare

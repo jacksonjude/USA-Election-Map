@@ -289,7 +289,7 @@ var USAPresidentialMapType = new MapType(
   538,
   function(decade, regionID, disabled)
   {
-    if (currentMapSource.getID() == currentCustomMapSource.getID() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
+    if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
     if (currentMapSource.getShouldSetDisabledWorthToZero() && disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },

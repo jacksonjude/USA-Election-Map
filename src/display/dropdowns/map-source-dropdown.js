@@ -37,7 +37,7 @@ function createMapSourceDropdownItems()
 
     $("#mapSourcesDropdownContainer").append(divStringToAppend)
 
-    if (mapSourceID == currentCustomMapSource.getID())
+    if (mapSources[mapSourceID].isCustom())
     {
       var customMapSourceID = mapSourceID
       $("#" + mapSourceIDNoSpace + "-download-icon")[0].addEventListener('click', function(e) {

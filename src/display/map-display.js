@@ -668,7 +668,7 @@ function updateNavBarForNewSource(revertToDefault)
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentMapState == MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
+  if (currentMapState == MapState.editing && currentMapSource.isCustom())
   {
     $("#editDoneButton").html("Done")
   }
@@ -676,7 +676,7 @@ function updateNavBarForNewSource(revertToDefault)
   {
     toggleEditing(MapState.viewing)
   }
-  else if (currentMapState != MapState.editing && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (currentMapState != MapState.editing && currentMapSource.isCustom())
   {
     $("#editDoneButton").html("Edit")
   }
@@ -691,7 +691,7 @@ function updateNavBarForNewSource(revertToDefault)
   {
     updateCompareMapSlidersVisibility(false)
   }
-  else if (showingCompareMap && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (showingCompareMap && currentMapSource.isCustom())
   {
     updateCompareMapSlidersVisibility(true)
   }
@@ -878,7 +878,7 @@ async function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "block")
 
-    var currentMapIsCustom = (currentMapSource.getID() == currentCustomMapSource.getID())
+    var currentMapIsCustom = (currentMapSource.isCustom())
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
 
     if (!currentMapIsCustom)
@@ -900,7 +900,7 @@ async function toggleEditing(stateToSet)
     break
 
     case MapState.viewing:
-    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    if (currentMapSource.isCustom())
     {
       $("#editDoneButton").html("Edit")
     }
@@ -920,7 +920,7 @@ async function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "none")
 
-    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    if (currentMapSource.isCustom())
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       displayPartyTotals(getPartyTotals(), true)
@@ -1080,7 +1080,7 @@ function shiftClickRegion(div)
       $("#regionboxcontainer").trigger('hide')
     }
   }
-  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (currentMapState == MapState.viewing && currentMapSource.isCustom())
   {
     editingRegionEVs = !editingRegionEVs
     updateRegionBox(currentRegionID)
@@ -1295,7 +1295,7 @@ function getPartyTotals()
 function getCurrentDecade()
 {
   var dateForDecade
-  if (currentMapSource.getID() == currentCustomMapSource.getID() && showingCompareMap)
+  if (currentMapSource.isCustom() && showingCompareMap)
   {
     var compareDate = mapSources[compareMapSourceIDArray[0]].getMapDates()[$("#firstCompareDataMapDateSlider")[0].value-1]
     if (compareDate != null)
@@ -1343,7 +1343,7 @@ function updateRegionBox(regionID)
   }
 
   var roundedMarginValue = getRoundedMarginValue(regionData.margin)
-  var regionMarginString = (((currentMapSource.getID() == currentCustomMapSource.getID()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +"
+  var regionMarginString = (((currentMapSource.isCustom()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +"
 
   if (editingRegionMarginValue)
   {

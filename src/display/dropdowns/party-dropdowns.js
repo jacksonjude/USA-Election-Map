@@ -56,7 +56,7 @@ function createPartyDropdowns()
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + (currentMapSource.getID() == currentCustomMapSource.getID() ? partyDropdownHeightExtended : partyDropdownHeight) + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + (currentMapSource.isCustom() ? partyDropdownHeightExtended : partyDropdownHeight) + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
 
     if (!shouldReverseOrder)
@@ -72,7 +72,7 @@ function createPartyDropdowns()
     var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
 
-    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    if (currentMapSource.isCustom())
     {
       dropdownDiv += '<div class="dropdown-separator"></div>'
 
@@ -353,7 +353,7 @@ function selectParty(div)
       $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
     }
   }
-  else if (currentMapState == MapState.viewing && currentMapSource.getID() == currentCustomMapSource.getID())
+  else if (currentMapState == MapState.viewing && currentMapSource.isCustom())
   {
     toggleCandidateNameEditing(partyID, div)
   }
@@ -389,7 +389,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
   displayPartyTotals(getPartyTotals())
   if (shouldRefreshMap && showingDataMap && !skipReload)
   {
-    if (currentMapSource.getID() == currentCustomMapSource.getID())
+    if (currentMapSource.isCustom())
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap(null, null, null, false)
@@ -501,7 +501,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
       createPartyDropdowns()
     }
   }
-  else if ((currentMapSource.getID() == currentCustomMapSource.getID() && currentMapState != MapState.editing) || overrideCreateDropdowns)
+  else if ((currentMapSource.isCustom() && currentMapState != MapState.editing) || overrideCreateDropdowns)
   {
     if (currentMapSource.getDropdownPartyIDs() != null)
     {
