@@ -67,6 +67,7 @@ Then open the address provided in the Terminal window (by default, it seems to b
 - [ ] Past house election results
 - [ ] Presidential election results by county
 - [ ] National popular vote totals for past elections
+- [ ] Profiles and custom map sharing
 - [ ] Popularity rating source (by state)
 - [ ] Custom countdown timer events
 - [ ] 2024 presidential primaries
