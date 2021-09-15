@@ -28,6 +28,31 @@ class MapSource
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
   }
 
+  // id,
+  // name,
+  // dataURL,
+  // homepageURL,
+  // iconURL,
+  // columnMap,
+  // cycleYear,
+  // candidateNameToPartyIDMap,
+  // shortCandidateNameOverride,
+  // incumbentChallengerPartyIDs,
+  // regionNameToIDMap,
+  // ev2016,
+  // regionIDToLinkMap,
+  // shouldFilterOutDuplicateRows,
+  // addDecimalPadding,
+  // organizeMapDataFunction,
+  // customOpenRegionLinkFunction,
+  // convertMapDataRowToCSVFunction,
+  // isCustomMap,
+  // shouldClearDisabled,
+  // shouldShowVoteshare,
+  // voteshareCutoffMargin,
+  // overrideSVGPath,
+  // shouldSetDisabledWorthToZero
+
   loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
     var self = this
@@ -1059,114 +1084,87 @@ function createPresidentialMapSources()
   const ev2016 = {"AL":republicanPartyID, "AK":republicanPartyID, "AZ":republicanPartyID, "AR":republicanPartyID, "CA":democraticPartyID, "CO":democraticPartyID, "CT":democraticPartyID, "DE":democraticPartyID, "DC":democraticPartyID, "FL":republicanPartyID, "GA":republicanPartyID, "HI":democraticPartyID, "ID":republicanPartyID, "IL":democraticPartyID, "IN":republicanPartyID, "IA":republicanPartyID, "KS":republicanPartyID, "KY":republicanPartyID, "LA":republicanPartyID, "ME-D1":democraticPartyID, "ME-D2":republicanPartyID, "ME-AL":democraticPartyID, "MD":democraticPartyID, "MA":democraticPartyID, "MI":republicanPartyID, "MN":democraticPartyID, "MS":republicanPartyID, "MO":republicanPartyID, "MT":republicanPartyID, "NE-DrepublicanPartyID":republicanPartyID, "NE-D2":republicanPartyID, "NE-D3":republicanPartyID, "NE-AL":republicanPartyID, "NV":democraticPartyID, "NH":democraticPartyID, "NJ":democraticPartyID, "NM":democraticPartyID, "NY":democraticPartyID, "NC":republicanPartyID, "ND":republicanPartyID, "OH":republicanPartyID, "OK":republicanPartyID, "OR":democraticPartyID, "PA":republicanPartyID, "RI":democraticPartyID, "SC":republicanPartyID, "SD":republicanPartyID, "TN":republicanPartyID, "TX":republicanPartyID, "UT":republicanPartyID, "VT":democraticPartyID, "VA":democraticPartyID, "WA":democraticPartyID, "WV":republicanPartyID, "WI":republicanPartyID, "WY":republicanPartyID}
 
   const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
-  const regionNameToIDJHK = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine CD-1":"ME-D1", "Maine CD-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska CD-1":"NE-D1", "Nebraska CD-2":"NE-D2", "Nebraska CD-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
   const regionNameToIDCook = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Washington DC":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine 1st CD":"ME-D1", "Maine 2nd CD":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska 1st CD":"NE-D1", "Nebraska 2nd CD":"NE-D2", "Nebraska 3rd CD":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
   const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME-AL", "Maine 1st CD":"ME-D1", "Maine 2nd CD":"ME-D2", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE-AL", "Nebraska 1st CD":"NE-D1", "Nebraska 2nd CD": "NE-D2", "Nebraska 3rd CD":"NE-D3", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
   const regionNameToIDCustom = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
 
   var FiveThirtyEightPollAverageMapSource = new MapSource(
-    "538-2020-Presidential-PollAvg",
-    "538 Poll Avg",
-    "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv",
-    "https://projects.fivethirtyeight.com/polls/president-general/",
-    "./assets/fivethirtyeight-large.png",
+    "538-2020-Presidential-PollAvg", // id
+    "538 Poll Avg", // name
+    "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv", // dataURL
+    "https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
+    "./assets/fivethirtyeight-large.png", // iconURL
     {
       date: "modeldate",
       region: "state",
       candidateName: "candidate_name",
       percentAdjusted: "pct_trend_adjusted"
-    },
-    2020,
-    partyCandiateFullNames,
-    partyIDToCandidateLastNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDFiveThirtyEight,
-    ev2016,
-    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
-    false,
-    true,
-    doubleLineMarginFilterFunction,
-    null
+    }, // columnMap
+    2020, // cycleYear
+    partyCandiateFullNames, // candidateNameToPartyIDMap
+    partyIDToCandidateLastNames, // shortCandidateNameOverride
+    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
+    regionNameToIDFiveThirtyEight, // regionNameToIDMap
+    ev2016, // ev2016
+    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineMarginFilterFunction, // organizeMapDataFunction
+    null // customOpenRegionLinkFunction
   )
 
   var FiveThirtyEightProjectionMapSource = new MapSource(
-    "538-2020-Presidential-Projection",
-    "538 Projection",
-    "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv",
-    "https://projects.fivethirtyeight.com/2020-election-forecast/",
-    "./assets/fivethirtyeight-large.png",
+    "538-2020-Presidential-Projection", // id
+    "538 Projection", // name
+    "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", // dataURL
+    "https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
+    "./assets/fivethirtyeight-large.png", // iconURL
     {
       date: "modeldate",
       region: "state",
       margin: "margin",
       incumbentWinChance: "winstate_inc",
       challengerWinChance: "winstate_chal"
-    },
-    2020,
-    partyCandiateLastNames,
-    partyIDToCandidateLastNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDFiveThirtyEight,
-    ev2016,
-    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
-    false,
-    true,
-    singleLineMarginFilterFunction,
-    null
-  )
-
-  var JHKProjectionMapSource = new MapSource(
-    "JHK-2020-Presidential",
-    "JHK",
-    "https://data.jhkforecasts.com/2020-presidential.csv",
-    "https://projects.jhkforecasts.com/presidential-forecast/",
-    "./assets/jhk-large.png",
-    {
-      date: "forecastDate",
-      region: "state",
-      candidateName: "candidate",
-      percentAdjusted: "vote",
-      winChance: "win",
-    },
-    2020,
-    partyCandiateFullNames,
-    partyIDToCandidateLastNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDJHK,
-    ev2016,
-    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-cd-1", "ME-D2":"maine-cd-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-cd-1", "NE-D2":"nebraska-cd-2", "NE-D3":"nebraska-cd-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"},
-    true,
-    true,
-    doubleLineMarginFilterFunction,
-    null
+    }, // columnMap
+    2020, // cycleYear
+    partyCandiateLastNames, // candidateNameToPartyIDMap
+    partyIDToCandidateLastNames, // shortCandidateNameOverride
+    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
+    regionNameToIDFiveThirtyEight, // regionNameToIDMap
+    ev2016, // ev2016
+    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    singleLineMarginFilterFunction, // organizeMapDataFunction
+    null // customOpenRegionLinkFunction
   )
 
   var CookProjectionMapSource = new MapSource(
-    "Cook-2020-Presidential",
-    "Cook Political",
-    "./csv-sources/cook-pres-2020/cook-latest.csv",
-    "https://map.jacksonjude.com/csv-sources/cook-pres-2020/",
-    "./assets/cookpolitical-large.png",
+    "Cook-2020-Presidential", // id
+    "Cook Political", // name
+    "./csv-sources/cook-pres-2020/cook-latest.csv", // dataURL
+    "https://map.jacksonjude.com/csv-sources/cook-pres-2020/", // homepageURL
+    "./assets/cookpolitical-large.png", // iconURL
     {
       date: "date",
       region: "region",
       margin: "margin"
-    },
-    2020,
-    partyCandiateLastNames,
-    partyIDToCandidateLastNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDCook,
-    ev2016,
-    null,
-    false,
-    false,
-    singleLineMarginFilterFunction,
+    }, // columnMap
+    2020, // cycleYear
+    partyCandiateLastNames, // candidateNameToPartyIDMap
+    partyIDToCandidateLastNames, // shortCandidateNameOverride
+    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
+    regionNameToIDCook, // regionNameToIDMap
+    ev2016, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    singleLineMarginFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
       window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
-    }
+    } // customOpenRegionLinkFunction
   )
 
   var getPresidentialSVGFromDate = function(dateTime)
@@ -1187,11 +1185,11 @@ function createPresidentialMapSources()
   }
 
   var PastElectionResultMapSource = new MapSource(
-    "Past-Presidential-Elections",
-    "Past Elections",
-    "./csv-sources/past-president.csv",
-    "https://en.wikipedia.org/wiki/",
-    "./assets/wikipedia-large.png",
+    "Past-Presidential-Elections", // id
+    "Past Elections", // name
+    "./csv-sources/past-president.csv", // dataURL
+    "https://en.wikipedia.org/wiki/", // homepageURL
+    "./assets/wikipedia-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1199,17 +1197,17 @@ function createPresidentialMapSources()
       partyID: "party",
       partyCandidateName: "candidate",
       candidateName: "candidate"
-    },
-    null,
-    electionYearToCandidateData,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    ev2016,
-    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
-    false,
-    true,
-    doubleLineVoteshareFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    electionYearToCandidateData, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1220,21 +1218,21 @@ function createPresidentialMapSources()
         linkToOpen += "_in_" + regionIDToLinkMap[regionID]
       }
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    true,
-    1.0,
-    getPresidentialSVGFromDate
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0, // voteshareCutoffMargin
+    getPresidentialSVGFromDate // overrideSVGPath
   )
 
   var HistoricalElectionResultMapSource = new MapSource(
-    "Historical-Presidential-Elections",
-    "Older Elections",
-    "./csv-sources/historical-president.csv",
-    "https://en.wikipedia.org/wiki/",
-    "./assets/wikipedia-large.png",
+    "Historical-Presidential-Elections", // id
+    "Older Elections", // name
+    "./csv-sources/historical-president.csv", // dataURL
+    "https://en.wikipedia.org/wiki/", // homepageURL
+    "./assets/wikipedia-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1242,17 +1240,17 @@ function createPresidentialMapSources()
       partyCandidateName: "candidate",
       partyID: "party",
       candidateName: "candidate"
-    },
-    null,
-    electionYearToCandidateData,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    ev2016,
-    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
-    false,
-    true,
-    doubleLineVoteshareFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    electionYearToCandidateData, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    ev2016, // ev2016
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1263,14 +1261,14 @@ function createPresidentialMapSources()
         linkToOpen += "_in_" + regionIDToLinkMap[regionID]
       }
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    true,
-    1.0,
-    getPresidentialSVGFromDate,
-    true
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0, // voteshareCutoffMargin
+    getPresidentialSVGFromDate, // overrideSVGPath
+    true // shouldSetDisabledWorthToZero
   )
 
   var idsToPartyNames = {}
@@ -1284,11 +1282,11 @@ function createPresidentialMapSources()
   }
 
   var CustomMapSource = new MapSource(
-    "Custom-Presidential",
-    "Custom",
-    null,
-    null,
-    null,
+    "Custom-Presidential", // id
+    "Custom", // name
+    null, // dateURL
+    null, // homepageURL
+    null, // iconURL
     {
       date: "date",
       region: "region",
@@ -1296,25 +1294,25 @@ function createPresidentialMapSources()
       candidateName: "candidate",
       partyID: "party",
       percentAdjusted: "percent"
-    },
-    null, //currentCycleYear, // Needs to be here until all previous presidential candidate names are listed in "partyCandidate/ID" constants
-    partyNamesToIDs,
-    idsToPartyNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDCustom, //null,
-    null,
-    null,
-    false,
-    true,
-    doubleLineVoteshareFilterFunction,
-    null,
-    customMapConvertMapDataToCSVFunction,
-    true,
-    false,
-    false,
-    null,
-    getPresidentialSVGFromDate,
-    true
+    }, // columnMap
+    null, // cycleYear
+    partyNamesToIDs, // candidateNameToPartyIDMap
+    idsToPartyNames, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDCustom, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // customOpenRegionLinkFunction
+    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
+    true, // isCustomMap
+    false, // shouldClearDisabled
+    false, // shouldShowVoteshare
+    null, // voteshareCutoffMargin
+    getPresidentialSVGFromDate, // overrideSVGPath
+    true // shouldSetDisabledWorthToZero
   )
 
   var todayDate = new Date()
@@ -1323,7 +1321,6 @@ function createPresidentialMapSources()
   var presidentialMapSources = {}
   presidentialMapSources[FiveThirtyEightPollAverageMapSource.getID()] = FiveThirtyEightPollAverageMapSource
   presidentialMapSources[FiveThirtyEightProjectionMapSource.getID()] = FiveThirtyEightProjectionMapSource
-  presidentialMapSources[JHKProjectionMapSource.getID()] = JHKProjectionMapSource
   presidentialMapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
   presidentialMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   presidentialMapSources[HistoricalElectionResultMapSource.getID()] = HistoricalElectionResultMapSource
@@ -1700,11 +1697,11 @@ function createSenateMapSources()
   }
 
   var LTESenateProjectionMapSource = new MapSource(
-    "LTE-2022-Senate-Projection",
-    "LTE Projection",
-    "./csv-sources/lte-2022-senate.csv",
-    "https://www.youtube.com/watch?v=",
-    "./assets/lte-large.png",
+    "LTE-2022-Senate-Projection", // id
+    "LTE Projection", // name
+    "./csv-sources/lte-2022-senate.csv", // dataURL
+    "https://www.youtube.com/watch?v=", // homepageURL
+    "./assets/lte-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1716,17 +1713,17 @@ function createSenateMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    false,
-    doubleLineClassSeparatedFilterFunction,
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1734,11 +1731,11 @@ function createSenateMapSources()
       var linkToOpen = homepageURL
       linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getTime()]
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    false
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    false // shouldShowVoteshare
   )
 
   const PA2022SenateYouTubeIDs = {
@@ -1751,11 +1748,11 @@ function createSenateMapSources()
   }
 
   var PASenateProjectionMapSource = new MapSource(
-    "PA-2022-Senate-Projection",
-    "PA Projection",
-    "./csv-sources/pa-2022-senate.csv",
-    "https://www.youtube.com/watch?v=",
-    "./assets/pa-large.png",
+    "PA-2022-Senate-Projection", // id
+    "PA Projection", // name
+    "./csv-sources/pa-2022-senate.csv", // dataURL
+    "https://www.youtube.com/watch?v=", // homepageURL
+    "./assets/pa-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1767,17 +1764,17 @@ function createSenateMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    false,
-    doubleLineClassSeparatedFilterFunction,
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1785,11 +1782,11 @@ function createSenateMapSources()
       var linkToOpen = homepageURL
       linkToOpen += PA2022SenateYouTubeIDs[mapDate.getTime()]
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    false
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    false // shouldShowVoteshare
   )
 
   const Cook2022SenateRatingIDs = {
@@ -1799,11 +1796,11 @@ function createSenateMapSources()
   }
 
   var CookSenateProjectionMapSource = new MapSource(
-    "Cook-2022-Senate",
-    "Cook Political",
-    "./csv-sources/cook-senate-2022/cook-latest.csv",
-    "https://cookpolitical.com/ratings/senate-race-ratings/",
-    "./assets/cookpolitical-large.png",
+    "Cook-2022-Senate", // id
+    "Cook Political", // name
+    "./csv-sources/cook-senate-2022/cook-latest.csv", // dataURL
+    "https://cookpolitical.com/ratings/senate-race-ratings/", // homepageURL
+    "./assets/cookpolitical-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1815,31 +1812,34 @@ function createSenateMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    false,
-    doubleLineClassSeparatedFilterFunction,
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
       window.open(homepageURL + Cook2022SenateRatingIDs[mapDate.getTime()] || "")
-    }
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    false // shouldShowVoteshare
   )
 
   var PastElectionResultMapSource = new MapSource(
-    "Past-Senate-Elections",
-    "Past Elections",
-    "./csv-sources/past-senate.csv",
-    //"./csv-sources/past-senate.csv",
-    "https://en.wikipedia.org/wiki/",
-    "./assets/wikipedia-large.png",
+    "Past-Senate-Elections", // id
+    "Past Elections", // name
+    "./csv-sources/past-senate.csv", // dataURL
+    "https://en.wikipedia.org/wiki/", // homepageURL
+    "./assets/wikipedia-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -1850,17 +1850,17 @@ function createSenateMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
-    false,
-    true,
-    doubleLineClassSeparatedFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1891,12 +1891,12 @@ function createSenateMapSources()
         linkToOpen += "election"
       }
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    true,
-    1.0
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0 // voteshareCutoffMargin
   )
 
   var idsToPartyNames = {}
@@ -1910,11 +1910,11 @@ function createSenateMapSources()
   }
 
   var CustomMapSource = new MapSource(
-    "Custom-Senate",
-    "Custom",
-    null,
-    null,
-    null,
+    "Custom-Senate", // id
+    "Custom", // name
+    null, // dataURL
+    null, // homepageURL
+    null, // iconURL
     {
       date: "date",
       region: "region",
@@ -1926,21 +1926,21 @@ function createSenateMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    partyNamesToIDs,
-    idsToPartyNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    true,
-    doubleLineClassSeparatedFilterFunction,
-    null,
-    customMapConvertMapDataToCSVFunction,
-    true,
-    false
+    }, // columnMap
+    null, // cycleYear
+    partyNamesToIDs, // candidateNameToPartyIDMap
+    idsToPartyNames, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // customOpenRegionLinkFunction
+    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
+    true, // isCustomMap
+    false // shouldClearDisabled
   )
 
   var todayDate = new Date()
@@ -2248,12 +2248,11 @@ function createGovernorMapSources()
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
-    "LTE-2022-Governor-Projection",
-    "LTE Projection",
-    "./csv-sources/lte-2022-governor.csv",
-    // "./csv-sources/lte-2022-governor.csv",
-    "https://www.youtube.com/watch?v=",
-    "./assets/lte-large.png",
+    "LTE-2022-Governor-Projection", // id
+    "LTE Projection", // name
+    "./csv-sources/lte-2022-governor.csv", // dataURL
+    "https://www.youtube.com/watch?v=", // homepageURL
+    "./assets/lte-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -2264,17 +2263,17 @@ function createGovernorMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    false,
-    doubleLineVoteshareFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2282,11 +2281,11 @@ function createGovernorMapSources()
       var linkToOpen = homepageURL
       linkToOpen += LTE2022GovernorYouTubeIDs[mapDate.getTime()]
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    false
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    false // shouldShowVoteshare
   )
 
   const Cook2022GovernorRatingIDs = {
@@ -2300,12 +2299,11 @@ function createGovernorMapSources()
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
-    "Cook-2022-Governor",
-    "Cook Political",
-    "./csv-sources/cook-governor-2022.csv",
-    // "./csv-sources/cook-governor-2022.csv",
-    "https://cookpolitical.com/ratings/governor-race-ratings/",
-    "./assets/cookpolitical-large.png",
+    "Cook-2022-Governor", // id
+    "Cook Political", // name
+    "./csv-sources/cook-governor-2022.csv", // dataURL
+    "https://cookpolitical.com/ratings/governor-race-ratings/", // homepageURL
+    "./assets/cookpolitical-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -2316,30 +2314,30 @@ function createGovernorMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    false,
-    doubleLineVoteshareFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
       window.open(homepageURL + Cook2022GovernorRatingIDs[mapDate.getTime()] || "")
-    }
+    } // customOpenRegionLinkFunction
   )
 
   var PastElectionResultMapSource = new MapSource(
-    "Past-Governor-Elections",
-    "Past Elections",
-    "./csv-sources/past-governor.csv",
-    "https://en.wikipedia.org/wiki/",
-    "./assets/wikipedia-large.png",
+    "Past-Governor-Elections", // id
+    "Past Elections", // name
+    "./csv-sources/past-governor.csv", // dataURL
+    "https://en.wikipedia.org/wiki/", // homepageURL
+    "./assets/wikipedia-large.png", // iconURL
     {
       date: "date",
       region: "region",
@@ -2349,17 +2347,17 @@ function createGovernorMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    null,
-    null,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"},
-    false,
-    true,
-    doubleLineVoteshareFilterFunction,
+    }, // columnMap
+    null, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToID
+    null, // ev2016
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2380,12 +2378,12 @@ function createGovernorMapSources()
         linkToOpen += "_United_States_gubernatorial_elections"
       }
       window.open(linkToOpen)
-    },
-    null,
-    null,
-    null,
-    true,
-    1.0
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0 // voteshareCutoffMargin
   )
 
   var idsToPartyNames = {}
@@ -2399,11 +2397,11 @@ function createGovernorMapSources()
   }
 
   var CustomMapSource = new MapSource(
-    "Custom-Governor",
-    "Custom",
-    null,
-    null,
-    null,
+    "Custom-Governor", // id
+    "Custom", // name
+    null, // dataURL
+    null, // homepageURL
+    null, // iconURL
     {
       date: "date",
       region: "region",
@@ -2414,21 +2412,21 @@ function createGovernorMapSources()
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
-    },
-    null,
-    partyNamesToIDs,
-    idsToPartyNames,
-    incumbentChallengerPartyIDs,
-    regionNameToIDHistorical,
-    null,
-    null,
-    false,
-    true,
-    doubleLineVoteshareFilterFunction,
-    null,
-    customMapConvertMapDataToCSVFunction,
-    true,
-    false
+    }, // columnMap
+    null, // cycleYear
+    partyNamesToIDs, // candidateNameToPartyIDMap
+    idsToPartyNames, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // customOpenRegionLinkFunction
+    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
+    true, // isCustomMap
+    false // shouldClearDisabled
   )
 
   var todayDate = new Date()
@@ -2462,15 +2460,15 @@ mainTwoPartyIDsToNames[DemocraticParty.getID()] = DemocraticParty.getNames()[0]
 mainTwoPartyIDsToNames[RepublicanParty.getID()] = RepublicanParty.getNames()[0]
 
 var NullMapSource = new MapSource(
-  "None",
-  "None",
-  null,
-  null,
-  null,
-  null,
-  null,
-  invertObject(mainTwoPartyIDsToNames),
-  mainTwoPartyIDsToNames
+  "None", // id
+  "None", // name
+  null, // dataURL
+  null, // homepageURL
+  null, // iconURL
+  null, // columnMap
+  null, // cycleYear
+  invertObject(mainTwoPartyIDsToNames), // candidateNameToPartyIDMap
+  mainTwoPartyIDsToNames // shortCandidateNameOverride
 )
 
 createPresidentialMapSources()
