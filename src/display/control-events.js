@@ -481,7 +481,7 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
-  if (!(currentMapType.getMapSettingValue("mapFlipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
+  if (!(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
     for (var linkedRegionSetNum in linkedRegions)

@@ -1186,7 +1186,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     var marginIndex = getMarginIndexForValue(regionData.margin, regionData.partyID)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
 
-    if (currentMapType.getMapSettingValue("mapFlipStates") && regionData.flip)
+    if (currentMapType.getMapSettingValue("flipStates") && regionData.flip)
     {
       var patternID = generateFlipPattern(regionData.partyID, marginIndex)
 

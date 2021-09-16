@@ -251,7 +251,7 @@ const MapSettingReloadType =
 
 var globalMapSettings =
 [
-  {id: "mapFlipStates", title: "Flip States", type: MapSettingType.optionCycle, options:
+  {id: "flipStates", title: "Flip States", type: MapSettingType.optionCycle, options:
     [
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
