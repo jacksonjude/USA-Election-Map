@@ -23,7 +23,13 @@ const regionDeselectColor = "#181922" //#555
 
 const regionDisabledColor = "#28292F"
 
+const flipPatternBrightnessFactor = 0.8
+const flipPatternHeight = 5
+const flipPatternWidth = 5
+
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
+
+const nationalPopularVoteID = "NPV"
 
 var displayRegionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
@@ -823,6 +829,8 @@ function populateRegionsArray()
 
     displayRegionDataArray[regionID] = {partyID: TossupParty.getID(), margin: 0}
   })
+
+  displayRegionDataArray[nationalPopularVoteID] = {partyID: TossupParty.getID(), margin: 0}
 }
 
 async function toggleEditing(stateToSet)
@@ -1242,9 +1250,9 @@ function generateFlipPattern(partyID, margin)
 
   if ($("#" + patternID).length == 0)
   {
-    var patternHTML = '<pattern id="' + patternID + '" width="5" height="10" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
-    patternHTML += '<rect x1="0" y1="0" width="5" height="10" style="fill: ' + fillColor + ';"></rect>'
-    patternHTML += '<line x1="0" y1="0" x2="0" y2="10" style="stroke: ' + multiplyBrightness(fillColor, 0.8) + '; stroke-width: 5"></line>'
+    var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
+    patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" style="fill: ' + fillColor + ';"></rect>'
+    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + multiplyBrightness(fillColor, flipPatternBrightnessFactor) + '; stroke-width: ' + flipPatternWidth + '"></line>'
     patternHTML += '</pattern>'
 
     var tempDiv = document.createElement('div');
@@ -1266,9 +1274,10 @@ function generateFlipPatternsFromPartyMap(partyMap)
   }
 }
 
-function getPartyTotals()
+function getPartyTotals(includeFlipData)
 {
   var partyTotals = {}
+  var partyFlipTotals = {}
 
   for (var partyIDNum in mainPoliticalPartyIDs)
   {
@@ -1277,19 +1286,52 @@ function getPartyTotals()
 
   for (var regionID in displayRegionDataArray)
   {
+    if (regionID == nationalPopularVoteID) { continue }
+
     var partyIDToSet = displayRegionDataArray[regionID].partyID
     if (displayRegionDataArray[regionID].partyID == null)
     {
       partyIDToSet = TossupParty.getID()
     }
-    if (!(partyIDToSet in partyTotals))
+
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+
+    if (includeFlipData && displayRegionDataArray[regionID].flip)
     {
-      partyTotals[partyIDToSet] = 0
+      if (!(partyIDToSet in partyFlipTotals))
+      {
+        partyFlipTotals[partyIDToSet] = 0
+      }
+      partyFlipTotals[partyIDToSet] += currentRegionEV
     }
-    partyTotals[partyIDToSet] += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+    else
+    {
+      if (!(partyIDToSet in partyTotals))
+      {
+        partyTotals[partyIDToSet] = 0
+      }
+      partyTotals[partyIDToSet] += currentRegionEV
+    }
   }
 
-  return partyTotals
+  return includeFlipData ? {nonFlipTotals: partyTotals, flipTotals: partyFlipTotals} : partyTotals
+}
+
+function getNationalPopularVotePartyVoteshareData()
+{
+  var popularVoteData = getNationalPopularVoteData()
+  if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
+  {
+    return popularVoteData.partyVotesharePercentages
+  }
+}
+
+function getNationalPopularVoteData()
+{
+  if (nationalPopularVoteID in displayRegionDataArray && displayRegionDataArray[nationalPopularVoteID].partyID != TossupParty.getID())
+  {
+    return displayRegionDataArray[nationalPopularVoteID]
+  }
 }
 
 function getCurrentDecade()
@@ -1390,13 +1432,7 @@ function updateRegionBox(regionID)
 
 function getRoundedMarginValue(fullMarginValue)
 {
-  var decimalPlaceToRound = Math.floor(-Math.log(fullMarginValue)/Math.log(10)+2)
-  if (decimalPlaceToRound <= 0 || !isFinite(decimalPlaceToRound))
-  {
-    decimalPlaceToRound = 1
-  }
-
-  return decimalPadding(Math.round(fullMarginValue*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound), currentMapSource.getAddDecimalPadding())
+  return decimalPadding(roundValueToPlace(fullMarginValue, 2), currentMapSource.getAddDecimalPadding())
 }
 
 function applyRegionEVEdit(regionID)

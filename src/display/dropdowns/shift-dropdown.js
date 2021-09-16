@@ -8,6 +8,8 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 
   for (var regionID in displayRegionDataArray)
   {
+    if (regionID == nationalPopularVoteID) { continue }
+
     if (displayRegionDataArray[regionID].disabled) { continue }
 
     if (displayRegionDataArray[regionID].partyID != partyToShift.getID())
@@ -67,8 +69,9 @@ function getTippingPointRegion()
 function getCurrentTotalEV()
 {
   var totalEV = 0
-  for (regionID in displayRegionDataArray)
+  for (var regionID in displayRegionDataArray)
   {
+    if (regionID == nationalPopularVoteID) { continue }
     totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
   }
   return totalEV

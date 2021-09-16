@@ -260,12 +260,24 @@ var globalMapSettings =
       return value
     },
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
-  {id: "latestTick", title: "Latest Tick", type: MapSettingType.optionCycle, options:
+  {id: "piePopularVote", title: "Popular Vote", type: MapSettingType.optionCycle, options:
     [
-      {id: "enabled", title: "Enabled", value: true},
-      {id: "disabled", title: "Disabled", value: false}
+      {id: "show", title: "Shown", value: true},
+      {id: "hide", title: "Hidden", value: false}
     ],
-  defaultValue: "disabled", reloadType: MapSettingReloadType.data},
+    shouldShowActive: (value) => {
+      return value
+    },
+  defaultValue: "hide", reloadType: MapSettingReloadType.display},
+  {id: "pieStyle", title: "Pie Style", type: MapSettingType.optionCycle, options:
+    [
+      {id: "expanded", title: "Expanded", value: 0},
+      {id: "compact", title: "Compact", value: 1}
+    ],
+    shouldShowActive: (value) => {
+      return value == 1
+    },
+  defaultValue: "expanded", reloadType: MapSettingReloadType.display},
   {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
     [
       {id: "enabled", title: "Enabled", value: true},

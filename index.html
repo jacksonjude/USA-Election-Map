@@ -140,6 +140,10 @@
               <a onclick="addConstantMarginToMap(getTippingPointRegion().margin, politicalParties[dropdownPoliticalPartyIDs[1]])" style="display:flex; justify-content:center;">
                 Shift by tipping point
               </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="if (!getNationalPopularVoteData()) return; addConstantMarginToMap(getNationalPopularVoteData().margin, politicalParties[dropdownPoliticalPartyIDs[1]])" style="display:flex; justify-content:center;">
+                Shift by NPV margin
+              </a>
             </div>
           </div>
         </div>

@@ -164,6 +164,8 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1960,Wyoming,WY,Nixon,republican,55.01484565,JJCooley
 11/8/1960,Wyoming,WY,Kennedy,democrat,44.98515435,JJCooley
 11/8/1960,Wyoming,WY,Other,independent,0,JJCooley
+11/8/1960,National Popular Vote,NPV,Kennedy,democrat,49.7163294255,20210915
+11/8/1960,National Popular Vote,NPV,Nixon,republican,49.5524140833,20210915
 11/3/1964,Alabama,AL,Goldwater,republican,69.45102832,JJCooley
 11/3/1964,Alabama,AL,Johnson,democrat,0,JJCooley
 11/3/1964,Alabama,AL,Other,independent,30.54897168,JJCooley
@@ -332,6 +334,8 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/1964,Wyoming,WY,Goldwater,republican,43.44152022,JJCooley
 11/3/1964,Wyoming,WY,Johnson,democrat,56.55847978,JJCooley
 11/3/1964,Wyoming,WY,Other,independent,0,JJCooley
+11/3/1964,National Popular Vote,NPV,Johnson,democrat,61.0533697461,20210915
+11/3/1964,National Popular Vote,NPV,Goldwater,republican,38.4699348071,20210915
 11/5/1968,Alabama,AL,Nixon,republican,13.99377284,JJCooley
 11/5/1968,Alabama,AL,Humphrey,democrat,18.72328956,JJCooley
 11/5/1968,Alabama,AL,Wallace,independent,65.8552057,JJCooley
@@ -556,6 +560,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1968,Wyoming,WY,Humphrey,democrat,35.51196887,JJCooley
 11/5/1968,Wyoming,WY,Wallace,independent,8.730002751,JJCooley
 11/5/1968,Wyoming,WY,Other,independent,0,JJCooley
+11/5/1968,National Popular Vote,NPV,Nixon,republican,43.4204691724,20210915
+11/5/1968,National Popular Vote,NPV,Humphrey,democrat,42.7210921137,20210915
+11/5/1968,National Popular Vote,NPV,Wallace,independent,13.5261176711,20210915
 11/7/1972,Alabama,AL,Nixon,republican,72.42879137,JJCooley
 11/7/1972,Alabama,AL,McGovern,democrat,25.53670486,JJCooley
 11/7/1972,Alabama,AL,Other,independent,2.034503769,JJCooley
@@ -724,6 +731,8 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/1972,Wyoming,WY,Nixon,republican,69.01421996,JJCooley
 11/7/1972,Wyoming,WY,McGovern,democrat,30.4719379,JJCooley
 11/7/1972,Wyoming,WY,Other,independent,0.5138421378,JJCooley
+11/7/1972,National Popular Vote,NPV,Nixon,republican,60.671809784,20210915
+11/7/1972,National Popular Vote,NPV,McGovern,democrat,37.5247102575,20210915
 11/2/1976,Alabama,AL,Carter,democrat,55.727268884473900,20171015
 11/2/1976,Alabama,AL,Ford,republican,42.614870862746800,20171015
 11/2/1976,Alabama,AL,Maddox,american independent party,0.77761339138521400,20171015
@@ -1037,6 +1046,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Wisconsin,WI,Levin,socialist labor,0.018512032345136600,20171015
 11/2/1976,Wyoming,WY,Ford,republican,59.303582507691400,20171015
 11/2/1976,Wyoming,WY,Carter,democrat,39.809265525159400,20171015
+11/2/1976,National Popular Vote,NPV,Carter,democrat,50.0810593843,20210915
+11/2/1976,National Popular Vote,NPV,Ford,republican,48.0165257184,20210915
+11/2/1976,National Popular Vote,NPV,McCarthy,independent,0.9081879238,20210915
 11/4/1980,Alabama,AL,Reagan,republican,48.750120162840200,20171015
 11/4/1980,Alabama,AL,Carter,democrat,47.448859067804600,20171015
 11/4/1980,Alabama,AL,Anderson,independent,1.2281573764334800,20171015
@@ -1392,6 +1404,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/1980,Wyoming,WY,Carter,democrat,27.97021158601800,20171015
 11/4/1980,Wyoming,WY,Anderson,independent,6.8314159116759900,20171015
 11/4/1980,Wyoming,WY,Clark,libertarian,2.5544244056747400,20171015
+11/4/1980,National Popular Vote,NPV,Reagan,republican,50.7495011136,20210915
+11/4/1980,National Popular Vote,NPV,Carter,democrat,41.0128852867,20210915
+11/4/1980,National Popular Vote,NPV,Anderson,independent,6.611803595,20210915
 11/6/1984,Alabama,AL,Reagan,republican,60.542493547606200,20171015
 11/6/1984,Alabama,AL,Mondale,democrat,38.280781265064500,20171015
 11/6/1984,Alabama,AL,Bergland,libertarian,0.65921580786189800,20171015
@@ -1705,6 +1720,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/1984,Wyoming,WY,Reagan,republican,70.509821768765100,20171015
 11/6/1984,Wyoming,WY,Mondale,democrat,28.242877100884800,20171015
 11/6/1984,Wyoming,WY,Bergland,libertarian,1.2473011303501100,20171015
+11/6/1984,National Popular Vote,NPV,Reagan,republican,58.7734180846,20210915
+11/6/1984,National Popular Vote,NPV,Mondale,democrat,40.5569787295,20210915
+11/6/1984,National Popular Vote,NPV,Bergland,libertarian,0.2461986405,20210915
 11/8/1988,Alabama,AL,Bush,republican,59.165048938102700,20171015
 11/8/1988,Alabama,AL,Dukakis,democrat,39.863298309147200,20171015
 11/8/1988,Alabama,AL,Paul,libertarian,0.61372123997806300,20171015
@@ -1968,6 +1986,9 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/1988,Wyoming,WY,Dukakis,democrat,38.01337857049800,20171015
 11/8/1988,Wyoming,WY,Paul,libertarian,1.1475437692224900,20171015
 11/8/1988,Wyoming,WY,Fulani,new alliance,0.30869267237228900,20171015
+11/8/1988,National Popular Vote,NPV,Bush,republican,53.3727436983,20210915
+11/8/1988,National Popular Vote,NPV,Dukakis,democrat,45.6461808276,20210915
+11/8/1988,National Popular Vote,NPV,Paul,libertarian,0.4713701404,20210915
 11/3/1992,Alabama,AL,Bush,republican,47.645403599398100,20171015
 11/3/1992,Alabama,AL,Clinton,democrat,40.880063504851700,20171015
 11/3/1992,Alabama,AL,Perot,independent,10.847304005781800,20171015
@@ -2302,6 +2323,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/1992,Wyoming,WY,Perot,independent,25.646374897440500,20171015
 11/3/1992,Wyoming,WY,Marrou,libertarian,0.42224490204318500,20171015
 11/3/1992,Wyoming,WY,Fulani,independent,0.13507834544035500,20171015
+11/3/1992,National Popular Vote,NPV,Clinton,democrat,43.0072800464,20210915
+11/3/1992,National Popular Vote,NPV,Bush,republican,37.4478844278,20210915
+11/3/1992,National Popular Vote,NPV,Perot,reform party,18.9073733612,20210915
+11/3/1992,National Popular Vote,NPV,Marrou,libertarian,0.2777974545,20210915
 11/5/1996,Alabama,AL,Dole,republican,50.121843205163900,20171015
 11/5/1996,Alabama,AL,Clinton,democrat,43.156087695824100,20171015
 11/5/1996,Alabama,AL,Perot,independent,6.01,JJCooley
@@ -2647,6 +2672,11 @@ date,region,state_po,candidate,party,voteshare,version
 11/5/1996,Wyoming,WY,Perot,independent,12.254987687348500,20171015
 11/5/1996,Wyoming,WY,Browne,libertarian,0.82194629698777200,20171015
 11/5/1996,Wyoming,WY,Hagelin,natural law,0.27508495965893200,20171015
+11/5/1996,National Popular Vote,NPV,Clinton,democrat,49.2338490578,20210915
+11/5/1996,National Popular Vote,NPV,Dole,republican,40.7129541634,20210915
+11/5/1996,National Popular Vote,NPV,Perot,reform party,8.3978943645,20210915
+11/5/1996,National Popular Vote,NPV,Nader,green,0.7117925229,20210915
+11/5/1996,National Popular Vote,NPV,Browne,libertarian,0.5045398187,20210915
 11/7/2000,Alabama,AL,Bush,republican,56.483755353267700,20171015
 11/7/2000,Alabama,AL,Gore,democrat,41.566502947898100,20171015
 11/7/2000,Alabama,AL,Nader,green,1.0996403948,JJCooley
@@ -2980,6 +3010,11 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Wyoming,WY,Browne,libertarian,0.67516352713287100,20171015
 11/7/2000,Wyoming,WY,Phillips,independent,0.33687993037814800,20171015
 11/7/2000,Wyoming,WY,Hagelin,natural law,0.19230229359085900,20171015
+11/7/2000,National Popular Vote,NPV,Gore,democrat,48.3771661857,20210915
+11/7/2000,National Popular Vote,NPV,Bush,republican,47.8612416378,20210915
+11/7/2000,National Popular Vote,NPV,Nader,green,2.7346955846,20210915
+11/7/2000,National Popular Vote,NPV,Buchanan,reform party,0.4258100367,20210915
+11/7/2000,National Popular Vote,NPV,Browne,libertarian,0.3646611752,20210915
 11/2/2004,Alabama,AL,Bush,republican,62.460689757700800,20171015
 11/2/2004,Alabama,AL,Kerry,democrat,36.844402322377200,20171015
 11/2/2004,Alaska,AK,Bush,republican,61.065329912539400,20171015
@@ -3263,6 +3298,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/2004,Wyoming,WY,Kerry,democrat,29.023091023164800,20171015
 11/2/2004,Wyoming,WY,Nader,independent,1.3827549300626200,20171015
 11/2/2004,Wyoming,WY,Badnarik,libertarian,0.48019158455021500,20171015
+11/2/2004,National Popular Vote,NPV,Bush,republican,50.7301483961,20210915
+11/2/2004,National Popular Vote,NPV,Kerry,democrat,48.2671225139,20210915
+11/2/2004,National Popular Vote,NPV,Nader,independent,0.3807585644,20210915
+11/2/2004,National Popular Vote,NPV,Badnarik,libertarian,0.3248406552,20210915
 11/4/2008,Alabama,AL,McCain,republican,60.316913029170600,20171015
 11/4/2008,Alabama,AL,Obama,democrat,38.740434294574900,20171015
 11/4/2008,Alaska,AK,McCain,republican,59.424519538806300,20171015
@@ -3579,6 +3618,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/4/2008,Wyoming,WY,McCain,republican,64.7762881982895,20171015
 11/4/2008,Wyoming,WY,Obama,democrat,32.540897988675,20171015
 11/4/2008,Wyoming,WY,Barr,libertarian,0.625937531905536,20171015
+11/4/2008,National Popular Vote,NPV,Obama,democrat,52.9255153799,20210915
+11/4/2008,National Popular Vote,NPV,McCain,republican,45.6527142383,20210915
+11/4/2008,National Popular Vote,NPV,Nader,independent,0.5627998637,20210915
+11/4/2008,National Popular Vote,NPV,Barr,libertarian,0.3988270237,20210915
 11/6/2012,Alabama,AL,Romney,republican,60.545822329822800,20171015
 11/6/2012,Alabama,AL,Obama,democrat,38.359033098752500,20171015
 11/6/2012,Alaska,AK,Romney,republican,54.801577397294500,20171015
@@ -3854,6 +3897,10 @@ date,region,state_po,candidate,party,voteshare,version
 11/6/2012,Wyoming,WY,Obama,democrat,27.8188877423603,20171015
 11/6/2012,Wyoming,WY,Johnson,libertarian,2.13843195040572,20171015
 11/6/2012,Wyoming,WY,Goode,constitution party,0.582989709348312,20171015
+11/6/2012,National Popular Vote,NPV,Obama,democrat,51.06370658,20210915
+11/6/2012,National Popular Vote,NPV,Romney,republican,47.2040209657,20210915
+11/6/2012,National Popular Vote,NPV,Johnson,libertarian,0.9884703469,20210915
+11/6/2012,National Popular Vote,NPV,Stein,green,0.3638110612,20210915
 11/8/2016,Alabama,AL,Trump,republican,62.083092364409100,20171015
 11/8/2016,Alabama,AL,Clinton,democrat,34.357945757973600,20171015
 11/8/2016,Alabama,AL,Johnson,libertarian,2.0941690857748900,20171015
@@ -4149,6 +4196,11 @@ date,region,state_po,candidate,party,voteshare,version
 11/8/2016,Wyoming,WY,Clinton,democrat,21.8773573474979,20171015
 11/8/2016,Wyoming,WY,Johnson,libertarian,5.19329760913664,20171015
 11/8/2016,Wyoming,WY,Castle,constitution party,0.798127020234591,20171015
+11/8/2016,National Popular Vote,NPV,Clinton,democrat,48.1845780759,20210915
+11/8/2016,National Popular Vote,NPV,Trump,republican,46.0855796148,20210915
+11/8/2016,National Popular Vote,NPV,Johnson,libertarian,3.2848209425,20210915
+11/8/2016,National Popular Vote,NPV,Stein,green,1.0662367159,20210915
+11/8/2016,National Popular Vote,NPV,McMullin,independent,0.5355929448,20210915
 11/3/2020,Alabama,AL,Trump,republican,62.03,20201214
 11/3/2020,Alabama,AL,Biden,democrat,36.57,20201214
 11/3/2020,Alabama,AL,Jorgensen,libertarian,1.08,20201214
@@ -4319,3 +4371,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/3/2020,Wyoming,WY,Trump,republican,69.94,20201214
 11/3/2020,Wyoming,WY,Biden,democrat,26.55,20201214
 11/3/2020,Wyoming,WY,Jorgensen,libertarian,2.08,20201214
+11/3/2020,National Popular Vote,NPV,Biden,democrat,51.31151526,20210915
+11/3/2020,National Popular Vote,NPV,Trump,republican,46.85854237,20210915
+11/3/2020,National Popular Vote,NPV,Jorgensen,libertarian,1.177979488,20210915
+11/3/2020,National Popular Vote,NPV,Hawkins,green,0.2557307094,20210915

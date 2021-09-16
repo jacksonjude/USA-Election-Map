@@ -153,6 +153,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1960,Idaho,ID,2,FALSE,FALSE,FALSE,Dworshak,republican,FALSE,0.5225953111305870,kachang
 11/08/1960,Delaware,DE,2,FALSE,FALSE,FALSE,Frear,democratic,FALSE,0.492860220348372,kachang
 11/08/1960,Delaware,DE,2,FALSE,FALSE,FALSE,Boggs,republican,FALSE,0.507139779651628,kachang
+11/08/1960,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4424961402,20210915
+11/08/1960,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5510009949,20210915
 05/27/1961,Texas,TX,2,TRUE,FALSE,TRUE,Blakley,democratic,FALSE,0.4941636919910030,kachang
 05/27/1961,Texas,TX,2,TRUE,FALSE,TRUE,Tower,republican,FALSE,0.5058363080089970,kachang
 11/06/1962,New York,NY,3,FALSE,FALSE,FALSE,Gould,vegetarian,FALSE,0.0,kachang
@@ -259,6 +261,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/06/1962,Wisconsin,WI,3,FALSE,FALSE,FALSE,Nelson,democratic,FALSE,0.5256348803250590,kachang
 11/06/1962,Idaho,ID,3,FALSE,FALSE,FALSE,Hawley,republican,FALSE,0.4526094920127060,kachang
 11/06/1962,Idaho,ID,3,FALSE,FALSE,FALSE,Church,democratic,FALSE,0.5473905079872950,kachang
+11/06/1962,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4912094122,20210915
+11/06/1962,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.502724218,20210915
 09/16/1964,South Carolina,SC,2,TRUE,FALSE,TRUE,Thurmond,republican,FALSE,1.01,kachang
 11/03/1964,Connecticut,CT,1,FALSE,FALSE,FALSE,Dodd,democratic,FALSE,0.6465581685,JJCooley
 11/03/1964,Connecticut,CT,1,FALSE,FALSE,FALSE,Lodge,republican,FALSE,0.3534418315,JJCooley
@@ -365,6 +369,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1964,Delaware,DE,1,FALSE,FALSE,FALSE,Williams,republican,FALSE,0.5170924201431970,kachang
 11/03/1964,Tennessee,TN,1,FALSE,FALSE,FALSE,Kuykendall,republican,FALSE,0.4637848831362660,kachang
 11/03/1964,Tennessee,TN,1,FALSE,FALSE,FALSE,Gore,democratic,FALSE,0.5362151168637340,kachang
+11/03/1964,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4227994259,20210915
+11/03/1964,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5617263499,20210915
 11/08/1966,Virginia,VA,1,TRUE,FALSE,FALSE,Brayman,independent,FALSE,0.013950862267439900,kachang
 11/08/1966,Virginia,VA,1,TRUE,FALSE,FALSE,Carter,virginia conservative,FALSE,0.07906219508184140,kachang
 11/08/1966,Virginia,VA,1,TRUE,FALSE,FALSE,Traylor,republican,FALSE,0.37385570039358400,kachang
@@ -471,6 +477,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1966,Maine,ME,2,FALSE,FALSE,FALSE,Bishop,independent,FALSE,0.0003379911433802240,kachang
 11/08/1966,Maine,ME,2,FALSE,FALSE,FALSE,Violette,democratic,FALSE,0.4103963572065660,kachang
 11/08/1966,Maine,ME,2,FALSE,FALSE,FALSE,Smith,republican,FALSE,0.589265651650054,kachang
+11/08/1966,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5063745707,20210915
+11/08/1966,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4810440266,20210915
 09/10/1968,New York,NY,1,TRUE,FALSE,TRUE,Goodell,republican,FALSE,1.01,JJCooley
 11/05/1968,South Carolina,SC,3,FALSE,FALSE,FALSE,Others,other,FALSE,2.29760053917026E-05,kachang
 11/05/1968,South Carolina,SC,3,FALSE,FALSE,FALSE,Parker,republican,FALSE,0.3810647080898520,kachang
@@ -573,6 +581,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1968,New Hampshire,NH,3,FALSE,FALSE,FALSE,Write-In,nonpartisan,FALSE,3.48445410799717E-05,kachang
 11/05/1968,New Hampshire,NH,3,FALSE,FALSE,FALSE,King,democratic,FALSE,0.4070399910797980,kachang
 11/05/1968,New Hampshire,NH,3,FALSE,FALSE,FALSE,Cotton,republican,FALSE,0.5929251643791230,kachang
+11/05/1968,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4653184664,20210915
+11/05/1968,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4926950655,20210915
 11/03/1970,Hawaii,HI,1,FALSE,FALSE,FALSE,Heftel,democratic,FALSE,0.4842872570194380,kachang
 11/03/1970,Hawaii,HI,1,FALSE,FALSE,FALSE,Fong,republican,FALSE,0.5157127429805620,kachang
 11/03/1970,Alaska,AK,2,TRUE,FALSE,FALSE,Kay,democratic,FALSE,0.4038624259618740,kachang
@@ -697,6 +707,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Henderson,socialist workers,FALSE,0.0024613310691717700,kachang
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Smith,republican,FALSE,0.42222927303076800,kachang
 11/03/1970,Illinois,IL,3,TRUE,FALSE,FALSE,Stevenson,democratic,FALSE,0.5737421345205360,kachang
+11/03/1970,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.3989794316,20210915
+11/03/1970,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5238027799,20210915
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Write-In,nonpartisan,FALSE,0.0006587430621741320,kachang
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Sanders,liberty union,FALSE,0.022018837248416200,kachang
 01/07/1972,Vermont,VT,1,TRUE,FALSE,TRUE,Major,democratic,FALSE,0.33416493805012100,kachang
@@ -814,6 +826,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/07/1972,Minnesota,MN,2,FALSE,FALSE,FALSE,Heck,industrial government,FALSE,0.004730794573676990,kachang
 11/07/1972,Minnesota,MN,2,FALSE,FALSE,FALSE,Hansen,republican,FALSE,0.42856713864889400,kachang
 11/07/1972,Minnesota,MN,2,FALSE,FALSE,FALSE,Mondale,democratic,FALSE,0.5667020667774290,kachang
+11/07/1972,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5242442705,20210915
+11/07/1972,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4549055098,20210915
 11/05/1974,South Carolina,SC,3,FALSE,FALSE,FALSE,Hough,independent,FALSE,0.018786214595323500,kachang
 11/05/1974,South Carolina,SC,3,FALSE,FALSE,FALSE,Bush,republican,FALSE,0.2861941034002930,kachang
 11/05/1974,South Carolina,SC,3,FALSE,FALSE,FALSE,Hollings,democratic,FALSE,0.6950196820043830,kachang
@@ -937,6 +951,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1974,New Hampshire,NH,3,FALSE,FALSE,FALSE,Chimento,american,FALSE,0.0067737270720755,kachang
 11/05/1974,New Hampshire,NH,3,FALSE,FALSE,FALSE,Durkin,democratic,FALSE,0.4966086594467300,kachang
 11/05/1974,New Hampshire,NH,3,FALSE,FALSE,FALSE,Wyman,republican,FALSE,0.49661761348119400,kachang
+11/05/1974,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.3956294514,20210915
+11/05/1974,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5524269652,20210915
 09/16/1975,New Hampshire,NH,3,TRUE,FALSE,TRUE,Durkin,democratic,FALSE,0.5361500845,kachang
 09/16/1975,New Hampshire,NH,3,TRUE,FALSE,TRUE,Wyman,republican,FALSE,0.4303848087,kachang
 09/16/1975,New Hampshire,NH,3,TRUE,FALSE,TRUE,Chimento,american independent,FALSE,0.03346510671,kachang
@@ -1072,6 +1088,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/2/1976,Wisconsin,WI,1,FALSE,FALSE,FALSE,York,republican,FALSE,0.269691290177725,20210114
 11/2/1976,Wyoming,WY,1,FALSE,FALSE,FALSE,McGee,democrat,FALSE,0.454134699552031,20210114
 11/2/1976,Wyoming,WY,1,FALSE,FALSE,FALSE,Wallop,republican,FALSE,0.545865300447969,20210114
+11/2/1976,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4150881822,20210915
+11/2/1976,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.537238014,20210915
 11/7/1978,Alabama,AL,2,FALSE,FALSE,FALSE,Couch,prohibition,FALSE,0.0600527486877261,20210114
 11/7/1978,Alabama,AL,3,TRUE,FALSE,FALSE,Martin,republican,FALSE,0.433203350862241,20210114
 11/7/1978,Alabama,AL,3,TRUE,FALSE,FALSE,Erdey,libertarian,FALSE,0.00822917837011298,20210114
@@ -1186,6 +1204,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/7/1978,West Virginia,WV,2,FALSE,FALSE,FALSE,Randolph,democrat,FALSE,0.504780572047082,20210114
 11/7/1978,Wyoming,WY,2,FALSE,FALSE,FALSE,Whitaker,democrat,FALSE,0.378332983413815,20210114
 11/7/1978,Wyoming,WY,2,FALSE,FALSE,FALSE,Simpson,republican,FALSE,0.621667016586185,20210114
+11/7/1978,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4822915876,20210915
+11/7/1978,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4988753329,20210915
 11/4/1980,Alabama,AL,3,FALSE,FALSE,FALSE,Folsom,democrat,FALSE,0.470539198940125,20210114
 11/4/1980,Alabama,AL,3,FALSE,FALSE,FALSE,Denton,republican,FALSE,0.501529584956935,20210114
 11/4/1980,Alabama,AL,3,FALSE,FALSE,FALSE,Hadnott,national democratic party of alabama,FALSE,0.0022926423377703,20210114
@@ -1310,6 +1330,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/4/1980,Wisconsin,WI,3,FALSE,FALSE,FALSE,Hagen,socialist workers,FALSE,0.00294982038851249,20210114
 11/4/1980,Wisconsin,WI,3,FALSE,FALSE,FALSE,Larson,libertarian,FALSE,0.00439115834211202,20210114
 11/4/1980,Wisconsin,WI,3,FALSE,FALSE,FALSE,Wickstrom,american independent,FALSE,0.00732963675742967,20210114
+11/4/1980,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4472447882,20210915
+11/4/1980,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5162269272,20210915
 11/2/1982,Arizona,AZ,1,FALSE,FALSE,FALSE,Deconcini,democrat,FALSE,0.569109734280998,20210114
 11/2/1982,Arizona,AZ,1,FALSE,FALSE,FALSE,Dunn,republican,FALSE,0.403032249597657,20210114
 11/2/1982,Arizona,AZ,1,FALSE,FALSE,FALSE,Clamons,libertarian,FALSE,0.0277668414181811,20210114
@@ -1427,6 +1449,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/2/1982,Wisconsin,WI,1,FALSE,FALSE,FALSE,Knapp,constitution,FALSE,0.00288889190961387,20210114
 11/2/1982,Wyoming,WY,1,FALSE,FALSE,FALSE,Wallop,republican,FALSE,0.566567578398359,20210114
 11/2/1982,Wyoming,WY,1,FALSE,FALSE,FALSE,McDaniel,democrat,FALSE,0.433432421601641,20210114
+11/2/1982,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4344433063,20210915
+11/2/1982,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5407957686,20210915
 11/3/1983,Washington,WA,1,TRUE,FALSE,TRUE,Evans,republican,FALSE,0.5541268615,20210325
 11/3/1983,Washington,WA,1,TRUE,FALSE,TRUE,Lowry,democrat,FALSE,0.4458731385,20210325
 11/6/1984,Alabama,AL,2,FALSE,FALSE,FALSE,Heflin,democrat,FALSE,0.627562472925846,20210114
@@ -1534,6 +1558,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/6/1984,West Virginia,WV,2,FALSE,FALSE,FALSE,Rockefeller,democrat,FALSE,0.518176103415618,20210114
 11/6/1984,Wyoming,WY,2,FALSE,FALSE,FALSE,Ryan,democrat,FALSE,0.216829500583206,20210114
 11/6/1984,Wyoming,WY,2,FALSE,FALSE,FALSE,Simpson,republican,FALSE,0.783170499416794,20210114
+11/6/1984,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4932882511,20210915
+11/6/1984,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4982271797,20210915
 11/4/1986,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,democrat,FALSE,0.502815008206143,20210114
 11/4/1986,Alabama,AL,3,FALSE,FALSE,FALSE,Denton,republican,FALSE,0.497184991793857,20210114
 11/4/1986,Alaska,AK,3,FALSE,FALSE,FALSE,House,libertarian,FALSE,0.0174833103799205,20210114
@@ -1637,6 +1663,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/4/1986,Wisconsin,WI,3,FALSE,FALSE,FALSE,Storsteen,socialist workers,FALSE,0.0019727961790053,20210114
 11/4/1986,Wisconsin,WI,3,FALSE,FALSE,FALSE,Garvey,democrat,FALSE,0.473958551053349,20210114
 11/4/1986,Wisconsin,WI,3,FALSE,FALSE,FALSE,Kasten,republican,FALSE,0.508755547225073,20210114
+11/4/1986,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4757404008,20210915
+11/4/1986,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5008612556,20210915
 11/8/1988,Arizona,AZ,1,FALSE,FALSE,FALSE,Finkelstein,new alliance,FALSE,0.00446099271900726,20210114
 11/8/1988,Arizona,AZ,1,FALSE,FALSE,FALSE,Tompkins,libertarian,FALSE,0.01790322178991,20210114
 11/8/1988,Arizona,AZ,1,FALSE,FALSE,FALSE,Degreen,republican,FALSE,0.410514375216287,20210114
@@ -1746,6 +1774,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/8/1988,Wisconsin,WI,1,FALSE,FALSE,FALSE,Grogan,independent,FALSE,0.0013970177890314,20210114
 11/8/1988,Wyoming,WY,1,FALSE,FALSE,FALSE,Vinich,democrat,FALSE,0.496347339802392,20210114
 11/8/1988,Wyoming,WY,1,FALSE,FALSE,FALSE,Wallop,republican,FALSE,0.503652660197608,20210114
+11/8/1988,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4620185434,20210915
+11/8/1988,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5211446791,20210915
 11/6/1990,Alabama,AL,2,FALSE,FALSE,FALSE,Heflin,democrat,FALSE,0.605671499231324,20210114
 11/6/1990,Alabama,AL,2,FALSE,FALSE,FALSE,Cabaniss,republican,FALSE,0.394201934938413,20210114
 11/6/1990,Alaska,AK,2,FALSE,FALSE,FALSE,Beasley,democrat,FALSE,0.321925488400006,20210114
@@ -1829,6 +1859,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/6/1990,West Virginia,WV,2,FALSE,FALSE,FALSE,Yoder,republican,FALSE,0.316768281371737,20210114
 11/6/1990,Wyoming,WY,2,FALSE,FALSE,FALSE,Simpson,republican,FALSE,0.639362565976451,20210114
 11/6/1990,Wyoming,WY,2,FALSE,FALSE,FALSE,Helling,democrat,FALSE,0.360637434023549,20210114
+11/6/1990,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4709067224,20210915
+11/6/1990,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5112443212,20210915
 11/5/1991,Pennsylvania,PA,1,TRUE,FALSE,TRUE,Wofford,democrat,FALSE,0.5500738158,20210325
 11/5/1991,Pennsylvania,PA,1,TRUE,FALSE,TRUE,Thornburgh,republican,FALSE,0.4499261842,20210325
 11/3/1992,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,democrat,FALSE,0.64818015475989,20210114
@@ -1977,6 +2009,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/3/1992,Wisconsin,WI,3,FALSE,FALSE,FALSE,Johnson,independent,FALSE,0.0067259331911545,20210114
 11/3/1992,Wisconsin,WI,3,FALSE,FALSE,FALSE,Selliken,independent,FALSE,0.00111318206330923,20210114
 11/3/1992,Wisconsin,WI,3,FALSE,FALSE,FALSE,Taylor,independent,FALSE,0.00132946441809049,20210114
+11/3/1992,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4355773811,20210915
+11/3/1992,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4987370894,20210915
+11/3/1992,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01516760738,20210915
 11/24/1992,Georgia,GA,3,FALSE,TRUE,FALSE,Fowler,democrat,FALSE,0.493525870600347,20210114
 11/24/1992,Georgia,GA,3,FALSE,TRUE,FALSE,Coverdell,republican,FALSE,0.506474129399653,20210114
 12/4/1992,North Dakota,ND,1,FALSE,FALSE,TRUE,Conrad,democrat,FALSE,0.6516409997,20210325
@@ -2122,6 +2157,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/8/1994,Wyoming,WY,1,FALSE,FALSE,FALSE,Thomas,republican,FALSE,0.588736304595707,20210114
 11/8/1994,Wyoming,WY,1,FALSE,FALSE,FALSE,Sullivan,democrat,FALSE,0.393074215457836,20210114
 11/8/1994,Wyoming,WY,1,FALSE,FALSE,FALSE,McCune,libertarian,FALSE,0.0181894799464578,20210114
+11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5002021603,20210915
+11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4396697284,20210915
+11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01142917954,20210915
 3/3/1995,Colorado,CO,3,FALSE,FALSE,TRUE,Campbell,republican,FALSE,1.01,20210114
 1/30/1996,Oregon,OR,3,TRUE,FALSE,TRUE,Wyden,democrat,FALSE,0.4777997473,20210325
 1/30/1996,Oregon,OR,3,TRUE,FALSE,TRUE,Smith,republican,FALSE,0.4625733741,20210325
@@ -2268,6 +2306,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/5/1996,Wyoming,WY,2,FALSE,FALSE,FALSE,Marsden,natural law,FALSE,0.0121709139318827,20210114
 11/5/1996,Wyoming,WY,2,FALSE,FALSE,FALSE,Karpan,democrat,FALSE,0.422135050242329,20210114
 11/5/1996,Wyoming,WY,2,FALSE,FALSE,FALSE,Herbert,libertarian,FALSE,0.0250572066118052,20210114
+11/5/1996,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.49502652,20210915
+11/5/1996,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4783810258,20210915
 11/3/1998,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,republican,FALSE,0.63241830671754,20210114
 11/3/1998,Alabama,AL,3,FALSE,FALSE,FALSE,Suddith,democrat,FALSE,0.366913689061044,20210114
 11/3/1998,Alaska,AK,3,FALSE,FALSE,FALSE,Murkowski,republican,FALSE,0.744913370633028,20210114
@@ -2406,6 +2446,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/3/1998,Wisconsin,WI,3,FALSE,FALSE,FALSE,Ender,libertarian,FALSE,0.00317519632719913,20210114
 11/3/1998,Wisconsin,WI,3,FALSE,FALSE,FALSE,Raymond,u.s. taxpayers,FALSE,0.00451035758014943,20210114
 11/3/1998,Wisconsin,WI,3,FALSE,FALSE,FALSE,Feingold,democrat,FALSE,0.50547524017001,20210114
+11/3/1998,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4683837959,20210915
+11/3/1998,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4946627326,20210915
 11/7/2000,Arizona,AZ,1,FALSE,FALSE,FALSE,Toel,independent,FALSE,0.0781847229499326,20210114
 11/7/2000,Arizona,AZ,1,FALSE,FALSE,FALSE,Hansen,green,FALSE,0.0779671256252344,20210114
 11/7/2000,Arizona,AZ,1,FALSE,FALSE,FALSE,Kyl,republican,FALSE,0.793225279082885,20210114
@@ -2571,6 +2613,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/7/2000,Wyoming,WY,1,FALSE,FALSE,FALSE,Thomas,republican,FALSE,0.73772693872011,20210114
 11/7/2000,Wyoming,WY,1,FALSE,FALSE,FALSE,Dawson,libertarian,FALSE,0.0418891785508684,20210114
 11/7/2000,Wyoming,WY,1,FALSE,FALSE,FALSE,Logan,democrat,FALSE,0.220383882729021,20210114
+11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4696839363,20210915
+11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4703930132,20210915
+11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.0132582194,20210915
 6/5/2001,Vermont,VT,1,FALSE,FALSE,TRUE,Jeffords,democrat,FALSE,1.01,20210114
 11/5/2002,Alabama,AL,2,FALSE,FALSE,FALSE,Sessions,republican,FALSE,0.585770530138808,20210114
 11/5/2002,Alabama,AL,2,FALSE,FALSE,FALSE,Allen,libertarian,FALSE,0.0149546607855151,20210114
@@ -2699,6 +2744,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/5/2002,West Virginia,WV,2,FALSE,FALSE,FALSE,Rockefeller,democrat,FALSE,0.63111354637847,20210114
 11/5/2002,Wyoming,WY,2,FALSE,FALSE,FALSE,Corcoran,democrat,FALSE,0.270460497599302,20210114
 11/5/2002,Wyoming,WY,2,FALSE,FALSE,FALSE,Enzi,republican,FALSE,0.729539502400698,20210114
+11/5/2002,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4987331065,20210915
+11/5/2002,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4595844136,20210915
 12/7/2002,Louisiana,LA,2,FALSE,TRUE,FALSE,Landrieu,democrat,FALSE,0.5170048312,20210325
 12/7/2002,Louisiana,LA,2,FALSE,TRUE,FALSE,Terrell,republican,FALSE,0.4829951688,20210325
 11/2/2004,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,republican,FALSE,0.675451560737896,20210114
@@ -2837,6 +2884,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/2/2004,Wisconsin,WI,3,FALSE,FALSE,FALSE,Feingold,democrat,FALSE,0.553504830759832,20210114
 11/2/2004,Wisconsin,WI,3,FALSE,FALSE,FALSE,Michels,republican,FALSE,0.441117412601708,20210114
 11/2/2004,Wisconsin,WI,3,FALSE,FALSE,FALSE,Hem,independent,FALSE,0.00225850184236389,20210114
+11/2/2004,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4531414777,20210915
+11/2/2004,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5080132322,20210915
 11/7/2006,Arizona,AZ,1,FALSE,FALSE,FALSE,Pederson,democrat,FALSE,0.434993993903517,20210114
 11/7/2006,Arizona,AZ,1,FALSE,FALSE,FALSE,Kyl,republican,FALSE,0.53340817484094,20210114
 11/7/2006,Arizona,AZ,1,FALSE,FALSE,FALSE,Mack,libertarian,FALSE,0.0315899715872993,20210114
@@ -2971,6 +3020,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/7/2006,Wisconsin,WI,1,FALSE,FALSE,FALSE,Vogeler,wisconsin green,FALSE,0.0198447643147795,20210114
 11/7/2006,Wyoming,WY,1,FALSE,FALSE,FALSE,Groutage,democrat,FALSE,0.298510321124661,20210114
 11/7/2006,Wyoming,WY,1,FALSE,FALSE,FALSE,Thomas,republican,FALSE,0.699672871073935,20210114
+11/7/2006,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4181178815,20210915
+11/7/2006,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5437361347,20210915
+11/7/2006,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01007134486,20210915
 11/4/2008,Alabama,AL,2,FALSE,FALSE,FALSE,Figures,democrat,FALSE,0.365204488321714,20210114
 11/4/2008,Alabama,AL,2,FALSE,FALSE,FALSE,Sessions,republican,FALSE,0.63362231948397,20210114
 11/4/2008,Alaska,AK,2,FALSE,FALSE,FALSE,Stevens,republican,FALSE,0.465229146143024,20210114
@@ -3086,6 +3138,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/4/2008,Wyoming,WY,1,TRUE,FALSE,FALSE,Barrasso,republican,FALSE,0.733369655354761,20210114
 11/4/2008,Wyoming,WY,2,FALSE,FALSE,FALSE,Enzi,republican,FALSE,0.756162827440832,20210114
 11/4/2008,Wyoming,WY,1,TRUE,FALSE,FALSE,Carter,democrat,FALSE,0.265212183367452,20210114
+11/4/2008,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4449899677,20210915
+11/4/2008,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5187923916,20210915
+11/4/2008,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01230536321,20210915
 12/2/2008,Georgia,GA,2,FALSE,TRUE,FALSE,Chambliss,republican,FALSE,0.574395824797143,20210114
 12/2/2008,Georgia,GA,2,FALSE,TRUE,FALSE,Martin,democrat,FALSE,0.425604175202857,20210114
 4/28/2009,Pennsylvania,PA,3,FALSE,FALSE,TRUE,Specter,democrat,FALSE,1.01,20210325
@@ -3265,6 +3320,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/2/2010,Wisconsin,WI,3,FALSE,FALSE,FALSE,Pagels,republican,FALSE,0.0000617132993541749,20210114
 11/2/2010,Wisconsin,WI,3,FALSE,FALSE,FALSE,Johnson,republican,FALSE,0.518575472832102,20210114
 11/2/2010,Wisconsin,WI,3,FALSE,FALSE,FALSE,Laforest,independent,FALSE,0.000059410564303646,20210114
+11/2/2010,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4822166463,20210915
+11/2/2010,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4514213346,20210915
+11/2/2010,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01081444405,20210915
 11/6/2012,Arizona,AZ,1,FALSE,FALSE,FALSE,Victor,libertarian,FALSE,0.0455148429497437,20210114
 11/6/2012,Arizona,AZ,1,FALSE,FALSE,FALSE,Flake,republican,FALSE,0.492309070696463,20210114
 11/6/2012,Arizona,AZ,1,FALSE,FALSE,FALSE,Carmona,democrat,FALSE,0.462036121603515,20210114
@@ -3397,6 +3455,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/6/2012,Wyoming,WY,1,FALSE,FALSE,FALSE,Otto,country party,FALSE,0.0252130000449066,20210114
 11/6/2012,Wyoming,WY,1,FALSE,FALSE,FALSE,Barrasso,republican,FALSE,0.756267528872886,20210114
 11/6/2012,Wyoming,WY,1,FALSE,FALSE,FALSE,Chesnut,democrat,FALSE,0.216445603850535,20210114
+11/6/2012,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4182102283,20210915
+11/6/2012,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5404461374,20210915
+11/6/2012,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01022586043,20210915
 6/25/2013,Massachusetts,MA,2,TRUE,FALSE,TRUE,Markey,democrat,FALSE,0.5480000679,20210325
 6/25/2013,Massachusetts,MA,2,TRUE,FALSE,TRUE,Gomez,republican,FALSE,0.4460107489,20210325
 10/16/2013,New Jersey,NJ,2,TRUE,FALSE,TRUE,Booker,democrat,FALSE,0.5492433595,20210325
@@ -3544,6 +3605,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/4/2014,Wyoming,WY,2,FALSE,FALSE,FALSE,Porambo,libertarian,FALSE,0.0218193686209352,20210114
 11/4/2014,Wyoming,WY,2,FALSE,FALSE,FALSE,Enzi,republican,FALSE,0.721303109423214,20210114
 11/4/2014,Wyoming,WY,2,FALSE,FALSE,FALSE,Hardy,democrat,FALSE,0.174323522430572,20210114
+11/4/2014,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5148575961,20210915
+11/4/2014,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4381003906,20210915
+11/4/2014,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01947788097,20210915
 12/6/2014,Louisiana,LA,2,FALSE,TRUE,FALSE,Cassidy,republican,FALSE,0.5593476388,20210325
 12/6/2014,Louisiana,LA,2,FALSE,TRUE,FALSE,Landrieu,democrat,FALSE,0.4406523612,20210325
 11/8/2016,Alabama,AL,3,FALSE,FALSE,FALSE,Crumpton,democrat,FALSE,0.358672615888139,20210114
@@ -3715,6 +3779,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/8/2016,Wisconsin,WI,3,FALSE,FALSE,FALSE,Feingold,democrat,FALSE,0.468109949297005,20210114
 11/8/2016,Wisconsin,WI,3,FALSE,FALSE,FALSE,Anderson,libertarian,FALSE,0.0296841940339962,20210114
 11/8/2016,Wisconsin,WI,3,FALSE,FALSE,FALSE,Johnson,republican,FALSE,0.501729721260701,20210114
+11/8/2016,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4216288728,20210915
+11/8/2016,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.5297596613,20210915
+11/8/2016,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01845954828,20210915
 12/10/2016,Louisiana,LA,3,FALSE,TRUE,FALSE,Kennedy,republican,FALSE,0.606546102,20210325
 12/10/2016,Louisiana,LA,3,FALSE,TRUE,FALSE,Campbell,democrat,FALSE,0.393453898,20210325
 12/12/2017,Alabama,AL,2,TRUE,FALSE,TRUE,Jones,democrat,FALSE,0.4996559701,20210325
@@ -3853,6 +3920,8 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/6/2018,Wyoming,WY,1,FALSE,FALSE,FALSE,Barrasso,republican,FALSE,0.669599842690001,20210114
 11/6/2018,Wyoming,WY,1,FALSE,FALSE,FALSE,Trauner,democrat,FALSE,0.300988103431324,20210114
 11/6/2018,Wyoming,WY,1,FALSE,FALSE,FALSE,Porambo,libertarian,FALSE,0.0278143742011602,20210114
+11/6/2018,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.3837923004,20210915
+11/6/2018,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.58307961,20210915
 11/3/2020,Alabama,AL,2,FALSE,FALSE,FALSE,Jones,democrat,FALSE,0.39736665450723,20210114
 11/3/2020,Alabama,AL,2,FALSE,FALSE,FALSE,Tuberville,republican,FALSE,0.600953616425169,20210114
 11/3/2020,Alaska,AK,2,FALSE,FALSE,FALSE,Gross,democrat,FALSE,0.411938395936681,20210114
@@ -4038,6 +4107,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/3/2020,West Virginia,WV,2,FALSE,FALSE,FALSE,Moran,libertarian,FALSE,0.0271594699313663,20210114
 11/3/2020,Wyoming,WY,2,FALSE,FALSE,FALSE,Lummis,republican,FALSE,0.711302930309548,20210114
 11/3/2020,Wyoming,WY,2,FALSE,FALSE,FALSE,David,democrat,FALSE,0.261275462023748,20210114
+11/3/2020,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4928744521,20210915
+11/3/2020,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4703217847,20210915
+11/3/2020,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01799193906,20210915
 1/5/2021,Georgia,GA,3,TRUE,TRUE,FALSE,Loeffler,republican,FALSE,0.489561469758619,20210114
 1/5/2021,Georgia,GA,3,TRUE,TRUE,FALSE,Warnock,democrat,FALSE,0.510438530241381,20210114
 1/5/2021,Georgia,GA,2,FALSE,TRUE,FALSE,Perdue,republican,FALSE,0.493834482687859,20210114

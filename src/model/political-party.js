@@ -128,7 +128,7 @@ var GreenParty = new PoliticalParty(
 
 var ReformParty = new PoliticalParty(
   "REF",
-  ["Reform"],
+  ["Reform", "Reform Party"],
   "Ref",
   "Perot",
   cloneObject(PoliticalPartyColors.purple),
@@ -137,7 +137,7 @@ var ReformParty = new PoliticalParty(
 
 var IndependentRNParty = new PoliticalParty(
   "INDRN",
-  ["None"],
+  ["Nader"],
   "Ind",
   "Nader",
   cloneObject(PoliticalPartyColors.gray),
@@ -146,7 +146,7 @@ var IndependentRNParty = new PoliticalParty(
 
 var Independent2016EMParty = new PoliticalParty(
   "IND2016EM",
-  ["None"],
+  ["McMullin"],
   "Ind",
   "McMullin",
   cloneObject(PoliticalPartyColors.gray),
@@ -155,16 +155,16 @@ var Independent2016EMParty = new PoliticalParty(
 
 var Independent1980JAParty = new PoliticalParty(
   "IND1980JA",
-  ["None"],
+  ["Anderson"],
   "Ind",
   "Anderson",
-  cloneObject(PoliticalPartyColors.gray),
+  cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
 
 var Independent1976EMParty = new PoliticalParty(
   "IND1976EM",
-  ["None"],
+  ["McCarthy"],
   "Ind",
   "McCarthy",
   cloneObject(PoliticalPartyColors.gray),

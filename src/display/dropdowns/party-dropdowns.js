@@ -467,12 +467,12 @@ async function deleteParty(partyID)
     delete currentCandidateNames[partyID]
   }
 
-  for (var regionData in displayRegionDataArray)
+  for (var regionID in displayRegionDataArray)
   {
-    if (displayRegionDataArray[regionData].partyID == partyID)
+    if (displayRegionDataArray[regionID].partyID == partyID)
     {
-      displayRegionDataArray[regionData].margin = 0
-      displayRegionDataArray[regionData].partyID = TossupParty.getID()
+      displayRegionDataArray[regionID].margin = 0
+      displayRegionDataArray[regionID].partyID = TossupParty.getID()
     }
   }
 
@@ -529,7 +529,7 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
   for (var partyIDNum in dropdownPoliticalPartyIDs)
   {
     if (politicalParties[dropdownPoliticalPartyIDs[partyIDNum]] == null) { continue }
-    $("#" + dropdownPoliticalPartyIDs[partyIDNum]).html(politicalParties[dropdownPoliticalPartyIDs[partyIDNum]].getCandidateName() + " (" + (partyTotals[dropdownPoliticalPartyIDs[partyIDNum]] || 0) + ")")
+    $("#" + dropdownPoliticalPartyIDs[partyIDNum]).html(politicalParties[dropdownPoliticalPartyIDs[partyIDNum]].getCandidateName() + " (<span style='font-weight: bold'>" + (partyTotals[dropdownPoliticalPartyIDs[partyIDNum]] || 0) + "</span>)")
   }
 }
 

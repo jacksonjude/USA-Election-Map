@@ -23,6 +23,22 @@ function decimalPadding(num, shouldAddDecimalPadding)
   return num.toString()
 }
 
+function roundValue(valueToRound, decimalPlaceToRound)
+{
+  return Math.round(valueToRound*Math.pow(10, decimalPlaceToRound))/Math.pow(10, decimalPlaceToRound)
+}
+
+function roundValueToPlace(valueToRound, figuresToInclude)
+{
+  var decimalPlaceToRound = Math.floor(-Math.log(valueToRound)/Math.log(10)+figuresToInclude)
+  if (decimalPlaceToRound <= 0 || !isFinite(decimalPlaceToRound))
+  {
+    decimalPlaceToRound = 1
+  }
+
+  return roundValue(valueToRound, decimalPlaceToRound)
+}
+
 function getKeyByValue(object, value, shouldStringifyToCompare)
 {
   return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)
