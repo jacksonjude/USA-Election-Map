@@ -64,9 +64,9 @@ Then open the address provided in the Terminal window (by default, it seems to b
   - [x] Set map-wide electoral votes from decade
   - [ ] Add multiple dates, edit dates, create & remove dates
   - [ ] Split electoral votes between multiple candidates
+- [x] National popular vote totals for past elections
 - [ ] Past house election results
 - [ ] Presidential election results by county
-- [ ] National popular vote totals for past elections
 - [ ] Profiles and custom map sharing
 - [ ] Popularity rating source (by state)
 - [ ] Custom countdown timer events
