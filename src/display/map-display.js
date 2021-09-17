@@ -1253,7 +1253,7 @@ function getMarginIndexForValue(margin, partyID)
 function generateFlipPattern(partyID, margin)
 {
   var fillColor = politicalParties[partyID].getMarginColors()[margin]
-  var patternID = partyID + "-" + margin + "-flip-pattern"
+  var patternID = fillColor.slice(1)
 
   if ($("#" + patternID).length == 0)
   {
