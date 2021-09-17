@@ -104,7 +104,7 @@ $(async function() {
 async function reloadForNewMapType(initialLoad)
 {
   var previousDateOverride
-  if (initialLoad != true)
+  if (!initialLoad)
   {
     previousDateOverride = currentSliderDate ? currentSliderDate.getTime() : null
     clearMap(true, false)
@@ -143,6 +143,9 @@ async function reloadForNewMapType(initialLoad)
   selectedCompareSlider = null
 
   createMapTypeDropdownItems()
+  createMapSourceDropdownItems()
+  createSettingsDropdownItems()
+  createComparePresetDropdownItems()
 
   currentMapSource = (currentMapType.getCurrentMapSourceID() && currentMapType.getCurrentMapSourceID() in mapSources) ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
   if (currentMapSource.getID() == NullMapSource.getID())
