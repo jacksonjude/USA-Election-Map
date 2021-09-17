@@ -161,10 +161,6 @@ async function reloadForNewMapType(initialLoad)
   $("#loader").hide()
   resizeElements(false)
 
-  createMapSourceDropdownItems()
-  createSettingsDropdownItems()
-  createComparePresetDropdownItems()
-
   populateRegionsArray()
   for (var partyNum in dropdownPoliticalPartyIDs)
   {
