@@ -9,8 +9,9 @@ An interactive USA presidential, senatorial, and governor election map. Created 
   * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA), [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ), and [The Cook Political Report](https://cookpolitical.com)
   * Displays projection data for the 2022 governor elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [The Cook Political Report](https://cookpolitical.com)
   * Displays presidential (1856-2020), senatorial (1960-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
-  * Pie chart to show electoral vote counts by party and by margin
-  * Editable custom maps that can be downloaded and uploaded as JSON or CSV files
+  * Pie chart to show electoral vote counts by party and by margin, as well as national popular vote totals for past elections
+  * View states that flipped between election cycles on both the map and pie chart
+  * Fully editable custom maps that can be downloaded and uploaded as JSON or CSV files
 * Comparisons between different map sources
   * Can be used to show shift between elections
   * Can be used to show margins of error between projections and election results
