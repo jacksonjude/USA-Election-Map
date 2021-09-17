@@ -192,7 +192,11 @@ function loadMapSVGFile()
     $('#mapzoom').load(currentMapType.getSVGPath(), function() {
       setOutlineDivProperties()
       updateMapElectoralVoteText()
-      generateFlipPatternsFromPartyMap(politicalParties)
+
+      if (currentMapType.getMapSettingValue("flipStates"))
+      {
+        generateFlipPatternsFromPartyMap(politicalParties)
+      }
 
       resolve()
     })
