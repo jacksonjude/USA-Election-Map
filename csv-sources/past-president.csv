@@ -769,8 +769,8 @@ date,region,state_po,candidate,party,voteshare,version
 11/2/1976,Colorado,CO,Hall,communist party use,0.037265127977511500,20171015
 11/2/1976,Connecticut,CT,Ford,republican,52.0627914349784,20171015
 11/2/1976,Connecticut,CT,Carter,democrat,46.8970544166378,20171015
-11/2/1976,Connecticut,CT,Maddox,american independent party,0.396662820678004,20171015
-11/2/1976,Connecticut,CT,Larouche,u.s. labor,0.51399684117418,20171015
+11/2/1976,Connecticut,CT,Maddox,american independent party,0.51399684117418,20171015
+11/2/1976,Connecticut,CT,Larouche,u.s. labor,0.12949448653156,20171015
 11/2/1976,Delaware,DE,Carter,democrat,51.969088702353600,20171015
 11/2/1976,Delaware,DE,Ford,republican,46.587620203529100,20171015
 11/2/1976,Delaware,DE,Anderson,american,0.27372030452975300,20171015
@@ -3003,7 +3003,7 @@ date,region,state_po,candidate,party,voteshare,version
 11/7/2000,Wisconsin,WI,Nader,green,3.62861805853697,20171015
 11/7/2000,Wisconsin,WI,Buchanan,reform party,0.442477705426572,20171015
 11/7/2000,Wisconsin,WI,Browne,libertarian,0.25612866916855,20171015
-11/7/2000,Wyoming,WY,Bush,republican,47.9464768228627,20171015
+11/7/2000,Wyoming,WY,Bush,republican,69.2227431384109,20171015
 11/7/2000,Wyoming,WY,Gore,democrat,28.298382040556600,20171015
 11/7/2000,Wyoming,WY,Nader,green,2.12,JJCooley
 11/7/2000,Wyoming,WY,Buchanan,reform party,1.2745290699306600,20171015
