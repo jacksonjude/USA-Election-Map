@@ -2169,7 +2169,7 @@ function createGovernorMapSources()
           for (var regionID in fullFilteredMapData[mapDate])
           {
             if (regionIDs[regionNum] == nationalPopularVoteID) { continue }
-            
+
             if (fullFilteredMapData[mapDate][regionID].runoff)
             {
               fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID] = fullFilteredMapData[mapDate][regionID]
@@ -2302,7 +2302,10 @@ function createGovernorMapSources()
     1624604400000: "231836",
     1625814000000: "231846",
     1628233200000: "231881",
-    1630393200000: ""
+    1630393200000: "231906",
+    1631516400000: "231916",
+    1631689200000: "231936",
+    1632466800000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
