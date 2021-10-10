@@ -294,8 +294,6 @@ function createHashCanvasPattern(baseColor)
     return hashCanvasPatternCache[baseColor]
   }
 
-  console.log("generating")
-
   var patternCanvas = document.createElement('canvas')
   var patternContext = patternCanvas.getContext('2d')
 
