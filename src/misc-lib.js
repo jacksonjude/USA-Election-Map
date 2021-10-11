@@ -44,6 +44,25 @@ function getKeyByValue(object, value, shouldStringifyToCompare)
   return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)
 }
 
+function getKeyForMaxValue(object, returnEvenKeys, minValue)
+{
+  var largestValue = minValue || 0
+  var largestKey = []
+  Object.keys(object).forEach(key => {
+    if (object[key] > largestValue)
+    {
+      largestKey = [key]
+      largestValue = object[key]
+    }
+    else if (object[key] == largestValue)
+    {
+      largestKey.push(key)
+    }
+  })
+
+  return largestKey.length > 1 && returnEvenKeys ? largestKey : largestKey[0]
+}
+
 function invertObject(object)
 {
   var newObject = {}

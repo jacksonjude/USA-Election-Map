@@ -50,7 +50,8 @@ const maxDateSliderTicks = 55
 
 const MapState = {
   editing: 0,
-  viewing: 1
+  viewing: 1,
+  zooming: 2
 }
 var currentMapState = MapState.viewing
 
@@ -599,7 +600,18 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
-  for (var regionNum in currentMapDataForDate)
+  switch (currentMapState)
+  {
+    case MapState.viewing:
+    currentMapDataForDate = currentMapSource.getViewingData(currentMapDataForDate)
+    break
+
+    case MapState.zooming:
+    currentMapDataForDate = currentMapSource.getZoomingData(currentMapDataForDate)
+    break
+  }
+
+  for (let regionNum in currentMapDataForDate)
   {
     var regionDataCallback = getRegionData(currentMapDataForDate[regionNum].region)
     var regionData = regionDataCallback.regionData
@@ -621,6 +633,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
     regionData.flip = currentMapDataForDate[regionNum].flip
+    regionData.partyVoteSplits = currentMapDataForDate[regionNum].partyVoteSplits
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }
@@ -649,7 +662,7 @@ function updateMapElectoralVoteText()
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}).disabled)
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}))
     if (regionEV == undefined) { continue }
 
     if (regionChildren.length == 1)
@@ -1171,7 +1184,9 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 {
   var fillColor
   var shouldHide = false
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
+
+  var canUseVoteSplitsForColor = regionData.margin == 0 && "partyVoteSplits" in regionData
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
   {
     if (regionData.disabled == true)
     {
@@ -1185,6 +1200,18 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
           shouldHide = true
           break
         }
+      }
+    }
+    else if (canUseVoteSplitsForColor)
+    {
+      var evenParties = getKeyForMaxValue(regionData.partyVoteSplits, true, 0)
+      if (evenParties.length == 2 && evenParties.includes(DemocraticParty.getID()) && evenParties.includes(RepublicanParty.getID()))
+      {
+        fillColor = PoliticalPartyColors.purple.likely
+      }
+      else // Add better handling / more party combos
+      {
+        fillColor = TossupParty.getMarginColors().safe
       }
     }
     else
@@ -1287,19 +1314,22 @@ function getPartyTotals(includeFlipData)
     partyTotals[mainPoliticalPartyIDs[partyIDNum]] = 0
   }
 
-  for (var regionID in displayRegionDataArray)
+  var shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
+  var regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+
+  for (var regionID in regionDataArray)
   {
     if (regionID == nationalPopularVoteID) { continue }
 
-    var partyIDToSet = displayRegionDataArray[regionID].partyID
-    if (displayRegionDataArray[regionID].partyID == null)
+    var partyIDToSet = regionDataArray[regionID].partyID
+    if (regionDataArray[regionID].partyID == null)
     {
       partyIDToSet = TossupParty.getID()
     }
 
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
 
-    if (includeFlipData && displayRegionDataArray[regionID].flip)
+    if (includeFlipData && regionDataArray[regionID].flip)
     {
       if (!(partyIDToSet in partyFlipTotals))
       {
@@ -1382,7 +1412,7 @@ function updateRegionBox(regionID)
 
   if (editingRegionEVs)
   {
-    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled) + "'>")
+    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData) + "'>")
     $("#regionEV-text").focus().select()
     return
   }
@@ -1428,6 +1458,14 @@ function updateRegionBox(regionID)
     regionMarginString += "</div>"
   }
 
+  if (regionData.partyVoteSplits)
+  {
+    regionMarginString = "</span>"
+    Object.keys(regionData.partyVoteSplits).forEach((partyID, i) => {
+      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
+    })
+  }
+
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
   $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
@@ -1451,7 +1489,7 @@ function applyRegionEVEdit(regionID)
     shouldRefreshEV = true
   }
 
-  var currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData.disabled)
+  var currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData)
   if (!isNaN(newEV) && newEV > 0 && newEV != currentEV)
   {
     overrideRegionEVs[regionID] = newEV

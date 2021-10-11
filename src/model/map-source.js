@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
   {
     this.id = id
     this.name = name
@@ -18,6 +18,12 @@ class MapSource
     this.shouldFilterOutDuplicateRows = shouldFilterOutDuplicateRows
     this.addDecimalPadding = addDecimalPadding
     this.filterMapDataFunction = organizeMapDataFunction
+    this.viewingDataFunction = viewingDataFunction || ((mapData) => {
+      return mapData
+    })
+    this.zoomingDataFunction = zoomingDataFunction || ((mapData) => {
+      return null
+    })
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
@@ -26,6 +32,7 @@ class MapSource
     this.voteshareCutoffMargin = voteshareCutoffMargin
     this.overrideSVGPath = overrideSVGPath
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
+    this.shouldUseOriginalMapDataForTotalsPieChart = shouldUseOriginalMapDataForTotalsPieChart == null ? false : shouldUseOriginalMapDataForTotalsPieChart
   }
 
   // id,
@@ -44,6 +51,8 @@ class MapSource
   // shouldFilterOutDuplicateRows,
   // addDecimalPadding,
   // organizeMapDataFunction,
+  // viewingDataFunction,
+  // zoomingDataFunction,
   // customOpenRegionLinkFunction,
   // convertMapDataRowToCSVFunction,
   // isCustomMap,
@@ -52,6 +61,7 @@ class MapSource
   // voteshareCutoffMargin,
   // overrideSVGPath,
   // shouldSetDisabledWorthToZero
+  // shouldUseOriginalMapDataForTotalsPieChart
 
   loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
@@ -305,6 +315,16 @@ class MapSource
     return this.mapData[modelDate][regionID]
   }
 
+  getViewingData(mapDateData)
+  {
+    return this.viewingDataFunction(mapDateData)
+  }
+
+  getZoomingData(mapDateData)
+  {
+    return this.zoomingDataFunction(mapDateData)
+  }
+
   openRegionLink(regionID, modelDate)
   {
     if (this.customOpenRegionLinkFunction == undefined)
@@ -400,6 +420,11 @@ class MapSource
   getShouldSetDisabledWorthToZero()
   {
     return this.shouldSetDisabledWorthToZero
+  }
+
+  getShouldUseOriginalMapDataForTotalsPieChart()
+  {
+    return this.shouldUseOriginalMapDataForTotalsPieChart
   }
 
   getDropdownPartyIDs()
@@ -1208,6 +1233,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1251,6 +1278,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1305,6 +1334,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -1727,6 +1758,8 @@ function createSenateMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1778,6 +1811,8 @@ function createSenateMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1826,6 +1861,8 @@ function createSenateMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1864,6 +1901,8 @@ function createSenateMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -1940,6 +1979,8 @@ function createSenateMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -2281,6 +2322,8 @@ function createGovernorMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2335,6 +2378,8 @@ function createGovernorMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -2368,6 +2413,8 @@ function createGovernorMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2433,6 +2480,8 @@ function createGovernorMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -2623,7 +2672,7 @@ function createHouseMapSources()
           }
 
           var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName)
-          filteredDateData[fullRegionName] = {region: fullRegionName, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+          filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
         }
       }
 
@@ -2711,24 +2760,50 @@ function createHouseMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    (mapDateData) => {
+      var housePerStateMapData = {}
+
+      for (let regionID in mapDateData)
+      {
+        var regionData = mapDateData[regionID]
+
+        if (!(regionData.state in housePerStateMapData))
+        {
+          housePerStateMapData[regionData.state] = {region: regionData.state, partyVoteSplits: {}}
+        }
+
+        var partyVoteSplitData = housePerStateMapData[regionData.state].partyVoteSplits
+
+        if (!(regionData.partyID in partyVoteSplitData))
+        {
+          partyVoteSplitData[regionData.partyID] = 0
+        }
+        partyVoteSplitData[regionData.partyID]++
+      }
+
+      for (let regionID in housePerStateMapData)
+      {
+        var partyVoteSplitData = housePerStateMapData[regionID].partyVoteSplits
+
+        var largestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
+        var largestPartyCount = partyVoteSplitData[largestPartyID]
+        delete partyVoteSplitData[housePerStateMapData[regionID].partyID]
+
+        housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // to account for rounding errors
+        housePerStateMapData[regionID].partyID = largestPartyID
+      }
+
+      return housePerStateMapData
+    }, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
 
-      var isSpecial = false
-      if (regionID != null && mapDate != null)
-      {
-        isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
-      }
-
-      var linkToOpen = homepageURL + mapDate.getFullYear()
+      var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_House_of_Representatives_elections"
       if (!shouldOpenHomepage)
       {
-        linkToOpen += "_" + regionIDToLinkMap[regionID] + "_gubernatorial_election"
-      }
-      else
-      {
-        linkToOpen += "_United_States_gubernatorial_elections"
+        linkToOpen += "_in_" + regionIDToLinkMap[regionID]
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
@@ -2736,7 +2811,10 @@ function createHouseMapSources()
     null, // isCustomMap
     null, // shouldClearDisabled
     true, // shouldShowVoteshare
-    1.0 // voteshareCutoffMargin
+    1.0, // voteshareCutoffMargin
+    null, // overrideSVGPath
+    null, // shouldSetDisabledWorthToZero
+    true // shouldUseOriginalMapDataForTotalsPieChart
   )
 
   var idsToPartyNames = {}
@@ -2776,10 +2854,17 @@ function createHouseMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
-    false // shouldClearDisabled
+    false, // shouldClearDisabled
+    null, // shouldShowVoteshare
+    null, // voteshareCutoffMargin
+    null, // overrideSVGPath
+    null, // shouldSetDisabledWorthToZero
+    true // shouldUseOriginalMapDataForTotalsPieChart
   )
 
   var todayDate = new Date()

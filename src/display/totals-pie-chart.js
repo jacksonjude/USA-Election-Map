@@ -294,8 +294,6 @@ function createHashCanvasPattern(baseColor)
     return hashCanvasPatternCache[baseColor]
   }
 
-  console.log("generating")
-
   var patternCanvas = document.createElement('canvas')
   var patternContext = patternCanvas.getContext('2d')
 
@@ -345,8 +343,11 @@ function createHashCanvasPattern(baseColor)
   return colorPattern
 }
 
-function updateTotalsPieChart()
+function updateTotalsPieChart(regionDataArray)
 {
+  var shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
+  var regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+
   var marginTotalsData = {}
   var regionMarginStringsData = {}
 
@@ -379,11 +380,11 @@ function updateTotalsPieChart()
 
   var fullPartyOrdering = cloneObject(partyOrdering)
 
-  for (var regionID in displayRegionDataArray)
+  for (var regionID in regionDataArray)
   {
     if (regionID == nationalPopularVoteID) { continue }
 
-    var regionParty = displayRegionDataArray[regionID].partyID
+    var regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
     {
       insertPartyIntoTotalsPieChartOrdering(regionParty, fullPartyOrdering)
@@ -398,12 +399,12 @@ function updateTotalsPieChart()
       }
     }
 
-    var regionMargin = displayRegionDataArray[regionID].margin
+    var regionMargin = regionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
     var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
 
-    if (regionParty == null || regionParty == TossupParty.getID())
+    if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
       marginTotalsData[TossupParty.getID()].safe += regionEV
       regionMarginStringsData[TossupParty.getID()].safe.push(regionString)

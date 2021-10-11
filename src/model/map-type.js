@@ -299,10 +299,10 @@ var USAPresidentialMapType = new MapType(
   "assets/usa-pres.png",
   "svg-sources/usa-presidential-map.svg",
   538,
-  function(decade, regionID, disabled)
+  function(decade, regionID, regionData)
   {
     if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
-    if (currentMapSource.getShouldSetDisabledWorthToZero() && disabled) return 0
+    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData.disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
@@ -559,9 +559,9 @@ var USAHouseMapType = new MapType(
   "assets/usa-house.png",
   "svg-sources/usa-governor-map.svg", // use governor (single state) by default before zoom
   50,
-  function(decade, regionID)
+  function(decade, regionID, regionData)
   {
-    return (regionEVArray[decade] || regionEVArray[2020])[regionID]-2
+    return (regionEVArray[decade] || regionEVArray[2020])[regionID]-2 || 1
   },
   false,
   4,

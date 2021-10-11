@@ -59,7 +59,7 @@ function getTippingPointRegion()
       return (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
     })
     tippingPointRegion = nextClosestState
-    greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region, displayRegionDataArray[nextClosestState.region].disabled, currentMapSource.getShouldSetDisabledWorthToZero(), currentMapSource.isCustom())
+    greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region, displayRegionDataArray[nextClosestState.region], currentMapSource.getShouldSetDisabledWorthToZero(), currentMapSource.isCustom())
     checkedStates.push(nextClosestState.region)
   }
 
@@ -72,7 +72,7 @@ function getCurrentTotalEV()
   for (var regionID in displayRegionDataArray)
   {
     if (regionID == nationalPopularVoteID) { continue }
-    totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+    totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID])
   }
   return totalEV
 }
