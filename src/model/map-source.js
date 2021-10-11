@@ -2465,6 +2465,347 @@ function createGovernorMapSources()
   USAGovernorMapType.setCustomSourceID(CustomMapSource.getID())
 }
 
+function createHouseMapSources()
+{
+  const regionNameToIDHistorical = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", "National Popular Vote":"NPV"}
+
+  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, _, __, isCustomMap, voteshareCutoffMargin)
+  {
+    var filteredMapData = {}
+    var partyNameData = {}
+
+    var regionNames = Object.keys(regionNameToID)
+    var regionIDs = Object.values(regionNameToID)
+
+    for (var dateNum in mapDates)
+    {
+      var rawDateData = rawMapData[mapDates[dateNum]]
+      var filteredDateData = {}
+
+      var currentMapDate = new Date(mapDates[dateNum])
+      var currentDatePartyNameArray = {}
+
+      for (var regionNum in regionNames)
+      {
+        var regionToFind = regionNames[regionNum]
+
+        var fullStateRows = rawDateData.filter(row => {
+          return row[columnMap.region] == regionToFind
+        })
+
+        if (fullStateRows.length == 0)
+        {
+          // if (isCustomMap)
+          // {
+          //   let partyIDToCandidateNames = {}
+          //   for (var partyCandidateName in candidateNameToPartyIDMap)
+          //   {
+          //     partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
+          //   }
+          //
+          //   filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+          // }
+          continue
+        }
+
+        var stateDistricts = [...new Set(fullStateRows.map(row => {
+          return row[columnMap.district]
+        }))]
+
+        if (stateDistricts.length == 0)
+        {
+          console.log(fullStateRows, regionToFind, currentMapDate, rawDateData)
+        }
+
+        for (let stateDistrict of stateDistricts)
+        {
+          var districtRows = fullStateRows.filter(row => {
+            return row[columnMap.district] == stateDistrict
+          })
+
+          var fullRegionName = regionToFind + "-" + stateDistrict
+
+          var partyVotesharePercentages = null
+
+          var candidateData = {}
+
+          for (var rowNum in districtRows)
+          {
+            var row = districtRows[rowNum]
+
+            var candidateName = row[columnMap.candidateName]
+            var currentVoteshare = parseFloat(row[columnMap.voteshare])
+
+            var currentPartyName = row[columnMap.partyID]
+            var foundParty = Object.values(politicalParties).find(party => {
+              var partyNames = cloneObject(party.getNames())
+              for (var nameNum in partyNames)
+              {
+                partyNames[nameNum] = partyNames[nameNum].toLowerCase()
+              }
+              return partyNames.includes(currentPartyName)
+            })
+
+            if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
+            {
+              foundParty = politicalParties[currentPartyName]
+            }
+
+            var currentPartyID
+            if (foundParty)
+            {
+              currentPartyID = foundParty.getID()
+            }
+            else
+            {
+              currentPartyID = IndependentGenericParty.getID()
+            }
+
+            if (Object.keys(candidateData).includes(candidateName))
+            {
+              if (currentVoteshare > candidateData[candidateName].voteshare)
+              {
+                candidateData[candidateName].partyID = currentPartyID
+              }
+
+              candidateData[candidateName].voteshare += currentVoteshare
+            }
+            else
+            {
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+            }
+          }
+
+          var voteshareSortedCandidateData = Object.values(candidateData)
+          voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
+          voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          if (!isCustomMap && voteshareCutoffMargin != null)
+          {
+            voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+          }
+
+          if (voteshareSortedCandidateData.length == 0)
+          {
+            console.log("No candidate data!", currentMapDate.getFullYear().toString(), fullRegionName)
+            continue
+          }
+
+          var greatestMarginPartyID
+          var greatestMarginCandidateName
+          var topTwoMargin
+
+          if (voteshareSortedCandidateData[0].voteshare > 0)
+          {
+            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          }
+          else
+          {
+            greatestMarginPartyID = TossupParty.getID()
+            greatestMarginCandidateName = null
+            topTwoMargin = 0
+          }
+
+          for (var candidateDataNum in voteshareSortedCandidateData)
+          {
+            var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
+            if (!Object.keys(partyNameData).includes(mainPartyID))
+            {
+              currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            }
+          }
+
+          var partyIDToCandidateNames = {}
+          for (let partyCandidateName in candidateData)
+          {
+            partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
+          }
+
+          var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName)
+          filteredDateData[fullRegionName] = {region: fullRegionName, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+        }
+      }
+
+      filteredMapData[mapDates[dateNum]] = filteredDateData
+      partyNameData[mapDates[dateNum]] = currentDatePartyNameArray
+    }
+
+    return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
+  }
+
+  function mostRecentWinner(mapData, dateToStart, regionID)
+  {
+    var reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
+
+    var startYear = (new Date(parseInt(dateToStart))).getFullYear()
+
+    for (var dateNum in reversedMapDates)
+    {
+      if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
+
+      var currentYear = (new Date(parseInt(reversedMapDates[dateNum]))).getFullYear()
+
+      if (startYear-currentYear > 2)
+      {
+        return TossupParty.getID()
+      }
+
+      var mapDataFromDate = mapData[reversedMapDates[dateNum]]
+      if (regionID in mapDataFromDate)
+      {
+        return mapDataFromDate[regionID].partyID
+      }
+    }
+
+    return TossupParty.getID()
+  }
+
+  function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
+  {
+    var columnKey = getKeyByValue(columnMap, columnTitle)
+    switch (columnKey)
+    {
+      case "date":
+      return mapDateString
+
+      case "candidateName":
+      return candidateName
+
+      case "voteshare":
+      if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
+      {
+        return regionData.margin
+      }
+      return 0
+
+      case "region":
+      return getKeyByValue(regionNameToID, regionID)
+
+      case "partyID":
+      return candidateNameToPartyIDs[candidateName]
+    }
+  }
+
+  var PastElectionResultMapSource = new MapSource(
+    "Past-House-Elections", // id
+    "Past Elections", // name
+    "./csv-sources/past-house.csv", // dataURL
+    "https://en.wikipedia.org/wiki/", // homepageURL
+    "./assets/wikipedia-large.png", // iconURL
+    {
+      date: "date",
+      region: "region",
+      district: "district",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    }, // columnMap
+    null, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToID
+    null, // ev2016
+    {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+    {
+      if (mapDate == null) { return }
+
+      var isSpecial = false
+      if (regionID != null && mapDate != null)
+      {
+        isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
+      }
+
+      var linkToOpen = homepageURL + mapDate.getFullYear()
+      if (!shouldOpenHomepage)
+      {
+        linkToOpen += "_" + regionIDToLinkMap[regionID] + "_gubernatorial_election"
+      }
+      else
+      {
+        linkToOpen += "_United_States_gubernatorial_elections"
+      }
+      window.open(linkToOpen)
+    }, // customOpenRegionLinkFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0 // voteshareCutoffMargin
+  )
+
+  var idsToPartyNames = {}
+  var partyNamesToIDs = {}
+  for (var partyNum in mainPoliticalPartyIDs)
+  {
+    if (mainPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
+
+    partyNamesToIDs[politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]] = mainPoliticalPartyIDs[partyNum]
+    idsToPartyNames[mainPoliticalPartyIDs[partyNum]] = politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]
+  }
+
+  var CustomMapSource = new MapSource(
+    "Custom-House", // id
+    "Custom", // name
+    null, // dataURL
+    null, // homepageURL
+    null, // iconURL
+    {
+      date: "date",
+      region: "region",
+      isSpecial: "special",
+      isRunoff: "runoff",
+      isOffyear: "offyear",
+      isDisabled: "disabled",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    }, // columnMap
+    null, // cycleYear
+    partyNamesToIDs, // candidateNameToPartyIDMap
+    idsToPartyNames, // shortCandidateNameOverride
+    null, // incumbentChallengerPartyIDs
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // ev2016
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // customOpenRegionLinkFunction
+    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
+    true, // isCustomMap
+    false // shouldClearDisabled
+  )
+
+  var todayDate = new Date()
+  CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
+
+  var houseMapSources = {}
+  houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+  houseMapSources[CustomMapSource.getID()] = CustomMapSource
+
+  var houseMapSourceIDs = [PastElectionResultMapSource.getID()]
+  if (USAHouseMapType.getCustomMapEnabled())
+  {
+    houseMapSourceIDs.push(CustomMapSource.getID())
+  }
+
+  const kPastElectionsVsPastElections = 1
+
+  var defaultHouseCompareSourceIDs = {}
+  defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+
+  USAHouseMapType.setMapSources(houseMapSources)
+  USAHouseMapType.setMapSourceIDs(houseMapSourceIDs)
+  USAHouseMapType.setDefaultCompareSourceIDs(defaultHouseCompareSourceIDs)
+  USAHouseMapType.setCustomSourceID(CustomMapSource.getID())
+}
+
 var mainTwoPartyIDsToNames = {}
 mainTwoPartyIDsToNames[DemocraticParty.getID()] = DemocraticParty.getNames()[0]
 mainTwoPartyIDsToNames[RepublicanParty.getID()] = RepublicanParty.getNames()[0]
@@ -2484,3 +2825,4 @@ var NullMapSource = new MapSource(
 createPresidentialMapSources()
 createSenateMapSources()
 createGovernorMapSources()
+createHouseMapSources()
