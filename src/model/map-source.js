@@ -178,7 +178,7 @@ class MapSource
       var columnSplitStringArray = rowSplitStringArray[rowNum].split(columnDelimiter)
       for (var columnNum in columnSplitStringArray)
       {
-        if (columnSplitStringArray[columnNum].includes("\r"))
+        if (columnSplitStringArray[columnNum] != null && columnSplitStringArray[columnNum].includes("\r"))
         {
           columnSplitStringArray[columnNum] = columnSplitStringArray[columnNum].replace("\r", "")
         }
