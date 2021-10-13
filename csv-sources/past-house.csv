@@ -10900,8 +10900,8 @@ date,region,district,candidate,party,voteshare
 11/8/1994,NY,11,Gaffney,conservative,1.649928
 11/8/1994,NY,11,Popkin,libertarian,0.421808
 11/8/1994,NY,11,Popkin,republican,9.054519
-11/8/1994,NY,12,Velђ___zquez,democrat,86.263724
-11/8/1994,NY,12,Velђ___zquez,liberal,6.025656
+11/8/1994,NY,12,Velázquez,democrat,86.263724
+11/8/1994,NY,12,Velázquez,liberal,6.025656
 11/8/1994,NY,12,Brennan,conservative,6.349243
 11/8/1994,NY,12,Ruano-Melendez,perot hispano american,1.361378
 11/8/1994,NY,13,Butler,democrat,23.733556
@@ -12269,8 +12269,8 @@ date,region,district,candidate,party,voteshare
 11/5/1996,NY,12,Prado,republican,10.692322
 11/5/1996,NY,12,Prado,conservative,1.780687
 11/5/1996,NY,12,Prado,right to life,1.162981
-11/5/1996,NY,12,Velђ___quez,liberal,4.053352
-11/5/1996,NY,12,Velђ___quez,democrat,80.557302
+11/5/1996,NY,12,Velázquez,liberal,4.053352
+11/5/1996,NY,12,Velázquez,democrat,80.557302
 11/5/1996,NY,12,Garcia,socialist workers,1.753355
 11/5/1996,NY,13,Butler,liberal,1.253829
 11/5/1996,NY,13,Molinari,freedom,3.384948
@@ -14677,7 +14677,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,MI,9,Kildee,democrat,61.091887
 11/7/2000,MI,9,Martin,libertarian,2.061191
 11/7/2000,MI,9,Haines,u.s. taxpayers,0.639946
-11/7/2000,MI,9,Bouchђ__©,natural law,0.318235
+11/7/2000,MI,9,Bouch,natural law,0.318235
 11/7/2000,MI,10,Turner,republican,33.200361
 11/7/2000,MI,10,Bonior,democrat,64.413937
 11/7/2000,MI,10,Friend,libertarian,1.563070
@@ -15010,10 +15010,10 @@ date,region,district,candidate,party,voteshare
 11/7/2000,NY,11,Owens,democrat,81.781122
 11/7/2000,NY,12,Estevez,conservative,0.857893
 11/7/2000,NY,12,Rosario,right to life,0.873032
-11/7/2000,NY,12,Velђ__ќzquez,working families,4.631611
+11/7/2000,NY,12,Velázquez,working families,4.631611
 11/7/2000,NY,12,Pederson,socialist worker,1.034518
 11/7/2000,NY,12,Markgraf,republican,10.145337
-11/7/2000,NY,12,Velђ__ќzquez,democrat,82.457610
+11/7/2000,NY,12,Velázquez,democrat,82.457610
 11/7/2000,NY,13,Fossella,right to life,2.831320
 11/7/2000,NY,13,Lerman,green,0.794416
 11/7/2000,NY,13,Johnstone,working families,1.081958
@@ -15044,7 +15044,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,NY,17,Engel,democrat,87.882520
 11/7/2000,NY,17,Engel,liberal,1.827833
 11/7/2000,NY,18,Vonglis,republican,28.053984
-11/7/2000,NY,18,Oђ__ђgrady,right to life,1.986249
+11/7/2000,NY,18,O'Grady,right to life,1.986249
 11/7/2000,NY,18,Lowey,democrat,67.256834
 11/7/2000,NY,18,Vonglis,conservative,2.702932
 11/7/2000,NY,19,Graham,working families,0.741373
@@ -15156,7 +15156,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,OH,12,Richey,natural law,0.987144
 11/7/2000,OH,12,Tiberi,republican,52.866136
 11/7/2000,OH,12,Hogan,libertarian,1.725984
-11/7/2000,OH,12,Oђ__ђshaughnessy,democrat,43.826171
+11/7/2000,OH,12,O'Shaughnessy,democrat,43.826171
 11/7/2000,OH,12,Jordan,independent,0.594565
 11/7/2000,OH,13,Jeric,republican,32.015055
 11/7/2000,OH,13,Kluter,natural law,1.180412
@@ -16341,9 +16341,9 @@ date,region,district,candidate,party,voteshare
 11/5/2002,NY,11,Cleary,republican,10.409165
 11/5/2002,NY,11,Owens,democrat,76.484291
 11/5/2002,NY,11,Owens,working families,10.071570
-11/5/2002,NY,12,Velђ___quez,working families,9.102064
+11/5/2002,NY,12,Velázquez,working families,9.102064
 11/5/2002,NY,12,Estevez,conservative,4.193797
-11/5/2002,NY,12,Velђ___quez,democrat,86.704138
+11/5/2002,NY,12,Velázquez,democrat,86.704138
 11/5/2002,NY,13,Mattsson,working families,1.225734
 11/5/2002,NY,13,Mattsson,liberal,0.762829
 11/5/2002,NY,13,Bardel,green,0.671212
@@ -18489,7 +18489,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,ME,1,Allen,democrat,60.838758
 11/7/2006,ME,1,Curley,republican,31.321378
 11/7/2006,ME,1,Kamilewicz,independent,7.839864
-11/7/2006,ME,2,Dђ__ђamboise,republican,29.481265
+11/7/2006,ME,2,D'Amboise,republican,29.481265
 11/7/2006,ME,2,Michaud,democrat,70.518735
 11/7/2006,MI,1,Hooper,republican,27.989782
 11/7/2006,MI,1,Newland,green,0.866397
@@ -18755,10 +18755,10 @@ date,region,district,candidate,party,voteshare
 11/7/2006,NY,11,McClean,freedom,1.015270
 11/7/2006,NY,11,Finger,republican,6.907097
 11/7/2006,NY,11,Blume,conservative,1.350635
-11/7/2006,NY,12,Velaђ___zquez,working families,10.242899
+11/7/2006,NY,12,Velázquez,working families,10.242899
 11/7/2006,NY,12,Romaguera,conservative,1.483671
 11/7/2006,NY,12,Romaguera,republican,8.772080
-11/7/2006,NY,12,Velaђ___zquez,democrat,79.501349
+11/7/2006,NY,12,Velázquez,democrat,79.501349
 11/7/2006,NY,13,Fossella,independence,3.510267
 11/7/2006,NY,13,Fossella,conservative,5.599004
 11/7/2006,NY,13,Fossella,republican,47.688700
@@ -19112,7 +19112,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,UT,3,Cannon,republican,57.712306
 11/7/2006,UT,3,Noorlander,constitution,8.786684
 11/7/2006,VA,1,Davis,republican,63.051690
-11/7/2006,VA,1,Oђ__ђdonnell,democrat,35.530306
+11/7/2006,VA,1,O'Donnell,democrat,35.530306
 11/7/2006,VA,1,Pixton,independent,1.418005
 11/7/2006,VA,2,Kellam,democrat,48.588124
 11/7/2006,VA,2,Drake,republican,51.411876
@@ -19970,9 +19970,9 @@ date,region,district,candidate,party,voteshare
 11/4/2008,NY,11,Clarke,democrat,87.074834
 11/4/2008,NY,11,Clarke,working families,5.682825
 11/4/2008,NY,11,Carr,republican,6.407554
-11/4/2008,NY,12,Velђ___quez,working families,5.423937
+11/4/2008,NY,12,Velázquez,working families,5.423937
 11/4/2008,NY,12,Romaguera,republican,9.127126
-11/4/2008,NY,12,Velђ___quez,democrat,84.526429
+11/4/2008,NY,12,Velázquez,democrat,84.526429
 11/4/2008,NY,12,Romaguera,conservative,0.922508
 11/4/2008,NY,13,Straniere,republican,33.318570
 11/4/2008,NY,13,Cochrane,conservative,3.094351
@@ -23740,8 +23740,8 @@ date,region,district,candidate,party,voteshare
 11/4/2014,NY,6,Meng,working families,11.091244
 11/4/2014,NY,7,Romaguera,conservative,2.194525
 11/4/2014,NY,7,Fernandez,republican,8.968040
-11/4/2014,NY,7,Velђ___zquez,democrat,74.001633
-11/4/2014,NY,7,Velђ___zquez,working families,14.835803
+11/4/2014,NY,7,Velázquez,democrat,74.001633
+11/4/2014,NY,7,Velázquez,working families,14.835803
 11/4/2014,NY,8,Jeffries,democrat,83.963635
 11/4/2014,NY,8,Bellone,conservative,7.950863
 11/4/2014,NY,8,Jeffries,working families,8.085502
@@ -24336,7 +24336,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,CA,42,Calvert,republican,58.822118
 11/8/2016,CA,43,Waters,democrat,76.084203
 11/8/2016,CA,43,Navarro,republican,23.915797
-11/8/2016,CA,44,Barragђ___ђ__ќn,democrat,52.195748
+11/8/2016,CA,44,Barragán,democrat,52.195748
 11/8/2016,CA,44,Hall,democrat,47.804252
 11/8/2016,CA,45,Varasteh,democrat,41.440248
 11/8/2016,CA,45,Walters,republican,58.559752
@@ -26673,7 +26673,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,AR,4,Hanson,democrat,27.541949
 11/3/2020,AR,4,Westerman,republican,69.670042
 11/3/2020,AR,4,Gilbert,libertarian,2.788009
-11/3/2020,AZ,1,Oв’halleran,democrat,51.610174
+11/3/2020,AZ,1,O'Halleran,democrat,51.610174
 11/3/2020,AZ,1,Shedd,republican,48.389826
 11/3/2020,AZ,2,Schlass,write-in (common sense moderate),0.009185
 11/3/2020,AZ,2,Kirkpatrick,democrat,55.095866
@@ -26758,8 +26758,8 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,27,Nalbandian,republican,30.224255
 11/3/2020,CA,28,Schiff,democrat,72.656671
 11/3/2020,CA,28,Early,republican,27.343329
-11/3/2020,CA,29,Cгўrdenas,democrat,56.612181
-11/3/2020,CA,29,Dueг±as,democrat,43.387819
+11/3/2020,CA,29,Cárdenas,democrat,56.612181
+11/3/2020,CA,29,Dueñas,democrat,43.387819
 11/3/2020,CA,30,Sherman,democrat,69.482783
 11/3/2020,CA,30,Reed,republican,30.517217
 11/3/2020,CA,31,Aguilar,democrat,61.288236
@@ -26776,7 +26776,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,36,Cruz,republican,39.660550
 11/3/2020,CA,37,Bass,democrat,85.939971
 11/3/2020,CA,37,Webber,republican,14.060029
-11/3/2020,CA,38,Sгўnchez,democrat,74.341350
+11/3/2020,CA,38,Sánchez,democrat,74.341350
 11/3/2020,CA,38,Tolar,democrat,25.658650
 11/3/2020,CA,39,Cisneros,democrat,49.402385
 11/3/2020,CA,39,Kim,republican,50.597615
@@ -26784,11 +26784,11 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,40,Delgado,republican,27.260826
 11/3/2020,CA,41,Takano,democrat,64.030194
 11/3/2020,CA,41,Smith,republican,35.969806
-11/3/2020,CA,42,Oв’mara,democrat,42.867623
+11/3/2020,CA,42,O'Mara,democrat,42.867623
 11/3/2020,CA,42,Calvert,republican,57.132377
 11/3/2020,CA,43,Waters,democrat,71.684575
 11/3/2020,CA,43,Collins,republican,28.315425
-11/3/2020,CA,44,Barragгўn,democrat,67.784756
+11/3/2020,CA,44,Barragán,democrat,67.784756
 11/3/2020,CA,44,Joya,democrat,32.215244
 11/3/2020,CA,45,Raths,republican,46.535997
 11/3/2020,CA,45,Porter,democrat,53.464003
@@ -26807,7 +26807,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,52,Peters,democrat,61.575808
 11/3/2020,CA,52,Debello,republican,38.424192
 11/3/2020,CA,53,Jacobs,democrat,59.501042
-11/3/2020,CA,53,Gгіmez,democrat,40.498958
+11/3/2020,CA,53,Gómez,democrat,40.498958
 11/3/2020,CO,1,Fiorino,unity party of colorado,0.560528
 11/3/2020,CO,1,Kok,approval voting party,0.320016
 11/3/2020,CO,1,Degette,democrat,73.646095
@@ -26880,7 +26880,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,FL,1,Gaetz,republican,64.609337
 11/3/2020,FL,1,Oram,no party affiliation,1.376772
 11/3/2020,FL,2,Dunn,republican,97.864737
-11/3/2020,FL,2,Oв’connor,write-in,2.135263
+11/3/2020,FL,2,O'Connor,write-in,2.135263
 11/3/2020,FL,3,Christensen,democrat,42.860034
 11/3/2020,FL,3,Cammack,republican,57.139966
 11/3/2020,FL,4,Deegan,democrat,38.900265
@@ -27016,7 +27016,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,IL,2,Kelly,democrat,78.814111
 11/3/2020,IL,3,Newman,democrat,56.378728
 11/3/2020,IL,3,Fricilone,republican,43.621272
-11/3/2020,IL,4,Garcг­a,democrat,84.053839
+11/3/2020,IL,4,García,democrat,84.053839
 11/3/2020,IL,4,Solorio,republican,15.946161
 11/3/2020,IL,5,Quigley,democrat,70.767097
 11/3/2020,IL,5,Hanson,republican,26.628210
@@ -27053,7 +27053,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,IL,16,McCullough,write-in,0.001183
 11/3/2020,IL,16,Jones,write-in,0.000887
 11/3/2020,IL,17,King,republican,47.971123
-11/3/2020,IL,17,Generalв”,write-in,0.007002
+11/3/2020,IL,17,Write-In,write-in,0.007002
 11/3/2020,IL,17,Bustos,democrat,52.021874
 11/3/2020,IL,18,Petrilli,democrat,29.590001
 11/3/2020,IL,18,Lahood,republican,70.409999
@@ -27477,8 +27477,8 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,6,Zmich,conservative,2.096652
 11/3/2020,NY,6,City,independent,0.444501
 11/3/2020,NY,6,Libertarian,independent,0.302213
-11/3/2020,NY,7,Velгўzquez,democrat,69.582784
-11/3/2020,NY,7,Velгўzquez,working families,15.161152
+11/3/2020,NY,7,Velázquez,democrat,69.582784
+11/3/2020,NY,7,Velázquez,working families,15.161152
 11/3/2020,NY,7,Kelly,republican,13.041145
 11/3/2020,NY,7,Kelly,conservative,1.381996
 11/3/2020,NY,7,Midonnet,libertarian,0.675031
