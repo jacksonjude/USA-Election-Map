@@ -2834,15 +2834,13 @@ function createHouseMapSources()
         }
       }
 
-      console.log(stateMapData)
-
       return stateMapData
     }, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
 
-      if (regionID.includes("-"))
+      if (regionID != null && regionID.includes("-"))
       {
         regionID = regionID.split("-")[0]
       }

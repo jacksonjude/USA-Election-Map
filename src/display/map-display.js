@@ -222,7 +222,8 @@ function loadMapSVGFile()
 
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
-          $("#outlines").css("stroke-width", (svgDataBoundingBox.height/$("#svgdata").height()*1.5) + "px")
+          // console.log(Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5)
+          $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5) + "px")
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
           $("#svgdata").css('visibility', "")
         }, 0)

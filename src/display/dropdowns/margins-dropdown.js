@@ -4,6 +4,8 @@ const marginsCookieName = "global-margins"
 
 function createMarginEditDropdownItems()
 {
+  setCookie(marginsCookieName, JSON.stringify(marginValues))
+
   $("#marginsDropdownContainer").html("")
   for (var marginID in marginNames)
   {
