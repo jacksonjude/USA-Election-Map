@@ -221,9 +221,9 @@ function loadMapSVGFile()
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+          $("#svgdata").css('visibility', "")
         }, 0)
 
-        $("#svgdata").show()
         handleNewSVG()
       })
     }
@@ -1512,6 +1512,12 @@ function updateRegionBox(regionID)
     }).forEach((partyID, i) => {
       regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
     })
+    // regionMarginString += "<span style='font-size: 16px; font-style: italic; color: #bbb'>Right click to zoom in</span>"
+  }
+
+  if (currentMapState == MapState.zooming)
+  {
+    // regionMarginString += "<span style='font-size: 16px; font-style: italic; color: #bbb'>Right click to zoom out</span>"
   }
 
   //Couldn't get safe colors to look good
