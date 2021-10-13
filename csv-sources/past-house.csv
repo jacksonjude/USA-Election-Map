@@ -1588,7 +1588,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,MD,5,Spellman,democrat,77.198077
 11/7/1978,MD,6,Perkins,republican,10.334586
 11/7/1978,MD,6,Byron,democrat,89.665414
-11/7/1978,MD,7,Hanania-freeman,independent,11.302924
+11/7/1978,MD,7,Hanania-Freeman,independent,11.302924
 11/7/1978,MD,7,Mitchell,democrat,88.697076
 11/7/1978,MD,8,Steers,republican,48.733543
 11/7/1978,MD,8,Barnes,democrat,51.266457
@@ -2423,7 +2423,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,CO,3,Glennie,libertarian,1.384984
 11/4/1980,CO,3,Kogovsek,democrat,54.891017
 11/4/1980,CO,3,McCormick,republican,43.723999
-11/4/1980,CO,4,Molson-smith,libertarian,2.081070
+11/4/1980,CO,4,Molson-Smith,libertarian,2.081070
 11/4/1980,CO,4,Barragan,democrat,29.501595
 11/4/1980,CO,4,Brown,republican,68.417335
 11/4/1980,CO,5,Lanning,libertarian,2.277664
@@ -3500,7 +3500,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,CA,18,Fonde,republican,38.264059
 11/2/1982,CA,19,Lagomarsino,republican,61.052072
 11/2/1982,CA,19,Frost,democrat,35.844469
-11/2/1982,CA,19,Gordon-mccutchan,libertarian,2.278476
+11/2/1982,CA,19,Gordon-Mccutchan,libertarian,2.278476
 11/2/1982,CA,19,Zekan,peace and freedom,0.824984
 11/2/1982,CA,20,Bethea,democrat,31.902298
 11/2/1982,CA,20,Thomas,republican,68.097702
@@ -5507,7 +5507,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,PA,14,Duncan,socialist workers,0.310575
 11/6/1984,PA,14,Coyne,democrat,76.623152
 11/6/1984,PA,15,Ritter,republican,58.125250
-11/6/1984,PA,15,Wells-schooley,democrat,41.874750
+11/6/1984,PA,15,Wells-Schooley,democrat,41.874750
 11/6/1984,PA,16,Bard,democrat,22.200436
 11/6/1984,PA,16,Walker,republican,77.799564
 11/6/1984,PA,17,Anderson,democrat,27.391394
@@ -6283,7 +6283,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,NH,1,Demers,democrat,43.638637
 11/4/1986,NH,1,Smith,republican,56.344636
 11/4/1986,NH,1,Other,independent,0.016727
-11/4/1986,NH,2,Craig-green,democrat,25.770833
+11/4/1986,NH,2,Craig-Green,democrat,25.770833
 11/4/1986,NH,2,Gregg,republican,74.200521
 11/4/1986,NH,2,Other,independent,0.028646
 11/4/1986,NJ,1,Busch,republican,23.602560
@@ -6417,7 +6417,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,NY,20,Dioguardi,republican,46.665995
 11/4/1986,NY,21,Grunberger,democrat,21.244106
 11/4/1986,NY,21,Fish,republican,66.968523
-11/4/1986,NY,21,Gormley-vitale,right to life,2.239930
+11/4/1986,NY,21,Gormley-Vitale,right to life,2.239930
 11/4/1986,NY,21,Fish,conservative,9.547441
 11/4/1986,NY,22,Gilman,republican,69.472784
 11/4/1986,NY,22,Burlingham,democrat,27.165772
@@ -7010,7 +7010,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,HI,2,Mallan,libertarian,11.059653
 11/8/1988,IA,1,Leach,republican,60.715363
 11/8/1988,IA,1,Gluba,democrat,38.385318
-11/8/1988,IA,1,Stav-river,nominated by petition,0.899319
+11/8/1988,IA,1,Stav-River,nominated by petition,0.899319
 11/8/1988,IA,2,Tauke,republican,56.776894
 11/8/1988,IA,2,Tabor,democrat,43.223106
 11/8/1988,IA,3,Nagle,democrat,63.370707
@@ -8019,7 +8019,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,FL,17,Rodney,republican,21.682513
 11/6/1990,FL,17,Lehman,democrat,78.317487
 11/6/1990,FL,18,Anscher,democrat,39.615607
-11/6/1990,FL,18,Ros-lehtinen,republican,60.384393
+11/6/1990,FL,18,Ros-Lehtinen,republican,60.384393
 11/6/1990,FL,19,Allen,republican,38.020524
 11/6/1990,FL,19,Fascell,democrat,61.979476
 11/6/1990,GA,1,Meredith,republican,28.777411
@@ -8396,7 +8396,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,NJ,14,Stoveken,populist,0.588677
 11/6/1990,NJ,14,Guarini,democrat,66.202683
 11/6/1990,NJ,14,Vernotico,right to vote,0.362353
-11/6/1990,NM,1,Vigil-giron,democrat,29.784902
+11/6/1990,NM,1,Vigil-Giron,democrat,29.784902
 11/6/1990,NM,1,Schiff,republican,70.215098
 11/6/1990,NM,2,Skeen,republican,100.000000
 11/6/1990,NM,3,Richardson,democrat,74.459193
@@ -8989,7 +8989,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,CA,32,Williams,peace and freedom,5.660552
 11/3/1992,CA,32,Weber,libertarian,7.166252
 11/3/1992,CA,33,Olvera,libertarian,2.374998
-11/3/1992,CA,33,Royabl-allard,democrat,63.037870
+11/3/1992,CA,33,Royabl-Allard,democrat,63.037870
 11/3/1992,CA,33,Guzman,republican,30.382638
 11/3/1992,CA,33,Delia,peace and freedom,4.204494
 11/3/1992,CA,34,Hernandez,republican,34.002151
@@ -9103,7 +9103,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,DE,0,Castle,republican,55.423288
 11/3/1992,DE,0,Woo,democrat,42.526546
 11/3/1992,DE,0,Schmitt,libertarian,2.050166
-11/3/1992,FL,1,Rodgers-hendricks,green,4.086042
+11/3/1992,FL,1,Rodgers-Hendricks,green,4.086042
 11/3/1992,FL,1,Hutto,democrat,52.022901
 11/3/1992,FL,1,Ketchel,republican,43.891056
 11/3/1992,FL,2,Wagner,republican,26.544105
@@ -9140,13 +9140,13 @@ date,region,district,candidate,party,voteshare
 11/3/1992,FL,16,Comerford,democrat,39.154313
 11/3/1992,FL,17,Meek,democrat,100.000000
 11/3/1992,FL,18,Davis,democrat,33.233268
-11/3/1992,FL,18,Ros-lehtinen,republican,66.766732
+11/3/1992,FL,18,Ros-Lehtinen,republican,66.766732
 11/3/1992,FL,19,Metz,republican,36.925237
 11/3/1992,FL,19,Johnston,democrat,63.074763
 11/3/1992,FL,20,Kennedy,republican,38.500729
 11/3/1992,FL,20,Deutsch,democrat,55.050465
 11/3/1992,FL,20,Blackburn,independent,6.448806
-11/3/1992,FL,21,Diaz-balart,republican,100.000000
+11/3/1992,FL,21,Diaz-Balart,republican,100.000000
 11/3/1992,FL,22,Margolis,democrat,37.083131
 11/3/1992,FL,22,Stephens,independent,6.260725
 11/3/1992,FL,22,Shaw,republican,51.966974
@@ -9212,7 +9212,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,IL,3,Lepinske,republican,36.478869
 11/3/1992,IL,3,Lipinski,democrat,63.521131
 11/3/1992,IL,4,Gutierrez,democrat,77.570622
-11/3/1992,IL,4,Rodriguez-schieman,republican,22.429378
+11/3/1992,IL,4,Rodriguez-Schieman,republican,22.429378
 11/3/1992,IL,5,Grenke,libertarian,3.643524
 11/3/1992,IL,5,Zenkich,republican,39.097220
 11/3/1992,IL,5,Rostenkowski,democrat,57.259256
@@ -9906,7 +9906,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,PA,11,Kanjorski,democrat,67.093586
 11/3/1992,PA,11,Fescina,republican,32.906414
 11/3/1992,PA,12,Murtha,democrat,100.000000
-11/3/1992,PA,13,Margolies-mezvinsky,democrat,50.270279
+11/3/1992,PA,13,Margolies-Mezvinsky,democrat,50.270279
 11/3/1992,PA,13,Fox,republican,49.729721
 11/3/1992,PA,14,Coyne,democrat,72.316821
 11/3/1992,PA,14,King,republican,26.768920
@@ -10306,7 +10306,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,CA,32,Farhat,republican,17.568445
 11/8/1994,CA,32,Honigsfeld,peace and freedom,4.828749
 11/8/1994,CA,33,Booker,peace and freedom,18.536186
-11/8/1994,CA,33,Roybal-allard,democrat,81.463814
+11/8/1994,CA,33,Roybal-Allard,democrat,81.463814
 11/8/1994,CA,34,Nunez,republican,34.121334
 11/8/1994,CA,34,Torres,democrat,61.688013
 11/8/1994,CA,34,Swinney,libertarian,4.190653
@@ -10431,12 +10431,12 @@ date,region,district,candidate,party,voteshare
 11/8/1994,FL,16,Comerford,democrat,41.933561
 11/8/1994,FL,16,Foley,republican,58.066439
 11/8/1994,FL,17,Meek,democrat,100.000000
-11/8/1994,FL,18,Ros-lehtinen,republican,100.000000
+11/8/1994,FL,18,Ros-Lehtinen,republican,100.000000
 11/8/1994,FL,19,Tsakanikas,republican,33.927380
 11/8/1994,FL,19,Johnston,democrat,66.072620
 11/8/1994,FL,20,Kennedy,republican,38.752752
 11/8/1994,FL,20,Deutsch,democrat,61.247248
-11/8/1994,FL,21,Diaz-balart,republican,100.000000
+11/8/1994,FL,21,Diaz-Balart,republican,100.000000
 11/8/1994,FL,22,Wiener,democrat,36.640959
 11/8/1994,FL,22,Shaw,republican,63.359041
 11/8/1994,FL,23,Hastings,democrat,100.000000
@@ -10903,7 +10903,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,NY,12,Velђ___zquez,democrat,86.263724
 11/8/1994,NY,12,Velђ___zquez,liberal,6.025656
 11/8/1994,NY,12,Brennan,conservative,6.349243
-11/8/1994,NY,12,Ruano-melendez,perot hispano american,1.361378
+11/8/1994,NY,12,Ruano-Melendez,perot hispano american,1.361378
 11/8/1994,NY,13,Butler,democrat,23.733556
 11/8/1994,NY,13,Butler,liberal,1.389516
 11/8/1994,NY,13,Molinari,republican,61.820510
@@ -10930,7 +10930,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,NY,18,Hartzell,conservative,6.173580
 11/8/1994,NY,18,O'Grady,right to life,1.795030
 11/8/1994,NY,18,Lowey,democrat,57.270404
-11/8/1994,NY,19,Portman-laux,ax taxes,0.873074
+11/8/1994,NY,19,Portman-Laux,ax taxes,0.873074
 11/8/1994,NY,19,Dioguardi,conservative,7.221191
 11/8/1994,NY,19,Fish,democrat,36.761670
 11/8/1994,NY,19,Dioguardi,right to life,3.054459
@@ -11082,7 +11082,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,PA,12,Choby,republican,31.085207
 11/8/1994,PA,13,Fox,republican,49.414748
 11/8/1994,PA,13,Szabo,citizens with szabo,1.682855
-11/8/1994,PA,13,Margolies-mezvinsky,democrat,45.214798
+11/8/1994,PA,13,Margolies-Mezvinsky,democrat,45.214798
 11/8/1994,PA,13,Hustead,libertarian,3.687599
 11/8/1994,PA,14,Coyne,democrat,64.144577
 11/8/1994,PA,14,Scherrer,workers league,1.107957
@@ -11192,7 +11192,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,TX,16,Ortiz,republican,42.888425
 11/8/1994,TX,17,Boone,republican,46.340413
 11/8/1994,TX,17,Stenholm,democrat,53.659587
-11/8/1994,TX,18,Jackson-lee,democrat,73.481238
+11/8/1994,TX,18,Jackson-Lee,democrat,73.481238
 11/8/1994,TX,18,Burley,republican,24.398128
 11/8/1994,TX,18,Hollenbeck,libertarian,1.013086
 11/8/1994,TX,18,Snellings,independent,1.107548
@@ -11208,7 +11208,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,TX,23,Rios,democrat,37.400353
 11/8/1994,TX,24,Frost,democrat,52.826188
 11/8/1994,TX,24,Harrison,republican,47.173812
-11/8/1994,TX,25,Klein-tower,independent,1.737971
+11/8/1994,TX,25,Klein-Tower,independent,1.737971
 11/8/1994,TX,25,Lockhart,libertarian,1.003130
 11/8/1994,TX,25,Fontenot,republican,44.985615
 11/8/1994,TX,25,Bentsen,democrat,52.273283
@@ -11428,8 +11428,8 @@ date,region,district,candidate,party,voteshare
 11/5/1996,CA,15,Currivan,natural law,1.486327
 11/5/1996,CA,15,Campbell,republican,58.508472
 11/5/1996,CA,15,Wimmers,libertarian,2.415942
-11/5/1996,CA,15,Sharpe-geisler,reform,2.746090
-11/5/1996,CA,16,Abu-shumays,natural law,1.303009
+11/5/1996,CA,15,Sharpe-Geisler,reform,2.746090
+11/5/1996,CA,16,Abu-Shumays,natural law,1.303009
 11/5/1996,CA,16,Lofgren,democrat,65.653215
 11/5/1996,CA,16,Bonino,libertarian,2.879747
 11/5/1996,CA,16,Wojslaw,republican,30.164028
@@ -11489,7 +11489,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,CA,29,Waxman,democrat,67.628726
 11/5/1996,CA,29,Binkley,libertarian,2.218633
 11/5/1996,CA,30,Parker,republican,18.709517
-11/5/1996,CA,30,Watson-frith,natural law,2.445713
+11/5/1996,CA,30,Watson-Frith,natural law,2.445713
 11/5/1996,CA,30,Probst,libertarian,3.423502
 11/5/1996,CA,30,Becerra,democrat,72.320387
 11/5/1996,CA,30,Mandel,peace and freedom,3.100881
@@ -11501,7 +11501,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,CA,32,Ardito,republican,12.394091
 11/5/1996,CA,32,Dixon,democrat,82.357836
 11/5/1996,CA,33,Leonard,republican,14.088331
-11/5/1996,CA,33,Roybal-allard,democrat,82.102096
+11/5/1996,CA,33,Roybal-Allard,democrat,82.102096
 11/5/1996,CA,33,Johnson,libertarian,3.809573
 11/5/1996,CA,34,Argall,libertarian,1.976307
 11/5/1996,CA,34,Torres,democrat,68.426755
@@ -11514,7 +11514,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,CA,36,Harman,democrat,52.460360
 11/5/1996,CA,36,Brooks,republican,43.900222
 11/5/1996,CA,36,Dovner,libertarian,2.197729
-11/5/1996,CA,37,Millender-mcdonald,democrat,84.997954
+11/5/1996,CA,37,Millender-Mcdonald,democrat,84.997954
 11/5/1996,CA,37,Voetee,republican,15.002046
 11/5/1996,CA,38,Gautreau,libertarian,1.951743
 11/5/1996,CA,38,Horn,republican,52.572997
@@ -11595,7 +11595,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,CO,5,Hefley,republican,71.935306
 11/5/1996,CO,5,Robinson,democrat,28.064694
 11/5/1996,CO,6,Schaefer,republican,62.236487
-11/5/1996,CO,6,Fitz-gerald,democrat,37.763513
+11/5/1996,CO,6,Fitz-Gerald,democrat,37.763513
 11/5/1996,CT,1,Kennelly,democrat,67.477781
 11/5/1996,CT,1,Kennelly,a connecticut party,6.067325
 11/5/1996,CT,1,Sleath,republican,24.945151
@@ -11662,12 +11662,12 @@ date,region,district,candidate,party,voteshare
 11/5/1996,FL,16,Foley,republican,64.002827
 11/5/1996,FL,17,Meek,democrat,88.754519
 11/5/1996,FL,17,Rolle,republican,11.245481
-11/5/1996,FL,18,Ros-lehtinen,republican,100.000000
+11/5/1996,FL,18,Ros-Lehtinen,republican,100.000000
 11/5/1996,FL,19,Kennedy,republican,34.425968
 11/5/1996,FL,19,Wexler,democrat,65.574032
 11/5/1996,FL,20,Deutsch,democrat,64.993695
 11/5/1996,FL,20,Jacobs,republican,35.006305
-11/5/1996,FL,21,Diaz-balart,republican,100.000000
+11/5/1996,FL,21,Diaz-Balart,republican,100.000000
 11/5/1996,FL,22,Shaw,republican,61.863141
 11/5/1996,FL,22,Cooper,democrat,38.136859
 11/5/1996,FL,23,Hastings,democrat,73.461184
@@ -11798,7 +11798,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,IN,5,Buyer,republican,59.301031
 11/5/1996,IN,6,Burton,republican,74.922535
 11/5/1996,IN,6,Peterson,libertarian,1.940223
-11/5/1996,IN,6,Dillard-trammell,democrat,23.137243
+11/5/1996,IN,6,Dillard-Trammell,democrat,23.137243
 11/5/1996,IN,7,Bourland,libertarian,3.395444
 11/5/1996,IN,7,Pease,republican,61.956729
 11/5/1996,IN,7,Hellmann,democrat,34.647827
@@ -12185,7 +12185,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,NJ,13,Estrada,independent,0.491558
 11/5/1996,NM,1,Uhrich,green,3.984918
 11/5/1996,NM,1,Schiff,republican,56.604067
-11/5/1996,NM,1,Turrietta-koury,independent,2.309429
+11/5/1996,NM,1,Turrietta-Koury,independent,2.309429
 11/5/1996,NM,1,Wertheim,democrat,37.101586
 11/5/1996,NM,2,Baca,democrat,44.066092
 11/5/1996,NM,2,Skeen,republican,55.933908
@@ -12661,7 +12661,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,TX,17,Caro,natural law,0.977751
 11/5/1996,TX,17,Stenholm,democrat,51.648238
 11/5/1996,TX,18,Burley,republican,5.720905
-11/5/1996,TX,18,Jackson-lee,democrat,77.066266
+11/5/1996,TX,18,Jackson-Lee,democrat,77.066266
 11/5/1996,TX,18,Lamson,democrat,3.204346
 11/5/1996,TX,18,White,republican,10.135960
 11/5/1996,TX,18,Young,republican,3.872523
@@ -12936,18 +12936,18 @@ date,region,district,candidate,party,voteshare
 11/3/1998,CA,29,Binkley,libertarian,1.984345
 11/3/1998,CA,29,Gottlieb,republican,22.618393
 11/3/1998,CA,29,Waxman,democrat,73.871663
-11/3/1998,CA,29,Blasdell-wilkinson,natural law,1.525599
+11/3/1998,CA,29,Blasdell-Wilkinson,natural law,1.525599
 11/3/1998,CA,30,Becerra,democrat,82.395891
 11/3/1998,CA,30,Parker,republican,17.604109
 11/3/1998,CA,31,Everling,libertarian,1.283196
 11/3/1998,CA,31,Martinez,democrat,70.024038
-11/3/1998,CA,31,Lieberg-wong,green,5.010302
+11/3/1998,CA,31,Lieberg-Wong,green,5.010302
 11/3/1998,CA,31,Hearne,natural law,1.033654
 11/3/1998,CA,31,Moreno,republican,22.648810
 11/3/1998,CA,32,Milosevich,libertarian,2.020974
 11/3/1998,CA,32,Dixon,democrat,86.687208
 11/3/1998,CA,32,Ardito,republican,11.291817
-11/3/1998,CA,33,Roybal-allard,democrat,87.188469
+11/3/1998,CA,33,Roybal-Allard,democrat,87.188469
 11/3/1998,CA,33,Miller,republican,12.811531
 11/3/1998,CA,34,Scott,american independent,1.846562
 11/3/1998,CA,34,Perez,republican,28.583683
@@ -12961,7 +12961,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,CA,36,Barrett,green,1.987826
 11/3/1998,CA,36,Kuykendall,republican,48.893817
 11/3/1998,CA,37,Lankster,republican,14.941635
-11/3/1998,CA,37,Millender-mcdonald,democrat,85.058365
+11/3/1998,CA,37,Millender-Mcdonald,democrat,85.058365
 11/3/1998,CA,38,Mathews,democrat,44.318468
 11/3/1998,CA,38,Bowers,libertarian,2.747334
 11/3/1998,CA,38,Horn,republican,52.934197
@@ -13083,10 +13083,10 @@ date,region,district,candidate,party,voteshare
 11/3/1998,FL,15,Weldon,republican,63.083364
 11/3/1998,FL,16,Foley,republican,100.000000
 11/3/1998,FL,17,Meek,democrat,100.000000
-11/3/1998,FL,18,Ros-lehtinen,republican,100.000000
+11/3/1998,FL,18,Ros-Lehtinen,republican,100.000000
 11/3/1998,FL,19,Wexler,democrat,100.000000
 11/3/1998,FL,20,Deutsch,democrat,100.000000
-11/3/1998,FL,21,Diaz-balart,republican,74.751771
+11/3/1998,FL,21,Diaz-Balart,republican,74.751771
 11/3/1998,FL,21,Cusack,democrat,25.248229
 11/3/1998,FL,22,Shaw,democrat,100.000000
 11/3/1998,FL,23,Hastings,democrat,100.000000
@@ -13226,7 +13226,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,KY,3,Metten,natural law,0.962463
 11/3/1998,KY,4,Lucas,democrat,53.410234
 11/3/1998,KY,4,Williams,republican,46.589766
-11/3/1998,KY,5,Bailey-bamer,democrat,21.773927
+11/3/1998,KY,5,Bailey-Bamer,democrat,21.773927
 11/3/1998,KY,5,Rogers,republican,78.226073
 11/3/1998,KY,6,Scorsone,democrat,45.954430
 11/3/1998,KY,6,Krogdahl,taxpayers,0.938658
@@ -13351,7 +13351,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,MI,15,Smith,natural law,0.879385
 11/3/1998,MI,15,Willey,libertarian,1.189332
 11/3/1998,MI,15,Harkness,no party affiliation,0.647125
-11/3/1998,MI,15,Boyd-fields,republican,10.321160
+11/3/1998,MI,15,Boyd-Fields,republican,10.321160
 11/3/1998,MI,16,Dingell,democrat,66.613328
 11/3/1998,MI,16,Morse,republican,31.040337
 11/3/1998,MI,16,Hamze,natural law,0.589021
@@ -13928,7 +13928,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,TX,17,Mobley,libertarian,1.150087
 11/3/1998,TX,17,Stenholm,democrat,53.571454
 11/3/1998,TX,18,Galvan,libertarian,10.054017
-11/3/1998,TX,18,Jackson-lee,democrat,89.945983
+11/3/1998,TX,18,Jackson-Lee,democrat,89.945983
 11/3/1998,TX,19,Combest,republican,83.649597
 11/3/1998,TX,19,Blankenship,democrat,16.350403
 11/3/1998,TX,20,Walker,republican,35.561326
@@ -14018,7 +14018,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,WA,7,Powers,socialist workers,2.371086
 11/3/1998,WA,7,McDermott,democrat,88.211543
 11/3/1998,WA,7,Lippmann,reform,9.417371
-11/3/1998,WA,8,Behrens-benedict,democrat,40.267507
+11/3/1998,WA,8,Behrens-Benedict,democrat,40.267507
 11/3/1998,WA,8,Dunn,republican,59.732493
 11/3/1998,WA,9,Smith,democrat,64.688887
 11/3/1998,WA,9,Taber,republican,35.311113
@@ -14226,14 +14226,14 @@ date,region,district,candidate,party,voteshare
 11/7/2000,CA,30,Heath,libertarian,2.860288
 11/7/2000,CA,31,McGuire,libertarian,6.321625
 11/7/2000,CA,31,Griffin,natural law,5.209274
-11/7/2000,CA,31,Lieberg-wong,green,9.116673
+11/7/2000,CA,31,Lieberg-Wong,green,9.116673
 11/7/2000,CA,31,Solis,democrat,79.352428
 11/7/2000,CA,32,Weber,libertarian,2.355237
 11/7/2000,CA,32,Williamson,republican,12.109866
 11/7/2000,CA,32,Dixon,democrat,83.540695
 11/7/2000,CA,32,Jibri,natural law,1.994202
 11/7/2000,CA,33,Miller,republican,11.540987
-11/7/2000,CA,33,Roybal-allard,democrat,84.545416
+11/7/2000,CA,33,Roybal-Allard,democrat,84.545416
 11/7/2000,CA,33,Craddock,libertarian,2.236940
 11/7/2000,CA,33,Harpur,natural law,1.676657
 11/7/2000,CA,34,Canales,republican,22.493560
@@ -14249,12 +14249,12 @@ date,region,district,candidate,party,voteshare
 11/7/2000,CA,36,Sherman,libertarian,2.543814
 11/7/2000,CA,36,Kuykendall,republican,46.578229
 11/7/2000,CA,37,Glazer,natural law,3.614213
-11/7/2000,CA,37,Millender-mcdonald,democrat,82.338557
+11/7/2000,CA,37,Millender-Mcdonald,democrat,82.338557
 11/7/2000,CA,37,Peters,libertarian,2.780843
 11/7/2000,CA,37,Van,republican,11.266387
 11/7/2000,CA,38,Schipske,democrat,47.466717
 11/7/2000,CA,38,Horn,republican,48.448274
-11/7/2000,CA,38,Blasdell-wilkinson,natural law,2.078591
+11/7/2000,CA,38,Blasdell-Wilkinson,natural law,2.078591
 11/7/2000,CA,38,Neglia,libertarian,2.006418
 11/7/2000,CA,39,Gann,libertarian,2.566111
 11/7/2000,CA,39,Royce,republican,62.897200
@@ -14391,11 +14391,11 @@ date,region,district,candidate,party,voteshare
 11/7/2000,FL,16,McGuire,reform,2.583327
 11/7/2000,FL,16,Foley,republican,60.225101
 11/7/2000,FL,17,Meek,democrat,100.000000
-11/7/2000,FL,18,Ros-lehtinen,republican,100.000000
+11/7/2000,FL,18,Ros-Lehtinen,republican,100.000000
 11/7/2000,FL,19,Thompson,republican,28.379153
 11/7/2000,FL,19,Wexler,democrat,71.620847
 11/7/2000,FL,20,Deutsch,democrat,100.000000
-11/7/2000,FL,21,Diaz-balart,republican,100.000000
+11/7/2000,FL,21,Diaz-Balart,republican,100.000000
 11/7/2000,FL,22,Bloom,democrat,49.858132
 11/7/2000,FL,22,Shaw,republican,50.141868
 11/7/2000,FL,23,Lambert,republican,23.653999
@@ -14705,7 +14705,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,MI,14,Catalfio,libertarian,1.113823
 11/7/2000,MI,15,Warner,libertarian,1.064560
 11/7/2000,MI,15,Smith,natural law,0.449761
-11/7/2000,MI,15,Boyd-fields,republican,9.030494
+11/7/2000,MI,15,Boyd-Fields,republican,9.030494
 11/7/2000,MI,15,Kilpatrick,democrat,88.572040
 11/7/2000,MI,15,Thomas,u.s. taxpayers,0.883144
 11/7/2000,MI,16,Hamze,natural law,0.398273
@@ -15373,7 +15373,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,TX,17,Clements,republican,35.489395
 11/7/2000,TX,17,Stenholm,democrat,59.040536
 11/7/2000,TX,18,Levy,republican,22.155379
-11/7/2000,TX,18,Jackson-lee,democrat,76.492940
+11/7/2000,TX,18,Jackson-Lee,democrat,76.492940
 11/7/2000,TX,18,Nankervis,libertarian,1.351681
 11/7/2000,TX,19,Combest,republican,91.619598
 11/7/2000,TX,19,Turnbow,libertarian,8.380402
@@ -15478,7 +15478,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,WA,7,McDermott,democrat,72.785346
 11/7/2000,WA,7,Grus,libertarian,7.598313
 11/7/2000,WA,7,Szwaja,green,19.616341
-11/7/2000,WA,8,Behrens-benedict,democrat,35.638507
+11/7/2000,WA,8,Behrens-Benedict,democrat,35.638507
 11/7/2000,WA,8,McIlroy,libertarian,2.128924
 11/7/2000,WA,8,Dunn,republican,62.232569
 11/7/2000,WA,9,Wright,libertarian,3.371687
@@ -15602,7 +15602,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,10,Tauscher,democrat,75.593462
 11/5/2002,CA,11,Pombo,republican,60.314677
 11/5/2002,CA,11,Shaw,democrat,39.685323
-11/5/2002,CA,12,Abu-ghazalah,libertarian,7.101378
+11/5/2002,CA,12,Abu-Ghazalah,libertarian,7.101378
 11/5/2002,CA,12,Moloney,republican,24.764492
 11/5/2002,CA,12,Lantos,democrat,68.134130
 11/5/2002,CA,13,Grundmann,american independent,2.277302
@@ -15620,7 +15620,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,16,McNea,republican,29.802011
 11/5/2002,CA,16,Umphress,libertarian,3.180042
 11/5/2002,CA,17,Shugart,independent,0.018085
-11/5/2002,CA,17,Glock-grueneich,green,3.272023
+11/5/2002,CA,17,Glock-Grueneich,green,3.272023
 11/5/2002,CA,17,Engler,republican,27.016129
 11/5/2002,CA,17,Farr,democrat,68.074161
 11/5/2002,CA,17,Lee,libertarian,1.619601
@@ -15670,7 +15670,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,33,Kim,republican,14.098051
 11/5/2002,CA,33,Tate,libertarian,3.352498
 11/5/2002,CA,33,Watson,democrat,82.549452
-11/5/2002,CA,34,Roybal-allard,democrat,74.036825
+11/5/2002,CA,34,Roybal-Allard,democrat,74.036825
 11/5/2002,CA,34,Miller,republican,25.963175
 11/5/2002,CA,35,Moen,republican,19.371139
 11/5/2002,CA,35,Waters,democrat,77.511321
@@ -15680,7 +15680,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,36,Johnson,republican,35.010539
 11/5/2002,CA,37,Peters,libertarian,3.922447
 11/5/2002,CA,37,Velasco,republican,23.162322
-11/5/2002,CA,37,Millender-mcdonald,democrat,72.915230
+11/5/2002,CA,37,Millender-Mcdonald,democrat,72.915230
 11/5/2002,CA,38,Cuperus,libertarian,2.613971
 11/5/2002,CA,38,Napolitano,democrat,71.114544
 11/5/2002,CA,38,Burrola,republican,26.271485
@@ -15703,7 +15703,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,44,Vandenberg,democrat,31.562388
 11/5/2002,CA,44,Calvert,republican,63.659381
 11/5/2002,CA,45,Bono,republican,65.228071
-11/5/2002,CA,45,Miller-boyer,libertarian,2.051927
+11/5/2002,CA,45,Miller-Boyer,libertarian,2.051927
 11/5/2002,CA,45,Kurpiewski,democrat,32.720002
 11/5/2002,CA,46,Gann,libertarian,3.680821
 11/5/2002,CA,46,Lash,independent,0.045386
@@ -15723,7 +15723,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,51,Garcia,republican,39.333768
 11/5/2002,CA,51,Keup,libertarian,2.739646
 11/5/2002,CA,51,Filner,democrat,57.926586
-11/5/2002,CA,52,Moore-kochlacs,democrat,25.753506
+11/5/2002,CA,52,Moore-Kochlacs,democrat,25.753506
 11/5/2002,CA,52,Hunter,republican,70.150287
 11/5/2002,CA,52,Benoit,libertarian,4.096207
 11/5/2002,CA,53,Vandeweghe,republican,37.790482
@@ -15748,7 +15748,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CO,5,Hefley,republican,69.374096
 11/5/2002,CO,5,Baker,libertarian,5.941184
 11/5/2002,CO,5,Imrie,democrat,24.684720
-11/5/2002,CO,6,Tancredo,republican,66.884350
+11/5/2002,CO,6,Tancredo,independent,66.884350
 11/5/2002,CO,6,Wright,democrat,30.032295
 11/5/2002,CO,6,Katz,libertarian,3.083355
 11/5/2002,CO,7,Martin,libertarian,1.682005
@@ -15782,7 +15782,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,FL,5,Gargan,no party affiliation,3.392926
 11/5/2002,FL,5,Moore,no party affiliation,2.444053
 11/5/2002,FL,5,Thurman,democrat,46.248890
-11/5/2002,FL,5,Brown-waite,republican,47.914130
+11/5/2002,FL,5,Brown-Waite,republican,47.914130
 11/5/2002,FL,6,Stearns,republican,65.355283
 11/5/2002,FL,6,Bruderly,democrat,34.644717
 11/5/2002,FL,7,Hogan,democrat,40.422313
@@ -15802,13 +15802,13 @@ date,region,district,candidate,party,voteshare
 11/5/2002,FL,16,Foley,republican,78.880183
 11/5/2002,FL,16,McLain,constitution,21.119817
 11/5/2002,FL,17,Meek,democrat,100.000000
-11/5/2002,FL,18,Ros-lehtinen,republican,69.106131
+11/5/2002,FL,18,Ros-Lehtinen,republican,69.106131
 11/5/2002,FL,18,Opperman,no party affiliation,2.285245
 11/5/2002,FL,18,Chote,democrat,28.608624
 11/5/2002,FL,19,Wexler,democrat,72.159154
 11/5/2002,FL,19,Merkl,republican,27.840846
 11/5/2002,FL,20,Deutsch,democrat,100.000000
-11/5/2002,FL,21,Diaz-balart,republican,100.000000
+11/5/2002,FL,21,Diaz-Balart,republican,100.000000
 11/5/2002,FL,22,Xuna,no party affiliation,0.876106
 11/5/2002,FL,22,Shaw,republican,60.770071
 11/5/2002,FL,22,Roberts,democrat,38.353823
@@ -15816,7 +15816,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,FL,23,Hastings,democrat,77.491092
 11/5/2002,FL,24,Feeney,republican,61.838234
 11/5/2002,FL,24,Jacobs,democrat,38.161766
-11/5/2002,FL,25,Diaz-balart,republican,64.647478
+11/5/2002,FL,25,Diaz-Balart,republican,64.647478
 11/5/2002,FL,25,Betancourt,democrat,35.352522
 11/5/2002,GA,1,Kingston,republican,72.143618
 11/5/2002,GA,1,Smart,democrat,27.856382
@@ -15877,7 +15877,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,IL,3,Lipinski,democrat,100.000000
 11/5/2002,IL,4,Gutierrez,democrat,79.678866
 11/5/2002,IL,4,Kohls,libertarian,5.201567
-11/5/2002,IL,4,Lopez-cisneros,republican,15.119567
+11/5/2002,IL,4,Lopez-Cisneros,republican,15.119567
 11/5/2002,IL,5,Augusti,republican,28.856901
 11/5/2002,IL,5,Gonzalez,libertarian,4.335936
 11/5/2002,IL,5,Emanuel,democrat,66.807163
@@ -16268,7 +16268,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,NV,1,Dempsey,independent american,2.387011
 11/5/2002,NV,1,Startin,green,1.163607
 11/5/2002,NV,1,Berkley,democrat,53.721369
-11/5/2002,NV,1,Boggs-mcdonald,republican,42.725162
+11/5/2002,NV,1,Boggs-Mcdonald,republican,42.725162
 11/5/2002,NV,2,Hansen,independent american,3.598410
 11/5/2002,NV,2,Gibbons,republican,74.340954
 11/5/2002,NV,2,Souza,democrat,19.974652
@@ -16651,7 +16651,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,TX,17,Jones,libertarian,1.249054
 11/5/2002,TX,17,Stenholm,democrat,51.363825
 11/5/2002,TX,18,Abbott,republican,21.702372
-11/5/2002,TX,18,Jackson-lee,democrat,76.913113
+11/5/2002,TX,18,Jackson-Lee,democrat,76.913113
 11/5/2002,TX,18,Sullivan,libertarian,1.384515
 11/5/2002,TX,19,Combest,republican,91.638492
 11/5/2002,TX,19,Johnson,libertarian,8.361508
@@ -16752,7 +16752,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,WA,7,Lippmann,libertarian,4.003261
 11/5/2002,WA,7,Cassady,republican,21.921963
 11/5/2002,WA,7,McDermott,democrat,74.074776
-11/5/2002,WA,8,Behrens-benedict,democrat,37.342809
+11/5/2002,WA,8,Behrens-Benedict,democrat,37.342809
 11/5/2002,WA,8,Taff,libertarian,2.838173
 11/5/2002,WA,8,Dunn,republican,59.819018
 11/5/2002,WA,9,Casada,republican,38.571865
@@ -16874,7 +16874,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,CA,16,Welch,libertarian,2.779774
 11/2/2004,CA,16,Lofgren,democrat,70.891645
 11/2/2004,CA,16,McNea,republican,26.328581
-11/2/2004,CA,17,Glock-grueneich,green,1.633430
+11/2/2004,CA,17,Glock-Grueneich,green,1.633430
 11/2/2004,CA,17,Smolen,libertarian,1.168272
 11/2/2004,CA,17,Williams,peace and freedom,1.265068
 11/2/2004,CA,17,Risley,republican,29.180820
@@ -16919,7 +16919,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,CA,33,Watson,democrat,88.575995
 11/2/2004,CA,33,Weber,libertarian,11.424005
 11/2/2004,CA,34,Miller,republican,25.507664
-11/2/2004,CA,34,Roybal-allard,democrat,74.492336
+11/2/2004,CA,34,Roybal-Allard,democrat,74.492336
 11/2/2004,CA,35,Tate,libertarian,2.191078
 11/2/2004,CA,35,Mego,american independent,2.199390
 11/2/2004,CA,35,Waters,democrat,80.526447
@@ -16928,7 +16928,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,CA,36,Harman,democrat,61.959319
 11/2/2004,CA,36,Stek,peace and freedom,2.501598
 11/2/2004,CA,36,Whitehead,republican,33.463638
-11/2/2004,CA,37,Millender-mcdonald,democrat,75.053374
+11/2/2004,CA,37,Millender-Mcdonald,democrat,75.053374
 11/2/2004,CA,37,Van,republican,20.187218
 11/2/2004,CA,37,Peters,libertarian,4.759408
 11/2/2004,CA,38,Napolitano,democrat,100.000000
@@ -17019,7 +17019,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,FL,3,Brown,democrat,100.000000
 11/2/2004,FL,4,Crenshaw,republican,100.000000
 11/2/2004,FL,5,Whittel,democrat,34.061818
-11/2/2004,FL,5,Brown-waite,republican,65.938182
+11/2/2004,FL,5,Brown-Waite,republican,65.938182
 11/2/2004,FL,6,Bruderly,democrat,35.593029
 11/2/2004,FL,6,Stearns,republican,64.406971
 11/2/2004,FL,7,Mica,republican,100.000000
@@ -17041,20 +17041,20 @@ date,region,district,candidate,party,voteshare
 11/2/2004,FL,16,Foley,republican,68.041728
 11/2/2004,FL,16,Fisher,democrat,31.958272
 11/2/2004,FL,17,Meek,democrat,100.000000
-11/2/2004,FL,18,Ros-lehtinen,republican,64.726848
+11/2/2004,FL,18,Ros-Lehtinen,republican,64.726848
 11/2/2004,FL,18,Sheldon,democrat,35.273152
 11/2/2004,FL,19,Wexler,democrat,100.000000
 11/2/2004,FL,20,Hostetter,republican,29.813001
 11/2/2004,FL,20,Schultz,democrat,70.186999
 11/2/2004,FL,21,Gonzalez,libertarian,27.198958
-11/2/2004,FL,21,Diaz-balart,republican,72.801042
+11/2/2004,FL,21,Diaz-Balart,republican,72.801042
 11/2/2004,FL,22,McLain,constitution party of florida,1.714886
 11/2/2004,FL,22,Kennedy,independent,0.204417
 11/2/2004,FL,22,Shaw,republican,62.786004
 11/2/2004,FL,22,Rorapaugh,democrat,35.294693
 11/2/2004,FL,23,Hastings,democrat,100.000000
 11/2/2004,FL,24,Feeney,republican,100.000000
-11/2/2004,FL,25,Diaz-balart,republican,100.000000
+11/2/2004,FL,25,Diaz-Balart,republican,100.000000
 11/2/2004,GA,1,Kingston,republican,100.000000
 11/2/2004,GA,2,Bishop,democrat,66.785525
 11/2/2004,GA,2,Eversman,republican,33.214475
@@ -17110,7 +17110,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,IL,5,Best,republican,23.820517
 11/2/2004,IL,6,Cegelis,democrat,44.170862
 11/2/2004,IL,6,Hyde,republican,55.829138
-11/2/2004,IL,7,Davis-fairman,republican,13.867553
+11/2/2004,IL,7,Davis-Fairman,republican,13.867553
 11/2/2004,IL,7,Davis,democrat,86.132447
 11/2/2004,IL,8,Bean,democrat,51.699563
 11/2/2004,IL,8,Crane,republican,48.300437
@@ -17788,7 +17788,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,TN,2,Duncan,republican,79.066640
 11/2/2004,TN,2,Greene,democrat,19.109435
 11/2/2004,TN,3,Wolfe,democrat,32.846132
-11/2/2004,TN,3,Howard-hill,independent,0.573965
+11/2/2004,TN,3,Howard-Hill,independent,0.573965
 11/2/2004,TN,3,Wamp,republican,64.743060
 11/2/2004,TN,3,Griffin,independent,1.175985
 11/2/2004,TN,3,Vandagriff,independent,0.660858
@@ -17854,7 +17854,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,TX,17,Garland,libertarian,1.385098
 11/2/2004,TX,17,Edwards,democrat,51.199193
 11/2/2004,TX,18,Bazan,republican,6.397234
-11/2/2004,TX,18,Jackson-lee,democrat,88.907627
+11/2/2004,TX,18,Jackson-Lee,democrat,88.907627
 11/2/2004,TX,18,Sullivan,libertarian,4.695139
 11/2/2004,TX,19,Neugebauer,republican,58.437181
 11/2/2004,TX,19,Peterson,libertarian,1.509117
@@ -18132,7 +18132,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,CA,32,Faegre,libertarian,17.044042
 11/7/2006,CA,33,Watson,democrat,100.000000
 11/7/2006,CA,34,Miller,republican,23.201636
-11/7/2006,CA,34,Roybal-allard,democrat,76.798364
+11/7/2006,CA,34,Roybal-Allard,democrat,76.798364
 11/7/2006,CA,35,Waters,democrat,83.749213
 11/7/2006,CA,35,Ireland,libertarian,7.781252
 11/7/2006,CA,35,Mego,independent,8.469535
@@ -18141,7 +18141,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,CA,36,Smith,peace and freedom,2.763718
 11/7/2006,CA,36,Gibson,republican,31.939237
 11/7/2006,CA,37,Peters,libertarian,17.604786
-11/7/2006,CA,37,Millender-mcdonald,democrat,82.395214
+11/7/2006,CA,37,Millender-Mcdonald,democrat,82.395214
 11/7/2006,CA,38,Napolitano,democrat,75.330909
 11/7/2006,CA,38,Street,republican,24.669091
 11/7/2006,CA,39,Andion,republican,34.130353
@@ -18218,7 +18218,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,CT,5,Murphy,democrat,56.463609
 11/7/2006,CT,5,Johnson,republican,43.536391
 11/7/2006,DE,0,Berg,green,1.773185
-11/7/2006,DE,0,Hartley-nagle,independent,2.292069
+11/7/2006,DE,0,Hartley-Nagle,independent,2.292069
 11/7/2006,DE,0,Spivack,democrat,38.763340
 11/7/2006,DE,0,Castle,republican,57.171407
 11/7/2006,FL,1,Miller,republican,68.535175
@@ -18227,7 +18227,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,FL,3,Brown,democrat,100.000000
 11/7/2006,FL,4,Crenshaw,republican,69.673110
 11/7/2006,FL,4,Harms,democrat,30.326890
-11/7/2006,FL,5,Brown-waite,republican,59.850026
+11/7/2006,FL,5,Brown-Waite,republican,59.850026
 11/7/2006,FL,5,Russell,democrat,40.149974
 11/7/2006,FL,6,Stearns,republican,59.878840
 11/7/2006,FL,6,Bruderly,democrat,40.121160
@@ -18256,10 +18256,10 @@ date,region,district,candidate,party,voteshare
 11/7/2006,FL,16,Ross,none,2.791597
 11/7/2006,FL,17,Meek,democrat,100.000000
 11/7/2006,FL,18,Patlak,democrat,37.851401
-11/7/2006,FL,18,Ros-lehtinen,republican,62.148599
+11/7/2006,FL,18,Ros-Lehtinen,republican,62.148599
 11/7/2006,FL,19,Wexler,democrat,100.000000
 11/7/2006,FL,20,Schultz,democrat,100.000000
-11/7/2006,FL,21,Diaz-balart,republican,59.466102
+11/7/2006,FL,21,Diaz-Balart,republican,59.466102
 11/7/2006,FL,21,Gonzalez,democrat,40.533898
 11/7/2006,FL,22,Shaw,republican,47.125770
 11/7/2006,FL,22,Klein,democrat,50.882704
@@ -18268,7 +18268,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,FL,24,Feeney,republican,57.940728
 11/7/2006,FL,24,Curtis,democrat,42.059272
 11/7/2006,FL,25,Calderin,democrat,41.534450
-11/7/2006,FL,25,Diaz-balart,republican,58.465550
+11/7/2006,FL,25,Diaz-Balart,republican,58.465550
 11/7/2006,GA,1,Nelson,democrat,31.499903
 11/7/2006,GA,1,Kingston,republican,68.500097
 11/7/2006,GA,2,Hughes,republican,32.126863
@@ -18314,7 +18314,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,IA,5,Schulte,democrat,35.577248
 11/7/2006,IA,5,King,republican,58.525823
 11/7/2006,ID,1,Grant,democrat,44.804590
-11/7/2006,ID,1,Hedden-nicely,natural law,1.242381
+11/7/2006,ID,1,Hedden-Nicely,natural law,1.242381
 11/7/2006,ID,1,Olson,independent,2.955935
 11/7/2006,ID,1,Smith,constitution,1.059170
 11/7/2006,ID,1,Sali,republican,49.937924
@@ -18646,14 +18646,14 @@ date,region,district,candidate,party,voteshare
 11/7/2006,NE,2,Esch,democrat,45.337099
 11/7/2006,NE,3,Smith,republican,54.992188
 11/7/2006,NE,3,Kleeb,democrat,45.007812
-11/7/2006,NH,1,Shea-porter,democrat,51.315883
+11/7/2006,NH,1,Shea-Porter,democrat,51.315883
 11/7/2006,NH,1,Bradley,republican,48.684117
 11/7/2006,NH,2,Bass,republican,45.643653
 11/7/2006,NH,2,Hodes,democrat,52.753037
 11/7/2006,NH,2,Blevens,libertarian,1.603310
 11/7/2006,NJ,1,Andrews,democrat,100.000000
 11/7/2006,NJ,2,Fanslau,we the people,0.333937
-11/7/2006,NJ,2,Thomas-hughes,democrat,35.596130
+11/7/2006,NJ,2,Thomas-Hughes,democrat,35.596130
 11/7/2006,NJ,2,Mullock,preserve green space,1.700697
 11/7/2006,NJ,2,Lobiondo,republican,61.606663
 11/7/2006,NJ,2,Norwood,socialist party usa,0.213210
@@ -19049,7 +19049,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,TX,17,Edwards,democrat,58.116940
 11/7/2006,TX,17,Acosta,libertarian,1.573616
 11/7/2006,TX,17,Taylor,republican,40.309444
-11/7/2006,TX,18,Jackson-lee,democrat,76.624327
+11/7/2006,TX,18,Jackson-Lee,democrat,76.624327
 11/7/2006,TX,18,Warren,libertarian,4.261426
 11/7/2006,TX,18,Hassan,republican,19.114246
 11/7/2006,TX,19,Neugebauer,republican,67.795580
@@ -19069,6 +19069,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,TX,22,Gibbs,independent,41.782527
 11/7/2006,TX,23,Bonilla,republican,45.715380
 11/7/2006,TX,23,Rodriguez,democrat,54.284620
+11/7/2006,TX,23,Rodriguez,democrat,19.866073
 11/7/2006,TX,24,Page,democrat,37.159800
 11/7/2006,TX,24,Frohman,libertarian,3.017026
 11/7/2006,TX,24,Marchant,republican,59.823174
@@ -19322,7 +19323,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,CA,32,Solis,democrat,100.000000
 11/4/2008,CA,33,Crowley,republican,12.431369
 11/4/2008,CA,33,Watson,democrat,87.568631
-11/4/2008,CA,34,Roybal-allard,democrat,77.094600
+11/4/2008,CA,34,Roybal-Allard,democrat,77.094600
 11/4/2008,CA,34,Balding,republican,22.905400
 11/4/2008,CA,35,Hayes,republican,13.237557
 11/4/2008,CA,35,Peters,libertarian,4.180108
@@ -19413,7 +19414,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,CT,5,Cappiello,republican,38.960902
 11/4/2008,CT,5,Murphy,working families,5.996755
 11/4/2008,DE,0,Parks,libertarian,0.930324
-11/4/2008,DE,0,Hartley-nagle,democrat,37.989711
+11/4/2008,DE,0,Hartley-Nagle,democrat,37.989711
 11/4/2008,DE,0,Castle,republican,61.079965
 11/4/2008,FL,1,Miller,republican,70.184032
 11/4/2008,FL,1,Bryan,democrat,29.815968
@@ -19423,7 +19424,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,FL,4,McGovern,democrat,34.745314
 11/4/2008,FL,4,Crenshaw,republican,65.254686
 11/4/2008,FL,5,Russell,democrat,38.845380
-11/4/2008,FL,5,Brown-waite,republican,61.154620
+11/4/2008,FL,5,Brown-Waite,republican,61.154620
 11/4/2008,FL,6,Cunha,democrat,39.112485
 11/4/2008,FL,6,Stearns,republican,60.887515
 11/4/2008,FL,7,Armitage,democrat,37.996639
@@ -19455,14 +19456,14 @@ date,region,district,candidate,party,voteshare
 11/4/2008,FL,16,Mahoney,democrat,39.906714
 11/4/2008,FL,16,Rooney,republican,60.093286
 11/4/2008,FL,17,Meek,democrat,100.000000
-11/4/2008,FL,18,Ros-lehtinen,republican,57.869698
+11/4/2008,FL,18,Ros-Lehtinen,republican,57.869698
 11/4/2008,FL,18,Taddeo,democrat,42.130302
 11/4/2008,FL,19,Wexler,democrat,66.157249
 11/4/2008,FL,19,Lynch,republican,27.237645
 11/4/2008,FL,19,Graber,no party affiliation,6.605105
 11/4/2008,FL,20,Schultz,democrat,77.478895
 11/4/2008,FL,20,Hostetter,no party affiliation,22.521105
-11/4/2008,FL,21,Diaz-balart,republican,57.900777
+11/4/2008,FL,21,Diaz-Balart,republican,57.900777
 11/4/2008,FL,21,Martinez,democrat,42.099223
 11/4/2008,FL,22,Klein,democrat,54.680166
 11/4/2008,FL,22,West,republican,45.319834
@@ -19472,7 +19473,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,FL,24,Feeney,republican,41.114059
 11/4/2008,FL,24,Kosmas,democrat,57.201180
 11/4/2008,FL,25,Garcia,democrat,46.945617
-11/4/2008,FL,25,Diaz-balart,republican,53.054383
+11/4/2008,FL,25,Diaz-Balart,republican,53.054383
 11/4/2008,GA,1,Kingston,republican,66.533245
 11/4/2008,GA,1,Gillespie,democrat,33.466755
 11/4/2008,GA,2,Bishop,democrat,68.948935
@@ -19506,7 +19507,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,HI,2,Mallan,libertarian,1.697459
 11/4/2008,IA,1,Hartsuch,republican,35.393359
 11/4/2008,IA,1,Braley,democrat,64.606641
-11/4/2008,IA,2,Miller-meeks,republican,38.804039
+11/4/2008,IA,2,Miller-Meeks,republican,38.804039
 11/4/2008,IA,2,White,no party affiliation,1.776234
 11/4/2008,IA,2,Barth,green,2.177088
 11/4/2008,IA,2,Loebsack,democrat,57.242639
@@ -19682,7 +19683,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,MD,6,Bartlett,republican,57.822546
 11/4/2008,MD,7,Cummings,democrat,79.571868
 11/4/2008,MD,7,Hargadon,republican,18.598930
-11/4/2008,MD,7,Owens-bey,libertarian,1.824736
+11/4/2008,MD,7,Owens-Bey,libertarian,1.824736
 11/4/2008,MD,8,Hudson,republican,21.695670
 11/4/2008,MD,8,Thomas,libertarian,0.837731
 11/4/2008,MD,8,Hollen,democrat,75.205987
@@ -19852,7 +19853,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,NE,3,Smith,republican,76.874024
 11/4/2008,NE,3,Stoddard,democrat,23.125976
 11/4/2008,NH,1,Bradley,republican,45.864002
-11/4/2008,NH,1,Shea-porter,democrat,51.759746
+11/4/2008,NH,1,Shea-Porter,democrat,51.759746
 11/4/2008,NH,1,Kingsbury,libertarian,2.376252
 11/4/2008,NH,2,Horn,republican,41.424140
 11/4/2008,NH,2,Lapointe,libertarian,2.134113
@@ -20207,7 +20208,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,TN,1,Roe,republican,71.824508
 11/4/2008,TN,2,Duncan,republican,78.112801
 11/4/2008,TN,2,Scott,democrat,21.887199
-11/4/2008,TN,3,Howard-hill,independent,1.818311
+11/4/2008,TN,3,Howard-Hill,independent,1.818311
 11/4/2008,TN,3,Wamp,republican,69.373380
 11/4/2008,TN,3,Vandagriff,democrat,27.401818
 11/4/2008,TN,3,Choate,independent,1.406491
@@ -20272,7 +20273,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,TX,17,Osborne,libertarian,1.515223
 11/4/2008,TX,17,Curnock,republican,45.500390
 11/4/2008,TX,18,Taylor,libertarian,2.334051
-11/4/2008,TX,18,Jackson-lee,democrat,77.324946
+11/4/2008,TX,18,Jackson-Lee,democrat,77.324946
 11/4/2008,TX,18,Faulk,republican,20.341003
 11/4/2008,TX,19,Neugebauer,republican,72.438965
 11/4/2008,TX,19,Fullingim,democrat,24.947229
@@ -20551,7 +20552,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,CA,33,Andion,republican,13.918817
 11/2/2010,CA,33,Bass,democrat,86.081183
 11/2/2010,CA,34,Miller,republican,22.770734
-11/2/2010,CA,34,Roybal-allard,democrat,77.229266
+11/2/2010,CA,34,Roybal-Allard,democrat,77.229266
 11/2/2010,CA,35,Brown,republican,20.665039
 11/2/2010,CA,35,Waters,democrat,79.334961
 11/2/2010,CA,36,Harman,democrat,59.618819
@@ -20664,7 +20665,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,FL,2,Boyd,democrat,41.352949
 11/2/2010,FL,2,McKain,no party affiliation,2.804396
 11/2/2010,FL,2,Berryhill,no party affiliation,2.242338
-11/2/2010,FL,3,Martin-back,no party affiliation,3.077159
+11/2/2010,FL,3,Martin-Back,no party affiliation,3.077159
 11/2/2010,FL,3,Brown,democrat,63.036174
 11/2/2010,FL,3,Yost,republican,33.886667
 11/2/2010,FL,4,Stanley,no party affiliation,22.766468
@@ -20700,14 +20701,14 @@ date,region,district,candidate,party,voteshare
 11/2/2010,FL,17,Wilson,democrat,86.213018
 11/2/2010,FL,17,Vereen,no party affiliation,13.786982
 11/2/2010,FL,18,Banciella,democrat,31.114775
-11/2/2010,FL,18,Ros-lehtinen,republican,68.885225
+11/2/2010,FL,18,Ros-Lehtinen,republican,68.885225
 11/2/2010,FL,19,Deutch,democrat,62.655871
 11/2/2010,FL,19,Budd,republican,37.344129
 11/2/2010,FL,20,Blumenthal,no party affiliation,0.992439
 11/2/2010,FL,20,Schultz,democrat,60.147284
 11/2/2010,FL,20,Harrington,republican,38.101177
 11/2/2010,FL,20,Kunst,no party affiliation,0.759099
-11/2/2010,FL,21,Diaz-balart,republican,100.000000
+11/2/2010,FL,21,Diaz-Balart,republican,100.000000
 11/2/2010,FL,22,Klein,democrat,45.636369
 11/2/2010,FL,22,West,republican,54.363631
 11/2/2010,FL,23,Hastings,democrat,78.872862
@@ -20754,7 +20755,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,IA,2,Sicard,libertarian,1.919137
 11/2/2010,IA,2,Loebsack,democrat,51.035567
 11/2/2010,IA,2,Tack,constitution,1.085132
-11/2/2010,IA,2,Miller-meeks,republican,45.960163
+11/2/2010,IA,2,Miller-Meeks,republican,45.960163
 11/2/2010,IA,3,Williamson,socialist workers,2.603920
 11/2/2010,IA,3,Boswell,democrat,50.824699
 11/2/2010,IA,3,Zaun,republican,46.571381
@@ -21158,7 +21159,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,NE,3,Smith,republican,70.122516
 11/2/2010,NH,1,Hodson,libertarian,3.538494
 11/2/2010,NH,1,Guinta,republican,54.039107
-11/2/2010,NH,1,Shea-porter,democrat,42.422398
+11/2/2010,NH,1,Shea-Porter,democrat,42.422398
 11/2/2010,NH,2,Vanblommesteyn,independent,2.758354
 11/2/2010,NH,2,Wilson,libertarian,2.134753
 11/2/2010,NH,2,Kuster,democrat,46.763374
@@ -21170,7 +21171,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,NJ,1,Chapman,time for change,0.747027
 11/2/2010,NJ,2,Lovett,marklovett.us,0.671972
 11/2/2010,NJ,2,Stein,democrat,30.929871
-11/2/2010,NJ,2,Valdes-munoz,american labor,0.435017
+11/2/2010,NJ,2,Valdes-Munoz,american labor,0.435017
 11/2/2010,NJ,2,Boyce,constitution,2.465294
 11/2/2010,NJ,2,Lobiondo,republican,65.497846
 11/2/2010,NJ,3,Runyan,republican,50.027461
@@ -21706,7 +21707,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,WA,6,Dicks,democrat,58.039232
 11/2/2010,WA,6,Cloud,republican,41.960768
 11/2/2010,WA,7,McDermott,democrat,82.973359
-11/2/2010,WA,7,Jeffers-schroder,independent,17.026641
+11/2/2010,WA,7,Jeffers-Schroder,independent,17.026641
 11/2/2010,WA,8,Delbene,democrat,47.948380
 11/2/2010,WA,8,Reichert,republican,52.051620
 11/2/2010,WA,9,Muri,republican,45.147921
@@ -21878,7 +21879,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,CA,38,Campos,republican,32.455239
 11/6/2012,CA,39,Royce,republican,57.788123
 11/6/2012,CA,39,Chen,democrat,42.211877
-11/6/2012,CA,40,Roybal-allard,democrat,58.891464
+11/6/2012,CA,40,Roybal-Allard,democrat,58.891464
 11/6/2012,CA,40,Sanchez,democrat,41.108536
 11/6/2012,CA,41,Tavaglione,republican,41.032268
 11/6/2012,CA,41,Takano,democrat,58.967732
@@ -22015,15 +22016,15 @@ date,region,district,candidate,party,voteshare
 11/6/2012,FL,23,Harrington,republican,35.615583
 11/6/2012,FL,23,Schultz,democrat,63.248375
 11/6/2012,FL,24,Wilson,democrat,100.000000
-11/6/2012,FL,25,Diaz-balart,republican,75.646385
+11/6/2012,FL,25,Diaz-Balart,republican,75.646385
 11/6/2012,FL,25,Voteforeddie.com,none,8.539722
 11/6/2012,FL,25,Blumenthal,none,15.813893
 11/6/2012,FL,26,Rivera,republican,43.019169
 11/6/2012,FL,26,Peixoto,none,1.074096
 11/6/2012,FL,26,Garcia,democrat,53.643109
 11/6/2012,FL,26,Fernandez,none,2.263626
-11/6/2012,FL,27,Cruz-wiggins,none,2.894804
-11/6/2012,FL,27,Ros-lehtinen,republican,60.167441
+11/6/2012,FL,27,Cruz-Wiggins,none,2.894804
+11/6/2012,FL,27,Ros-Lehtinen,republican,60.167441
 11/6/2012,FL,27,Yevancey,democrat,36.937755
 11/6/2012,GA,1,Messinger,democrat,37.021797
 11/6/2012,GA,1,Kingston,republican,62.978203
@@ -22068,7 +22069,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,IA,4,King,republican,52.974789
 11/6/2012,IA,4,Monroe,nominated by petition,2.151158
 11/6/2012,IA,4,Vilsack,democrat,44.874052
-11/6/2012,ID,1,Pro-life,independent,2.401776
+11/6/2012,ID,1,Pro-Life,independent,2.401776
 11/6/2012,ID,1,Farris,democrat,30.768114
 11/6/2012,ID,1,Labrador,republican,62.957654
 11/6/2012,ID,1,Oates,libertarian,3.872457
@@ -22235,7 +22236,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,MD,6,Mueller,libertarian,3.207504
 11/6/2012,MD,6,Bartlett,republican,37.946951
 11/6/2012,MD,7,Mirabile,republican,20.841063
-11/6/2012,MD,7,Owens-bey,libertarian,2.538773
+11/6/2012,MD,7,Owens-Bey,libertarian,2.538773
 11/6/2012,MD,7,Cummings,democrat,76.608415
 11/6/2012,MD,8,Gluck,green,1.476975
 11/6/2012,MD,8,Timmerman,republican,32.967395
@@ -22402,7 +22403,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,NE,2,Ewing,democrat,49.204303
 11/6/2012,NE,3,Sullivan,democrat,25.828588
 11/6/2012,NE,3,Smith,republican,74.171412
-11/6/2012,NH,1,Shea-porter,democrat,49.778152
+11/6/2012,NH,1,Shea-Porter,democrat,49.778152
 11/6/2012,NH,1,Guinta,republican,46.010788
 11/6/2012,NH,1,Kelly,libertarian,4.211061
 11/6/2012,NH,2,Kuster,democrat,50.201964
@@ -22461,7 +22462,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,NJ,12,Cody,truth vision hope,0.468332
 11/6/2012,NJ,12,Freudenheim,independent,0.824046
 11/6/2012,NJ,12,Holt,democrat,69.220564
-11/6/2012,NM,1,Arnold-jones,republican,40.840314
+11/6/2012,NM,1,Arnold-Jones,republican,40.840314
 11/6/2012,NM,1,Grisham,democrat,59.159686
 11/6/2012,NM,2,Erhard,democrat,40.898723
 11/6/2012,NM,2,Pearce,republican,59.101277
@@ -22629,7 +22630,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,OH,6,Johnson,republican,53.251343
 11/6/2012,OH,6,Wilson,democrat,46.748657
 11/6/2012,OH,7,Gibbs,republican,56.395577
-11/6/2012,OH,7,Healy-abrams,democrat,43.604423
+11/6/2012,OH,7,Healy-Abrams,democrat,43.604423
 11/6/2012,OH,8,Boehner,republican,100.000000
 11/6/2012,OH,9,Kaptur,democrat,73.037322
 11/6/2012,OH,9,Wurzelbacher,republican,23.030279
@@ -23102,7 +23103,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,CA,21,Valadao,republican,57.834133
 11/4/2014,CA,21,Renteria,democrat,42.165867
 11/4/2014,CA,22,Nunes,republican,72.035068
-11/4/2014,CA,22,Aguilera-marrero,democrat,27.964932
+11/4/2014,CA,22,Aguilera-Marrero,democrat,27.964932
 11/4/2014,CA,23,McCarthy,republican,74.839417
 11/4/2014,CA,23,Garcia,democrat,25.160583
 11/4/2014,CA,24,Mitchum,republican,48.072879
@@ -23138,7 +23139,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,CA,39,Royce,republican,68.544943
 11/4/2014,CA,39,Anderson,democrat,31.455057
 11/4/2014,CA,40,Sanchez,democrat,38.824197
-11/4/2014,CA,40,Roybal-allard,democrat,61.175803
+11/4/2014,CA,40,Roybal-Allard,democrat,61.175803
 11/4/2014,CA,41,Takano,democrat,56.643019
 11/4/2014,CA,41,Adams,republican,43.356981
 11/4/2014,CA,42,Calvert,republican,65.737719
@@ -23192,7 +23193,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,CT,1,Russell,green,1.582056
 11/4/2014,CT,1,Larson,democrat,58.486054
 11/4/2014,CT,2,Clyde,green,1.118296
-11/4/2014,CT,2,Hopkins-cavanagh,republican,35.464780
+11/4/2014,CT,2,Hopkins-Cavanagh,republican,35.464780
 11/4/2014,CT,2,Courtney,working families,4.674119
 11/4/2014,CT,2,Courtney,democrat,57.601256
 11/4/2014,CT,2,Reale,libertarian,1.141549
@@ -23220,7 +23221,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,FL,3,Wheeler,democrat,32.302051
 11/4/2014,FL,3,Yoho,republican,64.984769
 11/4/2014,FL,3,Lawson,no party affiliation,2.713180
-11/4/2014,FL,4,Moser-bartlett,no party affiliation,15.693980
+11/4/2014,FL,4,Moser-Bartlett,no party affiliation,15.693980
 11/4/2014,FL,4,Crenshaw,republican,78.281553
 11/4/2014,FL,4,Koniz,no party affiliation,6.024468
 11/4/2014,FL,5,Smith,republican,34.525024
@@ -23265,10 +23266,10 @@ date,region,district,candidate,party,voteshare
 11/4/2014,FL,24,Fernandez,no party affiliation,3.660001
 11/4/2014,FL,24,Wilson,democrat,86.175109
 11/4/2014,FL,24,Neree,republican,10.164890
-11/4/2014,FL,25,Diaz-balart,republican,100.000000
+11/4/2014,FL,25,Diaz-Balart,republican,100.000000
 11/4/2014,FL,26,Garcia,democrat,48.535674
 11/4/2014,FL,26,Curbelo,republican,51.464326
-11/4/2014,FL,27,Ros-lehtinen,republican,100.000000
+11/4/2014,FL,27,Ros-Lehtinen,republican,100.000000
 11/4/2014,GA,1,Reese,democrat,39.086460
 11/4/2014,GA,1,Carter,republican,60.913540
 11/4/2014,GA,2,Duke,republican,40.845304
@@ -23298,7 +23299,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,IA,1,Murphy,democrat,48.854822
 11/4/2014,IA,1,Blum,republican,51.145178
 11/4/2014,IA,2,Loebsack,democrat,52.560776
-11/4/2014,IA,2,Miller-meeks,republican,47.439224
+11/4/2014,IA,2,Miller-Meeks,republican,47.439224
 11/4/2014,IA,3,Appel,democrat,42.336770
 11/4/2014,IA,3,Wright,libertarian,3.218205
 11/4/2014,IA,3,Young,republican,52.895282
@@ -23638,7 +23639,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,NE,3,Smith,republican,75.387643
 11/4/2014,NE,3,Sullivan,democrat,24.612357
 11/4/2014,NH,1,Guinta,republican,51.803514
-11/4/2014,NH,1,Shea-porter,democrat,48.196486
+11/4/2014,NH,1,Shea-Porter,democrat,48.196486
 11/4/2014,NH,2,Kuster,democrat,55.015132
 11/4/2014,NH,2,Garcia,republican,44.984868
 11/4/2014,NJ,1,Chapman,change is needed,0.678803
@@ -23957,7 +23958,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,SC,6,Culler,republican,25.549495
 11/4/2014,SC,6,,independent,0.114166
 11/4/2014,SC,7,Rice,republican,59.992766
-11/4/2014,SC,7,Bromell-tinubu,democrat,40.007234
+11/4/2014,SC,7,Bromell-Tinubu,democrat,40.007234
 11/4/2014,SD,0,Robinson,democrat,33.470373
 11/4/2014,SD,0,Noem,republican,66.529627
 11/4/2014,TN,1,Salyer,independent,2.974415
@@ -24015,7 +24016,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,TX,9,Green,democrat,90.821250
 11/4/2014,TX,10,McCaul,republican,62.181798
 11/4/2014,TX,10,Kelsey,libertarian,3.678454
-11/4/2014,TX,10,Walter-cadien,democrat,34.139748
+11/4/2014,TX,10,Walter-Cadien,democrat,34.139748
 11/4/2014,TX,11,Conaway,republican,90.269624
 11/4/2014,TX,11,Lange,libertarian,9.730376
 11/4/2014,TX,12,Greene,democrat,26.306936
@@ -24328,7 +24329,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,CA,39,Murdock,democrat,42.769571
 11/8/2016,CA,39,Royce,republican,57.230429
 11/8/2016,CA,40,Gonzalez,none,28.629510
-11/8/2016,CA,40,Roybal-allard,democrat,71.370490
+11/8/2016,CA,40,Roybal-Allard,democrat,71.370490
 11/8/2016,CA,41,Shepherd,republican,35.048626
 11/8/2016,CA,41,Takano,democrat,64.951374
 11/8/2016,CA,42,Sheridan,democrat,41.177882
@@ -24456,13 +24457,13 @@ date,region,district,candidate,party,voteshare
 11/8/2016,FL,23,Endriss,none,1.603120
 11/8/2016,FL,23,Milstein,none,1.206053
 11/8/2016,FL,23,Kaufman,republican,40.485888
-11/8/2016,FL,24,Wilson,democrat,
+11/8/2016,FL,24,Wilson,democrat,100.000000
 11/8/2016,FL,25,Valdes,democrat,37.639788
-11/8/2016,FL,25,Diaz-balart,republican,62.360212
+11/8/2016,FL,25,Diaz-Balart,republican,62.360212
 11/8/2016,FL,26,Peixoto,none,5.882185
 11/8/2016,FL,26,Curbelo,republican,52.950004
 11/8/2016,FL,26,Garcia,democrat,41.167811
-11/8/2016,FL,27,Ros-lehtinen,republican,54.893857
+11/8/2016,FL,27,Ros-Lehtinen,republican,54.893857
 11/8/2016,FL,27,Fuhrman,democrat,45.106143
 11/8/2016,GA,1,Carter,republican,100.000000
 11/8/2016,GA,2,Bishop,democrat,61.229848
@@ -24849,7 +24850,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NE,2,Ashford,democrat,47.727430
 11/8/2016,NE,3,Smith,republican,100.000000
 11/8/2016,NH,1,O'Connor,independent,9.497314
-11/8/2016,NH,1,Shea-porter,democrat,44.316240
+11/8/2016,NH,1,Shea-Porter,democrat,44.316240
 11/8/2016,NH,1,Kelly,independent,1.661506
 11/8/2016,NH,1,Lombardo,libertarian,1.506406
 11/8/2016,NH,1,Guinta,republican,42.994540
@@ -24881,7 +24882,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NJ,6,Shamy,libertarian,0.652912
 11/8/2016,NJ,6,Malliah,green,0.725796
 11/8/2016,NJ,6,Pallone,democrat,63.732989
-11/8/2016,NJ,6,Sonnek-schmelz,republican,34.888303
+11/8/2016,NJ,6,Sonnek-Schmelz,republican,34.888303
 11/8/2016,NJ,7,Lance,republican,54.083548
 11/8/2016,NJ,7,Jacob,democrat,43.123663
 11/8/2016,NJ,7,Haussmann,conservative,1.237941
@@ -24932,11 +24933,11 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NV,4,Brown,libertarian,3.839065
 11/8/2016,NV,4,Kihuen,democrat,48.518691
 11/8/2016,NY,1,Zeldin,conservative,6.832107
-11/8/2016,NY,1,Throne-holst,women's equality,0.731039
-11/8/2016,NY,1,Throne-holst,working families,1.800358
+11/8/2016,NY,1,Throne-Holst,women's equality,0.731039
+11/8/2016,NY,1,Throne-Holst,working families,1.800358
 11/8/2016,NY,1,Zeldin,republican,46.395476
 11/8/2016,NY,1,Zeldin,reform,0.246983
-11/8/2016,NY,1,Throne-holst,democrat,39.111796
+11/8/2016,NY,1,Throne-Holst,democrat,39.111796
 11/8/2016,NY,1,Zeldin,independence,1.828419
 11/8/2016,NY,2,Gregory,democrat,32.235899
 11/8/2016,NY,2,King,reform,0.669808
@@ -25110,7 +25111,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,OH,16,Mundy,democrat,34.670625
 11/8/2016,OH,16,Renacci,republican,65.329375
 11/8/2016,OK,1,Bridenstine,republican,100.000000
-11/8/2016,OK,2,Harris-till,democrat,23.203407
+11/8/2016,OK,2,Harris-Till,democrat,23.203407
 11/8/2016,OK,2,Mullin,republican,70.606241
 11/8/2016,OK,2,McCarthy,independent,6.190352
 11/8/2016,OK,3,Robbins,democrat,21.709134
@@ -25233,7 +25234,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,TN,8,Hart,independent,1.434923
 11/8/2016,TN,8,Montague,independent,0.883165
 11/8/2016,TN,8,Rawles,independent,0.864773
-11/8/2016,TN,8,Talley-lane,independent,0.700661
+11/8/2016,TN,8,Talley-Lane,independent,0.700661
 11/8/2016,TN,8,Godwin,independent,2.278475
 11/8/2016,TN,8,Kustoff,republican,68.752498
 11/8/2016,TN,8,Hobson,democrat,25.085505
@@ -25320,7 +25321,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,TX,28,Cary,green,2.502684
 11/8/2016,TX,28,Hardin,republican,31.305234
 11/8/2016,TX,29,Perez,libertarian,2.450334
-11/8/2016,TX,29,Partsch-galvan,green,1.100908
+11/8/2016,TX,29,Partsch-Galvan,green,1.100908
 11/8/2016,TX,29,Garza,republican,23.977512
 11/8/2016,TX,29,Green,democrat,72.471246
 11/8/2016,TX,30,Johnson,democrat,77.916701
@@ -25557,7 +25558,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,CA,38,Downing,republican,31.148222
 11/6/2018,CA,39,Cisneros,democrat,51.557123
 11/6/2018,CA,39,Kim,republican,48.442877
-11/6/2018,CA,40,Roybal-allard,democrat,77.347693
+11/6/2018,CA,40,Roybal-Allard,democrat,77.347693
 11/6/2018,CA,40,Barragan,green,22.652307
 11/6/2018,CA,41,Smith,republican,34.900269
 11/6/2018,CA,41,Takano,democrat,65.099731
@@ -25577,7 +25578,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,CA,48,Rouda,democrat,53.551992
 11/6/2018,CA,49,Harkey,republican,43.580992
 11/6/2018,CA,49,Levin,democrat,56.419008
-11/6/2018,CA,50,Campa-najjar,democrat,48.284516
+11/6/2018,CA,50,Campa-Najjar,democrat,48.284516
 11/6/2018,CA,50,Hunter,republican,51.715484
 11/6/2018,CA,51,Hidalgo,republican,28.799048
 11/6/2018,CA,51,Vargas,democrat,71.200952
@@ -25678,10 +25679,10 @@ date,region,district,candidate,party,voteshare
 11/6/2018,FL,23,Kaufman,republican,35.983442
 11/6/2018,FL,23,Canova,no party affiliation,4.956109
 11/6/2018,FL,24,Wilson,democrat,100.000000
-11/6/2018,FL,25,Diaz-balart,republican,60.453382
+11/6/2018,FL,25,Diaz-Balart,republican,60.453382
 11/6/2018,FL,25,Flores,democrat,39.546618
 11/6/2018,FL,26,Curbelo,republican,49.125385
-11/6/2018,FL,26,Mucarsel-powell,democrat,50.874615
+11/6/2018,FL,26,Mucarsel-Powell,democrat,50.874615
 11/6/2018,FL,27,Shalala,democrat,51.761776
 11/6/2018,FL,27,Salazar,republican,45.761840
 11/6/2018,FL,27,Joli,no party affiliation,2.476384
@@ -25702,7 +25703,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,GA,9,Collins,republican,79.505473
 11/6/2018,GA,9,McCall,democrat,20.494527
 11/6/2018,GA,10,Hice,republican,62.891968
-11/6/2018,GA,10,Johnson-green,democrat,37.108032
+11/6/2018,GA,10,Johnson-Green,democrat,37.108032
 11/6/2018,GA,11,Loudermilk,republican,61.791396
 11/6/2018,GA,11,Broady,democrat,38.208604
 11/6/2018,GA,12,Allen,republican,59.478061
@@ -25741,7 +25742,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,ID,1,Fulcher,republican,62.772321
 11/6/2018,ID,1,Howard,libertarian,1.725517
 11/6/2018,ID,1,McNeil,democrat,30.771038
-11/6/2018,ID,1,Pro-life,constitution,1.009912
+11/6/2018,ID,1,Pro-Life,constitution,1.009912
 11/6/2018,ID,2,Simpson,republican,60.670218
 11/6/2018,ID,2,Swisher,democrat,39.329782
 11/6/2018,IL,1,Rush,democrat,73.505632
@@ -26107,7 +26108,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NJ,12,Kipnis,republican,31.318871
 11/6/2018,NM,1,Haaland,democrat,59.132613
 11/6/2018,NM,1,Princeton,libertarian,4.542828
-11/6/2018,NM,1,Arnold-jones,republican,36.324560
+11/6/2018,NM,1,Arnold-Jones,republican,36.324560
 11/6/2018,NM,2,Small,democrat,50.933974
 11/6/2018,NM,2,Herrell,republican,49.066026
 11/6/2018,NM,3,Lujan,democrat,63.375025
@@ -26176,7 +26177,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,9,Gayot,republican,9.206685
 11/6/2018,NY,9,Gayot,conservative,1.082531
 11/6/2018,NY,9,Clarke,working families,6.983533
-11/6/2018,NY,9,Anabilah-azumah,reform,0.383489
+11/6/2018,NY,9,Anabilah-Azumah,reform,0.383489
 11/6/2018,NY,10,Nadler,democrat,76.943630
 11/6/2018,NY,10,Levin,republican,15.989445
 11/6/2018,NY,10,Levin,conservative,1.546646
@@ -26199,7 +26200,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,13,Butler,republican,5.010431
 11/6/2018,NY,13,Espaillat,working families,4.568504
 11/6/2018,NY,13,Butler,reform,0.385175
-11/6/2018,NY,14,Ocasio-cortez,democrat,78.172078
+11/6/2018,NY,14,Ocasio-Cortez,democrat,78.172078
 11/6/2018,NY,14,Pappas,republican,13.606667
 11/6/2018,NY,14,Perri,conservative,1.597200
 11/6/2018,NY,14,Crowley,working families,5.721999
@@ -26338,7 +26339,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,OR,1,Verbeek,republican,32.099569
 11/6/2018,OR,2,Roberts,independent,4.216800
 11/6/2018,OR,2,Walden,republican,56.346236
-11/6/2018,OR,2,McLeod-skinner,democrat,39.436964
+11/6/2018,OR,2,Mcleod-Skinner,democrat,39.436964
 11/6/2018,OR,3,Koller,independent,5.563140
 11/6/2018,OR,3,Blumenauer,democrat,72.696789
 11/6/2018,OR,3,Dye,libertarian,1.502559
@@ -26644,25 +26645,25 @@ date,region,district,candidate,party,voteshare
 11/6/2018,WY,0,Cummings,constitution,3.022096
 11/3/2020,AK,0,Galvin,democrat,45.263829
 11/3/2020,AK,0,Young,republican,54.401201
-11/3/2020,AK,0,Write-in,independent,0.334971
-11/3/2020,AL,1,Write-in,independent,0.091469
+11/3/2020,AK,0,Write-In,independent,0.334971
+11/3/2020,AL,1,Write-In,independent,0.091469
 11/3/2020,AL,1,Averhart,democrat,35.538707
 11/3/2020,AL,1,Carl,republican,64.369825
-11/3/2020,AL,2,Harvey-hall,democrat,34.682725
+11/3/2020,AL,2,Harvey-Hall,democrat,34.682725
 11/3/2020,AL,2,Moore,republican,65.222734
-11/3/2020,AL,2,Write-in,independent,0.094542
+11/3/2020,AL,2,Write-In,independent,0.094542
 11/3/2020,AL,3,Winfrey,democrat,32.459331
 11/3/2020,AL,3,Rogers,republican,67.461534
-11/3/2020,AL,3,Write-in,independent,0.079135
+11/3/2020,AL,3,Write-In,independent,0.079135
 11/3/2020,AL,4,Neighbors,democrat,17.682979
 11/3/2020,AL,4,Aderholt,republican,82.241871
-11/3/2020,AL,4,Write-in,independent,0.075150
-11/3/2020,AL,5,Write-in,independent,4.189128
+11/3/2020,AL,4,Write-In,independent,0.075150
+11/3/2020,AL,5,Write-In,independent,4.189128
 11/3/2020,AL,5,Brooks,republican,95.810872
 11/3/2020,AL,6,Palmer,republican,97.129961
-11/3/2020,AL,6,Write-in,independent,2.870039
+11/3/2020,AL,6,Write-In,independent,2.870039
 11/3/2020,AL,7,Sewell,democrat,97.163960
-11/3/2020,AL,7,Write-in,independent,2.836040
+11/3/2020,AL,7,Write-In,independent,2.836040
 11/3/2020,AR,1,Crawford,republican,100.000000
 11/3/2020,AR,2,Elliott,democrat,44.634184
 11/3/2020,AR,2,Hill,republican,55.365816
@@ -26752,7 +26753,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,25,Garcia,republican,50.049123
 11/3/2020,CA,25,Smith,democrat,49.950877
 11/3/2020,CA,26,Brownley,democrat,60.584858
-11/3/2020,CA,26,Baldwin-kennedy,republican,39.415142
+11/3/2020,CA,26,Baldwin-Kennedy,republican,39.415142
 11/3/2020,CA,27,Chu,democrat,69.775745
 11/3/2020,CA,27,Nalbandian,republican,30.224255
 11/3/2020,CA,28,Schiff,democrat,72.656671
@@ -26779,7 +26780,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,38,Tolar,democrat,25.658650
 11/3/2020,CA,39,Cisneros,democrat,49.402385
 11/3/2020,CA,39,Kim,republican,50.597615
-11/3/2020,CA,40,Roybal-allard,democrat,72.739174
+11/3/2020,CA,40,Roybal-Allard,democrat,72.739174
 11/3/2020,CA,40,Delgado,republican,27.260826
 11/3/2020,CA,41,Takano,democrat,64.030194
 11/3/2020,CA,41,Smith,republican,35.969806
@@ -26799,7 +26800,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,48,Steel,republican,51.059985
 11/3/2020,CA,49,Levin,democrat,53.129576
 11/3/2020,CA,49,Maryott,republican,46.870424
-11/3/2020,CA,50,Campa-najjar,democrat,46.046800
+11/3/2020,CA,50,Campa-Najjar,democrat,46.046800
 11/3/2020,CA,50,Issa,republican,53.953200
 11/3/2020,CA,51,Vargas,democrat,68.304755
 11/3/2020,CA,51,Hidalgo,republican,31.695245
@@ -26864,7 +26865,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,DC,0,Krucoff,independent,1.457799
 11/3/2020,DC,0,Lowery,independent,1.453150
 11/3/2020,DC,0,Cheeks,independent,0.846726
-11/3/2020,DC,0,Write-in,independent,0.657564
+11/3/2020,DC,0,Write-In,independent,0.657564
 11/3/2020,DC,0,Nicolas,democrat,3.041415
 11/3/2020,DC,0,Underwood,democrat,2.060154
 11/3/2020,DC,0,Norton,democrat,81.893335
@@ -26942,8 +26943,8 @@ date,region,district,candidate,party,voteshare
 11/3/2020,FL,24,Olivo,no party affiliation,4.040561
 11/3/2020,FL,24,Knepper,write-in,0.005869
 11/3/2020,FL,24,Rivera,write-in,0.003107
-11/3/2020,FL,25,Diaz-balart,republican,100.000000
-11/3/2020,FL,26,Mucarsel-powell,democrat,48.275691
+11/3/2020,FL,25,Diaz-Balart,republican,100.000000
+11/3/2020,FL,26,Mucarsel-Powell,democrat,48.275691
 11/3/2020,FL,26,Gimenez,republican,51.724309
 11/3/2020,FL,27,Shalala,democrat,48.621037
 11/3/2020,FL,27,Salazar,republican,51.356804
@@ -26958,7 +26959,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,GA,4,Johnson,democrat,80.076601
 11/3/2020,GA,4,Ezammudeen,republican,19.923399
 11/3/2020,GA,5,Williams,democrat,85.149350
-11/3/2020,GA,5,Stanton-king,republican,14.850650
+11/3/2020,GA,5,Stanton-King,republican,14.850650
 11/3/2020,GA,6,McBath,democrat,54.588974
 11/3/2020,GA,6,Handel,republican,45.411026
 11/3/2020,GA,7,Bourdeaux,democrat,51.391252
@@ -26968,7 +26969,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,GA,8,Cooper,write-in,0.015584
 11/3/2020,GA,9,Pandy,democrat,21.419311
 11/3/2020,GA,9,Clyde,republican,78.580689
-11/3/2020,GA,10,Johnson-green,democrat,37.689921
+11/3/2020,GA,10,Johnson-Green,democrat,37.689921
 11/3/2020,GA,10,Hice,republican,62.310079
 11/3/2020,GA,11,Barrett,democrat,39.573817
 11/3/2020,GA,11,Loudermilk,republican,60.426183
@@ -26987,26 +26988,26 @@ date,region,district,candidate,party,voteshare
 11/3/2020,HI,2,Tippens,libertarian,2.493550
 11/3/2020,HI,2,Burrus,nonpartisan,0.977207
 11/3/2020,HI,2,Giuffre,american shopping party,0.242924
-11/3/2020,IA,1,Write-in,independent,0.102402
+11/3/2020,IA,1,Write-In,independent,0.102402
 11/3/2020,IA,1,Finkenauer,democrat,47.490748
 11/3/2020,IA,1,Hinson,republican,50.024176
 11/3/2020,IA,2,Hart,democrat,47.575660
-11/3/2020,IA,2,Miller-meeks,republican,47.577110
-11/3/2020,IA,2,Write-in,independent,0.178065
+11/3/2020,IA,2,Miller-Meeks,republican,47.577110
+11/3/2020,IA,2,Write-In,independent,0.178065
 11/3/2020,IA,3,Axne,democrat,47.569188
 11/3/2020,IA,3,Young,republican,47.526469
 11/3/2020,IA,3,Holder,libertarian,3.427532
-11/3/2020,IA,3,Write-in,independent,0.085683
+11/3/2020,IA,3,Write-In,independent,0.085683
 11/3/2020,IA,4,Scholten,democrat,37.782105
 11/3/2020,IA,4,Feenstra,republican,61.952462
-11/3/2020,IA,4,Write-in,independent,0.232885
+11/3/2020,IA,4,Write-In,independent,0.232885
 11/3/2020,ID,1,Soto,democrat,28.649559
 11/3/2020,ID,1,Fulcher,republican,67.761069
 11/3/2020,ID,1,Evans,libertarian,3.587846
-11/3/2020,ID,1,Pro-life,write-in,0.001526
+11/3/2020,ID,1,Pro-Life,write-in,0.001526
 11/3/2020,ID,2,Swisher,democrat,31.725155
 11/3/2020,ID,2,Simpson,republican,64.055165
-11/3/2020,ID,2,Pro-life,constitution,2.190717
+11/3/2020,ID,2,Pro-Life,constitution,2.190717
 11/3/2020,ID,2,Law,libertarian,2.028963
 11/3/2020,IL,1,Rush,democrat,73.800685
 11/3/2020,IL,1,White,republican,26.152256
@@ -27266,34 +27267,34 @@ date,region,district,candidate,party,voteshare
 11/3/2020,MN,1,Feehan,democrat,45.516407
 11/3/2020,MN,1,Hagedorn,republican,48.591862
 11/3/2020,MN,1,Rood,grassroots - legalize cannabis,5.814735
-11/3/2020,MN,1,Write-in,independent,0.076995
+11/3/2020,MN,1,Write-In,independent,0.076995
 11/3/2020,MN,2,Craig,democrat,48.180970
 11/3/2020,MN,2,Kistner,republican,45.924261
 11/3/2020,MN,2,Weeks,legal marijuana now,5.830459
-11/3/2020,MN,2,Write-in,independent,0.064309
+11/3/2020,MN,2,Write-In,independent,0.064309
 11/3/2020,MN,3,Qualls,republican,44.324542
-11/3/2020,MN,3,Write-in,independent,0.070333
+11/3/2020,MN,3,Write-In,independent,0.070333
 11/3/2020,MN,3,Phillips,democrat,55.605124
 11/3/2020,MN,4,McCollum,democrat,63.172489
 11/3/2020,MN,4,Rechtzigel,republican,28.970944
 11/3/2020,MN,4,Sindt,grassroots - legalize cannabis,7.590835
-11/3/2020,MN,4,Write-in,independent,0.265732
+11/3/2020,MN,4,Write-In,independent,0.265732
 11/3/2020,MN,5,Omar,democrat,64.265536
 11/3/2020,MN,5,Johnson,republican,25.833880
 11/3/2020,MN,5,Moore,legal marijuana now,9.536975
-11/3/2020,MN,5,Write-in,independent,0.363610
+11/3/2020,MN,5,Write-In,independent,0.363610
 11/3/2020,MN,6,Zahradka,democrat,34.162166
 11/3/2020,MN,6,Emmer,republican,65.703711
-11/3/2020,MN,6,Write-in,independent,0.134123
+11/3/2020,MN,6,Write-In,independent,0.134123
 11/3/2020,MN,7,Fischbach,republican,53.391549
 11/3/2020,MN,7,Johnson,legal marijuana now,4.872385
 11/3/2020,MN,7,Anderson,grassroots - legalize cannabis,1.788009
-11/3/2020,MN,7,Write-in,independent,0.099594
+11/3/2020,MN,7,Write-In,independent,0.099594
 11/3/2020,MN,7,Peterson,democrat,39.848464
 11/3/2020,MN,8,Nystrom,democrat,37.553688
 11/3/2020,MN,8,Stauber,republican,56.750256
 11/3/2020,MN,8,Schwartzbacker,grassroots - legalize cannabis,5.636114
-11/3/2020,MN,8,Write-in,independent,0.059942
+11/3/2020,MN,8,Write-In,independent,0.059942
 11/3/2020,MO,1,Bush,democrat,78.782368
 11/3/2020,MO,1,Rogers,republican,18.958095
 11/3/2020,MO,1,Furman,libertarian,2.139981
@@ -27353,7 +27354,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NC,7,Rouzer,republican,60.247276
 11/3/2020,NC,7,Everett,write-in,0.065014
 11/3/2020,NC,7,(miscellaneous),independent,0.094204
-11/3/2020,NC,8,Timmons-goodson,democrat,46.716243
+11/3/2020,NC,8,Timmons-Goodson,democrat,46.716243
 11/3/2020,NC,8,Hudson,republican,53.283757
 11/3/2020,NC,9,Wallace,democrat,44.407905
 11/3/2020,NC,9,Bishop,republican,55.592095
@@ -27369,14 +27370,14 @@ date,region,district,candidate,party,voteshare
 11/3/2020,ND,0,Peterson,libertarian,3.381346
 11/3/2020,ND,0,Raknerud,democrat,27.550774
 11/3/2020,ND,0,Armstrong,republican,68.962424
-11/3/2020,ND,0,Write-in,independent,0.105456
+11/3/2020,ND,0,Write-In,independent,0.105456
 11/3/2020,NE,1,Fortenberry,republican,59.517077
 11/3/2020,NE,1,Bolz,democrat,37.668390
 11/3/2020,NE,1,Grace,libertarian,2.814533
 11/3/2020,NE,2,Schaeffer,libertarian,3.022596
 11/3/2020,NE,2,Bacon,republican,50.768633
 11/3/2020,NE,2,Eastman,democrat,46.208771
-11/3/2020,NE,3,,democrat,17.676186
+11/3/2020,NE,3,Elworth,democrat,17.676186
 11/3/2020,NE,3,Smith,republican,78.514838
 11/3/2020,NE,3,Hobbs,libertarian,3.808976
 11/3/2020,NH,1,Pappas,democrat,51.335790
@@ -27403,21 +27404,21 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NJ,5,Pallotta,republican,45.636584
 11/3/2020,NJ,5,Vellucci,american values,1.210473
 11/3/2020,NJ,5,Gottheimer,democrat,53.152943
-11/3/2020,NJ,6,,democrat,61.165168
+11/3/2020,NJ,6,Pallone,democrat,61.165168
 11/3/2020,NJ,6,Onuoha,republican,38.834832
 11/3/2020,NJ,7,Malinowski,democrat,50.611941
-11/3/2020,NJ,7,,republican,49.388059
+11/3/2020,NJ,7,Kean,republican,49.388059
 11/3/2020,NJ,8,Sires,democrat,74.027633
 11/3/2020,NJ,8,Mushnick,republican,24.578156
 11/3/2020,NJ,8,Delaney,libertarian,1.394211
 11/3/2020,NJ,9,Prempeh,republican,31.862881
 11/3/2020,NJ,9,Auriemma,veteran for change,2.338616
-11/3/2020,NJ,9,,democrat,65.798502
+11/3/2020,NJ,9,Pascrell,democrat,65.798502
 11/3/2020,NJ,10,Zinone,republican,13.895431
 11/3/2020,NJ,10,Khalfani,no slogan filed,1.219617
 11/3/2020,NJ,10,Fitchette,building your legacy,1.199963
 11/3/2020,NJ,10,Mirrione,libertarian,0.404125
-11/3/2020,NJ,10,,democrat,83.280864
+11/3/2020,NJ,10,Payne,democrat,83.280864
 11/3/2020,NJ,11,Sherrill,democrat,53.303670
 11/3/2020,NJ,11,Becchi,republican,46.696330
 11/3/2020,NJ,12,Coleman,democrat,65.643045
@@ -27434,7 +27435,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NV,1,Titus,democrat,61.765220
 11/3/2020,NV,1,Bentley,republican,33.371712
 11/3/2020,NV,1,Bakari,independent american,2.773136
-11/3/2020,NV,1,,libertarian,2.089932
+11/3/2020,NV,1,Strawder,libertarian,2.089932
 11/3/2020,NV,2,Ackerman,democrat,40.708385
 11/3/2020,NV,2,Amodei,republican,56.465442
 11/3/2020,NV,2,Hansen,independent american,2.826173
@@ -27487,10 +27488,10 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,8,Wallace,conservative,1.040122
 11/3/2020,NY,9,Clarke,democrat,70.605760
 11/3/2020,NY,9,Clarke,working families,12.430073
-11/3/2020,NY,9,Jean-pierre,republican,14.466827
-11/3/2020,NY,9,Jean-pierre,conservative,1.385007
+11/3/2020,NY,9,Jean-Pierre,republican,14.466827
+11/3/2020,NY,9,Jean-Pierre,conservative,1.385007
 11/3/2020,NY,9,Popkin,libertarian,0.592956
-11/3/2020,NY,9,Anabilah-azumah,serve america movement,0.379434
+11/3/2020,NY,9,Anabilah-Azumah,serve america movement,0.379434
 11/3/2020,NY,10,Nadler,democrat,65.422703
 11/3/2020,NY,10,Nadler,working families,9.059861
 11/3/2020,NY,10,Bernstein,republican,22.038622
@@ -27501,17 +27502,17 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,11,Malliotakis,republican,48.891904
 11/3/2020,NY,11,Malliotakis,conservative,4.154891
 11/3/2020,NY,12,Maloney,democrat,82.088462
-11/3/2020,NY,12,Santiago-cano,republican,15.217378
-11/3/2020,NY,12,Santiago-cano,conservative,1.208549
+11/3/2020,NY,12,Santiago-Cano,republican,15.217378
+11/3/2020,NY,12,Santiago-Cano,conservative,1.208549
 11/3/2020,NY,12,Kolln,libertarian,1.242911
 11/3/2020,NY,13,Espaillat,democrat,75.931386
 11/3/2020,NY,13,Espaillat,working families,10.823766
 11/3/2020,NY,13,Gwinn,republican,7.420033
-11/3/2020,NY,13,Morris-perry,conservative,1.232993
+11/3/2020,NY,13,Morris-Perry,conservative,1.232993
 11/3/2020,NY,14,Cummings,republican,24.597825
 11/3/2020,NY,14,Cummings,conservative,2.795069
-11/3/2020,NY,14,Caruso-cabrera,serve america movement,0.937471
-11/3/2020,NY,14,Ocasio-cortez,democrat,68.270792
+11/3/2020,NY,14,Caruso-Cabrera,serve america movement,0.937471
+11/3/2020,NY,14,Ocasio-Cortez,democrat,68.270792
 11/3/2020,NY,15,Torres,democrat,88.743542
 11/3/2020,NY,15,Delices,republican,9.937342
 11/3/2020,NY,15,Delices,conservative,1.170977
@@ -27519,7 +27520,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,16,McManus,conservative,15.803747
 11/3/2020,NY,17,Jones,democrat,55.202823
 11/3/2020,NY,17,Jones,working families,4.014151
-11/3/2020,NY,17,McArdle-schulman,republican,35.198682
+11/3/2020,NY,17,Mcardle-Schulman,republican,35.198682
 11/3/2020,NY,17,Gottesfeld,conservative,2.666599
 11/3/2020,NY,17,Eisen,education.community.law,1.909257
 11/3/2020,NY,17,Parietti,serve america movement,0.823654
@@ -27552,7 +27553,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,22,Brindisi,independence,1.845939
 11/3/2020,NY,22,Tenney,republican,44.808823
 11/3/2020,NY,22,Tenney,conservative,4.004903
-11/3/2020,NY,22,,libertarian,2.120188
+11/3/2020,NY,22,Price,libertarian,2.120188
 11/3/2020,NY,23,Mitrano,democrat,36.959007
 11/3/2020,NY,23,Mitrano,working families,4.124460
 11/3/2020,NY,23,Reed,republican,51.533457
@@ -27586,7 +27587,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,OH,1,Schroder,democrat,44.647988
 11/3/2020,OH,1,Chabot,republican,51.795424
 11/3/2020,OH,2,Wenstrup,republican,61.081835
-11/3/2020,OH,2,,write-in,0.009808
+11/3/2020,OH,2,Condit,write-in,0.009808
 11/3/2020,OH,2,Castle,democrat,38.908357
 11/3/2020,OH,3,Moss,write-in,0.028652
 11/3/2020,OH,3,Davis,write-in,0.003426
@@ -27625,7 +27626,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,OH,15,Hoffman,write-in,0.019564
 11/3/2020,OH,16,Godfrey,democrat,36.808582
 11/3/2020,OH,16,Gonzalez,republican,63.191418
-11/3/2020,OK,1,Asamoa-caesar,democrat,32.682706
+11/3/2020,OK,1,Asamoa-Caesar,democrat,32.682706
 11/3/2020,OK,1,Hern,republican,63.701482
 11/3/2020,OK,1,Rogers,independent,3.615812
 11/3/2020,OK,2,Lanier,democrat,21.998634
@@ -27687,44 +27688,44 @@ date,region,district,candidate,party,voteshare
 11/3/2020,PA,14,Marx,democrat,35.305407
 11/3/2020,PA,14,Reschenthaler,republican,64.694593
 11/3/2020,PA,15,Williams,democrat,26.541557
-11/3/2020,PA,15,,republican,73.458443
-11/3/2020,PA,16,,republican,59.338512
+11/3/2020,PA,15,Thompson,republican,73.458443
+11/3/2020,PA,16,Kelly,republican,59.338512
 11/3/2020,PA,16,Gnibus,democrat,40.661488
 11/3/2020,PA,17,Parnell,republican,48.852917
 11/3/2020,PA,17,Lamb,democrat,51.147083
-11/3/2020,PA,18,,democrat,69.248166
+11/3/2020,PA,18,Doyle,democrat,69.248166
 11/3/2020,PA,18,Negron,republican,30.751834
 11/3/2020,RI,1,Lemire,independent,12.641830
 11/3/2020,RI,1,Cicilline,democrat,70.825516
 11/3/2020,RI,1,Wysocki,independent,15.838917
-11/3/2020,RI,1,Write-in,independent,0.693737
-11/3/2020,RI,2,Write-in,independent,0.218100
+11/3/2020,RI,1,Write-In,independent,0.693737
+11/3/2020,RI,2,Write-In,independent,0.218100
 11/3/2020,RI,2,Langevin,democrat,58.243025
 11/3/2020,RI,2,Lancia,republican,41.538874
 11/3/2020,SC,1,Cunningham,democrat,49.314347
 11/3/2020,SC,1,Mace,republican,50.582167
-11/3/2020,SC,1,Write-in,independent,0.103486
+11/3/2020,SC,1,Write-In,independent,0.103486
 11/3/2020,SC,2,Wilson,republican,55.658059
 11/3/2020,SC,2,Wright,constitution,1.692132
-11/3/2020,SC,2,Write-in,independent,0.060129
+11/3/2020,SC,2,Write-In,independent,0.060129
 11/3/2020,SC,2,Boroughs,democrat,42.589679
 11/3/2020,SC,3,Cleveland,democrat,28.693744
 11/3/2020,SC,3,Duncan,republican,71.213920
-11/3/2020,SC,3,Write-in,independent,0.092336
+11/3/2020,SC,3,Write-In,independent,0.092336
 11/3/2020,SC,4,Nelson,democrat,36.894467
 11/3/2020,SC,4,Timmons,republican,61.607544
 11/3/2020,SC,4,Chandler,constitution,1.411732
-11/3/2020,SC,4,Write-in,independent,0.086257
+11/3/2020,SC,4,Write-In,independent,0.086257
 11/3/2020,SC,5,Brown,democrat,39.856877
 11/3/2020,SC,5,Norman,republican,60.068586
-11/3/2020,SC,5,Write-in,independent,0.074538
+11/3/2020,SC,5,Write-In,independent,0.074538
 11/3/2020,SC,6,Clyburn,democrat,68.177095
 11/3/2020,SC,6,McCollum,republican,30.815493
 11/3/2020,SC,6,Hackett,constitution,0.913507
-11/3/2020,SC,6,Write-in,independent,0.093905
+11/3/2020,SC,6,Write-In,independent,0.093905
 11/3/2020,SC,7,Watson,democrat,38.139641
 11/3/2020,SC,7,Rice,republican,61.795815
-11/3/2020,SC,7,Write-in,independent,0.064544
+11/3/2020,SC,7,Write-In,independent,0.064544
 11/3/2020,SD,0,Johnson,republican,80.955015
 11/3/2020,SD,0,Luallin,libertarian,19.044985
 11/3/2020,TN,1,Walsingham,democrat,22.466219
@@ -27735,7 +27736,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TN,2,Hoyos,democrat,31.054624
 11/3/2020,TN,2,Burchett,republican,67.641288
 11/3/2020,TN,2,Campbell,independent,1.300124
-11/3/2020,TN,2,,write-in,0.001982
+11/3/2020,TN,2,Cornell,write-in,0.001982
 11/3/2020,TN,3,Gorman,democrat,30.498690
 11/3/2020,TN,3,Fleischmann,republican,67.303051
 11/3/2020,TN,3,Hysell,independent,1.574466
@@ -27752,7 +27753,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TN,7,Sreepada,democrat,27.332982
 11/3/2020,TN,7,Green,republican,69.926847
 11/3/2020,TN,7,Brown,independent,2.168352
-11/3/2020,TN,7,,independent,0.571820
+11/3/2020,TN,7,Vieira,independent,0.571820
 11/3/2020,TN,8,Pearson,democrat,29.498001
 11/3/2020,TN,8,Dillard,independent,0.899193
 11/3/2020,TN,8,Kustoff,republican,68.468870
@@ -27804,10 +27805,10 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TX,14,Bell,democrat,38.359187
 11/3/2020,TX,14,Weber,republican,61.640813
 11/3/2020,TX,15,Gonzalez,democrat,50.500837
-11/3/2020,TX,15,Cruz-hernandez,republican,47.622938
+11/3/2020,TX,15,Cruz-Hernandez,republican,47.622938
 11/3/2020,TX,15,Leone,libertarian,1.876226
 11/3/2020,TX,16,Escobar,democrat,64.720260
-11/3/2020,TX,16,Armendariz-jackson,republican,35.279740
+11/3/2020,TX,16,Armendariz-Jackson,republican,35.279740
 11/3/2020,TX,17,Kennedy,democrat,40.917578
 11/3/2020,TX,17,Sessions,republican,55.850466
 11/3/2020,TX,17,Brown,libertarian,3.231956
@@ -27827,7 +27828,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TX,21,Wakely,green,0.785455
 11/3/2020,TX,22,Kulkarni,democrat,44.602106
 11/3/2020,TX,22,Nehls,republican,51.528007
-11/3/2020,TX,22,,libertarian,3.869888
+11/3/2020,TX,22,Leblanc,libertarian,3.869888
 11/3/2020,TX,23,Jones,democrat,46.603397
 11/3/2020,TX,23,Gonzales,republican,50.564041
 11/3/2020,TX,23,Villela,libertarian,2.832561
@@ -27878,7 +27879,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TX,36,Lewis,democrat,24.266482
 11/3/2020,TX,36,Babin,republican,73.611878
 11/3/2020,TX,36,Abbey,libertarian,1.602385
-11/3/2020,TX,36,,green,0.519255
+11/3/2020,TX,36,Ridley,green,0.519255
 11/3/2020,UT,1,Moore,republican,69.515789
 11/3/2020,UT,1,Lee,write-in,0.045859
 11/3/2020,UT,1,Smith,write-in,0.003505
@@ -27899,37 +27900,37 @@ date,region,district,candidate,party,voteshare
 11/3/2020,UT,4,Peterson,write-in,0.007698
 11/3/2020,VA,1,Rashid,democrat,41.707313
 11/3/2020,VA,1,Wittman,republican,58.149664
-11/3/2020,VA,1,Write-in,independent,0.143024
+11/3/2020,VA,1,Write-In,independent,0.143024
 11/3/2020,VA,2,Luria,democrat,51.552833
 11/3/2020,VA,2,Taylor,republican,45.806699
 11/3/2020,VA,2,Taylor,independent,2.545264
-11/3/2020,VA,2,Write-in,independent,0.095205
+11/3/2020,VA,2,Write-In,independent,0.095205
 11/3/2020,VA,3,Scott,democrat,68.351686
-11/3/2020,VA,3,,republican,31.432706
-11/3/2020,VA,3,Write-in,independent,0.215608
-11/3/2020,VA,4,Write-in,independent,0.147696
+11/3/2020,VA,3,Collick,republican,31.432706
+11/3/2020,VA,3,Write-In,independent,0.215608
+11/3/2020,VA,4,Write-In,independent,0.147696
 11/3/2020,VA,4,McEachin,democrat,61.618776
 11/3/2020,VA,4,Benjamin,republican,38.233528
 11/3/2020,VA,5,Webb,democrat,47.304737
 11/3/2020,VA,5,Good,republican,52.443223
-11/3/2020,VA,5,Write-in,independent,0.252040
+11/3/2020,VA,5,Write-In,independent,0.252040
 11/3/2020,VA,6,Betts,democrat,35.286646
 11/3/2020,VA,6,Cline,republican,64.588162
-11/3/2020,VA,6,Write-in,independent,0.125192
+11/3/2020,VA,6,Write-In,independent,0.125192
 11/3/2020,VA,7,Spanberger,democrat,50.819542
 11/3/2020,VA,7,Freitas,republican,48.999315
-11/3/2020,VA,7,Write-in,independent,0.181142
-11/3/2020,VA,8,,democrat,75.790770
-11/3/2020,VA,8,Write-in,independent,0.232812
+11/3/2020,VA,7,Write-In,independent,0.181142
+11/3/2020,VA,8,Beyer,democrat,75.790770
+11/3/2020,VA,8,Write-In,independent,0.232812
 11/3/2020,VA,8,Jordan,republican,23.976417
-11/3/2020,VA,9,Write-in,independent,6.023009
+11/3/2020,VA,9,Write-In,independent,6.023009
 11/3/2020,VA,9,Griffith,republican,93.976991
 11/3/2020,VA,10,Wexton,democrat,56.510621
 11/3/2020,VA,10,Andrews,republican,43.371829
-11/3/2020,VA,10,Write-in,independent,0.117549
+11/3/2020,VA,10,Write-In,independent,0.117549
 11/3/2020,VA,11,Connolly,democrat,71.387521
 11/3/2020,VA,11,Anantatmula,republican,28.323598
-11/3/2020,VA,11,Write-in,independent,0.288881
+11/3/2020,VA,11,Write-In,independent,0.288881
 11/3/2020,VT,0,Welch,democrat,67.233545
 11/3/2020,VT,0,Orr,independent,0.542199
 11/3/2020,VT,0,Trudell,independent,0.529531
@@ -27938,37 +27939,37 @@ date,region,district,candidate,party,voteshare
 11/3/2020,VT,0,Overvotes,independent,0.107821
 11/3/2020,VT,0,Horne,independent,1.220089
 11/3/2020,VT,0,Helali,communist,0.966162
-11/3/2020,VT,0,Write-in,independent,0.152581
+11/3/2020,VT,0,Write-In,independent,0.152581
 11/3/2020,WA,1,Delbene,democrat,58.553818
 11/3/2020,WA,1,Beeler,republican,41.326471
-11/3/2020,WA,1,Write-in,independent,0.119711
+11/3/2020,WA,1,Write-In,independent,0.119711
 11/3/2020,WA,2,Larsen,democrat,63.087806
 11/3/2020,WA,2,Hazelo,republican,36.674427
-11/3/2020,WA,2,Write-in,independent,0.237767
+11/3/2020,WA,2,Write-In,independent,0.237767
 11/3/2020,WA,3,Beutler,republican,56.371694
-11/3/2020,WA,3,Write-in,independent,0.233786
+11/3/2020,WA,3,Write-In,independent,0.233786
 11/3/2020,WA,3,Long,democrat,43.394520
 11/3/2020,WA,4,McKinley,democrat,33.632310
 11/3/2020,WA,4,Newhouse,republican,66.207827
-11/3/2020,WA,4,Write-in,independent,0.159862
-11/3/2020,WA,5,Write-in,independent,0.199822
+11/3/2020,WA,4,Write-In,independent,0.159862
+11/3/2020,WA,5,Write-In,independent,0.199822
 11/3/2020,WA,5,Wilson,democrat,38.514443
 11/3/2020,WA,5,Rodgers,republican,61.285735
 11/3/2020,WA,6,Kilmer,democrat,59.304773
 11/3/2020,WA,6,Kreiselmaier,republican,40.454585
-11/3/2020,WA,6,Write-in,independent,0.240643
-11/3/2020,WA,7,Write-in,independent,0.238605
+11/3/2020,WA,6,Write-In,independent,0.240643
+11/3/2020,WA,7,Write-In,independent,0.238605
 11/3/2020,WA,7,Jayapal,democrat,82.988325
 11/3/2020,WA,7,Keller,republican,16.773070
 11/3/2020,WA,8,Schrier,democrat,51.714825
 11/3/2020,WA,8,Jensen,republican,48.147834
-11/3/2020,WA,8,Write-in,independent,0.137341
+11/3/2020,WA,8,Write-In,independent,0.137341
 11/3/2020,WA,9,Smith,democrat,74.135797
 11/3/2020,WA,9,Basler,republican,25.697465
-11/3/2020,WA,9,Write-in,independent,0.166738
+11/3/2020,WA,9,Write-In,independent,0.166738
 11/3/2020,WA,10,Strickland,democrat,49.334179
 11/3/2020,WA,10,Doglio,democrat,35.557436
-11/3/2020,WA,10,Write-in,independent,15.108385
+11/3/2020,WA,10,Write-In,independent,15.108385
 11/3/2020,WI,1,Polack,democrat,40.646073
 11/3/2020,WI,1,Steil,republican,59.353927
 11/3/2020,WI,2,Pocan,democrat,69.667436
@@ -27993,9 +27994,9 @@ date,region,district,candidate,party,voteshare
 11/3/2020,WV,2,Mooney,republican,63.076478
 11/3/2020,WV,3,Turner,democrat,28.644096
 11/3/2020,WV,3,Miller,republican,71.287081
-11/3/2020,WV,3,Fox-spencer,write-in,0.068823
+11/3/2020,WV,3,Fox-Spencer,write-in,0.068823
 11/3/2020,WY,0,Bull,democrat,24.461542
 11/3/2020,WY,0,Cheney,republican,68.242176
 11/3/2020,WY,0,Brubaker,libertarian,3.730811
 11/3/2020,WY,0,Haggit,constitution,2.904477
-11/3/2020,WY,0,Write-in,independent,0.193804
+11/3/2020,WY,0,Write-In,independent,0.193804
