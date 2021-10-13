@@ -218,6 +218,8 @@ function loadMapSVGFile()
           }
         }
 
+        $("#text").remove()
+
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))

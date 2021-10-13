@@ -2750,7 +2750,7 @@ function createHouseMapSources()
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear > 2020)
     {
-      return "svg-sources/usa-governor-map.svg"
+      return ["svg-sources/usa-governor-map.svg", zoomRegion]
     }
     else if (dateYear > 2010)
     {
@@ -2761,7 +2761,7 @@ function createHouseMapSources()
       return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
     }
 
-    return "svg-sources/usa-governor-map.svg"
+    return ["svg-sources/usa-governor-map.svg", zoomRegion]
   }
 
   var PastElectionResultMapSource = new MapSource(
