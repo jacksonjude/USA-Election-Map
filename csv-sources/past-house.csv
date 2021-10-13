@@ -222,7 +222,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,HI,1,Rohlfing,republican,39.058299
 11/2/1976,HI,1,Hoshijo,independents for godly government,17.301347
 11/2/1976,HI,1,Heftel,democrat,43.640354
-11/2/1976,HI,2,Cate,peoples,1.542611
+11/2/1976,HI,2,Cate,people's,1.542611
 11/2/1976,HI,2,Penaroza,independents for godly government,2.217183
 11/2/1976,HI,2,Akaka,democrat,79.511080
 11/2/1976,HI,2,Inouye,republican,15.321687
@@ -285,7 +285,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,IL,16,Anderson,republican,67.918206
 11/2/1976,IL,16,Eytalis,democrat,32.081794
 11/2/1976,IL,17,Karlock,democrat,41.787359
-11/2/1976,IL,17,OBrien,republican,58.212641
+11/2/1976,IL,17,O'Brien,republican,58.212641
 11/2/1976,IL,18,Michel,republican,57.728852
 11/2/1976,IL,18,Ryan,democrat,42.271148
 11/2/1976,IL,19,Railsback,republican,68.498693
@@ -388,12 +388,12 @@ date,region,district,candidate,party,voteshare
 11/2/1976,MA,7,Chickles,independent,2.252500
 11/2/1976,MA,7,Daly,republican,17.583069
 11/2/1976,MA,7,Murphy,independent,3.250185
-11/2/1976,MA,8,ONeil,democrat,74.448477
+11/2/1976,MA,8,O'Neil,democrat,74.448477
 11/2/1976,MA,8,Kahian,american,2.249151
 11/2/1976,MA,8,Donato,independent,4.603994
 11/2/1976,MA,8,Barnstead,republican,18.698378
 11/2/1976,MA,9,Warren,socialist workers,2.047293
-11/2/1976,MA,9,OLoughlin,independent,5.263510
+11/2/1976,MA,9,O'Loughlin,independent,5.263510
 11/2/1976,MA,9,Cunningham,republican,23.128783
 11/2/1976,MA,9,Moakley,democrat,69.560415
 11/2/1976,MA,10,Heckler,republican,100.000000
@@ -469,7 +469,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,MI,10,Cederberg,republican,56.486697
 11/2/1976,MI,10,Albosta,democrat,42.810109
 11/2/1976,MI,10,Dean,american independent,0.597572
-11/2/1976,MI,10,DUrso,u.s. labor,0.105622
+11/2/1976,MI,10,D'Urso,u.s. labor,0.105622
 11/2/1976,MI,11,Aho,human rights,0.106395
 11/2/1976,MI,11,Pape,american independent,0.247334
 11/2/1976,MI,11,Ruppe,republican,54.750248
@@ -622,9 +622,9 @@ date,region,district,candidate,party,voteshare
 11/2/1976,NE,3,Smith,republican,72.897169
 11/2/1976,NE,3,Hansen,democrat,24.672442
 11/2/1976,NE,3,Steen,american,2.430389
-11/2/1976,NH,1,OBrien,libertarian,1.484435
+11/2/1976,NH,1,O'Brien,libertarian,1.484435
 11/2/1976,NH,1,Adams,republican,30.388266
-11/2/1976,NH,1,DAmours,democrat,68.127299
+11/2/1976,NH,1,D'Amours,democrat,68.127299
 11/2/1976,NH,2,Grandmaison,democrat,39.466596
 11/2/1976,NH,2,Cleveland,republican,60.533404
 11/2/1976,NJ,1,Florio,democrat,70.100258
@@ -660,7 +660,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,NJ,8,Doty,republican,29.037718
 11/2/1976,NJ,9,Helstoski,democrat,44.341814
 11/2/1976,NJ,9,Hollenbeck,republican,53.104614
-11/2/1976,NJ,9,Terlizzi,independent taxpayers watchdog,0.787767
+11/2/1976,NJ,9,Terlizzi,independent taxpayer's watchdog,0.787767
 11/2/1976,NJ,9,Primich,libertarian,0.869312
 11/2/1976,NJ,9,Shaw,politicians are crooks,0.896493
 11/2/1976,NJ,10,Stewart,socialist workers,0.309061
@@ -691,7 +691,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,NJ,15,Adams,silent majority,8.086812
 11/2/1976,NJ,15,Todd,labor,0.400365
 11/2/1976,NJ,15,Wiley,republican,30.298161
-11/2/1976,NJ,15,Klein,peoples independent,2.177540
+11/2/1976,NJ,15,Klein,people's independent,2.177540
 11/2/1976,NM,1,Garcia,democrat,27.400176
 11/2/1976,NM,1,Lujan,republican,72.085960
 11/2/1976,NM,1,Aragom,la raza unida,0.513864
@@ -763,7 +763,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,NY,14,Gargiulo,conservative,2.241161
 11/2/1976,NY,14,Wright,socialist workers,1.033678
 11/2/1976,NY,14,Richmond,democrat,79.178546
-11/2/1976,NY,15,DAngelo,republican,30.726022
+11/2/1976,NY,15,D'Angelo,republican,30.726022
 11/2/1976,NY,15,Zeferetti,conservative,9.034863
 11/2/1976,NY,15,Paone,liberal,6.031766
 11/2/1976,NY,15,Zeferetti,democrat,54.207349
@@ -1031,7 +1031,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,SC,1,Davis,democrat,68.887799
 11/2/1976,SC,2,Spence,republican,57.543903
 11/2/1976,SC,2,Livingston,democrat,41.800825
-11/2/1976,SC,2,ONeal,independent,0.655272
+11/2/1976,SC,2,O'Neal,independent,0.655272
 11/2/1976,SC,3,Derrick,democrat,100.000000
 11/2/1976,SC,4,Mann,democrat,73.550969
 11/2/1976,SC,4,Watkins,republican,26.449031
@@ -1130,7 +1130,7 @@ date,region,district,candidate,party,voteshare
 11/2/1976,VA,2,Washington,democrat,34.311722
 11/2/1976,VA,3,Ogden,independent,11.941816
 11/2/1976,VA,3,Satterfield,democrat,88.058184
-11/2/1976,VA,4,OBrien,democrat,46.969967
+11/2/1976,VA,4,O'Brien,democrat,46.969967
 11/2/1976,VA,4,Daniel,republican,53.030033
 11/2/1976,VA,5,Daniel,democrat,100.000000
 11/2/1976,VA,6,Saunders,independent,37.764226
@@ -1268,7 +1268,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,CA,12,Fumino,peace and freedom,1.887747
 11/7/1978,CA,12,McCloskey,republican,73.074929
 11/7/1978,CA,13,Goldsborough,peace and freedom,2.991543
-11/7/1978,CA,13,OKeefe,republican,39.521901
+11/7/1978,CA,13,O'Keefe,republican,39.521901
 11/7/1978,CA,13,Mineta,democrat,57.486556
 11/7/1978,CA,14,Shumway,republican,53.393202
 11/7/1978,CA,14,McFall,democrat,42.621309
@@ -1463,7 +1463,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,IL,15,Corcoran,republican,62.383113
 11/7/1978,IL,16,Anderson,republican,65.475205
 11/7/1978,IL,16,Dahlin,democrat,34.524795
-11/7/1978,IL,17,OBrien,republican,70.621469
+11/7/1978,IL,17,O'Brien,republican,70.621469
 11/7/1978,IL,17,Sinclair,democrat,29.378531
 11/7/1978,IL,18,Michel,republican,65.879693
 11/7/1978,IL,18,Grunkmeyer,democrat,34.120307
@@ -1564,10 +1564,10 @@ date,region,district,candidate,party,voteshare
 11/7/1978,MA,8,Other,independent,0.006573
 11/7/1978,MA,8,Barnstead,republican,20.862059
 11/7/1978,MA,8,Ross,communist,4.522815
-11/7/1978,MA,8,ONeill,democrat,74.608553
+11/7/1978,MA,8,O'Neill,democrat,74.608553
 11/7/1978,MA,9,Franklin,socialist workers,5.839880
 11/7/1978,MA,9,Moakley,democrat,91.805773
-11/7/1978,MA,9,Freund,workers party,2.328560
+11/7/1978,MA,9,Freund,worker's party,2.328560
 11/7/1978,MA,9,Other,independent,0.025787
 11/7/1978,MA,10,Heckler,republican,61.141492
 11/7/1978,MA,10,Marino,democrat,38.853118
@@ -1738,7 +1738,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,NE,2,Daub,republican,47.685223
 11/7/1978,NE,3,Fowler,democrat,19.987229
 11/7/1978,NE,3,Smith,republican,80.012771
-11/7/1978,NH,1,DAmours,democrat,61.606138
+11/7/1978,NH,1,D'Amours,democrat,61.606138
 11/7/1978,NH,1,Pinard,libertarian,1.793124
 11/7/1978,NH,1,Hughes,republican,36.600738
 11/7/1978,NH,2,Cleveland,republican,68.128884
@@ -1795,7 +1795,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,NM,1,Lujan,republican,62.527802
 11/7/1978,NM,1,Hawk,democrat,37.472198
 11/7/1978,NM,2,Runnels,democrat,100.000000
-11/7/1978,NV,0,OMara,republican,24.280335
+11/7/1978,NV,0,O'Mara,republican,24.280335
 11/7/1978,NV,0,Santini,democrat,72.424536
 11/7/1978,NV,0,West,libertarian,3.295130
 11/7/1978,NY,1,Carney,republican,47.181094
@@ -1934,7 +1934,7 @@ date,region,district,candidate,party,voteshare
 11/7/1978,NY,35,Hammel,conservative,4.362414
 11/7/1978,NY,35,Repicci,democrat,26.284156
 11/7/1978,NY,36,Lafalce,democrat,71.216398
-11/7/1978,NY,36,Cartonia,taxpayers citizens,0.419345
+11/7/1978,NY,36,Cartonia,taxpayer's citizens,0.419345
 11/7/1978,NY,36,Cartonia,republican,23.063229
 11/7/1978,NY,36,Lafalce,liberal,2.892959
 11/7/1978,NY,36,Mundy,conservative,2.408068
@@ -2349,7 +2349,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,CA,21,Lehmann,libertarian,1.818774
 11/4/1980,CA,21,Corman,democrat,48.173403
 11/4/1980,CA,21,Tucker,peace and freedom,1.328553
-11/4/1980,CA,22,ODonnell,democrat,31.856803
+11/4/1980,CA,22,O'Donnell,democrat,31.856803
 11/4/1980,CA,22,Moorhead,republican,63.872677
 11/4/1980,CA,22,Susel,libertarian,4.270520
 11/4/1980,CA,23,Winckler,republican,31.467763
@@ -2553,7 +2553,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,IL,15,Quillin,democrat,23.253602
 11/4/1980,IL,16,Aurand,democrat,32.579681
 11/4/1980,IL,16,Martin,republican,67.420319
-11/4/1980,IL,17,OBrien,republican,65.828759
+11/4/1980,IL,17,O'Brien,republican,65.828759
 11/4/1980,IL,17,Murer,democrat,34.171241
 11/4/1980,IL,18,Knuppel,democrat,37.850935
 11/4/1980,IL,18,Michel,republican,62.149065
@@ -2657,7 +2657,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,MA,6,Mavroules,democrat,50.822843
 11/4/1980,MA,7,Markey,democrat,100.000000
 11/4/1980,MA,8,Barnstead,republican,21.610443
-11/4/1980,MA,8,ONeill,democrat,78.389557
+11/4/1980,MA,8,O'Neill,democrat,78.389557
 11/4/1980,MA,9,Moakley,democrat,100.000000
 11/4/1980,MA,10,McCarthy,democrat,39.383598
 11/4/1980,MA,10,Heckler,republican,60.616402
@@ -2690,7 +2690,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,MI,2,Pursell,republican,57.268447
 11/4/1980,MI,2,Hudler,libertarian,0.725507
 11/4/1980,MI,2,Wagner,american independent,0.601616
-11/4/1980,MI,2,OReilly,democrat,41.404430
+11/4/1980,MI,2,O'Reilly,democrat,41.404430
 11/4/1980,MI,3,Gilmore,republican,47.188887
 11/4/1980,MI,3,Wells,american independent,0.387756
 11/4/1980,MI,3,Todd,libertarian,0.409834
@@ -2833,7 +2833,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,NE,2,Putney,libertarian,3.079980
 11/4/1980,NE,3,Smith,republican,83.949342
 11/4/1980,NE,3,Ditus,democrat,16.050658
-11/4/1980,NH,1,DAmours,democrat,60.791681
+11/4/1980,NH,1,D'Amours,democrat,60.791681
 11/4/1980,NH,1,Cobleigh,republican,39.208319
 11/4/1980,NH,2,Gregg,republican,64.138938
 11/4/1980,NH,2,Arel,democrat,35.861062
@@ -2901,8 +2901,8 @@ date,region,district,candidate,party,voteshare
 11/4/1980,NJ,14,Famularo,action talks,0.832964
 11/4/1980,NJ,14,Guarini,democrat,64.186235
 11/4/1980,NJ,14,Steele,libertarian,1.303353
-11/4/1980,NJ,15,Mintz,peoples independent coalition,1.696991
-11/4/1980,NJ,15,OSullivan,republican,43.803988
+11/4/1980,NJ,15,Mintz,people's independent coalition,1.696991
+11/4/1980,NJ,15,O'Sullivan,republican,43.803988
 11/4/1980,NJ,15,Dwyer,democrat,53.421428
 11/4/1980,NJ,15,Hart,libertarian,1.077592
 11/4/1980,NM,1,Richardson,democrat,48.985669
@@ -3081,7 +3081,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,NY,34,Toole,democrat,20.724309
 11/4/1980,NY,35,Bayoneta,workers world,0.353559
 11/4/1980,NY,35,Conable,republican,72.195572
-11/4/1980,NY,35,OConnor,right to life,2.133798
+11/4/1980,NY,35,O'Connor,right to life,2.133798
 11/4/1980,NY,35,Owens,democrat,22.183126
 11/4/1980,NY,35,Owens,conservative,3.133945
 11/4/1980,NY,36,Feder,conservative,2.421844
@@ -3089,7 +3089,7 @@ date,region,district,candidate,party,voteshare
 11/4/1980,NY,36,Lafalce,democrat,67.306267
 11/4/1980,NY,36,Lafalce,liberal,4.432267
 11/4/1980,NY,36,Feder,republican,24.367840
-11/4/1980,NY,37,OConner,right to life,2.524992
+11/4/1980,NY,37,O'Conner,right to life,2.524992
 11/4/1980,NY,37,Heymanowski,republican,12.857605
 11/4/1980,NY,37,Nowak,liberal,4.172752
 11/4/1980,NY,37,Heymanowski,conservative,1.625895
@@ -3693,7 +3693,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,IL,2,Sparks,republican,12.798999
 11/2/1982,IL,3,Murphy,republican,25.998201
 11/2/1982,IL,3,Russo,democrat,74.001799
-11/2/1982,IL,4,OBrien,republican,54.624568
+11/2/1982,IL,4,O'Brien,republican,54.624568
 11/2/1982,IL,4,Murer,democrat,45.375432
 11/2/1982,IL,5,Partyka,republican,24.582938
 11/2/1982,IL,5,Lipinski,democrat,75.417062
@@ -3812,7 +3812,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,MA,6,Mavroules,democrat,57.828680
 11/2/1982,MA,7,Basile,republican,22.155396
 11/2/1982,MA,7,Markey,democrat,77.844604
-11/2/1982,MA,8,ONeil,democrat,74.876417
+11/2/1982,MA,8,O'Neil,democrat,74.876417
 11/2/1982,MA,8,McNamara,republican,25.123583
 11/2/1982,MA,9,Eckart,socialist workers,1.577187
 11/2/1982,MA,9,Cochran,republican,34.346095
@@ -3994,7 +3994,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,NE,2,Daub,republican,56.809346
 11/2/1982,NE,2,Fellman,democrat,43.190654
 11/2/1982,NE,3,Smith,republican,100.000000
-11/2/1982,NH,1,DAmours,democrat,54.914764
+11/2/1982,NH,1,D'Amours,democrat,54.914764
 11/2/1982,NH,1,Smith,republican,44.544591
 11/2/1982,NH,1,Mackenzie,independent,0.540646
 11/2/1982,NH,2,Dupay,democrat,29.157564
@@ -4157,7 +4157,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,NY,19,Chertov,socialist workers,0.460477
 11/2/1982,NY,20,Fossel,republican,36.025782
 11/2/1982,NY,20,Ottinger,democrat,56.492068
-11/2/1982,NY,20,OGrady,right to life,2.179902
+11/2/1982,NY,20,O'Grady,right to life,2.179902
 11/2/1982,NY,20,Fossel,conservative,5.302248
 11/2/1982,NY,21,Fish,conservative,9.258026
 11/2/1982,NY,21,Fish,republican,65.977044
@@ -4674,7 +4674,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,CA,25,Roybal,democrat,71.681194
 11/6/1984,CA,26,Ojeda,republican,37.206359
 11/6/1984,CA,26,Berman,democrat,62.793641
-11/6/1984,CA,27,OConnor,peace and freedom,1.792923
+11/6/1984,CA,27,O'Connor,peace and freedom,1.792923
 11/6/1984,CA,27,Avrech,libertarian,1.474286
 11/6/1984,CA,27,Levine,democrat,54.954625
 11/6/1984,CA,27,Scribner,republican,41.778166
@@ -4856,7 +4856,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,IL,3,Murphy,republican,35.590479
 11/6/1984,IL,3,Russo,democrat,64.409072
 11/6/1984,IL,3,Other,independent,0.000449
-11/6/1984,IL,4,OBrien,republican,63.977802
+11/6/1984,IL,4,O'Brien,republican,63.977802
 11/6/1984,IL,4,Marlow,democrat,36.022198
 11/6/1984,IL,5,Lipinski,democrat,63.561070
 11/6/1984,IL,5,Other,independent,0.001193
@@ -5002,7 +5002,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,MA,7,Other,independent,0.020923
 11/6/1984,MA,7,Markey,democrat,71.399718
 11/6/1984,MA,7,Ralph,republican,28.579359
-11/6/1984,MA,8,ONeill,democrat,91.827324
+11/6/1984,MA,8,O'Neill,democrat,91.827324
 11/6/1984,MA,8,Ross,communist,8.082698
 11/6/1984,MA,8,Other,independent,0.089978
 11/6/1984,MA,9,Moakley,democrat,99.921698
@@ -5098,7 +5098,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,MI,16,Kostyu,libertarian,0.546632
 11/6/1984,MI,17,Other,independent,0.030803
 11/6/1984,MI,17,Levin,democrat,99.969197
-11/6/1984,MI,18,OBrien,libertarian,0.931524
+11/6/1984,MI,18,O'Brien,libertarian,0.931524
 11/6/1984,MI,18,Broomfield,republican,79.403024
 11/6/1984,MI,18,Smargon,democrat,19.665452
 11/6/1984,MN,1,Spicer,republican,43.005325
@@ -5273,11 +5273,11 @@ date,region,district,candidate,party,voteshare
 11/6/1984,NY,4,Dunkle,right to life,1.836398
 11/6/1984,NY,4,Engelhard,democrat,28.134806
 11/6/1984,NY,4,Lent,conservative,7.417694
-11/6/1984,NY,5,DInnocenzo,democrat,34.989266
+11/6/1984,NY,5,D'Innocenzo,democrat,34.989266
 11/6/1984,NY,5,Callahan,right to life,1.607626
 11/6/1984,NY,5,McGrath,republican,56.364119
 11/6/1984,NY,5,McGrath,conservative,5.996643
-11/6/1984,NY,5,DInnocenzo,ivs,0.308743
+11/6/1984,NY,5,D'Innocenzo,ivs,0.308743
 11/6/1984,NY,5,Olchin,liberal,0.733603
 11/6/1984,NY,6,Addabbo,liberal,2.540341
 11/6/1984,NY,6,Veltre,conservative,1.915418
@@ -5339,7 +5339,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,NY,19,Biaggi,republican,40.372633
 11/6/1984,NY,19,Farrell,conservative,5.180416
 11/6/1984,NY,19,Biaggi,liberal,3.487242
-11/6/1984,NY,20,OGrady,right to life,1.663472
+11/6/1984,NY,20,O'Grady,right to life,1.663472
 11/6/1984,NY,20,Dioguardi,republican,43.833343
 11/6/1984,NY,20,Dioguardi,conservative,6.299537
 11/6/1984,NY,20,Teicher,democrat,48.203648
@@ -5842,7 +5842,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,CA,25,Brown,libertarian,2.624586
 11/4/1986,CA,26,Kerns,republican,34.932638
 11/4/1986,CA,26,Berman,democrat,65.067362
-11/4/1986,CA,27,OConnor,peace and freedom,1.198938
+11/4/1986,CA,27,O'Connor,peace and freedom,1.198938
 11/4/1986,CA,27,Leathers,libertarian,0.824486
 11/4/1986,CA,27,Scribner,republican,34.277637
 11/4/1986,CA,27,Levine,democrat,63.698938
@@ -6248,7 +6248,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,MT,1,Williams,democrat,61.666802
 11/4/1986,MT,1,Allen,republican,38.333198
 11/4/1986,MT,2,Marlenee,republican,53.467062
-11/4/1986,MT,2,OBrien,democrat,46.532938
+11/4/1986,MT,2,O'Brien,democrat,46.532938
 11/4/1986,NC,1,Jones,democrat,69.540730
 11/4/1986,NC,1,Moye,republican,30.459270
 11/4/1986,NC,2,McElhaney,republican,25.435131
@@ -6412,7 +6412,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,NY,19,Barry,right to life,2.741682
 11/4/1986,NY,19,Biaggi,republican,30.723479
 11/4/1986,NY,20,Dioguardi,conservative,7.201853
-11/4/1986,NY,20,OGrady,right to life,1.571985
+11/4/1986,NY,20,O'Grady,right to life,1.571985
 11/4/1986,NY,20,Abzug,democrat,44.560167
 11/4/1986,NY,20,Dioguardi,republican,46.665995
 11/4/1986,NY,21,Grunberger,democrat,21.244106
@@ -6798,7 +6798,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,CA,3,Matsui,democrat,71.176959
 11/8/1988,CA,3,Landowski,republican,28.823041
 11/8/1988,CA,4,Fazio,democrat,100.000000
-11/8/1988,CA,5,ONeill,republican,19.279232
+11/8/1988,CA,5,O'Neill,republican,19.279232
 11/8/1988,CA,5,Grove,libertarian,2.037675
 11/8/1988,CA,5,Zuur,peace and freedom,2.274574
 11/8/1988,CA,5,Pelosi,democrat,76.408519
@@ -7020,7 +7020,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,IA,5,Lightfoot,republican,63.875570
 11/8/1988,IA,5,Freund,democrat,36.124430
 11/8/1988,IA,6,Grandy,republican,64.386897
-11/8/1988,IA,6,OBrein,democrat,35.613103
+11/8/1988,IA,6,O'Brein,democrat,35.613103
 11/8/1988,ID,1,Givens,democrat,34.214713
 11/8/1988,ID,1,Craig,republican,65.785287
 11/8/1988,ID,2,Bramwell,libertarian,2.824876
@@ -7169,7 +7169,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,MD,8,Franchot,democrat,37.251588
 11/8/1988,ME,1,Brennan,democrat,63.207276
 11/8/1988,ME,1,Other,independent,0.016216
-11/8/1988,ME,1,OMeara,republican,36.776508
+11/8/1988,ME,1,O'Meara,republican,36.776508
 11/8/1988,ME,2,Hayes,democrat,33.770838
 11/8/1988,ME,2,Snowe,republican,66.170204
 11/8/1988,ME,2,Other,independent,0.058958
@@ -7240,7 +7240,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,MI,17,Other,independent,0.002072
 11/8/1988,MI,17,Flessland,republican,28.595481
 11/8/1988,MI,18,Other,independent,0.001166
-11/8/1988,MI,18,OBrien,libertarian,1.556207
+11/8/1988,MI,18,O'Brien,libertarian,1.556207
 11/8/1988,MI,18,Broomfield,republican,76.033325
 11/8/1988,MI,18,Kohut,democrat,22.409302
 11/8/1988,MN,1,Honts,socialist workers,0.416478
@@ -7300,7 +7300,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,MT,1,Fenlason,republican,39.225972
 11/8/1988,MT,1,Williams,democrat,60.774028
 11/8/1988,MT,2,Marlenee,republican,55.524856
-11/8/1988,MT,2,OBrien,democrat,44.475144
+11/8/1988,MT,2,O'Brien,democrat,44.475144
 11/8/1988,NC,1,Moye,republican,34.806120
 11/8/1988,NC,1,Jones,democrat,65.193880
 11/8/1988,NC,2,Valentine,democrat,100.000000
@@ -7360,11 +7360,11 @@ date,region,district,candidate,party,voteshare
 11/8/1988,NJ,8,Roe,democrat,100.000000
 11/8/1988,NJ,9,Lane,republican,32.323848
 11/8/1988,NJ,9,Torricelli,democrat,67.147059
-11/8/1988,NJ,9,Kemly,poor mans,0.529093
+11/8/1988,NJ,9,Kemly,poor man's,0.529093
 11/8/1988,NJ,10,Payne,democrat,77.353320
 11/8/1988,NJ,10,Webb,republican,12.649694
 11/8/1988,NJ,10,Curtis,time for change,0.503320
-11/8/1988,NJ,10,Imperiale,peoples choice,4.952819
+11/8/1988,NJ,10,Imperiale,people's choice,4.952819
 11/8/1988,NJ,10,Birdno,socialist workers,4.146228
 11/8/1988,NJ,10,Bowser,independent,0.394618
 11/8/1988,NJ,11,Gallo,republican,70.480843
@@ -7388,7 +7388,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,NM,3,Salazar,republican,26.890668
 11/8/1988,NV,1,Lusk,republican,33.687043
 11/8/1988,NV,1,Bilbray,democrat,63.971938
-11/8/1988,NV,1,ONeill,libertarian,2.341019
+11/8/1988,NV,1,O'Neill,libertarian,2.341019
 11/8/1988,NV,2,Spoo,democrat,40.607357
 11/8/1988,NV,2,Cromwell,libertarian,2.135637
 11/8/1988,NV,2,Vucanovich,republican,57.257006
@@ -7399,7 +7399,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,NY,1,Hochbrueckner,democrat,49.776630
 11/8/1988,NY,2,Cardino,republican,31.940006
 11/8/1988,NY,2,Downey,democrat,59.996678
-11/8/1988,NY,2,Downey,vote children 88,1.649887
+11/8/1988,NY,2,Downey,vote children '88,1.649887
 11/8/1988,NY,2,Cardino,conservative,4.142185
 11/8/1988,NY,2,Cardino,right to life,2.271244
 11/8/1988,NY,3,Signorelli,liberal,0.545237
@@ -7443,10 +7443,10 @@ date,region,district,candidate,party,voteshare
 11/8/1988,NY,13,Curci,conservative,3.316765
 11/8/1988,NY,13,Solarz,liberal,3.047565
 11/8/1988,NY,14,Molinari,right to life,3.115227
-11/8/1988,NY,14,ODonovan,democrat,35.797347
+11/8/1988,NY,14,O'Donovan,democrat,35.797347
 11/8/1988,NY,14,Molinari,conservative,8.352587
 11/8/1988,NY,14,Molinari,republican,51.831736
-11/8/1988,NY,14,ODonovan,independent voter,0.903103
+11/8/1988,NY,14,O'Donovan,independent voter,0.903103
 11/8/1988,NY,15,Green,independent,3.930865
 11/8/1988,NY,15,Levitt,liberal,1.971131
 11/8/1988,NY,15,Doukas,democrat,36.712958
@@ -7470,12 +7470,12 @@ date,region,district,candidate,party,voteshare
 11/8/1988,NY,19,Engel,liberal,1.847644
 11/8/1988,NY,19,Blumetti,conservative,8.118017
 11/8/1988,NY,19,Biaggi,republican,27.191218
-11/8/1988,NY,19,OGrady,right to life,8.182630
+11/8/1988,NY,19,O'Grady,right to life,8.182630
 11/8/1988,NY,20,Levine,liberal,0.802409
 11/8/1988,NY,20,Dioguardi,conservative,5.664582
 11/8/1988,NY,20,Dioguardi,republican,41.793637
 11/8/1988,NY,20,Lowey,democrat,50.296906
-11/8/1988,NY,20,OGrady,right to life,1.442466
+11/8/1988,NY,20,O'Grady,right to life,1.442466
 11/8/1988,NY,21,Curtin,right to life,1.919576
 11/8/1988,NY,21,Fish,republican,66.551757
 11/8/1988,NY,21,Grunberger,democrat,23.458511
@@ -7590,7 +7590,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,OR,5,Other,independent,0.037328
 11/8/1988,OR,5,Kopetski,democrat,49.822355
 11/8/1988,PA,1,Foglietta,democrat,76.315209
-11/8/1988,PA,1,OBrien,republican,23.684791
+11/8/1988,PA,1,O'Brien,republican,23.684791
 11/8/1988,PA,2,Gray,democrat,93.713362
 11/8/1988,PA,2,Harsch,republican,6.286638
 11/8/1988,PA,3,Matthews,republican,36.787584
@@ -8102,7 +8102,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,IL,18,Port,independent,0.144550
 11/6/1990,IL,19,Kerans,republican,32.393186
 11/6/1990,IL,19,Bruce,democrat,66.297822
-11/6/1990,IL,19,ONeill,solidarity,1.308992
+11/6/1990,IL,19,O'Neill,solidarity,1.308992
 11/6/1990,IL,20,Jurgens,republican,33.800058
 11/6/1990,IL,20,Durbin,democrat,66.199942
 11/6/1990,IL,21,Gaffner,republican,33.955340
@@ -8411,7 +8411,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,NY,1,Hochbrueckner,democrat,54.599693
 11/6/1990,NY,1,Hochbrueckner,tax brake,1.702287
 11/6/1990,NY,1,Creighton,republican,34.719467
-11/6/1990,NY,1,OHara,right to life,3.826028
+11/6/1990,NY,1,O'Hara,right to life,3.826028
 11/6/1990,NY,2,Curcio,conservative,8.011324
 11/6/1990,NY,2,Downey,democrat,55.756849
 11/6/1990,NY,2,Bugler,right to life,4.965055
@@ -8917,7 +8917,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,CA,12,Lantos,democrat,68.826700
 11/3/1992,CA,12,Tomlin,republican,23.325905
 11/3/1992,CA,12,Weldon,peace and freedom,4.440319
-11/3/1992,CA,12,OBrien,libertarian,3.407076
+11/3/1992,CA,12,O'Brien,libertarian,3.407076
 11/3/1992,CA,13,Teyler,republican,31.604839
 11/3/1992,CA,13,Allen,peace and freedom,8.158975
 11/3/1992,CA,13,Stark,democrat,60.236186
@@ -9406,7 +9406,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,MI,8,Marotta,libertarian,1.796672
 11/3/1992,MI,8,Chrysler,republican,46.332716
 11/3/1992,MI,8,Carr,democrat,47.601100
-11/3/1992,MI,9,ONeill,republican,44.805765
+11/3/1992,MI,9,O'Neill,republican,44.805765
 11/3/1992,MI,9,Halverson,natural law,0.757864
 11/3/1992,MI,9,Kildee,democrat,53.686122
 11/3/1992,MI,9,White,workers world,0.750249
@@ -9505,7 +9505,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,MS,4,McMillan,republican,22.465355
 11/3/1992,MS,4,Gilchrist,independent,5.409059
 11/3/1992,MS,4,Parker,democrat,67.299428
-11/3/1992,MS,5,OHara,independent,1.399052
+11/3/1992,MS,5,O'Hara,independent,1.399052
 11/3/1992,MS,5,Taylor,democrat,63.209078
 11/3/1992,MS,5,Harvey,republican,35.391871
 11/3/1992,MT,0,Wilverding,libertarian,2.589322
@@ -9599,7 +9599,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,NJ,6,Stewart,libertarian,0.620983
 11/3/1992,NJ,6,Matto,american first populist,0.181784
 11/3/1992,NJ,6,Cerrato,independent for freedom,0.474583
-11/3/1992,NJ,6,Spalletta,the peoples candidate,0.952263
+11/3/1992,NJ,6,Spalletta,the people's candidate,0.952263
 11/3/1992,NJ,6,Predham,you gotta believe,0.420623
 11/3/1992,NJ,6,Dickson,capitalist,0.120747
 11/3/1992,NJ,6,Kyrillos,republican,44.649326
@@ -9610,9 +9610,9 @@ date,region,district,candidate,party,voteshare
 11/3/1992,NJ,7,Sendelsky,democrat,42.631469
 11/3/1992,NJ,7,Franks,republican,53.278352
 11/3/1992,NJ,7,Layman,libertarian,0.791674
-11/3/1992,NJ,7,Criss,peoples congressional preference,0.275715
+11/3/1992,NJ,7,Criss,people's congressional preference,0.275715
 11/3/1992,NJ,8,Gorfinkle,independents,0.133607
-11/3/1992,NJ,8,Pellosie,independent peoples network,1.037274
+11/3/1992,NJ,8,Pellosie,independent people's network,1.037274
 11/3/1992,NJ,8,Redrup,socialist workers,0.190450
 11/3/1992,NJ,8,Bubba,republican,41.138232
 11/3/1992,NJ,8,Dzula,american first populist,0.153526
@@ -9628,7 +9628,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,NJ,9,Torricelli,democrat,58.309873
 11/3/1992,NJ,9,Roma,republican,36.940730
 11/3/1992,NJ,9,Russo,clean up congress,1.881410
-11/3/1992,NJ,9,DAlessio,american first populist,0.672800
+11/3/1992,NJ,9,D'Alessio,american first populist,0.672800
 11/3/1992,NJ,10,Caraballo,libertarian,0.850086
 11/3/1992,NJ,10,Leonard,socialist workers,0.610164
 11/3/1992,NJ,10,Payne,democrat,78.383635
@@ -9738,7 +9738,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,NY,16,Serrano,democrat,86.834340
 11/3/1992,NY,16,Walters,republican,7.233065
 11/3/1992,NY,16,Walters,conservative,1.324077
-11/3/1992,NY,17,OGrady,right to life,2.506108
+11/3/1992,NY,17,O'Grady,right to life,2.506108
 11/3/1992,NY,17,Brawley,conservative,2.568209
 11/3/1992,NY,17,Engel,democrat,77.428686
 11/3/1992,NY,17,Laluz,natural law,1.300856
@@ -10072,7 +10072,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,UT,2,Shepgerd,democrat,50.495515
 11/3/1992,UT,2,Greene,republican,46.767390
 11/3/1992,UT,2,Koschak,socialist workers,0.256948
-11/3/1992,UT,3,Janthony,socialist workers,0.168376
+11/3/1992,UT,3,J'anthony,socialist workers,0.168376
 11/3/1992,UT,3,Harrington,republican,36.840582
 11/3/1992,UT,3,Jones,libertarian,0.787947
 11/3/1992,UT,3,Hill,independent,2.527394
@@ -10587,7 +10587,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,MA,2,Briare,republican,36.343649
 11/8/1994,MA,2,Ross,natural law,5.080376
 11/8/1994,MA,2,Other,independent,0.022986
-11/8/1994,MA,3,OSullivan,democrat,44.185630
+11/8/1994,MA,3,O'Sullivan,democrat,44.185630
 11/8/1994,MA,3,Friedgen,natural law,1.120098
 11/8/1994,MA,3,Blute,republican,54.618341
 11/8/1994,MA,3,Other,independent,0.075931
@@ -10664,7 +10664,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,MI,8,Turcotte,libertarian,2.046407
 11/8/1994,MI,8,McPeak,natural law,1.447734
 11/8/1994,MI,8,Mitchell,democrat,44.892455
-11/8/1994,MI,9,ONeill,republican,47.047772
+11/8/1994,MI,9,O'Neill,republican,47.047772
 11/8/1994,MI,9,Blasdell,natural law,1.709907
 11/8/1994,MI,9,Kildee,democrat,51.242321
 11/8/1994,MI,10,Lobsinger,republican,37.735136
@@ -10928,7 +10928,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,NY,17,Marshall,republican,17.883339
 11/8/1994,NY,18,Hartzell,republican,34.760985
 11/8/1994,NY,18,Hartzell,conservative,6.173580
-11/8/1994,NY,18,OGrady,right to life,1.795030
+11/8/1994,NY,18,O'Grady,right to life,1.795030
 11/8/1994,NY,18,Lowey,democrat,57.270404
 11/8/1994,NY,19,Portman-laux,ax taxes,0.873074
 11/8/1994,NY,19,Dioguardi,conservative,7.221191
@@ -11637,7 +11637,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,FL,4,Fowler,republican,100.000000
 11/5/1996,FL,5,Gentry,republican,38.318888
 11/5/1996,FL,5,Thurman,democrat,61.681112
-11/5/1996,FL,6,OBrien,democrat,32.818849
+11/5/1996,FL,6,O'Brien,democrat,32.818849
 11/5/1996,FL,6,Stearns,republican,67.181151
 11/5/1996,FL,7,Mica,republican,62.059447
 11/5/1996,FL,7,Stuart,democrat,37.940553
@@ -11997,7 +11997,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,MN,8,Oberstar,democrat,67.364423
 11/5/1996,MN,8,Fuhol,libertarian,1.340506
 11/5/1996,MO,1,Millay,libertarian,2.204601
-11/5/1996,MO,1,OSullivan,republican,27.634517
+11/5/1996,MO,1,O'Sullivan,republican,27.634517
 11/5/1996,MO,1,Clay,democrat,70.160882
 11/5/1996,MO,2,Stever,libertarian,1.010985
 11/5/1996,MO,2,Horn,democrat,37.075124
@@ -12215,7 +12215,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,NY,2,Herman,independence,2.805366
 11/5/1996,NY,3,King,conservative,6.591308
 11/5/1996,NY,3,Lamagna,democrat,40.248287
-11/5/1996,NY,3,OShea,right to life,1.784156
+11/5/1996,NY,3,O'Shea,right to life,1.784156
 11/5/1996,NY,3,King,freedom,0.608402
 11/5/1996,NY,3,King,republican,48.097448
 11/5/1996,NY,3,Lamagna,independence,1.889589
@@ -12304,7 +12304,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,NY,17,Coleman,independence,1.684747
 11/5/1996,NY,18,Lowey,democrat,63.640280
 11/5/1996,NY,18,Katsorhis,conservative,4.216517
-11/5/1996,NY,18,OGrady,right to life,2.023454
+11/5/1996,NY,18,O'Grady,right to life,2.023454
 11/5/1996,NY,18,Ferrara,independence,2.306135
 11/5/1996,NY,18,Katsorhis,republican,27.813614
 11/5/1996,NY,19,Dioguardi,conservative,9.044588
@@ -12614,10 +12614,23 @@ date,region,district,candidate,party,voteshare
 11/5/1996,TX,2,Hardy,natural law,0.302075
 11/5/1996,TX,2,Babin,republican,45.609760
 11/5/1996,TX,2,Turner,democrat,52.245254
+11/5/1996,TX,3,Johnson,republican,72.978198
+11/5/1996,TX,3,Cole,democrat,24.434941
+11/5/1996,TX,3,Davis,libertarian,2.586861
 11/5/1996,TX,4,Hall,republican,34.301588
 11/5/1996,TX,4,Rothacker,libertarian,1.531058
 11/5/1996,TX,4,Hall,democrat,63.774454
 11/5/1996,TX,4,Denham,natural law,0.392901
+11/5/1996,TX,5,Pouland,democrat,46.931537
+11/5/1996,TX,5,Sessions,republican,53.068463
+11/5/1996,TX,6,Richardson,independent,12.811007
+11/5/1996,TX,6,Barton,republican,77.116384
+11/5/1996,TX,6,Williams,u.s. taxpayers,3.139807
+11/5/1996,TX,6,Anderson,libertarian,6.932801
+11/5/1996,TX,7,Siegmund,democrat,15.086897
+11/5/1996,TX,7,Archer,republican,81.369794
+11/5/1996,TX,7,Hsiao,independent,2.085307
+11/5/1996,TX,7,Sims,independent,1.458002
 11/5/1996,TX,8,Brady,republican,59.112322
 11/5/1996,TX,8,Fontenot,republican,40.887678
 11/5/1996,TX,9,Lampson,democrat,52.834649
@@ -12647,6 +12660,11 @@ date,region,district,candidate,party,voteshare
 11/5/1996,TX,17,Izzard,republican,47.374012
 11/5/1996,TX,17,Caro,natural law,0.977751
 11/5/1996,TX,17,Stenholm,democrat,51.648238
+11/5/1996,TX,18,Burley,republican,5.720905
+11/5/1996,TX,18,Jackson-lee,democrat,77.066266
+11/5/1996,TX,18,Lamson,democrat,3.204346
+11/5/1996,TX,18,White,republican,10.135960
+11/5/1996,TX,18,Young,republican,3.872523
 11/5/1996,TX,19,Sawyer,democrat,19.626484
 11/5/1996,TX,19,Combest,republican,80.373516
 11/5/1996,TX,20,Felps,natural law,0.322956
@@ -12656,17 +12674,36 @@ date,region,district,candidate,party,voteshare
 11/5/1996,TX,21,Smith,republican,76.429502
 11/5/1996,TX,21,Wharton,democrat,22.404913
 11/5/1996,TX,21,Rutenbeck,natural law,1.165584
+11/5/1996,TX,22,Cunningham,democrat,31.893282
+11/5/1996,TX,22,Delay,republican,68.106718
 11/5/1996,TX,23,Jones,democrat,36.374734
 11/5/1996,TX,23,Caswell,natural law,1.776744
 11/5/1996,TX,23,Bonilla,republican,61.848522
+11/5/1996,TX,24,Harrison,republican,39.068811
+11/5/1996,TX,24,Frost,democrat,55.753144
+11/5/1996,TX,24,Mouton,independent,1.843470
+11/5/1996,TX,24,Jacob,democrat,3.334575
 11/5/1996,TX,25,Bentsen,democrat,57.315551
 11/5/1996,TX,25,McKenna,republican,42.684449
+11/5/1996,TX,26,Armey,republican,73.632557
+11/5/1996,TX,26,Frankel,democrat,26.367443
 11/5/1996,TX,27,Gardner,republican,33.840637
 11/5/1996,TX,27,Richardson,natural law,1.517928
 11/5/1996,TX,27,Ortiz,democrat,64.641434
 11/5/1996,TX,28,Cude,republican,23.396859
 11/5/1996,TX,28,Tejeda,democrat,75.374140
 11/5/1996,TX,28,Finley,natural law,1.229001
+11/5/1996,TX,29,Klinger,u.s. taxpayers,1.464929
+11/5/1996,TX,29,Rodriguez,republican,31.026981
+11/5/1996,TX,29,Green,democrat,67.508090
+11/5/1996,TX,30,Hembry,independent,3.096339
+11/5/1996,TX,30,Sweatt,democrat,8.763675
+11/5/1996,TX,30,Crenshaw,democrat,6.867488
+11/5/1996,TX,30,Hammond,independent,0.413907
+11/5/1996,TX,30,Grenado,independent,1.130283
+11/5/1996,TX,30,Kitterman,republican,6.863950
+11/5/1996,TX,30,Johnson,democrat,54.588791
+11/5/1996,TX,30,Hendry,republican,18.275566
 11/5/1996,UT,1,Sanders,democrat,29.969196
 11/5/1996,UT,1,Tolpinrud,natural law,1.723095
 11/5/1996,UT,1,Hansen,republican,68.307709
@@ -12998,7 +13035,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,CO,6,Newman,natural law,2.586501
 11/3/1998,CO,6,Tancredo,republican,55.914011
 11/3/1998,CT,1,Palmieri,term limits,0.543788
-11/3/1998,CT,1,OConnor,republican,41.403984
+11/3/1998,CT,1,O'Connor,republican,41.403984
 11/3/1998,CT,1,Larson,democrat,58.052227
 11/3/1998,CT,2,Gejdenson,democrat,61.008817
 11/3/1998,CT,2,Cook,term limits,0.403184
@@ -13764,7 +13801,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,PA,6,Meckley,republican,38.998092
 11/3/1998,PA,6,Holden,democrat,61.001908
 11/3/1998,PA,7,Weldon,republican,71.804748
-11/3/1998,PA,7,DUrso,democrat,28.195252
+11/3/1998,PA,7,D'Urso,democrat,28.195252
 11/3/1998,PA,8,Boyce,natural law,0.689678
 11/3/1998,PA,8,Wolfertz,constitutional,2.643317
 11/3/1998,PA,8,Tuthill,democrat,32.607889
@@ -15140,7 +15177,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,OH,17,Norris,libertarian,0.530561
 11/7/2000,OH,17,Walter,independent,21.501845
 11/7/2000,OH,17,Traficant,democrat,49.956202
-11/7/2000,OH,17,DApolito,independent,3.972152
+11/7/2000,OH,17,D'Apolito,independent,3.972152
 11/7/2000,OH,17,McCoy,natural law,1.309382
 11/7/2000,OH,18,Bargar,libertarian,2.092133
 11/7/2000,OH,18,Ney,republican,64.406672
@@ -15211,7 +15248,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,PA,10,Casey,democrat,47.420075
 11/7/2000,PA,11,Urban,republican,33.576646
 11/7/2000,PA,11,Kanjorski,democrat,66.423354
-11/7/2000,PA,12,ONeil,reform,1.618014
+11/7/2000,PA,12,O'Neil,reform,1.618014
 11/7/2000,PA,12,Choby,republican,27.538856
 11/7/2000,PA,12,Murtha,democrat,70.843130
 11/7/2000,PA,13,Hoeffel,democrat,52.764398
@@ -15219,7 +15256,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,PA,13,Cavanaugh,libertarian,1.526282
 11/7/2000,PA,14,Coyne,democrat,100.000000
 11/7/2000,PA,15,Toomey,republican,53.250424
-11/7/2000,PA,15,OBrien,democrat,46.749576
+11/7/2000,PA,15,O'Brien,democrat,46.749576
 11/7/2000,PA,16,Yorczyk,democrat,33.051777
 11/7/2000,PA,16,Pitts,republican,66.948223
 11/7/2000,PA,17,Herrmann,democrat,28.477881
@@ -15711,7 +15748,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CO,5,Hefley,republican,69.374096
 11/5/2002,CO,5,Baker,libertarian,5.941184
 11/5/2002,CO,5,Imrie,democrat,24.684720
-11/5/2002,CO,6,Tancredo,independent,66.884350
+11/5/2002,CO,6,Tancredo,republican,66.884350
 11/5/2002,CO,6,Wright,democrat,30.032295
 11/5/2002,CO,6,Katz,libertarian,3.083355
 11/5/2002,CO,7,Martin,libertarian,1.682005
@@ -16238,7 +16275,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,NV,2,Winquist,natural law,0.389662
 11/5/2002,NV,2,Trainor,libertarian,1.696322
 11/5/2002,NV,3,Odell,independent american,0.946400
-11/5/2002,NV,3,ONeil,independent,3.822474
+11/5/2002,NV,3,O'Neil,independent,3.822474
 11/5/2002,NV,3,Porter,republican,56.078975
 11/5/2002,NV,3,Scott,libertarian,1.911237
 11/5/2002,NV,3,Herrera,democrat,37.240913
@@ -16262,11 +16299,11 @@ date,region,district,candidate,party,voteshare
 11/5/2002,NY,3,King,right to life,4.522334
 11/5/2002,NY,3,King,independence,4.207083
 11/5/2002,NY,3,King,conservative,4.674931
-11/5/2002,NY,4,OGrady,right to life,3.619912
+11/5/2002,NY,4,O'Grady,right to life,3.619912
 11/5/2002,NY,4,Derham,green,0.505518
-11/5/2002,NY,4,OGrady,republican,36.473834
+11/5/2002,NY,4,O'Grady,republican,36.473834
 11/5/2002,NY,4,McCarthy,independent,3.128041
-11/5/2002,NY,4,OGrady,conservative,3.149401
+11/5/2002,NY,4,O'Grady,conservative,3.149401
 11/5/2002,NY,4,McCarthy,working families,1.710573
 11/5/2002,NY,4,McCarthy,democrat,50.727424
 11/5/2002,NY,4,McCarthy,liberal,0.685297
@@ -16500,7 +16537,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,PA,13,Hoeffel,democrat,50.949416
 11/5/2002,PA,13,Brown,republican,47.338661
 11/5/2002,PA,14,Doyle,democrat,100.000000
-11/5/2002,PA,15,OBrien,democrat,42.638246
+11/5/2002,PA,15,O'Brien,democrat,42.638246
 11/5/2002,PA,15,Toomey,republican,57.361754
 11/5/2002,PA,16,Brenneman,constitution,5.029287
 11/5/2002,PA,16,Todd,green,6.481729
@@ -17184,7 +17221,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,MA,5,Meehan,democrat,66.987087
 11/2/2004,MA,5,Tierney,republican,32.899187
 11/2/2004,MA,5,Other,independent,0.113726
-11/2/2004,MA,6,OMalley,republican,29.980492
+11/2/2004,MA,6,O'Malley,republican,29.980492
 11/2/2004,MA,6,Tierney,democrat,69.866654
 11/2/2004,MA,6,Other,independent,0.152853
 11/2/2004,MA,7,Markey,democrat,73.573150
@@ -17347,7 +17384,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,MO,9,Millay,libertarian,1.077987
 11/2/2004,MS,1,Wicker,republican,79.013200
 11/2/2004,MS,1,Washer,reform,20.986800
-11/2/2004,MS,2,OHara,reform,0.980107
+11/2/2004,MS,2,O'Hara,reform,0.980107
 11/2/2004,MS,2,Lesueur,republican,40.641600
 11/2/2004,MS,2,Thompson,democrat,58.378293
 11/2/2004,MS,3,Pickering,republican,80.061220
@@ -17467,7 +17504,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,NV,2,Cochran,democrat,27.476390
 11/2/2004,NV,2,Trainor,libertarian,1.716716
 11/2/2004,NV,2,Hansen,independent american,3.654678
-11/2/2004,NV,3,ODell,independent american,2.031767
+11/2/2004,NV,3,O'Dell,independent american,2.031767
 11/2/2004,NV,3,Silvestri,libertarian,3.108238
 11/2/2004,NV,3,Gallagher,democrat,40.402057
 11/2/2004,NV,3,Porter,republican,54.457938
@@ -18164,7 +18201,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,CO,6,Woehr,libertarian,1.510856
 11/7/2006,CO,6,Tancredo,republican,58.620333
 11/7/2006,CO,6,Winter,democrat,39.868811
-11/7/2006,CO,7,ODonnell,republican,42.063668
+11/7/2006,CO,7,O'Donnell,republican,42.063668
 11/7/2006,CO,7,Chandler,green,1.624482
 11/7/2006,CO,7,McCarville,constitution,1.377090
 11/7/2006,CO,7,Perlmutter,democrat,54.934529
@@ -19004,6 +19041,9 @@ date,region,district,candidate,party,voteshare
 11/7/2006,TX,13,Thornberry,republican,74.353490
 11/7/2006,TX,14,Sklar,democrat,39.812128
 11/7/2006,TX,14,Paul,republican,60.187872
+11/7/2006,TX,15,Hinojosa,democrat,61.777187
+11/7/2006,TX,15,Haring,republican,23.720119
+11/7/2006,TX,15,Zamora,republican,14.502693
 11/7/2006,TX,16,Strickland,libertarian,21.331480
 11/7/2006,TX,16,Reyes,democrat,78.668520
 11/7/2006,TX,17,Edwards,democrat,58.116940
@@ -19017,20 +19057,34 @@ date,region,district,candidate,party,voteshare
 11/7/2006,TX,19,Jones,libertarian,2.395394
 11/7/2006,TX,20,Idrogo,libertarian,12.648732
 11/7/2006,TX,20,Gonzalez,democrat,87.351268
-11/7/2006,TX,22,Smither,libertarian,6.080999
-11/7/2006,TX,22,Lampson,democrat,51.822477
-11/7/2006,TX,22,Gibbs,independent,41.807627
+11/7/2006,TX,21,Smith,republican,60.106388
+11/7/2006,TX,21,Calvert,independent,2.591004
+11/7/2006,TX,21,Peterson,independent,1.074187
+11/7/2006,TX,21,Strohm,libertarian,2.000177
+11/7/2006,TX,21,Courage,democrat,24.514923
+11/7/2006,TX,21,Kelly,democrat,9.007174
+11/7/2006,TX,21,Rossano,independent,0.706147
+11/7/2006,TX,22,Smither,libertarian,6.077348
+11/7/2006,TX,22,Lampson,democrat,51.791364
+11/7/2006,TX,22,Gibbs,independent,41.782527
 11/7/2006,TX,23,Bonilla,republican,45.715380
 11/7/2006,TX,23,Rodriguez,democrat,54.284620
 11/7/2006,TX,24,Page,democrat,37.159800
 11/7/2006,TX,24,Frohman,libertarian,3.017026
 11/7/2006,TX,24,Marchant,republican,59.823174
+11/7/2006,TX,25,Parrett,independent,2.200411
+11/7/2006,TX,25,Rostig,republican,26.296627
+11/7/2006,TX,25,Cunningham,libertarian,4.247846
+11/7/2006,TX,25,Doggett,democrat,67.255116
 11/7/2006,TX,26,Haas,libertarian,2.551715
 11/7/2006,TX,26,Barnwell,democrat,37.237911
 11/7/2006,TX,26,Burgess,republican,60.210374
 11/7/2006,TX,27,Vaden,republican,38.913588
 11/7/2006,TX,27,Powell,libertarian,4.316007
 11/7/2006,TX,27,Ortiz,democrat,56.770405
+11/7/2006,TX,28,Cuellar,democrat,67.614944
+11/7/2006,TX,28,Avery,conservative,12.067391
+11/7/2006,TX,28,Enriquez,democrat,20.317664
 11/7/2006,TX,29,Green,democrat,73.539070
 11/7/2006,TX,29,Story,republican,24.425321
 11/7/2006,TX,29,Messina,libertarian,2.035608
@@ -19075,7 +19129,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,VA,7,Nachman,democrat,34.438653
 11/7/2006,VA,8,Hurysz,independent,2.802702
 11/7/2006,VA,8,Moran,democrat,66.549236
-11/7/2006,VA,8,ODonoghue,republican,30.648062
+11/7/2006,VA,8,O'Donoghue,republican,30.648062
 11/7/2006,VA,9,Carrico,republican,32.190674
 11/7/2006,VA,9,Boucher,democrat,67.809326
 11/7/2006,VA,10,Wood,libertarian,0.874492
@@ -20031,7 +20085,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,OH,12,Linnabary,libertarian,2.970965
 11/4/2008,OH,13,Potter,republican,35.293960
 11/4/2008,OH,13,Sutton,democrat,64.706040
-11/4/2008,OH,14,ONeill,democrat,38.740397
+11/4/2008,OH,14,O'Neill,democrat,38.740397
 11/4/2008,OH,14,Latourette,republican,58.316961
 11/4/2008,OH,14,Macko,libertarian,2.942642
 11/4/2008,OH,15,Noble,libertarian,4.627886
@@ -20121,7 +20175,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,PA,16,Slater,democrat,39.385976
 11/4/2008,PA,17,Holden,democrat,63.679414
 11/4/2008,PA,17,Gilhooley,republican,36.320586
-11/4/2008,PA,18,ODonnell,democrat,35.933155
+11/4/2008,PA,18,O'Donnell,democrat,35.933155
 11/4/2008,PA,18,Murphy,republican,64.066845
 11/4/2008,PA,19,Avillo,democrat,33.354040
 11/4/2008,PA,19,Platts,republican,66.645960
@@ -21315,7 +21369,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,OH,13,Ganley,republican,44.267801
 11/2/2010,OH,13,Sutton,democrat,55.732199
 11/2/2010,OH,14,Jelenic,libertarian,3.631126
-11/2/2010,OH,14,ONeill,democrat,31.448682
+11/2/2010,OH,14,O'Neill,democrat,31.448682
 11/2/2010,OH,14,Latourette,republican,64.920191
 11/2/2010,OH,15,Ryon,constitution,1.762404
 11/2/2010,OH,15,Stivers,republican,54.169330
@@ -21331,7 +21385,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,OH,18,Gibbs,republican,53.867060
 11/2/2010,OH,18,Sutton,constitution,5.639128
 11/2/2010,OK,1,Sullivan,republican,76.804231
-11/2/2010,OK,1,ODell,independent,23.195769
+11/2/2010,OK,1,O'Dell,independent,23.195769
 11/2/2010,OK,2,Boren,democrat,56.523829
 11/2/2010,OK,2,Thompson,republican,43.476171
 11/2/2010,OK,3,Lucas,republican,77.993507
@@ -22358,7 +22412,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,NJ,1,Andrews,democrat,68.219461
 11/6/2012,NJ,1,Chapman,reform,0.381500
 11/6/2012,NJ,1,Reitter,green,1.430382
-11/6/2012,NJ,2,Bowen,the peoples agenda,0.349398
+11/6/2012,NJ,2,Bowen,the people's agenda,0.349398
 11/6/2012,NJ,2,Shober,democrat,40.288651
 11/6/2012,NJ,2,Ordille,libertarian,0.933687
 11/6/2012,NJ,2,Lobiondo,republican,57.659936
@@ -22789,7 +22843,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,TX,15,Brueggemann,republican,36.857788
 11/6/2012,TX,15,Hinojosa,democrat,60.885989
 11/6/2012,TX,16,Carrasco,republican,32.929905
-11/6/2012,TX,16,ORourke,democrat,65.419180
+11/6/2012,TX,16,O'Rourke,democrat,65.419180
 11/6/2012,TX,16,Sodoy,libertarian,1.650914
 11/6/2012,TX,17,Easton,libertarian,20.070065
 11/6/2012,TX,17,Flores,republican,79.929935
@@ -23768,8 +23822,8 @@ date,region,district,candidate,party,voteshare
 11/4/2014,NY,26,Weppner,conservative,8.687748
 11/4/2014,NY,27,Collins,independence,3.879933
 11/4/2014,NY,27,Collins,conservative,13.559380
-11/4/2014,NY,27,ODonnell,democrat,25.020876
-11/4/2014,NY,27,ODonnell,working families,3.915790
+11/4/2014,NY,27,O'Donnell,democrat,25.020876
+11/4/2014,NY,27,O'Donnell,working families,3.915790
 11/4/2014,NY,27,Collins,republican,53.624021
 11/4/2014,OH,1,Chabot,republican,63.216690
 11/4/2014,OH,1,Kundrata,democrat,36.783310
@@ -23977,7 +24031,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,TX,15,Partain,libertarian,2.727757
 11/4/2014,TX,15,Hinojosa,democrat,54.009580
 11/4/2014,TX,15,Zamora,republican,43.262663
-11/4/2014,TX,16,ORourke,democrat,67.489228
+11/4/2014,TX,16,O'Rourke,democrat,67.489228
 11/4/2014,TX,16,Perez,libertarian,3.341769
 11/4/2014,TX,16,Roen,republican,29.169003
 11/4/2014,TX,17,Haynes,democrat,32.400557
@@ -24176,7 +24230,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,AR,4,Hicks,libertarian,25.095942
 11/8/2016,AR,4,Westerman,republican,74.904058
 11/8/2016,AZ,1,Babeu,republican,43.370382
-11/8/2016,AZ,1,OHalleran,democrat,50.664030
+11/8/2016,AZ,1,O'Halleran,democrat,50.664030
 11/8/2016,AZ,1,Parrish,green,5.965587
 11/8/2016,AZ,2,McSally,republican,56.958493
 11/8/2016,AZ,2,Heinz,democrat,43.041507
@@ -24402,7 +24456,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,FL,23,Endriss,none,1.603120
 11/8/2016,FL,23,Milstein,none,1.206053
 11/8/2016,FL,23,Kaufman,republican,40.485888
-11/8/2016,FL,24,Wilson,democrat,100.000000
+11/8/2016,FL,24,Wilson,democrat,
 11/8/2016,FL,25,Valdes,democrat,37.639788
 11/8/2016,FL,25,Diaz-balart,republican,62.360212
 11/8/2016,FL,26,Peixoto,none,5.882185
@@ -24752,7 +24806,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,MS,3,Sheets,reform,0.681951
 11/8/2016,MS,3,Quinn,democrat,30.368942
 11/8/2016,MS,4,Gladney,democrat,27.801592
-11/8/2016,MS,4,OHara,reform,1.888234
+11/8/2016,MS,4,O'Hara,reform,1.888234
 11/8/2016,MS,4,McCluskey,libertarian,5.268331
 11/8/2016,MS,4,Palazzo,republican,65.041843
 11/8/2016,MT,0,Breckenridge,libertarian,3.259746
@@ -24794,7 +24848,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NE,2,Laird,libertarian,3.343646
 11/8/2016,NE,2,Ashford,democrat,47.727430
 11/8/2016,NE,3,Smith,republican,100.000000
-11/8/2016,NH,1,OConnor,independent,9.497314
+11/8/2016,NH,1,O'Connor,independent,9.497314
 11/8/2016,NH,1,Shea-porter,democrat,44.316240
 11/8/2016,NH,1,Kelly,independent,1.661506
 11/8/2016,NH,1,Lombardo,libertarian,1.506406
@@ -24809,7 +24863,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NJ,1,Sihr,libertarian,0.788940
 11/8/2016,NJ,2,Lobiondo,republican,59.214560
 11/8/2016,NJ,2,Cole,democrat,37.219564
-11/8/2016,NJ,2,Beechwood,peoples independent progressive,0.465757
+11/8/2016,NJ,2,Beechwood,people's independent progressive,0.465757
 11/8/2016,NJ,2,Franco,for political revolution,0.413707
 11/8/2016,NJ,2,Ordille,libertarian,1.266979
 11/8/2016,NJ,2,Keenan,make government work,0.890881
@@ -24831,7 +24885,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NJ,7,Lance,republican,54.083548
 11/8/2016,NJ,7,Jacob,democrat,43.123663
 11/8/2016,NJ,7,Haussmann,conservative,1.237941
-11/8/2016,NJ,7,ONeill,libertarian,1.554847
+11/8/2016,NJ,7,O'Neill,libertarian,1.554847
 11/8/2016,NJ,8,Sires,democrat,77.039151
 11/8/2016,NJ,8,Khan,republican,18.490014
 11/8/2016,NJ,8,Delaney,libertarian,1.965818
@@ -24843,7 +24897,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NJ,10,Pinckney,republican,11.873179
 11/8/2016,NJ,10,Payne,democrat,85.673629
 11/8/2016,NJ,10,Miller,women of power,1.669427
-11/8/2016,NJ,10,Fraser,new beginnings,0.783764
+11/8/2016,NJ,10,Fraser,new beginning's,0.783764
 11/8/2016,NJ,11,Depasquale,financial independence,2.106319
 11/8/2016,NJ,11,Hetrick,libertarian,1.037338
 11/8/2016,NJ,11,Wenzel,democrat,38.855256
@@ -24863,7 +24917,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NM,3,Luj_n,democrat,62.417045
 11/8/2016,NV,1,Titus,democrat,61.871921
 11/8/2016,NV,1,Bakari,independent american,1.987768
-11/8/2016,NV,1,DSilva,none,7.378207
+11/8/2016,NV,1,D'Silva,none,7.378207
 11/8/2016,NV,1,Perry,republican,28.762105
 11/8/2016,NV,2,Knight,none,1.993068
 11/8/2016,NV,2,Everhart,independent american,2.774338
@@ -24878,7 +24932,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NV,4,Brown,libertarian,3.839065
 11/8/2016,NV,4,Kihuen,democrat,48.518691
 11/8/2016,NY,1,Zeldin,conservative,6.832107
-11/8/2016,NY,1,Throne-holst,womens equality,0.731039
+11/8/2016,NY,1,Throne-holst,women's equality,0.731039
 11/8/2016,NY,1,Throne-holst,working families,1.800358
 11/8/2016,NY,1,Zeldin,republican,46.395476
 11/8/2016,NY,1,Zeldin,reform,0.246983
@@ -24889,32 +24943,32 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,2,King,republican,49.666987
 11/8/2016,NY,2,Gregory,independence,1.012750
 11/8/2016,NY,2,Gregory,working families,1.373596
-11/8/2016,NY,2,Gregory,womens equality,0.491718
+11/8/2016,NY,2,Gregory,women's equality,0.491718
 11/8/2016,NY,2,King,conservative,7.457838
 11/8/2016,NY,3,Suozzi,democrat,52.938058
 11/8/2016,NY,3,Martins,reform,0.598619
 11/8/2016,NY,3,Martins,conservative,5.063580
 11/8/2016,NY,3,Martins,republican,41.333749
-11/8/2016,NY,4,Rice,womens equality,1.330716
+11/8/2016,NY,4,Rice,women's equality,1.330716
 11/8/2016,NY,4,Gurfein,republican,32.449981
 11/8/2016,NY,4,Gurfein,reform,0.337210
 11/8/2016,NY,4,Gurfein,conservative,4.518620
 11/8/2016,NY,4,Rice,democrat,58.128370
-11/8/2016,NY,5,OReilly,republican,11.456342
+11/8/2016,NY,5,O'Reilly,republican,11.456342
 11/8/2016,NY,5,Francois,green,1.533870
-11/8/2016,NY,5,OReilly,conservative,1.505647
-11/8/2016,NY,5,Meeks,womens equality,0.839416
+11/8/2016,NY,5,O'Reilly,conservative,1.505647
+11/8/2016,NY,5,Meeks,women's equality,0.839416
 11/8/2016,NY,5,Meeks,democrat,84.605286
 11/8/2016,NY,6,Maio,conservative,2.319319
 11/8/2016,NY,6,Maio,republican,20.823917
 11/8/2016,NY,6,Meng,democrat,69.466726
-11/8/2016,NY,6,Meng,womens equality,2.664786
+11/8/2016,NY,6,Meng,women's equality,2.664786
 11/8/2016,NY,6,Maio,blue lives matter,1.042030
 11/8/2016,NY,6,Bhatti,haris bhatti party,1.121820
 11/8/2016,NY,7,Romaguera,republican,7.227756
 11/8/2016,NY,7,Romaguera,conservative,1.227282
 11/8/2016,NY,7,Vel_quez,democrat,80.215464
-11/8/2016,NY,7,Vel_quez,womens equality,3.336603
+11/8/2016,NY,7,Vel_quez,women's equality,3.336603
 11/8/2016,NY,8,Jeffries,democrat,78.958410
 11/8/2016,NY,8,Jeffries,working families,4.413450
 11/8/2016,NY,8,Cavanagh,conservative,6.696203
@@ -24925,7 +24979,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,10,Rosenthal,independence,0.849001
 11/8/2016,NY,10,Rosenthal,republican,18.770916
 11/8/2016,NY,10,Nadler,democrat,73.150495
-11/8/2016,NY,10,Nadler,womens equality,0.724126
+11/8/2016,NY,10,Nadler,women's equality,0.724126
 11/8/2016,NY,10,Rosenthal,conservative,1.886869
 11/8/2016,NY,10,Rosenthal,stop iran deal,0.342366
 11/8/2016,NY,11,Donovan,independence,2.425996
@@ -24943,7 +24997,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,13,Evans,independence,1.268166
 11/8/2016,NY,13,Fenstermaker,transparent government,0.804171
 11/8/2016,NY,14,Crowley,democrat,70.197859
-11/8/2016,NY,14,Crowley,womens equality,1.068309
+11/8/2016,NY,14,Crowley,women's equality,1.068309
 11/8/2016,NY,14,Crowley,working families,4.107628
 11/8/2016,NY,14,Spotorno,republican,15.096109
 11/8/2016,NY,14,Spotorno,conservative,2.051288
@@ -24951,17 +25005,17 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,15,Ramirez,conservative,1.208945
 11/8/2016,NY,15,Vega,republican,3.524014
 11/8/2016,NY,16,Engel,working families,3.842441
-11/8/2016,NY,16,Lawrence,peoples choice,5.334217
-11/8/2016,NY,16,Engel,womens equality,1.140372
+11/8/2016,NY,16,Lawrence,people's choice,5.334217
+11/8/2016,NY,16,Engel,women's equality,1.140372
 11/8/2016,NY,16,Engel,democrat,89.682969
 11/8/2016,NY,17,Lowey,working families,4.854783
 11/8/2016,NY,17,Lowey,democrat,90.345872
-11/8/2016,NY,17,Lowey,womens equality,2.333007
+11/8/2016,NY,17,Lowey,women's equality,2.333007
 11/8/2016,NY,18,Maloney,independence,3.246599
 11/8/2016,NY,18,Maloney,democrat,48.365468
 11/8/2016,NY,18,Oliva,republican,38.128326
 11/8/2016,NY,18,Maloney,working families,3.009652
-11/8/2016,NY,18,Maloney,womens equality,0.680097
+11/8/2016,NY,18,Maloney,women's equality,0.680097
 11/8/2016,NY,18,Oliva,conservative,5.822344
 11/8/2016,NY,18,Oliva,reform,0.440588
 11/8/2016,NY,19,Faso,independence,2.459792
@@ -24976,7 +25030,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,20,Vitollo,republican,26.557963
 11/8/2016,NY,20,Tonko,independence,3.385401
 11/8/2016,NY,20,Vitollo,reform,0.480624
-11/8/2016,NY,20,Tonko,womens equality,0.967622
+11/8/2016,NY,20,Tonko,women's equality,0.967622
 11/8/2016,NY,21,Derrick,working families,2.271902
 11/8/2016,NY,21,Stefanik,conservative,5.692956
 11/8/2016,NY,21,Stefanik,reform,0.353472
@@ -25008,11 +25062,11 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,25,Slaughter,democrat,51.763031
 11/8/2016,NY,25,Assini,independence,2.105651
 11/8/2016,NY,25,Assini,republican,34.963145
-11/8/2016,NY,25,Slaughter,womens equality,1.257678
+11/8/2016,NY,25,Slaughter,women's equality,1.257678
 11/8/2016,NY,26,Schratz,conservative,5.697588
 11/8/2016,NY,26,Schratz,republican,19.721755
 11/8/2016,NY,26,Higgins,working families,5.590544
-11/8/2016,NY,26,Higgins,womens equality,1.326446
+11/8/2016,NY,26,Higgins,women's equality,1.326446
 11/8/2016,NY,26,Higgins,democrat,67.663667
 11/8/2016,NY,27,Collins,republican,49.524113
 11/8/2016,NY,27,Collins,reform,0.307288
@@ -25226,7 +25280,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,TX,15,Tijerina,green,3.069659
 11/8/2016,TX,15,Leone,libertarian,1.939384
 11/8/2016,TX,15,Westley,republican,37.681641
-11/8/2016,TX,16,ORourke,democrat,85.732384
+11/8/2016,TX,16,O'Rourke,democrat,85.732384
 11/8/2016,TX,16,Gourdoux,green,4.285820
 11/8/2016,TX,16,Perez,libertarian,9.981795
 11/8/2016,TX,17,Flores,republican,60.805850
@@ -25406,7 +25460,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,AR,4,Shamel,democrat,31.261115
 11/6/2018,AR,4,Westerman,republican,66.808028
 11/6/2018,AZ,1,Rogers,republican,46.155234
-11/6/2018,AZ,1,OHalleran,democrat,53.844766
+11/6/2018,AZ,1,O'Halleran,democrat,53.844766
 11/6/2018,AZ,2,Peterson,republican,45.253551
 11/6/2018,AZ,2,Kirkpatrick,democrat,54.746449
 11/6/2018,AZ,3,Pierson,republican,36.134538
@@ -26001,7 +26055,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NH,1,Belforti,libertarian,1.391410
 11/6/2018,NH,2,Negron,republican,42.206515
 11/6/2018,NH,2,Kuster,democrat,55.573521
-11/6/2018,NH,2,ODonnell,libertarian,2.219965
+11/6/2018,NH,2,O'Donnell,libertarian,2.219965
 11/6/2018,NJ,1,Norcross,democrat,64.394992
 11/6/2018,NJ,1,Dilks,republican,33.261584
 11/6/2018,NJ,1,Shapiro,libertarian,1.070922
@@ -26083,14 +26137,14 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,1,Zeldin,conservative,5.290253
 11/6/2018,NY,1,Gershon,working families,1.399228
 11/6/2018,NY,1,Zeldin,independence,0.997385
-11/6/2018,NY,1,Browning,womens equality,1.106642
+11/6/2018,NY,1,Browning,women's equality,1.106642
 11/6/2018,NY,1,Zeldin,reform,0.180737
 11/6/2018,NY,2,Shirley,democrat,45.118017
 11/6/2018,NY,2,King,republican,46.678029
 11/6/2018,NY,2,King,conservative,5.185111
 11/6/2018,NY,2,Shirley,working families,1.160679
 11/6/2018,NY,2,King,independence,1.051204
-11/6/2018,NY,2,Shirley,womens equality,0.610403
+11/6/2018,NY,2,Shirley,women's equality,0.610403
 11/6/2018,NY,2,King,reform,0.196557
 11/6/2018,NY,2,King,tax revolt,0.000000
 11/6/2018,NY,3,Suozzi,democrat,56.162490
@@ -26098,12 +26152,12 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,3,Debono,conservative,4.044649
 11/6/2018,NY,3,Suozzi,working families,1.063041
 11/6/2018,NY,3,Suozzi,independence,1.109488
-11/6/2018,NY,3,Suozzi,womens equality,0.515414
+11/6/2018,NY,3,Suozzi,women's equality,0.515414
 11/6/2018,NY,3,Suozzi,reform,0.128479
 11/6/2018,NY,4,Rice,democrat,60.255434
 11/6/2018,NY,4,Benno,republican,34.718922
 11/6/2018,NY,4,Benno,conservative,3.732709
-11/6/2018,NY,4,Rice,womens equality,1.079175
+11/6/2018,NY,4,Rice,women's equality,1.079175
 11/6/2018,NY,4,Benno,reform,0.213759
 11/6/2018,NY,5,Meeks,democrat,100.000000
 11/6/2018,NY,6,Meng,democrat,84.891132
@@ -26134,7 +26188,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,11,Bardel,green,0.403045
 11/6/2018,NY,11,Rose,working families,2.027724
 11/6/2018,NY,11,Donovan,independence,0.677991
-11/6/2018,NY,11,Rose,womens equality,0.561868
+11/6/2018,NY,11,Rose,women's equality,0.561868
 11/6/2018,NY,11,Donovan,reform,0.180693
 11/6/2018,NY,12,Maloney,democrat,81.818254
 11/6/2018,NY,12,Rabin,republican,12.100762
@@ -26149,38 +26203,38 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,14,Pappas,republican,13.606667
 11/6/2018,NY,14,Perri,conservative,1.597200
 11/6/2018,NY,14,Crowley,working families,5.721999
-11/6/2018,NY,14,Crowley,womens equality,0.902056
+11/6/2018,NY,14,Crowley,women's equality,0.902056
 11/6/2018,NY,15,Serrano,democrat,94.087481
 11/6/2018,NY,15,Gonzalez,republican,3.521138
 11/6/2018,NY,15,Gonzalez,conservative,0.492774
 11/6/2018,NY,15,Serrano,working families,1.898607
 11/6/2018,NY,16,Engel,democrat,94.930347
 11/6/2018,NY,16,Engel,working families,3.710641
-11/6/2018,NY,16,Engel,womens equality,1.359012
+11/6/2018,NY,16,Engel,women's equality,1.359012
 11/6/2018,NY,17,Lowey,democrat,82.725354
 11/6/2018,NY,17,Lowey,working families,3.794784
-11/6/2018,NY,17,Lowey,womens equality,1.504775
+11/6/2018,NY,17,Lowey,women's equality,1.504775
 11/6/2018,NY,17,Ciardullo,reform,11.975088
 11/6/2018,NY,18,Maloney,democrat,50.225955
-11/6/2018,NY,18,ODonnell,republican,38.293077
-11/6/2018,NY,18,ODonnell,conservative,5.756780
+11/6/2018,NY,18,O'Donnell,republican,38.293077
+11/6/2018,NY,18,O'Donnell,conservative,5.756780
 11/6/2018,NY,18,Maloney,working families,1.561612
 11/6/2018,NY,18,Maloney,independence,3.070759
-11/6/2018,NY,18,Maloney,womens equality,0.612483
-11/6/2018,NY,18,ODonnell,reform,0.479334
+11/6/2018,NY,18,Maloney,women's equality,0.612483
+11/6/2018,NY,18,O'Donnell,reform,0.479334
 11/6/2018,NY,19,Delgado,democrat,47.094417
 11/6/2018,NY,19,Faso,republican,39.008802
 11/6/2018,NY,19,Faso,conservative,5.872300
 11/6/2018,NY,19,Greenfield,green,1.498121
 11/6/2018,NY,19,Delgado,working families,3.208473
 11/6/2018,NY,19,Faso,independence,1.045176
-11/6/2018,NY,19,Delgado,womens equality,1.060807
+11/6/2018,NY,19,Delgado,women's equality,1.060807
 11/6/2018,NY,19,Faso,reform,0.227167
 11/6/2018,NY,19,Neal,independent,0.984737
 11/6/2018,NY,20,Tonko,democrat,60.680260
 11/6/2018,NY,20,Vitollo,republican,33.496948
 11/6/2018,NY,20,Tonko,working families,3.809771
-11/6/2018,NY,20,Tonko,womens equality,1.396176
+11/6/2018,NY,20,Tonko,women's equality,1.396176
 11/6/2018,NY,20,Tonko,reform,0.616845
 11/6/2018,NY,21,Cobb,democrat,39.706814
 11/6/2018,NY,21,Stefanik,republican,49.501932
@@ -26188,45 +26242,45 @@ date,region,district,candidate,party,voteshare
 11/6/2018,NY,21,Kahn,green,1.461254
 11/6/2018,NY,21,Cobb,working families,1.881306
 11/6/2018,NY,21,Stefanik,independence,1.432343
-11/6/2018,NY,21,Cobb,womens equality,0.838403
+11/6/2018,NY,21,Cobb,women's equality,0.838403
 11/6/2018,NY,21,Stefanik,reform,0.332045
 11/6/2018,NY,22,Brindisi,democrat,46.223457
 11/6/2018,NY,22,Tenney,republican,43.882020
 11/6/2018,NY,22,Tenney,conservative,4.806003
 11/6/2018,NY,22,Brindisi,working families,1.853306
 11/6/2018,NY,22,Brindisi,independence,2.260547
-11/6/2018,NY,22,Brindisi,womens equality,0.553880
+11/6/2018,NY,22,Brindisi,women's equality,0.553880
 11/6/2018,NY,22,Tenney,reform,0.420789
 11/6/2018,NY,23,Mitrano,democrat,42.002872
 11/6/2018,NY,23,Reed,republican,47.750099
 11/6/2018,NY,23,Reed,conservative,5.108739
 11/6/2018,NY,23,Mitrano,working families,2.690475
 11/6/2018,NY,23,Reed,independence,1.384779
-11/6/2018,NY,23,Mitrano,womens equality,1.063037
+11/6/2018,NY,23,Mitrano,women's equality,1.063037
 11/6/2018,NY,24,Balter,democrat,44.552674
 11/6/2018,NY,24,Katko,republican,43.643954
 11/6/2018,NY,24,Katko,conservative,6.524029
 11/6/2018,NY,24,Balter,working families,1.838967
 11/6/2018,NY,24,Katko,independence,2.096515
-11/6/2018,NY,24,Balter,womens equality,0.976375
+11/6/2018,NY,24,Balter,women's equality,0.976375
 11/6/2018,NY,24,Katko,reform,0.367486
 11/6/2018,NY,25,Morelle,democrat,54.811097
 11/6/2018,NY,25,Maxwell,republican,33.832877
 11/6/2018,NY,25,Maxwell,conservative,6.586043
 11/6/2018,NY,25,Morelle,working families,1.694570
 11/6/2018,NY,25,Morelle,independence,1.698274
-11/6/2018,NY,25,Morelle,womens equality,0.779687
+11/6/2018,NY,25,Morelle,women's equality,0.779687
 11/6/2018,NY,25,Maxwell,reform,0.597452
 11/6/2018,NY,26,Higgins,democrat,68.053448
 11/6/2018,NY,26,Zeno,republican,26.658111
 11/6/2018,NY,26,Higgins,working families,3.871166
-11/6/2018,NY,26,Higgins,womens equality,1.417274
+11/6/2018,NY,26,Higgins,women's equality,1.417274
 11/6/2018,NY,27,McMurray,democrat,44.942808
 11/6/2018,NY,27,Collins,republican,40.152466
 11/6/2018,NY,27,Collins,conservative,8.259052
 11/6/2018,NY,27,McMurray,working families,2.836825
 11/6/2018,NY,27,Collins,independence,0.731824
-11/6/2018,NY,27,McMurray,womens equality,0.982544
+11/6/2018,NY,27,McMurray,women's equality,0.982544
 11/6/2018,NY,27,Piegza,reform,2.094481
 11/6/2018,OH,1,Chabot,republican,51.321519
 11/6/2018,OH,1,Kubala,libertarian,1.774544
@@ -26256,7 +26310,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,OH,11,Goldstein,republican,17.750096
 11/6/2018,OH,12,Balderson,republican,51.420769
 11/6/2018,OH,12,Manchik,green,1.380962
-11/6/2018,OH,12,OConnor,democrat,47.198270
+11/6/2018,OH,12,O'Connor,democrat,47.198270
 11/6/2018,OH,13,Depizzo,republican,39.005052
 11/6/2018,OH,13,Ryan,democrat,60.994948
 11/6/2018,OH,14,Joyce,republican,55.247952
