@@ -11,7 +11,7 @@ var currentMapSource = NullMapSource
 var selectedParty
 
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
-var marginValues = cloneObject(defaultMarginValues)
+var marginValues = JSON.parse(getCookie(marginsCookieName)) || cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
