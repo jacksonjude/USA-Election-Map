@@ -425,7 +425,7 @@ class MapSource
 
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
-    return this.shouldUseOriginalMapDataForTotalsPieChart
+    return this.shouldUseOriginalMapDataForTotalsPieChart  && !(currentMapState == MapState.zooming && currentMapType.getMapSettingValue("zoomSeatsTotal"))
   }
 
   getDropdownPartyIDs()
@@ -2750,7 +2750,7 @@ function createHouseMapSources()
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear > 2020)
     {
-      return ["svg-sources/usa-governor-map.svg", zoomRegion]
+      return ["svg-sources/usa-governor-map.svg", zoomRegion, true]
     }
     else if (dateYear > 2010)
     {
@@ -2761,7 +2761,7 @@ function createHouseMapSources()
       return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
     }
 
-    return ["svg-sources/usa-governor-map.svg", zoomRegion]
+    return ["svg-sources/usa-governor-map.svg", zoomRegion, true]
   }
 
   var PastElectionResultMapSource = new MapSource(
@@ -2801,12 +2801,16 @@ function createHouseMapSources()
         }
 
         var partyVoteSplitData = housePerStateMapData[regionData.state].partyVoteSplits
-
         if (!(regionData.partyID in partyVoteSplitData))
         {
           partyVoteSplitData[regionData.partyID] = 0
         }
         partyVoteSplitData[regionData.partyID]++
+
+        if (regionData.flip)
+        {
+          housePerStateMapData[regionData.state].flip = true
+        }
       }
 
       for (let regionID in housePerStateMapData)

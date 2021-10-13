@@ -624,17 +624,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   {
     await loadMapSVGFile()
   }
-
-  displayRegionDataArray = {}
-  populateRegionsArray()
-
-  $('#outlines').children().each(function() {
-    var regionDataCallback = getRegionData($(this).attr('id'))
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
-    var regionData = regionDataCallback.regionData
-
-    updateRegionFillColors(regionIDsToFill, regionData, false)
-  })
+  var usedFallbackMap = currentMapType.getSVGPath()[2] || false
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
@@ -649,6 +639,20 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     break
   }
 
+  displayRegionDataArray = {}
+  if (!(currentMapState == MapState.zooming && usedFallbackMap))
+  {
+    populateRegionsArray()
+  }
+
+  $('#outlines').children().each(function() {
+    var regionDataCallback = getRegionData($(this).attr('id'))
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+    var regionData = regionDataCallback.regionData
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+  })
+
   for (let regionNum in currentMapDataForDate)
   {
     var regionDataCallback = getRegionData(currentMapDataForDate[regionNum].region)
@@ -657,7 +661,8 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
     if (regionData == null)
     {
-      continue
+      displayRegionDataArray[regionNum] = {}
+      regionData = displayRegionDataArray[regionNum]
     }
 
     regionData.region = currentMapDataForDate[regionNum].region
