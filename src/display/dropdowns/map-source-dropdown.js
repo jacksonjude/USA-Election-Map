@@ -24,7 +24,7 @@ function createMapSourceDropdownItems()
     {
       divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
 
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;')'>"
+      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;'>"
       divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
       divStringToAppend += "</span>"
 
