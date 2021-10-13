@@ -55,6 +55,8 @@ const MapState = {
 }
 var currentMapState = MapState.viewing
 
+var currentMapZoomRegion = null
+
 var showingHelpBox = false
 
 var showingCompareMap = false
@@ -138,6 +140,7 @@ async function reloadForNewMapType(initialLoad)
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
   currentMapState = MapState.viewing
+  currentMapZoomRegion = null
   showingCompareMap = false
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
@@ -189,7 +192,9 @@ async function reloadForNewMapType(initialLoad)
 function loadMapSVGFile()
 {
   var loadSVGFilePromise = new Promise((resolve, reject) => {
-    $('#mapzoom').load(currentMapType.getSVGPath(), function() {
+    var svgPath = currentMapType.getSVGPath()
+
+    var handleNewSVG = () => {
       setOutlineDivProperties()
       updateMapElectoralVoteText()
 
@@ -199,7 +204,33 @@ function loadMapSVGFile()
       }
 
       resolve()
-    })
+    }
+    if (svgPath instanceof Array)
+    {
+      $('#mapzoom').load(svgPath[0], () => {
+        var stateToShow = svgPath[1]
+        for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
+        {
+          var splitID = districtPath.id.split("-")[0]
+          if (stateToShow != splitID && splitID != "use")
+          {
+            districtPath.remove()
+          }
+        }
+
+        setTimeout(() => {
+          var svgDataBoundingBox = $("#svgdata")[0].getBBox()
+          $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+        }, 0)
+
+        $("#svgdata").show()
+        handleNewSVG()
+      })
+    }
+    else
+    {
+      $('#mapzoom').load(svgPath, handleNewSVG)
+    }
   })
 
   return loadSVGFilePromise
@@ -572,7 +603,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   var currentSVGPath = currentMapType.getSVGPath()
   var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(dateToDisplay)
 
-  if (newOverrideSVGPath != null && currentSVGPath != newOverrideSVGPath)
+  if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {
     currentMapType.setOverrideSVGPath(newOverrideSVGPath)
     shouldReloadSVG = true
@@ -645,7 +676,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   updateMapElectoralVoteText()
 
-  if (currentRegionID && currentMapState == MapState.viewing)
+  if (currentRegionID && (currentMapState == MapState.viewing || currentMapState == MapState.zooming))
   {
     updateRegionBox(currentRegionID)
   }
@@ -1026,7 +1057,7 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == MapState.viewing && showingDataMap)
+  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
@@ -1086,6 +1117,21 @@ function rightClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
+  }
+  else if (currentMapState == MapState.viewing)
+  {
+    var regionID = getBaseRegionID($(div).attr('id')).baseID
+    currentMapState = MapState.zooming
+    currentMapZoomRegion = regionID
+
+    displayDataMap()
+  }
+  else if (currentMapState == MapState.zooming)
+  {
+    currentMapState = MapState.viewing
+    currentMapZoomRegion = null
+
+    displayDataMap()
   }
 }
 
@@ -1386,7 +1432,7 @@ function getCurrentDecade()
   {
     dateForDecade = currentSliderDate
   }
-  return Math.floor(((dateForDecade || new Date()).getFullYear()-1)/10)*10
+  return getDecadeFromDate(dateForDecade)
 }
 
 function getCurrentDateOrToday()
@@ -1470,7 +1516,7 @@ function updateRegionBox(regionID)
 
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+  $("#regionbox").html((getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 }
 
 function getRoundedMarginValue(fullMarginValue)

@@ -559,7 +559,7 @@ var USAHouseMapType = new MapType(
   "assets/usa-house.png",
   "svg-sources/usa-governor-map.svg", // use governor (single state) by default before zoom
   50,
-  function(decade, regionID, regionData)
+  function(decade, regionID)
   {
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]-2 || 1
   },

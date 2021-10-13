@@ -304,6 +304,11 @@ function getMDYDateString(date, delimiter, includeTime)
   return dateString
 }
 
+function getDecadeFromDate(dateForDecade)
+{
+  return Math.floor(((dateForDecade || new Date()).getFullYear()-1)/10)*10
+}
+
 String.prototype.toTitle = function() {
   if (this.length == 0) { return "" }
   if (this.length == 1) { return this.toUpperCase() }

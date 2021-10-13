@@ -471,7 +471,7 @@ function mouseEnteredRegion(div)
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentMapState == MapState.viewing && showingDataMap)
+  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
   {
     updateRegionBox(regionID)
   }
@@ -498,6 +498,10 @@ function mouseEnteredRegion(div)
       }
     }
   }
+
+  var regionPath = document.getElementById(regionID)
+  var parent = regionPath.parentNode
+  parent.insertBefore(regionPath, parent.lastChild.nextSibling)
 }
 
 function mouseLeftRegion(div)

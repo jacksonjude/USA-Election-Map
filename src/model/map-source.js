@@ -2737,6 +2737,33 @@ function createHouseMapSources()
     }
   }
 
+  var getHouseSVGFromDate = function(dateTime)
+  {
+    var isZoomingState = currentMapState == MapState.zooming
+    var zoomRegion = currentMapZoomRegion
+
+    if (!isZoomingState)
+    {
+      return "svg-sources/usa-governor-map.svg"
+    }
+
+    var dateYear = (new Date(dateTime)).getFullYear()
+    if (dateYear > 2020)
+    {
+      return "svg-sources/usa-governor-map.svg"
+    }
+    else if (dateYear > 2010)
+    {
+      return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
+    }
+    else if (dateYear > 2000)
+    {
+      return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
+    }
+
+    return "svg-sources/usa-governor-map.svg"
+  }
+
   var PastElectionResultMapSource = new MapSource(
     "Past-House-Elections", // id
     "Past Elections", // name
@@ -2796,15 +2823,34 @@ function createHouseMapSources()
 
       return housePerStateMapData
     }, // viewingDataFunction
-    null, // zoomingDataFunction
+    (mapDateData) => {
+      var stateMapData = {}
+
+      for (let regionID in mapDateData)
+      {
+        if (mapDateData[regionID].state == currentMapZoomRegion)
+        {
+          stateMapData[regionID] = cloneObject(mapDateData[regionID])
+        }
+      }
+
+      console.log(stateMapData)
+
+      return stateMapData
+    }, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
 
+      if (regionID.includes("-"))
+      {
+        regionID = regionID.split("-")[0]
+      }
+
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_House_of_Representatives_elections"
       if (!shouldOpenHomepage)
       {
-        linkToOpen += "_in_" + regionIDToLinkMap[regionID]
+        linkToOpen += (USAHouseMapType.getEV(getDecadeFromDate(mapDate), regionID) > 1 ? "_in_" : "#") + regionIDToLinkMap[regionID]
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
@@ -2813,7 +2859,7 @@ function createHouseMapSources()
     null, // shouldClearDisabled
     true, // shouldShowVoteshare
     1.0, // voteshareCutoffMargin
-    null, // overrideSVGPath
+    getHouseSVGFromDate, // overrideSVGPath
     null, // shouldSetDisabledWorthToZero
     true // shouldUseOriginalMapDataForTotalsPieChart
   )
