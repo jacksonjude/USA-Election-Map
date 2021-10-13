@@ -64,19 +64,23 @@ body {
 
 .topnavdisable {
   background-color: #3d3d3d !important;
+  color: #666 !important;
 }
 
 .topnavdisable:hover {
   background-color: #3d3d3d !important;
+  color: #666 !important;
 }
 
 .topnavdisable2 {
   background-color: #3d3d3d !important;
+  color: #666 !important;
   pointer-events: none;
 }
 
 .topnavdisable2:hover {
   background-color: #3d3d3d !important;
+  color: #666 !important;
   pointer-events: none;
 }
 

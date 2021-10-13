@@ -564,7 +564,7 @@ var USAHouseMapType = new MapType(
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]-2 || 1
   },
   false,
-  4,
+  2,
   false,
   `
   <h3 style='margin: 0px;'>Controls</h3>

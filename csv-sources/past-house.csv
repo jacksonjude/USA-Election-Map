@@ -7758,7 +7758,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,VA,10,Weinberg,democrat,31.890591
 11/8/1988,VA,10,Wolf,republican,68.109409
 11/8/1988,VT,0,Earle,small is beautiful,0.445967
-11/8/1988,VT,0,Sanders,independent,37.522090
+11/8/1988,VT,0,Sanders,democrat,37.522090
 11/8/1988,VT,0,Diamondstone,liberty union,0.606432
 11/8/1988,VT,0,Hedbor,libertarian,1.296222
 11/8/1988,VT,0,Poirier,democrat,18.893168
@@ -8773,7 +8773,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,VA,10,Minnich,independent,3.127966
 11/6/1990,VA,10,Larouche,independent,1.360217
 11/6/1990,VA,10,Canter,democrat,33.960350
-11/6/1990,VT,0,Sanders,independent,56.300661
+11/6/1990,VT,0,Sanders,democrat,56.300661
 11/6/1990,VT,0,Sandoval,democrat,3.025295
 11/6/1990,VT,0,Diamondstone,liberty union,0.941362
 11/6/1990,VT,0,Smith,republican,39.732682
@@ -9440,21 +9440,21 @@ date,region,district,candidate,party,voteshare
 11/3/1992,MI,16,Siegle,tisch independent citizens,1.680121
 11/3/1992,MI,16,Hampton,libertarian,0.990724
 11/3/1992,MN,1,Penny,democrat,74.037440
-11/3/1992,MN,1,Droogsma,independent-republican,25.962560
+11/3/1992,MN,1,Droogsma,republican,25.962560
 11/3/1992,MN,2,Bentz,independent,4.437133
-11/3/1992,MN,2,Ludeman,independent-republican,47.678349
+11/3/1992,MN,2,Ludeman,republican,47.678349
 11/3/1992,MN,2,Minge,democrat,47.884517
 11/3/1992,MN,3,Fellman,grassroots,2.918378
 11/3/1992,MN,3,Mandell,democrat,33.312952
-11/3/1992,MN,3,Ramstad,independent-republican,63.768670
-11/3/1992,MN,4,Maitland,independent-republican,36.660805
+11/3/1992,MN,3,Ramstad,republican,63.768670
+11/3/1992,MN,4,Maitland,republican,36.660805
 11/3/1992,MN,4,Willess,independent,2.425701
 11/3/1992,MN,4,Johnson,natural law,1.297887
 11/3/1992,MN,4,Rothenberg,socialist workers,0.445360
 11/3/1992,MN,4,Vento,democrat,57.578334
 11/3/1992,MN,4,Vacek,grassroots,1.591911
 11/3/1992,MN,5,Mellen,natural law,1.990120
-11/3/1992,MN,5,Moriarty,independent-republican,27.900404
+11/3/1992,MN,5,Moriarty,republican,27.900404
 11/3/1992,MN,5,Coleman,new alliance,2.145016
 11/3/1992,MN,5,Mesaros,independent,1.740405
 11/3/1992,MN,5,Sabo,democrat,63.021913
@@ -9462,12 +9462,12 @@ date,region,district,candidate,party,voteshare
 11/3/1992,MN,5,Bentley,grassroots,2.455893
 11/3/1992,MN,6,Firnstahl,natural law,0.798085
 11/3/1992,MN,6,Peterson,independents for perot,5.457236
-11/3/1992,MN,6,Grams,independent-republican,44.414738
+11/3/1992,MN,6,Grams,republican,44.414738
 11/3/1992,MN,6,Sikorski,democrat,33.258845
 11/3/1992,MN,6,Barkley,independent,16.071096
 11/3/1992,MN,7,Peterson,democrat,50.660280
-11/3/1992,MN,7,Omann,independent-republican,49.339720
-11/3/1992,MN,8,Herwig,independent-republican,29.708876
+11/3/1992,MN,7,Omann,republican,49.339720
+11/3/1992,MN,8,Herwig,republican,29.708876
 11/3/1992,MN,8,Welty,perot choice,8.016715
 11/3/1992,MN,8,Henspeter,term limits candidate,3.048755
 11/3/1992,MN,8,Oberstar,democrat,59.225655
@@ -10110,7 +10110,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,VT,0,Young,democrat,7.923902
 11/3/1992,VT,0,Philbin,republican,30.907804
 11/3/1992,VT,0,Miller,freedom for larouche,0.728761
-11/3/1992,VT,0,Sanders,independent,57.875531
+11/3/1992,VT,0,Sanders,democrat,57.875531
 11/3/1992,WA,1,Cantwell,democrat,54.868509
 11/3/1992,WA,1,Nelson,republican,41.985963
 11/3/1992,WA,1,Fleming,natural law,1.552305
@@ -11263,7 +11263,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,VT,0,Banus,natural law,1.403301
 11/8/1994,VT,0,Carroll,republican,46.661299
 11/8/1994,VT,0,Larson,liberty union,0.707097
-11/8/1994,VT,0,Sanders,independent,49.966611
+11/8/1994,VT,0,Sanders,democrat,49.966611
 11/8/1994,WA,1,White,republican,51.655160
 11/8/1994,WA,1,Cantwell,democrat,48.344840
 11/8/1994,WA,2,Metcalf,republican,54.664523
@@ -12023,7 +12023,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,MO,7,Harman,libertarian,2.611100
 11/5/1996,MO,8,Zimmer,natural law,0.591419
 11/5/1996,MO,8,Tiapek,libertarian,1.123157
-11/5/1996,MO,8,Emerson,independent,50.468917
+11/5/1996,MO,8,Emerson,republican,50.468917
 11/5/1996,MO,8,Firebaugh,democrat,37.281808
 11/5/1996,MO,8,Kline,republican,10.534700
 11/5/1996,MO,9,Moore,libertarian,2.853375
@@ -12747,7 +12747,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,VA,11,Davis,republican,64.150420
 11/5/1996,VA,11,Horton,democrat,34.535670
 11/5/1996,VT,0,Melamede,grassroots,0.530767
-11/5/1996,VT,0,Sanders,independent,55.309044
+11/5/1996,VT,0,Sanders,democrat,55.309044
 11/5/1996,VT,0,Kushi,natural law,0.319246
 11/5/1996,VT,0,Sweetser,republican,32.640584
 11/5/1996,VT,0,Long,democrat,9.369017
@@ -13997,7 +13997,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,VA,11,Levy,independent,17.033783
 11/3/1998,VT,0,Candon,republican,32.924224
 11/3/1998,VT,0,Diamondstone,liberty union,1.002062
-11/3/1998,VT,0,Sanders,independent,63.485481
+11/3/1998,VT,0,Sanders,democrat,63.485481
 11/3/1998,VT,0,Mulligan,vermont grassroots,1.612235
 11/3/1998,VT,0,Maynard,libertarian,0.975998
 11/3/1998,WA,1,Inslee,democrat,49.774587
@@ -15451,7 +15451,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,VA,11,Corrigan,democrat,34.388482
 11/7/2000,VA,11,Levy,independent,1.672552
 11/7/2000,VT,0,Kerin,republican,18.392037
-11/7/2000,VT,0,Sanders,independent,69.396262
+11/7/2000,VT,0,Sanders,democrat,69.396262
 11/7/2000,VT,0,Diamondstone,democrat,5.278727
 11/7/2000,VT,0,Skrill,independent,4.181086
 11/7/2000,VT,0,Krymkowski,libertarian,1.053764
@@ -16728,7 +16728,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,VA,11,Davis,republican,83.427723
 11/5/2002,VA,11,Creel,constitution,16.572277
 11/5/2002,VT,0,Newton,liberty union,1.413953
-11/5/2002,VT,0,Sanders,independent,64.318217
+11/5/2002,VT,0,Sanders,democrat,64.318217
 11/5/2002,VT,0,Krymkowski,libertarian,0.902533
 11/5/2002,VT,0,Meub,republican,32.324699
 11/5/2002,VT,0,Skinner,vermont grassroots,1.040598
@@ -17936,7 +17936,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,VA,11,Oddo,independent,1.404147
 11/2/2004,VA,11,Davis,republican,60.302257
 11/2/2004,VA,11,Longmyer,democrat,38.293596
-11/2/2004,VT,0,Sanders,independent,67.522896
+11/2/2004,VT,0,Sanders,democrat,67.522896
 11/2/2004,VT,0,Drown,democrat,7.115410
 11/2/2004,VT,0,Newton,liberty union,0.990330
 11/2/2004,VT,0,Parke,republican,24.371364

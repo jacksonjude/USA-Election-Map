@@ -1461,7 +1461,9 @@ function updateRegionBox(regionID)
   if (regionData.partyVoteSplits)
   {
     regionMarginString = "</span>"
-    Object.keys(regionData.partyVoteSplits).forEach((partyID, i) => {
+    Object.keys(regionData.partyVoteSplits).sort((partyID1, partyID2) => {
+      return regionData.partyVoteSplits[partyID2]-regionData.partyVoteSplits[partyID1]
+    }).forEach((partyID, i) => {
       regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
     })
   }

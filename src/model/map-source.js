@@ -116,6 +116,7 @@ class MapSource
       }
       for (var date in self.candidateNameData)
       {
+        if (self.candidateNameData[date] == null) { continue }
         if (Object.keys(self.candidateNameData[date]).length == 0)
         {
           self.candidateNameData[date] = cloneObject(self.shortCandidateNameOverride)
@@ -2563,7 +2564,7 @@ function createHouseMapSources()
 
         if (stateDistricts.length == 0)
         {
-          console.log(fullStateRows, regionToFind, currentMapDate, rawDateData)
+          console.log(regionToFind, currentMapDate)
         }
 
         for (let stateDistrict of stateDistricts)
@@ -2789,7 +2790,7 @@ function createHouseMapSources()
         var largestPartyCount = partyVoteSplitData[largestPartyID]
         delete partyVoteSplitData[housePerStateMapData[regionID].partyID]
 
-        housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // to account for rounding errors
+        housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // +0.001 to account for rounding errors
         housePerStateMapData[regionID].partyID = largestPartyID
       }
 
