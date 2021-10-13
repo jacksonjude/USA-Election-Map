@@ -499,9 +499,12 @@ function mouseEnteredRegion(div)
     }
   }
 
-  var regionPath = document.getElementById(regionID)
-  var parent = regionPath.parentNode
-  parent.insertBefore(regionPath, parent.lastChild.nextSibling)
+  if (currentMapState == MapState.zooming)
+  {
+    var regionPath = document.getElementById(regionID)
+    var parent = regionPath.parentNode
+    parent.insertBefore(regionPath, parent.lastChild.nextSibling)
+  }
 }
 
 function mouseLeftRegion(div)
