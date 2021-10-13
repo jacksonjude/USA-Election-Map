@@ -15686,7 +15686,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CA,38,Burrola,republican,26.271485
 11/5/2002,CA,39,Newhouse,libertarian,4.368301
 11/5/2002,CA,39,Escobar,republican,40.824995
-11/5/2002,CA,39,S_nchez,democrat,54.806704
+11/5/2002,CA,39,Sánchez,democrat,54.806704
 11/5/2002,CA,40,Royce,republican,67.638062
 11/5/2002,CA,40,Avalos,democrat,29.467514
 11/5/2002,CA,40,McGlawn,libertarian,2.894425
@@ -18145,7 +18145,7 @@ date,region,district,candidate,party,voteshare
 11/7/2006,CA,38,Napolitano,democrat,75.330909
 11/7/2006,CA,38,Street,republican,24.669091
 11/7/2006,CA,39,Andion,republican,34.130353
-11/7/2006,CA,39,S_nchez,democrat,65.869647
+11/7/2006,CA,39,Sánchez,democrat,65.869647
 11/7/2006,CA,40,Hoffman,democrat,30.681675
 11/7/2006,CA,40,Royce,republican,66.756341
 11/7/2006,CA,40,Inman,libertarian,2.561984
@@ -19335,7 +19335,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,CA,38,Napolitano,democrat,81.727172
 11/4/2008,CA,38,Agrella,libertarian,18.272828
 11/4/2008,CA,39,Lenning,republican,30.326100
-11/4/2008,CA,39,S_nchez,democrat,69.673900
+11/4/2008,CA,39,Sánchez,democrat,69.673900
 11/4/2008,CA,40,Avalos,democrat,37.450959
 11/4/2008,CA,40,Royce,republican,62.549041
 11/4/2008,CA,41,Prince,democrat,38.350986
@@ -19530,7 +19530,7 @@ date,region,district,candidate,party,voteshare
 11/4/2008,IL,3,Lipinski,democrat,73.275335
 11/4/2008,IL,3,Hawkins,republican,21.371920
 11/4/2008,IL,3,Pohlen,green,5.352745
-11/4/2008,IL,4,L_pez,green,7.917281
+11/4/2008,IL,4,López,green,7.917281
 11/4/2008,IL,4,Cunningham,republican,11.478017
 11/4/2008,IL,4,Gutierrez,democrat,80.604702
 11/4/2008,IL,5,Emanuel,democrat,73.942796
@@ -21875,7 +21875,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,CA,36,Ruiz,democrat,52.939339
 11/6/2012,CA,37,Osborne,republican,13.582519
 11/6/2012,CA,37,Bass,democrat,86.417481
-11/6/2012,CA,38,S_nchez,democrat,67.544761
+11/6/2012,CA,38,Sánchez,democrat,67.544761
 11/6/2012,CA,38,Campos,republican,32.455239
 11/6/2012,CA,39,Royce,republican,57.788123
 11/6/2012,CA,39,Chen,democrat,42.211877
@@ -22467,7 +22467,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,NM,2,Erhard,democrat,40.898723
 11/6/2012,NM,2,Pearce,republican,59.101277
 11/6/2012,NM,3,Byrd,republican,36.875328
-11/6/2012,NM,3,Luj_n,democrat,63.124672
+11/6/2012,NM,3,Luján,democrat,63.124672
 11/6/2012,NV,1,Edwards,republican,31.527014
 11/6/2012,NV,1,Vaughan,independent american,2.312052
 11/6/2012,NV,1,Pojunis,libertarian,2.590948
@@ -23054,7 +23054,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,AZ,7,Gallego,democrat,74.871958
 11/4/2014,AZ,7,Dewitt,americans elect,5.326302
 11/4/2014,AZ,7,Cobb,libertarian,14.792981
-11/4/2014,AZ,7,Pe_alosa,jos_ pe_alosa,4.835141
+11/4/2014,AZ,7,Peñalosa,independent,4.835141
 11/4/2014,AZ,8,Franks,republican,75.811658
 11/4/2014,AZ,8,Dolgos,americans elect,24.188342
 11/4/2014,AZ,9,Gammill,libertarian,3.462872
@@ -23117,7 +23117,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,CA,28,Schiff,democrat,76.495044
 11/4/2014,CA,28,Stokes,no party preference,23.504956
 11/4/2014,CA,29,Leader,republican,25.386872
-11/4/2014,CA,29,C_rdenas,democrat,74.613128
+11/4/2014,CA,29,Cárdenas,democrat,74.613128
 11/4/2014,CA,30,Sherman,democrat,65.639999
 11/4/2014,CA,30,Reed,republican,34.360001
 11/4/2014,CA,31,Chabot,republican,48.266255
@@ -23134,7 +23134,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,CA,36,Nestande,republican,45.815907
 11/4/2014,CA,37,King,republican,15.718665
 11/4/2014,CA,37,Bass,democrat,84.281335
-11/4/2014,CA,38,S_nchez,democrat,59.090171
+11/4/2014,CA,38,Sánchez,democrat,59.090171
 11/4/2014,CA,38,Campos,republican,40.909829
 11/4/2014,CA,39,Royce,republican,68.544943
 11/4/2014,CA,39,Anderson,democrat,31.455057
@@ -23317,7 +23317,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,IL,3,Lipinski,democrat,64.562218
 11/4/2014,IL,3,Brannigan,republican,35.437782
 11/4/2014,IL,4,Concepcion,republican,21.853174
-11/4/2014,IL,4,Guti_rrez,democrat,78.146826
+11/4/2014,IL,4,Gutiérrez,democrat,78.146826
 11/4/2014,IL,5,Kolber,republican,30.621838
 11/4/2014,IL,5,Wade,green,6.143387
 11/4/2014,IL,5,Quigley,democrat,63.234775
@@ -23697,7 +23697,7 @@ date,region,district,candidate,party,voteshare
 11/4/2014,NM,2,Lara,democrat,35.542422
 11/4/2014,NM,3,Hook,independent,0.028249
 11/4/2014,NM,3,Byrd,republican,38.448793
-11/4/2014,NM,3,Luj_n,democrat,61.522958
+11/4/2014,NM,3,Luján,democrat,61.522958
 11/4/2014,NV,1,Bakari,independent american,2.024932
 11/4/2014,NV,1,Titus,democrat,56.841306
 11/4/2014,NV,1,Charles,libertarian,3.259069
@@ -24306,14 +24306,14 @@ date,region,district,candidate,party,voteshare
 11/8/2016,CA,27,Chu,democrat,67.420361
 11/8/2016,CA,28,Solis,republican,22.013321
 11/8/2016,CA,28,Schiff,democrat,77.986679
-11/8/2016,CA,29,C_rdenas,democrat,74.731702
+11/8/2016,CA,29,Cárdenas,democrat,74.731702
 11/8/2016,CA,29,Alarcon,democrat,25.268298
 11/8/2016,CA,30,Reed,republican,27.361608
 11/8/2016,CA,30,Sherman,democrat,72.638392
 11/8/2016,CA,31,Aguilar,democrat,56.067539
 11/8/2016,CA,31,Chabot,republican,43.932461
 11/8/2016,CA,32,Napolitano,democrat,61.574317
-11/8/2016,CA,32,Hern_ndez,democrat,38.425683
+11/8/2016,CA,32,Hernández,democrat,38.425683
 11/8/2016,CA,33,Wright,republican,33.560153
 11/8/2016,CA,33,Lieu,democrat,66.439847
 11/8/2016,CA,34,Edwards,democrat,22.816608
@@ -24324,7 +24324,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,CA,36,Ruiz,democrat,62.053934
 11/8/2016,CA,37,Bass,democrat,81.126302
 11/8/2016,CA,37,Wiggins,democrat,18.873698
-11/8/2016,CA,38,S_nchez,democrat,70.478299
+11/8/2016,CA,38,Sánchez,democrat,70.478299
 11/8/2016,CA,38,Downing,republican,29.521701
 11/8/2016,CA,39,Murdock,democrat,42.769571
 11/8/2016,CA,39,Royce,republican,57.230429
@@ -24516,7 +24516,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,IL,2,Kelly,democrat,79.807620
 11/8/2016,IL,3,Lipinski,democrat,99.959629
 11/8/2016,IL,3,Harris,independent,0.040371
-11/8/2016,IL,4,Guti_rrez,democrat,100.000000
+11/8/2016,IL,4,Gutiérrez,democrat,100.000000
 11/8/2016,IL,5,Kolber,republican,27.483656
 11/8/2016,IL,5,Quigley,democrat,67.844359
 11/8/2016,IL,5,Sherman,green,4.671986
@@ -24915,7 +24915,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NM,2,Soules,democrat,37.260379
 11/8/2016,NM,2,Pearce,republican,62.739621
 11/8/2016,NM,3,Romero,republican,37.582955
-11/8/2016,NM,3,Luj_n,democrat,62.417045
+11/8/2016,NM,3,Luján,democrat,62.417045
 11/8/2016,NV,1,Titus,democrat,61.871921
 11/8/2016,NV,1,Bakari,independent american,1.987768
 11/8/2016,NV,1,D'Silva,none,7.378207
@@ -24968,8 +24968,8 @@ date,region,district,candidate,party,voteshare
 11/8/2016,NY,6,Bhatti,haris bhatti party,1.121820
 11/8/2016,NY,7,Romaguera,republican,7.227756
 11/8/2016,NY,7,Romaguera,conservative,1.227282
-11/8/2016,NY,7,Vel_quez,democrat,80.215464
-11/8/2016,NY,7,Vel_quez,women's equality,3.336603
+11/8/2016,NY,7,Velázquez,democrat,80.215464
+11/8/2016,NY,7,Velázquez,women's equality,3.336603
 11/8/2016,NY,8,Jeffries,democrat,78.958410
 11/8/2016,NY,8,Jeffries,working families,4.413450
 11/8/2016,NY,8,Cavanagh,conservative,6.696203
@@ -26353,42 +26353,42 @@ date,region,district,candidate,party,voteshare
 11/6/2018,OR,5,Souza,libertarian,1.691392
 11/6/2018,OR,5,Sandnes,pacific green,1.341603
 11/6/2018,OR,5,Schrader,democrat,55.090940
-11/6/2018,PA,1,Scott__wallace,democrat,48.740441
-11/6/2018,PA,1,K__fitzpatrick,republican,51.259559
-11/6/2018,PA,2,F__boyle,democrat,79.016942
-11/6/2018,PA,2,David__torres,republican,20.983058
-11/6/2018,PA,3,Dwight__evans,democrat,93.380780
-11/6/2018,PA,3,E__leib,republican,6.619220
-11/6/2018,PA,4,Cunnane,democrat,63.522438
-11/6/2018,PA,4,Daniel__david,republican,36.477562
-11/6/2018,PA,5,Gay__scanlon,democrat,65.188669
-11/6/2018,PA,5,Pearl__kim,republican,34.811331
-11/6/2018,PA,6,Jampoler__houlahan,democrat,58.875916
+11/6/2018,PA,1,Wallace,democrat,48.740441
+11/6/2018,PA,1,Fitzpatrick,republican,51.259559
+11/6/2018,PA,2,Boyle,democrat,79.016942
+11/6/2018,PA,2,Torres,republican,20.983058
+11/6/2018,PA,3,Evans,democrat,93.380780
+11/6/2018,PA,3,Leib,republican,6.619220
+11/6/2018,PA,4,Dean,democrat,63.522438
+11/6/2018,PA,4,David,republican,36.477562
+11/6/2018,PA,5,Scanlon,democrat,65.188669
+11/6/2018,PA,5,Kim,republican,34.811331
+11/6/2018,PA,6,Houlahan,democrat,58.875916
 11/6/2018,PA,6,McCauley,republican,41.124084
-11/6/2018,PA,7,Ellis__wild,democrat,53.487983
-11/6/2018,PA,7,W__nothstein,republican,43.469029
-11/6/2018,PA,7,Tim__silfies,libertarian,3.042988
-11/6/2018,PA,8,Alton__cartwright,democrat,54.642054
-11/6/2018,PA,8,Robert__chrin,republican,45.357946
-11/6/2018,PA,9,Dennis__wolff,democrat,40.254372
-11/6/2018,PA,9,Daniel__meuser,republican,59.745628
-11/6/2018,PA,10,B__scott,democrat,48.677641
-11/6/2018,PA,10,G__perry,republican,51.322359
-11/6/2018,PA,11,Jessica__king,democrat,41.023978
-11/6/2018,PA,11,K__smucker,republican,58.976022
-11/6/2018,PA,12,Marc__friedenberg,democrat,33.962489
-11/6/2018,PA,12,A__marino,republican,66.037511
-11/6/2018,PA,13,M__ottaway,democrat,29.507711
-11/6/2018,PA,13,John__joyce,republican,70.492289
-11/6/2018,PA,14,Bibiana__boerio,democrat,42.094654
-11/6/2018,PA,14,L__reschenthaler,republican,57.905346
-11/6/2018,PA,15,Susan__boser,democrat,32.157637
+11/6/2018,PA,7,Wild,democrat,53.487983
+11/6/2018,PA,7,Nothstein,republican,43.469029
+11/6/2018,PA,7,Silfies,libertarian,3.042988
+11/6/2018,PA,8,Cartwright,democrat,54.642054
+11/6/2018,PA,8,Chrin,republican,45.357946
+11/6/2018,PA,9,Wolff,democrat,40.254372
+11/6/2018,PA,9,Meuser,republican,59.745628
+11/6/2018,PA,10,Scott,democrat,48.677641
+11/6/2018,PA,10,Perry,republican,51.322359
+11/6/2018,PA,11,King,democrat,41.023978
+11/6/2018,PA,11,Smucker,republican,58.976022
+11/6/2018,PA,12,Friedenberg,democrat,33.962489
+11/6/2018,PA,12,Marino,republican,66.037511
+11/6/2018,PA,13,Ottaway,democrat,29.507711
+11/6/2018,PA,13,Joyce,republican,70.492289
+11/6/2018,PA,14,Boerio,democrat,42.094654
+11/6/2018,PA,14,Reschenthaler,republican,57.905346
+11/6/2018,PA,15,Boser,democrat,32.157637
 11/6/2018,PA,15,Thompson,republican,67.842363
-11/6/2018,PA,16,A__dinicola,democrat,47.298358
+11/6/2018,PA,16,DiNicola,democrat,47.298358
 11/6/2018,PA,16,Kelly,republican,51.581579
-11/6/2018,PA,16,Bill__beeman,libertarian,1.120063
-11/6/2018,PA,17,James__lamb,democrat,56.257314
-11/6/2018,PA,17,Keith__rothfus,republican,43.742686
+11/6/2018,PA,16,Beeman,libertarian,1.120063
+11/6/2018,PA,17,Lamb,democrat,56.257314
+11/6/2018,PA,17,Rothfus,republican,43.742686
 11/6/2018,PA,18,Doyle,democrat,100.000000
 11/6/2018,RI,1,Cicilline,democrat,66.851888
 11/6/2018,RI,1,Donovan,republican,33.148112
@@ -27662,7 +27662,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,PA,1,Fitzpatrick,republican,56.557817
 11/3/2020,PA,1,Finello,democrat,43.442183
 11/3/2020,PA,2,Torres,republican,27.464289
-11/3/2020,PA,2,Democrat,democrat,72.535711
+11/3/2020,PA,2,Boyle,democrat,72.535711
 11/3/2020,PA,3,Harvey,republican,8.969868
 11/3/2020,PA,3,Evans,democrat,91.030132
 11/3/2020,PA,4,Barnette,republican,40.472554
