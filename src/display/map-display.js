@@ -192,9 +192,13 @@ async function reloadForNewMapType(initialLoad)
 function loadMapSVGFile()
 {
   var loadSVGFilePromise = new Promise((resolve, reject) => {
+    $("#svgdata").css('opacity', "0")
+
     var svgPath = currentMapType.getSVGPath()
 
     var handleNewSVG = () => {
+      $("#svgdata").css('opacity', "1")
+
       setOutlineDivProperties()
       updateMapElectoralVoteText()
 
@@ -225,10 +229,9 @@ function loadMapSVGFile()
           // console.log(Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5)
           $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5) + "px")
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
-          $("#svgdata").css('visibility', "")
-        }, 0)
 
-        handleNewSVG()
+          handleNewSVG()
+        }, 0)
       })
     }
     else
