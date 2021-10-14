@@ -2742,7 +2742,7 @@ function createHouseMapSources()
     var isZoomingState = currentMapState == MapState.zooming
     var zoomRegion = currentMapZoomRegion
 
-    if (!isZoomingState)
+    if (!isZoomingState && !currentMapType.getMapSettingValue("showAllDistricts"))
     {
       return "svg-sources/usa-governor-map.svg"
     }
@@ -2788,7 +2788,13 @@ function createHouseMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
-    (mapDateData) => {
+    async (mapDateData) => {
+      var usedFallbackMap = USAHouseMapType.getSVGPath()[2] || false
+      if (currentMapType.getMapSettingValue("showAllDistricts") && !usedFallbackMap)
+      {
+        return mapDateData
+      }
+
       var housePerStateMapData = {}
 
       for (let regionID in mapDateData)
@@ -2827,7 +2833,7 @@ function createHouseMapSources()
 
       return housePerStateMapData
     }, // viewingDataFunction
-    (mapDateData) => {
+    async (mapDateData) => {
       var stateMapData = {}
 
       for (let regionID in mapDateData)

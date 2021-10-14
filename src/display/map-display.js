@@ -213,21 +213,24 @@ function loadMapSVGFile()
     {
       $('#mapzoom').load(svgPath[0], () => {
         var stateToShow = svgPath[1]
-        for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
+        if (stateToShow != null)
         {
-          var splitID = districtPath.id.split("-")[0]
-          if (stateToShow != splitID && splitID != "use")
+          for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
           {
-            districtPath.remove()
+            var splitID = districtPath.id.split("-")[0]
+            if (stateToShow != splitID && splitID != "use")
+            {
+              districtPath.remove()
+            }
           }
-        }
 
-        $("#text").remove()
+          $("#text").remove()
+        }
 
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
           // console.log(Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5)
-          $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5) + "px")
+          $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
 
           handleNewSVG()
@@ -252,29 +255,27 @@ function setOutlineDivProperties()
     outlineDiv.css('fill', defaultRegionFillColor)
     outlineDiv.css('cursor', "pointer")
 
-    outlineDiv.attr('oncontextmenu', "rightClickRegion(this); return false;")
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
-    outlineDiv.bind('click', function(e) {
+    outlineDiv.mousedown(function(e) {
       if (e.altKey)
       {
         altClickRegion(e.target)
-        return
       }
       else if (e.shiftKey)
       {
         shiftClickRegion(e.target)
       }
+      else if (e.which == 3)
+      {
+        rightClickRegion(e.target)
+      }
       else
       {
         leftClickRegion(e.target)
-        return
       }
     })
-
-    // outlineDiv.css('stroke', regionDeselectColor)
-    // outlineDiv.css('stroke-width', 0.5)
   })
 }
 
@@ -631,11 +632,11 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   switch (currentMapState)
   {
     case MapState.viewing:
-    currentMapDataForDate = currentMapSource.getViewingData(currentMapDataForDate)
+    currentMapDataForDate = await currentMapSource.getViewingData(currentMapDataForDate)
     break
 
     case MapState.zooming:
-    currentMapDataForDate = currentMapSource.getZoomingData(currentMapDataForDate)
+    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate)
     break
   }
 
@@ -1134,7 +1135,7 @@ function rightClickRegion(div)
   {
     var regionID = getBaseRegionID($(div).attr('id')).baseID
     currentMapState = MapState.zooming
-    currentMapZoomRegion = regionID
+    currentMapZoomRegion = regionID.includes("-") ? regionID.split("-")[0] : regionID
 
     displayDataMap()
   }
