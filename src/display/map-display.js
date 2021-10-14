@@ -194,8 +194,6 @@ function loadMapSVGFile()
   var loadSVGFilePromise = new Promise((resolve, reject) => {
     $("#svgdata").css('opacity', "0")
 
-    var svgPath = currentMapType.getSVGPath()
-
     var handleNewSVG = () => {
       $("#svgdata").css('opacity', "1")
 
@@ -209,9 +207,10 @@ function loadMapSVGFile()
 
       resolve()
     }
-    if (svgPath instanceof Array)
-    {
-      $('#mapzoom').load(svgPath[0], () => {
+
+    currentMapType.loadSVG((svgPath) => {
+      if (svgPath instanceof Array)
+      {
         var stateToShow = svgPath[1]
         if (stateToShow != null)
         {
@@ -235,12 +234,12 @@ function loadMapSVGFile()
 
           handleNewSVG()
         }, 0)
-      })
-    }
-    else
-    {
-      $('#mapzoom').load(svgPath, handleNewSVG)
-    }
+      }
+      else
+      {
+        handleNewSVG()
+      }
+    })
   })
 
   return loadSVGFilePromise

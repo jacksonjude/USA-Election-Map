@@ -141,7 +141,7 @@ class MapSource
     var fetchMapDataPromise = new Promise(async (resolve, reject) => {
       if (!reloadCache)
       {
-        var savedCSVText = await CSVDatabase.fetchCSV(this.id)
+        var savedCSVText = await CSVDatabase.fetchFile(this.id)
         if (savedCSVText != null)
         {
           return resolve(savedCSVText)
@@ -156,7 +156,7 @@ class MapSource
       $.get(self.dataURL, null, function(data) {
         $("#loader").hide()
 
-        CSVDatabase.insertCSV(self.id, data)
+        CSVDatabase.insertFile(self.id, data)
         resolve(data)
       }, "text").fail(function() {
         $("#loader").hide()

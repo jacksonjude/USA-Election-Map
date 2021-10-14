@@ -66,6 +66,29 @@ class MapType
     return true
   }
 
+  async loadSVG(callback)
+  {
+    $("#svgdata").css('opacity', "0")
+
+    var svgPath = this.getSVGPath()
+    var svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+
+    var svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+    var svgData = await SVGDatabase.fetchFile(svgPathID)
+    if (svgData)
+    {
+      $("#mapzoom").html(svgData)
+      callback(svgPath)
+    }
+    else
+    {
+      $("#mapzoom").load(svgPathString, () => {
+        SVGDatabase.insertFile(svgPathID, $("#mapzoom").html())
+        callback(svgPath)
+      })
+    }
+  }
+
   getTotalEV()
   {
     return this.totalEV
@@ -618,9 +641,6 @@ var USAHouseMapType = new MapType(
         {id: "all", title: "All Seats", value: false},
         {id: "selected", title: "Selected State", value: true}
       ],
-      shouldShowActive: (value) => {
-        return value
-      },
     defaultValue: "all", reloadType: MapSettingReloadType.display}
   ]
 )

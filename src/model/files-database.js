@@ -1,29 +1,31 @@
-const sourceUpdatedTimesURL = "https://map.jacksonjude.com/csv-sources/source-updated-times.json"
-
-class CSVDatabase
+class FilesDatabase
 {
-  static initilize(databaseName, databaseVersion)
+  async initialize(databaseName, databaseVersion, storeName, sourceUpdatedTimesURL)
   {
     this.databaseName = databaseName
     this.databaseVersion = databaseVersion
+    this.storeName = storeName
+    this.sourceUpdatedTimesURL = sourceUpdatedTimesURL
 
-    const request = indexedDB.open(this.databaseName, this.databaseVersion)
-
-    request.onupgradeneeded = function(event) {
-      var db = event.target.result
-
-      var store = db.createObjectStore('CSVFiles')
-    }
+    await this.openDatabase(this)
   }
 
-  static async openDatabase()
+  async openDatabase(self)
   {
+    var self = self || this
+
     var openDatabasePromise = new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.databaseName, this.databaseVersion)
+      const request = indexedDB.open(self.databaseName, self.databaseVersion)
 
       request.onerror = function(event) {
         console.error(`Database error: ${event.target.errorCode || event.target.error.code}`)
         resolve(null)
+      }
+
+      request.onupgradeneeded = function(event) {
+        var db = event.target.result
+
+        var store = db.createObjectStore(self.storeName)
       }
 
       request.onsuccess = function(event) {
@@ -35,16 +37,18 @@ class CSVDatabase
     return openDatabasePromise
   }
 
-  static async insertCSV(sourceID, csvText)
+  async insertFile(sourceID, fileText, self)
   {
+    var self = self || this
+
     try
     {
-      var db = await CSVDatabase.openDatabase()
+      var db = await self.openDatabase()
       if (db == null) { return }
-      var transaction = db.transaction('CSVFiles', 'readwrite')
-      var store = transaction.objectStore('CSVFiles')
+      var transaction = db.transaction(self.storeName, 'readwrite')
+      var store = transaction.objectStore(self.storeName)
 
-      store.put({text: csvText, updatedAt: Date.now()}, sourceID)
+      store.put({text: fileText, updatedAt: Date.now()}, sourceID)
 
       transaction.oncomplete = function() {
         db.close()
@@ -56,17 +60,17 @@ class CSVDatabase
     }
   }
 
-  static async fetchCSV(sourceID)
+  async fetchFile(sourceID, self)
   {
-    var self = this
+    var self = self || this
 
-    var fetchCSVPromise = new Promise(async (resolve, reject) => {
+    var fetchFilePromise = new Promise(async (resolve, reject) => {
       try
       {
-        var db = await CSVDatabase.openDatabase()
+        var db = await self.openDatabase()
         if (db == null) { return resolve(null) }
-        var transaction = db.transaction('CSVFiles', 'readonly')
-        var store = transaction.objectStore('CSVFiles')
+        var transaction = db.transaction(self.storeName, 'readonly')
+        var store = transaction.objectStore(self.storeName)
 
         var query = store.get(sourceID)
 
@@ -80,8 +84,7 @@ class CSVDatabase
             return
           }
 
-          $.getJSON(sourceUpdatedTimesURL, null, data => {
-            // console.log(updatedTime, data[sourceID], updatedTime != null && updatedTime >= data[sourceID])
+          $.getJSON(self.sourceUpdatedTimesURL, null, data => {
             self.lastSourceUpdateCheck = (new Date()).getTime()
             if (updatedTime && updatedTime >= data[sourceID])
             {
@@ -113,18 +116,20 @@ class CSVDatabase
       }
     })
 
-    return fetchCSVPromise
+    return fetchFilePromise
   }
 
-  static async hasCSV(sourceID)
+  async hasFile(sourceID, self)
   {
-    var hasCSVPromise = new Promise(async (resolve, reject) => {
+    var self = self || this
+
+    var hasFilePromise = new Promise(async (resolve, reject) => {
       try
       {
-        var db = await CSVDatabase.openDatabase()
+        var db = await self.openDatabase()
         if (db == null) { return resolve(false) }
-        var transaction = db.transaction('CSVFiles', 'readonly')
-        var store = transaction.objectStore('CSVFiles')
+        var transaction = db.transaction(self.storeName, 'readonly')
+        var store = transaction.objectStore(self.storeName)
 
         var query = store.getAllKeys()
 
@@ -148,14 +153,14 @@ class CSVDatabase
       }
     })
 
-    return hasCSVPromise
+    return hasFilePromise
   }
 
-  static async isSourceUpdated(sourceID)
+  async isSourceUpdated(sourceID, self)
   {
-    var self = this
+    var self = self || this
     var isSourceUpdatedPromise = new Promise(async (resolve, reject) => {
-      var result = await self.fetchCSV(sourceID)
+      var result = await self.fetchFile(sourceID)
       resolve(result != null)
     })
 
@@ -166,7 +171,17 @@ class CSVDatabase
 
 const csvDatabaseName = "CSVDatabase"
 const csvDatabaseVersion = 1
+const csvStoreName = "CSVFiles"
+const csvSourceUpdatedTimesURL = "https://map.jacksonjude.com/csv-sources/source-updated-times.json"
 
-//indexedDB.deleteDatabase(csvDatabaseName)
+var CSVDatabase = new FilesDatabase()
+CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
 
-CSVDatabase.initilize(csvDatabaseName, csvDatabaseVersion)
+
+const svgDatabaseName = "SVGDatabase"
+const svgDatabaseVersion = 1
+const svgStoreName = "SVGFiles"
+const svgSourceUpdatedTimesURL = "https://map.jacksonjude.com/svg-sources/source-updated-times.json"
+
+var SVGDatabase = new FilesDatabase()
+SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
