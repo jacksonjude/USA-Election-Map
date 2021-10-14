@@ -266,7 +266,7 @@ function setOutlineDivProperties()
       {
         shiftClickRegion(e.target)
       }
-      else if (e.which == 3)
+      else if (e.which == 3 || e.ctrlKey)
       {
         rightClickRegion(e.target)
       }
