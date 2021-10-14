@@ -1069,7 +1069,22 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
+  else if (currentMapSource.canZoom() && currentMapState == MapState.viewing && showingDataMap)
+  {
+    var regionID = getBaseRegionID($(div).attr('id')).baseID
+    currentMapState = MapState.zooming
+    currentMapZoomRegion = regionID.includes("-") ? regionID.split("-")[0] : regionID
+
+    displayDataMap()
+  }
+  else if (currentMapState == MapState.zooming && showingDataMap)
+  {
+    currentMapState = MapState.viewing
+    currentMapZoomRegion = null
+
+    displayDataMap()
+  }
+  else if (currentMapState == MapState.viewing && showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
@@ -1130,20 +1145,9 @@ function rightClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapState == MapState.viewing)
+  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
   {
-    var regionID = getBaseRegionID($(div).attr('id')).baseID
-    currentMapState = MapState.zooming
-    currentMapZoomRegion = regionID.includes("-") ? regionID.split("-")[0] : regionID
-
-    displayDataMap()
-  }
-  else if (currentMapState == MapState.zooming)
-  {
-    currentMapState = MapState.viewing
-    currentMapZoomRegion = null
-
-    displayDataMap()
+    currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
   }
 }
 

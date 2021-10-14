@@ -21,9 +21,7 @@ class MapSource
     this.viewingDataFunction = viewingDataFunction || ((mapData) => {
       return mapData
     })
-    this.zoomingDataFunction = zoomingDataFunction || ((mapData) => {
-      return null
-    })
+    this.zoomingDataFunction = zoomingDataFunction
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
@@ -324,6 +322,11 @@ class MapSource
   getZoomingData(mapDateData)
   {
     return this.zoomingDataFunction(mapDateData)
+  }
+
+  canZoom(mapDateData)
+  {
+    return this.zoomingDataFunction != null && (!mapDateData || this.zoomingDataFunction(mapDateData) != null)
   }
 
   openRegionLink(regionID, modelDate)
