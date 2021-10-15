@@ -596,7 +596,8 @@ var USAHouseMapType = new MapType(
     &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
     &#x2022; Slider / arrow keys: Select map date<br>
     &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
+    &#x2022; Click state: Reveal state districts<br>
+    &#x2022; Right click state: View more poll / projection / result data<br>
     <br>
     &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
     &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
@@ -616,9 +617,8 @@ var USAHouseMapType = new MapType(
     &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
     <br>
     &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Current Seats: Show seats not up for election<br>
-    &#x2022; Pie Current Seats: Show seats not up for election<br>
-    &#x2022; Off Cycle Elections: Show elections not on election day<br>
+    &#x2022; Map Seats: Show totals or all districts<br>
+    &#x2022; Seat Totals: Show totals for selected state or all states<br>
     <br>
     &#x2022; Margins button / enter key: Apply entered margins<br>
     &#x2022; Margin dropdown button: Edit margin value<br>
