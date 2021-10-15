@@ -172,7 +172,7 @@ class FilesDatabase
 const csvDatabaseName = "CSVDatabase"
 const csvDatabaseVersion = 1
 const csvStoreName = "CSVFiles"
-const csvSourceUpdatedTimesURL = "https://map.jacksonjude.com/csv-sources/source-updated-times.json"
+const csvSourceUpdatedTimesURL = "./csv-sources/source-updated-times.json"
 
 var CSVDatabase = new FilesDatabase()
 CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
@@ -181,7 +181,7 @@ CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSou
 const svgDatabaseName = "SVGDatabase"
 const svgDatabaseVersion = 1
 const svgStoreName = "SVGFiles"
-const svgSourceUpdatedTimesURL = "https://map.jacksonjude.com/svg-sources/source-updated-times.json"
+const svgSourceUpdatedTimesURL = "./svg-sources/source-updated-times.json"
 
 var SVGDatabase = new FilesDatabase()
 SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
