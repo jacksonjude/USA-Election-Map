@@ -1247,7 +1247,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   var fillColor
   var shouldHide = false
 
-  var canUseVoteSplitsForColor = regionData.margin == 0 && "partyVoteSplits" in regionData
+  var canUseVoteSplitsForColor = regionData.margin == 0 && "partyVoteSplits" in regionData && regionData["partyVoteSplits"] != null
   if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
   {
     if (regionData.disabled == true)
