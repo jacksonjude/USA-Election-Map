@@ -1172,7 +1172,7 @@ function createPresidentialMapSources()
     "Cook-2020-Presidential", // id
     "Cook Political", // name
     "./csv-sources/cook-pres-2020/cook-latest.csv", // dataURL
-    "https://map.jacksonjude.com/csv-sources/cook-pres-2020/", // homepageURL
+    "./csv-sources/cook-pres-2020/", // homepageURL
     "./assets/cookpolitical-large.png", // iconURL
     {
       date: "date",
