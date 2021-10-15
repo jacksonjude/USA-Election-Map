@@ -216,8 +216,8 @@ function loadMapSVGFile()
         {
           for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
           {
-            var splitID = districtPath.id.split("-")[0]
-            if (stateToShow != splitID && splitID != "use")
+            var splitArray = districtPath.id.split("-")
+            if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
             {
               districtPath.remove()
             }
@@ -1244,6 +1244,8 @@ function getBaseRegionID(regionID)
 
 async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdatePieChart)
 {
+  if (regionData == null) { return }
+
   var fillColor
   var shouldHide = false
 
