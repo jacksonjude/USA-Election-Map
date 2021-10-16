@@ -1139,6 +1139,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineMarginFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null // customOpenRegionLinkFunction
   )
 
@@ -1165,6 +1167,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     singleLineMarginFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     null // customOpenRegionLinkFunction
   )
 
@@ -1189,6 +1193,8 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
     singleLineMarginFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
