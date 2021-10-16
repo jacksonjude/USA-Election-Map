@@ -3800,7 +3800,7 @@ date,region,district,candidate,party,voteshare
 11/2/1982,LA,6,Moore,republican,100.000000
 11/2/1982,LA,7,Breaux,democrat,100.000000
 11/2/1982,LA,8,Long,democrat,100.000000
-11/2/1982,MA,1,Conte,democrat,100.000000
+11/2/1982,MA,1,Conte,republican,100.000000
 11/2/1982,MA,2,Boland,democrat,72.631928
 11/2/1982,MA,2,Swank,republican,27.368072
 11/2/1982,MA,3,Early,democrat,100.000000
@@ -5486,7 +5486,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,PA,4,Kunder,republican,43.209717
 11/6/1984,PA,5,Fanti,democrat,27.402570
 11/6/1984,PA,5,Schulze,republican,72.597430
-11/6/1984,PA,6,Yatron,republican,100.000000
+11/6/1984,PA,6,Yatron,democrat,100.000000
 11/6/1984,PA,7,Weldon,republican,49.917104
 11/6/1984,PA,7,Edgar,democrat,50.082896
 11/6/1984,PA,8,Kostmayer,democrat,50.892728
@@ -6578,7 +6578,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,PA,18,Buckman,republican,36.995548
 11/4/1986,PA,19,Thornton,democrat,27.115051
 11/4/1986,PA,19,Goodling,republican,72.884949
-11/4/1986,PA,20,Gaydos,republican,98.476418
+11/4/1986,PA,20,Gaydos,democrat,98.476418
 11/4/1986,PA,20,Vedder,workers league,1.523582
 11/4/1986,PA,21,Blackwell,democrat,19.148627
 11/4/1986,PA,21,Ridge,republican,80.851373
@@ -7608,7 +7608,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,PA,8,Kostmayer,democrat,56.813970
 11/8/1988,PA,8,Howard,republican,41.516895
 11/8/1988,PA,8,Ernsberger,libertarian,1.669135
-11/8/1988,PA,9,Shuster,democrat,100.000000
+11/8/1988,PA,9,Shuster,republican,100.000000
 11/8/1988,PA,10,McDade,republican,73.243236
 11/8/1988,PA,10,Cordaro,democrat,26.756764
 11/8/1988,PA,11,Kanjorski,democrat,100.000000
@@ -7621,7 +7621,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,PA,15,Reibman,democrat,42.523565
 11/8/1988,PA,16,Walker,republican,73.978597
 11/8/1988,PA,16,Guyll,democrat,26.021403
-11/8/1988,PA,17,Gekas,democrat,100.000000
+11/8/1988,PA,17,Gekas,republican,100.000000
 11/8/1988,PA,18,Newman,republican,37.061532
 11/8/1988,PA,18,Bailey,populist,0.269580
 11/8/1988,PA,18,Walgren,democrat,62.668888
@@ -8631,8 +8631,8 @@ date,region,district,candidate,party,voteshare
 11/6/1990,PA,7,Innelli,democrat,34.713863
 11/6/1990,PA,8,Schaller,republican,43.366752
 11/6/1990,PA,8,Kostmayer,democrat,56.633248
-11/6/1990,PA,9,Shuster,democrat,100.000000
-11/6/1990,PA,10,McDade,democrat,100.000000
+11/6/1990,PA,9,Shuster,republican,100.000000
+11/6/1990,PA,10,McDade,republican,100.000000
 11/6/1990,PA,11,Kanjorski,democrat,100.000000
 11/6/1990,PA,12,Choby,republican,38.262952
 11/6/1990,PA,12,Murtha,democrat,61.737048
@@ -8644,7 +8644,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,PA,15,Orloski,democrat,39.425952
 11/6/1990,PA,16,Walker,republican,66.125381
 11/6/1990,PA,16,Guyll,democrat,33.874619
-11/6/1990,PA,17,Gekas,democrat,100.000000
+11/6/1990,PA,17,Gekas,republican,100.000000
 11/6/1990,PA,18,Walgren,democrat,48.554122
 11/6/1990,PA,18,Santorum,republican,51.445878
 11/6/1990,PA,19,Goodling,republican,100.000000
@@ -9900,8 +9900,8 @@ date,region,district,candidate,party,voteshare
 11/3/1992,PA,8,Kostmayer,democrat,45.722495
 11/3/1992,PA,8,Magerman,magerman for congress,2.344332
 11/3/1992,PA,8,Greenwood,republican,51.933173
-11/3/1992,PA,9,Shuster,democrat,100.000000
-11/3/1992,PA,10,McDade,democrat,90.391700
+11/3/1992,PA,9,Shuster,republican,100.000000
+11/3/1992,PA,10,McDade,republican,90.391700
 11/3/1992,PA,10,Smith,libertarian,9.608300
 11/3/1992,PA,11,Kanjorski,democrat,67.093586
 11/3/1992,PA,11,Fescina,republican,32.906414
@@ -11063,7 +11063,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,PA,3,Borski,democrat,62.674176
 11/8/1994,PA,4,Klink,democrat,64.170043
 11/8/1994,PA,4,Peglow,republican,35.829957
-11/8/1994,PA,5,Clinger,democrat,100.000000
+11/8/1994,PA,5,Clinger,republican,100.000000
 11/8/1994,PA,6,Holden,democrat,56.749226
 11/8/1994,PA,6,Levering,republican,43.250774
 11/8/1994,PA,7,Weldon,republican,69.671861
@@ -11072,7 +11072,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,PA,8,Greenwood,republican,66.098197
 11/8/1994,PA,8,Cash,cash for congress,2.506969
 11/8/1994,PA,8,Russell,libertarian,4.740570
-11/8/1994,PA,9,Shuster,democrat,100.000000
+11/8/1994,PA,9,Shuster,republican,100.000000
 11/8/1994,PA,10,McDade,republican,65.710618
 11/8/1994,PA,10,Smith,libertarian,3.191195
 11/8/1994,PA,10,Schreffler,democrat,31.098186
@@ -15748,7 +15748,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,CO,5,Hefley,republican,69.374096
 11/5/2002,CO,5,Baker,libertarian,5.941184
 11/5/2002,CO,5,Imrie,democrat,24.684720
-11/5/2002,CO,6,Tancredo,independent,66.884350
+11/5/2002,CO,6,Tancredo,republican,66.884350
 11/5/2002,CO,6,Wright,democrat,30.032295
 11/5/2002,CO,6,Katz,libertarian,3.083355
 11/5/2002,CO,7,Martin,libertarian,1.682005
