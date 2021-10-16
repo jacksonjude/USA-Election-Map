@@ -257,7 +257,7 @@ function setOutlineDivProperties()
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
-    outlineDiv.mousedown(function(e) {
+    outlineDiv.on('click', function(e) {
       if (e.altKey)
       {
         altClickRegion(e.target)
@@ -268,12 +268,17 @@ function setOutlineDivProperties()
       }
       else if (e.which == 3 || e.ctrlKey)
       {
-        rightClickRegion(e.target)
+        return // handled in contextmenu
       }
       else
       {
+        console.log("LEFT-DOWN", $(e.target).attr('id'))
         leftClickRegion(e.target)
       }
+    })
+
+    outlineDiv.on('contextmenu', function(e) {
+      rightClickRegion(e.target)
     })
   })
 }
