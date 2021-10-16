@@ -272,7 +272,6 @@ function setOutlineDivProperties()
       }
       else
       {
-        console.log("LEFT-DOWN", $(e.target).attr('id'))
         leftClickRegion(e.target)
       }
     })

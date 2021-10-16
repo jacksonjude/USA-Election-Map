@@ -561,10 +561,11 @@ function updateTotalsPieChart(regionDataArray)
   }
 
   var nonFlipSortedPartyTotalsArray = []
+  var tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
   for (var totalIndex in sortedPartyTotalsArray)
   {
-    if (totalIndex % 2 == 1) { continue }
-    nonFlipSortedPartyTotalsArray[totalIndex/2] = sortedPartyTotalsArray[totalIndex]
+    if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { continue }
+    nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
   }
 
   if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded"))
