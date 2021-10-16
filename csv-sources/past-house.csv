@@ -26672,7 +26672,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,AR,4,Hanson,democrat,27.541949
 11/3/2020,AR,4,Westerman,republican,69.670042
 11/3/2020,AR,4,Gilbert,libertarian,2.788009
-11/3/2020,AZ,1,Oв’halleran,democrat,51.610174
+11/3/2020,AZ,1,O'Halleran,democrat,51.610174
 11/3/2020,AZ,1,Shedd,republican,48.389826
 11/3/2020,AZ,2,Schlass,write-in (common sense moderate),0.009185
 11/3/2020,AZ,2,Kirkpatrick,democrat,55.095866
@@ -26757,8 +26757,8 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,27,Nalbandian,republican,30.224255
 11/3/2020,CA,28,Schiff,democrat,72.656671
 11/3/2020,CA,28,Early,republican,27.343329
-11/3/2020,CA,29,Cгўrdenas,democrat,56.612181
-11/3/2020,CA,29,Dueг±as,democrat,43.387819
+11/3/2020,CA,29,Cárdenas,democrat,56.612181
+11/3/2020,CA,29,Dueñas,democrat,43.387819
 11/3/2020,CA,30,Sherman,democrat,69.482783
 11/3/2020,CA,30,Reed,republican,30.517217
 11/3/2020,CA,31,Aguilar,democrat,61.288236
@@ -26775,7 +26775,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,36,Cruz,republican,39.660550
 11/3/2020,CA,37,Bass,democrat,85.939971
 11/3/2020,CA,37,Webber,republican,14.060029
-11/3/2020,CA,38,Sгўnchez,democrat,74.341350
+11/3/2020,CA,38,Sánchez,democrat,74.341350
 11/3/2020,CA,38,Tolar,democrat,25.658650
 11/3/2020,CA,39,Cisneros,democrat,49.402385
 11/3/2020,CA,39,Kim,republican,50.597615
@@ -26783,11 +26783,11 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,40,Delgado,republican,27.260826
 11/3/2020,CA,41,Takano,democrat,64.030194
 11/3/2020,CA,41,Smith,republican,35.969806
-11/3/2020,CA,42,Oв’mara,democrat,42.867623
+11/3/2020,CA,42,O'Mara,democrat,42.867623
 11/3/2020,CA,42,Calvert,republican,57.132377
 11/3/2020,CA,43,Waters,democrat,71.684575
 11/3/2020,CA,43,Collins,republican,28.315425
-11/3/2020,CA,44,Barragгўn,democrat,67.784756
+11/3/2020,CA,44,Barragán,democrat,67.784756
 11/3/2020,CA,44,Joya,democrat,32.215244
 11/3/2020,CA,45,Raths,republican,46.535997
 11/3/2020,CA,45,Porter,democrat,53.464003
@@ -26806,7 +26806,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,CA,52,Peters,democrat,61.575808
 11/3/2020,CA,52,Debello,republican,38.424192
 11/3/2020,CA,53,Jacobs,democrat,59.501042
-11/3/2020,CA,53,Gгіmez,democrat,40.498958
+11/3/2020,CA,53,Gómez,democrat,40.498958
 11/3/2020,CO,1,Fiorino,unity party of colorado,0.560528
 11/3/2020,CO,1,Kok,approval voting party,0.320016
 11/3/2020,CO,1,Degette,democrat,73.646095
@@ -26879,7 +26879,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,FL,1,Gaetz,republican,64.609337
 11/3/2020,FL,1,Oram,no party affiliation,1.376772
 11/3/2020,FL,2,Dunn,republican,97.864737
-11/3/2020,FL,2,Oв’connor,write-in,2.135263
+11/3/2020,FL,2,O'Connor,write-in,2.135263
 11/3/2020,FL,3,Christensen,democrat,42.860034
 11/3/2020,FL,3,Cammack,republican,57.139966
 11/3/2020,FL,4,Deegan,democrat,38.900265
@@ -27015,7 +27015,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,IL,2,Kelly,democrat,78.814111
 11/3/2020,IL,3,Newman,democrat,56.378728
 11/3/2020,IL,3,Fricilone,republican,43.621272
-11/3/2020,IL,4,Garcг­a,democrat,84.053839
+11/3/2020,IL,4,García,democrat,84.053839
 11/3/2020,IL,4,Solorio,republican,15.946161
 11/3/2020,IL,5,Quigley,democrat,70.767097
 11/3/2020,IL,5,Hanson,republican,26.628210
@@ -27052,7 +27052,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,IL,16,McCullough,write-in,0.001183
 11/3/2020,IL,16,Jones,write-in,0.000887
 11/3/2020,IL,17,King,republican,47.971123
-11/3/2020,IL,17,Generalв”,write-in,0.007002
+11/3/2020,IL,17,Write-In,independent,0.007002
 11/3/2020,IL,17,Bustos,democrat,52.021874
 11/3/2020,IL,18,Petrilli,democrat,29.590001
 11/3/2020,IL,18,Lahood,republican,70.409999
@@ -27476,8 +27476,8 @@ date,region,district,candidate,party,voteshare
 11/3/2020,NY,6,Zmich,conservative,2.238426
 11/3/2020,NY,6,City,independent,0.474558
 11/3/2020,NY,6,Libertarian,independent,0.322648
-11/3/2020,NY,7,Velгўzquez,democrat,69.692824
-11/3/2020,NY,7,Velгўzquez,working families,15.185128
+11/3/2020,NY,7,Velázquez,democrat,69.692824
+11/3/2020,NY,7,Velázquez,working families,15.185128
 11/3/2020,NY,7,Kelly,republican,13.061768
 11/3/2020,NY,7,Kelly,conservative,1.384181
 11/3/2020,NY,7,Midonnet,libertarian,0.676099
