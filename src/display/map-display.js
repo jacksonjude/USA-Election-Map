@@ -121,13 +121,20 @@ async function reloadForNewMapType(initialLoad)
   if (currentMapType.getCustomMapEnabled())
   {
     $("#editDoneButton").removeClass('topnavdisable2')
+  }
+  else
+  {
+    $("#editDoneButton").addClass('topnavdisable2')
+  }
+
+  if (currentMapType.getCompareMapEnabled())
+  {
     $("#compareButton").removeClass('topnavdisable2')
     $("#compareDropdownContent").removeClass('topnavdisable2')
     $("#compareDropdownContent").css("opacity", "100%")
   }
   else
   {
-    $("#editDoneButton").addClass('topnavdisable2')
     $("#compareButton").addClass('topnavdisable2')
     $("#compareDropdownContent").addClass('topnavdisable2')
     $("#compareDropdownContent").css("opacity", "0%")
@@ -151,7 +158,7 @@ async function reloadForNewMapType(initialLoad)
   createSettingsDropdownItems()
   createComparePresetDropdownItems()
 
-  currentMapSource = (currentMapType.getCurrentMapSourceID() && currentMapType.getCurrentMapSourceID() in mapSources) ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
+  currentMapSource = (currentMapType.getCurrentMapSourceID() && currentMapType.getCurrentMapSourceID() in mapSources && !(!currentMapType.getCustomMapEnabled() && currentMapType.getCurrentMapSourceID() == currentMapType.getCustomMapSource().getID())) ? mapSources[currentMapType.getCurrentMapSourceID()] : NullMapSource
   if (currentMapSource.getID() == NullMapSource.getID())
   {
     $("#sourceToggleButton").addClass('active')
@@ -612,7 +619,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
-  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(dateToDisplay)
+  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(!showingCompareMap ? dateToDisplay : currentSliderDate)
 
   if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {
@@ -1546,7 +1553,7 @@ async function updateRegionBox(regionID)
       regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < Object.keys(regionData.partyVoteSplits).length-1 ? 0 : 5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
     })
 
-    if (currentSliderDate)
+    if (currentSliderDate && currentMapSource.getMapData())
     {
       var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
       var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
@@ -1883,11 +1890,11 @@ function applyCompareToCustomMap()
       }
     }
 
-    if (compareRegionData0.partyID == TossupParty.getID())
+    if (compareRegionData0 && compareRegionData0.partyID == TossupParty.getID())
     {
       resultMapArray[regionID] = cloneObject(compareRegionData0)
     }
-    else if (compareRegionData0.disabled == true || compareRegionData1.disabled == true)
+    else if (!compareRegionData0 || !compareRegionData1 || compareRegionData0.disabled == true || compareRegionData1.disabled == true)
     {
       resultMapArray[regionID] = cloneObject(compareRegionData0)
       resultMapArray[regionID].disabled = true
@@ -1909,7 +1916,7 @@ function applyCompareToCustomMap()
       if (resultMapArray[regionID].margin < 0)
       {
         var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-        resultMapArray[regionID].partyID = sortedVoteshareArray[1].partyID
+        resultMapArray[regionID].partyID = sortedVoteshareArray.length >= 2 ? sortedVoteshareArray[1].partyID : TossupParty.getID()
         resultMapArray[regionID].margin = Math.abs(resultMapArray[regionID].margin)
       }
       else

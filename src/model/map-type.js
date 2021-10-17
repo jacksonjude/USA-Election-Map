@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -12,6 +12,7 @@ class MapType
     this.shouldDisplayEVOnMap = shouldDisplayEVOnMap
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
+    this.compareMapEnabled = compareMapEnabled
     this.controlsHelpHTML = controlsHelpHTML
 
     this.regionNameToID = regionNameToID
@@ -112,6 +113,11 @@ class MapType
   getCustomMapEnabled()
   {
     return this.customMapEnabled
+  }
+
+  getCompareMapEnabled()
+  {
+    return this.compareMapEnabled
   }
 
   getControlsHelpHTML()
@@ -331,6 +337,7 @@ var USAPresidentialMapType = new MapType(
   true,
   5,
   true,
+  true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
@@ -405,6 +412,7 @@ var USASenateMapType = new MapType(
   },
   false,
   3,
+  true,
   true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
@@ -504,6 +512,7 @@ var USAGovernorMapType = new MapType(
   false,
   4,
   true,
+  true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
@@ -589,6 +598,7 @@ var USAHouseMapType = new MapType(
   false,
   2,
   false,
+  true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
@@ -651,4 +661,4 @@ mapTypes[USASenateMapType.getID()] = USASenateMapType
 mapTypes[USAGovernorMapType.getID()] = USAGovernorMapType
 mapTypes[USAHouseMapType.getID()] = USAHouseMapType
 
-var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID(), USAGovernorMapType.getID(), USAHouseMapType.getID()]
+var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID(), USAHouseMapType.getID(), USAGovernorMapType.getID()]

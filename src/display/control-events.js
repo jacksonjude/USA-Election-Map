@@ -377,7 +377,7 @@ document.addEventListener('keypress', async function(e) {
       editingRegionMarginValue = false
       $("#regionboxcontainer").trigger('hide')
     }
-    else
+    else if (currentMapType.getCustomMapEnabled())
     {
       toggleEditing()
     }

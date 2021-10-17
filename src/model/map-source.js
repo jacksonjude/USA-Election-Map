@@ -2762,7 +2762,7 @@ function createHouseMapSources()
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear > 2020)
     {
-      return ["svg-sources/usa-house-2010-map.svg", zoomRegion, true]
+      return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
     }
     else if (dateYear > 2010)
     {
@@ -2809,13 +2809,16 @@ function createHouseMapSources()
 
     for (let regionID in housePerStateMapData)
     {
-      var partyVoteSplitData = housePerStateMapData[regionID].partyVoteSplits
+      var partyVoteSplitData = cloneObject(housePerStateMapData[regionID].partyVoteSplits)
 
       var largestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
       var largestPartyCount = partyVoteSplitData[largestPartyID]
-      delete partyVoteSplitData[housePerStateMapData[regionID].partyID]
+      delete partyVoteSplitData[largestPartyID]
 
-      housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // +0.001 to account for rounding errors
+      var secondLargestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
+      var secondLargestPartyCount = partyVoteSplitData[secondLargestPartyID] || 0
+
+      housePerStateMapData[regionID].margin = (largestPartyCount/(largestPartyCount+secondLargestPartyCount)*100-50)*0.9001 // +0.001 to account for rounding errors
       housePerStateMapData[regionID].partyID = largestPartyID
     }
 
