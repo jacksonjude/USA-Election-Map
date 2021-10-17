@@ -1549,7 +1549,8 @@ async function updateRegionBox(regionID)
         }
         if (i % districtsPerLine == 0)
         {
-          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center;'>"
+          var isLastDistrictLine = (i+((Object.keys(zoomingData).length-1) % districtsPerLine)) == Object.keys(zoomingData).length-1
+          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
         }
         if (i % districtsPerLine > 0)
         {
