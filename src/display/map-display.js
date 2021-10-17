@@ -635,6 +635,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   switch (currentMapState)
   {
     case MapState.viewing:
+    case MapState.editing:
     currentMapDataForDate = await currentMapSource.getViewingData(currentMapDataForDate)
     break
 
@@ -918,10 +919,11 @@ async function toggleEditing(stateToSet)
     switch (currentMapState)
     {
       case MapState.editing:
-      currentMapState = MapState.viewing
+      currentMapState = currentMapZoomRegion == null ? MapState.viewing : MapState.zooming
       break
 
       case MapState.viewing:
+      case MapState.zooming:
       currentMapState = MapState.editing
       break
     }
@@ -950,7 +952,8 @@ async function toggleEditing(stateToSet)
     $("#fillDropdownContainer").css('display', "block")
 
     var currentMapIsCustom = (currentMapSource.isCustom())
-    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+    var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+    currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
 
     if (!currentMapIsCustom)
     {
@@ -971,6 +974,7 @@ async function toggleEditing(stateToSet)
     break
 
     case MapState.viewing:
+    case MapState.zooming:
     if (currentMapSource.isCustom())
     {
       $("#editDoneButton").html("Edit")
@@ -993,7 +997,14 @@ async function toggleEditing(stateToSet)
 
     if (currentMapSource.isCustom())
     {
-      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+      if (currentMapState == MapState.zooming)
+      {
+        currentMapDataForDate = mergeObject(currentMapDataForDate, displayRegionDataArray)
+        console.log(displayRegionDataArray["MI-4"], currentMapDataForDate["MI-4"])
+      }
+      currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      await loadDataMap()
       displayPartyTotals(getPartyTotals(), true)
     }
 

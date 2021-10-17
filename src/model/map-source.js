@@ -2739,7 +2739,10 @@ function createHouseMapSources()
       return 0
 
       case "region":
-      return getKeyByValue(regionNameToID, regionID)
+      return regionData.state || regionID.split("-")[0]
+
+      case "district":
+      return regionData.district || regionID.split("-")[1]
 
       case "partyID":
       return candidateNameToPartyIDs[candidateName]
@@ -2759,7 +2762,7 @@ function createHouseMapSources()
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear > 2020)
     {
-      return ["svg-sources/usa-governor-map.svg", zoomRegion, true]
+      return ["svg-sources/usa-house-2010-map.svg", zoomRegion, true]
     }
     else if (dateYear > 2010)
     {
@@ -2771,6 +2774,66 @@ function createHouseMapSources()
     }
 
     return ["svg-sources/usa-governor-map.svg", zoomRegion, true]
+  }
+
+  var houseViewingData = async (mapDateData) => {
+    var usedFallbackMap = USAHouseMapType.getSVGPath()[2] || false
+    if (currentMapType.getMapSettingValue("showAllDistricts") && !usedFallbackMap)
+    {
+      return mapDateData
+    }
+
+    var housePerStateMapData = {}
+
+    for (let regionID in mapDateData)
+    {
+      var regionData = mapDateData[regionID]
+
+      if (!(regionData.state in housePerStateMapData))
+      {
+        housePerStateMapData[regionData.state] = {region: regionData.state, partyVoteSplits: {}}
+      }
+
+      var partyVoteSplitData = housePerStateMapData[regionData.state].partyVoteSplits
+      if (!(regionData.partyID in partyVoteSplitData))
+      {
+        partyVoteSplitData[regionData.partyID] = 0
+      }
+      partyVoteSplitData[regionData.partyID]++
+
+      if (regionData.flip)
+      {
+        housePerStateMapData[regionData.state].flip = true
+      }
+    }
+
+    for (let regionID in housePerStateMapData)
+    {
+      var partyVoteSplitData = housePerStateMapData[regionID].partyVoteSplits
+
+      var largestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
+      var largestPartyCount = partyVoteSplitData[largestPartyID]
+      delete partyVoteSplitData[housePerStateMapData[regionID].partyID]
+
+      housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // +0.001 to account for rounding errors
+      housePerStateMapData[regionID].partyID = largestPartyID
+    }
+
+    return housePerStateMapData
+  }
+
+  var houseZoomingData = async (mapDateData, zoomRegion) => {
+    var stateMapData = {}
+
+    for (let regionID in mapDateData)
+    {
+      if (mapDateData[regionID].state == zoomRegion)
+      {
+        stateMapData[regionID] = cloneObject(mapDateData[regionID])
+      }
+    }
+
+    return stateMapData
   }
 
   var PastElectionResultMapSource = new MapSource(
@@ -2797,64 +2860,8 @@ function createHouseMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
-    async (mapDateData) => {
-      var usedFallbackMap = USAHouseMapType.getSVGPath()[2] || false
-      if (currentMapType.getMapSettingValue("showAllDistricts") && !usedFallbackMap)
-      {
-        return mapDateData
-      }
-
-      var housePerStateMapData = {}
-
-      for (let regionID in mapDateData)
-      {
-        var regionData = mapDateData[regionID]
-
-        if (!(regionData.state in housePerStateMapData))
-        {
-          housePerStateMapData[regionData.state] = {region: regionData.state, partyVoteSplits: {}}
-        }
-
-        var partyVoteSplitData = housePerStateMapData[regionData.state].partyVoteSplits
-        if (!(regionData.partyID in partyVoteSplitData))
-        {
-          partyVoteSplitData[regionData.partyID] = 0
-        }
-        partyVoteSplitData[regionData.partyID]++
-
-        if (regionData.flip)
-        {
-          housePerStateMapData[regionData.state].flip = true
-        }
-      }
-
-      for (let regionID in housePerStateMapData)
-      {
-        var partyVoteSplitData = housePerStateMapData[regionID].partyVoteSplits
-
-        var largestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
-        var largestPartyCount = partyVoteSplitData[largestPartyID]
-        delete partyVoteSplitData[housePerStateMapData[regionID].partyID]
-
-        housePerStateMapData[regionID].margin = (largestPartyCount/Object.values(partyVoteSplitData).reduce((totalSeats, partySeats) => totalSeats+partySeats, 0)*100-50)*0.9001 // +0.001 to account for rounding errors
-        housePerStateMapData[regionID].partyID = largestPartyID
-      }
-
-      return housePerStateMapData
-    }, // viewingDataFunction
-    async (mapDateData, zoomRegion) => {
-      var stateMapData = {}
-
-      for (let regionID in mapDateData)
-      {
-        if (mapDateData[regionID].state == zoomRegion)
-        {
-          stateMapData[regionID] = cloneObject(mapDateData[regionID])
-        }
-      }
-
-      return stateMapData
-    }, // zoomingDataFunction
+    houseViewingData, // viewingDataFunction
+    houseZoomingData, // zoomingDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2900,10 +2907,7 @@ function createHouseMapSources()
     {
       date: "date",
       region: "region",
-      isSpecial: "special",
-      isRunoff: "runoff",
-      isOffyear: "offyear",
-      isDisabled: "disabled",
+      district: "district",
       candidateName: "candidate",
       partyID: "party",
       voteshare: "voteshare"
@@ -2918,15 +2922,15 @@ function createHouseMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
-    null, // viewingDataFunction
-    null, // zoomingDataFunction
+    houseViewingData, // viewingDataFunction
+    houseZoomingData, // zoomingDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false, // shouldClearDisabled
     null, // shouldShowVoteshare
     null, // voteshareCutoffMargin
-    null, // overrideSVGPath
+    getHouseSVGFromDate, // overrideSVGPath
     null, // shouldSetDisabledWorthToZero
     true // shouldUseOriginalMapDataForTotalsPieChart
   )

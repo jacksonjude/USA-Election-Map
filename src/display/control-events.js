@@ -501,7 +501,7 @@ function mouseEnteredRegion(div)
     }
   }
 
-  if (currentMapState == MapState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
+  if (currentMapState == MapState.zooming || (currentMapState == MapState.editing && currentMapZoomRegion) || currentMapType.getMapSettingValue("showAllDistricts"))
   {
     var regionPath = document.getElementById(regionID)
     var parent = regionPath.parentNode
