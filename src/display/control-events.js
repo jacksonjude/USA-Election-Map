@@ -444,6 +444,8 @@ var mouseMovedDuringClick = false
 var currentRegionID
 var ignoreNextClick = false
 
+var currentMouseY
+
 document.addEventListener('mousedown', function(e) {
   if (currentMapState == MapState.editing)
   {
@@ -549,8 +551,11 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
+
   $("#regionboxcontainer").css("left", e.pageX+5)
-  $("#regionboxcontainer").css("top", e.pageY+5)
+  updateRegionBoxYPosition(e.pageY)
+
+  currentMouseY = e.pageY
 })
 
 document.addEventListener('mouseup', function() {

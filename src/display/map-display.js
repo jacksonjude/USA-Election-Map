@@ -639,7 +639,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     break
 
     case MapState.zooming:
-    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate)
+    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
     break
   }
 
@@ -1468,7 +1468,7 @@ function getCurrentDateOrToday()
   return dateToUse
 }
 
-function updateRegionBox(regionID)
+async function updateRegionBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
   if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
@@ -1534,17 +1534,55 @@ function updateRegionBox(regionID)
     }).forEach((partyID, i) => {
       regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
     })
-    // regionMarginString += "<span style='font-size: 16px; font-style: italic; color: #bbb'>Right click to zoom in</span>"
-  }
 
-  if (currentMapState == MapState.zooming)
-  {
-    // regionMarginString += "<span style='font-size: 16px; font-style: italic; color: #bbb'>Right click to zoom out</span>"
+    if (currentSliderDate)
+    {
+      var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+      var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+
+      const districtsPerLine = 3
+
+      Object.keys(zoomingData).forEach((districtID, i) => {
+        if (i % districtsPerLine == 0 && i != 0)
+        {
+          regionMarginString += "<br></div>"
+        }
+        if (i % districtsPerLine == 0)
+        {
+          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center;'>"
+        }
+        if (i % districtsPerLine > 0)
+        {
+          regionMarginString += "&nbsp;&nbsp;"
+        }
+
+        var districtNumber = districtID.split("-")[1]
+        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
+        var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
+
+        regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
+      })
+    }
   }
 
   //Couldn't get safe colors to look good
   // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
   $("#regionbox").html((getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+
+  updateRegionBoxYPosition()
+}
+
+function updateRegionBoxYPosition(mouseY)
+{
+  var newRegionBoxYPos = (mouseY+5) || (currentMouseY+5)
+  if (!newRegionBoxYPos) { return }
+
+  var regionBoxHeightDifference = $(document).height() - (newRegionBoxYPos+$("#regionboxcontainer").height())
+  if (regionBoxHeightDifference < 0)
+  {
+    newRegionBoxYPos += regionBoxHeightDifference
+  }
+  $("#regionboxcontainer").css("top", newRegionBoxYPos)
 }
 
 function getRoundedMarginValue(fullMarginValue)

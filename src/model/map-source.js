@@ -319,9 +319,9 @@ class MapSource
     return this.viewingDataFunction(mapDateData)
   }
 
-  getZoomingData(mapDateData)
+  getZoomingData(mapDateData, zoomRegion)
   {
-    return this.zoomingDataFunction(mapDateData)
+    return this.zoomingDataFunction(mapDateData, zoomRegion)
   }
 
   canZoom(mapDateData)
@@ -2842,12 +2842,12 @@ function createHouseMapSources()
 
       return housePerStateMapData
     }, // viewingDataFunction
-    async (mapDateData) => {
+    async (mapDateData, zoomRegion) => {
       var stateMapData = {}
 
       for (let regionID in mapDateData)
       {
-        if (mapDateData[regionID].state == currentMapZoomRegion)
+        if (mapDateData[regionID].state == zoomRegion)
         {
           stateMapData[regionID] = cloneObject(mapDateData[regionID])
         }
