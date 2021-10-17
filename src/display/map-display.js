@@ -1532,7 +1532,7 @@ async function updateRegionBox(regionID)
     Object.keys(regionData.partyVoteSplits).sort((partyID1, partyID2) => {
       return regionData.partyVoteSplits[partyID2]-regionData.partyVoteSplits[partyID1]
     }).forEach((partyID, i) => {
-      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
+      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < Object.keys(regionData.partyVoteSplits).length-1 ? 0 : 5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
     })
 
     if (currentSliderDate)
