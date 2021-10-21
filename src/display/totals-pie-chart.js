@@ -1,5 +1,6 @@
 var totalsPieChart
 var regionMarginStrings = []
+var regionPartyStrings = []
 
 const PieChartDirection = {
   clockwise: 0,
@@ -95,12 +96,30 @@ function setupTotalsPieChart()
             return labelArray
 
             case 1:
+            var regionPartyStringArray = regionPartyStrings[tooltipItem.index]
+            if (regionPartyStringArray) { return regionPartyStringArray.concat() }
+            return
+
             case 2:
             return
           }
         },
         labelTextColor: function(tooltipItem, chart) {
-          var color = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor[tooltipItem.index]
+          var backgroundColors = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
+          var indexToUse = tooltipItem.index
+          if (tooltipItem.datasetIndex == 1 && typeof backgroundColors[indexToUse] !== 'string')
+          {
+            if (partyOrdering[Math.floor(indexToUse/2)].direction == PieChartDirection.clockwise)
+            {
+              indexToUse -= 1
+            }
+            else
+            {
+              indexToUse += 1
+            }
+          }
+
+          var color = backgroundColors[indexToUse]
           return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
         }
       }
@@ -478,14 +497,18 @@ function updateTotalsPieChart(regionDataArray)
 
   var shouldShowFlips = currentMapType.getMapSettingValue("flipStates")
   var partyTotalsCallback = getPartyTotals(shouldShowFlips)
+
   var partyTotals
+
   var partyNonFlipTotals
   var partyFlipTotals
+  var partyFlipData
 
   if (shouldShowFlips)
   {
     partyNonFlipTotals = partyTotalsCallback.nonFlipTotals
     partyFlipTotals = partyTotalsCallback.flipTotals
+    partyFlipData = partyTotalsCallback.flipData
   }
   else
   {
@@ -493,6 +516,7 @@ function updateTotalsPieChart(regionDataArray)
   }
 
   var sortedPartyTotalsArray = []
+  regionPartyStrings = []
   for (var partyNum in fullPartyOrdering)
   {
     var currentPartyID = fullPartyOrdering[partyNum].partyID
@@ -504,26 +528,43 @@ function updateTotalsPieChart(regionDataArray)
       {
         sortedPartyTotalsArray.push(partyTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(null)
       }
       else if (currentDirection == PieChartDirection.counterclockwise)
       {
         sortedPartyTotalsArray.push(0)
         sortedPartyTotalsArray.push(partyTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(null)
       }
 
       delete partyTotals[currentPartyID]
     }
     else
     {
+      var partyStrings = []
+      partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
+        partyStrings.push(regionData.region + " +" + decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding()) + "\n")
+      })
+
       if (currentDirection == PieChartDirection.clockwise)
       {
         sortedPartyTotalsArray.push(partyNonFlipTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(partyFlipTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(partyStrings)
       }
       else if (currentDirection == PieChartDirection.counterclockwise)
       {
         sortedPartyTotalsArray.push(partyFlipTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(partyNonFlipTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(partyStrings)
+        regionPartyStrings.push(null)
       }
 
       delete partyFlipTotals[currentPartyID]

@@ -1394,6 +1394,7 @@ function getPartyTotals(includeFlipData)
 {
   var partyTotals = {}
   var partyFlipTotals = {}
+  var partyFlipData = {}
 
   for (var partyIDNum in mainPoliticalPartyIDs)
   {
@@ -1420,8 +1421,10 @@ function getPartyTotals(includeFlipData)
       if (!(partyIDToSet in partyFlipTotals))
       {
         partyFlipTotals[partyIDToSet] = 0
+        partyFlipData[partyIDToSet] = []
       }
       partyFlipTotals[partyIDToSet] += currentRegionEV
+      partyFlipData[partyIDToSet].push({region: regionID, margin: regionDataArray[regionID].margin})
     }
     else
     {
@@ -1433,7 +1436,11 @@ function getPartyTotals(includeFlipData)
     }
   }
 
-  return includeFlipData ? {nonFlipTotals: partyTotals, flipTotals: partyFlipTotals} : partyTotals
+  Object.values(partyFlipData).forEach((partyData) => {
+    partyData.sort((regionData1, regionData2) => regionData1.margin-regionData2.margin)
+  })
+
+  return includeFlipData ? {nonFlipTotals: partyTotals, flipTotals: partyFlipTotals, flipData: partyFlipData} : partyTotals
 }
 
 function getNationalPopularVotePartyVoteshareData()
