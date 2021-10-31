@@ -2759,21 +2759,65 @@ function createHouseMapSources()
       return "svg-sources/usa-governor-map.svg"
     }
 
-    var dateYear = (new Date(dateTime)).getFullYear()
-    if (dateYear > 2020)
+    if (!isZoomingState || currentMapType.getMapSettingValue("showStateDistricts"))
     {
-      return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
-    }
-    else if (dateYear > 2010)
-    {
-      return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
-    }
-    else if (dateYear > 2000)
-    {
-      return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
+      var dateYear = (new Date(dateTime)).getFullYear()
+      if (dateYear > 2020)
+      {
+        return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
+      }
+      else if (dateYear > 2010)
+      {
+        return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
+      }
+      else if (dateYear > 2000)
+      {
+        return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
+      }
     }
 
-    return ["svg-sources/usa-governor-map.svg", zoomRegion, true]
+    return ["svg-sources/usa-governor-map.svg", zoomRegion, true, (mapDateData) => {
+      $("#outlines").children().each(function() {
+        if ($(this).attr(isDistrictBoxRegionAttribute) !== undefined)
+        {
+          $(this).remove()
+        }
+        else
+        {
+          $(this).attr(noInteractSVGRegionAttribute, "")
+          $(this).attr(noCountSVGRegionAttribute, "")
+        }
+      })
+
+      const districtBoxesPerLine = 6
+
+      var boundingBox = $("#svgdata")[0].getBBox()
+
+      var districtCount = Object.keys(mapDateData).length
+
+      var districtBoxSize = Math.max(boundingBox.width, boundingBox.height)*0.07
+      var districtBoxPadding = districtBoxSize/5
+      var districtBoxCornerRadius = districtBoxSize/10
+
+      var startingX = boundingBox.x + boundingBox.width/2 - (districtBoxesPerLine*(districtBoxSize+districtBoxPadding)-districtBoxPadding/2)/2
+      var startingY = boundingBox.y + boundingBox.height/2 - (Math.ceil(districtCount/districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)-districtBoxPadding/2)/2
+
+      var districtBoxLineCount = Math.floor(districtCount/districtBoxesPerLine)+1
+
+      var itemsOnLastLine = districtCount%districtBoxesPerLine > 0 ? districtCount%districtBoxesPerLine : districtBoxesPerLine
+      var lastLineXOffset = (districtBoxesPerLine-itemsOnLastLine)*(districtBoxSize+districtBoxPadding)/2
+
+      var outlineGroupHTML = ""
+      outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " " + noInteractSVGRegionAttribute + " " + noCountSVGRegionAttribute + " fill='gray' fill-opacity='0.7' width='" + ((districtBoxLineCount == 1 ? itemsOnLastLine : districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' height='" + (Math.ceil(districtCount/districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' x='" + (startingX-districtBoxPadding+(districtBoxLineCount == 1 ? lastLineXOffset : 0)) + "' y='" + (startingY-districtBoxPadding) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "'></rect>"
+      Object.keys(mapDateData).forEach((regionID, i) => {
+        var districtBoxLineOn = Math.floor(i/districtBoxesPerLine)
+        outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " id='" + regionID + "' width='" + districtBoxSize + "' height='" + districtBoxSize + "' x='" + (startingX + i%districtBoxesPerLine*(districtBoxSize+districtBoxPadding) + (districtBoxLineOn == districtBoxLineCount-1 ? lastLineXOffset : 0)) + "' y='" + (startingY + districtBoxLineOn*(districtBoxSize+districtBoxPadding)) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "' ></rect>"
+      })
+
+      $("#outlines").append(outlineGroupHTML)
+      var svgDataHTML = $("#svgdata").html()
+      $("#svgdata").html(svgDataHTML)
+    }]
   }
 
   var houseViewingData = async (mapDateData) => {

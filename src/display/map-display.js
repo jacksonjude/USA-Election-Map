@@ -29,6 +29,10 @@ const flipPatternWidth = 5
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
+const noInteractSVGRegionAttribute = "data-nointeract"
+const noCountSVGRegionAttribute = "data-nocount"
+const isDistrictBoxRegionAttribute = "data-isdistrictbox"
+
 const nationalPopularVoteID = "NPV"
 
 var displayRegionDataArray = {}
@@ -235,7 +239,6 @@ function loadMapSVGFile()
 
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
-          // console.log(Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1.5)
           $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
           $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
 
@@ -257,9 +260,10 @@ function setOutlineDivProperties()
   $('#outlines').children().each(function() {
     var outlineDiv = $(this)
 
+    outlineDiv.css('cursor', "pointer")
+
     outlineDiv.css('transition', "fill " + regionFillAnimationDuration + "s linear, stroke " + regionStrokeAnimationDuration + "s linear")
     outlineDiv.css('fill', defaultRegionFillColor)
-    outlineDiv.css('cursor', "pointer")
 
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
@@ -635,7 +639,9 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   {
     await loadMapSVGFile()
   }
-  var usedFallbackMap = currentMapType.getSVGPath()[2] || false
+  var svgPathData = currentMapType.getSVGPath()
+  var usedFallbackMap = svgPathData[2] || false
+  var populateSVGBoxesFunction = svgPathData[3]
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
 
@@ -651,11 +657,14 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     break
   }
 
-  displayRegionDataArray = {}
-  if (!(currentMapState == MapState.zooming && usedFallbackMap))
+  if (currentMapState == MapState.zooming && usedFallbackMap)
   {
-    populateRegionsArray()
+    populateSVGBoxesFunction(currentMapDataForDate)
+    setOutlineDivProperties()
   }
+
+  displayRegionDataArray = {}
+  populateRegionsArray()
 
   $('#outlines').children().each(function() {
     var regionDataCallback = getRegionData($(this).attr('id'))
@@ -896,6 +905,10 @@ function populateRegionsArray()
       {
         return
       }
+    }
+    if ($(this).attr(noCountSVGRegionAttribute) !== undefined || regionID === undefined)
+    {
+      return
     }
 
     displayRegionDataArray[regionID] = {partyID: TossupParty.getID(), margin: 0}

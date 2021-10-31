@@ -483,7 +483,7 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
-  if (!(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
+  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
     for (var linkedRegionSetNum in linkedRegions)
@@ -501,7 +501,10 @@ function mouseEnteredRegion(div)
     }
   }
 
-  if (currentMapState == MapState.zooming || (currentMapState == MapState.editing && currentMapZoomRegion) || currentMapType.getMapSettingValue("showAllDistricts"))
+  var svgPathData = currentMapType.getSVGPath()
+  var usedFallbackMap = svgPathData[2] || false
+
+  if ((currentMapState == MapState.zooming || (currentMapState == MapState.editing && currentMapZoomRegion) || currentMapType.getMapSettingValue("showAllDistricts")) && !usedFallbackMap)
   {
     var regionPath = document.getElementById(regionID)
     var parent = regionPath.parentNode
