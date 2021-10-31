@@ -1204,6 +1204,8 @@ date,region,district,candidate,party,voteshare
 11/2/1976,WV,4,Goodman,republican,28.135401
 11/2/1976,WY,0,Roncalio,democrat,56.444412
 11/2/1976,WY,0,Hart,republican,43.555588
+11/2/1976,NPV,0,Democratic,democrat,55.8515444639
+11/2/1976,NPV,0,Republican,republican,42.2581312658
 11/7/1978,AK,0,Rodey,democrat,44.501440
 11/7/1978,AK,0,Young,republican,55.498560
 11/7/1978,AL,1,Noonan,democrat,36.064229
@@ -2240,6 +2242,8 @@ date,region,district,candidate,party,voteshare
 11/7/1978,WV,4,Rahall,democrat,100.000000
 11/7/1978,WY,0,Cheney,republican,58.630978
 11/7/1978,WY,0,Bagley,democrat,41.369022
+11/7/1978,NPV,0,Democratic,democrat,53.7103618168
+11/7/1978,NPV,0,Republican,republican,44.8202769306
 11/4/1980,AK,0,Parnell,democrat,25.921525
 11/4/1980,AK,0,Young,republican,74.078475
 11/4/1980,AL,1,Smith,libertarian,5.229528
@@ -3405,6 +3409,8 @@ date,region,district,candidate,party,voteshare
 11/4/1980,WV,4,Rahall,democrat,76.551769
 11/4/1980,WY,0,Rogers,democrat,31.430945
 11/4/1980,WY,0,Cheney,republican,68.569055
+11/4/1980,NPV,0,Democratic,democrat,50.5277614326
+11/4/1980,NPV,0,Republican,republican,47.7985305401
 11/2/1982,AK,0,Carlson,democrat,28.849322
 11/2/1982,AK,0,Young,republican,71.150678
 11/2/1982,AL,1,Springer,libertarian,1.258089
@@ -4563,6 +4569,8 @@ date,region,district,candidate,party,voteshare
 11/2/1982,WV,4,Harris,republican,19.475794
 11/2/1982,WY,0,Cheney,republican,71.093755
 11/2/1982,WY,0,Hommel,democrat,28.906245
+11/2/1982,NPV,0,Democratic,democrat,55.2348259519
+11/2/1982,NPV,0,Republican,republican,43.2455040826
 11/6/1984,AK,0,Young,republican,55.020176
 11/6/1984,AK,0,Begich,democrat,41.684388
 11/6/1984,AK,0,Other,independent,0.142901
@@ -5734,6 +5742,8 @@ date,region,district,candidate,party,voteshare
 11/6/1984,WY,0,McCune,libertarian,2.029228
 11/6/1984,WY,0,Cheney,republican,73.566289
 11/6/1984,WY,0,McFadden,democrat,24.404483
+11/6/1984,NPV,0,Democratic,democrat,52.1384805808
+11/6/1984,NPV,0,Republican,republican,46.8839896533
 11/4/1986,AK,0,Young,republican,56.544319
 11/4/1986,AK,0,Begich,democrat,41.132786
 11/4/1986,AK,0,Breck,libertarian,2.322895
@@ -6751,6 +6761,8 @@ date,region,district,candidate,party,voteshare
 11/4/1986,WV,4,Rahall,democrat,71.250933
 11/4/1986,WY,0,Gilmore,democrat,30.528141
 11/4/1986,WY,0,Cheney,republican,69.471859
+11/4/1986,NPV,0,Democratic,democrat,54.2970069964
+11/4/1986,NPV,0,Republican,republican,44.4007525838
 11/8/1988,AK,0,Young,republican,62.654565
 11/8/1988,AK,0,Gruenstein,democrat,37.345435
 11/8/1988,AL,1,Ament,libertarian,0.763151
@@ -7807,6 +7819,8 @@ date,region,district,candidate,party,voteshare
 11/8/1988,WY,0,Sharratt,democrat,31.819129
 11/8/1988,WY,0,Cheney,republican,66.619383
 11/8/1988,WY,0,Hamburg,new alliance,0.488598
+11/8/1988,NPV,0,Democratic,democrat,53.3097455706
+11/8/1988,NPV,0,Republican,republican,45.5536528559
 11/6/1990,AK,0,Devens,democrat,48.078980
 11/6/1990,AK,0,Young,republican,51.921020
 11/6/1990,AL,1,Callahan,republican,100.000000
@@ -8820,6 +8834,8 @@ date,region,district,candidate,party,voteshare
 11/6/1990,WV,4,Rahall,democrat,51.952038
 11/6/1990,WY,0,Thomas,republican,55.093480
 11/6/1990,WY,0,Maxfield,democrat,44.906520
+11/6/1990,NPV,0,Democratic,democrat,52.0623021916
+11/6/1990,NPV,0,Republican,republican,44.2567894435
 11/3/1992,AK,0,States,alaskan independence,6.301794
 11/3/1992,AK,0,Milligan,green,3.990285
 11/3/1992,AK,0,Young,republican,46.836959
@@ -10172,6 +10188,8 @@ date,region,district,candidate,party,voteshare
 11/3/1992,WY,0,McCune,libertarian,2.882062
 11/3/1992,WY,0,Thomas,republican,57.814872
 11/3/1992,WY,0,Herschler,democrat,39.303066
+11/3/1992,NPV,0,Democratic,democrat,50.056617236
+11/3/1992,NPV,0,Republican,republican,45.0749198165
 11/8/1994,AK,0,Smith,democrat,32.777206
 11/8/1994,AK,0,Whitmore,green,10.230015
 11/8/1994,AK,0,Young,republican,56.992778
@@ -11315,6 +11333,8 @@ date,region,district,candidate,party,voteshare
 11/8/1994,WY,0,Dawson,libertarian,5.478677
 11/8/1994,WY,0,Cubin,republican,53.225075
 11/8/1994,WY,0,Schuster,democrat,41.296248
+11/8/1994,NPV,0,Democratic,democrat,44.7456244568
+11/8/1994,NPV,0,Republican,republican,51.5306130845
 11/5/1996,AK,0,Nemec,alaskan independence,2.148811
 11/5/1996,AK,0,Grames,green,1.932944
 11/5/1996,AK,0,Young,republican,59.463418
@@ -12804,6 +12824,8 @@ date,region,district,candidate,party,voteshare
 11/5/1996,WY,0,Cubin,republican,55.244472
 11/5/1996,WY,0,Maxfield,democrat,40.824257
 11/5/1996,WY,0,Dawson,libertarian,3.931271
+11/5/1996,NPV,0,Democratic,democrat,48.2166843927
+11/5/1996,NPV,0,Republican,republican,48.150606914
 11/3/1998,AK,0,Duncan,democrat,34.659450
 11/3/1998,AK,0,Grames,green,2.658068
 11/3/1998,AK,0,Young,republican,62.682481
@@ -14050,6 +14072,8 @@ date,region,district,candidate,party,voteshare
 11/3/1998,WY,0,Cubin,republican,57.793352
 11/3/1998,WY,0,Richardson,libertarian,3.520282
 11/3/1998,WY,0,Farris,democrat,38.686366
+11/3/1998,NPV,0,Democratic,democrat,47.2793207913
+11/3/1998,NPV,0,Republican,republican,48.4018614754
 11/7/2000,AK,0,Young,green,8.202924
 11/7/2000,AK,0,Karpinski,libertarian,1.755367
 11/7/2000,AK,0,Young,republican,69.769448
@@ -15514,6 +15538,8 @@ date,region,district,candidate,party,voteshare
 11/7/2000,WY,0,Stock,libertarian,3.019613
 11/7/2000,WY,0,Green,democrat,28.560797
 11/7/2000,WY,0,Raymond,natural law,1.608482
+11/7/2000,NPV,0,Democratic,democrat,47.1479599643
+11/7/2000,NPV,0,Republican,republican,47.5631585004
 11/5/2002,AK,0,Young,republican,74.660982
 11/5/2002,AK,0,Greene,democrat,17.316983
 11/5/2002,AK,0,Deforest,green,6.351364
@@ -16784,6 +16810,8 @@ date,region,district,candidate,party,voteshare
 11/5/2002,WY,0,Stock,libertarian,3.273091
 11/5/2002,WY,0,Akin,democrat,36.212065
 11/5/2002,WY,0,Cubin,republican,60.514845
+11/5/2002,NPV,0,Democratic,democrat,45.2381788988
+11/5/2002,NPV,0,Republican,republican,49.9722574545
 11/2/2004,AK,0,Anders,libertarian,2.394599
 11/2/2004,AK,0,Higgins,democrat,22.441708
 11/2/2004,AK,0,Young,republican,71.338091
@@ -17997,6 +18025,8 @@ date,region,district,candidate,party,voteshare
 11/2/2004,WY,0,Cubin,republican,55.319799
 11/2/2004,WY,0,Other,independent,0.054019
 11/2/2004,WY,0,Ladd,democrat,41.870389
+11/2/2004,NPV,0,Democratic,democrat,46.7962861003
+11/2/2004,NPV,0,Republican,republican,49.4363582338
 11/7/2006,AK,0,Crawford,libertarian,1.721170
 11/7/2006,AK,0,Ince,green,0.777068
 11/7/2006,AK,0,Benson,democrat,40.104663
@@ -19193,6 +19223,8 @@ date,region,district,candidate,party,voteshare
 11/7/2006,WY,0,Rankin,libertarian,3.873336
 11/7/2006,WY,0,Trauner,democrat,47.801347
 11/7/2006,WY,0,Cubin,republican,48.325317
+11/7/2006,NPV,0,Democratic,democrat,52.2859082738
+11/7/2006,NPV,0,Republican,republican,44.2816871965
 11/4/2008,AK,0,Wright,alaskan independence,4.520336
 11/4/2008,AK,0,Berkowitz,democrat,45.146355
 11/4/2008,AK,0,Young,republican,50.333309
@@ -20401,6 +20433,8 @@ date,region,district,candidate,party,voteshare
 11/4/2008,WY,0,Trauner,democrat,42.869190
 11/4/2008,WY,0,Herbert,libertarian,4.429150
 11/4/2008,WY,0,Lummis,republican,52.701661
+11/4/2008,NPV,0,Democratic,democrat,53.2345724789
+11/4/2008,NPV,0,Republican,republican,42.6359811365
 11/2/2010,AK,0,Young,republican,69.324479
 11/2/2010,AK,0,Crawford,democrat,30.675521
 11/2/2010,AL,1,Bonner,republican,83.041436
@@ -21742,6 +21776,8 @@ date,region,district,candidate,party,voteshare
 11/2/2010,WY,0,Love,libertarian,4.956557
 11/2/2010,WY,0,Wendt,democrat,24.516558
 11/2/2010,WY,0,Lummis,republican,70.526885
+11/2/2010,NPV,0,Democratic,democrat,44.9178337256
+11/2/2010,NPV,0,Republican,republican,51.6584243962
 11/6/2012,AK,0,McDermott,libertarian,5.202880
 11/6/2012,AK,0,Young,republican,64.151780
 11/6/2012,AK,0,Gianoutsos,nominated by petition,1.934981
@@ -23007,6 +23043,9 @@ date,region,district,candidate,party,voteshare
 11/6/2012,WY,0,Brubaker,libertarian,3.499927
 11/6/2012,WY,0,Henrichsen,democrat,23.868908
 11/6/2012,WY,0,Lummis,republican,69.008520
+11/6/2012,NPV,0,Democratic,democrat,48.7732438377
+11/6/2012,NPV,0,Republican,republican,47.6593340311
+11/6/2012,NPV,0,Libertarian,libertarian,1.1128533145
 11/4/2014,AK,0,Young,republican,51.199437
 11/4/2014,AK,0,Dunbar,democrat,41.155051
 11/4/2014,AK,0,McDermott,libertarian,7.645513
@@ -24205,6 +24244,9 @@ date,region,district,candidate,party,voteshare
 11/4/2014,WY,0,Grayson,democrat,22.952362
 11/4/2014,WY,0,Cummings,constitution,4.097704
 11/4/2014,WY,0,Brubaker,libertarian,4.318102
+11/4/2014,NPV,0,Democratic,democrat,45.5349239039
+11/4/2014,NPV,0,Republican,republican,51.2317492731
+11/4/2014,NPV,0,Libertarian,libertarian,1.2194977609
 11/8/2016,AK,0,Souphanavong,none,2.962179
 11/8/2016,AK,0,Young,republican,50.522201
 11/8/2016,AK,0,Lindbeck,democrat,36.166075
@@ -25432,6 +25474,9 @@ date,region,district,candidate,party,voteshare
 11/8/2016,WY,0,Greene,democrat,30.061704
 11/8/2016,WY,0,Struempf,libertarian,3.598274
 11/8/2016,WY,0,Cheney,republican,62.212343
+11/8/2016,NPV,0,Democratic,democrat,48.019332798
+11/8/2016,NPV,0,Republican,republican,49.1203775941
+11/8/2016,NPV,0,Libertarian,libertarian,1.2914853575
 11/6/2018,AK,0,Galvin,democrat,46.693691
 11/6/2018,AK,0,Young,republican,53.306309
 11/6/2018,AL,1,Kennedy,democrat,36.801208
@@ -26642,6 +26687,8 @@ date,region,district,candidate,party,voteshare
 11/6/2018,WY,0,Hunter,democrat,29.824151
 11/6/2018,WY,0,Brubaker,libertarian,3.444293
 11/6/2018,WY,0,Cummings,constitution,3.022096
+11/6/2018,NPV,0,Democratic,democrat,53.4085606367
+11/6/2018,NPV,0,Republican,republican,44.8466885923
 11/3/2020,AK,0,Galvin,democrat,45.263829
 11/3/2020,AK,0,Young,republican,54.401201
 11/3/2020,AK,0,Write-In,independent,0.334971
@@ -27999,3 +28046,5 @@ date,region,district,candidate,party,voteshare
 11/3/2020,WY,0,Brubaker,libertarian,3.748357
 11/3/2020,WY,0,Haggit,constitution,2.918137
 11/3/2020,WY,0,Write-In,independent,0.193804
+11/3/2020,NPV,0,Democratic,democrat,50.8137525249
+11/3/2020,NPV,0,Republican,republican,47.6877161361
