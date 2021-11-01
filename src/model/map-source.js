@@ -428,7 +428,7 @@ class MapSource
 
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
-    return this.shouldUseOriginalMapDataForTotalsPieChart  && !(currentMapState == MapState.zooming && currentMapType.getMapSettingValue("zoomSeatsTotal"))
+    return this.shouldUseOriginalMapDataForTotalsPieChart  && !(currentMapState == MapState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
   }
 
   getDropdownPartyIDs()
