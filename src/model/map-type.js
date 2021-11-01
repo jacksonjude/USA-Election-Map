@@ -652,12 +652,12 @@ var USAHouseMapType = new MapType(
         {id: "districts", title: "Show Districts", value: true}
       ],
     defaultValue: "districts", reloadType: MapSettingReloadType.display},
-    {id: "zoomSeatsTotal", title: "State Totals", type: MapSettingType.optionCycle, options:
+    {id: "zoomSeatsTotal", title: "Seat Totals", type: MapSettingType.optionCycle, options:
       [
         {id: "all", title: "All Seats", value: false},
         {id: "selected", title: "Selected State", value: true}
       ],
-    defaultValue: "all", reloadType: MapSettingReloadType.display}
+    defaultValue: "selected", reloadType: MapSettingReloadType.display}
   ]
 )
 
