@@ -13,7 +13,7 @@
     <script src="./lib/bowser-2.9.0.min.js"></script>
     <script src="./lib/discord-invite.js"></script>
     <script src="./src/misc-lib.js"></script>
-    <script src="./src/model/csv-database.js"></script>
+    <script src="./src/model/files-database.js"></script>
     <script src="./src/model/map-type.js"></script>
     <script src="./src/model/political-party.js"></script>
     <script src="./src/model/map-source.js"></script>
@@ -206,7 +206,7 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px;">
+    <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px;" oncontextmenu="return false">
     </div>
     <div style="display: flex; flex-direction: column; float: right;">
       <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">

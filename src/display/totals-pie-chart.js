@@ -1,5 +1,6 @@
 var totalsPieChart
 var regionMarginStrings = []
+var regionPartyStrings = []
 
 const PieChartDirection = {
   clockwise: 0,
@@ -95,12 +96,30 @@ function setupTotalsPieChart()
             return labelArray
 
             case 1:
+            var regionPartyStringArray = regionPartyStrings[tooltipItem.index]
+            if (regionPartyStringArray) { return regionPartyStringArray.concat() }
+            return
+
             case 2:
             return
           }
         },
         labelTextColor: function(tooltipItem, chart) {
-          var color = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor[tooltipItem.index]
+          var backgroundColors = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
+          var indexToUse = tooltipItem.index
+          if (tooltipItem.datasetIndex == 1 && typeof backgroundColors[indexToUse] !== 'string')
+          {
+            if (partyOrdering[Math.floor(indexToUse/2)].direction == PieChartDirection.clockwise)
+            {
+              indexToUse -= 1
+            }
+            else
+            {
+              indexToUse += 1
+            }
+          }
+
+          var color = backgroundColors[indexToUse]
           return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
         }
       }
@@ -343,8 +362,11 @@ function createHashCanvasPattern(baseColor)
   return colorPattern
 }
 
-function updateTotalsPieChart()
+function updateTotalsPieChart(regionDataArray)
 {
+  var shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
+  var regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+
   var marginTotalsData = {}
   var regionMarginStringsData = {}
 
@@ -377,11 +399,11 @@ function updateTotalsPieChart()
 
   var fullPartyOrdering = cloneObject(partyOrdering)
 
-  for (var regionID in displayRegionDataArray)
+  for (var regionID in regionDataArray)
   {
     if (regionID == nationalPopularVoteID) { continue }
 
-    var regionParty = displayRegionDataArray[regionID].partyID
+    var regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
     {
       insertPartyIntoTotalsPieChartOrdering(regionParty, fullPartyOrdering)
@@ -396,12 +418,12 @@ function updateTotalsPieChart()
       }
     }
 
-    var regionMargin = displayRegionDataArray[regionID].margin
+    var regionMargin = regionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID].disabled)
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
     var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
 
-    if (regionParty == null || regionParty == TossupParty.getID())
+    if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
       marginTotalsData[TossupParty.getID()].safe += regionEV
       regionMarginStringsData[TossupParty.getID()].safe.push(regionString)
@@ -475,14 +497,18 @@ function updateTotalsPieChart()
 
   var shouldShowFlips = currentMapType.getMapSettingValue("flipStates")
   var partyTotalsCallback = getPartyTotals(shouldShowFlips)
+
   var partyTotals
+
   var partyNonFlipTotals
   var partyFlipTotals
+  var partyFlipData
 
   if (shouldShowFlips)
   {
     partyNonFlipTotals = partyTotalsCallback.nonFlipTotals
     partyFlipTotals = partyTotalsCallback.flipTotals
+    partyFlipData = partyTotalsCallback.flipData
   }
   else
   {
@@ -490,6 +516,7 @@ function updateTotalsPieChart()
   }
 
   var sortedPartyTotalsArray = []
+  regionPartyStrings = []
   for (var partyNum in fullPartyOrdering)
   {
     var currentPartyID = fullPartyOrdering[partyNum].partyID
@@ -501,26 +528,43 @@ function updateTotalsPieChart()
       {
         sortedPartyTotalsArray.push(partyTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(null)
       }
       else if (currentDirection == PieChartDirection.counterclockwise)
       {
         sortedPartyTotalsArray.push(0)
         sortedPartyTotalsArray.push(partyTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(null)
       }
 
       delete partyTotals[currentPartyID]
     }
     else
     {
+      var partyStrings = []
+      partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
+        partyStrings.push(regionData.region + " +" + decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding()) + "\n")
+      })
+
       if (currentDirection == PieChartDirection.clockwise)
       {
         sortedPartyTotalsArray.push(partyNonFlipTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(partyFlipTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(null)
+        regionPartyStrings.push(partyStrings)
       }
       else if (currentDirection == PieChartDirection.counterclockwise)
       {
         sortedPartyTotalsArray.push(partyFlipTotals[currentPartyID] || 0)
         sortedPartyTotalsArray.push(partyNonFlipTotals[currentPartyID] || 0)
+
+        regionPartyStrings.push(partyStrings)
+        regionPartyStrings.push(null)
       }
 
       delete partyFlipTotals[currentPartyID]
@@ -558,10 +602,11 @@ function updateTotalsPieChart()
   }
 
   var nonFlipSortedPartyTotalsArray = []
+  var tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
   for (var totalIndex in sortedPartyTotalsArray)
   {
-    if (totalIndex % 2 == 1) { continue }
-    nonFlipSortedPartyTotalsArray[totalIndex/2] = sortedPartyTotalsArray[totalIndex]
+    if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { continue }
+    nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
   }
 
   if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded"))

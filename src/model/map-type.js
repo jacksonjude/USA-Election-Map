@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -12,6 +12,7 @@ class MapType
     this.shouldDisplayEVOnMap = shouldDisplayEVOnMap
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
+    this.compareMapEnabled = compareMapEnabled
     this.controlsHelpHTML = controlsHelpHTML
 
     this.regionNameToID = regionNameToID
@@ -66,6 +67,29 @@ class MapType
     return true
   }
 
+  async loadSVG(callback)
+  {
+    $("#svgdata").css('opacity', "0")
+
+    var svgPath = this.getSVGPath()
+    var svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+
+    var svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+    var svgData = await SVGDatabase.fetchFile(svgPathID)
+    if (svgData)
+    {
+      $("#mapzoom").html(svgData)
+      callback(svgPath)
+    }
+    else
+    {
+      $("#mapzoom").load(svgPathString, () => {
+        SVGDatabase.insertFile(svgPathID, $("#mapzoom").html())
+        callback(svgPath)
+      })
+    }
+  }
+
   getTotalEV()
   {
     return this.totalEV
@@ -89,6 +113,11 @@ class MapType
   getCustomMapEnabled()
   {
     return this.customMapEnabled
+  }
+
+  getCompareMapEnabled()
+  {
+    return this.compareMapEnabled
   }
 
   getControlsHelpHTML()
@@ -299,14 +328,15 @@ var USAPresidentialMapType = new MapType(
   "assets/usa-pres.png",
   "svg-sources/usa-presidential-map.svg",
   538,
-  function(decade, regionID, disabled)
+  function(decade, regionID, regionData)
   {
     if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
-    if (currentMapSource.getShouldSetDisabledWorthToZero() && disabled) return 0
+    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData.disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
   5,
+  true,
   true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
@@ -382,6 +412,7 @@ var USASenateMapType = new MapType(
   },
   false,
   3,
+  true,
   true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
@@ -481,6 +512,7 @@ var USAGovernorMapType = new MapType(
   false,
   4,
   true,
+  true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
   <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
@@ -552,9 +584,87 @@ var USAGovernorMapType = new MapType(
   ]
 )
 
+var USAHouseMapType = new MapType(
+  "USA-House",
+  "House",
+  "H",
+  "assets/usa-house.png",
+  "svg-sources/usa-governor-map.svg", // use governor (single state) by default before zoom
+  50,
+  function(decade, regionID)
+  {
+    return (regionEVArray[decade] || regionEVArray[2020])[regionID]-2 || 1
+  },
+  false,
+  2,
+  false,
+  true,
+  `
+  <h3 style='margin: 0px;'>Controls</h3>
+  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
+    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
+    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
+    &#x2022; Slider / arrow keys: Select map date<br>
+    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
+    &#x2022; Click state: Reveal state districts<br>
+    &#x2022; Right click state: View more poll / projection / result data<br>
+    <br>
+    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
+    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
+    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
+    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
+    &#x2022; Shift click state: Enter specific margin<br>
+    &#x2022; Alt click state: Disable state<br>
+    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
+    <br>
+    &#x2022; Party buttons: Click to edit cadndiate name<br>
+    &#x2022; Left / right click preset button: Cycle preset colors<br>
+    &#x2022; Left click margin color: Select with color picker<br>
+    &#x2022; Right click margin color: Enter exact hex value<br>
+    <br>
+    &#x2022; Source checkbox: Select map source to compare<br>
+    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
+    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
+    <br>
+    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
+    &#x2022; Map Seats: Show totals or all districts<br>
+    &#x2022; Seat Totals: Show totals for selected state or all states<br>
+    <br>
+    &#x2022; Margins button / enter key: Apply entered margins<br>
+    &#x2022; Margin dropdown button: Edit margin value<br>
+    <br>
+    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
+    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
+  </h5>
+  `,
+  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  [],
+  [
+    {id: "showAllDistricts", title: "National View", type: MapSettingType.optionCycle, options:
+      [
+        {id: "totals", title: "Show Totals", value: false},
+        {id: "all", title: "Show Districts", value: true}
+      ],
+    defaultValue: "totals", reloadType: MapSettingReloadType.display},
+    {id: "showStateDistricts", title: "State View", type: MapSettingType.optionCycle, options:
+      [
+        {id: "boxes", title: "Show Boxes", value: false},
+        {id: "districts", title: "Show Districts", value: true}
+      ],
+    defaultValue: "districts", reloadType: MapSettingReloadType.display},
+    {id: "zoomSeatTotals", title: "Seat Totals", type: MapSettingType.optionCycle, options:
+      [
+        {id: "all", title: "All Seats", value: false},
+        {id: "selected", title: "Selected State", value: true}
+      ],
+    defaultValue: "selected", reloadType: MapSettingReloadType.display}
+  ]
+)
+
 var mapTypes = {}
 mapTypes[USAPresidentialMapType.getID()] = USAPresidentialMapType
 mapTypes[USASenateMapType.getID()] = USASenateMapType
 mapTypes[USAGovernorMapType.getID()] = USAGovernorMapType
+mapTypes[USAHouseMapType.getID()] = USAHouseMapType
 
-var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID(), USAGovernorMapType.getID()]
+var mapTypeIDs = [USAPresidentialMapType.getID(), USASenateMapType.getID(), USAHouseMapType.getID(), USAGovernorMapType.getID()]

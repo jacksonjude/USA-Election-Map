@@ -99,7 +99,7 @@ async function updateIconsBasedOnLocalCSVData()
   for (var sourceIDNum in mapSourceIDs)
   {
     var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    var csvIsStored = await CSVDatabase.hasCSV(mapSourceIDs[sourceIDNum])
+    var csvIsStored = await CSVDatabase.hasFile(mapSourceIDs[sourceIDNum])
     if (csvIsStored)
     {
       for (let divID in divsToUpdateStatus)

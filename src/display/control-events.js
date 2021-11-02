@@ -377,7 +377,7 @@ document.addEventListener('keypress', async function(e) {
       editingRegionMarginValue = false
       $("#regionboxcontainer").trigger('hide')
     }
-    else
+    else if (currentMapType.getCustomMapEnabled())
     {
       toggleEditing()
     }
@@ -444,6 +444,8 @@ var mouseMovedDuringClick = false
 var currentRegionID
 var ignoreNextClick = false
 
+var currentMouseY
+
 document.addEventListener('mousedown', function(e) {
   if (currentMapState == MapState.editing)
   {
@@ -471,7 +473,7 @@ function mouseEnteredRegion(div)
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentMapState == MapState.viewing && showingDataMap)
+  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
   {
     updateRegionBox(regionID)
   }
@@ -481,7 +483,7 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
-  if (!(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
+  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
     for (var linkedRegionSetNum in linkedRegions)
@@ -497,6 +499,16 @@ function mouseEnteredRegion(div)
         }
       }
     }
+  }
+
+  var svgPathData = currentMapType.getSVGPath()
+  var usedFallbackMap = svgPathData[2] || false
+
+  if ((currentMapState == MapState.zooming || (currentMapState == MapState.editing && currentMapZoomRegion) || currentMapType.getMapSettingValue("showAllDistricts")) && !usedFallbackMap)
+  {
+    var regionPath = document.getElementById(regionID)
+    var parent = regionPath.parentNode
+    parent.insertBefore(regionPath, parent.lastChild.nextSibling)
   }
 }
 
@@ -542,8 +554,11 @@ document.addEventListener('mousemove', function(e) {
       regionIDsChanged.push(currentRegionID)
     }
   }
+
   $("#regionboxcontainer").css("left", e.pageX+5)
-  $("#regionboxcontainer").css("top", e.pageY+5)
+  updateRegionBoxYPosition(e.pageY)
+
+  currentMouseY = e.pageY
 })
 
 document.addEventListener('mouseup', function() {
