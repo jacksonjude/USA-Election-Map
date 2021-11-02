@@ -187,7 +187,7 @@ class MapSource
       var columnSplitStringArray = rowSplitStringArray[rowNum].split(columnDelimiter)
       for (var columnNum in columnSplitStringArray)
       {
-        if (columnSplitStringArray[columnNum].includes("\r"))
+        if (columnSplitStringArray[columnNum] != null && columnSplitStringArray[columnNum].includes("\r"))
         {
           columnSplitStringArray[columnNum] = columnSplitStringArray[columnNum].replace("\r", "")
         }
@@ -1790,7 +1790,8 @@ function createSenateMapSources()
     1616742000000: "KJtDSRW3I7Q",
     1617778800000: "_cZ8OvgwN18",
     1619161200000: "_nWQxmYO2iA",
-    1629010800000: "eZGs7_uZ1YM"
+    1629010800000: "eZGs7_uZ1YM",
+    1633849200000: "R9WqiO-j2lY"
   }
 
   var PASenateProjectionMapSource = new MapSource(
@@ -2358,7 +2359,8 @@ function createGovernorMapSources()
     1630393200000: "231906",
     1631516400000: "231916",
     1631689200000: "231936",
-    1632466800000: ""
+    1632466800000: "231946",
+    1633417200000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
