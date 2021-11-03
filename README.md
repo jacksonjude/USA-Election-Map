@@ -1,6 +1,6 @@
 # USA Election Map
 
-An interactive USA presidential, senatorial, and governor election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
+An interactive USA presidential, senatorial, house, and governor election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
 
 ## Features
 
@@ -8,7 +8,7 @@ An interactive USA presidential, senatorial, and governor election map. Created 
   * Displays projection data for the 2020 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
   * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA), [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ), and [The Cook Political Report](https://cookpolitical.com)
   * Displays projection data for the 2022 governor elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [The Cook Political Report](https://cookpolitical.com)
-  * Displays presidential (1856-2020), senatorial (1960-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
+  * Displays presidential (1856-2020), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
   * Pie chart to show electoral vote counts by party and by margin, as well as national popular vote totals for past elections
   * View states that flipped between election cycles on both the map and pie chart
   * Fully editable custom maps that can be downloaded and uploaded as JSON or CSV files
@@ -66,7 +66,7 @@ Then open the address provided in the Terminal window (by default, it seems to b
   - [ ] Add multiple dates, edit dates, create & remove dates
   - [ ] Split electoral votes between multiple candidates
 - [x] National popular vote totals for past elections
-- [ ] Past house election results
+- [x] Past house election results
 - [ ] Presidential election results by county
 - [ ] Profiles and custom map sharing
 - [ ] Popularity rating source (by state)
