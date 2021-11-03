@@ -1017,13 +1017,14 @@ async function toggleEditing(stateToSet)
 
     if (currentMapSource.isCustom())
     {
-      var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
-      if (currentMapState == MapState.zooming)
-      {
-        currentMapDataForDate = mergeObject(currentMapDataForDate, displayRegionDataArray)
-        console.log(displayRegionDataArray["MI-4"], currentMapDataForDate["MI-4"])
-      }
-      currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+      // Stuff for house editing that isn't done yet
+      // var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+      // if (currentMapState == MapState.zooming)
+      // {
+      //   currentMapDataForDate = mergeObject(currentMapDataForDate, displayRegionDataArray)
+      // }
+      
+      currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap()
       displayPartyTotals(getPartyTotals(), true)
     }
