@@ -284,17 +284,32 @@ function moveLastToFirst(array, times)
   }
 }
 
-function getTodayString(delimiter, includeTime)
+function getTodayString(delimiter, includeTime, overrideDateFormat)
 {
   var currentTimeDate = new Date()
-  return getMDYDateString(currentTimeDate, delimiter, includeTime)
+  return getDateString(currentTimeDate, delimiter, includeTime, false, overrideDateFormat)
 }
 
-function getMDYDateString(date, delimiter, includeTime)
+function getDateString(date, delimiter, includeTime, useZeroPadding, overrideDateFormat)
 {
   delimiter = delimiter || "/"
 
-  var dateString = (date.getMonth()+1) + delimiter + date.getDate() + delimiter + date.getFullYear()
+  var dateString
+  switch (overrideDateFormat || currentMapType.getMapSettings()["dateFormat"])
+  {
+    case "dmy":
+    dateString = (useZeroPadding ? zeroPadding(date.getDate()) : date.getDate()) + delimiter + (useZeroPadding ? zeroPadding(date.getMonth()+1) : (date.getMonth()+1)) + delimiter + date.getFullYear()
+    break
+
+    case "ymd":
+    dateString = date.getFullYear() + delimiter + (useZeroPadding ? zeroPadding(date.getMonth()+1) : (date.getMonth()+1)) + delimiter + (useZeroPadding ? zeroPadding(date.getDate()) : date.getDate())
+    break
+
+    case "mdy":
+    default:
+    dateString = (useZeroPadding ? zeroPadding(date.getMonth()+1) : (date.getMonth()+1)) + delimiter + (useZeroPadding ? zeroPadding(date.getDate()) : date.getDate()) + delimiter + date.getFullYear()
+    break
+  }
 
   if (includeTime)
   {

@@ -595,7 +595,7 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   }
   else
   {
-    dateString = (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear()
+    dateString = getDateString(dateToDisplay, "/", false, true)
   }
 
   $("#" + sliderDateDisplayDivID).html(dateString)
@@ -612,7 +612,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   if (dateIndex-1 > mapDates.length-1)
   {
     dateToDisplay = new Date(mapDates[dateIndex-1-1])
-    overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
+    overrideDateString = "Latest (" + getDateString(dateToDisplay, "/", false, true) + ")"
   }
   else
   {
@@ -1023,7 +1023,7 @@ async function toggleEditing(stateToSet)
       // {
       //   currentMapDataForDate = mergeObject(currentMapDataForDate, displayRegionDataArray)
       // }
-      
+
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap()
       displayPartyTotals(getPartyTotals(), true)
@@ -1498,7 +1498,7 @@ function getCurrentDecade()
 
 function getCurrentDateOrToday()
 {
-  var dateToUse = new Date(getTodayString()).getTime()
+  var dateToUse = new Date(getTodayString("/", false, "mdy")).getTime()
   if (currentSliderDate)
   {
     dateToUse = currentSliderDate.getTime()
@@ -1857,7 +1857,7 @@ function setMapCompareItem(compareArrayIndex)
 {
   if (!showingDataMap) { return }
   compareMapDataArray[compareArrayIndex] = cloneObject(displayRegionDataArray)
-  $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getMDYDateString(currentSliderDate))
+  $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getDateString(currentSliderDate))
 }
 
 function setCompareSourceDate(compareArrayIndex, dateIndex)
@@ -1869,7 +1869,8 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
   if (dateIndex-1 > mapDates.length-1)
   {
     dateToDisplay = new Date(mapDates[dateIndex-1-1])
-    overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
+    overrideDateString = "Latest (" + getDateString(dateToDisplay, "/", false, true) + ")"
+    // overrideDateString = "Latest (" + (zeroPadding(dateToDisplay.getMonth()+1)) + "/" + zeroPadding(dateToDisplay.getDate()) + "/" + dateToDisplay.getFullYear() + ")"
   }
   else
   {
@@ -1877,7 +1878,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
   }
   updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay")
 
-  $("#compareItem-" + compareArrayIndex).html(mapSources[compareMapSourceIDArray[compareArrayIndex]].getName() + " (" + getMDYDateString(dateToDisplay) + ")")
+  $("#compareItem-" + compareArrayIndex).html(mapSources[compareMapSourceIDArray[compareArrayIndex]].getName() + " (" + getDateString(dateToDisplay) + ")")
 
   compareMapDataArray[compareArrayIndex] = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapData()[dateToDisplay.getTime()]
 
@@ -1952,7 +1953,7 @@ function applyCompareToCustomMap()
     }
   }
 
-  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString())).getTime(), true)
+  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true)
   currentMapSource = currentCustomMapSource
   updateNavBarForNewSource()
   loadDataMap()

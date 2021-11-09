@@ -307,6 +307,13 @@ var globalMapSettings =
       return value == 1
     },
   defaultValue: "expanded", reloadType: MapSettingReloadType.display},
+  {id: "dateFormat", title: "Date Format", type: MapSettingType.optionCycle, options:
+    [
+      {id: "mdy", title: "MM/DD/YYYY", value: 0},
+      {id: "dmy", title: "DD/MM/YYYY", value: 1},
+      {id: "ymd", title: "YYYY/MM/DD", value: 2}
+    ],
+  defaultValue: "mdy", reloadType: MapSettingReloadType.display},
   {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
     [
       {id: "enabled", title: "Enabled", value: true},

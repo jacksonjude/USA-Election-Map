@@ -278,7 +278,7 @@ class MapSource
 
     if (this.shouldClearDisabled || mapIsClearExceptDisabled || shouldFullClear)
     {
-      this.setTextMapData("date\n" + getTodayString(), this)
+      this.setTextMapData("date\n" + getTodayString("/", false, "mdy"), this)
       this.setIconURL("", this)
       if (this.candidateNameData != null)
       {
