@@ -2305,8 +2305,9 @@ function createGovernorMapSources()
   }
 
   const LTE2022GovernorYouTubeIDs = {
-    1625814000000: "XXjRhuaFWuc",
-    1630911600000: "QCN0K03rmRI"
+    1628406000000: "XXjRhuaFWuc",
+    1630911600000: "QCN0K03rmRI",
+    1636444800000: "rG30Fokvs5E"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
