@@ -428,7 +428,7 @@ class MapSource
 
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
-    return this.shouldUseOriginalMapDataForTotalsPieChart  && !(currentMapState == MapState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
+    return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
   }
 
   getDropdownPartyIDs()
@@ -2757,15 +2757,14 @@ function createHouseMapSources()
 
   var getHouseSVGFromDate = function(dateTime)
   {
-    var isZoomingState = currentMapState == MapState.zooming
     var zoomRegion = currentMapZoomRegion
 
-    if (!isZoomingState && !currentMapType.getMapSettingValue("showAllDistricts"))
+    if (currentViewingState == ViewingState.viewing && !currentMapType.getMapSettingValue("showAllDistricts"))
     {
       return "svg-sources/usa-governor-map.svg"
     }
 
-    if (!isZoomingState || currentMapType.getMapSettingValue("showStateDistricts"))
+    if (currentViewingState == ViewingState.viewing || currentMapType.getMapSettingValue("showStateDistricts"))
     {
       var dateYear = (new Date(dateTime)).getFullYear()
       if (dateYear >= 2020)

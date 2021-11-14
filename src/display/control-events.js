@@ -280,7 +280,7 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentMapState == MapState.viewing && !isEditingTextbox() && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
   {
     currentMapSource = mapSources[mapSourceIDs[e.which-49]]
     updateNavBarForNewSource()
@@ -290,7 +290,7 @@ document.addEventListener('keypress', async function(e) {
       updateRegionBox(currentRegionID)
     }
   }
-  else if (currentMapState == MapState.viewing && !isEditingTextbox() && e.which == 48)
+  else if (currentEditingState == EditingState.viewing && !isEditingTextbox() && e.which == 48)
   {
     clearMap()
   }
@@ -341,7 +341,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentMapState == MapState.editing && !isEditingTextbox() && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
+  else if (currentEditingState == EditingState.editing && !isEditingTextbox() && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
   {
     var partyToSelect = e.which-48
     if (partyToSelect == 0)
@@ -447,7 +447,7 @@ var ignoreNextClick = false
 var currentMouseY
 
 document.addEventListener('mousedown', function(e) {
-  if (currentMapState == MapState.editing)
+  if (currentEditingState == EditingState.editing)
   {
     startRegionID = currentRegionID
     mouseIsDown = true
@@ -455,7 +455,7 @@ document.addEventListener('mousedown', function(e) {
 })
 
 document.oncontextmenu = function() {
-  if (currentMapState == MapState.editing)
+  if (currentEditingState == EditingState.editing)
   {
     regionIDsChanged = []
     mouseIsDown = false
@@ -468,12 +468,12 @@ function mouseEnteredRegion(div)
 {
   var regionID = getBaseRegionID($(div).attr('id')).baseID
   currentRegionID = regionID
-  if (currentMapState == MapState.editing && mouseIsDown && !regionIDsChanged.includes(regionID))
+  if (currentEditingState == EditingState.editing && mouseIsDown && !regionIDsChanged.includes(regionID))
   {
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if ((currentMapState == MapState.viewing || currentMapState == MapState.zooming) && showingDataMap)
+  else if (currentEditingState == EditingState.viewing && showingDataMap)
   {
     updateRegionBox(regionID)
   }
@@ -504,7 +504,7 @@ function mouseEnteredRegion(div)
   var svgPathData = currentMapType.getSVGPath()
   var usedFallbackMap = svgPathData[2] || false
 
-  if ((currentMapState == MapState.zooming || (currentMapState == MapState.editing && currentMapZoomRegion) || currentMapType.getMapSettingValue("showAllDistricts")) && !usedFallbackMap)
+  if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts")) && !usedFallbackMap)
   {
     var regionPath = document.getElementById(regionID)
     var parent = regionPath.parentNode
@@ -542,7 +542,7 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
-  if (currentMapState == MapState.editing)
+  if (currentViewingState == ViewingState.editing)
   {
     if (mouseIsDown)
     {
@@ -562,7 +562,7 @@ document.addEventListener('mousemove', function(e) {
 })
 
 document.addEventListener('mouseup', function() {
-  if (currentMapState == MapState.editing)
+  if (currentEditingState == EditingState.editing)
   {
     regionIDsChanged = []
     mouseIsDown = false

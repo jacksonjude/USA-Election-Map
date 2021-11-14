@@ -243,7 +243,7 @@ function cyclePartyColorPreset(partyID, div, incrementAmount)
 
 function updatePartyDropdownVisibility()
 {
-  if (currentMapState != MapState.editing)
+  if (currentEditingState != EditingState.editing)
   {
     $(".partyDropdownContainer").each(function() {
       $(this).css("display", "block")
@@ -296,7 +296,7 @@ function selectParty(div)
 {
   var partyID = $(div).attr('id')
 
-  if (currentMapState == MapState.editing)
+  if (currentEditingState == EditingState.editing)
   {
     if (selectedParty != null)
     {
@@ -353,7 +353,7 @@ function selectParty(div)
       $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
     }
   }
-  else if (currentMapState == MapState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+  else if (currentEditingState == EditingState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
   {
     toggleCandidateNameEditing(partyID, div)
   }
@@ -410,7 +410,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
 function createPartyDropdownsBoxHoverHandler()
 {
   $("#partyDropdownsBox").hover(function() {
-    if (!(currentMapSource.isCustom() && currentMapType.getCustomMapEnabled()) || currentMapState == MapState.editing || dropdownPoliticalPartyIDs.includes(addButtonPartyID) || dropdownPoliticalPartyIDs.length >= maxPartiesToDisplay) { return }
+    if (!(currentMapSource.isCustom() && currentMapType.getCustomMapEnabled()) || currentEditingState == EditingState.editing || dropdownPoliticalPartyIDs.includes(addButtonPartyID) || dropdownPoliticalPartyIDs.length >= maxPartiesToDisplay) { return }
 
     dropdownPoliticalPartyIDs.push(addButtonPartyID)
     $("#partyDropdownsBox").addClass("showingAddPartyButton")
@@ -501,13 +501,13 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
       createPartyDropdowns()
     }
   }
-  else if ((currentMapSource.isCustom() && currentMapType.getCustomMapEnabled() && currentMapState != MapState.editing) || overrideCreateDropdowns)
+  else if ((currentMapSource.isCustom() && currentMapType.getCustomMapEnabled() && currentEditingState != EditingState.editing) || overrideCreateDropdowns)
   {
     if (currentMapSource.getDropdownPartyIDs() != null)
     {
       dropdownPoliticalPartyIDs = cloneObject(currentMapSource.getDropdownPartyIDs())
     }
-    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsBox").hasClass("showingAddPartyButton") && currentMapState != MapState.editing)
+    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsBox").hasClass("showingAddPartyButton") && currentEditingState != EditingState.editing)
     {
       dropdownPoliticalPartyIDs.push(addButtonPartyID)
     }
