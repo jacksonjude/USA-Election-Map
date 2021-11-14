@@ -2768,17 +2768,21 @@ function createHouseMapSources()
     if (!isZoomingState || currentMapType.getMapSettingValue("showStateDistricts"))
     {
       var dateYear = (new Date(dateTime)).getFullYear()
-      if (dateYear > 2020)
+      if (dateYear >= 2020)
       {
-        return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
+        return ["svg-sources/usa-house-2020-map.svg", zoomRegion]
       }
-      else if (dateYear > 2010)
+      else if (dateYear >= 2018)
       {
-        return ["svg-sources/usa-house-2010-map.svg", zoomRegion]
+        return ["svg-sources/usa-house-2018-map.svg", zoomRegion]
       }
-      else if (dateYear > 2000)
+      else if (dateYear >= 2012)
       {
-        return ["svg-sources/usa-house-2000-map.svg", zoomRegion]
+        return ["svg-sources/usa-house-2012-map.svg", zoomRegion]
+      }
+      else if (dateYear >= 2002)
+      {
+        return ["svg-sources/usa-house-2002-map.svg", zoomRegion]
       }
     }
 
