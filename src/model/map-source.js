@@ -2775,6 +2775,10 @@ function createHouseMapSources()
       {
         return ["svg-sources/usa-house-2018-map.svg", zoomRegion]
       }
+      else if (dateYear >= 2016)
+      {
+        return ["svg-sources/usa-house-2016-map.svg", zoomRegion]
+      }
       else if (dateYear >= 2012)
       {
         return ["svg-sources/usa-house-2012-map.svg", zoomRegion]
