@@ -173,15 +173,27 @@ const csvDatabaseName = "CSVDatabase"
 const csvDatabaseVersion = 1
 const csvStoreName = "CSVFiles"
 const csvSourceUpdatedTimesURL = "./csv-sources/source-updated-times.json"
-
 var CSVDatabase = new FilesDatabase()
-CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
 
 
 const svgDatabaseName = "SVGDatabase"
 const svgDatabaseVersion = 1
 const svgStoreName = "SVGFiles"
 const svgSourceUpdatedTimesURL = "./svg-sources/source-updated-times.json"
-
 var SVGDatabase = new FilesDatabase()
-SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
+
+function initializeDatabases()
+{
+  CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
+  SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
+}
+
+function clearDatabases()
+{
+  indexedDB.deleteDatabase(CSVDatabase.databaseName)
+  indexedDB.deleteDatabase(SVGDatabase.databaseName)
+
+  initializeDatabases()
+}
+
+initializeDatabases()
