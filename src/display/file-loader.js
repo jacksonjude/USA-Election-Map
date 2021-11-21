@@ -25,6 +25,7 @@ function loadUploadedFile(file)
 {
   var fr = new FileReader()
 
+  if (file == null) { return }
   if (currentMapType.getCustomMapEnabled() == false && (file.type == kJSONFileType || file.type == kCSVFileType)) { return }
 
   switch (file.type)
