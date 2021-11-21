@@ -71,11 +71,11 @@ class MapType
   {
     $("#svgdata").css('opacity', "0")
 
-    var svgPath = this.getSVGPath()
-    var svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+    let svgPath = this.getSVGPath()
+    let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
 
-    var svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
-    var svgData = await SVGDatabase.fetchFile(svgPathID)
+    let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+    let svgData = await SVGDatabase.fetchFile(svgPathID)
     if (svgData)
     {
       $("#mapzoom").html(svgData)
