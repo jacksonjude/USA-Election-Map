@@ -1844,7 +1844,8 @@ function createSenateMapSources()
   const Cook2022SenateRatingIDs = {
     1610611200000: "231206",
     1611561600000: "231216",
-    1626418800000: ""
+    1626418800000: "231871",
+    1637308800000: ""
   }
 
   var CookSenateProjectionMapSource = new MapSource(
