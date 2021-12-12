@@ -1795,7 +1795,8 @@ function createSenateMapSources()
     1619161200000: "_nWQxmYO2iA",
     1629010800000: "eZGs7_uZ1YM",
     1633849200000: "R9WqiO-j2lY",
-    1636182000000: "kAsztlIJm64"
+    1636182000000: "kAsztlIJm64",
+    1639296000000: "Elasgd8mVLE"
   }
 
   var PASenateProjectionMapSource = new MapSource(
