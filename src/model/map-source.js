@@ -1729,18 +1729,18 @@ function createSenateMapSources()
   }
 
   const LTE2022SenateYouTubeIDs = {
-    1608364800000: "Wk-T-lXa5-g",
-    1612080000000: "yifvg3uHips",
-    1614412800000: "wtYw6nmWgQ0",
-    1617087600000: "TNHmvLFzD7U",
-    1619852400000: "RbpHQboaeWM",
-    1622876400000: "DsLq1N8YEkc",
-    1625295600000: "AU_GCaD594k",
-    1628319600000: "zlC6UzT2xCQ",
-    1630652400000: "hY5HsIqfSyQ",
-    1633158000000: "SDfCEZF1uH8",
-    1636009200000: "rTEnS6Jy9oM",
-    1638432000000: "skPfbpMb_g8"
+    1608336000000: "Wk-T-lXa5-g",
+    1612051200000: "yifvg3uHips",
+    1614384000000: "wtYw6nmWgQ0",
+    1617062400000: "TNHmvLFzD7U",
+    1619827200000: "RbpHQboaeWM",
+    1622851200000: "DsLq1N8YEkc",
+    1625270400000: "AU_GCaD594k",
+    1628294400000: "zlC6UzT2xCQ",
+    1630627200000: "hY5HsIqfSyQ",
+    1633132800000: "SDfCEZF1uH8",
+    1635984000000: "rTEnS6Jy9oM",
+    1638403200000: "skPfbpMb_g8"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
@@ -1778,7 +1778,7 @@ function createSenateMapSources()
       if (mapDate == null) { return }
 
       var linkToOpen = homepageURL
-      linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getTime()]
+      linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
     null, // convertMapDataRowToCSVFunction
@@ -1788,15 +1788,15 @@ function createSenateMapSources()
   )
 
   const PA2022SenateYouTubeIDs = {
-    1614240000000: "Tbsy6XZ_e-Q",
-    1615449600000: "xGtBqaMiAU4",
-    1616742000000: "KJtDSRW3I7Q",
-    1617778800000: "_cZ8OvgwN18",
-    1619161200000: "_nWQxmYO2iA",
-    1629010800000: "eZGs7_uZ1YM",
-    1633849200000: "R9WqiO-j2lY",
-    1636182000000: "kAsztlIJm64",
-    1639296000000: "Elasgd8mVLE"
+    1614211200000: "Tbsy6XZ_e-Q",
+    1615420800000: "xGtBqaMiAU4",
+    1616716800000: "KJtDSRW3I7Q",
+    1617753600000: "_cZ8OvgwN18",
+    1619136000000: "_nWQxmYO2iA",
+    1628985600000: "eZGs7_uZ1YM",
+    1633824000000: "R9WqiO-j2lY",
+    1636156800000: "kAsztlIJm64",
+    1639267200000: "Elasgd8mVLE"
   }
 
   var PASenateProjectionMapSource = new MapSource(
@@ -1834,7 +1834,7 @@ function createSenateMapSources()
       if (mapDate == null) { return }
 
       var linkToOpen = homepageURL
-      linkToOpen += PA2022SenateYouTubeIDs[mapDate.getTime()]
+      linkToOpen += PA2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
     null, // convertMapDataRowToCSVFunction
@@ -1844,10 +1844,10 @@ function createSenateMapSources()
   )
 
   const Cook2022SenateRatingIDs = {
-    1610611200000: "231206",
-    1611561600000: "231216",
-    1626418800000: "231871",
-    1637308800000: ""
+    1610582400000: "231206",
+    1611532800000: "231216",
+    1626393600000: "231871",
+    1637280000000: ""
   }
 
   var CookSenateProjectionMapSource = new MapSource(
@@ -1883,7 +1883,7 @@ function createSenateMapSources()
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
-      window.open(homepageURL + Cook2022SenateRatingIDs[mapDate.getTime()] || "")
+      window.open(homepageURL + (Cook2022SenateRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
     }, // customOpenRegionLinkFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
@@ -2308,9 +2308,9 @@ function createGovernorMapSources()
   }
 
   const LTE2022GovernorYouTubeIDs = {
-    1628406000000: "XXjRhuaFWuc",
-    1630911600000: "QCN0K03rmRI",
-    1636444800000: "rG30Fokvs5E"
+    1628380800000: "XXjRhuaFWuc",
+    1630886400000: "QCN0K03rmRI",
+    1636416000000: "rG30Fokvs5E"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
@@ -2347,7 +2347,7 @@ function createGovernorMapSources()
       if (mapDate == null) { return }
 
       var linkToOpen = homepageURL
-      linkToOpen += LTE2022GovernorYouTubeIDs[mapDate.getTime()]
+      linkToOpen += LTE2022GovernorYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
     null, // convertMapDataRowToCSVFunction
@@ -2357,17 +2357,17 @@ function createGovernorMapSources()
   )
 
   const Cook2022GovernorRatingIDs = {
-    1612166400000: "231801",
-    1618297200000: "231816",
-    1619766000000: "231826",
-    1624604400000: "231836",
-    1625814000000: "231846",
-    1628233200000: "231881",
-    1630393200000: "231906",
-    1631516400000: "231916",
-    1631689200000: "231936",
-    1632466800000: "231946",
-    1633417200000: ""
+    1612137600000: "231801",
+    1618272000000: "231816",
+    1619740800000: "231826",
+    1624579200000: "231836",
+    1625788800000: "231846",
+    1628208000000: "231881",
+    1630368000000: "231906",
+    1631491200000: "231916",
+    1631664000000: "231936",
+    1632441600000: "231946",
+    1633392000000: "232571"
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
@@ -2402,7 +2402,7 @@ function createGovernorMapSources()
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
-      window.open(homepageURL + Cook2022GovernorRatingIDs[mapDate.getTime()] || "")
+      window.open(homepageURL + (Cook2022GovernorRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
     } // customOpenRegionLinkFunction
   )
 

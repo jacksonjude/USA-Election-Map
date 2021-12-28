@@ -329,3 +329,7 @@ String.prototype.toTitle = function() {
   if (this.length == 1) { return this.toUpperCase() }
   return this.charAt(0).toUpperCase() + this.slice(1)
 }
+
+Date.prototype.getUTCAdjustedTime = function() {
+  return this.getTime()-1000*60*this.getTimezoneOffset()
+}
