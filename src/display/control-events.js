@@ -247,7 +247,7 @@ function deselectDropdownButton()
   removeActiveClassFromDropdownButton()
   selectedDropdownDivID = null
 
-  $('.dropdown-content').each((i, div) => {
+  $('.dropdown-content').each((_, div) => {
     if ($(div).css("display") == "none" && $(div).find(".jscolor-active").length > 0)
     {
       jscolor.hide()
@@ -446,7 +446,7 @@ var ignoreNextClick = false
 
 var currentMouseY
 
-document.addEventListener('mousedown', function(e) {
+document.addEventListener('mousedown', function() {
   if (currentEditingState == EditingState.editing)
   {
     startRegionID = currentRegionID

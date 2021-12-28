@@ -88,7 +88,7 @@ function setupTotalsPieChart()
 
           return label
         },
-        label: function(tooltipItem, data) {
+        label: function(tooltipItem, _) {
           switch (tooltipItem.datasetIndex)
           {
             case 0:
@@ -316,7 +316,6 @@ function createHashCanvasPattern(baseColor)
   var patternCanvas = document.createElement('canvas')
   var patternContext = patternCanvas.getContext('2d')
 
-  const CANVAS_SIDE_LENGTH = 90
   const WIDTH = flipPatternWidth*2
   const HEIGHT = flipPatternWidth*2
   const DIVISIONS = 4

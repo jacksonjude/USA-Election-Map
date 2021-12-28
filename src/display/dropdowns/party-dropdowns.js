@@ -182,8 +182,6 @@ async function updatePartyColor(partyID, margin, newColor)
 
 async function toggleMarginHexColorEditing(partyID, margin)
 {
-  var newMarginColor = null
-
   if (editPartyMarginColor)
   {
     var currentMarginColor = politicalParties[editPartyMarginColor.partyID].getMarginColors()[editPartyMarginColor.margin]

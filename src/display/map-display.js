@@ -208,7 +208,7 @@ async function reloadForNewMapType(initialLoad)
 
 function loadMapSVGFile()
 {
-  var loadSVGFilePromise = new Promise((resolve, reject) => {
+  var loadSVGFilePromise = new Promise((resolve) => {
     $("#svgdata").css('opacity', "0")
 
     var handleNewSVG = () => {
@@ -483,7 +483,7 @@ function addTextBoxSpacingCSS()
 
 function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames)
 {
-  var loadDataMapPromise = new Promise(async (resolve, reject) => {
+  var loadDataMapPromise = new Promise(async (resolve) => {
     $("#dataMapDateSliderContainer").hide()
     $("#dateDisplay").hide()
 
@@ -546,7 +546,6 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   mapDates = mapDates || currentMapSource.getMapDates()
   previousDate = previousDate || (currentSliderDate ? currentSliderDate.getTime() : null)
 
-  var startDate = new Date(mapDates[0])
   var endDate = new Date(mapDates[mapDates.length-1])
 
   var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
@@ -579,7 +578,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   $("#" + sliderTickDivID).empty()
   if (mapDates.length <= maxDateSliderTicks)
   {
-    for (let dateNum in mapDates)
+    for (let _ in mapDates)
     {
       $("#" + sliderTickDivID).append("<span class='tick'></span>")
     }
@@ -878,7 +877,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   showingDataMap = false
 }
 
-function toggleHelpBox(helpButtonDiv)
+function toggleHelpBox()
 {
   showingHelpBox = !showingHelpBox
   if (showingHelpBox)
@@ -1197,7 +1196,7 @@ function rightClickRegion(div)
   }
 }
 
-function shiftClickRegion(div)
+function shiftClickRegion()
 {
   if (currentEditingState == EditingState.editing)
   {
@@ -1368,7 +1367,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   }
 }
 
-function getMarginIndexForValue(margin, partyID)
+function getMarginIndexForValue(margin)
 {
   if (margin == 101)
   {
@@ -1767,7 +1766,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
 
 function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
 {
-  var updateCompareMapSourcesPromise = new Promise(async (resolve, reject) => {
+  var updateCompareMapSourcesPromise = new Promise(async (resolve) => {
     if (compareSourcesToUpdate[0])
     {
       let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])

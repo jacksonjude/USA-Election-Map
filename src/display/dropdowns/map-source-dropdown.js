@@ -60,7 +60,7 @@ function toggleMapSource(buttonDiv)
   updateMapSource(mapSourceIDs[mapSourceArrayIndex], buttonDiv)
 }
 
-function updateMapSource(sourceID, buttonDiv, forceDownload)
+function updateMapSource(sourceID, _, forceDownload)
 {
   if (ignoreMapUpdateClickArray.includes(sourceID.replace(/\s/g, '')))
   {
@@ -135,7 +135,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
   {
     ignoreMapUpdateClickArray.push(mapIDToIgnore)
   }
-  var downloadDataPromise = new Promise(async (resolve, reject) => {
+  var downloadDataPromise = new Promise(async (resolve) => {
     for (let divID in divsToUpdateStatus)
     {
       removeStatusImage(divID)

@@ -14,7 +14,7 @@ class FilesDatabase
   {
     var self = self || this
 
-    var openDatabasePromise = new Promise((resolve, reject) => {
+    var openDatabasePromise = new Promise((resolve) => {
       const request = indexedDB.open(self.databaseName, self.databaseVersion)
 
       request.onerror = function(event) {
@@ -25,7 +25,7 @@ class FilesDatabase
       request.onupgradeneeded = function(event) {
         var db = event.target.result
 
-        var store = db.createObjectStore(self.storeName)
+        db.createObjectStore(self.storeName)
       }
 
       request.onsuccess = function(event) {
@@ -64,7 +64,7 @@ class FilesDatabase
   {
     var self = self || this
 
-    var fetchFilePromise = new Promise(async (resolve, reject) => {
+    var fetchFilePromise = new Promise(async (resolve) => {
       try
       {
         var db = await self.openDatabase()
@@ -74,7 +74,7 @@ class FilesDatabase
 
         var query = store.get(sourceID)
 
-        query.onsuccess = function(event) {
+        query.onsuccess = function() {
           var textResult = query.result ? query.result.text : null
           var updatedTime = query.result ? query.result.updatedAt : null
 
@@ -94,7 +94,7 @@ class FilesDatabase
             {
               resolve(null)
             }
-          }).fail((callback, error) => {
+          }).fail((_, error) => {
             console.log(error)
             resolve(textResult)
           })
@@ -123,7 +123,7 @@ class FilesDatabase
   {
     var self = self || this
 
-    var hasFilePromise = new Promise(async (resolve, reject) => {
+    var hasFilePromise = new Promise(async (resolve) => {
       try
       {
         var db = await self.openDatabase()
@@ -133,7 +133,7 @@ class FilesDatabase
 
         var query = store.getAllKeys()
 
-        query.onsuccess = function(event) {
+        query.onsuccess = function() {
           resolve(query.result.includes(sourceID))
         }
 
@@ -159,7 +159,7 @@ class FilesDatabase
   async isSourceUpdated(sourceID, self)
   {
     var self = self || this
-    var isSourceUpdatedPromise = new Promise(async (resolve, reject) => {
+    var isSourceUpdatedPromise = new Promise(async (resolve) => {
       var result = await self.fetchFile(sourceID)
       resolve(result != null)
     })
