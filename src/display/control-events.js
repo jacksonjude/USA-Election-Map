@@ -1,14 +1,14 @@
-const shiftNumberKeycodes = [33, 64, 35, 36, 37, 94, 38, 42, 40]
+const shiftNumberKeycodes = ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
-var arrowKeyTimeouts = {}
+var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
 
 document.addEventListener('keydown', function(e) {
-  if (e.which >= 37 && e.which <= 40 && !isEditingTextbox() && showingDataMap)
+  if (!isEditingTextbox() && showingDataMap)
   {
-    switch (e.which)
+    switch (e.key)
     {
-      case 37:
+      case "ArrowLeft":
       if (arrowKeysDown.left > 0) { return }
       arrowKeysDown.left = 1
       arrowKeyTimeouts.left = setTimeout(function() { arrowKeyCycle("left") }, initialKeyPressDelay)
@@ -16,7 +16,7 @@ document.addEventListener('keydown', function(e) {
       incrementSlider("left")
       break
 
-      case 39:
+      case "ArrowRight":
       if (arrowKeysDown.right > 0) { return }
       arrowKeysDown.right = 1
       arrowKeyTimeouts.right = setTimeout(function() { arrowKeyCycle("right") }, initialKeyPressDelay)
@@ -24,7 +24,7 @@ document.addEventListener('keydown', function(e) {
       incrementSlider("right")
       break
 
-      case 40:
+      case "ArrowDown":
       if (arrowKeysDown.down > 0) { return }
       arrowKeysDown.down = 1
       arrowKeyTimeouts.down = setTimeout(function() { arrowKeyCycle("down") }, initialKeyPressDelay)
@@ -32,7 +32,7 @@ document.addEventListener('keydown', function(e) {
       incrementSlider("down")
       break
 
-      case 38:
+      case "ArrowUp":
       if (arrowKeysDown.up > 0) { return }
       arrowKeysDown.up = 1
       arrowKeyTimeouts.up = setTimeout(function() { arrowKeyCycle("up") }, initialKeyPressDelay)
@@ -214,30 +214,27 @@ function incrementSlider(keyString)
 }
 
 document.addEventListener('keyup', function(e) {
-  if (e.which >= 37 && e.which <= 40)
+  switch (e.key)
   {
-    switch (e.which)
-    {
-      case 37:
-      arrowKeysDown.left = 0
-      clearTimeout(arrowKeyTimeouts.left)
-      break
+    case "ArrowLeft":
+    arrowKeysDown.left = 0
+    clearTimeout(arrowKeyTimeouts.left)
+    break
 
-      case 39:
-      arrowKeysDown.right = 0
-      clearTimeout(arrowKeyTimeouts.right)
-      break
+    case "ArrowRight":
+    arrowKeysDown.right = 0
+    clearTimeout(arrowKeyTimeouts.right)
+    break
 
-      case 40:
-      arrowKeysDown.down = 0
-      clearTimeout(arrowKeyTimeouts.down)
-      break
+    case "ArrowDown":
+    arrowKeysDown.down = 0
+    clearTimeout(arrowKeyTimeouts.down)
+    break
 
-      case 38:
-      arrowKeysDown.up = 0
-      clearTimeout(arrowKeyTimeouts.up)
-      break
-    }
+    case "ArrowUp":
+    arrowKeysDown.up = 0
+    clearTimeout(arrowKeyTimeouts.up)
+    break
   }
 })
 
@@ -280,9 +277,9 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && e.which >= 49 && e.which <= 57 && e.which-49 < mapSourceIDs.length)
+  if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
   {
-    currentMapSource = mapSources[mapSourceIDs[e.which-49]]
+    currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)]]
     updateNavBarForNewSource()
     await loadDataMap()
     if (currentRegionID)
@@ -290,33 +287,33 @@ document.addEventListener('keypress', async function(e) {
       updateRegionBox(currentRegionID)
     }
   }
-  else if (currentEditingState == EditingState.viewing && !isEditingTextbox() && e.which == 48)
+  else if (currentEditingState == EditingState.viewing && !isEditingTextbox() && e.key == "0")
   {
     clearMap()
   }
-  else if (selectedDropdownDivID && e.which >= 49 && e.which <= 57)
+  else if (selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0)
   {
     switch (selectedDropdownDivID)
     {
       case "compareDropdownContent":
-      if (e.which >= 3+49) { return }
+      if (parseInt(e.key)-1 >= getDefaultCompareSourceIDs().length) { return }
 
       $(".comparesourcecheckbox").prop('checked', false)
       compareMapSourceIDArray = [null, null]
 
-      loadComparePreset(e.which-(49-1))
+      loadComparePreset(parseInt(e.key)-1)
       break
 
       case "marginsDropdownContent":
-      if (e.which >= 2+49) { return }
+      if (parseInt(e.key) > 2) { return }
 
-      switch (e.which)
+      switch (parseInt(e.key))
       {
-        case 49:
+        case 1:
         marginValues = cloneObject(defaultMarginValues)
         break
 
-        case 50:
+        case 2:
         marginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
         break
       }
@@ -329,9 +326,9 @@ document.addEventListener('keypress', async function(e) {
       break
 
       case "mapSourcesDropdownContent":
-      if (e.which >= mapSourceIDs.length+49) { return }
+      if (parseInt(e.key)-1 >= mapSourceIDs.length) { return }
 
-      currentMapSource = mapSources[mapSourceIDs[e.which-49]]
+      currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)-1]]
       updateNavBarForNewSource()
       await loadDataMap(true, true)
       if (currentRegionID)
@@ -341,9 +338,9 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentEditingState == EditingState.editing && !isEditingTextbox() && e.which >= 48 && e.which <= 57 && e.which-48 <= dropdownPoliticalPartyIDs.length)
+  else if (currentEditingState == EditingState.editing && !isEditingTextbox() && parseInt(e.key) != NaN && parseInt(e.key) <= dropdownPoliticalPartyIDs.length)
   {
-    var partyToSelect = e.which-48
+    var partyToSelect = parseInt(e.key)
     if (partyToSelect == 0)
     {
       selectParty()
@@ -353,7 +350,7 @@ document.addEventListener('keypress', async function(e) {
       selectParty($("#" + dropdownPoliticalPartyIDs[partyToSelect-1]))
     }
   }
-  else if (e.which == 13)
+  else if (e.key == "Enter")
   {
     if (editMarginID)
     {
@@ -382,34 +379,34 @@ document.addEventListener('keypress', async function(e) {
       toggleEditing()
     }
   }
-  else if ((e.which == 82 || e.which == 114) && !isEditingTextbox())
+  else if (e.key == "r" && !isEditingTextbox())
   {
     resizeElements()
   }
-  else if (shiftNumberKeycodes.includes(e.which) && shiftNumberKeycodes.indexOf(e.which) < mapSourceIDs.length-1 && !isEditingTextbox())
+  else if (shiftNumberKeycodes.includes(e.key) && shiftNumberKeycodes.indexOf(e.key) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
-    var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.which)]
+    var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.key)]
     toggleCompareMapSourceCheckbox(mapSourceIDToCompare, false)
   }
-  else if ((e.which == 99 || e.which == 109 || e.which == 115) && !isEditingTextbox())
+  else if ((e.key == "c" || e.key == "m" || e.key == "s") && !isEditingTextbox())
   {
     removeActiveClassFromDropdownButton()
 
     var contentDivIDToToggle = ""
     var dropdownButtonDivID = ""
-    switch (e.which)
+    switch (e.key)
     {
-      case 99:
+      case "c":
       contentDivIDToToggle = "compareDropdownContent"
       dropdownButtonDivID = "compareButton"
       break
 
-      case 109:
+      case "m":
       contentDivIDToToggle = "marginsDropdownContent"
       dropdownButtonDivID = "marginEditButton"
       break
 
-      case 115:
+      case "s":
       contentDivIDToToggle = "mapSourcesDropdownContent"
       dropdownButtonDivID = "sourceToggleButton"
       break
@@ -431,7 +428,7 @@ document.addEventListener('keypress', async function(e) {
       selectedDropdownDivID = null
     }
   }
-  else if ((e.which == 84 || e.which == 116) && !isEditingTextbox())
+  else if (e.key == "t" && !isEditingTextbox())
   {
     cycleMapType($("#cycleMapTypeButton")[0])
   }
