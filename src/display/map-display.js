@@ -210,6 +210,7 @@ function loadMapSVGFile()
 {
   var loadSVGFilePromise = new Promise((resolve) => {
     $("#svgdata").css('opacity', "0")
+    $("#mapCloseButton").hide()
 
     var handleNewSVG = () => {
       $("#svgdata").css('opacity', "1")
@@ -242,6 +243,8 @@ function loadMapSVGFile()
 
           $("#text").remove()
         }
+
+        $("#mapCloseButton").show()
 
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()
@@ -464,6 +467,12 @@ function addDivEventListeners()
     }, 200)
   })
 
+  $("#mapCloseButton").hover(function() {
+    $("#mapCloseButtonImage").attr('src', "./assets/close-icon-hover.png")
+  }, function() {
+    $("#mapCloseButtonImage").attr('src', "./assets/close-icon.png")
+  })
+
   createPartyDropdownsBoxHoverHandler()
 }
 
@@ -521,7 +530,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
-    $("#totalsPieChart").attr('onclick', "currentMapSource.openHomepageLink(currentSliderDate)")
+    $("#totalsPieChart").attr('onclick', "!currentMapZoomRegion ? currentMapSource.openHomepageLink(currentSliderDate) : currentMapSource.openRegionLink(currentMapZoomRegion, currentSliderDate)")
 
     if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
     {
@@ -1122,16 +1131,9 @@ function leftClickRegion(div)
 
     displayDataMap()
   }
-  else if (currentViewingState == ViewingState.zooming && showingDataMap)
+  else if (showingDataMap)
   {
-    currentViewingState = ViewingState.viewing
-    currentMapZoomRegion = null
-
-    displayDataMap()
-  }
-  else if (currentViewingState == ViewingState.viewing && showingDataMap)
-  {
-    currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
+    currentMapSource.openRegionLink(currentRegionID ?? currentMapZoomRegion, currentSliderDate)
   }
 }
 
@@ -1190,10 +1192,6 @@ function rightClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentEditingState == EditingState.viewing && showingDataMap)
-  {
-    currentMapSource.openRegionLink(currentRegionID, currentSliderDate)
-  }
 }
 
 function shiftClickRegion()
@@ -1243,6 +1241,14 @@ function altClickRegion(div)
     updateMapElectoralVoteText()
     displayPartyTotals(getPartyTotals())
   }
+}
+
+function mapCloseButtonClicked()
+{
+  currentViewingState = ViewingState.viewing
+  currentMapZoomRegion = null
+
+  displayDataMap()
 }
 
 function getRegionData(regionID)

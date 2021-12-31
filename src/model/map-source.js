@@ -2917,15 +2917,29 @@ function createHouseMapSources()
     {
       if (mapDate == null) { return }
 
+      var districtNumber
       if (regionID != null && regionID.includes("-"))
       {
+        districtNumber = regionID.split("-")[1]
         regionID = regionID.split("-")[0]
       }
 
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_House_of_Representatives_elections"
       if (!shouldOpenHomepage)
       {
-        linkToOpen += (USAHouseMapType.getEV(getDecadeFromDate(mapDate), regionID) > 1 ? "_in_" : "#") + regionIDToLinkMap[regionID]
+        if (getDecadeFromDate(mapDate) < 1990)
+        {
+          linkToOpen += "#" + regionIDToLinkMap[regionID]
+        }
+        else if (USAHouseMapType.getEV(getDecadeFromDate(mapDate), regionID) > 1)
+        {
+          linkToOpen += "_in_" + regionIDToLinkMap[regionID] + (districtNumber ? "#District_" + districtNumber : "")
+        }
+        else
+        {
+          linkToOpen += "#" + regionIDToLinkMap[regionID]
+        }
+        // linkToOpen += (USAHouseMapType.getEV(getDecadeFromDate(mapDate), regionID) > 1 ? "_in_" : "#") + regionIDToLinkMap[regionID] + (districtNumber ? "#District_" + districtNumber : "")
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
