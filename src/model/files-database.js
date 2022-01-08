@@ -80,7 +80,14 @@ class FilesDatabase
 
           if (Date.now()-self.lastSourceUpdateCheck < 1000*60*5)
           {
-            resolve(textResult)
+            if (updatedTime && updatedTime >= data[sourceID])
+            {
+              resolve(textResult)
+            }
+            else
+            {
+              resolve(null)
+            }
             return
           }
 
