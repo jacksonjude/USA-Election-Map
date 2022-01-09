@@ -74,30 +74,29 @@ class FilesDatabase
 
         var query = store.get(sourceID)
 
-        query.onsuccess = function() {
+        query.onsuccess = async function() {
           var textResult = query.result ? query.result.text : null
           var updatedTime = query.result ? query.result.updatedAt : null
 
-          if (Date.now()-self.lastSourceUpdateCheck < 1000*60*5)
+          if (!self.sourceUpdatedTimesData || Date.now()-self.lastSourceUpdateCheck >= 1000*60*5)
           {
-            resolve(textResult)
-            return
+            await $.getJSON(self.sourceUpdatedTimesURL, null, data => {
+              self.lastSourceUpdateCheck = (new Date()).getTime()
+              self.sourceUpdatedTimesData = data
+            }).fail((_, error) => {
+              console.log(error)
+              resolve(textResult)
+            })
           }
 
-          $.getJSON(self.sourceUpdatedTimesURL, null, data => {
-            self.lastSourceUpdateCheck = (new Date()).getTime()
-            if (updatedTime && updatedTime >= data[sourceID])
-            {
-              resolve(textResult)
-            }
-            else
-            {
-              resolve(null)
-            }
-          }).fail((_, error) => {
-            console.log(error)
+          if (updatedTime && self.sourceUpdatedTimesData && updatedTime >= self.sourceUpdatedTimesData[sourceID])
+          {
             resolve(textResult)
-          })
+          }
+          else
+          {
+            resolve(null)
+          }
         }
 
         query.onerror = function(event) {
