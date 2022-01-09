@@ -1202,11 +1202,19 @@ function createPresidentialMapSources()
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear < 1864)
     {
-      return "svg-sources/usa-presidential-pre-civil-war-map.svg"
+      return "svg-sources/usa-presidential-pre-1864-map.svg"
     }
     else if (dateYear < 1960)
     {
-      return "svg-sources/usa-presidential-historical-map.svg"
+      return "svg-sources/usa-presidential-pre-1960-map.svg"
+    }
+    else if (dateYear < 1972)
+    {
+      return "svg-sources/usa-presidential-pre-1972-map.svg"
+    }
+    else  if (dateYear < 1996)
+    {
+      return "svg-sources/usa-presidential-pre-1996-map.svg"
     }
     else
     {
