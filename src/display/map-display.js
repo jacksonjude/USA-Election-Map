@@ -1365,7 +1365,10 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     }
   }
 
-  $("#" + regionData.region + "-text").css('fill', regionData.disabled && !currentMapType.getMapSettingValue("mapCurrentSeats") ? 'gray' : 'white')
+  for (let regionID of regionIDsToUpdate)
+  {
+    $("#" + regionID + "-text").css('fill', regionData.disabled && !currentMapType.getMapSettingValue("mapCurrentSeats") ? 'gray' : 'white')
+  }
 
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
   {
