@@ -1229,12 +1229,12 @@ function altClickRegion(div)
     if (regionData.disabled)
     {
       regionData.disabled = false
-      regionData.margin = 100
+      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 100
     }
     else
     {
       regionData.disabled = true
-      regionData.margin = 101
+      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 101
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
