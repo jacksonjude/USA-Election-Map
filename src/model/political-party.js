@@ -74,7 +74,7 @@ const PoliticalPartyColors = {
   purple: {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#E8AF44", lean: "#E6BD5D", tilt: "#C7A659"},
   scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
-  gray: {current: "#363636", safe: "#505050", likely: "#979797", lean: "#C0C0C0", tilt: "#A2A2A2"}
+  gray: {current: "#262626", safe: "#404040", likely: "#6C6C6C", lean: "#B0B0B0", tilt: "#D4D4D4"}
 }
 
 // Main Parties
