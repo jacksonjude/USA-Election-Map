@@ -12,6 +12,8 @@ var partyOrdering = [
   {partyID: DemocraticParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: GreenParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: IndependentRNParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1824AJParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1824WCParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1932NTParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1948SMParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1948HWParty.getID(), direction: PieChartDirection.clockwise},
@@ -21,6 +23,12 @@ var partyOrdering = [
   {partyID: Independent2016EMParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: IndependentGenericParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: TossupParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1824HCParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1832JFParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1832WWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836WMParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836DWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836HWParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1856MFParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1860JohnBellParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1888CFParty.getID(), direction: PieChartDirection.counterclockwise},
@@ -34,7 +42,10 @@ var partyOrdering = [
   {partyID: ReformParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: LibertarianParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: RepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
-  {partyID: Independent1912TRParty.getID(), direction: PieChartDirection.counterclockwise}
+  {partyID: Independent1912TRParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: WhigParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: NationalRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: DemocraticRepublicanParty.getID(), direction: PieChartDirection.counterclockwise}
 ]
 
 var totalsPieChartCutoutPercent = 55

@@ -1,4 +1,850 @@
 date,region,state_po,candidate,party,voteshare,
+10/31/1824,Alabama,AL,Jackson,democratic-republican,69.31559215
+10/31/1824,Alabama,AL,Adams,democratic-republican,17.80489598
+10/31/1824,Alabama,AL,Clay,democratic-republican,0.7057266779
+10/31/1824,Alabama,AL,Crawford,democratic-republican,12.17378519
+10/31/1824,Alabama,AL,Other,democratic-republican,0
+10/31/1824,Connecticut,CT,Jackson,democratic-republican,0
+10/31/1824,Connecticut,CT,Adams,democratic-republican,70.38602423
+10/31/1824,Connecticut,CT,Clay,democratic-republican,0
+10/31/1824,Connecticut,CT,Crawford,democratic-republican,18.45590307
+10/31/1824,Connecticut,CT,Other,democratic-republican,11.1580727
+10/31/1824,Delaware,DE,Jackson,democratic-republican,100
+10/31/1824,Delaware,DE,Adams,democratic-republican,0
+10/31/1824,Delaware,DE,Clay,democratic-republican,0
+10/31/1824,Delaware,DE,Crawford,democratic-republican,0
+10/31/1824,Delaware,DE,Other,democratic-republican,0
+10/31/1824,Georgia,GA,Jackson,democratic-republican,0
+10/31/1824,Georgia,GA,Adams,democratic-republican,0
+10/31/1824,Georgia,GA,Clay,democratic-republican,0
+10/31/1824,Georgia,GA,Crawford,democratic-republican,100
+10/31/1824,Georgia,GA,Other,democratic-republican,0
+10/31/1824,Illinois,IL,Jackson,democratic-republican,27.23185613
+10/31/1824,Illinois,IL,Adams,democratic-republican,32.45557696
+10/31/1824,Illinois,IL,Clay,democratic-republican,22.17940484
+10/31/1824,Illinois,IL,Crawford,democratic-republican,18.13316206
+10/31/1824,Illinois,IL,Other,democratic-republican,0
+10/31/1824,Indiana,IN,Jackson,democratic-republican,46.61334349
+10/31/1824,Indiana,IN,Adams,democratic-republican,19.64705136
+10/31/1824,Indiana,IN,Clay,democratic-republican,33.73960515
+10/31/1824,Indiana,IN,Crawford,democratic-republican,0
+10/31/1824,Indiana,IN,Other,democratic-republican,0
+10/31/1824,Kentucky,KY,Jackson,democratic-republican,27.23455309
+10/31/1824,Kentucky,KY,Adams,democratic-republican,0
+10/31/1824,Kentucky,KY,Clay,democratic-republican,72.76544691
+10/31/1824,Kentucky,KY,Crawford,democratic-republican,0
+10/31/1824,Kentucky,KY,Other,democratic-republican,0
+10/31/1824,Louisiana,LA,Jackson,democratic-republican,100
+10/31/1824,Louisiana,LA,Adams,democratic-republican,0
+10/31/1824,Louisiana,LA,Clay,democratic-republican,0
+10/31/1824,Louisiana,LA,Crawford,democratic-republican,0
+10/31/1824,Louisiana,LA,Other,democratic-republican,0
+10/31/1824,Maine,ME,Jackson,democratic-republican,0
+10/31/1824,Maine,ME,Adams,democratic-republican,81.4970297
+10/31/1824,Maine,ME,Clay,democratic-republican,0
+10/31/1824,Maine,ME,Crawford,democratic-republican,18.5029703
+10/31/1824,Maine,ME,Other,democratic-republican,0
+10/31/1824,Maryland,MD,Jackson,democratic-republican,43.72553742
+10/31/1824,Maryland,MD,Adams,democratic-republican,44.05371229
+10/31/1824,Maryland,MD,Clay,democratic-republican,2.092491118
+10/31/1824,Maryland,MD,Crawford,democratic-republican,10.12825917
+10/31/1824,Maryland,MD,Other,democratic-republican,0
+10/31/1824,Massachusetts,MA,Jackson,democratic-republican,0
+10/31/1824,Massachusetts,MA,Adams,democratic-republican,72.96699639
+10/31/1824,Massachusetts,MA,Clay,democratic-republican,0
+10/31/1824,Massachusetts,MA,Crawford,democratic-republican,0
+10/31/1824,Massachusetts,MA,Other,democratic-republican,27.03300361
+10/31/1824,Mississippi,MS,Jackson,democratic-republican,63.77196567
+10/31/1824,Mississippi,MS,Adams,democratic-republican,33.79648549
+10/31/1824,Mississippi,MS,Clay,democratic-republican,0
+10/31/1824,Mississippi,MS,Crawford,democratic-republican,2.431548835
+10/31/1824,Mississippi,MS,Other,democratic-republican,0
+10/31/1824,Missouri,MO,Jackson,democratic-republican,33.97435897
+10/31/1824,Missouri,MO,Adams,democratic-republican,4.632867133
+10/31/1824,Missouri,MO,Clay,democratic-republican,59.4988345
+10/31/1824,Missouri,MO,Crawford,democratic-republican,0.9324009324
+10/31/1824,Missouri,MO,Other,democratic-republican,0.9615384615
+10/31/1824,New Hampshire,NH,Jackson,democratic-republican,0
+10/31/1824,New Hampshire,NH,Adams,democratic-republican,93.59051037
+10/31/1824,New Hampshire,NH,Clay,democratic-republican,0
+10/31/1824,New Hampshire,NH,Crawford,democratic-republican,6.409489633
+10/31/1824,New Hampshire,NH,Other,democratic-republican,0
+10/31/1824,New Jersey,NJ,Jackson,democratic-republican,52.08448858
+10/31/1824,New Jersey,NJ,Adams,democratic-republican,41.88637395
+10/31/1824,New Jersey,NJ,Clay,democratic-republican,0
+10/31/1824,New Jersey,NJ,Crawford,democratic-republican,6.02913747
+10/31/1824,New Jersey,NJ,Other,democratic-republican,0
+10/31/1824,New York,NY,Jackson,democratic-republican,0
+10/31/1824,New York,NY,Adams,democratic-republican,100
+10/31/1824,New York,NY,Clay,democratic-republican,0
+10/31/1824,New York,NY,Crawford,democratic-republican,0
+10/31/1824,New York,NY,Other,democratic-republican,0
+10/31/1824,North Carolina,NC,Jackson,democratic-republican,56.02758315
+10/31/1824,North Carolina,NC,Adams,democratic-republican,0
+10/31/1824,North Carolina,NC,Clay,democratic-republican,0
+10/31/1824,North Carolina,NC,Crawford,democratic-republican,43.26345232
+10/31/1824,North Carolina,NC,Other,democratic-republican,0.7089645241
+10/31/1824,Ohio,OH,Jackson,democratic-republican,36.96025908
+10/31/1824,Ohio,OH,Adams,democratic-republican,24.54821686
+10/31/1824,Ohio,OH,Clay,democratic-republican,38.49152407
+10/31/1824,Ohio,OH,Crawford,democratic-republican,0
+10/31/1824,Ohio,OH,Other,democratic-republican,0
+10/31/1824,Pennsylvania,PA,Jackson,democratic-republican,76.03699314
+10/31/1824,Pennsylvania,PA,Adams,democratic-republican,11.50427495
+10/31/1824,Pennsylvania,PA,Clay,democratic-republican,3.608312876
+10/31/1824,Pennsylvania,PA,Crawford,democratic-republican,8.85041903
+10/31/1824,Pennsylvania,PA,Other,democratic-republican,0
+10/31/1824,Rhode Island,RI,Jackson,democratic-republican,0
+10/31/1824,Rhode Island,RI,Adams,democratic-republican,91.47121535
+10/31/1824,Rhode Island,RI,Clay,democratic-republican,0
+10/31/1824,Rhode Island,RI,Crawford,democratic-republican,8.528784648
+10/31/1824,Rhode Island,RI,Other,democratic-republican,0
+10/31/1824,South Carolina,SC,Jackson,democratic-republican,100
+10/31/1824,South Carolina,SC,Adams,democratic-republican,0
+10/31/1824,South Carolina,SC,Clay,democratic-republican,0
+10/31/1824,South Carolina,SC,Crawford,democratic-republican,0
+10/31/1824,South Carolina,SC,Other,democratic-republican,0
+10/31/1824,Tennessee,TN,Jackson,democratic-republican,97.45235223
+10/31/1824,Tennessee,TN,Adams,democratic-republican,1.042219542
+10/31/1824,Tennessee,TN,Clay,democratic-republican,0
+10/31/1824,Tennessee,TN,Crawford,democratic-republican,1.505428227
+10/31/1824,Tennessee,TN,Other,democratic-republican,0
+10/31/1824,Vermont,VT,Jackson,democratic-republican,0
+10/31/1824,Vermont,VT,Adams,democratic-republican,100
+10/31/1824,Vermont,VT,Clay,democratic-republican,0
+10/31/1824,Vermont,VT,Crawford,democratic-republican,0
+10/31/1824,Vermont,VT,Other,democratic-republican,0
+10/31/1824,Virginia,VA,Jackson,democratic-republican,19.35462885
+10/31/1824,Virginia,VA,Adams,democratic-republican,22.24318522
+10/31/1824,Virginia,VA,Clay,democratic-republican,2.725912433
+10/31/1824,Virginia,VA,Crawford,democratic-republican,55.6762735
+10/31/1824,Virginia,VA,Other,democratic-republican,0
+10/31/1828,Alabama,AL,Jackson,democrat,89.89150285
+10/31/1828,Alabama,AL,Adams,national republican,10.08701257
+10/31/1828,Alabama,AL,Other,independent,0.02148458481
+10/31/1828,Connecticut,CT,Jackson,democrat,22.95386521
+10/31/1828,Connecticut,CT,Adams,national republican,71.36443389
+10/31/1828,Connecticut,CT,Other,independent,5.681700898
+10/31/1828,Delaware,DE,Jackson,democrat,0
+10/31/1828,Delaware,DE,Adams,national republican,100
+10/31/1828,Delaware,DE,Other,independent,0
+10/31/1828,Georgia,GA,Jackson,democrat,96.79064187
+10/31/1828,Georgia,GA,Adams,national republican,3.209358128
+10/31/1828,Georgia,GA,Other,independent,0
+10/31/1828,Illinois,IL,Jackson,democrat,67.21980031
+10/31/1828,Illinois,IL,Adams,national republican,32.78019969
+10/31/1828,Illinois,IL,Other,independent,0
+10/31/1828,Indiana,IN,Jackson,democrat,56.62062123
+10/31/1828,Indiana,IN,Adams,national republican,43.37937877
+10/31/1828,Indiana,IN,Other,independent,0
+10/31/1828,Kentucky,KY,Jackson,democrat,55.53860066
+10/31/1828,Kentucky,KY,Adams,national republican,44.46139934
+10/31/1828,Kentucky,KY,Other,independent,0
+10/31/1828,Louisiana,LA,Jackson,democrat,53.01024519
+10/31/1828,Louisiana,LA,Adams,national republican,46.98975481
+10/31/1828,Louisiana,LA,Other,independent,0
+10/31/1828,Maine,ME,Jackson,democrat,40.03276898
+10/31/1828,Maine,ME,Adams,national republican,59.71140303
+10/31/1828,Maine,ME,Other,independent,0.2558279916
+10/31/1828,Maryland,MD,Jackson,democrat,49.74670277
+10/31/1828,Maryland,MD,Adams,national republican,50.25329723
+10/31/1828,Maryland,MD,Other,independent,0
+10/31/1828,Massachusetts,MA,Jackson,democrat,15.38619031
+10/31/1828,Massachusetts,MA,Adams,national republican,76.3576803
+10/31/1828,Massachusetts,MA,Other,independent,8.256129396
+10/31/1828,Mississippi,MS,Jackson,democrat,81.05225312
+10/31/1828,Mississippi,MS,Adams,national republican,18.94774688
+10/31/1828,Mississippi,MS,Other,independent,0
+10/31/1828,Missouri,MO,Jackson,democrat,70.63669126
+10/31/1828,Missouri,MO,Adams,national republican,29.36330874
+10/31/1828,Missouri,MO,Other,independent,0
+10/31/1828,New Hampshire,NH,Jackson,democrat,45.89985239
+10/31/1828,New Hampshire,NH,Adams,national republican,54.10014761
+10/31/1828,New Hampshire,NH,Other,independent,0
+10/31/1828,New Jersey,NJ,Jackson,democrat,47.85824007
+10/31/1828,New Jersey,NJ,Adams,national republican,52.12420452
+10/31/1828,New Jersey,NJ,Other,independent,0.01755540926
+10/31/1828,New York,NY,Jackson,democrat,51.44828859
+10/31/1828,New York,NY,Adams,national republican,48.55171141
+10/31/1828,New York,NY,Other,independent,0
+10/31/1828,North Carolina,NC,Jackson,democrat,73.07476762
+10/31/1828,North Carolina,NC,Adams,national republican,26.89624519
+10/31/1828,North Carolina,NC,Other,independent,0.02898718766
+10/31/1828,Ohio,OH,Jackson,democrat,51.6035208
+10/31/1828,Ohio,OH,Adams,national republican,48.3964792
+10/31/1828,Ohio,OH,Other,independent,0
+10/31/1828,Pennsylvania,PA,Jackson,democrat,66.65704918
+10/31/1828,Pennsylvania,PA,Adams,national republican,33.34295082
+10/31/1828,Pennsylvania,PA,Other,independent,0
+10/31/1828,Rhode Island,RI,Jackson,democrat,22.96503497
+10/31/1828,Rhode Island,RI,Adams,national republican,77.03496503
+10/31/1828,Rhode Island,RI,Other,independent,0
+10/31/1828,South Carolina,SC,Jackson,democrat,100
+10/31/1828,South Carolina,SC,Adams,national republican,0
+10/31/1828,South Carolina,SC,Other,independent,0
+10/31/1828,Tennessee,TN,Jackson,democrat,95.18621194
+10/31/1828,Tennessee,TN,Adams,national republican,4.813788064
+10/31/1828,Tennessee,TN,Other,independent,0
+10/31/1828,Vermont,VT,Jackson,democrat,24.76789369
+10/31/1828,Vermont,VT,Adams,national republican,75.23210631
+10/31/1828,Vermont,VT,Other,independent,0
+10/31/1828,Virginia,VA,Jackson,democrat,68.99085397
+10/31/1828,Virginia,VA,Adams,national republican,31.00914603
+10/31/1828,Virginia,VA,Other,independent,0
+11/2/1832,Alabama,AL,Jackson,democratic,99.96501295
+11/2/1832,Alabama,AL,Clay,national republican,0.03498705479
+11/2/1832,Alabama,AL,Wirt,independent,0
+11/2/1832,Alabama,AL,Other,independent,0
+11/2/1832,Connecticut,CT,Jackson,democratic,34.32217586
+11/2/1832,Connecticut,CT,Clay,national republican,55.29497761
+11/2/1832,Connecticut,CT,Wirt,independent,10.38284653
+11/2/1832,Connecticut,CT,Other,independent,0
+11/2/1832,Delaware,DE,Jackson,democratic,49.01025519
+11/2/1832,Delaware,DE,Clay,national republican,50.98974481
+11/2/1832,Delaware,DE,Wirt,independent,0
+11/2/1832,Delaware,DE,Other,independent,0
+11/2/1832,Georgia,GA,Jackson,democratic,100
+11/2/1832,Georgia,GA,Clay,national republican,0
+11/2/1832,Georgia,GA,Wirt,independent,0
+11/2/1832,Georgia,GA,Other,independent,0
+11/2/1832,Illinois,IL,Jackson,democratic,68.00893813
+11/2/1832,Illinois,IL,Clay,national republican,31.39984172
+11/2/1832,Illinois,IL,Wirt,independent,0.4515618454
+11/2/1832,Illinois,IL,Other,independent,0.1396583027
+11/2/1832,Indiana,IN,Jackson,democratic,67.09695256
+11/2/1832,Indiana,IN,Clay,national republican,32.90304744
+11/2/1832,Indiana,IN,Wirt,independent,0
+11/2/1832,Indiana,IN,Other,independent,0
+11/2/1832,Kentucky,KY,Jackson,democratic,45.51234622
+11/2/1832,Kentucky,KY,Clay,national republican,54.48765378
+11/2/1832,Kentucky,KY,Wirt,independent,0
+11/2/1832,Kentucky,KY,Other,independent,0
+11/2/1832,Louisiana,LA,Jackson,democratic,61.66955973
+11/2/1832,Louisiana,LA,Clay,national republican,38.33044027
+11/2/1832,Louisiana,LA,Wirt,independent,0
+11/2/1832,Louisiana,LA,Other,independent,0
+11/2/1832,Maine,ME,Jackson,democratic,54.6683185
+11/2/1832,Maine,ME,Clay,national republican,43.97374222
+11/2/1832,Maine,ME,Wirt,independent,1.357939279
+11/2/1832,Maine,ME,Other,independent,0
+11/2/1832,Maryland,MD,Jackson,democratic,49.99478025
+11/2/1832,Maryland,MD,Clay,national republican,50.00521975
+11/2/1832,Maryland,MD,Wirt,independent,0
+11/2/1832,Maryland,MD,Other,independent,0
+11/2/1832,Massachusetts,MA,Jackson,democratic,20.60515536
+11/2/1832,Massachusetts,MA,Clay,national republican,47.26925864
+11/2/1832,Massachusetts,MA,Wirt,independent,21.72762093
+11/2/1832,Massachusetts,MA,Other,independent,10.39796507
+11/2/1832,Mississippi,MS,Jackson,democratic,100
+11/2/1832,Mississippi,MS,Clay,national republican,0
+11/2/1832,Mississippi,MS,Wirt,independent,0
+11/2/1832,Mississippi,MS,Other,independent,0
+11/2/1832,Missouri,MO,Jackson,democratic,100
+11/2/1832,Missouri,MO,Clay,national republican,0
+11/2/1832,Missouri,MO,Wirt,independent,0
+11/2/1832,Missouri,MO,Other,independent,0
+11/2/1832,New Hampshire,NH,Jackson,democratic,56.75564588
+11/2/1832,New Hampshire,NH,Clay,national republican,43.24435412
+11/2/1832,New Hampshire,NH,Wirt,independent,0
+11/2/1832,New Hampshire,NH,Other,independent,0
+11/2/1832,New Jersey,NJ,Jackson,democratic,49.88693467
+11/2/1832,New Jersey,NJ,Clay,national republican,49.13316583
+11/2/1832,New Jersey,NJ,Wirt,independent,0.9798994975
+11/2/1832,New Jersey,NJ,Other,independent,0
+11/2/1832,New York,NY,Jackson,democratic,52.10285937
+11/2/1832,New York,NY,Clay,national republican,47.89714063
+11/2/1832,New York,NY,Wirt,independent,0
+11/2/1832,New York,NY,Other,independent,0
+11/2/1832,North Carolina,NC,Jackson,democratic,84.77130105
+11/2/1832,North Carolina,NC,Clay,national republican,15.22869895
+11/2/1832,North Carolina,NC,Wirt,independent,0
+11/2/1832,North Carolina,NC,Other,independent,0
+11/2/1832,Ohio,OH,Jackson,democratic,51.32601362
+11/2/1832,Ohio,OH,Clay,national republican,48.35243281
+11/2/1832,Ohio,OH,Wirt,independent,0.3215535649
+11/2/1832,Ohio,OH,Other,independent,0
+11/2/1832,Pennsylvania,PA,Jackson,democratic,57.96152246
+11/2/1832,Pennsylvania,PA,Clay,national republican,0
+11/2/1832,Pennsylvania,PA,Wirt,independent,42.03847754
+11/2/1832,Pennsylvania,PA,Other,independent,0
+11/2/1832,Rhode Island,RI,Jackson,democratic,43.0713128
+11/2/1832,Rhode Island,RI,Clay,national republican,56.9286872
+11/2/1832,Rhode Island,RI,Wirt,independent,0
+11/2/1832,Rhode Island,RI,Other,independent,0
+11/2/1832,South Carolina,SC,Jackson,democratic,0
+11/2/1832,South Carolina,SC,Clay,national republican,0
+11/2/1832,South Carolina,SC,Wirt,independent,0
+11/2/1832,South Carolina,SC,Other,independent,0
+11/2/1832,South Carolina,SC,Floyd,independent,100
+11/2/1832,Tennessee,TN,Jackson,democratic,95.42225998
+11/2/1832,Tennessee,TN,Clay,national republican,4.577740017
+11/2/1832,Tennessee,TN,Wirt,independent,0
+11/2/1832,Tennessee,TN,Other,independent,0
+11/2/1832,Vermont,VT,Jackson,democratic,24.49576693
+11/2/1832,Vermont,VT,Clay,national republican,34.71115538
+11/2/1832,Vermont,VT,Wirt,independent,40.79307769
+11/2/1832,Vermont,VT,Other,independent,0
+11/2/1832,Virginia,VA,Jackson,democratic,74.95950265
+11/2/1832,Virginia,VA,Clay,national republican,25.03393021
+11/2/1832,Virginia,VA,Wirt,independent,0.006567138041
+11/2/1832,Virginia,VA,Other,independent,0
+11/3/1836,Alabama,AL,Van Buren,democrat,55.33569284
+11/3/1836,Alabama,AL,Harrison,whig,0
+11/3/1836,Alabama,AL,White,independent,44.66430716
+11/3/1836,Alabama,AL,Webster,independent,0
+11/3/1836,Alabama,AL,Other,independent,0
+11/3/1836,Arkansas,AR,Van Buren,democrat,64.08185245
+11/3/1836,Arkansas,AR,Harrison,whig,0
+11/3/1836,Arkansas,AR,White,independent,35.91814755
+11/3/1836,Arkansas,AR,Webster,independent,0
+11/3/1836,Arkansas,AR,Other,independent,0
+11/3/1836,Connecticut,CT,Van Buren,democrat,50.64972567
+11/3/1836,Connecticut,CT,Harrison,whig,49.35027433
+11/3/1836,Connecticut,CT,White,independent,0
+11/3/1836,Connecticut,CT,Webster,independent,0
+11/3/1836,Connecticut,CT,Other,independent,0
+11/3/1836,Delaware,DE,Van Buren,democrat,46.70039348
+11/3/1836,Delaware,DE,Harrison,whig,53.24339517
+11/3/1836,Delaware,DE,White,independent,0
+11/3/1836,Delaware,DE,Webster,independent,0
+11/3/1836,Delaware,DE,Other,independent,0.05621135469
+11/3/1836,Georgia,GA,Van Buren,democrat,48.19822679
+11/3/1836,Georgia,GA,Harrison,whig,0
+11/3/1836,Georgia,GA,White,independent,51.80177321
+11/3/1836,Georgia,GA,Webster,independent,0
+11/3/1836,Georgia,GA,Other,independent,0
+11/3/1836,Illinois,IL,Van Buren,democrat,54.68754652
+11/3/1836,Illinois,IL,Harrison,whig,45.31245348
+11/3/1836,Illinois,IL,White,independent,0
+11/3/1836,Illinois,IL,Webster,independent,0
+11/3/1836,Illinois,IL,Other,independent,0
+11/3/1836,Indiana,IN,Van Buren,democrat,44.03259263
+11/3/1836,Indiana,IN,Harrison,whig,55.96740737
+11/3/1836,Indiana,IN,White,independent,0
+11/3/1836,Indiana,IN,Webster,independent,0
+11/3/1836,Indiana,IN,Other,independent,0
+11/3/1836,Kentucky,KY,Van Buren,democrat,47.40904551
+11/3/1836,Kentucky,KY,Harrison,whig,52.59095449
+11/3/1836,Kentucky,KY,White,independent,0
+11/3/1836,Kentucky,KY,Webster,independent,0
+11/3/1836,Kentucky,KY,Other,independent,0
+11/3/1836,Louisiana,LA,Van Buren,democrat,51.74410774
+11/3/1836,Louisiana,LA,Harrison,whig,0
+11/3/1836,Louisiana,LA,White,independent,48.25589226
+11/3/1836,Louisiana,LA,Webster,independent,0
+11/3/1836,Louisiana,LA,Other,independent,0
+11/3/1836,Maine,ME,Van Buren,democrat,58.91843056
+11/3/1836,Maine,ME,Harrison,whig,38.21115126
+11/3/1836,Maine,ME,White,independent,0
+11/3/1836,Maine,ME,Webster,independent,0
+11/3/1836,Maine,ME,Other,independent,2.870418172
+11/3/1836,Maryland,MD,Van Buren,democrat,46.27486024
+11/3/1836,Maryland,MD,Harrison,whig,53.72513976
+11/3/1836,Maryland,MD,White,independent,0
+11/3/1836,Maryland,MD,Webster,independent,0
+11/3/1836,Maryland,MD,Other,independent,0
+11/3/1836,Massachusetts,MA,Van Buren,democrat,44.80811433
+11/3/1836,Massachusetts,MA,Harrison,whig,0
+11/3/1836,Massachusetts,MA,White,independent,0
+11/3/1836,Massachusetts,MA,Webster,independent,55.1316705
+11/3/1836,Massachusetts,MA,Other,independent,0.06021516887
+11/3/1836,Michigan,MI,Van Buren,democrat,56.22483619
+11/3/1836,Michigan,MI,Harrison,whig,43.77516381
+11/3/1836,Michigan,MI,White,independent,0
+11/3/1836,Michigan,MI,Webster,independent,0
+11/3/1836,Michigan,MI,Other,independent,0
+11/3/1836,Mississippi,MS,Van Buren,democrat,51.28243438
+11/3/1836,Mississippi,MS,Harrison,whig,0
+11/3/1836,Mississippi,MS,White,independent,48.71756562
+11/3/1836,Mississippi,MS,Webster,independent,0
+11/3/1836,Mississippi,MS,Other,independent,0
+11/3/1836,Missouri,MO,Van Buren,democrat,59.97708924
+11/3/1836,Missouri,MO,Harrison,whig,0
+11/3/1836,Missouri,MO,White,independent,40.02291076
+11/3/1836,Missouri,MO,Webster,independent,0
+11/3/1836,Missouri,MO,Other,independent,0
+11/3/1836,New Hampshire,NH,Van Buren,democrat,75.01303912
+11/3/1836,New Hampshire,NH,Harrison,whig,24.98696088
+11/3/1836,New Hampshire,NH,White,independent,0
+11/3/1836,New Hampshire,NH,Webster,independent,0
+11/3/1836,New Hampshire,NH,Other,independent,0
+11/3/1836,New Jersey,NJ,Van Buren,democrat,49.47321618
+11/3/1836,New Jersey,NJ,Harrison,whig,50.52678382
+11/3/1836,New Jersey,NJ,White,independent,0
+11/3/1836,New Jersey,NJ,Webster,independent,0
+11/3/1836,New Jersey,NJ,Other,independent,0
+11/3/1836,New York,NY,Van Buren,democrat,54.625454
+11/3/1836,New York,NY,Harrison,whig,45.374546
+11/3/1836,New York,NY,White,independent,0
+11/3/1836,New York,NY,Webster,independent,0
+11/3/1836,New York,NY,Other,independent,0
+11/3/1836,North Carolina,NC,Van Buren,democrat,53.09951548
+11/3/1836,North Carolina,NC,Harrison,whig,0
+11/3/1836,North Carolina,NC,White,independent,46.89849062
+11/3/1836,North Carolina,NC,Webster,independent,0
+11/3/1836,North Carolina,NC,Other,independent,0.00199389867
+11/3/1836,Ohio,OH,Van Buren,democrat,47.56416403
+11/3/1836,Ohio,OH,Harrison,whig,51.87389106
+11/3/1836,Ohio,OH,White,independent,0
+11/3/1836,Ohio,OH,Webster,independent,0
+11/3/1836,Ohio,OH,Other,independent,0.5619449126
+11/3/1836,Pennsylvania,PA,Van Buren,democrat,51.18136234
+11/3/1836,Pennsylvania,PA,Harrison,whig,48.81863766
+11/3/1836,Pennsylvania,PA,White,independent,0
+11/3/1836,Pennsylvania,PA,Webster,independent,0
+11/3/1836,Pennsylvania,PA,Other,independent,0
+11/3/1836,Rhode Island,RI,Van Buren,democrat,52.23827987
+11/3/1836,Rhode Island,RI,Harrison,whig,47.76172013
+11/3/1836,Rhode Island,RI,White,independent,0
+11/3/1836,Rhode Island,RI,Webster,independent,0
+11/3/1836,Rhode Island,RI,Other,independent,0
+11/3/1836,South Carolina,SC,Van Buren,democratic,0
+11/3/1836,South Carolina,SC,Harrison,whig,0
+11/3/1836,South Carolina,SC,White,independent,0
+11/3/1836,South Carolina,SC,Webster,independent,0
+11/3/1836,South Carolina,SC,Other,independent,0
+11/3/1836,South Carolina,SC,Magnum,independent,100
+11/3/1836,Tennessee,TN,Van Buren,democrat,42.07598437
+11/3/1836,Tennessee,TN,Harrison,whig,0
+11/3/1836,Tennessee,TN,White,independent,57.92401563
+11/3/1836,Tennessee,TN,Webster,independent,0
+11/3/1836,Tennessee,TN,Other,independent,0
+11/3/1836,Vermont,VT,Van Buren,democrat,40.07022352
+11/3/1836,Vermont,VT,Harrison,whig,59.92977648
+11/3/1836,Vermont,VT,White,independent,0
+11/3/1836,Vermont,VT,Webster,independent,0
+11/3/1836,Vermont,VT,Other,independent,0
+11/3/1836,Virginia,VA,Van Buren,democrat,56.642877
+11/3/1836,Virginia,VA,Harrison,whig,0
+11/3/1836,Virginia,VA,White,independent,43.3478543
+11/3/1836,Virginia,VA,Webster,independent,0
+11/3/1836,Virginia,VA,Other,independent,0.009268699601
+10/30/1840,Alabama,AL,Van Buren,democrat,54.38402841
+10/30/1840,Alabama,AL,Harrison,whig,45.61597159
+10/30/1840,Alabama,AL,Other,independent,0
+10/30/1840,Arkansas,AR,Van Buren,democrat,56.41523777
+10/30/1840,Arkansas,AR,Harrison,whig,43.58476223
+10/30/1840,Arkansas,AR,Other,independent,0
+10/30/1840,Connecticut,CT,Van Buren,democrat,44.44698395
+10/30/1840,Connecticut,CT,Harrison,whig,55.55301605
+10/30/1840,Connecticut,CT,Other,independent,0
+10/30/1840,Delaware,DE,Van Buren,democrat,44.89495024
+10/30/1840,Delaware,DE,Harrison,whig,54.98525617
+10/30/1840,Delaware,DE,Other,independent,0.1197935864
+10/30/1840,Georgia,GA,Van Buren,democrat,44.22305799
+10/30/1840,Georgia,GA,Harrison,whig,55.77694201
+10/30/1840,Georgia,GA,Other,independent,0
+10/30/1840,Illinois,IL,Van Buren,democrat,50.91601825
+10/30/1840,Illinois,IL,Harrison,whig,48.91226187
+10/30/1840,Illinois,IL,Other,independent,0.1717198819
+10/30/1840,Indiana,IN,Van Buren,democrat,44.14144697
+10/30/1840,Indiana,IN,Harrison,whig,55.85855303
+10/30/1840,Indiana,IN,Other,independent,0
+10/30/1840,Kentucky,KY,Van Buren,democrat,35.80084299
+10/30/1840,Kentucky,KY,Harrison,whig,64.19915701
+10/30/1840,Kentucky,KY,Other,independent,0
+10/30/1840,Louisiana,LA,Van Buren,democrat,40.27072758
+10/30/1840,Louisiana,LA,Harrison,whig,59.72927242
+10/30/1840,Louisiana,LA,Other,independent,0
+10/30/1840,Maine,ME,Van Buren,democrat,49.77263421
+10/30/1840,Maine,ME,Harrison,whig,50.22736579
+10/30/1840,Maine,ME,Other,independent,0
+10/30/1840,Maryland,MD,Van Buren,democrat,46.16570328
+10/30/1840,Maryland,MD,Harrison,whig,53.83429672
+10/30/1840,Maryland,MD,Other,independent,0
+10/30/1840,Massachusetts,MA,Van Buren,democrat,41.28129312
+10/30/1840,Massachusetts,MA,Harrison,whig,57.44293318
+10/30/1840,Massachusetts,MA,Other,independent,1.275773704
+10/30/1840,Michigan,MI,Van Buren,democrat,47.56708005
+10/30/1840,Michigan,MI,Harrison,whig,51.70913191
+10/30/1840,Michigan,MI,Other,independent,0.7237880496
+10/30/1840,Mississippi,MS,Van Buren,democrat,46.57084189
+10/30/1840,Mississippi,MS,Harrison,whig,53.42915811
+10/30/1840,Mississippi,MS,Other,independent,0
+10/30/1840,Missouri,MO,Van Buren,democrat,56.62755324
+10/30/1840,Missouri,MO,Harrison,whig,43.37244676
+10/30/1840,Missouri,MO,Other,independent,0
+10/30/1840,New Hampshire,NH,Van Buren,democrat,54.66341984
+10/30/1840,New Hampshire,NH,Harrison,whig,43.88218027
+10/30/1840,New Hampshire,NH,Other,independent,1.454399893
+10/30/1840,New Jersey,NJ,Van Buren,democrat,48.14906755
+10/30/1840,New Jersey,NJ,Harrison,whig,51.74387936
+10/30/1840,New Jersey,NJ,Other,independent,0.1070530921
+10/30/1840,New York,NY,Van Buren,democrat,48.17945251
+10/30/1840,New York,NY,Harrison,whig,51.18436936
+10/30/1840,New York,NY,Other,independent,0.6361781299
+10/30/1840,North Carolina,NC,Van Buren,democrat,42.32117421
+10/30/1840,North Carolina,NC,Harrison,whig,57.67882579
+10/30/1840,North Carolina,NC,Other,independent,0
+10/30/1840,Ohio,OH,Van Buren,democrat,45.56715186
+10/30/1840,Ohio,OH,Harrison,whig,54.10309595
+10/30/1840,Ohio,OH,Other,independent,0.3297521929
+10/30/1840,Pennsylvania,PA,Van Buren,democrat,49.88299667
+10/30/1840,Pennsylvania,PA,Harrison,whig,49.99895843
+10/30/1840,Pennsylvania,PA,Other,independent,0.1180448987
+10/30/1840,Rhode Island,RI,Van Buren,democrat,38.29022155
+10/30/1840,Rhode Island,RI,Harrison,whig,61.22259599
+10/30/1840,Rhode Island,RI,Other,independent,0.4871824614
+10/30/1840,South Carolina,SC,Van Buren,democratic,100
+10/30/1840,South Carolina,SC,Harrison,whig,0
+10/30/1840,South Carolina,SC,Other,independent,0
+10/30/1840,Tennessee,TN,Van Buren,democrat,44.33954413
+10/30/1840,Tennessee,TN,Harrison,whig,55.66045587
+10/30/1840,Tennessee,TN,Other,independent,0
+10/30/1840,Vermont,VT,Van Buren,democrat,35.46963938
+10/30/1840,Vermont,VT,Harrison,whig,63.90207394
+10/30/1840,Vermont,VT,Other,independent,0.6282866878
+10/30/1840,Virginia,VA,Van Buren,democrat,50.64819316
+10/30/1840,Virginia,VA,Harrison,whig,49.35180684
+10/30/1840,Virginia,VA,Other,independent,0
+11/1/1844,Alabama,AL,Polk,democratic,58.98932227
+11/1/1844,Alabama,AL,Clay,whig,41.01067773
+11/1/1844,Alabama,AL,Birney,independent,0
+11/1/1844,Alabama,AL,Other,independent,0
+11/1/1844,Arkansas,AR,Polk,democratic,63.00990099
+11/1/1844,Arkansas,AR,Clay,whig,36.99009901
+11/1/1844,Arkansas,AR,Birney,independent,0
+11/1/1844,Arkansas,AR,Other,independent,0
+11/1/1844,Connecticut,CT,Polk,democratic,46.18206017
+11/1/1844,Connecticut,CT,Clay,whig,50.81094466
+11/1/1844,Connecticut,CT,Birney,independent,3.006995171
+11/1/1844,Connecticut,CT,Other,independent,0
+11/1/1844,Delaware,DE,Polk,democratic,48.74663183
+11/1/1844,Delaware,DE,Clay,whig,51.20437658
+11/1/1844,Delaware,DE,Birney,independent,0
+11/1/1844,Delaware,DE,Other,independent,0.04899158978
+11/1/1844,Georgia,GA,Polk,democratic,51.18670794
+11/1/1844,Georgia,GA,Clay,whig,48.81329206
+11/1/1844,Georgia,GA,Birney,independent,0
+11/1/1844,Georgia,GA,Other,independent,0
+11/1/1844,Illinois,IL,Polk,democratic,53.91217437
+11/1/1844,Illinois,IL,Clay,whig,42.0459026
+11/1/1844,Illinois,IL,Birney,independent,3.180905398
+11/1/1844,Illinois,IL,Other,independent,0.861017633
+11/1/1844,Indiana,IN,Polk,democratic,50.07420409
+11/1/1844,Indiana,IN,Clay,whig,48.42316309
+11/1/1844,Indiana,IN,Birney,independent,1.502632818
+11/1/1844,Indiana,IN,Other,independent,0
+11/1/1844,Kentucky,KY,Polk,democratic,45.91078888
+11/1/1844,Kentucky,KY,Clay,whig,54.08921112
+11/1/1844,Kentucky,KY,Birney,independent,0
+11/1/1844,Kentucky,KY,Other,independent,0
+11/1/1844,Louisiana,LA,Polk,democratic,51.30094919
+11/1/1844,Louisiana,LA,Clay,whig,48.69905081
+11/1/1844,Louisiana,LA,Birney,independent,0
+11/1/1844,Louisiana,LA,Other,independent,0
+11/1/1844,Maine,ME,Polk,democratic,53.82948913
+11/1/1844,Maine,ME,Clay,whig,40.47661098
+11/1/1844,Maine,ME,Birney,independent,5.693899898
+11/1/1844,Maine,ME,Other,independent,0
+11/1/1844,Maryland,MD,Polk,democratic,47.6139176
+11/1/1844,Maryland,MD,Clay,whig,52.3860824
+11/1/1844,Maryland,MD,Birney,independent,0
+11/1/1844,Maryland,MD,Other,independent,0
+11/1/1844,Massachusetts,MA,Polk,democratic,40.16980089
+11/1/1844,Massachusetts,MA,Clay,whig,50.79030878
+11/1/1844,Massachusetts,MA,Birney,independent,8.20224634
+11/1/1844,Massachusetts,MA,Other,independent,0.8376439937
+11/1/1844,Michigan,MI,Polk,democratic,49.75157396
+11/1/1844,Michigan,MI,Clay,whig,43.72118886
+11/1/1844,Michigan,MI,Birney,independent,6.52723718
+11/1/1844,Michigan,MI,Other,independent,0
+11/1/1844,Mississippi,MS,Polk,democratic,57.43045063
+11/1/1844,Mississippi,MS,Clay,whig,42.56954937
+11/1/1844,Mississippi,MS,Birney,independent,0
+11/1/1844,Mississippi,MS,Other,independent,0
+11/1/1844,Missouri,MO,Polk,democratic,56.97857202
+11/1/1844,Missouri,MO,Clay,whig,43.02142798
+11/1/1844,Missouri,MO,Birney,independent,0
+11/1/1844,Missouri,MO,Other,independent,0
+11/1/1844,New Hampshire,NH,Polk,democratic,55.21784211
+11/1/1844,New Hampshire,NH,Clay,whig,36.32260557
+11/1/1844,New Hampshire,NH,Birney,independent,8.459552321
+11/1/1844,New Hampshire,NH,Other,independent,0
+11/1/1844,New Jersey,NJ,Polk,democratic,49.37190561
+11/1/1844,New Jersey,NJ,Clay,whig,50.45559886
+11/1/1844,New Jersey,NJ,Birney,independent,0.172495523
+11/1/1844,New Jersey,NJ,Other,independent,0
+11/1/1844,New York,NY,Polk,democratic,48.89829218
+11/1/1844,New York,NY,Clay,whig,47.84741974
+11/1/1844,New York,NY,Birney,independent,3.254288078
+11/1/1844,New York,NY,Other,independent,0
+11/1/1844,North Carolina,NC,Polk,democratic,47.60848754
+11/1/1844,North Carolina,NC,Clay,whig,52.38908884
+11/1/1844,North Carolina,NC,Birney,independent,0
+11/1/1844,North Carolina,NC,Other,independent,0.002423625501
+11/1/1844,Ohio,OH,Polk,democratic,47.74168546
+11/1/1844,Ohio,OH,Clay,whig,49.68003741
+11/1/1844,Ohio,OH,Birney,independent,2.578277134
+11/1/1844,Ohio,OH,Other,independent,0
+11/1/1844,Pennsylvania,PA,Polk,democratic,50.500947
+11/1/1844,Pennsylvania,PA,Clay,whig,48.59427213
+11/1/1844,Pennsylvania,PA,Birney,independent,0.9047808621
+11/1/1844,Pennsylvania,PA,Other,independent,0
+11/1/1844,Rhode Island,RI,Polk,democratic,39.58197788
+11/1/1844,Rhode Island,RI,Clay,whig,59.54782043
+11/1/1844,Rhode Island,RI,Birney,independent,0.8702016916
+11/1/1844,Rhode Island,RI,Other,independent,0
+11/1/1844,South Carolina,SC,Polk,democratic,100
+11/1/1844,South Carolina,SC,Clay,whig,0
+11/1/1844,South Carolina,SC,Birney,independent,0
+11/1/1844,South Carolina,SC,Other,independent,0
+11/1/1844,Tennessee,TN,Polk,democratic,49.94873163
+11/1/1844,Tennessee,TN,Clay,whig,50.05126837
+11/1/1844,Tennessee,TN,Birney,independent,0
+11/1/1844,Tennessee,TN,Other,independent,0
+11/1/1844,Vermont,VT,Polk,democratic,36.96368961
+11/1/1844,Vermont,VT,Clay,whig,54.84445719
+11/1/1844,Vermont,VT,Birney,independent,8.130414303
+11/1/1844,Vermont,VT,Other,independent,0.06143889901
+11/1/1844,Virginia,VA,Polk,democratic,53.04535321
+11/1/1844,Virginia,VA,Clay,whig,46.95464679
+11/1/1844,Virginia,VA,Birney,independent,0
+11/1/1844,Virginia,VA,Other,independent,0
+11/7/1848,Alabama,AL,Cass,democratic,50.55709629
+11/7/1848,Alabama,AL,Taylor,whig,49.43641642
+11/7/1848,Alabama,AL,Van Buren,independent,0
+11/7/1848,Alabama,AL,Other,independent,0.006487293015
+11/7/1848,Arkansas,AR,Cass,democratic,55.07460919
+11/7/1848,Arkansas,AR,Taylor,whig,44.92539081
+11/7/1848,Arkansas,AR,Van Buren,independent,0
+11/7/1848,Arkansas,AR,Other,independent,0
+11/7/1848,Connecticut,CT,Cass,democratic,43.35235104
+11/7/1848,Connecticut,CT,Taylor,whig,48.58809577
+11/7/1848,Connecticut,CT,Van Buren,independent,8.02109042
+11/7/1848,Connecticut,CT,Other,independent,0.03846277124
+11/7/1848,Delaware,DE,Cass,democratic,47.53861004
+11/7/1848,Delaware,DE,Taylor,whig,51.8018018
+11/7/1848,Delaware,DE,Van Buren,independent,0.6595881596
+11/7/1848,Delaware,DE,Other,independent,0
+11/7/1848,Florida,FL,Cass,democratic,42.80161044
+11/7/1848,Florida,FL,Taylor,whig,57.19838956
+11/7/1848,Florida,FL,Van Buren,independent,0
+11/7/1848,Florida,FL,Other,independent,0
+11/7/1848,Georgia,GA,Cass,democratic,48.51219169
+11/7/1848,Georgia,GA,Taylor,whig,51.48780831
+11/7/1848,Georgia,GA,Van Buren,independent,0
+11/7/1848,Georgia,GA,Other,independent,0
+11/7/1848,Illinois,IL,Cass,democratic,44.90673858
+11/7/1848,Illinois,IL,Taylor,whig,42.41949982
+11/7/1848,Illinois,IL,Van Buren,independent,12.60233073
+11/7/1848,Illinois,IL,Other,independent,0.07143086455
+11/7/1848,Indiana,IN,Cass,democratic,48.93225621
+11/7/1848,Indiana,IN,Taylor,whig,45.7650309
+11/7/1848,Indiana,IN,Van Buren,independent,5.302712894
+11/7/1848,Indiana,IN,Other,independent,0
+11/7/1848,Iowa,IA,Cass,democratic,50.46023977
+11/7/1848,Iowa,IA,Taylor,whig,44.58713125
+11/7/1848,Iowa,IA,Van Buren,independent,4.952628979
+11/7/1848,Iowa,IA,Other,independent,0
+11/7/1848,Kentucky,KY,Cass,democratic,42.54481667
+11/7/1848,Kentucky,KY,Taylor,whig,57.45518333
+11/7/1848,Kentucky,KY,Van Buren,independent,0
+11/7/1848,Kentucky,KY,Other,independent,0
+11/7/1848,Louisiana,LA,Cass,democratic,45.41132699
+11/7/1848,Louisiana,LA,Taylor,whig,54.58867301
+11/7/1848,Louisiana,LA,Van Buren,independent,0
+11/7/1848,Louisiana,LA,Other,independent,0
+11/7/1848,Maine,ME,Cass,democratic,45.87161198
+11/7/1848,Maine,ME,Taylor,whig,40.25449358
+11/7/1848,Maine,ME,Van Buren,independent,13.87389444
+11/7/1848,Maine,ME,Other,independent,0
+11/7/1848,Maryland,MD,Cass,democratic,47.71763015
+11/7/1848,Maryland,MD,Taylor,whig,52.1040921
+11/7/1848,Maryland,MD,Van Buren,independent,0.178277754
+11/7/1848,Maryland,MD,Other,independent,0
+11/7/1848,Massachusetts,MA,Cass,democratic,26.18294891
+11/7/1848,Massachusetts,MA,Taylor,whig,45.32312168
+11/7/1848,Massachusetts,MA,Van Buren,independent,28.44791759
+11/7/1848,Massachusetts,MA,Other,independent,0.04601181465
+11/7/1848,Michigan,MI,Cass,democratic,47.23579484
+11/7/1848,Michigan,MI,Taylor,whig,36.79512
+11/7/1848,Michigan,MI,Van Buren,independent,15.96908515
+11/7/1848,Michigan,MI,Other,independent,0
+11/7/1848,Mississippi,MS,Cass,democratic,50.604316
+11/7/1848,Mississippi,MS,Taylor,whig,49.395684
+11/7/1848,Mississippi,MS,Van Buren,independent,0
+11/7/1848,Mississippi,MS,Other,independent,0
+11/7/1848,Missouri,MO,Cass,democratic,55.0901743
+11/7/1848,Missouri,MO,Taylor,whig,44.9098257
+11/7/1848,Missouri,MO,Van Buren,independent,0
+11/7/1848,Missouri,MO,Other,independent,0
+11/7/1848,New Hampshire,NH,Cass,democratic,55.41074565
+11/7/1848,New Hampshire,NH,Taylor,whig,29.50063867
+11/7/1848,New Hampshire,NH,Van Buren,independent,15.08861568
+11/7/1848,New Hampshire,NH,Other,independent,0
+11/7/1848,New Jersey,NJ,Cass,democratic,47.4702515
+11/7/1848,New Jersey,NJ,Taylor,whig,51.47616904
+11/7/1848,New Jersey,NJ,Van Buren,independent,1.053579469
+11/7/1848,New Jersey,NJ,Other,independent,0
+11/7/1848,New York,NY,Cass,democratic,25.07303529
+11/7/1848,New York,NY,Taylor,whig,47.94075588
+11/7/1848,New York,NY,Van Buren,independent,26.42802625
+11/7/1848,New York,NY,Other,independent,0.5581825838
+11/7/1848,North Carolina,NC,Cass,democratic,44.79787607
+11/7/1848,North Carolina,NC,Taylor,whig,55.16956369
+11/7/1848,North Carolina,NC,Van Buren,independent,0
+11/7/1848,North Carolina,NC,Other,independent,0.03256023644
+11/7/1848,Ohio,OH,Cass,democratic,47.11808061
+11/7/1848,Ohio,OH,Taylor,whig,42.12110972
+11/7/1848,Ohio,OH,Van Buren,independent,10.76080967
+11/7/1848,Ohio,OH,Other,independent,0
+11/7/1848,Pennsylvania,PA,Cass,democratic,46.66261477
+11/7/1848,Pennsylvania,PA,Taylor,whig,50.28137142
+11/7/1848,Pennsylvania,PA,Van Buren,independent,3.056013805
+11/7/1848,Pennsylvania,PA,Other,independent,0
+11/7/1848,Rhode Island,RI,Cass,democratic,32.68489467
+11/7/1848,Rhode Island,RI,Taylor,whig,60.77095473
+11/7/1848,Rhode Island,RI,Van Buren,independent,6.544150605
+11/7/1848,Rhode Island,RI,Other,independent,0
+11/7/1848,South Carolina,SC,Cass,democratic,100
+11/7/1848,South Carolina,SC,Taylor,whig,0
+11/7/1848,South Carolina,SC,Van Buren,independent,0
+11/7/1848,South Carolina,SC,Other,independent,0
+11/7/1848,Tennessee,TN,Cass,democratic,47.47719719
+11/7/1848,Tennessee,TN,Taylor,whig,52.52280281
+11/7/1848,Tennessee,TN,Van Buren,independent,0
+11/7/1848,Tennessee,TN,Other,independent,0
+11/7/1848,Texas,TX,Cass,democratic,70.29057126
+11/7/1848,Texas,TX,Taylor,whig,29.70942874
+11/7/1848,Texas,TX,Van Buren,independent,0
+11/7/1848,Texas,TX,Other,independent,0
+11/7/1848,Vermont,VT,Cass,democratic,22.8454572
+11/7/1848,Vermont,VT,Taylor,whig,48.27010559
+11/7/1848,Vermont,VT,Van Buren,independent,28.87400359
+11/7/1848,Vermont,VT,Other,independent,0.0104336213
+11/7/1848,Virginia,VA,Cass,democratic,50.80105213
+11/7/1848,Virginia,VA,Taylor,whig,49.19894787
+11/7/1848,Virginia,VA,Van Buren,independent,0
+11/7/1848,Virginia,VA,Other,independent,0
+11/7/1848,Wisconsin,WI,Cass,democratic,38.30107747
+11/7/1848,Wisconsin,WI,Taylor,whig,35.09932084
+11/7/1848,Wisconsin,WI,Van Buren,independent,26.5996017
+11/7/1848,Wisconsin,WI,Other,independent,0
+11/2/1852,Alabama,AL,Pierce,democratic,60.88975468
+11/2/1852,Alabama,AL,Scott,whig,34.11556844
+11/2/1852,Alabama,AL,Hale,independent,0
+11/2/1852,Alabama,AL,Other,independent,4.994676875
+11/2/1852,Arkansas,AR,Pierce,democratic,62.18010931
+11/2/1852,Arkansas,AR,Scott,whig,37.81989069
+11/2/1852,Arkansas,AR,Hale,independent,0
+11/2/1852,Arkansas,AR,Other,independent,0
+11/2/1852,California,CA,Pierce,democratic,53.01523239
+11/2/1852,California,CA,Scott,whig,46.83244369
+11/2/1852,California,CA,Hale,independent,0.07941674261
+11/2/1852,California,CA,Other,independent,0.07290717355
+11/2/1852,Connecticut,CT,Pierce,democratic,49.78811339
+11/2/1852,Connecticut,CT,Scott,whig,45.46053518
+11/2/1852,Connecticut,CT,Hale,independent,4.733382249
+11/2/1852,Connecticut,CT,Other,independent,0.01796918285
+11/2/1852,Delaware,DE,Pierce,democratic,49.85402036
+11/2/1852,Delaware,DE,Scott,whig,49.65675057
+11/2/1852,Delaware,DE,Hale,independent,0.4892290697
+11/2/1852,Delaware,DE,Other,independent,0
+11/2/1852,Florida,FL,Pierce,democratic,60.03058529
+11/2/1852,Florida,FL,Scott,whig,39.96941471
+11/2/1852,Florida,FL,Hale,independent,0
+11/2/1852,Florida,FL,Other,independent,0
+11/2/1852,Georgia,GA,Pierce,democratic,64.69517453
+11/2/1852,Georgia,GA,Scott,whig,26.60236962
+11/2/1852,Georgia,GA,Hale,independent,0
+11/2/1852,Georgia,GA,Other,independent,8.702455849
+11/2/1852,Illinois,IL,Pierce,democratic,51.86547421
+11/2/1852,Illinois,IL,Scott,whig,41.77023243
+11/2/1852,Illinois,IL,Hale,independent,6.364293365
+11/2/1852,Illinois,IL,Other,independent,0
+11/2/1852,Indiana,IN,Pierce,democratic,52.05000819
+11/2/1852,Indiana,IN,Scott,whig,44.16716711
+11/2/1852,Indiana,IN,Hale,independent,3.782824698
+11/2/1852,Indiana,IN,Other,independent,0
+11/2/1852,Iowa,IA,Pierce,democratic,50.22904649
+11/2/1852,Iowa,IA,Scott,whig,44.83655695
+11/2/1852,Iowa,IA,Hale,independent,4.541341477
+11/2/1852,Iowa,IA,Other,independent,0.3930550843
+11/2/1852,Kentucky,KY,Pierce,democratic,48.32277886
+11/2/1852,Kentucky,KY,Scott,whig,51.43896169
+11/2/1852,Kentucky,KY,Hale,independent,0.238259452
+11/2/1852,Kentucky,KY,Other,independent,0
+11/2/1852,Louisiana,LA,Pierce,democratic,51.93861066
+11/2/1852,Louisiana,LA,Scott,whig,48.06138934
+11/2/1852,Louisiana,LA,Hale,independent,0
+11/2/1852,Louisiana,LA,Other,independent,0
+11/2/1852,Maine,ME,Pierce,democratic,50.63030834
+11/2/1852,Maine,ME,Scott,whig,39.59869558
+11/2/1852,Maine,ME,Hale,independent,9.770996082
+11/2/1852,Maine,ME,Other,independent,0
+11/2/1852,Maryland,MD,Pierce,democratic,53.27742279
+11/2/1852,Maryland,MD,Scott,whig,46.69462194
+11/2/1852,Maryland,MD,Hale,independent,0.02795527157
+11/2/1852,Maryland,MD,Other,independent,0
+11/2/1852,Massachusetts,MA,Pierce,democratic,35.06526203
+11/2/1852,Massachusetts,MA,Scott,whig,41.449061
+11/2/1852,Massachusetts,MA,Hale,independent,22.04747331
+11/2/1852,Massachusetts,MA,Other,independent,1.438203662
+11/2/1852,Michigan,MI,Pierce,democratic,50.44912526
+11/2/1852,Michigan,MI,Scott,whig,40.82518477
+11/2/1852,Michigan,MI,Hale,independent,8.725689965
+11/2/1852,Michigan,MI,Other,independent,0
+11/2/1852,Mississippi,MS,Pierce,democratic,60.50299186
+11/2/1852,Mississippi,MS,Scott,whig,39.49700814
+11/2/1852,Mississippi,MS,Hale,independent,0
+11/2/1852,Mississippi,MS,Other,independent,0
+11/2/1852,Missouri,MO,Pierce,democratic,56.41923809
+11/2/1852,Missouri,MO,Scott,whig,43.58076191
+11/2/1852,Missouri,MO,Hale,independent,0
+11/2/1852,Missouri,MO,Other,independent,0
+11/2/1852,New Hampshire,NH,Pierce,democratic,56.40249332
+11/2/1852,New Hampshire,NH,Scott,whig,30.64410804
+11/2/1852,New Hampshire,NH,Hale,independent,12.95339863
+11/2/1852,New Hampshire,NH,Other,independent,0
+11/2/1852,New Jersey,NJ,Pierce,democratic,53.23840423
+11/2/1852,New Jersey,NJ,Scott,whig,46.33020908
+11/2/1852,New Jersey,NJ,Hale,independent,0.4313866859
+11/2/1852,New Jersey,NJ,Other,independent,0
+11/2/1852,New York,NY,Pierce,democratic,50.17920941
+11/2/1852,New York,NY,Scott,whig,44.9712231
+11/2/1852,New York,NY,Hale,independent,4.849567485
+11/2/1852,New York,NY,Other,independent,0
+11/2/1852,North Carolina,NC,Pierce,democratic,50.43414331
+11/2/1852,North Carolina,NC,Scott,whig,49.48980239
+11/2/1852,North Carolina,NC,Hale,independent,0
+11/2/1852,North Carolina,NC,Other,independent,0.07605430277
+11/2/1852,Ohio,OH,Pierce,democratic,47.83090026
+11/2/1852,Ohio,OH,Scott,whig,43.18464954
+11/2/1852,Ohio,OH,Hale,independent,8.984450208
+11/2/1852,Ohio,OH,Other,independent,0
+11/2/1852,Pennsylvania,PA,Pierce,democratic,51.19701732
+11/2/1852,Pennsylvania,PA,Scott,whig,46.17998706
+11/2/1852,Pennsylvania,PA,Hale,independent,2.190341869
+11/2/1852,Pennsylvania,PA,Other,independent,0.4326537558
+11/2/1852,Rhode Island,RI,Pierce,democratic,51.36724493
+11/2/1852,Rhode Island,RI,Scott,whig,44.84563364
+11/2/1852,Rhode Island,RI,Hale,independent,3.787121435
+11/2/1852,Rhode Island,RI,Other,independent,0
+11/2/1852,South Carolina,SC,Pierce,democratic,100
+11/2/1852,South Carolina,SC,Scott,whig,0
+11/2/1852,South Carolina,SC,Hale,independent,0
+11/2/1852,South Carolina,SC,Other,independent,0
+11/2/1852,Tennessee,TN,Pierce,democratic,49.27004139
+11/2/1852,Tennessee,TN,Scott,whig,50.72995861
+11/2/1852,Tennessee,TN,Hale,independent,0
+11/2/1852,Tennessee,TN,Other,independent,0
+11/2/1852,Texas,TX,Pierce,democratic,73.06842077
+11/2/1852,Texas,TX,Scott,whig,26.93157923
+11/2/1852,Texas,TX,Hale,independent,0
+11/2/1852,Texas,TX,Other,independent,0
+11/2/1852,Vermont,VT,Pierce,democratic,29.71975393
+11/2/1852,Vermont,VT,Scott,whig,50.51948052
+11/2/1852,Vermont,VT,Hale,independent,19.64228754
+11/2/1852,Vermont,VT,Other,independent,0.1184780132
+11/2/1852,Virginia,VA,Pierce,democratic,55.70872674
+11/2/1852,Virginia,VA,Scott,whig,44.29127326
+11/2/1852,Virginia,VA,Hale,independent,0
+11/2/1852,Virginia,VA,Other,independent,0
+11/2/1852,Wisconsin,WI,Pierce,democratic,52.03611515
+11/2/1852,Wisconsin,WI,Scott,whig,34.33721901
+11/2/1852,Wisconsin,WI,Hale,independent,13.62666584
+11/2/1852,Wisconsin,WI,Other,independent,0
 11/4/1856,Alabama,AL,Fremont,republican,0,
 11/4/1856,Alabama,AL,Buchanan,democrat,62.07780478,
 11/4/1856,Alabama,AL,Fillmore,independent,37.92219522,

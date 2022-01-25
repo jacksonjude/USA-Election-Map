@@ -559,6 +559,10 @@ const democraticPartyID = DemocraticParty.getID()
 const republicanPartyID = RepublicanParty.getID()
 const tossupPartyID = TossupParty.getID()
 
+const whigPartyID = WhigParty.getID()
+const nationalRepublicanPartyID = NationalRepublicanParty.getID()
+const democraticRepublicanPartyID = DemocraticRepublicanParty.getID()
+
 const reformPartyID = ReformParty.getID()
 const greenPartyID = GreenParty.getID()
 const libertarianPartyID = LibertarianParty.getID()
@@ -584,6 +588,17 @@ const independent1888CFPartyID = Independent1888CFParty.getID()
 const independent1860JohnBreckenridgePartyID = Independent1860JohnBreckenridgeParty.getID()
 const independent1860JohnBellPartyID = Independent1860JohnBellParty.getID()
 const independent1856MFPartyID = Independent1856MFParty.getID()
+const independent1852JHPartyID = Independent1852JHParty.getID()
+const independent1848VBPartyID = Independent1848VBParty.getID()
+const independent1844JBPartyID = Independent1844JBParty.getID()
+const independent1836HWPartyID = Independent1836HWParty.getID()
+const independent1836DWPartyID = Independent1836DWParty.getID()
+const independent1836WMPartyID = Independent1836WMParty.getID()
+const independent1832WWPartyID = Independent1832WWParty.getID()
+const independent1832JFPartyID = Independent1832JFParty.getID()
+const independent1824AJPartyID = Independent1824AJParty.getID()
+const independent1824WCPartyID = Independent1824WCParty.getID()
+const independent1824HCPartyID = Independent1824HCParty.getID()
 
 const independentGenericPartyID = IndependentGenericParty.getID()
 
@@ -1061,6 +1076,14 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1824: {"Adams":democraticRepublicanPartyID, "Jackson":independent1824AJPartyID, "Crawford":independent1824WCPartyID, "Clay":independent1824HCPartyID, "Other":independentGenericPartyID},
+    1828: {"Jackson":democraticPartyID, "Adams":nationalRepublicanPartyID, "Other":independentGenericPartyID},
+    1832: {"Jackson":democraticPartyID, "Clay":nationalRepublicanPartyID, "Wirt":independent1832WWPartyID, "Floyd":independent1832JFPartyID, "Other":independentGenericPartyID},
+    1836: {"Van Buren":democraticPartyID, "Harrison":whigPartyID, "White":independent1836HWPartyID, "Webster":independent1836DWPartyID, "Magnum":independent1836WMPartyID, "Other":independentGenericPartyID},
+    1840: {"Van Buren":democraticPartyID, "Harrison":whigPartyID, "Other":independentGenericPartyID},
+    1844: {"Polk":democraticPartyID, "Clay":whigPartyID, "Birney":independent1844JBPartyID, "Other":independentGenericPartyID},
+    1848: {"Cass":democraticPartyID, "Taylor":whigPartyID, "Van Buren":independent1848VBPartyID, "Other":independentGenericPartyID},
+    1852: {"Pierce":democraticPartyID, "Scott":whigPartyID, "Hale":independent1852JHPartyID, "Other":independentGenericPartyID},
     1856: {"Buchanan":democraticPartyID, "Fremont":republicanPartyID, "Fillmore":independent1856MFPartyID, "Other":independentGenericPartyID},
     1860: {"Douglas":democraticPartyID, "Lincoln":republicanPartyID, "Breckenridge":independent1860JohnBreckenridgePartyID, "Bell":independent1860JohnBellPartyID, "Other":independentGenericPartyID},
     1864: {"McClellan":democraticPartyID, "Lincoln":republicanPartyID, "Other":independentGenericPartyID},
