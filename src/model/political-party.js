@@ -70,7 +70,7 @@ const PoliticalPartyColors = {
   blue: {current: "#10234E", safe: "#1c408c", likely: "#587ccc", lean: "#8aafff", tilt: "#949bb3"},
   red: {current: "#600E15", safe: "#be1c29", likely: "#ff5864", lean: "#ff8b98", tilt: "#cf8980"},
   green: {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
-  orange: {current: "#A36323", safe: "#E58B31", likely: "#E6AB6F", lean: "#E5BD95", tilt: "#BFAD9C"},
+  orange: {current: "#A36323", safe: "#E57C13", likely: "#E69D54", lean: "#E5BD95", tilt: "#BFAD9C"},
   purple: {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#E8AF44", lean: "#E6BD5D", tilt: "#C7A659"},
   scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
@@ -103,6 +103,35 @@ var TossupParty = new PoliticalParty(
   "Tossup",
   null,
   {current: "#6c6e74", safe: "#6c6e74", likely: "#6c6e74", lean: "#6c6e74", tilt: "#6c6e74"},
+  defaultMarginNames
+)
+
+// Historic Main Parties
+
+var WhigParty = new PoliticalParty(
+  "WIG",
+  ["Whig"],
+  "Whig",
+  "Harrison",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
+var NationalRepublicanParty = new PoliticalParty(
+  "NRP",
+  ["National Republican"],
+  "NRP",
+  "Clay",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
+var DemocraticRepublicanParty = new PoliticalParty(
+  "DRP",
+  ["Democratic Republican"],
+  "DRP",
+  "Monroe",
+  cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
 
@@ -315,6 +344,114 @@ var Independent1856MFParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var Independent1852JHParty = new PoliticalParty(
+  "IND1852JH",
+  ["Free Soil"],
+  "Ind",
+  "Hale",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var Independent1848VBParty = new PoliticalParty(
+  "IND1848VB",
+  ["Free Soil"],
+  "Ind",
+  "Van Buren",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var Independent1844JBParty = new PoliticalParty(
+  "IND1844JB",
+  ["Liberty"],
+  "Ind",
+  "Birney",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var Independent1836HWParty = new PoliticalParty(
+  "IND1836HW",
+  ["Whig"],
+  "Ind",
+  "White",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var Independent1836DWParty = new PoliticalParty(
+  "IND1836DW",
+  ["Whig"],
+  "Ind",
+  "Webster",
+  cloneObject(PoliticalPartyColors.scarlet),
+  defaultMarginNames
+)
+
+var Independent1836WMParty = new PoliticalParty(
+  "IND1836WM",
+  ["Whig"],
+  "Ind",
+  "Magnum",
+  cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
+var Independent1832WWParty = new PoliticalParty(
+  "IND1832WW",
+  ["Anti Masonic"],
+  "Ind",
+  "Wirt",
+  cloneObject(PoliticalPartyColors.scarlet),
+  defaultMarginNames
+)
+
+var Independent1832JFParty = new PoliticalParty(
+  "IND1832JF",
+  ["Nullifier"],
+  "Ind",
+  "Floyd",
+  cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
+var Independent1832JFParty = new PoliticalParty(
+  "IND1832JF",
+  ["Nullifier"],
+  "Ind",
+  "Floyd",
+  cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
+var Independent1824AJParty = new PoliticalParty(
+  "IND1824AJ",
+  ["Democratic Republican"],
+  "Ind",
+  "Jackson",
+  cloneObject(PoliticalPartyColors.blue),
+  defaultMarginNames
+)
+
+var Independent1824WCParty = new PoliticalParty(
+  "IND1824WC",
+  ["Democratic Republican"],
+  "Ind",
+  "Crawford",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
+var Independent1824HCParty = new PoliticalParty(
+  "IND1824HC",
+  ["Democratic Republican"],
+  "Ind",
+  "Clay",
+  cloneObject(PoliticalPartyColors.scarlet),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
@@ -328,6 +465,10 @@ var politicalParties = {}
 politicalParties[DemocraticParty.getID()] = DemocraticParty
 politicalParties[RepublicanParty.getID()] = RepublicanParty
 politicalParties[TossupParty.getID()] = TossupParty
+
+politicalParties[WhigParty.getID()] = WhigParty
+politicalParties[NationalRepublicanParty.getID()] = NationalRepublicanParty
+politicalParties[DemocraticRepublicanParty.getID()] = DemocraticRepublicanParty
 
 politicalParties[LibertarianParty.getID()] = LibertarianParty
 politicalParties[GreenParty.getID()] = GreenParty
@@ -352,11 +493,22 @@ politicalParties[Independent1888CFParty.getID()] = Independent1888CFParty
 politicalParties[Independent1860JohnBreckenridgeParty.getID()] = Independent1860JohnBreckenridgeParty
 politicalParties[Independent1860JohnBellParty.getID()] = Independent1860JohnBellParty
 politicalParties[Independent1856MFParty.getID()] = Independent1856MFParty
+politicalParties[Independent1852JHParty.getID()] = Independent1852JHParty
+politicalParties[Independent1848VBParty.getID()] = Independent1848VBParty
+politicalParties[Independent1844JBParty.getID()] = Independent1844JBParty
+politicalParties[Independent1836HWParty.getID()] = Independent1836HWParty
+politicalParties[Independent1836DWParty.getID()] = Independent1836DWParty
+politicalParties[Independent1836WMParty.getID()] = Independent1836WMParty
+politicalParties[Independent1832WWParty.getID()] = Independent1832WWParty
+politicalParties[Independent1832JFParty.getID()] = Independent1832JFParty
+politicalParties[Independent1824AJParty.getID()] = Independent1824AJParty
+politicalParties[Independent1824WCParty.getID()] = Independent1824WCParty
+politicalParties[Independent1824HCParty.getID()] = Independent1824HCParty
 
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
 var defaultDropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
-var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), IndependentGenericParty.getID()]
+var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), WhigParty.getID(), NationalRepublicanParty.getID(), DemocraticRepublicanParty.getID(), IndependentGenericParty.getID()]
 var majorThirdPartyCandidates = [
   Independent2016EMParty.getID(),
   Independent1980JAParty.getID(),
@@ -376,5 +528,16 @@ var majorThirdPartyCandidates = [
   Independent1888CFParty.getID(),
   Independent1860JohnBreckenridgeParty.getID(),
   Independent1860JohnBellParty.getID(),
-  Independent1856MFParty.getID()
+  Independent1856MFParty.getID(),
+  Independent1852JHParty.getID(),
+  Independent1848VBParty.getID(),
+  Independent1844JBParty.getID(),
+  Independent1836HWParty.getID(),
+  Independent1836DWParty.getID(),
+  Independent1836WMParty.getID(),
+  Independent1832WWParty.getID(),
+  Independent1832JFParty.getID(),
+  Independent1824AJParty.getID(),
+  Independent1824WCParty.getID(),
+  Independent1824HCParty.getID()
 ]
