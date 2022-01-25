@@ -34,6 +34,7 @@ const noCountSVGRegionAttribute = "data-nocount"
 const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 
 const nationalPopularVoteID = "NPV"
+const statePopularVoteDistrictID = "PV"
 
 var displayRegionDataArray = {}
 var regionIDsToIgnore = [/.+-button/, /.+-land/]
@@ -1438,7 +1439,7 @@ function getPartyTotals(includeFlipData)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
 
     var partyIDToSet = regionDataArray[regionID].partyID
     if (regionDataArray[regionID].partyID == null)
@@ -1475,20 +1476,24 @@ function getPartyTotals(includeFlipData)
   return includeFlipData ? {nonFlipTotals: partyTotals, flipTotals: partyFlipTotals, flipData: partyFlipData} : partyTotals
 }
 
-function getNationalPopularVotePartyVoteshareData()
+function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopularVote)
 {
-  var popularVoteData = getNationalPopularVoteData()
+  regionDataArray = regionDataArray ? regionDataArray : displayRegionDataArray
+  enforceNationalPopularVote = enforceNationalPopularVote === true
+
+  let popularVoteData
+  if (nationalPopularVoteID in regionDataArray && regionDataArray[nationalPopularVoteID].partyID != TossupParty.getID())
+  {
+    popularVoteData = regionDataArray[nationalPopularVoteID]
+  }
+  if (!enforceNationalPopularVote && currentViewingState == ViewingState.zooming && currentMapZoomRegion && currentMapZoomRegion + "-" + statePopularVoteDistrictID in regionDataArray && regionDataArray[currentMapZoomRegion + "-" + statePopularVoteDistrictID].partyID != TossupParty.getID())
+  {
+    popularVoteData = regionDataArray[currentMapZoomRegion + "-" + statePopularVoteDistrictID]
+  }
+
   if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
   {
     return popularVoteData.partyVotesharePercentages
-  }
-}
-
-function getNationalPopularVoteData()
-{
-  if (nationalPopularVoteID in displayRegionDataArray && displayRegionDataArray[nationalPopularVoteID].partyID != TossupParty.getID())
-  {
-    return displayRegionDataArray[nationalPopularVoteID]
   }
 }
 
@@ -1599,14 +1604,14 @@ async function updateRegionBox(regionID)
 
       const districtsPerLine = 3
 
-      Object.keys(zoomingData).forEach((districtID, i) => {
+      Object.keys(zoomingData).filter(districtID => !districtID.endsWith("-" + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
         if (i % districtsPerLine == 0 && i != 0)
         {
           regionMarginString += "<br></div>"
         }
         if (i % districtsPerLine == 0)
         {
-          var isLastDistrictLine = (i+((Object.keys(zoomingData).length-1) % districtsPerLine)) == Object.keys(zoomingData).length-1
+          var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
           regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
         }
         if (i % districtsPerLine > 0)

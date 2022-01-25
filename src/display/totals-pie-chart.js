@@ -400,7 +400,7 @@ function updateTotalsPieChart(regionDataArray)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
 
     var regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
@@ -577,7 +577,7 @@ function updateTotalsPieChart(regionDataArray)
   }
   totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
-  var popularVoteData = getNationalPopularVotePartyVoteshareData()
+  var popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
   var showingPopularVote = popularVoteData && currentMapType.getMapSettingValue("piePopularVote")
   if (showingPopularVote)
   {
@@ -589,7 +589,7 @@ function updateTotalsPieChart(regionDataArray)
       summedPercentage += sortedPopularVoteArray[partyNum]
     }
     var remainingPopularVote = 100-summedPercentage
-    sortedPopularVoteArray[genericPartyOrderingIndex] = remainingPopularVote
+    sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
 
     totalsPieChart.data.datasets[2].hidden = false
     totalsPieChart.data.datasets[2].data = sortedPopularVoteArray

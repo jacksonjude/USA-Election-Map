@@ -8,7 +8,7 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 
   for (var regionID in displayRegionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
 
     if (displayRegionDataArray[regionID].disabled) { continue }
 
@@ -71,7 +71,7 @@ function getCurrentTotalEV()
   var totalEV = 0
   for (var regionID in displayRegionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
     totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID])
   }
   return totalEV

@@ -2805,7 +2805,7 @@ function createHouseMapSources()
 
       var boundingBox = $("#svgdata")[0].getBBox()
 
-      var districtCount = Object.keys(mapDateData).length
+      var districtCount = Object.keys(mapDateData).length - (Object.keys(mapDateData).some(regionID => regionID.endsWith("-" + statePopularVoteDistrictID)) ? 1 : 0)
 
       var districtBoxSize = Math.max(boundingBox.width, boundingBox.height)*0.07
       var districtBoxPadding = districtBoxSize/5
@@ -2822,6 +2822,8 @@ function createHouseMapSources()
       var outlineGroupHTML = ""
       outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " " + noInteractSVGRegionAttribute + " " + noCountSVGRegionAttribute + " fill='gray' fill-opacity='0.7' width='" + ((districtBoxLineCount == 1 ? itemsOnLastLine : districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' height='" + (Math.ceil(districtCount/districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' x='" + (startingX-districtBoxPadding+(districtBoxLineCount == 1 ? lastLineXOffset : 0)) + "' y='" + (startingY-districtBoxPadding) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "'></rect>"
       Object.keys(mapDateData).forEach((regionID, i) => {
+        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { return }
+
         var districtBoxLineOn = Math.floor(i/districtBoxesPerLine)
         outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " id='" + regionID + "' width='" + districtBoxSize + "' height='" + districtBoxSize + "' x='" + (startingX + i%districtBoxesPerLine*(districtBoxSize+districtBoxPadding) + (districtBoxLineOn == districtBoxLineCount-1 ? lastLineXOffset : 0)) + "' y='" + (startingY + districtBoxLineOn*(districtBoxSize+districtBoxPadding)) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "' ></rect>"
       })
@@ -2843,6 +2845,8 @@ function createHouseMapSources()
 
     for (let regionID in mapDateData)
     {
+      if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+
       var regionData = mapDateData[regionID]
 
       if (!(regionData.state in housePerStateMapData))
