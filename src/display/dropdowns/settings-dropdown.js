@@ -92,6 +92,13 @@ function cycleMapSetting(settingID, settingDiv, incrementAmount)
       loadDataMap()
     }
     break
+
+    case MapSettingReloadType.custom:
+    if (settingsLayout.customReloadFunction)
+    {
+      settingsLayout.customReloadFunction(settingOptions[optionIndex].value)
+    }
+    break
   }
 }
 

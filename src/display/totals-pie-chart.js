@@ -619,7 +619,7 @@ function updateTotalsPieChart(regionDataArray)
     nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
   }
 
-  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded"))
+  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded") || currentViewingState == ViewingState.splitVote)
   {
     totalsPieChart.data.datasets[0].hidden = true
     totalsPieChart.data.datasets[0].data = []

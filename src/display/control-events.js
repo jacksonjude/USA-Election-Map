@@ -487,7 +487,7 @@ function mouseEnteredRegion(div)
     updateRegionBox(regionID)
   }
 
-  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
+  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !((currentMapType.getMapSettingValue("flipStates") || currentViewingState == ViewingState.splitVote) && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
     for (var linkedRegionSetNum in linkedRegions)
@@ -546,7 +546,7 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
-  if (currentViewingState == ViewingState.editing)
+  if (currentEditingState == EditingState.editing)
   {
     if (mouseIsDown)
     {

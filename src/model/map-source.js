@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
   {
     this.id = id
     this.name = name
@@ -22,6 +22,9 @@ class MapSource
       return mapData
     })
     this.zoomingDataFunction = zoomingDataFunction
+    this.splitVoteDataFunction = splitVoteDataFunction || ((mapData) => {
+      return mapData
+    })
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
@@ -51,6 +54,7 @@ class MapSource
   // organizeMapDataFunction,
   // viewingDataFunction,
   // zoomingDataFunction,
+  // splitVoteDataFunction,
   // customOpenRegionLinkFunction,
   // convertMapDataRowToCSVFunction,
   // isCustomMap,
@@ -320,6 +324,11 @@ class MapSource
   getZoomingData(mapDateData, zoomRegion)
   {
     return this.zoomingDataFunction(mapDateData, zoomRegion)
+  }
+
+  getSplitVoteData(mapDateData)
+  {
+    return this.splitVoteDataFunction(mapDateData)
   }
 
   canZoom(mapDateData)
@@ -902,6 +911,7 @@ function createPresidentialMapSources()
           var candidateName = row[columnMap.candidateName]
           var currentPartyName = row[columnMap.partyID]
           var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
+          var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : 0
 
           var foundParty = currentCandidateToPartyIDMap[candidateName] ? politicalParties[currentCandidateToPartyIDMap[candidateName]] : null
 
@@ -948,14 +958,17 @@ function createPresidentialMapSources()
             }
 
             candidateData[candidateName].voteshare += currentVoteshare
+            candidateData[candidateName].electoralVotes += currentElectoralVotes
           }
           else
           {
-            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, electoralVotes: currentElectoralVotes}
           }
         }
 
-        var voteshareSortedCandidateData = Object.values(candidateData)
+        var voteshareSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
+          return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare}
+        })
         voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
         voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
         if (!isCustomMap && voteshareCutoffMargin != null)
@@ -968,6 +981,11 @@ function createPresidentialMapSources()
           console.log("No candidate data!", currentMapDate.getFullYear().toString(), regionToFind)
           continue
         }
+
+        var electoralVoteSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
+          return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, votes: singleCandidateData.electoralVotes}
+        }).filter(candVotes => candVotes.votes > 0)
+        electoralVoteSortedCandidateData.sort((cand1, cand2) => cand2.votes - cand1.votes)
 
         var greatestMarginPartyID
         var greatestMarginCandidateName
@@ -1002,7 +1020,7 @@ function createPresidentialMapSources()
         }
 
         var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
-        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
       }
 
       filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -1159,6 +1177,7 @@ function createPresidentialMapSources()
     doubleLineMarginFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null // customOpenRegionLinkFunction
   )
 
@@ -1187,6 +1206,7 @@ function createPresidentialMapSources()
     singleLineMarginFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null // customOpenRegionLinkFunction
   )
 
@@ -1213,6 +1233,7 @@ function createPresidentialMapSources()
     singleLineMarginFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, _, __, mapDate, ___)
     {
       if (mapDate == null) { return }
@@ -1245,6 +1266,23 @@ function createPresidentialMapSources()
     }
   }
 
+  var pastElectoralVoteCounts = async (mapDateData) => {
+    let voteSplitMapDateData = {}
+
+    for (let regionID in mapDateData)
+    {
+      let regionData = cloneObject(mapDateData[regionID])
+      voteSplitMapDateData[regionID] = regionData
+      if (!regionData.voteSplits || !regionData.voteSplits[0]) { continue }
+      regionData.margin = 100
+      regionData.partyID = regionData.voteSplits[0].partyID
+    }
+
+    if (Object.keys(voteSplitMapDateData).length == 0) { return mapDateData }
+
+    return voteSplitMapDateData
+  }
+
   var PastElectionResultMapSource = new MapSource(
     "Past-Presidential-Elections", // id
     "Past Elections", // name
@@ -1255,6 +1293,7 @@ function createPresidentialMapSources()
       date: "date",
       region: "region",
       percentAdjusted: "voteshare",
+      electoralVotes: "ev",
       partyID: "party",
       partyCandidateName: "candidate",
       candidateName: "candidate"
@@ -1271,6 +1310,7 @@ function createPresidentialMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    pastElectoralVoteCounts, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1300,6 +1340,7 @@ function createPresidentialMapSources()
       date: "date",
       region: "region",
       percentAdjusted: "voteshare",
+      electoralVotes: "ev",
       partyCandidateName: "candidate",
       partyID: "party",
       candidateName: "candidate"
@@ -1316,6 +1357,7 @@ function createPresidentialMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    pastElectoralVoteCounts, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1372,6 +1414,7 @@ function createPresidentialMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -1852,6 +1895,7 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, _, __, mapDate, ___, ____)
     {
       if (mapDate == null) { return }
@@ -1903,6 +1947,7 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, _, __, mapDate, ____)
     {
       if (mapDate == null) { return }
@@ -1943,6 +1988,7 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2021,6 +2067,7 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -2364,6 +2411,7 @@ function createGovernorMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, _, __, mapDate, ___, ____)
     {
       if (mapDate == null) { return }
@@ -2421,6 +2469,7 @@ function createGovernorMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, _, __, mapDate, ___)
     {
       if (mapDate == null) { return }
@@ -2456,6 +2505,7 @@ function createGovernorMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
       if (mapDate == null) { return }
@@ -2523,6 +2573,7 @@ function createGovernorMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
@@ -2874,15 +2925,17 @@ function createHouseMapSources()
 
       if (!(regionData.state in housePerStateMapData))
       {
-        housePerStateMapData[regionData.state] = {region: regionData.state, partyVoteSplits: {}}
+        housePerStateMapData[regionData.state] = {region: regionData.state, voteSplits: []}
       }
 
-      var partyVoteSplitData = housePerStateMapData[regionData.state].partyVoteSplits
-      if (!(regionData.partyID in partyVoteSplitData))
+      var partyVoteSplitData = housePerStateMapData[regionData.state].voteSplits
+      var partyVote = partyVoteSplitData.find(partyVoteItem => partyVoteItem.partyID == regionData.partyID)
+      if (!partyVote)
       {
-        partyVoteSplitData[regionData.partyID] = 0
+        partyVote = {partyID: regionData.partyID, candidate: politicalParties[regionData.partyID].getNames()[0], votes: 0}
+        partyVoteSplitData.push(partyVote)
       }
-      partyVoteSplitData[regionData.partyID]++
+      partyVote.votes++
 
       if (regionData.flip)
       {
@@ -2892,14 +2945,12 @@ function createHouseMapSources()
 
     for (let regionID in housePerStateMapData)
     {
-      var partyVoteSplitData = cloneObject(housePerStateMapData[regionID].partyVoteSplits)
+      var partyVoteSplitData = cloneObject(housePerStateMapData[regionID].voteSplits)
+      partyVoteSplitData.sort((partyVote1, partyVote2) => partyVote2.votes-partyVote1.votes)
 
-      var largestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
-      var largestPartyCount = partyVoteSplitData[largestPartyID]
-      delete partyVoteSplitData[largestPartyID]
-
-      var secondLargestPartyID = getKeyForMaxValue(partyVoteSplitData, false, 0)
-      var secondLargestPartyCount = partyVoteSplitData[secondLargestPartyID] || 0
+      var largestPartyCount = partyVoteSplitData[0].votes
+      var largestPartyID = partyVoteSplitData[0].partyID
+      var secondLargestPartyCount = partyVoteSplitData[1] ? partyVoteSplitData[1].votes : 0
 
       housePerStateMapData[regionID].margin = (largestPartyCount/(largestPartyCount+secondLargestPartyCount)*100-50)*0.9001 // +0.001 to account for rounding errors
       housePerStateMapData[regionID].partyID = largestPartyID
@@ -2950,6 +3001,7 @@ function createHouseMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
+    null, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
       if (mapDate == null) { return }
@@ -3026,6 +3078,7 @@ function createHouseMapSources()
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
+    null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap

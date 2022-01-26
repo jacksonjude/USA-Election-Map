@@ -55,7 +55,8 @@ const maxDateSliderTicks = 55
 
 const ViewingState = {
   viewing: 0,
-  zooming: 1
+  zooming: 1,
+  splitVote: 2
 }
 var currentViewingState = ViewingState.viewing
 
@@ -669,6 +670,10 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     case ViewingState.zooming:
     currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
     break
+
+    case ViewingState.splitVote:
+    currentMapDataForDate = await currentMapSource.getSplitVoteData(currentMapDataForDate)
+    break
   }
 
   if (currentViewingState == ViewingState.zooming && usedFallbackMap)
@@ -711,7 +716,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
     regionData.flip = currentMapDataForDate[regionNum].flip
-    regionData.partyVoteSplits = currentMapDataForDate[regionNum].partyVoteSplits
+    regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }
@@ -1301,7 +1306,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   var fillColor
   var shouldHide = false
 
-  var canUseVoteSplitsForColor = regionData.margin == 0 && "partyVoteSplits" in regionData && regionData["partyVoteSplits"] != null
+  var canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
   if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
   {
     if (regionData.disabled == true)
@@ -1320,17 +1325,26 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     }
     else if (canUseVoteSplitsForColor)
     {
-      var evenParties = getKeyForMaxValue(regionData.partyVoteSplits, true, 0)
-      if (evenParties.length == 2 && evenParties.includes(DemocraticParty.getID()) && evenParties.includes(RepublicanParty.getID()))
+      if (currentViewingState == ViewingState.splitVote)
       {
-        fillColor = PoliticalPartyColors.purple.likely
+        let party1Color = politicalParties[regionData.voteSplits[0].partyID].getMarginColors().safe
+        let party2Color = politicalParties[regionData.voteSplits[1].partyID].getMarginColors().safe
+        let patternID = "split-" + party1Color + "-" + party2Color
+        generateSVGPattern(patternID, party1Color, party2Color)
+        fillColor = "url(#" + patternID + ")"
       }
-      else // Add better handling / more party combos
+      else if (regionData.voteSplits[0].votes == regionData.voteSplits[1].votes)
       {
-        fillColor = TossupParty.getMarginColors().safe
+        var voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
+        voteSplitPartyIDs.sort()
+        if (voteSplitPartyIDs[0] == DemocraticParty.getID() && voteSplitPartyIDs[1] == RepublicanParty.getID())
+        {
+          fillColor = PoliticalPartyColors.purple.likely
+        }
       }
     }
-    else
+
+    if (!fillColor)
     {
       fillColor = TossupParty.getMarginColors().safe
     }
@@ -1343,7 +1357,6 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     if (currentMapType.getMapSettingValue("flipStates") && regionData.flip)
     {
       var patternID = generateFlipPattern(regionData.partyID, marginIndex)
-
       fillColor = "url(#" + patternID + ")"
     }
   }
@@ -1392,22 +1405,27 @@ function getMarginIndexForValue(margin)
   }
 }
 
-function generateFlipPattern(partyID, margin)
+function generateSVGPattern(patternID, fillColor, strokeColor)
 {
-  var fillColor = politicalParties[partyID].getMarginColors()[margin]
-  var patternID = fillColor.slice(1)
-
   if ($("#" + patternID).length == 0)
   {
     var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" style="fill: ' + fillColor + ';"></rect>'
-    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + multiplyBrightness(fillColor, flipPatternBrightnessFactor) + '; stroke-width: ' + flipPatternWidth + '"></line>'
+    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + strokeColor + '; stroke-width: ' + flipPatternWidth + '"></line>'
     patternHTML += '</pattern>'
 
-    var tempDiv = document.createElement('div');
+    var tempDiv = document.createElement('div')
     document.getElementById("svgdefinitions").appendChild(tempDiv)
-    tempDiv.outerHTML = patternHTML;
+    tempDiv.outerHTML = patternHTML
   }
+}
+
+function generateFlipPattern(partyID, margin)
+{
+  var fillColor = politicalParties[partyID].getMarginColors()[margin]
+  var patternID = "flip-" + fillColor.slice(1)
+
+  generateSVGPattern(patternID, fillColor, multiplyBrightness(fillColor, flipPatternBrightnessFactor))
 
   return patternID
 }
@@ -1441,31 +1459,50 @@ function getPartyTotals(includeFlipData)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
 
-    var partyIDToSet = regionDataArray[regionID].partyID
-    if (regionDataArray[regionID].partyID == null)
+    if (currentViewingState != ViewingState.splitVote)
     {
-      partyIDToSet = TossupParty.getID()
-    }
-
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
-
-    if (includeFlipData && regionDataArray[regionID].flip)
-    {
-      if (!(partyIDToSet in partyFlipTotals))
+      var partyIDToSet = regionDataArray[regionID].partyID
+      if (regionDataArray[regionID].partyID == null)
       {
-        partyFlipTotals[partyIDToSet] = 0
-        partyFlipData[partyIDToSet] = []
+        partyIDToSet = TossupParty.getID()
       }
-      partyFlipTotals[partyIDToSet] += currentRegionEV
-      partyFlipData[partyIDToSet].push({region: regionID, margin: regionDataArray[regionID].margin})
-    }
-    else
-    {
-      if (!(partyIDToSet in partyTotals))
+
+      var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
+
+      if (includeFlipData && regionDataArray[regionID].flip)
       {
-        partyTotals[partyIDToSet] = 0
+        if (!(partyIDToSet in partyFlipTotals))
+        {
+          partyFlipTotals[partyIDToSet] = 0
+          partyFlipData[partyIDToSet] = []
+        }
+        partyFlipTotals[partyIDToSet] += currentRegionEV
+        partyFlipData[partyIDToSet].push({region: regionID, margin: regionDataArray[regionID].margin})
       }
-      partyTotals[partyIDToSet] += currentRegionEV
+      else
+      {
+        if (!(partyIDToSet in partyTotals))
+        {
+          partyTotals[partyIDToSet] = 0
+        }
+        partyTotals[partyIDToSet] += currentRegionEV
+      }
+    }
+    else if (currentViewingState == ViewingState.splitVote)
+    {
+      if (!regionDataArray[regionID].voteSplits) { continue }
+
+      for (let partyVote of regionDataArray[regionID].voteSplits)
+      {
+        let partyIDToSet = partyVote.partyID
+        let votesWon = partyVote.votes
+
+        if (!(partyIDToSet in partyTotals))
+        {
+          partyTotals[partyIDToSet] = 0
+        }
+        partyTotals[partyIDToSet] += votesWon
+      }
     }
   }
 
@@ -1588,44 +1625,45 @@ async function updateRegionBox(regionID)
     regionMarginString += "</div>"
   }
 
-  if (regionData.partyVoteSplits)
+  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+  let canZoomCurrently = currentMapSource.canZoom(currentMapDataForDate)
+
+  if (regionData.voteSplits && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
   {
+    let voteSplitDataToDisplay = regionData.voteSplits
     regionMarginString = "</span>"
-    Object.keys(regionData.partyVoteSplits).sort((partyID1, partyID2) => {
-      return regionData.partyVoteSplits[partyID2]-regionData.partyVoteSplits[partyID1]
-    }).forEach((partyID, i) => {
-      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < Object.keys(regionData.partyVoteSplits).length-1 ? 0 : 5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
+    voteSplitDataToDisplay.forEach((candidateSplitVoteData, i) => {
+      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < voteSplitDataToDisplay.length-1 ? 0 : 5) + "px; color: " + politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean + ";'>" + candidateSplitVoteData.candidate + ": " + candidateSplitVoteData.votes + "</div>"
     })
+  }
 
-    if (currentSliderDate && currentMapSource.getMapData())
-    {
-      var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-      var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+  if (regionData.voteSplits && canZoomCurrently && currentSliderDate && currentMapSource.getMapData())
+  {
+    var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
 
-      const districtsPerLine = 3
+    const districtsPerLine = 3
 
-      Object.keys(zoomingData).filter(districtID => !districtID.endsWith("-" + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
-        if (i % districtsPerLine == 0 && i != 0)
-        {
-          regionMarginString += "<br></div>"
-        }
-        if (i % districtsPerLine == 0)
-        {
-          var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
-          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
-        }
-        if (i % districtsPerLine > 0)
-        {
-          regionMarginString += "&nbsp;&nbsp;"
-        }
+    Object.keys(zoomingData).filter(districtID => !districtID.endsWith("-" + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
+      if (i % districtsPerLine == 0 && i != 0)
+      {
+        regionMarginString += "<br></div>"
+      }
+      if (i % districtsPerLine == 0)
+      {
+        var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
+        regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
+      }
+      if (i % districtsPerLine > 0)
+      {
+        regionMarginString += "&nbsp;&nbsp;"
+      }
 
-        var districtNumber = districtID.split("-")[1]
-        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
-        var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
+      var districtNumber = districtID.split("-")[1]
+      var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
+      var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
-        regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
-      })
-    }
+      regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
+    })
   }
 
   //Couldn't get safe colors to look good

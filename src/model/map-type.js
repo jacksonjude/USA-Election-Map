@@ -278,7 +278,8 @@ const MapSettingReloadType =
 {
   none: 0,
   display: 1,
-  data: 2
+  data: 2,
+  custom: 3
 }
 
 var globalMapSettings =
@@ -392,6 +393,21 @@ var USAPresidentialMapType = new MapType(
   {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maine-text":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nebraska-text":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
   [],
   [
+    {id: "presViewingType", title: "Viewing Type", type: MapSettingType.optionCycle, options:
+      [
+        {id: "popularVotes", title: "Popular Votes", value: false},
+        {id: "electoralVotes", title: "Electoral Votes", value: true}
+      ],
+      shouldShowActive: (value) => {
+        return value
+      },
+    defaultValue: "popularVotes", reloadType: MapSettingReloadType.custom, customReloadFunction: (value) => {
+      currentViewingState = value ? ViewingState.splitVote : ViewingState.viewing
+      if (showingDataMap)
+      {
+        displayDataMap()
+      }
+    }},
     {id: "evDecadeOverrideSelection", title: "EV Decade", type: MapSettingType.optionCycle, options:
     Object.keys(regionEVArray).map((decade) => {
       return {id: decade, title: decade, value: parseInt(decade)}
