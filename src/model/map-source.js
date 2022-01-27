@@ -571,6 +571,7 @@ const tossupPartyID = TossupParty.getID()
 const whigPartyID = WhigParty.getID()
 const nationalRepublicanPartyID = NationalRepublicanParty.getID()
 const democraticRepublicanPartyID = DemocraticRepublicanParty.getID()
+const federalistPartyID = FederalistParty.getID()
 
 const reformPartyID = ReformParty.getID()
 const greenPartyID = GreenParty.getID()
@@ -617,6 +618,9 @@ const independent1832JFPartyID = Independent1832JFParty.getID()
 const independent1824AJPartyID = Independent1824AJParty.getID()
 const independent1824WCPartyID = Independent1824WCParty.getID()
 const independent1824HCPartyID = Independent1824HCParty.getID()
+const independent1820JAPartyID = Independent1820JAParty.getID()
+const independent1808GCPartyID = Independent1808GCParty.getID()
+const independentGWPartyID = IndependentGWParty.getID()
 
 const independentGenericPartyID = IndependentGenericParty.getID()
 
@@ -1116,6 +1120,15 @@ function createPresidentialMapSources()
   }
 
   const electionYearToCandidateData = {
+    1788: {"Washington":independentGWPartyID},
+    1792: {"Washington":independentGWPartyID},
+    1796: {"Jefferson":democraticRepublicanPartyID, "Adams":federalistPartyID},
+    1800: {"Jefferson":democraticRepublicanPartyID, "Adams":federalistPartyID},
+    1804: {"Jefferson":democraticRepublicanPartyID, "Pinckney":federalistPartyID},
+    1808: {"Madison":democraticRepublicanPartyID, "Pinckney":federalistPartyID, "Clinton":independent1808GCPartyID},
+    1812: {"Madison":democraticRepublicanPartyID, "Clinton":federalistPartyID},
+    1816: {"Monroe":democraticRepublicanPartyID, "King":federalistPartyID},
+    1820: {"Monroe":democraticRepublicanPartyID, "Adams":independent1820JAPartyID},
     1824: {"Adams":democraticRepublicanPartyID, "Jackson":independent1824AJPartyID, "Crawford":independent1824WCPartyID, "Clay":independent1824HCPartyID, "Other":independentGenericPartyID},
     1828: {"Jackson":democraticPartyID, "Adams":nationalRepublicanPartyID, "Other":independentGenericPartyID},
     1832: {"Jackson":democraticPartyID, "Clay":nationalRepublicanPartyID, "Wirt":independent1832WWPartyID, "Floyd":independent1832JFPartyID, "Other":independentGenericPartyID},
@@ -1289,6 +1302,12 @@ function createPresidentialMapSources()
   }
 
   var pastElectoralVoteCounts = async (mapDateData) => {
+    if (new Date(getCurrentDateOrToday()).getFullYear() >= 1824 && currentMapType.getMapSettingValue("presViewingType") === false && currentViewingState == ViewingState.splitVote)
+    {
+      currentViewingState = ViewingState.viewing
+      return mapDateData
+    }
+
     let voteSplitMapDateData = {}
 
     for (let regionID in mapDateData)
@@ -1382,7 +1401,17 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
-    null, // viewingDataFunction
+    async (mapDateData) => {
+      if (new Date(getCurrentDateOrToday()).getFullYear() >= 1824)
+      {
+        return mapDateData
+      }
+      else
+      {
+        currentViewingState = ViewingState.splitVote
+        return await pastElectoralVoteCounts(mapDateData)
+      }
+    }, // viewingDataFunction
     null, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)

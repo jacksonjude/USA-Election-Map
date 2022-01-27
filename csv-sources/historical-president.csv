@@ -1,4 +1,169 @@
 date,region,state_po,candidate,party,voteshare,ev
+12/15/1788,Connecticut,CT,Washington,independent,100,7
+12/15/1788,Delaware,DE,Washington,independent,100,3
+12/15/1788,Georgia,GA,Washington,independent,100,5
+12/15/1788,Maryland,MD,Washington,independent,100,6
+12/15/1788,Massachusetts,MA,Washington,independent,100,10
+12/15/1788,New Hampshire,NH,Washington,independent,100,5
+12/15/1788,New Jersey,NJ,Washington,independent,100,6
+12/15/1788,Pennsylvania,PA,Washington,independent,100,10
+12/15/1788,South Carolina,SC,Washington,independent,100,7
+12/15/1788,Virginia,VA,Washington,independent,100,10
+11/2/1792,Connecticut,CT,Washington,independent,100,9
+11/2/1792,Delaware,DE,Washington,independent,100,3
+11/2/1792,Georgia,GA,Washington,independent,100,4
+11/2/1792,Kentucky,KY,Washington,independent,100,4
+11/2/1792,Maryland,MD,Washington,independent,100,8
+11/2/1792,Massachusetts,MA,Washington,independent,100,16
+11/2/1792,New Hampshire,NH,Washington,independent,100,6
+11/2/1792,New Jersey,NJ,Washington,independent,100,7
+11/2/1792,New York,NY,Washington,independent,100,12
+11/2/1792,North Carolina,NC,Washington,independent,100,12
+11/2/1792,Pennsylvania,PA,Washington,independent,100,15
+11/2/1792,Rhode Island,RI,Washington,independent,100,4
+11/2/1792,South Carolina,SC,Washington,independent,100,8
+11/2/1792,Vermont,VT,Washington,independent,100,3
+11/2/1792,Virginia,VA,Washington,independent,100,21
+11/4/1796,Connecticut,CT,Adams,federalist,100,9
+11/4/1796,Delaware,DE,Adams,federalist,100,3
+11/4/1796,Georgia,GA,Jefferson,democratic-republican,100,4
+11/4/1796,Kentucky,KY,Jefferson,democratic-republican,100,4
+11/4/1796,Maryland,MD,Adams,federalist,63.6,7
+11/4/1796,Maryland,MD,Jefferson,democratic-republican,36.4,4
+11/4/1796,Massachusetts,MA,Adams,federalist,100,16
+11/4/1796,New Hampshire,NH,Adams,federalist,100,6
+11/4/1796,New Jersey,NJ,Adams,federalist,100,7
+11/4/1796,New York,NY,Adams,federalist,100,12
+11/4/1796,North Carolina,NC,Jefferson,democratic-republican,91.7,11
+11/4/1796,North Carolina,NC,Adams,federalist,8.3,1
+11/4/1796,Pennsylvania,PA,Jefferson,democratic-republican,93.3,14
+11/4/1796,Pennsylvania,PA,Adams,federalist,6.7,1
+11/4/1796,Rhode Island,RI,Adams,federalist,100,4
+11/4/1796,South Carolina,SC,Jefferson,democratic-republican,100,8
+11/4/1796,Tennessee,TN,Jefferson,democratic-republican,100,3
+11/4/1796,Vermont,VT,Adams,federalist,100,4
+11/4/1796,Virginia,VA,Jefferson,democratic-republican,95.2,20
+11/4/1796,Virginia,VA,Adams,federalist,4.8,1
+10/31/1800,Connecticut,CT,Adams,federalist,100,9
+10/31/1800,Delaware,DE,Adams,federalist,100,3
+10/31/1800,Georgia,GA,Jefferson,democratic-republican,100,4
+10/31/1800,Kentucky,KY,Jefferson,democratic-republican,100,4
+10/31/1800,Maryland,MD,Jefferson,democratic-republican,50,5
+10/31/1800,Maryland,MD,Adams,federalist,50,5
+10/31/1800,Massachusetts,MA,Adams,federalist,100,16
+10/31/1800,New Hampshire,NH,Adams,federalist,100,6
+10/31/1800,New Jersey,NJ,Adams,federalist,100,7
+10/31/1800,New York,NY,Jefferson,democratic-republican,100,12
+10/31/1800,North Carolina,NC,Jefferson,democratic-republican,66.7,8
+10/31/1800,North Carolina,NC,Adams,federalist,33.3,4
+10/31/1800,Pennsylvania,PA,Jefferson,democratic-republican,53.3,8
+10/31/1800,Pennsylvania,PA,Adams,federalist,46.7,7
+10/31/1800,Rhode Island,RI,Adams,federalist,100,4
+10/31/1800,South Carolina,SC,Jefferson,democratic-republican,100,8
+10/31/1800,Tennessee,TN,Jefferson,democratic-republican,100,3
+10/31/1800,Vermont,VT,Adams,federalist,100,4
+10/31/1800,Virginia,VA,Jefferson,democratic-republican,100,21
+11/2/1804,Connecticut,CT,Pinckney,federalist,100,9
+11/2/1804,Delaware,DE,Pinckney,federalist,100,3
+11/2/1804,Georgia,GA,Jefferson,democratic-republican,100,6
+11/2/1804,Kentucky,KY,Jefferson,democratic-republican,100,8
+11/2/1804,Maryland,MD,Jefferson,democratic-republican,81.8,9
+11/2/1804,Maryland,MD,Pinckney,federalist,18.2,2
+11/2/1804,Massachusetts,MA,Jefferson,democratic-republican,100,19
+11/2/1804,New Hampshire,NH,Jefferson,democratic-republican,100,7
+11/2/1804,New Jersey,NJ,Jefferson,democratic-republican,100,8
+11/2/1804,New York,NY,Jefferson,democratic-republican,100,19
+11/2/1804,North Carolina,NC,Jefferson,democratic-republican,100,14
+11/2/1804,Ohio,OH,Jefferson,democratic-republican,100,3
+11/2/1804,Pennsylvania,PA,Jefferson,democratic-republican,100,20
+11/2/1804,Rhode Island,RI,Jefferson,democratic-republican,100,4
+11/2/1804,South Carolina,SC,Jefferson,democratic-republican,100,10
+11/2/1804,Tennessee,TN,Jefferson,democratic-republican,100,5
+11/2/1804,Vermont,VT,Jefferson,democratic-republican,100,6
+11/2/1804,Virginia,VA,Jefferson,democratic-republican,100,24
+11/4/1808,Connecticut,CT,Pinckney,federalist,100,9
+11/4/1808,Delaware,DE,Pinckney,federalist,100,3
+11/4/1808,Georgia,GA,Madison,democratic-republican,100,6
+11/4/1808,Kentucky,KY,Madison,democratic-republican,100,7
+11/4/1808,Maryland,MD,Madison,democratic-republican,81.8,9
+11/4/1808,Maryland,MD,Pinckney,federalist,18.2,2
+11/4/1808,Massachusetts,MA,Pinckney,federalist,100,19
+11/4/1808,New Hampshire,NH,Pinckney,federalist,100,7
+11/4/1808,New Jersey,NJ,Madison,democratic-republican,100,8
+11/4/1808,New York,NY,Madison,democratic-republican,68.4,13
+11/4/1808,New York,NY,Clinton,democratic-republican,31.6,6
+11/4/1808,North Carolina,NC,Madison,democratic-republican,78.6,11
+11/4/1808,North Carolina,NC,Pinckney,federalist,21.4,3
+11/4/1808,Ohio,OH,Madison,democratic-republican,100,3
+11/4/1808,Pennsylvania,PA,Madison,democratic-republican,100,20
+11/4/1808,Rhode Island,RI,Pinckney,federalist,100,4
+11/4/1808,South Carolina,SC,Madison,democratic-republican,100,10
+11/4/1808,Tennessee,TN,Madison,democratic-republican,100,5
+11/4/1808,Vermont,VT,Madison,democratic-republican,100,6
+11/4/1808,Virginia,VA,Madison,democratic-republican,100,24
+10/30/1812,Connecticut,CT,Clinton,federalist,100,9
+10/30/1812,Delaware,DE,Clinton,federalist,100,4
+10/30/1812,Georgia,GA,Madison,democratic-republican,100,8
+10/30/1812,Kentucky,KY,Madison,democratic-republican,100,12
+10/30/1812,Louisiana,LA,Madison,democratic-republican,100,3
+10/30/1812,Maryland,MD,Madison,democratic-republican,54.5,6
+10/30/1812,Maryland,MD,Clinton,federalist,45.5,5
+10/30/1812,Massachusetts,MA,Clinton,federalist,100,22
+10/30/1812,New Hampshire,NH,Clinton,federalist,100,8
+10/30/1812,New Jersey,NJ,Clinton,federalist,100,8
+10/30/1812,New York,NY,Clinton,federalist,100,29
+10/30/1812,North Carolina,NC,Madison,democratic-republican,100,15
+10/30/1812,Ohio,OH,Madison,democratic-republican,100,7
+10/30/1812,Pennsylvania,PA,Madison,democratic-republican,100,25
+10/30/1812,Rhode Island,RI,Clinton,federalist,100,4
+10/30/1812,South Carolina,SC,Madison,democratic-republican,100,11
+10/30/1812,Tennessee,TN,Madison,democratic-republican,100,8
+10/30/1812,Vermont,VT,Madison,democratic-republican,100,8
+10/30/1812,Virginia,VA,Madison,democratic-republican,100,25
+11/1/1816,Connecticut,CT,King,federalist,100,9
+11/1/1816,Delaware,DE,King,federalist,100,3
+11/1/1816,Georgia,GA,Monroe,democratic-republican,100,8
+11/1/1816,Indiana,IN,Monroe,democratic-republican,100,3
+11/1/1816,Kentucky,KY,Monroe,democratic-republican,100,12
+11/1/1816,Louisiana,LA,Monroe,democratic-republican,100,3
+11/1/1816,Maryland,MD,Monroe,democratic-republican,100,8
+11/1/1816,Massachusetts,MA,King,federalist,100,22
+11/1/1816,New Hampshire,NH,Monroe,democratic-republican,100,8
+11/1/1816,New Jersey,NJ,Monroe,democratic-republican,100,8
+11/1/1816,New York,NY,Monroe,democratic-republican,100,29
+11/1/1816,North Carolina,NC,Monroe,democratic-republican,100,15
+11/1/1816,Ohio,OH,Monroe,democratic-republican,100,8
+11/1/1816,Pennsylvania,PA,Monroe,democratic-republican,100,25
+11/1/1816,Rhode Island,RI,Monroe,democratic-republican,100,4
+11/1/1816,South Carolina,SC,Monroe,democratic-republican,100,11
+11/1/1816,Tennessee,TN,Monroe,democratic-republican,100,8
+11/1/1816,Vermont,VT,Monroe,democratic-republican,100,8
+11/1/1816,Virginia,VA,Monroe,democratic-republican,100,25
+11/1/1820,Alabama,AL,Monroe,democratic-republican,100,3
+11/1/1820,Connecticut,CT,Monroe,democratic-republican,100,9
+11/1/1820,Delaware,DE,Monroe,democratic-republican,100,4
+11/1/1820,Georgia,GA,Monroe,democratic-republican,100,8
+11/1/1820,Illinois,IL,Monroe,democratic-republican,100,3
+11/1/1820,Indiana,IN,Monroe,democratic-republican,100,3
+11/1/1820,Kentucky,KY,Monroe,democratic-republican,100,12
+11/1/1820,Louisiana,LA,Monroe,democratic-republican,100,3
+11/1/1820,Maine,ME,Monroe,democratic-republican,100,9
+11/1/1820,Maryland,MD,Monroe,democratic-republican,100,11
+11/1/1820,Massachusetts,MA,Monroe,democratic-republican,100,15
+11/1/1820,Mississippi,MS,Monroe,democratic-republican,100,2
+11/1/1820,Missouri,MO,Monroe,democratic-republican,100,3
+11/1/1820,New Hampshire,NH,Monroe,democratic-republican,87.5,7
+11/1/1820,New Hampshire,NH,Adams,democratic-republican,12.5,1
+11/1/1820,New Jersey,NJ,Monroe,democratic-republican,100,8
+11/1/1820,New York,NY,Monroe,democratic-republican,100,29
+11/1/1820,North Carolina,NC,Monroe,democratic-republican,100,15
+11/1/1820,Ohio,OH,Monroe,democratic-republican,100,8
+11/1/1820,Pennsylvania,PA,Monroe,democratic-republican,100,24
+11/1/1820,Rhode Island,RI,Monroe,democratic-republican,100,4
+11/1/1820,South Carolina,SC,Monroe,democratic-republican,100,11
+11/1/1820,Tennessee,TN,Monroe,democratic-republican,100,6
+11/1/1820,Vermont,VT,Monroe,democratic-republican,100,8
+11/1/1820,Virginia,VA,Monroe,democratic-republican,100,25
 10/31/1824,Alabama,AL,Jackson,democratic-republican,69.31559215,
 10/31/1824,Alabama,AL,Adams,democratic-republican,17.80489598,
 10/31/1824,Alabama,AL,Clay,democratic-republican,0.7057266779,
