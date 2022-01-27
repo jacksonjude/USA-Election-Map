@@ -1,196 +1,196 @@
 date,region,state_po,candidate,party,voteshare,ev
-10/31/1824,Alabama,AL,Jackson,democratic-republican,69.31559215,5
-10/31/1824,Alabama,AL,Adams,democratic-republican,17.80489598,0
-10/31/1824,Alabama,AL,Clay,democratic-republican,0.7057266779,0
-10/31/1824,Alabama,AL,Crawford,democratic-republican,12.17378519,0
-10/31/1824,Alabama,AL,Other,democratic-republican,0,0
-10/31/1824,Connecticut,CT,Jackson,democratic-republican,0,0
-10/31/1824,Connecticut,CT,Adams,democratic-republican,70.38602423,8
-10/31/1824,Connecticut,CT,Clay,democratic-republican,0,0
-10/31/1824,Connecticut,CT,Crawford,democratic-republican,18.45590307,0
-10/31/1824,Connecticut,CT,Other,democratic-republican,11.1580727,0
-10/31/1824,Delaware,DE,Jackson,democratic-republican,0,0
+10/31/1824,Alabama,AL,Jackson,democratic-republican,69.31559215,
+10/31/1824,Alabama,AL,Adams,democratic-republican,17.80489598,
+10/31/1824,Alabama,AL,Clay,democratic-republican,0.7057266779,
+10/31/1824,Alabama,AL,Crawford,democratic-republican,12.17378519,
+10/31/1824,Alabama,AL,Other,democratic-republican,0,
+10/31/1824,Connecticut,CT,Jackson,democratic-republican,0,
+10/31/1824,Connecticut,CT,Adams,democratic-republican,70.38602423,
+10/31/1824,Connecticut,CT,Clay,democratic-republican,0,
+10/31/1824,Connecticut,CT,Crawford,democratic-republican,18.45590307,
+10/31/1824,Connecticut,CT,Other,democratic-republican,11.1580727,
+10/31/1824,Delaware,DE,Jackson,democratic-republican,0,
 10/31/1824,Delaware,DE,Adams,democratic-republican,0,1
-10/31/1824,Delaware,DE,Clay,democratic-republican,0,0
+10/31/1824,Delaware,DE,Clay,democratic-republican,0,
 10/31/1824,Delaware,DE,Crawford,democratic-republican,100,2
-10/31/1824,Delaware,DE,Other,democratic-republican,0,0
-10/31/1824,Georgia,GA,Jackson,democratic-republican,0,0
-10/31/1824,Georgia,GA,Adams,democratic-republican,0,0
-10/31/1824,Georgia,GA,Clay,democratic-republican,0,0
-10/31/1824,Georgia,GA,Crawford,democratic-republican,100,9
-10/31/1824,Georgia,GA,Other,democratic-republican,0,0
+10/31/1824,Delaware,DE,Other,democratic-republican,0,
+10/31/1824,Georgia,GA,Jackson,democratic-republican,0,
+10/31/1824,Georgia,GA,Adams,democratic-republican,0,
+10/31/1824,Georgia,GA,Clay,democratic-republican,0,
+10/31/1824,Georgia,GA,Crawford,democratic-republican,100,
+10/31/1824,Georgia,GA,Other,democratic-republican,0,
 10/31/1824,Illinois,IL,Jackson,democratic-republican,27.23185613,2
 10/31/1824,Illinois,IL,Adams,democratic-republican,32.45557696,1
-10/31/1824,Illinois,IL,Clay,democratic-republican,22.17940484,0
-10/31/1824,Illinois,IL,Crawford,democratic-republican,18.13316206,0
-10/31/1824,Illinois,IL,Other,democratic-republican,0,0
-10/31/1824,Indiana,IN,Jackson,democratic-republican,46.61334349,5
-10/31/1824,Indiana,IN,Adams,democratic-republican,19.64705136,0
-10/31/1824,Indiana,IN,Clay,democratic-republican,33.73960515,0
-10/31/1824,Indiana,IN,Crawford,democratic-republican,0,0
-10/31/1824,Indiana,IN,Other,democratic-republican,0,0
-10/31/1824,Kentucky,KY,Jackson,democratic-republican,27.23455309,0
-10/31/1824,Kentucky,KY,Adams,democratic-republican,0,0
-10/31/1824,Kentucky,KY,Clay,democratic-republican,72.76544691,14
-10/31/1824,Kentucky,KY,Crawford,democratic-republican,0,0
-10/31/1824,Kentucky,KY,Other,democratic-republican,0,0
+10/31/1824,Illinois,IL,Clay,democratic-republican,22.17940484,
+10/31/1824,Illinois,IL,Crawford,democratic-republican,18.13316206,
+10/31/1824,Illinois,IL,Other,democratic-republican,0,
+10/31/1824,Indiana,IN,Jackson,democratic-republican,46.61334349,
+10/31/1824,Indiana,IN,Adams,democratic-republican,19.64705136,
+10/31/1824,Indiana,IN,Clay,democratic-republican,33.73960515,
+10/31/1824,Indiana,IN,Crawford,democratic-republican,0,
+10/31/1824,Indiana,IN,Other,democratic-republican,0,
+10/31/1824,Kentucky,KY,Jackson,democratic-republican,27.23455309,
+10/31/1824,Kentucky,KY,Adams,democratic-republican,0,
+10/31/1824,Kentucky,KY,Clay,democratic-republican,72.76544691,
+10/31/1824,Kentucky,KY,Crawford,democratic-republican,0,
+10/31/1824,Kentucky,KY,Other,democratic-republican,0,
 10/31/1824,Louisiana,LA,Jackson,democratic-republican,100,3
 10/31/1824,Louisiana,LA,Adams,democratic-republican,0,2
-10/31/1824,Louisiana,LA,Clay,democratic-republican,0,0
-10/31/1824,Louisiana,LA,Crawford,democratic-republican,0,0
-10/31/1824,Louisiana,LA,Other,democratic-republican,0,0
-10/31/1824,Maine,ME,Jackson,democratic-republican,0,0
-10/31/1824,Maine,ME,Adams,democratic-republican,81.4970297,9
-10/31/1824,Maine,ME,Clay,democratic-republican,0,0
-10/31/1824,Maine,ME,Crawford,democratic-republican,18.5029703,0
-10/31/1824,Maine,ME,Other,democratic-republican,0,0
+10/31/1824,Louisiana,LA,Clay,democratic-republican,0,
+10/31/1824,Louisiana,LA,Crawford,democratic-republican,0,
+10/31/1824,Louisiana,LA,Other,democratic-republican,0,
+10/31/1824,Maine,ME,Jackson,democratic-republican,0,
+10/31/1824,Maine,ME,Adams,democratic-republican,81.4970297,
+10/31/1824,Maine,ME,Clay,democratic-republican,0,
+10/31/1824,Maine,ME,Crawford,democratic-republican,18.5029703,
+10/31/1824,Maine,ME,Other,democratic-republican,0,
 10/31/1824,Maryland,MD,Jackson,democratic-republican,43.72553742,7
 10/31/1824,Maryland,MD,Adams,democratic-republican,44.05371229,3
-10/31/1824,Maryland,MD,Clay,democratic-republican,2.092491118,0
+10/31/1824,Maryland,MD,Clay,democratic-republican,2.092491118,
 10/31/1824,Maryland,MD,Crawford,democratic-republican,10.12825917,1
-10/31/1824,Maryland,MD,Other,democratic-republican,0,0
-10/31/1824,Massachusetts,MA,Jackson,democratic-republican,0,0
-10/31/1824,Massachusetts,MA,Adams,democratic-republican,72.96699639,15
-10/31/1824,Massachusetts,MA,Clay,democratic-republican,0,0
-10/31/1824,Massachusetts,MA,Crawford,democratic-republican,0,0
-10/31/1824,Massachusetts,MA,Other,democratic-republican,27.03300361,0
-10/31/1824,Mississippi,MS,Jackson,democratic-republican,63.77196567,3
-10/31/1824,Mississippi,MS,Adams,democratic-republican,33.79648549,0
-10/31/1824,Mississippi,MS,Clay,democratic-republican,0,0
-10/31/1824,Mississippi,MS,Crawford,democratic-republican,2.431548835,0
-10/31/1824,Mississippi,MS,Other,democratic-republican,0,0
-10/31/1824,Missouri,MO,Jackson,democratic-republican,33.97435897,0
-10/31/1824,Missouri,MO,Adams,democratic-republican,4.632867133,0
-10/31/1824,Missouri,MO,Clay,democratic-republican,59.4988345,3
-10/31/1824,Missouri,MO,Crawford,democratic-republican,0.9324009324,0
-10/31/1824,Missouri,MO,Other,democratic-republican,0.9615384615,0
-10/31/1824,New Hampshire,NH,Jackson,democratic-republican,0,0
-10/31/1824,New Hampshire,NH,Adams,democratic-republican,93.59051037,8
-10/31/1824,New Hampshire,NH,Clay,democratic-republican,0,0
-10/31/1824,New Hampshire,NH,Crawford,democratic-republican,6.409489633,0
-10/31/1824,New Hampshire,NH,Other,democratic-republican,0,0
-10/31/1824,New Jersey,NJ,Jackson,democratic-republican,52.08448858,8
-10/31/1824,New Jersey,NJ,Adams,democratic-republican,41.88637395,0
-10/31/1824,New Jersey,NJ,Clay,democratic-republican,0,0
-10/31/1824,New Jersey,NJ,Crawford,democratic-republican,6.02913747,0
-10/31/1824,New Jersey,NJ,Other,democratic-republican,0,0
+10/31/1824,Maryland,MD,Other,democratic-republican,0,
+10/31/1824,Massachusetts,MA,Jackson,democratic-republican,0,
+10/31/1824,Massachusetts,MA,Adams,democratic-republican,72.96699639,
+10/31/1824,Massachusetts,MA,Clay,democratic-republican,0,
+10/31/1824,Massachusetts,MA,Crawford,democratic-republican,0,
+10/31/1824,Massachusetts,MA,Other,democratic-republican,27.03300361,
+10/31/1824,Mississippi,MS,Jackson,democratic-republican,63.77196567,
+10/31/1824,Mississippi,MS,Adams,democratic-republican,33.79648549,
+10/31/1824,Mississippi,MS,Clay,democratic-republican,0,
+10/31/1824,Mississippi,MS,Crawford,democratic-republican,2.431548835,
+10/31/1824,Mississippi,MS,Other,democratic-republican,0,
+10/31/1824,Missouri,MO,Jackson,democratic-republican,33.97435897,
+10/31/1824,Missouri,MO,Adams,democratic-republican,4.632867133,
+10/31/1824,Missouri,MO,Clay,democratic-republican,59.4988345,
+10/31/1824,Missouri,MO,Crawford,democratic-republican,0.9324009324,
+10/31/1824,Missouri,MO,Other,democratic-republican,0.9615384615,
+10/31/1824,New Hampshire,NH,Jackson,democratic-republican,0,
+10/31/1824,New Hampshire,NH,Adams,democratic-republican,93.59051037,
+10/31/1824,New Hampshire,NH,Clay,democratic-republican,0,
+10/31/1824,New Hampshire,NH,Crawford,democratic-republican,6.409489633,
+10/31/1824,New Hampshire,NH,Other,democratic-republican,0,
+10/31/1824,New Jersey,NJ,Jackson,democratic-republican,52.08448858,
+10/31/1824,New Jersey,NJ,Adams,democratic-republican,41.88637395,
+10/31/1824,New Jersey,NJ,Clay,democratic-republican,0,
+10/31/1824,New Jersey,NJ,Crawford,democratic-republican,6.02913747,
+10/31/1824,New Jersey,NJ,Other,democratic-republican,0,
 10/31/1824,New York,NY,Jackson,democratic-republican,0,1
 10/31/1824,New York,NY,Adams,democratic-republican,100,26
 10/31/1824,New York,NY,Clay,democratic-republican,0,4
 10/31/1824,New York,NY,Crawford,democratic-republican,0,5
-10/31/1824,New York,NY,Other,democratic-republican,0,0
-10/31/1824,North Carolina,NC,Jackson,democratic-republican,56.02758315,15
-10/31/1824,North Carolina,NC,Adams,democratic-republican,0,0
-10/31/1824,North Carolina,NC,Clay,democratic-republican,0,0
-10/31/1824,North Carolina,NC,Crawford,democratic-republican,43.26345232,0
-10/31/1824,North Carolina,NC,Other,democratic-republican,0.7089645241,0
-10/31/1824,Ohio,OH,Jackson,democratic-republican,36.96025908,0
-10/31/1824,Ohio,OH,Adams,democratic-republican,24.54821686,0
-10/31/1824,Ohio,OH,Clay,democratic-republican,38.49152407,16
-10/31/1824,Ohio,OH,Crawford,democratic-republican,0,0
-10/31/1824,Ohio,OH,Other,democratic-republican,0,0
-10/31/1824,Pennsylvania,PA,Jackson,democratic-republican,76.03699314,28
-10/31/1824,Pennsylvania,PA,Adams,democratic-republican,11.50427495,0
-10/31/1824,Pennsylvania,PA,Clay,democratic-republican,3.608312876,0
-10/31/1824,Pennsylvania,PA,Crawford,democratic-republican,8.85041903,0
-10/31/1824,Pennsylvania,PA,Other,democratic-republican,0,0
-10/31/1824,Rhode Island,RI,Jackson,democratic-republican,0,0
-10/31/1824,Rhode Island,RI,Adams,democratic-republican,91.47121535,4
-10/31/1824,Rhode Island,RI,Clay,democratic-republican,0,0
-10/31/1824,Rhode Island,RI,Crawford,democratic-republican,8.528784648,0
-10/31/1824,Rhode Island,RI,Other,democratic-republican,0,0
-10/31/1824,South Carolina,SC,Jackson,democratic-republican,100,11
-10/31/1824,South Carolina,SC,Adams,democratic-republican,0,0
-10/31/1824,South Carolina,SC,Clay,democratic-republican,0,0
-10/31/1824,South Carolina,SC,Crawford,democratic-republican,0,0
-10/31/1824,South Carolina,SC,Other,democratic-republican,0,0
-10/31/1824,Tennessee,TN,Jackson,democratic-republican,97.45235223,11
-10/31/1824,Tennessee,TN,Adams,democratic-republican,1.042219542,0
-10/31/1824,Tennessee,TN,Clay,democratic-republican,0,0
-10/31/1824,Tennessee,TN,Crawford,democratic-republican,1.505428227,0
-10/31/1824,Tennessee,TN,Other,democratic-republican,0,0
-10/31/1824,Vermont,VT,Jackson,democratic-republican,0,0
-10/31/1824,Vermont,VT,Adams,democratic-republican,100,7
-10/31/1824,Vermont,VT,Clay,democratic-republican,0,0
-10/31/1824,Vermont,VT,Crawford,democratic-republican,0,0
-10/31/1824,Vermont,VT,Other,democratic-republican,0,0
-10/31/1824,Virginia,VA,Jackson,democratic-republican,19.35462885,0
-10/31/1824,Virginia,VA,Adams,democratic-republican,22.24318522,0
-10/31/1824,Virginia,VA,Clay,democratic-republican,2.725912433,0
-10/31/1824,Virginia,VA,Crawford,democratic-republican,55.6762735,24
-10/31/1824,Virginia,VA,Other,democratic-republican,0,0
-10/31/1828,Alabama,AL,Jackson,democrat,89.89150285,5
-10/31/1828,Alabama,AL,Adams,national republican,10.08701257,0
-10/31/1828,Alabama,AL,Other,independent,0.02148458481,0
-10/31/1828,Connecticut,CT,Jackson,democrat,22.95386521,0
-10/31/1828,Connecticut,CT,Adams,national republican,71.36443389,8
-10/31/1828,Connecticut,CT,Other,independent,5.681700898,0
-10/31/1828,Delaware,DE,Jackson,democrat,0,0
-10/31/1828,Delaware,DE,Adams,national republican,100,3
-10/31/1828,Delaware,DE,Other,independent,0,0
-10/31/1828,Georgia,GA,Jackson,democrat,96.79064187,9
-10/31/1828,Georgia,GA,Adams,national republican,3.209358128,0
-10/31/1828,Georgia,GA,Other,independent,0,0
-10/31/1828,Illinois,IL,Jackson,democrat,67.21980031,3
-10/31/1828,Illinois,IL,Adams,national republican,32.78019969,0
-10/31/1828,Illinois,IL,Other,independent,0,0
-10/31/1828,Indiana,IN,Jackson,democrat,56.62062123,5
-10/31/1828,Indiana,IN,Adams,national republican,43.37937877,0
-10/31/1828,Indiana,IN,Other,independent,0,0
-10/31/1828,Kentucky,KY,Jackson,democrat,55.53860066,14
-10/31/1828,Kentucky,KY,Adams,national republican,44.46139934,0
-10/31/1828,Kentucky,KY,Other,independent,0,0
-10/31/1828,Louisiana,LA,Jackson,democrat,53.01024519,5
-10/31/1828,Louisiana,LA,Adams,national republican,46.98975481,0
-10/31/1828,Louisiana,LA,Other,independent,0,0
+10/31/1824,New York,NY,Other,democratic-republican,0,
+10/31/1824,North Carolina,NC,Jackson,democratic-republican,56.02758315,
+10/31/1824,North Carolina,NC,Adams,democratic-republican,0,
+10/31/1824,North Carolina,NC,Clay,democratic-republican,0,
+10/31/1824,North Carolina,NC,Crawford,democratic-republican,43.26345232,
+10/31/1824,North Carolina,NC,Other,democratic-republican,0.7089645241,
+10/31/1824,Ohio,OH,Jackson,democratic-republican,36.96025908,
+10/31/1824,Ohio,OH,Adams,democratic-republican,24.54821686,
+10/31/1824,Ohio,OH,Clay,democratic-republican,38.49152407,
+10/31/1824,Ohio,OH,Crawford,democratic-republican,0,
+10/31/1824,Ohio,OH,Other,democratic-republican,0,
+10/31/1824,Pennsylvania,PA,Jackson,democratic-republican,76.03699314,
+10/31/1824,Pennsylvania,PA,Adams,democratic-republican,11.50427495,
+10/31/1824,Pennsylvania,PA,Clay,democratic-republican,3.608312876,
+10/31/1824,Pennsylvania,PA,Crawford,democratic-republican,8.85041903,
+10/31/1824,Pennsylvania,PA,Other,democratic-republican,0,
+10/31/1824,Rhode Island,RI,Jackson,democratic-republican,0,
+10/31/1824,Rhode Island,RI,Adams,democratic-republican,91.47121535,
+10/31/1824,Rhode Island,RI,Clay,democratic-republican,0,
+10/31/1824,Rhode Island,RI,Crawford,democratic-republican,8.528784648,
+10/31/1824,Rhode Island,RI,Other,democratic-republican,0,
+10/31/1824,South Carolina,SC,Jackson,democratic-republican,100,
+10/31/1824,South Carolina,SC,Adams,democratic-republican,0,
+10/31/1824,South Carolina,SC,Clay,democratic-republican,0,
+10/31/1824,South Carolina,SC,Crawford,democratic-republican,0,
+10/31/1824,South Carolina,SC,Other,democratic-republican,0,
+10/31/1824,Tennessee,TN,Jackson,democratic-republican,97.45235223,
+10/31/1824,Tennessee,TN,Adams,democratic-republican,1.042219542,
+10/31/1824,Tennessee,TN,Clay,democratic-republican,0,
+10/31/1824,Tennessee,TN,Crawford,democratic-republican,1.505428227,
+10/31/1824,Tennessee,TN,Other,democratic-republican,0,
+10/31/1824,Vermont,VT,Jackson,democratic-republican,0,
+10/31/1824,Vermont,VT,Adams,democratic-republican,100,
+10/31/1824,Vermont,VT,Clay,democratic-republican,0,
+10/31/1824,Vermont,VT,Crawford,democratic-republican,0,
+10/31/1824,Vermont,VT,Other,democratic-republican,0,
+10/31/1824,Virginia,VA,Jackson,democratic-republican,19.35462885,
+10/31/1824,Virginia,VA,Adams,democratic-republican,22.24318522,
+10/31/1824,Virginia,VA,Clay,democratic-republican,2.725912433,
+10/31/1824,Virginia,VA,Crawford,democratic-republican,55.6762735,
+10/31/1824,Virginia,VA,Other,democratic-republican,0,
+10/31/1828,Alabama,AL,Jackson,democrat,89.89150285,
+10/31/1828,Alabama,AL,Adams,national republican,10.08701257,
+10/31/1828,Alabama,AL,Other,independent,0.02148458481,
+10/31/1828,Connecticut,CT,Jackson,democrat,22.95386521,
+10/31/1828,Connecticut,CT,Adams,national republican,71.36443389,
+10/31/1828,Connecticut,CT,Other,independent,5.681700898,
+10/31/1828,Delaware,DE,Jackson,democrat,0,
+10/31/1828,Delaware,DE,Adams,national republican,100,
+10/31/1828,Delaware,DE,Other,independent,0,
+10/31/1828,Georgia,GA,Jackson,democrat,96.79064187,
+10/31/1828,Georgia,GA,Adams,national republican,3.209358128,
+10/31/1828,Georgia,GA,Other,independent,0,
+10/31/1828,Illinois,IL,Jackson,democrat,67.21980031,
+10/31/1828,Illinois,IL,Adams,national republican,32.78019969,
+10/31/1828,Illinois,IL,Other,independent,0,
+10/31/1828,Indiana,IN,Jackson,democrat,56.62062123,
+10/31/1828,Indiana,IN,Adams,national republican,43.37937877,
+10/31/1828,Indiana,IN,Other,independent,0,
+10/31/1828,Kentucky,KY,Jackson,democrat,55.53860066,
+10/31/1828,Kentucky,KY,Adams,national republican,44.46139934,
+10/31/1828,Kentucky,KY,Other,independent,0,
+10/31/1828,Louisiana,LA,Jackson,democrat,53.01024519,
+10/31/1828,Louisiana,LA,Adams,national republican,46.98975481,
+10/31/1828,Louisiana,LA,Other,independent,0,
 10/31/1828,Maine,ME,Jackson,democrat,40.03276898,1
 10/31/1828,Maine,ME,Adams,national republican,59.71140303,8
-10/31/1828,Maine,ME,Other,independent,0.2558279916,0
+10/31/1828,Maine,ME,Other,independent,0.2558279916,
 10/31/1828,Maryland,MD,Jackson,democrat,49.74670277,5
 10/31/1828,Maryland,MD,Adams,national republican,50.25329723,6
-10/31/1828,Maryland,MD,Other,independent,0,0
-10/31/1828,Massachusetts,MA,Jackson,democrat,15.38619031,0
-10/31/1828,Massachusetts,MA,Adams,national republican,76.3576803,15
-10/31/1828,Massachusetts,MA,Other,independent,8.256129396,0
-10/31/1828,Mississippi,MS,Jackson,democrat,81.05225312,3
-10/31/1828,Mississippi,MS,Adams,national republican,18.94774688,0
-10/31/1828,Mississippi,MS,Other,independent,0,0
-10/31/1828,Missouri,MO,Jackson,democrat,70.63669126,3
-10/31/1828,Missouri,MO,Adams,national republican,29.36330874,0
-10/31/1828,Missouri,MO,Other,independent,0,0
-10/31/1828,New Hampshire,NH,Jackson,democrat,45.89985239,0
-10/31/1828,New Hampshire,NH,Adams,national republican,54.10014761,8
-10/31/1828,New Hampshire,NH,Other,independent,0,0
-10/31/1828,New Jersey,NJ,Jackson,democrat,47.85824007,0
-10/31/1828,New Jersey,NJ,Adams,national republican,52.12420452,8
-10/31/1828,New Jersey,NJ,Other,independent,0.01755540926,0
+10/31/1828,Maryland,MD,Other,independent,0,
+10/31/1828,Massachusetts,MA,Jackson,democrat,15.38619031,
+10/31/1828,Massachusetts,MA,Adams,national republican,76.3576803,
+10/31/1828,Massachusetts,MA,Other,independent,8.256129396,
+10/31/1828,Mississippi,MS,Jackson,democrat,81.05225312,
+10/31/1828,Mississippi,MS,Adams,national republican,18.94774688,
+10/31/1828,Mississippi,MS,Other,independent,0,
+10/31/1828,Missouri,MO,Jackson,democrat,70.63669126,
+10/31/1828,Missouri,MO,Adams,national republican,29.36330874,
+10/31/1828,Missouri,MO,Other,independent,0,
+10/31/1828,New Hampshire,NH,Jackson,democrat,45.89985239,
+10/31/1828,New Hampshire,NH,Adams,national republican,54.10014761,
+10/31/1828,New Hampshire,NH,Other,independent,0,
+10/31/1828,New Jersey,NJ,Jackson,democrat,47.85824007,
+10/31/1828,New Jersey,NJ,Adams,national republican,52.12420452,
+10/31/1828,New Jersey,NJ,Other,independent,0.01755540926,
 10/31/1828,New York,NY,Jackson,democrat,51.44828859,20
 10/31/1828,New York,NY,Adams,national republican,48.55171141,16
-10/31/1828,New York,NY,Other,independent,0,0
-10/31/1828,North Carolina,NC,Jackson,democrat,73.07476762,15
-10/31/1828,North Carolina,NC,Adams,national republican,26.89624519,0
-10/31/1828,North Carolina,NC,Other,independent,0.02898718766,0
-10/31/1828,Ohio,OH,Jackson,democrat,51.6035208,16
-10/31/1828,Ohio,OH,Adams,national republican,48.3964792,0
-10/31/1828,Ohio,OH,Other,independent,0,0
-10/31/1828,Pennsylvania,PA,Jackson,democrat,66.65704918,28
-10/31/1828,Pennsylvania,PA,Adams,national republican,33.34295082,0
-10/31/1828,Pennsylvania,PA,Other,independent,0,0
-10/31/1828,Rhode Island,RI,Jackson,democrat,22.96503497,0
-10/31/1828,Rhode Island,RI,Adams,national republican,77.03496503,4
-10/31/1828,Rhode Island,RI,Other,independent,0,0
-10/31/1828,South Carolina,SC,Jackson,democrat,100,11
-10/31/1828,South Carolina,SC,Adams,national republican,0,0
-10/31/1828,South Carolina,SC,Other,independent,0,0
-10/31/1828,Tennessee,TN,Jackson,democrat,95.18621194,11
-10/31/1828,Tennessee,TN,Adams,national republican,4.813788064,0
-10/31/1828,Tennessee,TN,Other,independent,0,0
-10/31/1828,Vermont,VT,Jackson,democrat,24.76789369,0
-10/31/1828,Vermont,VT,Adams,national republican,75.23210631,7
-10/31/1828,Vermont,VT,Other,independent,0,0
-10/31/1828,Virginia,VA,Jackson,democrat,68.99085397,24
-10/31/1828,Virginia,VA,Adams,national republican,31.00914603,0
-10/31/1828,Virginia,VA,Other,independent,0,0
+10/31/1828,New York,NY,Other,independent,0,
+10/31/1828,North Carolina,NC,Jackson,democrat,73.07476762,
+10/31/1828,North Carolina,NC,Adams,national republican,26.89624519,
+10/31/1828,North Carolina,NC,Other,independent,0.02898718766,
+10/31/1828,Ohio,OH,Jackson,democrat,51.6035208,
+10/31/1828,Ohio,OH,Adams,national republican,48.3964792,
+10/31/1828,Ohio,OH,Other,independent,0,
+10/31/1828,Pennsylvania,PA,Jackson,democrat,66.65704918,
+10/31/1828,Pennsylvania,PA,Adams,national republican,33.34295082,
+10/31/1828,Pennsylvania,PA,Other,independent,0,
+10/31/1828,Rhode Island,RI,Jackson,democrat,22.96503497,
+10/31/1828,Rhode Island,RI,Adams,national republican,77.03496503,
+10/31/1828,Rhode Island,RI,Other,independent,0,
+10/31/1828,South Carolina,SC,Jackson,democrat,100,
+10/31/1828,South Carolina,SC,Adams,national republican,0,
+10/31/1828,South Carolina,SC,Other,independent,0,
+10/31/1828,Tennessee,TN,Jackson,democrat,95.18621194,
+10/31/1828,Tennessee,TN,Adams,national republican,4.813788064,
+10/31/1828,Tennessee,TN,Other,independent,0,
+10/31/1828,Vermont,VT,Jackson,democrat,24.76789369,
+10/31/1828,Vermont,VT,Adams,national republican,75.23210631,
+10/31/1828,Vermont,VT,Other,independent,0,
+10/31/1828,Virginia,VA,Jackson,democrat,68.99085397,
+10/31/1828,Virginia,VA,Adams,national republican,31.00914603,
+10/31/1828,Virginia,VA,Other,independent,0,
 11/2/1832,Alabama,AL,Jackson,democratic,99.96501295,
 11/2/1832,Alabama,AL,Clay,national republican,0.03498705479,
 11/2/1832,Alabama,AL,Wirt,independent,0,
@@ -227,8 +227,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/2/1832,Maine,ME,Clay,national republican,43.97374222,
 11/2/1832,Maine,ME,Wirt,independent,1.357939279,
 11/2/1832,Maine,ME,Other,independent,0,
-11/2/1832,Maryland,MD,Jackson,democratic,49.99478025,
-11/2/1832,Maryland,MD,Clay,national republican,50.00521975,
+11/2/1832,Maryland,MD,Jackson,democratic,49.99478025,3
+11/2/1832,Maryland,MD,Clay,national republican,50.00521975,5
 11/2/1832,Maryland,MD,Wirt,independent,0,
 11/2/1832,Maryland,MD,Other,independent,0,
 11/2/1832,Massachusetts,MA,Jackson,democratic,20.60515536,
@@ -1072,8 +1072,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/6/1860,New Hampshire,NH,Breckenridge,independent,3.222480021,
 11/6/1860,New Hampshire,NH,Bell,independent,0.6247820087,
 11/6/1860,New Hampshire,NH,Other,independent,0,
-11/6/1860,New Jersey,NJ,Lincoln,republican,48.13430681,
-11/6/1860,New Jersey,NJ,Douglas,democrat,51.86569319,
+11/6/1860,New Jersey,NJ,Lincoln,republican,48.13430681,4
+11/6/1860,New Jersey,NJ,Douglas,democrat,51.86569319,3
 11/6/1860,New Jersey,NJ,Breckenridge,independent,0,
 11/6/1860,New Jersey,NJ,Bell,independent,0,
 11/6/1860,New Jersey,NJ,Other,independent,0,
@@ -1183,7 +1183,7 @@ date,region,state_po,candidate,party,voteshare,ev
 11/8/1864,Missouri,MO,Lincoln,republican,69.7199701,
 11/8/1864,Missouri,MO,McClellan,democrat,30.2800299,
 11/8/1864,Missouri,MO,Other,independent,0,
-11/8/1864,Nevada,NV,Lincoln,republican,59.84165652,
+11/8/1864,Nevada,NV,Lincoln,republican,59.84165652,2
 11/8/1864,Nevada,NV,McClellan,democrat,40.15834348,
 11/8/1864,Nevada,NV,Other,independent,0,
 11/8/1864,New Hampshire,NH,Lincoln,republican,52.55780554,
@@ -1325,7 +1325,7 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,Alabama,AL,Grant,republican,53.19003512,
 11/5/1872,Alabama,AL,Greeley,democrat,46.80996488,
 11/5/1872,Alabama,AL,Other,independent,0,
-11/5/1872,Arkansas,AR,Grant,republican,52.17276166,
+11/5/1872,Arkansas,AR,Grant,republican,52.17276166,0
 11/5/1872,Arkansas,AR,Greeley,democrat,47.82723834,
 11/5/1872,Arkansas,AR,Other,independent,0,
 11/5/1872,California,CA,Grant,republican,56.38356736,
@@ -1341,8 +1341,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,Florida,FL,Greeley,democrat,46.48086773,
 11/5/1872,Florida,FL,Other,independent,0,
 11/5/1872,Georgia,GA,Grant,republican,45.03045225,
-11/5/1872,Georgia,GA,Greeley,democrat,54.96954775,
-11/5/1872,Georgia,GA,Other,independent,0,
+11/5/1872,Georgia,GA,Greeley,democrat,54.96954775,3
+11/5/1872,Georgia,GA,Other,independent,0,8
 11/5/1872,Illinois,IL,Grant,republican,56.26798086,
 11/5/1872,Illinois,IL,Greeley,democrat,42.99917901,
 11/5/1872,Illinois,IL,Other,independent,0.7328401218,
@@ -1357,8 +1357,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,Kansas,KS,Other,independent,0.7332457816,
 11/5/1872,Kentucky,KY,Grant,republican,46.44152039,
 11/5/1872,Kentucky,KY,Greeley,democrat,52.31642556,
-11/5/1872,Kentucky,KY,Other,independent,1.242054046,
-11/5/1872,Louisiana,LA,Grant,republican,55.68566811,
+11/5/1872,Kentucky,KY,Other,independent,1.242054046,12
+11/5/1872,Louisiana,LA,Grant,republican,55.68566811,0
 11/5/1872,Louisiana,LA,Greeley,democrat,44.31433189,
 11/5/1872,Louisiana,LA,Other,independent,0,
 11/5/1872,Maine,ME,Grant,republican,67.85678778,
@@ -1366,7 +1366,7 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,Maine,ME,Other,independent,0,
 11/5/1872,Maryland,MD,Grant,republican,49.65525449,
 11/5/1872,Maryland,MD,Greeley,democrat,50.34474551,
-11/5/1872,Maryland,MD,Other,independent,0,
+11/5/1872,Maryland,MD,Other,independent,0,8
 11/5/1872,Massachusetts,MA,Grant,republican,69.19642857,
 11/5/1872,Massachusetts,MA,Greeley,democrat,30.69261241,
 11/5/1872,Massachusetts,MA,Other,independent,0.1109590178,
@@ -1381,7 +1381,7 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,Mississippi,MS,Other,independent,0,
 11/5/1872,Missouri,MO,Grant,republican,43.65210449,
 11/5/1872,Missouri,MO,Greeley,democrat,55.45834417,
-11/5/1872,Missouri,MO,Other,independent,0.8895513424,
+11/5/1872,Missouri,MO,Other,independent,0.8895513424,15
 11/5/1872,Nebraska,NE,Grant,republican,70.68101188,
 11/5/1872,Nebraska,NE,Greeley,democrat,29.31898812,
 11/5/1872,Nebraska,NE,Other,independent,0,
@@ -1417,10 +1417,10 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1872,South Carolina,SC,Other,independent,0.485060554,
 11/5/1872,Tennessee,TN,Grant,republican,47.83966132,
 11/5/1872,Tennessee,TN,Greeley,democrat,52.16033868,
-11/5/1872,Tennessee,TN,Other,independent,0,
+11/5/1872,Tennessee,TN,Other,independent,0,12
 11/5/1872,Texas,TX,Grant,republican,40.71221504,
 11/5/1872,Texas,TX,Greeley,democrat,57.07497813,
-11/5/1872,Texas,TX,Other,independent,2.212806834,
+11/5/1872,Texas,TX,Other,independent,2.212806834,8
 11/5/1872,Vermont,VT,Grant,republican,78.29369573,
 11/5/1872,Vermont,VT,Greeley,democrat,20.62287656,
 11/5/1872,Vermont,VT,Other,independent,1.083427709,
@@ -1559,8 +1559,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/2/1880,Arkansas,AR,Hancock,democrat,56.12682329,
 11/2/1880,Arkansas,AR,Weaver,independent,3.784842074,
 11/2/1880,Arkansas,AR,Other,independent,1.431726237,
-11/2/1880,California,CA,Garfield,republican,48.88745448,
-11/2/1880,California,CA,Hancock,democrat,48.9751428,
+11/2/1880,California,CA,Garfield,republican,48.88745448,1
+11/2/1880,California,CA,Hancock,democrat,48.9751428,5
 11/2/1880,California,CA,Weaver,independent,2.058848604,
 11/2/1880,California,CA,Other,independent,0.07855411709,
 11/2/1880,Colorado,CO,Garfield,republican,51.26433347,
@@ -1986,8 +1986,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/8/1892,Arkansas,AR,Weaver,independent,7.987604394,
 11/8/1892,Arkansas,AR,Bidwell,independent,0.07629104019,
 11/8/1892,Arkansas,AR,Other,independent,0.8554048489,
-11/8/1892,California,CA,Cleveland,democrat,43.83162283,
-11/8/1892,California,CA,Harrison,republican,43.77709943,
+11/8/1892,California,CA,Cleveland,democrat,43.83162283,8
+11/8/1892,California,CA,Harrison,republican,43.77709943,1
 11/8/1892,California,CA,Weaver,independent,9.388039717,
 11/8/1892,California,CA,Bidwell,independent,3.002867115,
 11/8/1892,California,CA,Other,independent,0.0003709074994,
@@ -2066,8 +2066,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/8/1892,Massachusetts,MA,Weaver,independent,0.8209130804,
 11/8/1892,Massachusetts,MA,Bidwell,independent,1.927994926,
 11/8/1892,Massachusetts,MA,Other,independent,0.1667399777,
-11/8/1892,Michigan,MI,Cleveland,democrat,43.26277505,
-11/8/1892,Michigan,MI,Harrison,republican,47.7868017,
+11/8/1892,Michigan,MI,Cleveland,democrat,43.26277505,5
+11/8/1892,Michigan,MI,Harrison,republican,47.7868017,9
 11/8/1892,Michigan,MI,Weaver,independent,4.276625648,
 11/8/1892,Michigan,MI,Bidwell,independent,4.475318907,
 11/8/1892,Michigan,MI,Other,independent,0.1984786877,
@@ -2121,19 +2121,19 @@ date,region,state_po,candidate,party,voteshare,ev
 11/8/1892,North Carolina,NC,Weaver,independent,15.81903165,
 11/8/1892,North Carolina,NC,Bidwell,independent,0.9408784386,
 11/8/1892,North Carolina,NC,Other,independent,0,
-11/8/1892,North Dakota,ND,Cleveland,democrat,0,
-11/8/1892,North Dakota,ND,Harrison,republican,48.5049006,
-11/8/1892,North Dakota,ND,Weaver,independent,49.00603577,
+11/8/1892,North Dakota,ND,Cleveland,democrat,0,1
+11/8/1892,North Dakota,ND,Harrison,republican,48.5049006,1
+11/8/1892,North Dakota,ND,Weaver,independent,49.00603577,1
 11/8/1892,North Dakota,ND,Bidwell,independent,2.489063625,
 11/8/1892,North Dakota,ND,Other,independent,0,
-11/8/1892,Ohio,OH,Cleveland,democrat,47.53376995,
-11/8/1892,Ohio,OH,Harrison,republican,47.65986327,
+11/8/1892,Ohio,OH,Cleveland,democrat,47.53376995,1
+11/8/1892,Ohio,OH,Harrison,republican,47.65986327,22
 11/8/1892,Ohio,OH,Weaver,independent,1.746721809,
 11/8/1892,Ohio,OH,Bidwell,independent,3.059644963,
 11/8/1892,Ohio,OH,Other,independent,0,
 11/8/1892,Oregon,OR,Cleveland,democrat,18.14602948,
-11/8/1892,Oregon,OR,Harrison,republican,44.59364768,
-11/8/1892,Oregon,OR,Weaver,independent,34.35425718,
+11/8/1892,Oregon,OR,Harrison,republican,44.59364768,3
+11/8/1892,Oregon,OR,Weaver,independent,34.35425718,1
 11/8/1892,Oregon,OR,Bidwell,independent,2.906065664,
 11/8/1892,Oregon,OR,Other,independent,0,
 11/8/1892,Pennsylvania,PA,Cleveland,democrat,45.09067706,
@@ -2206,8 +2206,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/3/1896,Arkansas,AR,McKinley,republican,25.11734417,
 11/3/1896,Arkansas,AR,Bryan,democrat,73.72294053,
 11/3/1896,Arkansas,AR,Other,independent,1.159715294,
-11/3/1896,California,CA,McKinley,republican,49.1550471,
-11/3/1896,California,CA,Bryan,democrat,48.51098623,
+11/3/1896,California,CA,McKinley,republican,49.1550471,8
+11/3/1896,California,CA,Bryan,democrat,48.51098623,1
 11/3/1896,California,CA,Other,independent,2.333966671,
 11/3/1896,Colorado,CO,McKinley,republican,13.86047199,
 11/3/1896,Colorado,CO,Bryan,democrat,84.94557848,
@@ -2239,8 +2239,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/3/1896,Kansas,KS,McKinley,republican,47.63007888,
 11/3/1896,Kansas,KS,Bryan,democrat,51.31565968,
 11/3/1896,Kansas,KS,Other,independent,1.054261434,
-11/3/1896,Kentucky,KY,McKinley,republican,48.92516281,
-11/3/1896,Kentucky,KY,Bryan,democrat,48.86304516,
+11/3/1896,Kentucky,KY,McKinley,republican,48.92516281,12
+11/3/1896,Kentucky,KY,Bryan,democrat,48.86304516,1
 11/3/1896,Kentucky,KY,Other,independent,2.211792038,
 11/3/1896,Louisiana,LA,McKinley,republican,21.80887912,
 11/3/1896,Louisiana,LA,Bryan,democrat,76.37610593,
@@ -2538,8 +2538,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/8/1904,Maine,ME,Parker,democrat,28.49015182,
 11/8/1904,Maine,ME,Debs,independent,2.166496604,
 11/8/1904,Maine,ME,Other,independent,1.903672325,
-11/8/1904,Maryland,MD,Roosevelt,republican,48.8326666,
-11/8/1904,Maryland,MD,Parker,democrat,48.809922,
+11/8/1904,Maryland,MD,Roosevelt,republican,48.8326666,1
+11/8/1904,Maryland,MD,Parker,democrat,48.809922,7
 11/8/1904,Maryland,MD,Debs,independent,1.002100531,
 11/8/1904,Maryland,MD,Other,independent,1.355310865,
 11/8/1904,Massachusetts,MA,Roosevelt,republican,57.92334013,
@@ -2721,8 +2721,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/3/1908,Maine,ME,Bryan,democrat,33.29352242,
 11/3/1908,Maine,ME,Debs,independent,1.653250075,
 11/3/1908,Maine,ME,Other,independent,2.057628649,
-11/3/1908,Maryland,MD,Taft,republican,48.84606194,
-11/3/1908,Maryland,MD,Bryan,democrat,48.59242614,
+11/3/1908,Maryland,MD,Taft,republican,48.84606194,2
+11/3/1908,Maryland,MD,Bryan,democrat,48.59242614,6
 11/3/1908,Maryland,MD,Debs,independent,0.9738776092,
 11/3/1908,Maryland,MD,Other,independent,1.587634312,
 11/3/1908,Massachusetts,MA,Taft,republican,58.20856651,
@@ -2860,8 +2860,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/5/1912,Arkansas,AR,Debs,independent,6.516977874,
 11/5/1912,Arkansas,AR,Other,independent,0.7257961376,
 11/5/1912,California,CA,Taft,republican,0.5773338211,
-11/5/1912,California,CA,Wilson,democrat,41.80817295,
-11/5/1912,California,CA,Roosevelt,independent,41.83383878,
+11/5/1912,California,CA,Wilson,democrat,41.80817295,2
+11/5/1912,California,CA,Roosevelt,independent,41.83383878,11
 11/5/1912,California,CA,Debs,independent,11.68252835,
 11/5/1912,California,CA,Other,independent,4.098126099,
 11/5/1912,Colorado,CO,Taft,republican,21.8772482,
@@ -3268,8 +3268,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/7/1916,Washington,WA,Wilson,democrat,48.13409135,
 11/7/1916,Washington,WA,Benson,independent,5.98434621,
 11/7/1916,Washington,WA,Other,independent,1.994257127,
-11/7/1916,West Virginia,WV,Hughes,republican,49.37830341,
-11/7/1916,West Virginia,WV,Wilson,democrat,48.43954846,
+11/7/1916,West Virginia,WV,Hughes,republican,49.37830341,7
+11/7/1916,West Virginia,WV,Wilson,democrat,48.43954846,1
 11/7/1916,West Virginia,WV,Benson,independent,2.121772491,
 11/7/1916,West Virginia,WV,Other,independent,0.06037563998,
 11/7/1916,Wisconsin,WI,Hughes,republican,49.38609008,
@@ -4648,8 +4648,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/2/1948,South Dakota,SD,Wallace,independent,1.11992963,
 11/2/1948,South Dakota,SD,Other,independent,0,
 11/2/1948,Tennessee,TN,Dewey,republican,36.87448095,
-11/2/1948,Tennessee,TN,Truman,democrat,49.1387159,
-11/2/1948,Tennessee,TN,Thurmond,independent,13.41400697,
+11/2/1948,Tennessee,TN,Truman,democrat,49.1387159,11
+11/2/1948,Tennessee,TN,Thurmond,independent,13.41400697,1
 11/2/1948,Tennessee,TN,Wallace,independent,0.3387347965,
 11/2/1948,Tennessee,TN,Other,independent,0.234061383,
 11/2/1948,Texas,TX,Dewey,republican,24.28839665,
@@ -4843,7 +4843,8 @@ date,region,state_po,candidate,party,voteshare,ev
 11/4/1952,National Popular Vote,NPV,Eisenhower,republican,55.135715596,
 11/4/1952,National Popular Vote,NPV,Stevenson,democrat,44.3769469142,
 11/6/1956,Alabama,AL,Eisenhower,republican,39.38527304,
-11/6/1956,Alabama,AL,Stevenson,democrat,56.52251792,
+11/6/1956,Alabama,AL,Stevenson,democrat,56.52251792,10
+11/6/1956,Alabama,AL,Jones,dixiecrat,0,1
 11/6/1956,Alabama,AL,Other,independent,4.092209044,
 11/6/1956,Arizona,AZ,Eisenhower,republican,60.99464802,
 11/6/1956,Arizona,AZ,Stevenson,democrat,38.90093151,

@@ -1,173 +1,158 @@
 date,region,state_po,candidate,party,voteshare,ev,version
-11/8/1960,Alabama,AL,Nixon,republican,42.1598553,0,JJCooley
+11/8/1960,Alabama,AL,Nixon,republican,42.1598553,,JJCooley
 11/8/1960,Alabama,AL,Kennedy,democrat,56.38941101,5,JJCooley
 11/8/1960,Alabama,AL,Byrd,southern democrat ,0,6,JJCooley
-11/8/1960,Alabama,AL,Other,independent,1.450733693,0,JJCooley
-11/8/1960,Alaska,AK,Nixon,republican,50.94137783,3,JJCooley
-11/8/1960,Alaska,AK,Kennedy,democrat,49.05862217,0,JJCooley
-11/8/1960,Alaska,AK,Other,independent,0,0,JJCooley
-11/8/1960,Arizona,AZ,Nixon,republican,55.51969806,4,JJCooley
-11/8/1960,Arizona,AZ,Kennedy,democrat,44.36260794,0,JJCooley
-11/8/1960,Arizona,AZ,Other,independent,0.1176940006,0,JJCooley
-11/8/1960,Arkansas,AR,Nixon,republican,43.0581388,0,JJCooley
-11/8/1960,Arkansas,AR,Kennedy,democrat,50.18541034,8,JJCooley
-11/8/1960,Arkansas,AR,Other,independent,6.756450856,0,JJCooley
-11/8/1960,California,CA,Nixon,republican,50.09886918,32,JJCooley
-11/8/1960,California,CA,Kennedy,democrat,49.55137708,0,JJCooley
-11/8/1960,California,CA,Other,independent,0.3497537415,0,JJCooley
-11/8/1960,Colorado,CO,Nixon,republican,54.63418477,6,JJCooley
-11/8/1960,Colorado,CO,Kennedy,democrat,44.90740867,0,JJCooley
-11/8/1960,Colorado,CO,Other,independent,0.4584065652,0,JJCooley
-11/8/1960,Connecticut,CT,Nixon,republican,46.26877633,0,JJCooley
-11/8/1960,Connecticut,CT,Kennedy,democrat,53.72999706,8,JJCooley
-11/8/1960,Connecticut,CT,Other,independent,0.001226609578,0,JJCooley
-11/8/1960,Delaware,DE,Nixon,republican,48.99915092,0,JJCooley
-11/8/1960,Delaware,DE,Kennedy,democrat,50.63477779,3,JJCooley
-11/8/1960,Delaware,DE,Other,independent,0.3660712924,0,JJCooley
-11/8/1960,Florida,FL,Nixon,republican,51.51459419,10,JJCooley
-11/8/1960,Florida,FL,Kennedy,democrat,48.48540581,0,JJCooley
-11/8/1960,Florida,FL,Other,independent,0,0,JJCooley
-11/8/1960,Georgia,GA,Nixon,republican,37.42720042,0,JJCooley
-11/8/1960,Georgia,GA,Kennedy,democrat,62.54020937,12,JJCooley
-11/8/1960,Georgia,GA,Other,independent,0.03259021285,0,JJCooley
-11/8/1960,Hawaii,HI,Nixon,republican,49.96886928,0,JJCooley
-11/8/1960,Hawaii,HI,Kennedy,democrat,50.03113072,3,JJCooley
-11/8/1960,Hawaii,HI,Other,independent,0,0,JJCooley
-11/8/1960,Idaho,ID,Nixon,republican,53.78498918,4,JJCooley
-11/8/1960,Idaho,ID,Kennedy,democrat,46.21501082,0,JJCooley
-11/8/1960,Idaho,ID,Other,independent,0,0,JJCooley
-11/8/1960,Illinois,IL,Nixon,republican,49.79576068,0,JJCooley
-11/8/1960,Illinois,IL,Kennedy,democrat,49.98195446,27,JJCooley
-11/8/1960,Illinois,IL,Other,independent,0.2222848614,0,JJCooley
-11/8/1960,Indiana,IN,Nixon,republican,55.0314701,13,JJCooley
-11/8/1960,Indiana,IN,Kennedy,democrat,44.59941181,0,JJCooley
-11/8/1960,Indiana,IN,Other,independent,0.3691180878,0,JJCooley
-11/8/1960,Iowa,IA,Nixon,republican,56.71026291,10,JJCooley
-11/8/1960,Iowa,IA,Kennedy,democrat,43.22190908,0,JJCooley
-11/8/1960,Iowa,IA,Other,independent,0.06782801203,0,JJCooley
-11/8/1960,Kansas,KS,Nixon,republican,60.44992329,8,JJCooley
-11/8/1960,Kansas,KS,Kennedy,democrat,39.1045676,0,JJCooley
-11/8/1960,Kansas,KS,Other,independent,0.445509111,0,JJCooley
-11/8/1960,Kentucky,KY,Nixon,republican,53.59069493,10,JJCooley
-11/8/1960,Kentucky,KY,Kennedy,democrat,46.40930507,0,JJCooley
-11/8/1960,Kentucky,KY,Other,independent,0,0,JJCooley
-11/8/1960,Louisiana,LA,Nixon,republican,28.59049055,0,JJCooley
-11/8/1960,Louisiana,LA,Kennedy,democrat,50.42004429,10,JJCooley
-11/8/1960,Louisiana,LA,Other,independent,20.98946516,0,JJCooley
-11/8/1960,Maine,ME,Nixon,republican,57.04680006,5,JJCooley
-11/8/1960,Maine,ME,Kennedy,democrat,42.95177738,0,JJCooley
-11/8/1960,Maine,ME,Other,independent,0.001422566167,0,JJCooley
-11/8/1960,Maine 1st CD,ME-1,Nixon,republican,57.04680006,0,JJCooley
-11/8/1960,Maine 1st CD,ME-1,Kennedy,democrat,42.95177738,0,JJCooley
-11/8/1960,Maine 1st CD,ME-1,Other,independent,0.001422566167,0,JJCooley
-11/8/1960,Maine 2nd CD,ME-2,Nixon,republican,57.04680006,0,JJCooley
-11/8/1960,Maine 2nd CD,ME-2,Kennedy,democrat,42.95177738,0,JJCooley
-11/8/1960,Maine 2nd CD,ME-2,Other,independent,0.001422566167,0,JJCooley
-11/8/1960,Maryland,MD,Nixon,republican,46.38636129,0,JJCooley
-11/8/1960,Maryland,MD,Kennedy,democrat,53.61335444,9,JJCooley
-11/8/1960,Maryland,MD,Other,independent,0.0002842661527,0,JJCooley
-11/8/1960,Massachusetts,MA,Nixon,republican,39.55286133,0,JJCooley
-11/8/1960,Massachusetts,MA,Kennedy,democrat,60.22215203,16,JJCooley
-11/8/1960,Massachusetts,MA,Other,independent,0.2249866369,0,JJCooley
-11/8/1960,Michigan,MI,Nixon,republican,48.83606477,0,JJCooley
-11/8/1960,Michigan,MI,Kennedy,democrat,50.85050256,20,JJCooley
-11/8/1960,Michigan,MI,Other,independent,0.3134326694,0,JJCooley
-11/8/1960,Minnesota,MN,Nixon,republican,49.15502887,0,JJCooley
-11/8/1960,Minnesota,MN,Kennedy,democrat,50.58301938,11,JJCooley
-11/8/1960,Minnesota,MN,Other,independent,0.2619517513,0,JJCooley
-11/8/1960,Mississippi,MS,Nixon,republican,24.67074263,0,JJCooley
-11/8/1960,Mississippi,MS,Kennedy,democrat,36.34223315,0,JJCooley
-11/8/1960,Mississippi,MS,Byrd,independent,38.98702422,8,JJCooley
-11/8/1960,Missouri,MO,Nixon,republican,49.74204181,0,JJCooley
-11/8/1960,Missouri,MO,Kennedy,democrat,50.25795819,13,JJCooley
-11/8/1960,Missouri,MO,Other,independent,0,0,JJCooley
-11/8/1960,Montana,MT,Nixon,republican,51.09932668,4,JJCooley
-11/8/1960,Montana,MT,Kennedy,democrat,48.59553496,0,JJCooley
-11/8/1960,Montana,MT,Other,independent,0.305138357,0,JJCooley
-11/8/1960,Nebraska,NE,Nixon,republican,62.07080469,6,JJCooley
-11/8/1960,Nebraska,NE,Kennedy,democrat,37.92919531,0,JJCooley
-11/8/1960,Nebraska,NE,Other,independent,0,0,JJCooley
-11/8/1960,Nebraska 1st CD,NE-1,Nixon,republican,62.07080469,0,JJCooley
-11/8/1960,Nebraska 1st CD,NE-1,Kennedy,democrat,37.92919531,0,JJCooley
-11/8/1960,Nebraska 1st CD,NE-1,Other,independent,0,0,JJCooley
-11/8/1960,Nebraska 2nd CD,NE-2,Nixon,republican,62.07080469,0,JJCooley
-11/8/1960,Nebraska 2nd CD,NE-2,Kennedy,democrat,37.92919531,0,JJCooley
-11/8/1960,Nebraska 2nd CD,NE-2,Other,independent,0,0,JJCooley
-11/8/1960,Nebraska 3rd CD,NE-3,Nixon,republican,62.07080469,0,JJCooley
-11/8/1960,Nebraska 3rd CD,NE-3,Kennedy,democrat,37.92919531,0,JJCooley
-11/8/1960,Nebraska 3rd CD,NE-3,Other,independent,0,0,JJCooley
-11/8/1960,Nevada,NV,Nixon,republican,48.83794643,0,JJCooley
-11/8/1960,Nevada,NV,Kennedy,democrat,51.16205357,3,JJCooley
-11/8/1960,Nevada,NV,Other,independent,0,0,JJCooley
-11/8/1960,New Hampshire,NH,Nixon,republican,53.41779342,4,JJCooley
-11/8/1960,New Hampshire,NH,Kennedy,democrat,46.58220658,0,JJCooley
-11/8/1960,New Hampshire,NH,Other,independent,0,0,JJCooley
-11/8/1960,New Jersey,NJ,Nixon,republican,49.16225856,0,JJCooley
-11/8/1960,New Jersey,NJ,Kennedy,democrat,49.9588729,16,JJCooley
-11/8/1960,New Jersey,NJ,Other,independent,0.8788685343,0,JJCooley
-11/8/1960,New Mexico,NM,Nixon,republican,49.41483155,0,JJCooley
-11/8/1960,New Mexico,NM,Kennedy,democrat,50.15219844,4,JJCooley
-11/8/1960,New Mexico,NM,Other,independent,0.4329700071,0,JJCooley
-11/8/1960,New York,NY,Nixon,republican,47.26898447,0,JJCooley
-11/8/1960,New York,NY,Kennedy,democrat,52.53111371,45,JJCooley
-11/8/1960,New York,NY,Other,independent,0.1999018252,0,JJCooley
-11/8/1960,North Carolina,NC,Nixon,republican,47.8913541,0,JJCooley
-11/8/1960,North Carolina,NC,Kennedy,democrat,52.1086459,14,JJCooley
-11/8/1960,North Carolina,NC,Other,independent,0,0,JJCooley
-11/8/1960,North Dakota,ND,Nixon,republican,55.42127134,4,JJCooley
-11/8/1960,North Dakota,ND,Kennedy,democrat,44.52198211,0,JJCooley
-11/8/1960,North Dakota,ND,Other,independent,0.0567465548,0,JJCooley
-11/8/1960,Ohio,OH,Nixon,republican,53.28414538,25,JJCooley
-11/8/1960,Ohio,OH,Kennedy,democrat,46.71585462,0,JJCooley
-11/8/1960,Ohio,OH,Other,independent,0,0,JJCooley
+11/8/1960,Alabama,AL,Other,independent,1.450733693,,JJCooley
+11/8/1960,Alaska,AK,Nixon,republican,50.94137783,,JJCooley
+11/8/1960,Alaska,AK,Kennedy,democrat,49.05862217,,JJCooley
+11/8/1960,Alaska,AK,Other,independent,0,,JJCooley
+11/8/1960,Arizona,AZ,Nixon,republican,55.51969806,,JJCooley
+11/8/1960,Arizona,AZ,Kennedy,democrat,44.36260794,,JJCooley
+11/8/1960,Arizona,AZ,Other,independent,0.1176940006,,JJCooley
+11/8/1960,Arkansas,AR,Nixon,republican,43.0581388,,JJCooley
+11/8/1960,Arkansas,AR,Kennedy,democrat,50.18541034,,JJCooley
+11/8/1960,Arkansas,AR,Other,independent,6.756450856,,JJCooley
+11/8/1960,California,CA,Nixon,republican,50.09886918,,JJCooley
+11/8/1960,California,CA,Kennedy,democrat,49.55137708,,JJCooley
+11/8/1960,California,CA,Other,independent,0.3497537415,,JJCooley
+11/8/1960,Colorado,CO,Nixon,republican,54.63418477,,JJCooley
+11/8/1960,Colorado,CO,Kennedy,democrat,44.90740867,,JJCooley
+11/8/1960,Colorado,CO,Other,independent,0.4584065652,,JJCooley
+11/8/1960,Connecticut,CT,Nixon,republican,46.26877633,,JJCooley
+11/8/1960,Connecticut,CT,Kennedy,democrat,53.72999706,,JJCooley
+11/8/1960,Connecticut,CT,Other,independent,0.001226609578,,JJCooley
+11/8/1960,Delaware,DE,Nixon,republican,48.99915092,,JJCooley
+11/8/1960,Delaware,DE,Kennedy,democrat,50.63477779,,JJCooley
+11/8/1960,Delaware,DE,Other,independent,0.3660712924,,JJCooley
+11/8/1960,Florida,FL,Nixon,republican,51.51459419,,JJCooley
+11/8/1960,Florida,FL,Kennedy,democrat,48.48540581,,JJCooley
+11/8/1960,Florida,FL,Other,independent,0,,JJCooley
+11/8/1960,Georgia,GA,Nixon,republican,37.42720042,,JJCooley
+11/8/1960,Georgia,GA,Kennedy,democrat,62.54020937,,JJCooley
+11/8/1960,Georgia,GA,Other,independent,0.03259021285,,JJCooley
+11/8/1960,Hawaii,HI,Nixon,republican,49.96886928,,JJCooley
+11/8/1960,Hawaii,HI,Kennedy,democrat,50.03113072,,JJCooley
+11/8/1960,Hawaii,HI,Other,independent,0,,JJCooley
+11/8/1960,Idaho,ID,Nixon,republican,53.78498918,,JJCooley
+11/8/1960,Idaho,ID,Kennedy,democrat,46.21501082,,JJCooley
+11/8/1960,Idaho,ID,Other,independent,0,,JJCooley
+11/8/1960,Illinois,IL,Nixon,republican,49.79576068,,JJCooley
+11/8/1960,Illinois,IL,Kennedy,democrat,49.98195446,,JJCooley
+11/8/1960,Illinois,IL,Other,independent,0.2222848614,,JJCooley
+11/8/1960,Indiana,IN,Nixon,republican,55.0314701,,JJCooley
+11/8/1960,Indiana,IN,Kennedy,democrat,44.59941181,,JJCooley
+11/8/1960,Indiana,IN,Other,independent,0.3691180878,,JJCooley
+11/8/1960,Iowa,IA,Nixon,republican,56.71026291,,JJCooley
+11/8/1960,Iowa,IA,Kennedy,democrat,43.22190908,,JJCooley
+11/8/1960,Iowa,IA,Other,independent,0.06782801203,,JJCooley
+11/8/1960,Kansas,KS,Nixon,republican,60.44992329,,JJCooley
+11/8/1960,Kansas,KS,Kennedy,democrat,39.1045676,,JJCooley
+11/8/1960,Kansas,KS,Other,independent,0.445509111,,JJCooley
+11/8/1960,Kentucky,KY,Nixon,republican,53.59069493,,JJCooley
+11/8/1960,Kentucky,KY,Kennedy,democrat,46.40930507,,JJCooley
+11/8/1960,Kentucky,KY,Other,independent,0,,JJCooley
+11/8/1960,Louisiana,LA,Nixon,republican,28.59049055,,JJCooley
+11/8/1960,Louisiana,LA,Kennedy,democrat,50.42004429,,JJCooley
+11/8/1960,Louisiana,LA,Other,independent,20.98946516,,JJCooley
+11/8/1960,Maine,ME,Nixon,republican,57.04680006,,JJCooley
+11/8/1960,Maine,ME,Kennedy,democrat,42.95177738,,JJCooley
+11/8/1960,Maine,ME,Other,independent,0.001422566167,,JJCooley
+11/8/1960,Maryland,MD,Nixon,republican,46.38636129,,JJCooley
+11/8/1960,Maryland,MD,Kennedy,democrat,53.61335444,,JJCooley
+11/8/1960,Maryland,MD,Other,independent,0.0002842661527,,JJCooley
+11/8/1960,Massachusetts,MA,Nixon,republican,39.55286133,,JJCooley
+11/8/1960,Massachusetts,MA,Kennedy,democrat,60.22215203,,JJCooley
+11/8/1960,Massachusetts,MA,Other,independent,0.2249866369,,JJCooley
+11/8/1960,Michigan,MI,Nixon,republican,48.83606477,,JJCooley
+11/8/1960,Michigan,MI,Kennedy,democrat,50.85050256,,JJCooley
+11/8/1960,Michigan,MI,Other,independent,0.3134326694,,JJCooley
+11/8/1960,Minnesota,MN,Nixon,republican,49.15502887,,JJCooley
+11/8/1960,Minnesota,MN,Kennedy,democrat,50.58301938,,JJCooley
+11/8/1960,Minnesota,MN,Other,independent,0.2619517513,,JJCooley
+11/8/1960,Mississippi,MS,Nixon,republican,24.67074263,,JJCooley
+11/8/1960,Mississippi,MS,Kennedy,democrat,36.34223315,,JJCooley
+11/8/1960,Mississippi,MS,Byrd,independent,38.98702422,,JJCooley
+11/8/1960,Missouri,MO,Nixon,republican,49.74204181,,JJCooley
+11/8/1960,Missouri,MO,Kennedy,democrat,50.25795819,,JJCooley
+11/8/1960,Missouri,MO,Other,independent,0,,JJCooley
+11/8/1960,Montana,MT,Nixon,republican,51.09932668,,JJCooley
+11/8/1960,Montana,MT,Kennedy,democrat,48.59553496,,JJCooley
+11/8/1960,Montana,MT,Other,independent,0.305138357,,JJCooley
+11/8/1960,Nebraska,NE,Nixon,republican,62.07080469,,JJCooley
+11/8/1960,Nebraska,NE,Kennedy,democrat,37.92919531,,JJCooley
+11/8/1960,Nebraska,NE,Other,independent,0,,JJCooley
+11/8/1960,Nevada,NV,Nixon,republican,48.83794643,,JJCooley
+11/8/1960,Nevada,NV,Kennedy,democrat,51.16205357,,JJCooley
+11/8/1960,Nevada,NV,Other,independent,0,,JJCooley
+11/8/1960,New Hampshire,NH,Nixon,republican,53.41779342,,JJCooley
+11/8/1960,New Hampshire,NH,Kennedy,democrat,46.58220658,,JJCooley
+11/8/1960,New Hampshire,NH,Other,independent,0,,JJCooley
+11/8/1960,New Jersey,NJ,Nixon,republican,49.16225856,,JJCooley
+11/8/1960,New Jersey,NJ,Kennedy,democrat,49.9588729,,JJCooley
+11/8/1960,New Jersey,NJ,Other,independent,0.8788685343,,JJCooley
+11/8/1960,New Mexico,NM,Nixon,republican,49.41483155,,JJCooley
+11/8/1960,New Mexico,NM,Kennedy,democrat,50.15219844,,JJCooley
+11/8/1960,New Mexico,NM,Other,independent,0.4329700071,,JJCooley
+11/8/1960,New York,NY,Nixon,republican,47.26898447,,JJCooley
+11/8/1960,New York,NY,Kennedy,democrat,52.53111371,,JJCooley
+11/8/1960,New York,NY,Other,independent,0.1999018252,,JJCooley
+11/8/1960,North Carolina,NC,Nixon,republican,47.8913541,,JJCooley
+11/8/1960,North Carolina,NC,Kennedy,democrat,52.1086459,,JJCooley
+11/8/1960,North Carolina,NC,Other,independent,0,,JJCooley
+11/8/1960,North Dakota,ND,Nixon,republican,55.42127134,,JJCooley
+11/8/1960,North Dakota,ND,Kennedy,democrat,44.52198211,,JJCooley
+11/8/1960,North Dakota,ND,Other,independent,0.0567465548,,JJCooley
+11/8/1960,Ohio,OH,Nixon,republican,53.28414538,,JJCooley
+11/8/1960,Ohio,OH,Kennedy,democrat,46.71585462,,JJCooley
+11/8/1960,Ohio,OH,Other,independent,0,,JJCooley
 11/8/1960,Oklahoma,OK,Nixon,republican,59.01998561,7,JJCooley
-11/8/1960,Oklahoma,OK,Kennedy,democrat,40.98001439,0,JJCooley
-11/8/1960,Oklahoma,OK,Other,independent,0,0,JJCooley
+11/8/1960,Oklahoma,OK,Kennedy,democrat,40.98001439,,JJCooley
+11/8/1960,Oklahoma,OK,Other,independent,0,,JJCooley
 11/8/1960,Oklahoma,OK,Byrd,southern democrat,0,1,JJCooley
-11/8/1960,Oregon,OR,Nixon,republican,52.55653827,6,JJCooley
-11/8/1960,Oregon,OR,Kennedy,democrat,47.31994627,0,JJCooley
-11/8/1960,Oregon,OR,Other,independent,0.1235154639,0,JJCooley
-11/8/1960,Pennsylvania,PA,Nixon,republican,48.7353644,0,JJCooley
-11/8/1960,Pennsylvania,PA,Kennedy,democrat,51.05884482,32,JJCooley
-11/8/1960,Pennsylvania,PA,Other,independent,0.2057907845,0,JJCooley
-11/8/1960,Rhode Island,RI,Nixon,republican,36.37219969,0,JJCooley
-11/8/1960,Rhode Island,RI,Kennedy,democrat,63.62755373,4,JJCooley
-11/8/1960,Rhode Island,RI,Other,independent,0.0002465878408,0,JJCooley
-11/8/1960,South Carolina,SC,Nixon,republican,48.76230967,0,JJCooley
-11/8/1960,South Carolina,SC,Kennedy,democrat,51.23743173,8,JJCooley
-11/8/1960,South Carolina,SC,Other,independent,0.0002586064217,0,JJCooley
-11/8/1960,South Dakota,SD,Nixon,republican,58.21356208,4,JJCooley
-11/8/1960,South Dakota,SD,Kennedy,democrat,41.78643792,0,JJCooley
-11/8/1960,South Dakota,SD,Other,independent,0,0,JJCooley
-11/8/1960,Tennessee,TN,Nixon,republican,52.91702162,11,JJCooley
-11/8/1960,Tennessee,TN,Kennedy,democrat,45.77454478,0,JJCooley
-11/8/1960,Tennessee,TN,Other,independent,1.308433607,0,JJCooley
-11/8/1960,Texas,TX,Nixon,republican,48.51879032,0,JJCooley
-11/8/1960,Texas,TX,Kennedy,democrat,50.5203186,24,JJCooley
-11/8/1960,Texas,TX,Other,independent,0.9608910797,0,JJCooley
-11/8/1960,Utah,UT,Nixon,republican,54.80546237,4,JJCooley
-11/8/1960,Utah,UT,Kennedy,democrat,45.16785025,0,JJCooley
-11/8/1960,Utah,UT,Other,independent,0.02668737607,0,JJCooley
-11/8/1960,Vermont,VT,Nixon,republican,58.64729507,3,JJCooley
-11/8/1960,Vermont,VT,Kennedy,democrat,41.34852143,0,JJCooley
-11/8/1960,Vermont,VT,Other,independent,0.004183500275,0,JJCooley
-11/8/1960,Virginia,VA,Nixon,republican,52.43651881,12,JJCooley
-11/8/1960,Virginia,VA,Kennedy,democrat,46.96707106,0,JJCooley
-11/8/1960,Virginia,VA,Other,independent,0.5964101321,0,JJCooley
-11/8/1960,Washington,WA,Nixon,republican,50.68356889,9,JJCooley
-11/8/1960,Washington,WA,Kennedy,democrat,48.26929087,0,JJCooley
-11/8/1960,Washington,WA,Other,independent,1.047140238,0,JJCooley
-11/8/1960,West Virginia,WV,Nixon,republican,47.2671259,0,JJCooley
-11/8/1960,West Virginia,WV,Kennedy,democrat,52.7328741,8,JJCooley
-11/8/1960,West Virginia,WV,Other,independent,0,0,JJCooley
-11/8/1960,Wisconsin,WI,Nixon,republican,51.77169157,12,JJCooley
-11/8/1960,Wisconsin,WI,Kennedy,democrat,48.04890688,0,JJCooley
-11/8/1960,Wisconsin,WI,Other,independent,0.1794015553,0,JJCooley
-11/8/1960,Wyoming,WY,Nixon,republican,55.01484565,3,JJCooley
-11/8/1960,Wyoming,WY,Kennedy,democrat,44.98515435,0,JJCooley
-11/8/1960,Wyoming,WY,Other,independent,0,0,JJCooley
-11/8/1960,National Popular Vote,NPV,Kennedy,democrat,49.7163294255,303,20210915
-11/8/1960,National Popular Vote,NPV,Nixon,republican,49.5524140833,219,20210915
+11/8/1960,Oregon,OR,Nixon,republican,52.55653827,,JJCooley
+11/8/1960,Oregon,OR,Kennedy,democrat,47.31994627,,JJCooley
+11/8/1960,Oregon,OR,Other,independent,0.1235154639,,JJCooley
+11/8/1960,Pennsylvania,PA,Nixon,republican,48.7353644,,JJCooley
+11/8/1960,Pennsylvania,PA,Kennedy,democrat,51.05884482,,JJCooley
+11/8/1960,Pennsylvania,PA,Other,independent,0.2057907845,,JJCooley
+11/8/1960,Rhode Island,RI,Nixon,republican,36.37219969,,JJCooley
+11/8/1960,Rhode Island,RI,Kennedy,democrat,63.62755373,,JJCooley
+11/8/1960,Rhode Island,RI,Other,independent,0.0002465878408,,JJCooley
+11/8/1960,South Carolina,SC,Nixon,republican,48.76230967,,JJCooley
+11/8/1960,South Carolina,SC,Kennedy,democrat,51.23743173,,JJCooley
+11/8/1960,South Carolina,SC,Other,independent,0.0002586064217,,JJCooley
+11/8/1960,South Dakota,SD,Nixon,republican,58.21356208,,JJCooley
+11/8/1960,South Dakota,SD,Kennedy,democrat,41.78643792,,JJCooley
+11/8/1960,South Dakota,SD,Other,independent,0,,JJCooley
+11/8/1960,Tennessee,TN,Nixon,republican,52.91702162,,JJCooley
+11/8/1960,Tennessee,TN,Kennedy,democrat,45.77454478,,JJCooley
+11/8/1960,Tennessee,TN,Other,independent,1.308433607,,JJCooley
+11/8/1960,Texas,TX,Nixon,republican,48.51879032,,JJCooley
+11/8/1960,Texas,TX,Kennedy,democrat,50.5203186,,JJCooley
+11/8/1960,Texas,TX,Other,independent,0.9608910797,,JJCooley
+11/8/1960,Utah,UT,Nixon,republican,54.80546237,,JJCooley
+11/8/1960,Utah,UT,Kennedy,democrat,45.16785025,,JJCooley
+11/8/1960,Utah,UT,Other,independent,0.02668737607,,JJCooley
+11/8/1960,Vermont,VT,Nixon,republican,58.64729507,,JJCooley
+11/8/1960,Vermont,VT,Kennedy,democrat,41.34852143,,JJCooley
+11/8/1960,Vermont,VT,Other,independent,0.004183500275,,JJCooley
+11/8/1960,Virginia,VA,Nixon,republican,52.43651881,,JJCooley
+11/8/1960,Virginia,VA,Kennedy,democrat,46.96707106,,JJCooley
+11/8/1960,Virginia,VA,Other,independent,0.5964101321,,JJCooley
+11/8/1960,Washington,WA,Nixon,republican,50.68356889,,JJCooley
+11/8/1960,Washington,WA,Kennedy,democrat,48.26929087,,JJCooley
+11/8/1960,Washington,WA,Other,independent,1.047140238,,JJCooley
+11/8/1960,West Virginia,WV,Nixon,republican,47.2671259,,JJCooley
+11/8/1960,West Virginia,WV,Kennedy,democrat,52.7328741,,JJCooley
+11/8/1960,West Virginia,WV,Other,independent,0,,JJCooley
+11/8/1960,Wisconsin,WI,Nixon,republican,51.77169157,,JJCooley
+11/8/1960,Wisconsin,WI,Kennedy,democrat,48.04890688,,JJCooley
+11/8/1960,Wisconsin,WI,Other,independent,0.1794015553,,JJCooley
+11/8/1960,Wyoming,WY,Nixon,republican,55.01484565,,JJCooley
+11/8/1960,Wyoming,WY,Kennedy,democrat,44.98515435,,JJCooley
+11/8/1960,Wyoming,WY,Other,independent,0,,JJCooley
+11/8/1960,National Popular Vote,NPV,Kennedy,democrat,49.7163294255,,20210915
+11/8/1960,National Popular Vote,NPV,Nixon,republican,49.5524140833,,20210915
 11/3/1964,Alabama,AL,Goldwater,republican,69.45102832,,JJCooley
 11/3/1964,Alabama,AL,Johnson,democrat,0,,JJCooley
 11/3/1964,Alabama,AL,Other,independent,30.54897168,,JJCooley
@@ -403,14 +388,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/5/1968,Maine,ME,Humphrey,democrat,55.30468066,,JJCooley
 11/5/1968,Maine,ME,Wallace,independent,1.621129141,,JJCooley
 11/5/1968,Maine,ME,Other,independent,0,,JJCooley
-11/5/1968,Maine 1st CD,ME-1,Nixon,republican,43.0741902,,JJCooley
-11/5/1968,Maine 1st CD,ME-1,Humphrey,democrat,55.30468066,,JJCooley
-11/5/1968,Maine 1st CD,ME-1,Wallace,independent,1.621129141,,JJCooley
-11/5/1968,Maine 1st CD,ME-1,Other,independent,0,,JJCooley
-11/5/1968,Maine 2nd CD,ME-2,Nixon,republican,43.0741902,,JJCooley
-11/5/1968,Maine 2nd CD,ME-2,Humphrey,democrat,55.30468066,,JJCooley
-11/5/1968,Maine 2nd CD,ME-2,Wallace,independent,1.621129141,,JJCooley
-11/5/1968,Maine 2nd CD,ME-2,Other,independent,0,,JJCooley
 11/5/1968,Maryland,MD,Nixon,republican,41.94159051,,JJCooley
 11/5/1968,Maryland,MD,Humphrey,democrat,43.58647784,,JJCooley
 11/5/1968,Maryland,MD,Wallace,independent,14.47193166,,JJCooley
@@ -443,18 +420,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/5/1968,Nebraska,NE,Humphrey,democrat,31.8121788,,JJCooley
 11/5/1968,Nebraska,NE,Wallace,independent,8.364332003,,JJCooley
 11/5/1968,Nebraska,NE,Other,independent,0,,JJCooley
-11/5/1968,Nebraska 1st CD,NE-1,Nixon,republican,59.8234892,,JJCooley
-11/5/1968,Nebraska 1st CD,NE-1,Humphrey,democrat,31.8121788,,JJCooley
-11/5/1968,Nebraska 1st CD,NE-1,Wallace,independent,8.364332003,,JJCooley
-11/5/1968,Nebraska 1st CD,NE-1,Other,independent,0,,JJCooley
-11/5/1968,Nebraska 2nd CD,NE-2,Nixon,republican,59.8234892,,JJCooley
-11/5/1968,Nebraska 2nd CD,NE-2,Humphrey,democrat,31.8121788,,JJCooley
-11/5/1968,Nebraska 2nd CD,NE-2,Wallace,independent,8.364332003,,JJCooley
-11/5/1968,Nebraska 2nd CD,NE-2,Other,independent,0,,JJCooley
-11/5/1968,Nebraska 3rd CD,NE-3,Nixon,republican,59.8234892,,JJCooley
-11/5/1968,Nebraska 3rd CD,NE-3,Humphrey,democrat,31.8121788,,JJCooley
-11/5/1968,Nebraska 3rd CD,NE-3,Wallace,independent,8.364332003,,JJCooley
-11/5/1968,Nebraska 3rd CD,NE-3,Other,independent,0,,JJCooley
 11/5/1968,Nevada,NV,Nixon,republican,47.45749523,,JJCooley
 11/5/1968,Nevada,NV,Humphrey,democrat,39.29372706,,JJCooley
 11/5/1968,Nevada,NV,Wallace,independent,13.2487777,,JJCooley
@@ -475,9 +440,9 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/5/1968,New York,NY,Humphrey,democrat,49.75607012,,JJCooley
 11/5/1968,New York,NY,Wallace,independent,5.285132722,,JJCooley
 11/5/1968,New York,NY,Other,independent,0.6597874012,,JJCooley
-11/5/1968,North Carolina,NC,Nixon,republican,39.50833169,,JJCooley
+11/5/1968,North Carolina,NC,Nixon,republican,39.50833169,12,JJCooley
 11/5/1968,North Carolina,NC,Humphrey,democrat,29.23559348,,JJCooley
-11/5/1968,North Carolina,NC,Wallace,independent,31.25607483,,JJCooley
+11/5/1968,North Carolina,NC,Wallace,independent,31.25607483,1,JJCooley
 11/5/1968,North Carolina,NC,Other,independent,0,,JJCooley
 11/5/1968,North Dakota,ND,Nixon,republican,55.9415367,,JJCooley
 11/5/1968,North Dakota,ND,Humphrey,democrat,38.23149724,,JJCooley
@@ -640,15 +605,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/7/1972,Nebraska,NE,Nixon,republican,70.50247359,,JJCooley
 11/7/1972,Nebraska,NE,McGovern,democrat,29.49752641,,JJCooley
 11/7/1972,Nebraska,NE,Other,independent,0,,JJCooley
-11/7/1972,Nebraska 1st CD,NE-1,Nixon,republican,70.50247359,,JJCooley
-11/7/1972,Nebraska 1st CD,NE-1,McGovern,democrat,29.49752641,,JJCooley
-11/7/1972,Nebraska 1st CD,NE-1,Other,independent,0,,JJCooley
-11/7/1972,Nebraska 2nd CD,NE-2,Nixon,republican,70.50247359,,JJCooley
-11/7/1972,Nebraska 2nd CD,NE-2,McGovern,democrat,29.49752641,,JJCooley
-11/7/1972,Nebraska 2nd CD,NE-2,Other,independent,0,,JJCooley
-11/7/1972,Nebraska 3rd CD,NE-3,Nixon,republican,70.50247359,,JJCooley
-11/7/1972,Nebraska 3rd CD,NE-3,McGovern,democrat,29.49752641,,JJCooley
-11/7/1972,Nebraska 3rd CD,NE-3,Other,independent,0,,JJCooley
 11/7/1972,Nevada,NV,Nixon,republican,63.68077638,,JJCooley
 11/7/1972,Nevada,NV,McGovern,democrat,36.31922362,,JJCooley
 11/7/1972,Nevada,NV,Other,independent,0,,JJCooley
@@ -703,9 +659,9 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/7/1972,Vermont,VT,Nixon,republican,62.66461973,,JJCooley
 11/7/1972,Vermont,VT,McGovern,democrat,36.46721513,,JJCooley
 11/7/1972,Vermont,VT,Other,independent,0.8681651386,,JJCooley
-11/7/1972,Virginia,VA,Nixon,republican,67.8435216,,JJCooley
+11/7/1972,Virginia,VA,Nixon,republican,67.8435216,11,JJCooley
 11/7/1972,Virginia,VA,McGovern,democrat,30.12225647,,JJCooley
-11/7/1972,Virginia,VA,Other,independent,2.034221928,,JJCooley
+11/7/1972,Virginia,VA,Other,independent,2.034221928,1,JJCooley
 11/7/1972,Washington,WA,Nixon,republican,56.91516521,,JJCooley
 11/7/1972,Washington,WA,McGovern,democrat,38.63991292,,JJCooley
 11/7/1972,Washington,WA,Other,independent,4.444921872,,JJCooley
@@ -880,12 +836,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/2/1976,Nebraska,NE,McCarthy,independent,1.5464384778549300,,20171015
 11/2/1976,Nebraska,NE,Maddox,american independent party,0.5567376295634600,,20171015
 11/2/1976,Nebraska,NE,Macbride,libertarian,0.24326368893891900,,20171015
-11/2/1976,Nebraska 1st CD,NE-1,Ford,republican,59.203888263515900,,JJCooley
-11/2/1976,Nebraska 1st CD,NE-1,Carter,democrat,38.449671940126800,,JJCooley
-11/2/1976,Nebraska 2nd CD,NE-2,Ford,republican,59.203888263515900,,JJCooley
-11/2/1976,Nebraska 2nd CD,NE-2,Carter,democrat,38.449671940126800,,JJCooley
-11/2/1976,Nebraska 3rd CD,NE-3,Ford,republican,59.203888263515900,,JJCooley
-11/2/1976,Nebraska 3rd CD,NE-3,Carter,democrat,38.449671940126800,,JJCooley
 11/2/1976,Nevada,NV,Ford,republican,50.165943450434900,,20171015
 11/2/1976,Nevada,NV,Carter,democrat,45.809804038122400,,20171015
 11/2/1976,Nevada,NV,Macbride,libertarian,0.75244209316610200,,20171015
@@ -1011,7 +961,7 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/2/1976,Virginia,VA,Anderson,american,0.98321012271565400,,20171015
 11/2/1976,Virginia,VA,Larouche,u.s. labor,0.44240330824338500,,20171015
 11/2/1976,Virginia,VA,Macbride,libertarian,0.2738799382945200,,20171015
-11/2/1976,Washington,WA,Ford,republican,49.99774996882100,,20171015
+11/2/1976,Washington,WA,Ford,republican,49.99774996882100,8,20171015
 11/2/1976,Washington,WA,Carter,democrat,46.114260440466100,,20171015
 11/2/1976,Washington,WA,McCarthy,independent,2.3777043767606500,,20171015
 11/2/1976,Washington,WA,Maddox,american independent party,0.55190050490699700,,20171015
@@ -1021,6 +971,7 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/2/1976,Washington,WA,Larouche,u.s. labor,0.058050804418289800,,20171015
 11/2/1976,Washington,WA,Hall,communist party use,0.052522156378452700,,20171015
 11/2/1976,Washington,WA,Levin,socialist labor,0.045836349446556600,,20171015
+11/2/1976,Washington,WA,Reagan,independent,0,1,JJCooley
 11/2/1976,West Virginia,WV,Carter,democrat,58.069518645332300,,20171015
 11/2/1976,West Virginia,WV,Ford,republican,41.930481354667700,,20171015
 11/2/1976,Wisconsin,WI,Carter,democrat,49.503363574411700,,20171015
@@ -1220,12 +1171,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/4/1980,Nebraska,NE,Carter,democrat,26.022738466975100,,20171015
 11/4/1980,Nebraska,NE,Anderson,independent,7.013555203562600,,20171015
 11/4/1980,Nebraska,NE,Clark,libertarian,1.4136878003167900,,20171015
-11/4/1980,Nebraska 1st CD,NE-1,Reagan,republican,65.550018529145500,,JJCooley
-11/4/1980,Nebraska 1st CD,NE-1,Carter,democrat,26.022738466975100,,JJCooley
-11/4/1980,Nebraska 2nd CD,NE-2,Reagan,republican,65.550018529145500,,JJCooley
-11/4/1980,Nebraska 2nd CD,NE-2,Carter,democrat,26.022738466975100,,JJCooley
-11/4/1980,Nebraska 3rd CD,NE-3,Reagan,republican,65.550018529145500,,JJCooley
-11/4/1980,Nebraska 3rd CD,NE-3,Carter,democrat,26.022738466975100,,JJCooley
 11/4/1980,Nevada,NV,Reagan,republican,63.611854307896900,,20171015
 11/4/1980,Nevada,NV,Carter,democrat,27.356663329120400,,20171015
 11/4/1980,Nevada,NV,Anderson,independent,7.2431593979285300,,20171015
@@ -1558,12 +1503,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/6/1984,Nebraska,NE,Bergland,libertarian,0.31882102163811700,,20171015
 11/6/1984,Nebraska,NE,Mason,socialist workers,0.16347436703522500,,20171015
 11/6/1984,Nebraska,NE,Serrette,alliance,0.15718689138002400,,20171015
-11/6/1984,Nebraska 1st CD,NE-1,Reagan,republican,70.550690855556700,,JJCooley
-11/6/1984,Nebraska 1st CD,NE-1,Mondale,democrat,28.809826864389900,,JJCooley
-11/6/1984,Nebraska 2nd CD,NE-2,Reagan,republican,70.550690855556700,,JJCooley
-11/6/1984,Nebraska 2nd CD,NE-2,Mondale,democrat,28.809826864389900,,JJCooley
-11/6/1984,Nebraska 3rd CD,NE-3,Reagan,republican,70.550690855556700,,JJCooley
-11/6/1984,Nebraska 3rd CD,NE-3,Mondale,democrat,28.809826864389900,,JJCooley
 11/6/1984,Nevada,NV,Reagan,republican,66.769950162176300,,20171015
 11/6/1984,Nevada,NV,Mondale,democrat,32.419345140193200,,20171015
 11/6/1984,Nevada,NV,Bergland,libertarian,0.81070469763049300,,20171015
@@ -1844,12 +1783,6 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/1988,Nebraska,NE,Dukakis,democrat,39.191038074576900,,20171015
 11/8/1988,Nebraska,NE,Paul,libertarian,0.38308905233081100,,20171015
 11/8/1988,Nebraska,NE,Fulani,new alliance,0.26305246687277500,,20171015
-11/8/1988,Nebraska 1st CD,NE-1,Bush,republican,60.162820406219500,,JJCooley
-11/8/1988,Nebraska 1st CD,NE-1,Dukakis,democrat,39.191038074576900,,JJCooley
-11/8/1988,Nebraska 2nd CD,NE-2,Bush,republican,60.162820406219500,,JJCooley
-11/8/1988,Nebraska 2nd CD,NE-2,Dukakis,democrat,39.191038074576900,,JJCooley
-11/8/1988,Nebraska 3rd CD,NE-3,Bush,republican,60.162820406219500,,JJCooley
-11/8/1988,Nebraska 3rd CD,NE-3,Dukakis,democrat,39.191038074576900,,JJCooley
 11/8/1988,Nevada,NV,Bush,republican,60.046687436067100,,20171015
 11/8/1988,Nevada,NV,Dukakis,democrat,38.684125397440600,,20171015
 11/8/1988,Nevada,NV,Paul,libertarian,1.0258412918605900,,20171015
@@ -1964,9 +1897,10 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/1988,Washington,WA,Fulani,new alliance,0.18871434598952500,,20171015
 11/8/1988,Washington,WA,Holmes,workers world,0.077201323359351300,,20171015
 11/8/1988,Washington,WA,Warren,socialist workers,0.069159518842752200,,20171015
-11/8/1988,West Virginia,WV,Dukakis,democrat,52.198110853789400,,20171015
+11/8/1988,West Virginia,WV,Dukakis,democrat,52.198110853789400,5,20171015
 11/8/1988,West Virginia,WV,Bush,republican,47.460550947404800,,20171015
 11/8/1988,West Virginia,WV,Fulani,new alliance,0.34133819880577600,,20171015
+11/8/1988,West Virginia,WV,Bentsen,independent,0,1,JJCooley
 11/8/1988,Wisconsin,WI,Dukakis,democrat,51.414030246284900,,20171015
 11/8/1988,Wisconsin,WI,Bush,republican,47.795910582549400,,20171015
 11/8/1988,Wyoming,WY,Bush,republican,60.530384987907200,,20171015
@@ -2091,7 +2025,7 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/3/1992,Louisiana,LA,Marrou,libertarian,0.17625530930711800,,20171015
 11/3/1992,Louisiana,LA,Phillips,taxpayers party,0.086703087177384300,,20171015
 11/3/1992,Louisiana,LA,Fulani,more perfect democracy,0.080110971013124500,,20171015
-11/3/1992,Louisiana,LA,Larouche,"justice, industry, and agriculture",0.063463084428807100,,20171015
+11/3/1992,Louisiana,LA,Larouche,justice industry and agriculture,0.063463084428807100,,20171015
 11/3/1992,Louisiana,LA,Hagelin,natural law,0.049664332796839400,,20171015
 11/3/1992,Louisiana,LA,Yiamouyiannis,independent,0.045139236107813500,,20171015
 11/3/1992,Maine,ME,Clinton,democrat,38.7667973021300,,20171015
@@ -2151,16 +2085,10 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/3/1992,Montana,MT,Bush,republican,35.122496547592100,,20171015
 11/3/1992,Montana,MT,Perot,independent,26.115304335542400,,20171015
 11/3/1992,Montana,MT,Marrou,libertarian,0.24014632851335800,,20171015
-11/3/1992,Nebraska,NE,Bush,republican,46.597500359299600,,20171015
+11/3/1992,Nebraska,NE,Bush,republican,46.597500359299600,5,20171015
 11/3/1992,Nebraska,NE,Clinton,democrat,29.403454157435600,,20171015
 11/3/1992,Nebraska,NE,Perot,independent,23.605849669037600,,20171015
 11/3/1992,Nebraska,NE,Marrou,libertarian,0.18168358312566300,,20171015
-11/3/1992,Nebraska 1st CD,NE-1,Bush,republican,46.597500359299600,,JJCooley
-11/3/1992,Nebraska 1st CD,NE-1,Clinton,democrat,29.403454157435600,,JJCooley
-11/3/1992,Nebraska 2nd CD,NE-2,Bush,republican,46.597500359299600,,JJCooley
-11/3/1992,Nebraska 2nd CD,NE-2,Clinton,democrat,29.403454157435600,,JJCooley
-11/3/1992,Nebraska 3rd CD,NE-3,Bush,republican,46.597500359299600,,JJCooley
-11/3/1992,Nebraska 3rd CD,NE-3,Clinton,democrat,29.403454157435600,,JJCooley
 11/3/1992,Nevada,NV,Clinton,democrat,37.357549998222500,,20171015
 11/3/1992,Nevada,NV,Bush,republican,34.7267922530900,,20171015
 11/3/1992,Nevada,NV,Perot,independent,26.185124763488600,,20171015
@@ -2437,7 +2365,7 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/5/1996,Louisiana,LA,Dole,republican,39.944079432318800,,20171015
 11/5/1996,Louisiana,LA,Perot,reform party,6.9112014345621200,,20171015
 11/5/1996,Louisiana,LA,Browne,libertarian,0.42035719430771700,,20171015
-11/5/1996,Louisiana,LA,Nader,"liberty, ecology, community",0.26452401652728600,,20171015
+11/5/1996,Louisiana,LA,Nader,liberty ecology community,0.26452401652728600,,20171015
 11/5/1996,Louisiana,LA,Phillips,u.s. taxpayers party,0.18868146633414800,,20171015
 11/5/1996,Louisiana,LA,Hagelin,natural law,0.16710025286455600,,20171015
 11/5/1996,Louisiana,LA,Moorehead,workers world,0.094060457667468800,,20171015
@@ -2718,7 +2646,7 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/7/2000,Delaware,DE,Browne,libertarian,0.23631495226376900,,20171015
 11/7/2000,Delaware,DE,Phillips,constitution party,0.063505826964940500,,20171015
 11/7/2000,Delaware,DE,Hagelin,natural law,0.032668862909849200,,20171015
-11/7/2000,District of Columbia,DC,Gore,democrat,85.155081379337700,,20171015
+11/7/2000,District of Columbia,DC,Gore,democrat,85.155081379337700,2,20171015
 11/7/2000,District of Columbia,DC,Bush,republican,8.9517271439468200,,20171015
 11/7/2000,District of Columbia,DC,Nader,green,5.2383924237471100,,20171015
 11/7/2000,District of Columbia,DC,Browne,libertarian,0.33136200184255100,,20171015
@@ -3136,13 +3064,14 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/2/2004,Michigan,MI,Cobb,green,0.11003766697828500,,20171015
 11/2/2004,Michigan,MI,Peroutka,u.s. taxpayers party,0.10290846601912900,,20171015
 11/2/2004,Michigan,MI,Brown,natural law,0.029570685717544800,,20171015
-11/2/2004,Minnesota,MN,Kerry,democrat,51.089684686006500,,20171015
+11/2/2004,Minnesota,MN,Kerry,democrat,51.089684686006500,9,20171015
 11/2/2004,Minnesota,MN,Bush,republican,47.613533791521500,,20171015
 11/2/2004,Minnesota,MN,Nader,better life,0.66055317041126300,,20171015
 11/2/2004,Minnesota,MN,Badnarik,libertarian,0.16401574466294700,,20171015
 11/2/2004,Minnesota,MN,Cobb,green,0.15584854547839500,,20171015
 11/2/2004,Minnesota,MN,Peroutka,constitution party,0.10868385408361700,,20171015
 11/2/2004,Minnesota,MN,Harens,christian freedom party,0.084394391573713200,,20171015
+11/2/2004,Minnesota,MN,Edwards,independent,0,1,JJCooley
 11/2/2004,Minnesota,MN,Van Auken,socialist equality party,0.019056798097290100,,20171015
 11/2/2004,Minnesota,MN,Calero,socialist workers,0.014708029700320400,,20171015
 11/2/2004,Mississippi,MS,Bush,republican,59.014374148991400,,20171015
@@ -3958,11 +3887,12 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/2016,Georgia,GA,Trump,republican,50.77132605477100,,20171015
 11/8/2016,Georgia,GA,Clinton,democrat,45.639983357360800,,20171015
 11/8/2016,Georgia,GA,Johnson,libertarian,3.0453016138110600,,20171015
-11/8/2016,Hawaii,HI,Clinton,democrat,62.2214917342174,,20171015
+11/8/2016,Hawaii,HI,Clinton,democrat,62.2214917342174,3,20171015
 11/8/2016,Hawaii,HI,Trump,republican,30.0386770085117,,20171015
 11/8/2016,Hawaii,HI,Johnson,libertarian,3.7194273284888,,20171015
 11/8/2016,Hawaii,HI,Stein,green,2.96943373968671,,20171015
 11/8/2016,Hawaii,HI,Castle,constitution party,1.05097018909537,,20171015
+11/8/2016,Hawaii,HI,Sanders,independent,0,1,JJCooley
 11/8/2016,Idaho,ID,Trump,republican,59.261432369196900,,20171015
 11/8/2016,Idaho,ID,Clinton,democrat,27.492013820979200,,20171015
 11/8/2016,Idaho,ID,McMullin,independent,8.8008054994168800,,20171015
@@ -4139,10 +4069,12 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/2016,Tennessee,TN,Trump,republican,60.722033694214600,,20171015
 11/8/2016,Tennessee,TN,Clinton,democrat,34.716332798650100,,20171015
 11/8/2016,Tennessee,TN,Johnson,libertarian,2.81,,JJCooley
-11/8/2016,Texas,TX,Trump,republican,52.234685579335400,,20171015
+11/8/2016,Texas,TX,Trump,republican,52.234685579335400,36,20171015
 11/8/2016,Texas,TX,Clinton,democrat,43.23525798101200,,20171015
 11/8/2016,Texas,TX,Johnson,libertarian,3.1607186617886500,,20171015
 11/8/2016,Texas,TX,Stein,green,0.7978168907774200,,20171015
+11/8/2016,Texas,TX,Paul,independent,0,1,JJCooley
+11/8/2016,Texas,TX,Kasich,independent,0,1,JJCooley
 11/8/2016,Utah,UT,Trump,republican,45.540816588100400,,20171015
 11/8/2016,Utah,UT,Clinton,democrat,27.46126859226900,,20171015
 11/8/2016,Utah,UT,McMullin,no party affiliation,21.538230381,,JJCooley
@@ -4161,13 +4093,15 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/2016,Virginia,VA,Johnson,libertarian,2.9696551530198200,,20171015
 11/8/2016,Virginia,VA,McMullin,independent,1.3572022561284300,,20171015
 11/8/2016,Virginia,VA,Stein,green,0.69394227910751200,,20171015
-11/8/2016,Washington,WA,Clinton,democrat,52.538680061826600,,20171015
+11/8/2016,Washington,WA,Clinton,democrat,52.538680061826600,8,20171015
 11/8/2016,Washington,WA,Trump,republican,36.832680186637500,,20171015
 11/8/2016,Washington,WA,Johnson,libertarian,4.8501078830118200,,20171015
 11/8/2016,Washington,WA,Stein,green,1.7611294960927300,,20171015
 11/8/2016,Washington,WA,Castle,constitution party,0.53129029408634700,,20171015
 11/8/2016,Washington,WA,Kennedy,socialist workers,0.12984550284457200,,20171015
 11/8/2016,Washington,WA,La Riva,socialism and liberation party,0.10620982273541400,,20171015
+11/8/2016,Washington,WA,Powell,independent,0,3,JJCooley
+11/8/2016,Washington,WA,Spotted Eagle,independent,0,1,JJCooley
 11/8/2016,West Virginia,WV,Trump,republican,68.630574811619400,,20171015
 11/8/2016,West Virginia,WV,Clinton,democrat,26.476928017771500,,20171015
 11/8/2016,West Virginia,WV,Johnson,libertarian,3.2261366998994500,,20171015

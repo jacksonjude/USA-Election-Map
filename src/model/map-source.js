@@ -579,10 +579,19 @@ const libertarianPartyID = LibertarianParty.getID()
 const independentRNPartyID = IndependentRNParty.getID()
 
 const independent2016EMPartyID = Independent2016EMParty.getID()
+const independent2016CPPartyID = Independent2016CPParty.getID()
+const independent2016BSPartyID = Independent2016BSParty.getID()
+const independent2016RPPartyID = Independent2016RPParty.getID()
+const independent2016JKPartyID = Independent2016JKParty.getID()
+const independent2016SEPartyID = Independent2016SEParty.getID()
+const independent2004JEPartyID = Independent2004JEParty.getID()
+const independent1988LBPartyID = Independent1988LBParty.getID()
 const independent1980JAPartyID = Independent1980JAParty.getID()
 const independent1976EMPartyID = Independent1976EMParty.getID()
+const independent1976RRPartyID = Independent1976RRParty.getID()
 const independent1968GWPartyID = Independent1968GWParty.getID()
 const independent1960HBPartyID = Independent1960HBParty.getID()
+const independent1956WJPartyID = Independent1956WJParty.getID()
 const independent1948SMPartyID = Independent1948SMParty.getID()
 const independent1948HWPartyID = Independent1948HWParty.getID()
 const independent1932NTPartyID = Independent1932NTParty.getID()
@@ -911,7 +920,7 @@ function createPresidentialMapSources()
           var candidateName = row[columnMap.candidateName]
           var currentPartyName = row[columnMap.partyID]
           var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
-          var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : 0
+          var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : null
 
           var foundParty = currentCandidateToPartyIDMap[candidateName] ? politicalParties[currentCandidateToPartyIDMap[candidateName]] : null
 
@@ -958,7 +967,10 @@ function createPresidentialMapSources()
             }
 
             candidateData[candidateName].voteshare += currentVoteshare
-            candidateData[candidateName].electoralVotes += currentElectoralVotes
+            if (candidateData[candidateName].electoralVotes != null)
+            {
+              candidateData[candidateName].electoralVotes += currentElectoralVotes ? currentElectoralVotes : 0
+            }
           }
           else
           {
@@ -984,7 +996,7 @@ function createPresidentialMapSources()
 
         var electoralVoteSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
           return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, votes: singleCandidateData.electoralVotes}
-        }).filter(candVotes => candVotes.votes > 0)
+        }).filter(candVotes => candVotes.votes != null)
         electoralVoteSortedCandidateData.sort((cand1, cand2) => cand2.votes - cand1.votes)
 
         var greatestMarginPartyID
@@ -1017,6 +1029,16 @@ function createPresidentialMapSources()
         for (let partyCandidateName in candidateData)
         {
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
+        }
+
+        for (let candidateElectoralVote of electoralVoteSortedCandidateData)
+        {
+          if (currentMapDate.getFullYear().toString() == "2016")
+          {
+            console.log(candidateElectoralVote, currentCandidateToPartyIDMap)
+          }
+          if (!currentDatePartyNameArray[candidateElectoralVote.partyID]) { continue }
+          currentDatePartyNameArray[candidateElectoralVote.partyID] = candidateElectoralVote.candidate
         }
 
         var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
@@ -1127,22 +1149,22 @@ function createPresidentialMapSources()
     1944: {"Roosevelt":democraticPartyID, "Dewey":republicanPartyID, "Other":independentGenericPartyID},
     1948: {"Truman":democraticPartyID, "Dewey":republicanPartyID, "Thurmond":independent1948SMPartyID, "Wallace":independent1948HWPartyID, "Other":independentGenericPartyID},
     1952: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
-    1956: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Other":independentGenericPartyID},
+    1956: {"Stevenson":democraticPartyID, "Eisenhower":republicanPartyID, "Jones":independent1956WJPartyID, "Other":independentGenericPartyID},
     1960: {"Kennedy":democraticPartyID, "Nixon":republicanPartyID, "Byrd":independent1960HBPartyID, "Other":independentGenericPartyID},
     1964: {"Johnson":democraticPartyID, "Goldwater":republicanPartyID, "Other":independentGenericPartyID},
     1968: {"Humphrey":democraticPartyID, "Nixon":republicanPartyID, "Wallace":independent1968GWPartyID, "Other":independentGenericPartyID},
     1972: {"McGovern":democraticPartyID, "Nixon":republicanPartyID, "Other":independentGenericPartyID},
-    1976: {"Carter":democraticPartyID, "Ford":republicanPartyID, "McCarthy":independent1976EMPartyID},
+    1976: {"Carter":democraticPartyID, "Ford":republicanPartyID, "McCarthy":independent1976EMPartyID, "Reagan": independent1976RRPartyID},
     1980: {"Carter":democraticPartyID, "Reagan":republicanPartyID, "Anderson":independent1980JAPartyID, "Clark":libertarianPartyID},
     1984: {"Mondale":democraticPartyID, "Reagan":republicanPartyID, "Bergland":libertarianPartyID},
-    1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID, "Paul":libertarianPartyID},
+    1988: {"Dukakis":democraticPartyID, "Bush":republicanPartyID, "Paul":libertarianPartyID, "Bentsen": independent1988LBPartyID},
     1992: {"Clinton":democraticPartyID, "Bush":republicanPartyID, "Perot":reformPartyID, "Marrou":libertarianPartyID},
     1996: {"Clinton":democraticPartyID, "Dole":republicanPartyID, "Perot":reformPartyID, "Nader":greenPartyID, "Browne":libertarianPartyID},
     2000: {"Gore":democraticPartyID, "Bush":republicanPartyID, "Nader":greenPartyID, "Buchanan":reformPartyID, "Browne":libertarianPartyID},
-    2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID, "Nader":independentRNPartyID, "Badnarik":libertarianPartyID},
+    2004: {"Kerry":democraticPartyID, "Bush":republicanPartyID, "Nader":independentRNPartyID, "Badnarik":libertarianPartyID, "Edwards": independent2004JEPartyID},
     2008: {"Obama":democraticPartyID, "McCain":republicanPartyID, "Nader":independentRNPartyID, "Barr":libertarianPartyID},
     2012: {"Obama":democraticPartyID, "Romney":republicanPartyID, "Johnson":libertarianPartyID, "Stein":greenPartyID},
-    2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID, "Johnson":libertarianPartyID, "Stein":greenPartyID, "McMullin":independent2016EMPartyID},
+    2016: {"Clinton":democraticPartyID, "Trump":republicanPartyID, "Johnson":libertarianPartyID, "Stein":greenPartyID, "McMullin":independent2016EMPartyID, "Powell":independent2016CPPartyID, "Sanders":independent2016BSPartyID, "Paul":independent2016RPPartyID, "Kasich":independent2016JKPartyID, "Spotted Eagle":independent2016SEPartyID},
     2020: {"Biden":democraticPartyID, "Trump":republicanPartyID, "Jorgensen":libertarianPartyID, "Hawkins":greenPartyID}
   }
 
@@ -1273,7 +1295,12 @@ function createPresidentialMapSources()
     {
       let regionData = cloneObject(mapDateData[regionID])
       voteSplitMapDateData[regionID] = regionData
-      if (!regionData.voteSplits || !regionData.voteSplits[0]) { continue }
+      if (mapDateData[regionID].disabled) { continue }
+      if (!regionData.voteSplits || !regionData.voteSplits[0])
+      {
+        let currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData)
+        regionData.voteSplits = [{partyID: regionData.partyID, candidate: regionData.candidateMap[regionData.partyID], votes: currentRegionEV}]
+      }
       regionData.margin = 100
       regionData.partyID = regionData.voteSplits[0].partyID
     }

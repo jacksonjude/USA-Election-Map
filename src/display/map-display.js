@@ -747,6 +747,10 @@ function updateMapElectoralVoteText()
 
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}))
     if (regionEV == undefined) { continue }
+    if (currentViewingState == ViewingState.splitVote && displayRegionDataArray[regionIDs[regionNum]] && displayRegionDataArray[regionIDs[regionNum]].voteSplits && displayRegionDataArray[regionIDs[regionNum]].voteSplits.length > 0)
+    {
+      regionEV = displayRegionDataArray[regionIDs[regionNum]].voteSplits.reduce((agg, curr) => agg + curr.votes, 0)
+    }
 
     if (regionChildren.length == 1)
     {
@@ -1459,6 +1463,8 @@ function getPartyTotals(includeFlipData)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
 
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
+
     if (currentViewingState != ViewingState.splitVote)
     {
       var partyIDToSet = regionDataArray[regionID].partyID
@@ -1466,8 +1472,6 @@ function getPartyTotals(includeFlipData)
       {
         partyIDToSet = TossupParty.getID()
       }
-
-      var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
 
       if (includeFlipData && regionDataArray[regionID].flip)
       {
@@ -1502,6 +1506,15 @@ function getPartyTotals(includeFlipData)
           partyTotals[partyIDToSet] = 0
         }
         partyTotals[partyIDToSet] += votesWon
+      }
+
+      if (regionDataArray[regionID].voteSplits.length == 0)
+      {
+        if (!(regionDataArray[regionID].partyID in partyTotals))
+        {
+          partyTotals[regionDataArray[regionID].partyID] = 0
+        }
+        partyTotals[regionDataArray[regionID].partyID] += currentRegionEV
       }
     }
   }
