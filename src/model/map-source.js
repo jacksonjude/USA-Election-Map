@@ -577,6 +577,8 @@ const reformPartyID = ReformParty.getID()
 const greenPartyID = GreenParty.getID()
 const libertarianPartyID = LibertarianParty.getID()
 
+const freeSoilPartyID = FreeSoilParty.getID()
+
 const independentRNPartyID = IndependentRNParty.getID()
 
 const independent2016EMPartyID = Independent2016EMParty.getID()
@@ -607,8 +609,6 @@ const independent1888CFPartyID = Independent1888CFParty.getID()
 const independent1860JohnBreckenridgePartyID = Independent1860JohnBreckenridgeParty.getID()
 const independent1860JohnBellPartyID = Independent1860JohnBellParty.getID()
 const independent1856MFPartyID = Independent1856MFParty.getID()
-const independent1852JHPartyID = Independent1852JHParty.getID()
-const independent1848VBPartyID = Independent1848VBParty.getID()
 const independent1844JBPartyID = Independent1844JBParty.getID()
 const independent1836HWPartyID = Independent1836HWParty.getID()
 const independent1836DWPartyID = Independent1836DWParty.getID()
@@ -1135,8 +1135,8 @@ function createPresidentialMapSources()
     1836: {"Van Buren":democraticPartyID, "Harrison":whigPartyID, "White":independent1836HWPartyID, "Webster":independent1836DWPartyID, "Magnum":independent1836WMPartyID, "Other":independentGenericPartyID},
     1840: {"Van Buren":democraticPartyID, "Harrison":whigPartyID, "Other":independentGenericPartyID},
     1844: {"Polk":democraticPartyID, "Clay":whigPartyID, "Birney":independent1844JBPartyID, "Other":independentGenericPartyID},
-    1848: {"Cass":democraticPartyID, "Taylor":whigPartyID, "Van Buren":independent1848VBPartyID, "Other":independentGenericPartyID},
-    1852: {"Pierce":democraticPartyID, "Scott":whigPartyID, "Hale":independent1852JHPartyID, "Other":independentGenericPartyID},
+    1848: {"Cass":democraticPartyID, "Taylor":whigPartyID, "Van Buren":freeSoilPartyID, "Other":independentGenericPartyID},
+    1852: {"Pierce":democraticPartyID, "Scott":whigPartyID, "Hale":freeSoilPartyID, "Other":independentGenericPartyID},
     1856: {"Buchanan":democraticPartyID, "Fremont":republicanPartyID, "Fillmore":independent1856MFPartyID, "Other":independentGenericPartyID},
     1860: {"Douglas":democraticPartyID, "Lincoln":republicanPartyID, "Breckenridge":independent1860JohnBreckenridgePartyID, "Bell":independent1860JohnBellPartyID, "Other":independentGenericPartyID},
     1864: {"McClellan":democraticPartyID, "Lincoln":republicanPartyID, "Other":independentGenericPartyID},
