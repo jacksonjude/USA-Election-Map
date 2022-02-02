@@ -1325,7 +1325,7 @@ function createPresidentialMapSources()
       if (!regionData.voteSplits || !regionData.voteSplits[0])
       {
         let currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData)
-        regionData.voteSplits = [{partyID: regionData.partyID, candidate: regionData.candidateMap[regionData.partyID], votes: currentRegionEV}]
+        regionData.voteSplits = [{partyID: regionData.partyID, candidate: regionData.candidateMap && regionData.candidateMap[regionData.partyID], votes: currentRegionEV}]
       }
       regionData.margin = 100
       regionData.partyID = regionData.voteSplits[0].partyID
@@ -2710,16 +2710,30 @@ function createHouseMapSources()
 
         if (fullStateRows.length == 0)
         {
-          // if (isCustomMap)
-          // {
-          //   let partyIDToCandidateNames = {}
-          //   for (var partyCandidateName in candidateNameToPartyIDMap)
-          //   {
-          //     partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
-          //   }
-          //
-          //   filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
-          // }
+          if (isCustomMap && regionNameToID[regionToFind] != nationalPopularVoteID)
+          {
+            let partyIDToCandidateNames = {}
+            for (let partyID of mainPoliticalPartyIDs)
+            {
+              partyIDToCandidateNames[partyID] = politicalParties[partyID].getNames()[0]
+            }
+
+            let decadeToFillFrom = getDecadeFromDate(currentMapDate)
+            if (decadeToFillFrom > 2010)
+            {
+              decadeToFillFrom = 2010 // default/fallback to 2010 since 2020 map has not been released yet
+            }
+
+            let regionHouseSeatCount = USAHouseMapType.getEV(decadeToFillFrom, regionNameToID[regionToFind])
+            for (let districtNumber in [...Array(regionHouseSeatCount).keys()])
+            {
+              if (regionHouseSeatCount > 1)
+              {
+                districtNumber = parseInt(districtNumber)+1
+              }
+              filteredDateData[regionNameToID[regionToFind] + "-" + districtNumber] = {region: regionNameToID[regionToFind] + "-" + districtNumber, state: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+            }
+          }
           continue
         }
 
