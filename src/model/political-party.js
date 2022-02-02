@@ -557,7 +557,7 @@ var Independent1808GCParty = new PoliticalParty(
 
 var IndependentGWParty = new PoliticalParty(
   "INDGW",
-  ["Independent"],
+  ["Washington"],
   "Ind",
   "Washington",
   cloneObject(PoliticalPartyColors.orange),
