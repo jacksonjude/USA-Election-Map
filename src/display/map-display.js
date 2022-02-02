@@ -1,12 +1,12 @@
-var currentMapType = mapTypes[mapTypeIDs[0]]
+var currentMapType
 
-var mapSources = currentMapType.getMapSources()
-var mapSourceIDs = currentMapType.getMapSourceIDs()
-var currentCustomMapSource = currentMapType.getCustomMapSource()
+var mapSources
+var mapSourceIDs
+var currentCustomMapSource
 
-var mapRegionNameToID = currentMapType.getRegionNameToID()
+var mapRegionNameToID
 
-var currentMapSource = NullMapSource
+var currentMapSource
 
 var selectedParty
 
@@ -36,8 +36,8 @@ const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 const nationalPopularVoteID = "NPV"
 const statePopularVoteDistrictID = "PV"
 
-var displayRegionDataArray = {}
-var regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
+var displayRegionDataArray
+const regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
 
 var showingDataMap = false
 
@@ -46,7 +46,7 @@ var overrideRegionEVs = {}
 
 var editingRegionMarginValue = false
 
-var ignoreMapUpdateClickArray = []
+var ignoreMapUpdateClickArray
 
 var currentSliderDate
 const initialKeyPressDelay = 500
@@ -58,22 +58,22 @@ const ViewingState = {
   zooming: 1,
   splitVote: 2
 }
-var currentViewingState = ViewingState.viewing
+var currentViewingState
 
 const EditingState = {
   viewing: 2,
   editing: 3
 }
-var currentEditingState = EditingState.viewing
+var currentEditingState
 
-var currentMapZoomRegion = null
+var currentMapZoomRegion
 
 var showingHelpBox = false
 
-var showingCompareMap = false
-var compareMapSourceIDArray = [null, null]
-var compareMapDataArray = [null, null]
-var selectedCompareSlider = null
+var showingCompareMap
+var compareMapSourceIDArray
+var compareMapDataArray
+var selectedCompareSlider
 
 var selectedDropdownDivID = null
 
@@ -153,7 +153,6 @@ async function reloadForNewMapType(initialLoad)
 
   selectedParty = null
   displayRegionDataArray = {}
-  regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
   showingDataMap = false
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
@@ -1636,7 +1635,7 @@ async function updateRegionBox(regionID)
     regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
       regionMarginString += "%</span></span><br>"
     })
