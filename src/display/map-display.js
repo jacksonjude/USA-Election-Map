@@ -1089,13 +1089,13 @@ function leftClickRegion(div)
     if (regionData.disabled)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = marginValues.safe
     }
     else if (selectedParty != null)
@@ -1158,13 +1158,13 @@ function rightClickRegion(div)
     if (regionData.disabled)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 0.1 // Hardcoding tilt == 0.1
     }
     else if (selectedParty != null)
@@ -1588,7 +1588,9 @@ function getCurrentDateOrToday()
 async function updateRegionBox(regionID)
 {
   var regionData = getRegionData(regionID).regionData
-  if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
+  let canZoomCurrently = currentMapSource.canZoom(currentMapDataForDate)
+
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently) || regionData.disabled == true)
   {
     $("#regionboxcontainer").trigger('hide')
     return
@@ -1644,7 +1646,6 @@ async function updateRegionBox(regionID)
   }
 
   var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-  let canZoomCurrently = currentMapSource.canZoom(currentMapDataForDate)
 
   if (regionData.voteSplits && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
   {
