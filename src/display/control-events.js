@@ -434,10 +434,7 @@ document.addEventListener('keypress', async function(e) {
   }
   else if (e.key == "Escape" && currentViewingState == ViewingState.zooming)
   {
-    currentViewingState = ViewingState.viewing
-    currentMapZoomRegion = null
-
-    displayDataMap()
+    zoomOutMap()
   }
 })
 

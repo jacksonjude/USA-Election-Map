@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, customOpenRegionLinkFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
   {
     this.id = id
     this.name = name
@@ -26,6 +26,7 @@ class MapSource
       return mapData
     })
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
+    this.updateCustomMapFunction = updateCustomMapFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
     this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
@@ -56,6 +57,7 @@ class MapSource
   // zoomingDataFunction,
   // splitVoteDataFunction,
   // customOpenRegionLinkFunction,
+  // updateCustomMapFunction,
   // convertMapDataRowToCSVFunction,
   // isCustomMap,
   // shouldClearDisabled,
@@ -463,18 +465,21 @@ class MapSource
     {
       this.mapData[dateToUpdate] = {}
     }
-    for (var regionID in displayRegionArray)
-    {
-      var regionData = displayRegionArray[regionID]
-      regionData.region = regionID
 
-      if (this.mapData[dateToUpdate][regionID] == null)
+    if (this.updateCustomMapFunction)
+    {
+      this.updateCustomMapFunction(displayRegionArray, this.mapData[dateToUpdate])
+    }
+    else
+    {
+      for (let regionID in displayRegionArray)
       {
-        this.mapData[dateToUpdate][regionID] = {}
-      }
-      for (var key in regionData)
-      {
-        this.mapData[dateToUpdate][regionID][key] = regionData[key]
+        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+
+        let regionData = displayRegionArray[regionID]
+        regionData.region = regionID
+
+        this.mapData[dateToUpdate][regionID] = cloneObject(regionData)
       }
     }
 
@@ -627,7 +632,6 @@ const independentGenericPartyID = IndependentGenericParty.getID()
 const incumbentChallengerPartyIDs = {incumbent: republicanPartyID, challenger: democraticPartyID, tossup: tossupPartyID}
 const partyCandiateLastNames = {2020: {"Biden":democraticPartyID, "Trump":republicanPartyID}}
 const partyCandiateFullNames = {2020: {"Joseph R. Biden Jr.":democraticPartyID, "Donald Trump":republicanPartyID}}
-const partyNamesToIDs = {2020: {"democrat":democraticPartyID, "republican":republicanPartyID}}
 
 const partyIDToCandidateLastNames = {2020: {}}
 partyIDToCandidateLastNames[2020][democraticPartyID] = "Biden"
@@ -1037,10 +1041,6 @@ function createPresidentialMapSources()
 
         for (let candidateElectoralVote of electoralVoteSortedCandidateData)
         {
-          if (currentMapDate.getFullYear().toString() == "2016")
-          {
-            console.log(candidateElectoralVote, currentCandidateToPartyIDMap)
-          }
           if (!currentDatePartyNameArray[candidateElectoralVote.partyID]) { continue }
           currentDatePartyNameArray[candidateElectoralVote.partyID] = candidateElectoralVote.candidate
         }
@@ -1213,7 +1213,8 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
-    null // customOpenRegionLinkFunction
+    null, // customOpenRegionLinkFunction
+    null // updateCustomMapFunction
   )
 
   var FiveThirtyEightProjectionMapSource = new MapSource(
@@ -1242,7 +1243,8 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
-    null // customOpenRegionLinkFunction
+    null, // customOpenRegionLinkFunction
+    null // updateCustomMapFunction
   )
 
   var CookProjectionMapSource = new MapSource(
@@ -1273,7 +1275,8 @@ function createPresidentialMapSources()
     {
       if (mapDate == null) { return }
       window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
-    } // customOpenRegionLinkFunction
+    }, // customOpenRegionLinkFunction
+    null // updateCustomMapFunction
   )
 
   var getPresidentialSVGFromDate = function(dateTime)
@@ -1372,6 +1375,7 @@ function createPresidentialMapSources()
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -1429,6 +1433,7 @@ function createPresidentialMapSources()
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -1476,6 +1481,7 @@ function createPresidentialMapSources()
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false, // shouldClearDisabled
@@ -1907,6 +1913,7 @@ function createSenateMapSources()
       linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -1964,6 +1971,7 @@ function createSenateMapSources()
       linkToOpen += PA2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -2013,6 +2021,7 @@ function createSenateMapSources()
       if (mapDate == null) { return }
       window.open(homepageURL + (Cook2022SenateRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -2080,6 +2089,7 @@ function createSenateMapSources()
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -2129,6 +2139,7 @@ function createSenateMapSources()
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false // shouldClearDisabled
@@ -2480,6 +2491,7 @@ function createGovernorMapSources()
       linkToOpen += LTE2022GovernorYouTubeIDs[mapDate.getUTCAdjustedTime()]
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -2534,7 +2546,8 @@ function createGovernorMapSources()
     {
       if (mapDate == null) { return }
       window.open(homepageURL + (Cook2022GovernorRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
-    } // customOpenRegionLinkFunction
+    }, // customOpenRegionLinkFunction
+    null // updateCustomMapFunction
   )
 
   var PastElectionResultMapSource = new MapSource(
@@ -2587,6 +2600,7 @@ function createGovernorMapSources()
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -2635,6 +2649,7 @@ function createGovernorMapSources()
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false // shouldClearDisabled
@@ -3016,7 +3031,10 @@ function createHouseMapSources()
       housePerStateMapData[regionID].partyID = largestPartyID
     }
 
-    housePerStateMapData["NPV"] = cloneObject(mapDateData["NPV"])
+    if (mapDateData["NPV"])
+    {
+      housePerStateMapData["NPV"] = cloneObject(mapDateData["NPV"])
+    }
 
     return housePerStateMapData
   }
@@ -3092,6 +3110,7 @@ function createHouseMapSources()
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
     null, // shouldClearDisabled
@@ -3140,6 +3159,19 @@ function createHouseMapSources()
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // customOpenRegionLinkFunction
+    function(displayRegionData, mapDateData)
+    {
+      for (let regionID in displayRegionData)
+      {
+        if (!regionID.includes("-")) { continue }
+        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+
+        let regionData = displayRegionData[regionID]
+        regionData.region = regionID
+
+        mapDateData[regionID] = cloneObject(regionData)
+      }
+    }, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false, // shouldClearDisabled

@@ -706,6 +706,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     }
 
     regionData.region = currentMapDataForDate[regionNum].region
+    regionData.state = currentMapDataForDate[regionNum].state
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID
     regionData.disabled = currentMapDataForDate[regionNum].disabled
@@ -1071,7 +1072,7 @@ async function toggleEditing(stateToSet)
 
 function leftClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing)
+  if (currentEditingState == EditingState.editing && (!currentMapSource.canZoom() || currentViewingState == ViewingState.zooming))
   {
     if (ignoreNextClick)
     {
@@ -1149,7 +1150,7 @@ function leftClickRegion(div)
 
 function rightClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing)
+  if (currentEditingState == EditingState.editing && (!currentMapSource.canZoom() || currentViewingState == ViewingState.zooming))
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
@@ -1253,10 +1254,15 @@ function altClickRegion(div)
   }
 }
 
-function mapCloseButtonClicked()
+function zoomOutMap()
 {
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
+
+  if (currentMapSource.isCustom())
+  {
+    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+  }
 
   displayDataMap()
 }

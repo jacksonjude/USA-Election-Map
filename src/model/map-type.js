@@ -623,7 +623,7 @@ var USAHouseMapType = new MapType(
   },
   false,
   2,
-  false,
+  true,
   true,
   `
   <h3 style='margin: 0px;'>Controls</h3>
