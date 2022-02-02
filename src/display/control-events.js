@@ -444,6 +444,7 @@ var startRegionID
 var mouseMovedDuringClick = false
 var currentRegionID
 var ignoreNextClick = false
+var clickUsedToZoom = false
 
 var currentMouseY
 
@@ -452,6 +453,11 @@ document.addEventListener('mousedown', function() {
   {
     startRegionID = currentRegionID
     mouseIsDown = true
+
+    if (currentMapSource.canZoom() && currentViewingState == ViewingState.viewing)
+    {
+      clickUsedToZoom = true
+    }
   }
 })
 
@@ -567,12 +573,17 @@ document.addEventListener('mouseup', function() {
   {
     regionIDsChanged = []
     mouseIsDown = false
-    if (currentRegionID != null && startRegionID == currentRegionID && mouseMovedDuringClick)
+    if (currentRegionID != null && !clickUsedToZoom && startRegionID == currentRegionID && mouseMovedDuringClick)
     {
       ignoreNextClick = true
     }
     mouseMovedDuringClick = false
     startRegionID = null
+  }
+
+  if (clickUsedToZoom)
+  {
+    clickUsedToZoom = false
   }
 })
 
