@@ -1,4 +1,5 @@
 .DS_Store
 csv-test
 assets/niu
-.jshintrc
+.eslintrc
+jsconfig.json
