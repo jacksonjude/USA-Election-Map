@@ -1636,8 +1636,60 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     countyVoteshareFilterFunction, // organizeMapDataFunction
-    () => {
-      return {}
+    (mapDateData) => {
+      var usedFallbackMap = USAHouseMapType.getSVGPath()[2] || false
+      if (currentMapType.getMapSettingValue("showAllDistricts") && !usedFallbackMap)
+      {
+        return mapDateData
+      }
+
+      var countiesPerStateMapData = {}
+
+      for (let regionID in mapDateData)
+      {
+        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
+
+        var regionData = mapDateData[regionID]
+
+        if (!(regionData.state in countiesPerStateMapData))
+        {
+          countiesPerStateMapData[regionData.state] = {region: regionData.state, voteSplits: []}
+        }
+
+        var partyVoteSplitData = countiesPerStateMapData[regionData.state].voteSplits
+        var partyVote = partyVoteSplitData.find(partyVoteItem => partyVoteItem.partyID == regionData.partyID)
+        if (!partyVote)
+        {
+          partyVote = {partyID: regionData.partyID, candidate: politicalParties[regionData.partyID].getNames()[0], votes: 0}
+          partyVoteSplitData.push(partyVote)
+        }
+        partyVote.votes++
+
+        if (regionData.flip)
+        {
+          countiesPerStateMapData[regionData.state].flip = true
+        }
+      }
+
+      for (let regionID in countiesPerStateMapData)
+      {
+        var partyVoteSplitData = countiesPerStateMapData[regionID].voteSplits
+        partyVoteSplitData.sort((partyVote1, partyVote2) => partyVote2.votes-partyVote1.votes)
+
+        var largestPartyCount = partyVoteSplitData[0].votes
+        var largestPartyID = partyVoteSplitData[0].partyID
+        var secondLargestPartyCount = partyVoteSplitData[1] ? partyVoteSplitData[1].votes : 0
+
+        countiesPerStateMapData[regionID].margin = (largestPartyCount/(largestPartyCount+secondLargestPartyCount)*100-50)*0.9001 // +0.001 to account for rounding errors
+        countiesPerStateMapData[regionID].partyID = largestPartyID
+      }
+
+      if (mapDateData["NPV"])
+      {
+        countiesPerStateMapData["NPV"] = cloneObject(mapDateData["NPV"])
+      }
+
+      return countiesPerStateMapData
     }, // viewingDataFunction
     (mapDateData) => {
       let countyZoomData = {}
