@@ -48,7 +48,7 @@ class FilesDatabase
       var transaction = db.transaction(self.storeName, 'readwrite')
       var store = transaction.objectStore(self.storeName)
 
-      store.put({text: fileText, updatedAt: Date.now()}, sourceID)
+      store.put({text: fileText, updatedAt: self.sourceUpdatedTimesData && self.sourceUpdatedTimesData[sourceID] ? self.sourceUpdatedTimesData[sourceID] : 0}, sourceID)
 
       transaction.oncomplete = function() {
         db.close()
