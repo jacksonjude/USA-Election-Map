@@ -247,7 +247,10 @@ function loadMapSVGFile()
           $("#text").remove()
         }
 
-        $("#mapCloseButton").show()
+        if (currentViewingState == ViewingState.zooming)
+        {
+          $("#mapCloseButton").show()
+        }
 
         setTimeout(() => {
           var svgDataBoundingBox = $("#svgdata")[0].getBBox()

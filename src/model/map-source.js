@@ -1104,6 +1104,7 @@ function createPresidentialMapSources()
           var fullRegionName = regionToFind + (regionToFind != "NPV" ? "__" + stateCounty : "")
 
           var candidateData = {}
+          var totalVoteshare = 0
 
           for (var rowNum in countyRows)
           {
@@ -1150,6 +1151,13 @@ function createPresidentialMapSources()
             {
               candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
             }
+
+            totalVoteshare += currentVoteshare
+          }
+
+          if (totalVoteshare > 100.1)
+          {
+            console.log("Overflow voteshare!", currentMapDate.getFullYear().toString(), fullRegionName)
           }
 
           var voteshareSortedCandidateData = Object.values(candidateData)
@@ -1628,14 +1636,26 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     countyVoteshareFilterFunction, // organizeMapDataFunction
-    null, // viewingDataFunction
-    null, // zoomingDataFunction
+    () => {
+      return {}
+    }, // viewingDataFunction
+    (mapDateData) => {
+      let countyZoomData = {}
+      for (let regionID in mapDateData)
+      {
+        if (mapDateData[regionID].state == currentMapZoomRegion)
+        {
+          countyZoomData[regionID] = mapDateData[regionID]
+        }
+      }
+      return countyZoomData
+    }, // zoomingDataFunction
     null, // splitVoteDataFunction
     (regionID) => {
       if (!regionID.includes(subregionSeparator)) { return regionID }
 
       let state = regionID.split(subregionSeparator)[0]
-      let county = regionID.split(subregionSeparator)[1]
+      let county = regionID.split(subregionSeparator)[1].replace(/_s$/, "'s").replaceAll("_", " ")
 
       return county + ", " + state
     }, // getFormattedRegionName
@@ -1656,7 +1676,14 @@ function createPresidentialMapSources()
     null, // shouldClearDisabled
     true, // shouldShowVoteshare
     1.0, // voteshareCutoffMargin
-    "svg-sources/usa-counties-map.svg" // overrideSVGPath
+    () => {
+      if (currentViewingState == ViewingState.viewing)
+      {
+        return "svg-sources/usa-governor-map.svg"
+      }
+
+      return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+    } // overrideSVGPath
   )
 
   var idsToPartyNames = {}
@@ -3152,7 +3179,7 @@ function createHouseMapSources()
       return "svg-sources/usa-governor-map.svg"
     }
 
-    if (currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("showStateDistricts"))
+    if ((currentViewingState == ViewingState.viewing && currentMapType.getMapSettingValue("showAllDistricts")) || (currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("showStateDistricts")))
     {
       var dateYear = (new Date(dateTime)).getFullYear()
       if (dateYear >= 2020)
