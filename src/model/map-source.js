@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
   {
     this.id = id
     this.name = name
@@ -25,6 +25,7 @@ class MapSource
     this.splitVoteDataFunction = splitVoteDataFunction || ((mapData) => {
       return mapData
     })
+    this.getFormattedRegionName = getFormattedRegionName
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.updateCustomMapFunction = updateCustomMapFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
@@ -56,6 +57,7 @@ class MapSource
   // viewingDataFunction,
   // zoomingDataFunction,
   // splitVoteDataFunction,
+  // getFormattedRegionName,
   // customOpenRegionLinkFunction,
   // updateCustomMapFunction,
   // convertMapDataRowToCSVFunction,
@@ -474,7 +476,7 @@ class MapSource
     {
       for (let regionID in displayRegionArray)
       {
-        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
         let regionData = displayRegionArray[regionID]
         regionData.region = regionID
@@ -1213,6 +1215,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null // updateCustomMapFunction
   )
@@ -1243,6 +1246,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null // updateCustomMapFunction
   )
@@ -1271,6 +1275,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___)
     {
       if (mapDate == null) { return }
@@ -1364,6 +1369,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1422,6 +1428,7 @@ function createPresidentialMapSources()
     }, // viewingDataFunction
     null, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
@@ -1480,6 +1487,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
@@ -1963,6 +1971,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
       if (mapDate == null) { return }
@@ -2016,6 +2025,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ____)
     {
       if (mapDate == null) { return }
@@ -2058,6 +2068,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
       if (mapDate == null) { return }
@@ -2138,6 +2149,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
@@ -2483,6 +2495,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
       if (mapDate == null) { return }
@@ -2542,6 +2555,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___)
     {
       if (mapDate == null) { return }
@@ -2579,6 +2593,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
       if (mapDate == null) { return }
@@ -2648,6 +2663,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
@@ -2731,7 +2747,7 @@ function createHouseMapSources()
               {
                 districtNumber = parseInt(districtNumber)+1
               }
-              filteredDateData[regionNameToID[regionToFind] + "-" + districtNumber] = {region: regionNameToID[regionToFind] + "-" + districtNumber, state: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+              filteredDateData[regionNameToID[regionToFind] + subregionSeparator + districtNumber] = {region: regionNameToID[regionToFind] + subregionSeparator + districtNumber, state: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
             }
           }
           continue
@@ -2752,7 +2768,7 @@ function createHouseMapSources()
             return row[columnMap.district] == stateDistrict
           })
 
-          var fullRegionName = regionToFind + (regionToFind != "NPV" ? "-" + stateDistrict : "")
+          var fullRegionName = regionToFind + (regionToFind != "NPV" ? subregionSeparator + stateDistrict : "")
 
           var candidateData = {}
 
@@ -2907,10 +2923,10 @@ function createHouseMapSources()
       return 0
 
       case "region":
-      return regionData.state || regionID.split("-")[0]
+      return regionData.state || regionID.split(subregionSeparator)[0]
 
       case "district":
-      return regionData.district || regionID.split("-")[1]
+      return regionData.district || regionID.split(subregionSeparator)[1]
 
       case "partyID":
       return candidateNameToPartyIDs[candidateName]
@@ -2968,7 +2984,7 @@ function createHouseMapSources()
 
       var boundingBox = $("#svgdata")[0].getBBox()
 
-      var districtCount = Object.keys(mapDateData).length - (Object.keys(mapDateData).some(regionID => regionID.endsWith("-" + statePopularVoteDistrictID)) ? 1 : 0)
+      var districtCount = Object.keys(mapDateData).length - (Object.keys(mapDateData).some(regionID => regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) ? 1 : 0)
 
       var districtBoxSize = Math.max(boundingBox.width, boundingBox.height)*0.07
       var districtBoxPadding = districtBoxSize/5
@@ -2985,7 +3001,7 @@ function createHouseMapSources()
       var outlineGroupHTML = ""
       outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " " + noInteractSVGRegionAttribute + " " + noCountSVGRegionAttribute + " fill='gray' fill-opacity='0.7' width='" + ((districtBoxLineCount == 1 ? itemsOnLastLine : districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' height='" + (Math.ceil(districtCount/districtBoxesPerLine)*(districtBoxSize+districtBoxPadding)+districtBoxPadding) + "' x='" + (startingX-districtBoxPadding+(districtBoxLineCount == 1 ? lastLineXOffset : 0)) + "' y='" + (startingY-districtBoxPadding) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "'></rect>"
       Object.keys(mapDateData).forEach((regionID, i) => {
-        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { return }
+        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { return }
 
         var districtBoxLineOn = Math.floor(i/districtBoxesPerLine)
         outlineGroupHTML += "<rect " + isDistrictBoxRegionAttribute + " id='" + regionID + "' width='" + districtBoxSize + "' height='" + districtBoxSize + "' x='" + (startingX + i%districtBoxesPerLine*(districtBoxSize+districtBoxPadding) + (districtBoxLineOn == districtBoxLineCount-1 ? lastLineXOffset : 0)) + "' y='" + (startingY + districtBoxLineOn*(districtBoxSize+districtBoxPadding)) + "' rx='" + districtBoxCornerRadius + "' ry='" + districtBoxCornerRadius  + "' ></rect>"
@@ -3008,7 +3024,7 @@ function createHouseMapSources()
 
     for (let regionID in mapDateData)
     {
-      if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+      if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
       var regionData = mapDateData[regionID]
 
@@ -3034,7 +3050,7 @@ function createHouseMapSources()
 
     for (let regionID in housePerStateMapData)
     {
-      var partyVoteSplitData = cloneObject(housePerStateMapData[regionID].voteSplits)
+      var partyVoteSplitData = housePerStateMapData[regionID].voteSplits
       partyVoteSplitData.sort((partyVote1, partyVote2) => partyVote2.votes-partyVote1.votes)
 
       var largestPartyCount = partyVoteSplitData[0].votes
@@ -3094,15 +3110,28 @@ function createHouseMapSources()
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
+    (regionID) => {
+      if (!regionID.includes(subregionSeparator)) { return regionID }
+
+      let state = regionID.split(subregionSeparator)[0]
+      let districtNumber = regionID.split(subregionSeparator)[1]
+
+      if (districtNumber == "0")
+      {
+        districtNumber = "AL"
+      }
+
+      return state + "-" + districtNumber
+    }, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
       if (mapDate == null) { return }
 
       var districtNumber
-      if (regionID != null && regionID.includes("-"))
+      if (regionID != null && regionID.includes(subregionSeparator))
       {
-        districtNumber = regionID.split("-")[1]
-        regionID = regionID.split("-")[0]
+        districtNumber = regionID.split(subregionSeparator)[1]
+        regionID = regionID.split(subregionSeparator)[0]
       }
 
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_House_of_Representatives_elections"
@@ -3172,13 +3201,14 @@ function createHouseMapSources()
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     function(displayRegionData, mapDateData)
     {
       for (let regionID in displayRegionData)
       {
-        if (!regionID.includes("-")) { continue }
-        if (regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+        if (!regionID.includes(subregionSeparator)) { continue }
+        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
         let regionData = displayRegionData[regionID]
         regionData.region = regionID

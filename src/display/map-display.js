@@ -36,6 +36,8 @@ const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 const nationalPopularVoteID = "NPV"
 const statePopularVoteDistrictID = "PV"
 
+const subregionSeparator = "__"
+
 var displayRegionDataArray
 const regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
 
@@ -235,7 +237,7 @@ function loadMapSVGFile()
         {
           for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
           {
-            var splitArray = districtPath.id.split("-")
+            var splitArray = districtPath.id.split(subregionSeparator)
             if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
             {
               districtPath.remove()
@@ -1137,7 +1139,7 @@ function leftClickRegion(div)
   {
     var regionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
-    currentMapZoomRegion = regionID.includes("-") ? regionID.split("-")[0] : regionID
+    currentMapZoomRegion = regionID.includes(subregionSeparator) ? regionID.split(subregionSeparator)[0] : regionID
 
     displayDataMap()
   }
@@ -1466,7 +1468,7 @@ function getPartyTotals(includeFlipData)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
     var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
 
@@ -1541,9 +1543,9 @@ function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopula
   {
     popularVoteData = regionDataArray[nationalPopularVoteID]
   }
-  if (!enforceNationalPopularVote && currentViewingState == ViewingState.zooming && currentMapZoomRegion && currentMapZoomRegion + "-" + statePopularVoteDistrictID in regionDataArray && regionDataArray[currentMapZoomRegion + "-" + statePopularVoteDistrictID].partyID != TossupParty.getID())
+  if (!enforceNationalPopularVote && currentViewingState == ViewingState.zooming && currentMapZoomRegion && currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID in regionDataArray && regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID].partyID != TossupParty.getID())
   {
-    popularVoteData = regionDataArray[currentMapZoomRegion + "-" + statePopularVoteDistrictID]
+    popularVoteData = regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID]
   }
 
   if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
@@ -1662,7 +1664,7 @@ async function updateRegionBox(regionID)
 
     const districtsPerLine = 3
 
-    Object.keys(zoomingData).filter(districtID => !districtID.endsWith("-" + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
+    Object.keys(zoomingData).filter(districtID => !districtID.endsWith(subregionSeparator + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
       if (i % districtsPerLine == 0 && i != 0)
       {
         regionMarginString += "<br></div>"
@@ -1677,7 +1679,7 @@ async function updateRegionBox(regionID)
         regionMarginString += "&nbsp;&nbsp;"
       }
 
-      var districtNumber = districtID.split("-")[1]
+      var districtNumber = districtID.split(subregionSeparator)[1]
       var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
       var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
@@ -1685,9 +1687,13 @@ async function updateRegionBox(regionID)
     })
   }
 
-  //Couldn't get safe colors to look good
-  // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#regionbox").html((getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+  var formattedRegionID = (getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID)
+  if (currentMapSource.getFormattedRegionName)
+  {
+    formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID)
+  }
+
+  $("#regionbox").html(formattedRegionID + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
 
   updateRegionBoxYPosition()
 }

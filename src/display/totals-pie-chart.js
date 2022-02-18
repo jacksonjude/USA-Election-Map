@@ -426,7 +426,7 @@ function updateTotalsPieChart(regionDataArray)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID || regionID.endsWith("-" + statePopularVoteDistrictID)) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
     var regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
