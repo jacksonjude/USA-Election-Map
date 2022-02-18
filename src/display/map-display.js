@@ -722,6 +722,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
     regionData.flip = currentMapDataForDate[regionNum].flip
     regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
+    regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }

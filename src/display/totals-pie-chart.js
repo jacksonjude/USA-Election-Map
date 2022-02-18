@@ -445,8 +445,8 @@ function updateTotalsPieChart(regionDataArray)
 
     var regionMargin = regionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
-    var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) || regionDataArray[regionID].voteWorth
+    var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {

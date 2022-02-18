@@ -2166,6 +2166,10 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/7/2000,HI,Maui,Bush,republican,12876,39248
 11/7/2000,HI,Maui,Nader,green,2499,39248
 11/7/2000,HI,Maui,Other,other,389,39248
+11/7/2000,HI,Kalawao,Gore,democrat,23484,39248
+11/7/2000,HI,Kalawao,Bush,republican,12876,39248
+11/7/2000,HI,Kalawao,Nader,green,2499,39248
+11/7/2000,HI,Kalawao,Other,other,389,39248
 11/7/2000,ID,Ada,Gore,democrat,40650,123485
 11/7/2000,ID,Ada,Bush,republican,75050,123485
 11/7/2000,ID,Ada,Nader,green,4846,123485
@@ -14171,6 +14175,9 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/2/2004,HI,Maui,Kerry,democrat,28803,47430
 11/2/2004,HI,Maui,Bush,republican,18187,47430
 11/2/2004,HI,Maui,Other,other,440,47430
+11/2/2004,HI,Kalawao,Kerry,democrat,28803,47430
+11/2/2004,HI,Kalawao,Bush,republican,18187,47430
+11/2/2004,HI,Kalawao,Other,other,440,47430
 11/2/2004,ID,Ada,Kerry,democrat,58523,155002
 11/2/2004,ID,Ada,Bush,republican,94641,155002
 11/2/2004,ID,Ada,Other,other,1838,155002
@@ -23580,6 +23587,8 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/4/2008,HI,Maui,Obama,democrat,39727,51789
 11/4/2008,HI,Maui,McCain,republican,11154,51789
 11/4/2008,HI,Maui,Other,other,908,51789
+11/4/2008,HI,Kalawao,Obama,democrat,24,31
+11/4/2008,HI,Kalawao,McCain,republican,7,31
 11/4/2008,ID,Ada,Obama,democrat,82236,179402
 11/4/2008,ID,Ada,McCain,republican,93328,179402
 11/4/2008,ID,Ada,Other,other,3838,179402
@@ -33018,6 +33027,8 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/6/2012,HI,Maui,Obama,democrat,36052,48653
 11/6/2012,HI,Maui,Romney,republican,11602,48653
 11/6/2012,HI,Maui,Other,other,999,48653
+11/6/2012,HI,Kalawao,Obama,democrat,25,27
+11/6/2012,HI,Kalawao,McCain,republican,2,27
 11/6/2012,ID,Ada,Obama,democrat,77137,180546
 11/6/2012,ID,Ada,Romney,republican,97554,180546
 11/6/2012,ID,Ada,Other,other,5855,180546
@@ -40827,9 +40838,9 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/8/2016,AK,Juneau,Trump,republican,5801.333645,16861.64197
 11/8/2016,AK,Juneau,Clinton,democrat,8974.341731,16861.64197
 11/8/2016,AK,Juneau,Johnson,libertarian,1008.214398,16861.64197
-11/8/2016,AK,Valdez-Cordova,Trump,republican,2795.51,2826.223321
-11/8/2016,AK,Valdez-Cordova,Clinton,democrat,1375.12,2826.223321
-11/8/2016,AK,Valdez-Cordova,Johnson,libertarian,336.3188002,2826.223321
+11/8/2016,AK,Valdez-Cordova,Trump,republican,2795.51,4875.57
+11/8/2016,AK,Valdez-Cordova,Clinton,democrat,1375.12,4875.57
+11/8/2016,AK,Valdez-Cordova,Johnson,libertarian,336.3188002,4875.57
 11/8/2016,AK,Haines,Trump,republican,576.416343,1375.575772
 11/8/2016,AK,Haines,Clinton,democrat,592.5148717,1375.575772
 11/8/2016,AK,Haines,Johnson,libertarian,47.04779876,1375.575772
@@ -42456,6 +42467,9 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/8/2016,HI,Maui,Clinton,democrat,33480,51945
 11/8/2016,HI,Maui,Trump,republican,13446,51945
 11/8/2016,HI,Maui,Other,other,5019,51945
+11/8/2016,HI,Kalawao,Clinton,democrat,14,20
+11/8/2016,HI,Kalawao,Trump,republican,1,20
+11/8/2016,HI,Kalawao,Stein,green,5,20
 11/8/2016,ID,Ada,Clinton,democrat,75677,195669
 11/8/2016,ID,Ada,Trump,republican,93752,195669
 11/8/2016,ID,Ada,Other,other,26240,195669
@@ -55187,6 +55201,8 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/3/2020,HI,Maui,Jorgensen,libertarian,772,71044
 11/3/2020,HI,Maui,Other,other,256,71044
 11/3/2020,HI,Maui,Trump,republican,22126,71044
+11/3/2020,HI,Kalawao,Biden,democrat,23,24
+11/3/2020,HI,Kalawao,Trump,republican,1,24
 11/3/2020,ID,Ada,Biden,democrat,120539,259389
 11/3/2020,ID,Ada,Jorgensen,libertarian,5310,259389
 11/3/2020,ID,Ada,Other,other,2841,259389

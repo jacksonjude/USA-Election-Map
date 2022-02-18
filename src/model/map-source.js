@@ -1698,6 +1698,7 @@ function createPresidentialMapSources()
         if (mapDateData[regionID].state == currentMapZoomRegion)
         {
           countyZoomData[regionID] = mapDateData[regionID]
+          countyZoomData[regionID].voteWorth = 1
         }
       }
       return countyZoomData
@@ -1713,12 +1714,12 @@ function createPresidentialMapSources()
     }, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
-      if (mapDate == null) { return }
+      if (mapDate == null || !regionID.includes(subregionSeparator)) { return }
 
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_presidential_election"
       if (!shouldOpenHomepage)
       {
-        linkToOpen += "_in_" + regionIDToLinkMap[regionID]
+        linkToOpen += "_in_" + regionIDToLinkMap[regionID.split(subregionSeparator)[0]]
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
