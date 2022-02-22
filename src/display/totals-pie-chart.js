@@ -604,7 +604,7 @@ function updateTotalsPieChart(regionDataArray)
   totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
   var popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
-  var showingPopularVote = popularVoteData && currentMapType.getMapSettingValue("piePopularVote")
+  var showingPopularVote = popularVoteData && (currentMapType.getMapSettingValue("piePopularVote") || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
   if (showingPopularVote)
   {
     var sortedPopularVoteArray = []

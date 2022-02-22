@@ -1075,9 +1075,12 @@ async function toggleEditing(stateToSet)
   updatePartyDropdownVisibility()
 }
 
-function leftClickRegion(div)
+async function leftClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing && (!currentMapSource.canZoom() || currentViewingState == ViewingState.zooming))
+  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+  var canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+
+  if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
   {
     if (ignoreNextClick)
     {
@@ -1139,7 +1142,7 @@ function leftClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals(getPartyTotals())
   }
-  else if (currentMapSource.canZoom() && currentViewingState == ViewingState.viewing && showingDataMap)
+  else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
   {
     var regionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
@@ -1153,9 +1156,12 @@ function leftClickRegion(div)
   }
 }
 
-function rightClickRegion(div)
+async function rightClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing && (!currentMapSource.canZoom() || currentViewingState == ViewingState.zooming))
+  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+  var canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+
+  if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
@@ -1593,8 +1599,9 @@ function getCurrentDateOrToday()
 
 async function updateRegionBox(regionID)
 {
+  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
   var regionData = getRegionData(regionID).regionData
-  let canZoomCurrently = currentMapSource.canZoom(currentMapDataForDate)
+  let canZoomCurrently = await currentMapSource.canZoom()
 
   if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently) || regionData.disabled == true)
   {
@@ -1651,8 +1658,6 @@ async function updateRegionBox(regionID)
     regionMarginString += "</div>"
   }
 
-  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
   {
     let voteSplitDataToDisplay = regionData.voteSplits
@@ -1665,30 +1670,32 @@ async function updateRegionBox(regionID)
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && currentSliderDate && currentMapSource.getMapData())
   {
     var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+    if (zoomingData)
+    {
+      const districtsPerLine = 3
 
-    const districtsPerLine = 3
+      Object.keys(zoomingData).filter(districtID => !districtID.endsWith(subregionSeparator + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
+        if (i % districtsPerLine == 0 && i != 0)
+        {
+          regionMarginString += "<br></div>"
+        }
+        if (i % districtsPerLine == 0)
+        {
+          var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
+          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
+        }
+        if (i % districtsPerLine > 0)
+        {
+          regionMarginString += "&nbsp;&nbsp;"
+        }
 
-    Object.keys(zoomingData).filter(districtID => !districtID.endsWith(subregionSeparator + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
-      if (i % districtsPerLine == 0 && i != 0)
-      {
-        regionMarginString += "<br></div>"
-      }
-      if (i % districtsPerLine == 0)
-      {
-        var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
-        regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
-      }
-      if (i % districtsPerLine > 0)
-      {
-        regionMarginString += "&nbsp;&nbsp;"
-      }
+        var districtNumber = districtID.split(subregionSeparator)[1]
+        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
+        var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
-      var districtNumber = districtID.split(subregionSeparator)[1]
-      var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
-      var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
-
-      regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
-    })
+        regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
+      })
+    }
   }
 
   var formattedRegionID = (getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID)

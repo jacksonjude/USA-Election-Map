@@ -448,13 +448,14 @@ var clickUsedToZoom = false
 
 var currentMouseY
 
-document.addEventListener('mousedown', function() {
+document.addEventListener('mousedown', async function() {
   if (currentEditingState == EditingState.editing)
   {
     startRegionID = currentRegionID
     mouseIsDown = true
 
-    if (currentMapSource.canZoom() && currentViewingState == ViewingState.viewing)
+    var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+    if (await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing)
     {
       clickUsedToZoom = true
     }

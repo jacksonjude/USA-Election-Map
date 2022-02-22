@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom)
   {
     this.id = id
     this.name = name
@@ -34,6 +34,7 @@ class MapSource
     this.overrideSVGPath = overrideSVGPath
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
     this.shouldUseOriginalMapDataForTotalsPieChart = shouldUseOriginalMapDataForTotalsPieChart == null ? false : shouldUseOriginalMapDataForTotalsPieChart
+    this.shouldForcePopularVoteDisplayOnZoom = shouldForcePopularVoteDisplayOnZoom == null ? false : shouldForcePopularVoteDisplayOnZoom
   }
 
   // id,
@@ -64,6 +65,7 @@ class MapSource
   // overrideSVGPath,
   // shouldSetDisabledWorthToZero
   // shouldUseOriginalMapDataForTotalsPieChart
+  // shouldForcePopularVoteDisplayOnZoom
 
   loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
@@ -331,9 +333,9 @@ class MapSource
     return this.splitVoteDataFunction(mapDateData)
   }
 
-  canZoom(mapDateData)
+  async canZoom(mapDateData)
   {
-    return this.zoomingDataFunction != null && (!mapDateData || this.zoomingDataFunction(mapDateData) != null)
+    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData) != null)
   }
 
   openRegionLink(regionID, modelDate)
@@ -436,6 +438,11 @@ class MapSource
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
     return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
+  }
+
+  getShouldForcePopularVoteDisplayOnZoom()
+  {
+    return this.shouldForcePopularVoteDisplayOnZoom
   }
 
   getDropdownPartyIDs()
@@ -1511,6 +1518,7 @@ function createPresidentialMapSources()
       await CountyElectionResultMapSource.loadMap()
     }
     let mapDateData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
+    if (mapDateData == null) { return null }
 
     let countyZoomData = {}
     for (let regionID in mapDateData)
@@ -1562,7 +1570,7 @@ function createPresidentialMapSources()
     countyZoomingDataFunction, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
     (regionID) => {
-      if (!regionID.includes(subregionSeparator)) { return regionID }
+      if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
 
       let state = regionID.split(subregionSeparator)[0]
       let county = regionID.split(subregionSeparator)[1].replace(/_s$/, "'s").replaceAll("_", " ")
@@ -1573,7 +1581,7 @@ function createPresidentialMapSources()
     {
       if (mapDate == null) { return }
 
-      if (regionID.includes(subregionSeparator))
+      if (regionID && regionID.includes(subregionSeparator))
       {
         regionID = regionID.split(subregionSeparator)[0]
       }
@@ -1591,7 +1599,10 @@ function createPresidentialMapSources()
     null, // shouldClearDisabled
     true, // shouldShowVoteshare
     1.0, // voteshareCutoffMargin
-    getPresidentialSVGFromDate // overrideSVGPath
+    getPresidentialSVGFromDate, // overrideSVGPath
+    null, // shouldSetDisabledWorthToZero
+    null, // shouldUseOriginalMapDataForTotalsPieChart
+    true // shouldForcePopularVoteDisplayOnZoom
   )
 
   var HistoricalElectionResultMapSource = new MapSource(
@@ -1800,7 +1811,7 @@ function createPresidentialMapSources()
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
-    null, // zoomingDataFunction
+    countyZoomingDataFunction, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
@@ -3407,7 +3418,7 @@ function createHouseMapSources()
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
     (regionID) => {
-      if (!regionID.includes(subregionSeparator)) { return regionID }
+      if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
 
       let state = regionID.split(subregionSeparator)[0]
       let districtNumber = regionID.split(subregionSeparator)[1]
