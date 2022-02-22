@@ -1474,7 +1474,7 @@ function getPartyTotals(includeFlipData)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) || regionDataArray[regionID].voteWorth
 
     if (currentViewingState != ViewingState.splitVote)
     {
@@ -1653,7 +1653,7 @@ async function updateRegionBox(regionID)
 
   var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
 
-  if (regionData.voteSplits && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
   {
     let voteSplitDataToDisplay = regionData.voteSplits
     regionMarginString = "</span>"
@@ -1662,7 +1662,7 @@ async function updateRegionBox(regionID)
     })
   }
 
-  if (regionData.voteSplits && canZoomCurrently && currentSliderDate && currentMapSource.getMapData())
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && currentSliderDate && currentMapSource.getMapData())
   {
     var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
 

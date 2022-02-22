@@ -1447,6 +1447,19 @@ function createPresidentialMapSources()
 
   var getPresidentialSVGFromDate = function(dateTime)
   {
+    if (currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
+    {
+      if (currentMapZoomRegion.includes("-"))
+      {
+        let stateID = currentMapZoomRegion.split("-")[0]
+        if (stateID == "NE" || stateID == "ME")
+        {
+          currentMapZoomRegion = stateID
+        }
+      }
+      return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+    }
+
     var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear < 1820)
     {
@@ -1502,6 +1515,33 @@ function createPresidentialMapSources()
     return voteSplitMapDateData
   }
 
+  var countyZoomingDataFunction = async (presidentialMapDateData) => {
+    if (!CountyElectionResultMapSource.getMapData() || !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID())))
+    {
+      await CountyElectionResultMapSource.loadMap()
+    }
+    let mapDateData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
+
+    let countyZoomData = {}
+    for (let regionID in mapDateData)
+    {
+      if (mapDateData[regionID].state == currentMapZoomRegion)
+      {
+        countyZoomData[regionID] = mapDateData[regionID]
+        countyZoomData[regionID].voteWorth = 1
+      }
+    }
+
+    let popularVoteRegionIDToUse = currentMapZoomRegion
+    if (popularVoteRegionIDToUse == "NE" || popularVoteRegionIDToUse == "ME")
+    {
+      popularVoteRegionIDToUse += "-AL"
+    }
+    countyZoomData[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID] = presidentialMapDateData[popularVoteRegionIDToUse]
+
+    return countyZoomData
+  }
+
   var PastElectionResultMapSource = new MapSource(
     "Past-Presidential-Elections", // id
     "Past Elections", // name
@@ -1526,14 +1566,29 @@ function createPresidentialMapSources()
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
-    doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+    (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin) => {
+      CountyElectionResultMapSource.loadMap()
+      return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin)
+    }, // organizeMapDataFunction
     null, // viewingDataFunction
-    null, // zoomingDataFunction
+    countyZoomingDataFunction, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
-    null, // getFormattedRegionName
+    (regionID) => {
+      if (!regionID.includes(subregionSeparator)) { return regionID }
+
+      let state = regionID.split(subregionSeparator)[0]
+      let county = regionID.split(subregionSeparator)[1].replace(/_s$/, "'s").replaceAll("_", " ")
+
+      return county + ", " + state
+    }, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
       if (mapDate == null) { return }
+
+      if (regionID.includes(subregionSeparator))
+      {
+        regionID = regionID.split(subregionSeparator)[0]
+      }
 
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_presidential_election"
       if (!shouldOpenHomepage)
@@ -1800,7 +1855,7 @@ function createPresidentialMapSources()
   presidentialMapSources[CountyElectionResultMapSource.getID()] = CountyElectionResultMapSource
   presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CountyElectionResultMapSource.getID()]
+  var presidentialMapSourceIDs = [FiveThirtyEightPollAverageMapSource.getID(), FiveThirtyEightProjectionMapSource.getID(), CookProjectionMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID()]
   if (USAPresidentialMapType.getCustomMapEnabled())
   {
     presidentialMapSourceIDs.push(CustomMapSource.getID())
