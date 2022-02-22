@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, incumbentChallengerPartyIDs, regionNameToIDMap, ev2016, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart)
   {
     this.id = id
     this.name = name
@@ -11,9 +11,7 @@ class MapSource
     this.cycleYear = cycleYear
     this.candidateNameToPartyIDMap = candidateNameToPartyIDMap && this.cycleYear ? candidateNameToPartyIDMap[this.cycleYear] : candidateNameToPartyIDMap
     this.shortCandidateNameOverride = shortCandidateNameOverride && this.cycleYear ? shortCandidateNameOverride[this.cycleYear] : shortCandidateNameOverride
-    this.incumbentChallengerPartyIDs = incumbentChallengerPartyIDs
     this.regionNameToIDMap = regionNameToIDMap
-    this.ev2016 = ev2016
     this.regionIDToLinkMap = regionIDToLinkMap
     this.shouldFilterOutDuplicateRows = shouldFilterOutDuplicateRows
     this.addDecimalPadding = addDecimalPadding
@@ -47,9 +45,7 @@ class MapSource
   // cycleYear,
   // candidateNameToPartyIDMap,
   // shortCandidateNameOverride,
-  // incumbentChallengerPartyIDs,
   // regionNameToIDMap,
-  // ev2016,
   // regionIDToLinkMap,
   // shouldFilterOutDuplicateRows,
   // addDecimalPadding,
@@ -103,7 +99,7 @@ class MapSource
 
       self.setDateRange(self)
 
-      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.incumbentChallengerPartyIDs, self.regionNameToIDMap, self.ev2016, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin)
+      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.regionNameToIDMap, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin)
       self.mapData = filterMapDataCallback.mapData
 
       if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
@@ -643,7 +639,7 @@ const currentCycleYear = 2020
 
 function createPresidentialMapSources()
 {
-  var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID)
+  var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID)
   {
     var filteredMapData = {}
 
@@ -689,7 +685,7 @@ function createPresidentialMapSources()
           challengerWinChance = columnMap.challengerWinChance ? regionRow[columnMap.challengerWinChance] : null
         }
 
-        var greaterMarginPartyID = (Math.sign(margin) == 0 ? null : (Math.sign(margin) == -1 ? partyIDs.challenger : partyIDs.incumbent))
+        var greaterMarginPartyID = (Math.sign(margin) == 0 ? null : (Math.sign(margin) == -1 ? incumbentChallengerPartyIDs.challenger : incumbentChallengerPartyIDs.incumbent))
 
         var partyIDToCandidateNames = {}
         for (var partyCandidateName in candidateNameToPartyIDMap)
@@ -706,7 +702,7 @@ function createPresidentialMapSources()
     return {mapData: filteredMapData}
   }
 
-  var doubleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, partyIDs, regionNameToID, ev2016, shouldFilterOutDuplicateRows)
+  var doubleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, shouldFilterOutDuplicateRows)
   {
     var filteredMapData = {}
     var candidateNameData = {}
@@ -748,7 +744,7 @@ function createPresidentialMapSources()
         var marginSum = 0
         if (mapDataRows.length <= 0 && ev2016)
         {
-          marginSum = ev2016[regionNameToID[regionToFind]] == partyIDs.challenger ? -100 : 100
+          marginSum = ev2016[regionNameToID[regionToFind]] == incumbentChallengerPartyIDs.challenger ? -100 : 100
         }
 
         var incumbentWinChance
@@ -791,12 +787,12 @@ function createPresidentialMapSources()
             candidateNameData[mapDates[dateNum]][partyID] = candidateNameToAdd
           }
 
-          if (partyID == partyIDs.incumbent)
+          if (partyID == incumbentChallengerPartyIDs.incumbent)
           {
             marginSum += parseFloat(mapDataRows[rowNum][columnMap.percentAdjusted])
             incumbentWinChance = columnMap.winChance ? mapDataRows[rowNum][columnMap.winChance] : null
           }
-          else if (partyID == partyIDs.challenger)
+          else if (partyID == incumbentChallengerPartyIDs.challenger)
           {
             marginSum -= parseFloat(mapDataRows[rowNum][columnMap.percentAdjusted])
             challengerWinChance = columnMap.winChance ? mapDataRows[rowNum][columnMap.winChance] : null
@@ -812,14 +808,14 @@ function createPresidentialMapSources()
         challengerWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? challengerWinChance/100 : challengerWinChance
         incumbentWinChance = (incumbentWinChance > 1 || challengerWinChance > 1) ? incumbentWinChance/100 : incumbentWinChance
 
-        var greaterMarginPartyID = partyIDs.tossup
+        var greaterMarginPartyID = incumbentChallengerPartyIDs.tossup
         if (Math.sign(marginSum) == -1)
         {
-          greaterMarginPartyID = partyIDs.challenger
+          greaterMarginPartyID = incumbentChallengerPartyIDs.challenger
         }
         else if (Math.sign(marginSum) == 1)
         {
-          greaterMarginPartyID = partyIDs.incumbent
+          greaterMarginPartyID = incumbentChallengerPartyIDs.incumbent
         }
 
         var compactPartyVotesharePercentages
@@ -878,7 +874,7 @@ function createPresidentialMapSources()
     return {mapData: filteredMapData, candidateNameData: candidateNameData}
   }
 
-  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin)
+  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, ____, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -1058,7 +1054,7 @@ function createPresidentialMapSources()
     return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
   }
 
-  var countyVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, ___, regionNameToID, ____, _____, isCustomMap, voteshareCutoffMargin)
+  var countyVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, _____, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -1366,9 +1362,7 @@ function createPresidentialMapSources()
     2020, // cycleYear
     partyCandiateFullNames, // candidateNameToPartyIDMap
     partyIDToCandidateLastNames, // shortCandidateNameOverride
-    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
     regionNameToIDFiveThirtyEight, // regionNameToIDMap
-    ev2016, // ev2016
     {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1397,9 +1391,7 @@ function createPresidentialMapSources()
     2020, // cycleYear
     partyCandiateLastNames, // candidateNameToPartyIDMap
     partyIDToCandidateLastNames, // shortCandidateNameOverride
-    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
     regionNameToIDFiveThirtyEight, // regionNameToIDMap
-    ev2016, // ev2016
     {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1426,9 +1418,7 @@ function createPresidentialMapSources()
     2020, // cycleYear
     partyCandiateLastNames, // candidateNameToPartyIDMap
     partyIDToCandidateLastNames, // shortCandidateNameOverride
-    incumbentChallengerPartyIDs, // incumbentChallengerPartyIDs
     regionNameToIDCook, // regionNameToIDMap
-    ev2016, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -1560,9 +1550,7 @@ function createPresidentialMapSources()
     null, // cycleYear
     electionYearToCandidateData, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1624,9 +1612,7 @@ function createPresidentialMapSources()
     null, // cycleYear
     electionYearToCandidateData, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    ev2016, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1684,9 +1670,7 @@ function createPresidentialMapSources()
     null, // cycleYear
     electionYearToCandidateData, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDCounty, // regionNameToIDMap
-    null, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1746,18 +1730,7 @@ function createPresidentialMapSources()
 
       return countiesPerStateMapData
     }, // viewingDataFunction
-    (mapDateData) => {
-      let countyZoomData = {}
-      for (let regionID in mapDateData)
-      {
-        if (mapDateData[regionID].state == currentMapZoomRegion)
-        {
-          countyZoomData[regionID] = mapDateData[regionID]
-          countyZoomData[regionID].voteWorth = 1
-        }
-      }
-      return countyZoomData
-    }, // zoomingDataFunction
+    countyZoomingDataFunction, // zoomingDataFunction
     null, // splitVoteDataFunction
     (regionID) => {
       if (!regionID.includes(subregionSeparator)) { return regionID }
@@ -1821,9 +1794,7 @@ function createPresidentialMapSources()
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
     idsToPartyNames, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDCustom, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -1887,7 +1858,7 @@ function createSenateMapSources()
     /* National Popular Vote */ "NPV": [1]
   }
 
-  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin)
+  var doubleLineClassSeparatedFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, ____, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -2249,9 +2220,7 @@ function createSenateMapSources()
     2022, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -2306,9 +2275,7 @@ function createSenateMapSources()
     2022, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -2360,9 +2327,7 @@ function createSenateMapSources()
     2022, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -2403,9 +2368,7 @@ function createSenateMapSources()
     null, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -2484,9 +2447,7 @@ function createSenateMapSources()
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
     idsToPartyNames, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -2533,7 +2494,7 @@ function createGovernorMapSources()
 {
   const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":"NPV"}
 
-  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin)
+  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, ____, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -2830,9 +2791,7 @@ function createGovernorMapSources()
     null, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -2890,9 +2849,7 @@ function createGovernorMapSources()
     null, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     false, // addDecimalPadding
@@ -2928,9 +2885,7 @@ function createGovernorMapSources()
     null, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToID
-    null, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -2998,9 +2953,7 @@ function createGovernorMapSources()
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
     idsToPartyNames, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -3046,7 +2999,7 @@ function createHouseMapSources()
 {
   const regionNameToIDHistorical = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", "NPV":"NPV"}
 
-  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, ___, regionNameToID, ____, _____, isCustomMap, voteshareCutoffMargin)
+  var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, _____, isCustomMap, voteshareCutoffMargin)
   {
     var filteredMapData = {}
     var partyNameData = {}
@@ -3445,9 +3398,7 @@ function createHouseMapSources()
     null, // cycleYear
     null, // candidateNameToPartyIDMap
     null, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToID
-    null, // ev2016
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
@@ -3536,9 +3487,7 @@ function createHouseMapSources()
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
     idsToPartyNames, // shortCandidateNameOverride
-    null, // incumbentChallengerPartyIDs
     regionNameToIDHistorical, // regionNameToIDMap
-    null, // ev2016
     null, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
