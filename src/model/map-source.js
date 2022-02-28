@@ -3274,6 +3274,10 @@ function createHouseMapSources()
       {
         return ["svg-sources/usa-house-2002-map.svg", zoomRegion]
       }
+      else if (dateYear >= 1992)
+      {
+        return ["svg-sources/usa-house-1992-map.svg", zoomRegion]
+      }
     }
 
     return ["svg-sources/usa-governor-map.svg", zoomRegion, true, (mapDateData) => {
