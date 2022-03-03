@@ -8,6 +8,10 @@ var mapRegionNameToID = currentMapType.getRegionNameToID()
 
 var currentMapSource = NullMapSource
 
+var currentDisplayDate
+var displayMapQueue = []
+var isRunningDisplayMapQueue = false
+
 var selectedParty
 
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
@@ -206,62 +210,82 @@ async function reloadForNewMapType(initialLoad)
   }
 }
 
-function loadMapSVGFile()
+function loadMapSVGFile(handleNewSVG)
 {
   var loadSVGFilePromise = new Promise((resolve) => {
     $("#svgdata").css('opacity', "0")
     $("#mapCloseButton").hide()
 
-    var handleNewSVG = () => {
-      $("#svgdata").css('opacity', "1")
+    handleNewSVG = handleNewSVG || async function(resolve, svgPath) {
+      $("#mapzoom").empty()
+      $("#mapzoom-preload").children().appendTo($("#mapzoom"))
 
-      setOutlineDivProperties()
-      updateMapElectoralVoteText()
-
-      if (currentMapType.getMapSettingValue("flipStates"))
-      {
-        generateFlipPatternsFromPartyMap(politicalParties)
-      }
-
-      resolve()
-    }
-
-    currentMapType.loadSVG((svgPath) => {
       if (svgPath instanceof Array)
       {
-        var stateToShow = svgPath[1]
-        if (stateToShow != null)
-        {
-          for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
-          {
-            var splitArray = districtPath.id.split("-")
-            if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
-            {
-              districtPath.remove()
-            }
-          }
-
-          $("#text").remove()
-        }
-
-        $("#mapCloseButton").show()
-
-        setTimeout(() => {
-          var svgDataBoundingBox = $("#svgdata")[0].getBBox()
-          $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
-          $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
-
-          handleNewSVG()
-        }, 0)
+        await handleSVGZooming(resolve, svgPath, handleNewSVGFields)
       }
       else
       {
-        handleNewSVG()
+        handleNewSVGFields(resolve)
       }
+    }
+
+    currentMapType.loadSVG((svgPath) => {
+      handleNewSVG(resolve, svgPath)
     })
   })
 
   return loadSVGFilePromise
+}
+
+function handleNewSVGFields(resolve)
+{
+  $("#svgdata").css('opacity', "1")
+
+  setOutlineDivProperties()
+  updateMapElectoralVoteText()
+
+  if (currentMapType.getMapSettingValue("flipStates"))
+  {
+    generateFlipPatternsFromPartyMap(politicalParties)
+  }
+
+  resolve()
+}
+
+async function handleSVGZooming(resolve, svgPath, handleNewSVG)
+{
+  var handleSVGZoomingPromise = new Promise((innerResolve) => {
+    var stateToShow = svgPath[1]
+    if (stateToShow != null)
+    {
+      for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
+      {
+        var splitArray = districtPath.id.split("-")
+        if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
+        {
+          districtPath.remove()
+        }
+      }
+
+      $("#text").remove()
+    }
+
+    $("#mapCloseButton").show()
+
+    setTimeout(() => {
+      var svgDataBoundingBox = $("#svgdata")[0].getBBox()
+      $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
+      $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+
+      handleNewSVG(() => {
+        innerResolve()
+        resolve()
+      }, svgPath)
+    }, 0)
+  })
+
+  return handleSVGZoomingPromise
 }
 
 function setOutlineDivProperties()
@@ -616,24 +640,31 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
+async function executeDisplayMapQueue()
+{
+  if (isRunningDisplayMapQueue) { return }
+
+  isRunningDisplayMapQueue = true
+
+  while (displayMapQueue.length > 0)
+  {
+    await displayDataMap(displayMapQueue[0][0], displayMapQueue[0][1])
+    displayMapQueue.splice(-1, 1)
+  }
+
+  isRunningDisplayMapQueue = false
+}
+
 async function displayDataMap(dateIndex, reloadPartyDropdowns)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
   var mapDates = currentMapSource.getMapDates()
-  var dateToDisplay
-  var overrideDateString
-  if (dateIndex-1 > mapDates.length-1)
-  {
-    dateToDisplay = new Date(mapDates[dateIndex-1-1])
-    overrideDateString = "Latest (" + getDateString(dateToDisplay, "/", false, true) + ")"
-  }
-  else
-  {
-    dateToDisplay = new Date(mapDates[dateIndex-1])
-  }
+  var dateToDisplay = new Date(mapDates[dateIndex-1])
 
-  updateSliderDateDisplay(dateToDisplay, overrideDateString)
+  currentDisplayDate = dateToDisplay
+
+  updateSliderDateDisplay(dateToDisplay)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
@@ -649,9 +680,13 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     shouldReloadSVG = currentMapType.resetOverrideSVGPath()
   }
 
+  var cachedSVGPathData
   if (shouldReloadSVG)
   {
-    await loadMapSVGFile()
+    await loadMapSVGFile((resolve, svgPath) => {
+      cachedSVGPathData = svgPath
+      resolve()
+    })
   }
   var svgPathData = currentMapType.getSVGPath()
   var usedFallbackMap = svgPathData[2] || false
@@ -668,6 +703,30 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     case ViewingState.zooming:
     currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
     break
+  }
+
+  if (currentDisplayDate.getTime() != dateToDisplay.getTime())
+  {
+    console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
+
+    $("#svgdata").css('opacity', "1")
+    $("#mapzoom-preload").empty()
+
+    return
+  }
+  else if (shouldReloadSVG)
+  {
+    $("#mapzoom").empty()
+    $("#mapzoom-preload").children().appendTo($("#mapzoom"))
+
+    if (cachedSVGPathData instanceof Array)
+    {
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields)
+    }
+    else
+    {
+      handleNewSVGFields(() => {})
+    }
   }
 
   if (currentViewingState == ViewingState.zooming && usedFallbackMap)

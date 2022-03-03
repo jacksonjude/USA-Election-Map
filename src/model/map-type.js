@@ -78,13 +78,13 @@ class MapType
     let svgData = await SVGDatabase.fetchFile(svgPathID)
     if (svgData)
     {
-      $("#mapzoom").html(svgData)
+      $("#mapzoom-preload").html(svgData)
       callback(svgPath)
     }
     else
     {
-      $("#mapzoom").load(svgPathString, () => {
-        SVGDatabase.insertFile(svgPathID, $("#mapzoom").html())
+      $("#mapzoom-preload").load(svgPathString, () => {
+        SVGDatabase.insertFile(svgPathID, $("#mapzoom-preload").html())
         callback(svgPath)
       })
     }
