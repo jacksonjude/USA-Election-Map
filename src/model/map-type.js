@@ -318,12 +318,12 @@ var globalMapSettings =
       {id: "ymd", title: "YYYY/MM/DD", value: 2}
     ],
   defaultValue: "mdy", reloadType: MapSettingReloadType.display},
-  {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+  {id: "showTooltips", title: "Control Tooltips", type: MapSettingType.optionCycle, options:
     [
-      {id: "enabled", title: "Enabled", value: true},
-      {id: "disabled", title: "Disabled", value: false}
+      {id: "show", title: "Shown", value: true},
+      {id: "hide", title: "Hidden", value: false}
     ],
-  defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+  defaultValue: "show", reloadType: MapSettingReloadType.none}
 ]
 
 var currentGlobalMapSettings = {}

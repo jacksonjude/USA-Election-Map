@@ -394,8 +394,18 @@ class MapSource
     self.candidateNameData[dateToSet] = cloneObject(candidateNamesToSet)
   }
 
-  getIconURL()
+  getIconURL(shouldGetSmall)
   {
+    if (!this.iconURL) { return null }
+
+    if (!shouldGetSmall && this.iconURL.regular)
+    {
+      return this.iconURL.regular
+    }
+    if (shouldGetSmall && this.iconURL.mini)
+    {
+      return this.iconURL.mini
+    }
     return this.iconURL
   }
 
@@ -403,6 +413,11 @@ class MapSource
   {
     self = self || this
     this.iconURL = newIconURL
+  }
+
+  hasHomepageURL()
+  {
+    return this.homepageURL != null
   }
 
   getAddDecimalPadding()
@@ -1114,7 +1129,8 @@ function createPresidentialMapSources()
             var row = countyRows[rowNum]
 
             var candidateName = row[columnMap.candidateName]
-            var currentVoteshare = parseFloat(row[columnMap.candidateVotes])/parseFloat(row[columnMap.totalVotes])*100
+            var candidateVotes = parseFloat(row[columnMap.candidateVotes])
+            var currentVoteshare = candidateVotes/parseFloat(row[columnMap.totalVotes])*100
 
             var currentPartyName = row[columnMap.partyID]
             var foundParty = Object.values(politicalParties).find(party => {
@@ -1149,10 +1165,11 @@ function createPresidentialMapSources()
               }
 
               candidateData[candidateName].voteshare += currentVoteshare
+              candidateData[candidateName].votes += candidateVotes
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes}
             }
 
             totalVoteshare += currentVoteshare
@@ -1359,7 +1376,7 @@ function createPresidentialMapSources()
     "538 Poll Avg", // name
     "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv", // dataURL
     "https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
-    "./assets/fivethirtyeight-large.png", // iconURL
+    {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
     {
       date: "modeldate",
       region: "state",
@@ -1387,7 +1404,7 @@ function createPresidentialMapSources()
     "538 Projection", // name
     "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", // dataURL
     "https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
-    "./assets/fivethirtyeight-large.png", // iconURL
+    {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
     {
       date: "modeldate",
       region: "state",
@@ -1416,7 +1433,7 @@ function createPresidentialMapSources()
     "Cook Political", // name
     "./csv-sources/cook-pres-2020/cook-latest.csv", // dataURL
     "./csv-sources/cook-pres-2020/", // homepageURL
-    "./assets/cookpolitical-large.png", // iconURL
+    {regular: "./assets/cookpolitical-large.png", mini: "./assets/cookpolitical.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -1444,6 +1461,8 @@ function createPresidentialMapSources()
 
   var getPresidentialSVGFromDate = function(dateTime)
   {
+    var dateYear = (new Date(dateTime)).getFullYear()
+
     if (currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
     {
       if (currentMapZoomRegion.includes("-"))
@@ -1454,10 +1473,16 @@ function createPresidentialMapSources()
           currentMapZoomRegion = stateID
         }
       }
-      return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+      if (dateYear >= 2000)
+      {
+        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+      }
+      else
+      {
+        return ["svg-sources/usa-presidential-map.svg", currentMapZoomRegion]
+      }
     }
 
-    var dateYear = (new Date(dateTime)).getFullYear()
     if (dateYear < 1820)
     {
       return "svg-sources/usa-presidential-pre-1820-map.svg"
@@ -2215,7 +2240,7 @@ function createSenateMapSources()
     "LTE Projection", // name
     "./csv-sources/lte-2022-senate.csv", // dataURL
     "https://www.youtube.com/watch?v=", // homepageURL
-    "./assets/lte-large.png", // iconURL
+    {regular: "./assets/lte-large.png", mini: "./assets/lte.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -2270,7 +2295,7 @@ function createSenateMapSources()
     "PA Projection", // name
     "./csv-sources/pa-2022-senate.csv", // dataURL
     "https://www.youtube.com/watch?v=", // homepageURL
-    "./assets/pa-large.png", // iconURL
+    {regular: "./assets/pa-large.png", mini: "./assets/pa.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -2322,7 +2347,7 @@ function createSenateMapSources()
     "Cook Political", // name
     "./csv-sources/cook-senate-2022/cook-latest.csv", // dataURL
     "https://cookpolitical.com/ratings/senate-race-ratings/", // homepageURL
-    "./assets/cookpolitical-large.png", // iconURL
+    {regular: "./assets/cookpolitical-large.png", mini: "./assets/cookpolitical.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -2787,7 +2812,7 @@ function createGovernorMapSources()
     "LTE Projection", // name
     "./csv-sources/lte-2022-governor.csv", // dataURL
     "https://www.youtube.com/watch?v=", // homepageURL
-    "./assets/lte-large.png", // iconURL
+    {regular: "./assets/lte-large.png", mini: "./assets/lte.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -2845,7 +2870,7 @@ function createGovernorMapSources()
     "Cook Political", // name
     "./csv-sources/cook-governor-2022.csv", // dataURL
     "https://cookpolitical.com/ratings/governor-race-ratings/", // homepageURL
-    "./assets/cookpolitical-large.png", // iconURL
+    {regular: "./assets/cookpolitical-large.png", mini: "./assets/cookpolitical.png"}, // iconURL
     {
       date: "date",
       region: "region",

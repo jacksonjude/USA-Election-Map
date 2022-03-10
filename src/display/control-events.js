@@ -2,6 +2,7 @@ const shiftNumberKeycodes = ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
+var shiftKeyDown = false
 
 document.addEventListener('keydown', function(e) {
   if (!isEditingTextbox() && showingDataMap)
@@ -38,6 +39,11 @@ document.addEventListener('keydown', function(e) {
       arrowKeyTimeouts.up = setTimeout(function() { arrowKeyCycle("up") }, initialKeyPressDelay)
 
       incrementSlider("up")
+      break
+
+      case "Shift":
+      shiftKeyDown = true
+      updateRegionBox(currentRegionID)
       break
     }
   }
@@ -234,6 +240,11 @@ document.addEventListener('keyup', function(e) {
     case "ArrowUp":
     arrowKeysDown.up = 0
     clearTimeout(arrowKeyTimeouts.up)
+    break
+
+    case "Shift":
+    shiftKeyDown = false
+    updateRegionBox(currentRegionID)
     break
   }
 })

@@ -529,7 +529,8 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
 
     if (!loadedSuccessfully) { resolve(); return }
 
-    shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+    // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+    shouldSetToMax = true
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
     await displayDataMap(null, true)
@@ -810,6 +811,8 @@ function updateNavBarForNewSource(revertToDefault)
   {
     updateCompareMapSlidersVisibility(true)
   }
+
+  currentViewingState = ViewingState.viewing
 }
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
@@ -1077,8 +1080,8 @@ async function toggleEditing(stateToSet)
 
 async function leftClickRegion(div)
 {
-  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-  var canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
 
   if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
   {
@@ -1149,6 +1152,9 @@ async function leftClickRegion(div)
     currentMapZoomRegion = regionID.includes(subregionSeparator) ? regionID.split(subregionSeparator)[0] : regionID
 
     displayDataMap()
+
+    currentRegionID = null
+    updateRegionBox()
   }
   else if (showingDataMap)
   {
@@ -1158,8 +1164,8 @@ async function leftClickRegion(div)
 
 async function rightClickRegion(div)
 {
-  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-  var canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
 
   if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
   {
@@ -1599,9 +1605,10 @@ function getCurrentDateOrToday()
 
 async function updateRegionBox(regionID)
 {
-  var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-  var regionData = getRegionData(regionID).regionData
+  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom()
+
+  var regionData = getRegionData(regionID).regionData
 
   if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently) || regionData.disabled == true)
   {
@@ -1629,6 +1636,13 @@ async function updateRegionBox(regionID)
 
   regionMarginString += roundedMarginValue
 
+  let tooltipsToShow = {
+    shiftForVotes: [false, "Shift to show votes"],
+    shiftClickEditEVs: [false, "Shift click to edit EVs"],
+    clickToZoom: [false, "Click to expand"],
+    clickToOpenLink: [true, "Click to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"]
+  }
+
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
     regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
@@ -1649,11 +1663,17 @@ async function updateRegionBox(regionID)
 
     regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
+    let hasVoteCountsForAll = true
+
     sortedPercentages.forEach((voteData, i) => {
       regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
-      regionMarginString += "%</span></span><br>"
+      regionMarginString += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : decimalPadding(Math.round(voteData.voteshare*100)/100) + "%"
+      regionMarginString += "</span></span><br>"
+
+      hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
     })
+
+    tooltipsToShow.shiftForVotes[0] = hasVoteCountsForAll
 
     regionMarginString += "</div>"
   }
@@ -1695,6 +1715,29 @@ async function updateRegionBox(regionID)
 
         regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
       })
+    }
+  }
+
+  tooltipsToShow.shiftClickEditEVs[0] = currentMapSource.isCustom()
+  tooltipsToShow.clickToZoom[0] = await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing
+  tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0]
+
+  if (currentMapType.getMapSettingValue("showTooltips"))
+  {
+    let isShowingSomeTooltip = false
+    Object.keys(tooltipsToShow).forEach((tooltipID) => {
+      if (tooltipsToShow[tooltipID][0])
+      {
+        regionMarginString += "<div style='color: gray; font-size: 15px; font-style: italic'>"
+        regionMarginString += tooltipsToShow[tooltipID][1]
+        regionMarginString += "</div>"
+
+        isShowingSomeTooltip = true
+      }
+    })
+    if (isShowingSomeTooltip)
+    {
+      regionMarginString += "<div style='padding-bottom: 3px;'></div>"
     }
   }
 

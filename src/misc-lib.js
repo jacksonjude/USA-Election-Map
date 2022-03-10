@@ -39,6 +39,22 @@ function roundValueToPlace(valueToRound, figuresToInclude)
   return roundValue(valueToRound, decimalPlaceToRound)
 }
 
+function addCommaFormatting(num)
+{
+  let numString = ""
+  let rawNumString = num.toString()
+  for (let i=0; i < rawNumString.length; i++)
+  {
+    numString += rawNumString.slice(i, i+1)
+    if (i != rawNumString.length-1 && (rawNumString.length-1-i) % 3 == 0)
+    {
+      numString += ","
+    }
+  }
+
+  return numString
+}
+
 function getKeyByValue(object, value, shouldStringifyToCompare)
 {
   return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)
