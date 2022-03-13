@@ -740,6 +740,8 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     updateRegionBox(currentRegionID)
   }
 
+  svgPanZoom('#svgdata', {controlIconsEnabled: true, fit: true, contain: true, minZoom: 1, panEnabled: false})
+
   showingDataMap = true
 }
 
@@ -1716,6 +1718,7 @@ async function updateRegionBox(regionID)
         regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
       })
     }
+    regionMarginString += "<br></div>"
   }
 
   tooltipsToShow.shiftClickEditEVs[0] = currentMapSource.isCustom()

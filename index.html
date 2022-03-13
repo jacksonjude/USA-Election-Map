@@ -12,6 +12,7 @@
     <script src="./lib/jscolor.min.js"></script>
     <script src="./lib/bowser-2.9.0.min.js"></script>
     <script src="./lib/discord-invite.js"></script>
+    <script src="./lib/svg-pan-zoom-3.6.1.min.js"></script>
     <script src="./src/misc-lib.js"></script>
     <script src="./src/model/files-database.js"></script>
     <script src="./src/model/map-type.js"></script>
@@ -211,7 +212,7 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px;" oncontextmenu="return false">
+    <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px; overflow: hidden;" oncontextmenu="return false">
     </div>
     <a id="mapCloseButton" onclick="zoomOutMap()" style="display: none; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="position: absolute; margin-top: 25px; width: 50px; height: 50px;  text-decoration: none;" /></a>
     <div style="display: flex; flex-direction: column; float: right;">

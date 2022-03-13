@@ -515,7 +515,7 @@ function updateTotalsPieChart(regionDataArray)
     else
     {
       regionMarginStrings.push(regionMarginStringsData[partyID].safe)
-      marginTotalsArray.push(marginTotalsData[partyID].safe)
+      marginTotalsArray.push(marginTotalsData[partyID].safe || 0)
       safeMarginTotalsArray.push(marginTotalsData[partyID].safe)
     }
   }
