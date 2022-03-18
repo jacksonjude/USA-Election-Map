@@ -740,7 +740,10 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     updateRegionBox(currentRegionID)
   }
 
-  svgPanZoom('#svgdata', {controlIconsEnabled: true, fit: true, contain: true, minZoom: 1, panEnabled: false})
+  if (currentViewingState == ViewingState.zooming)
+  {
+    svgPanZoom('#svgdata', {controlIconsEnabled: true, fit: true, contain: true, minZoom: 1, panEnabled: false})
+  }
 
   showingDataMap = true
 }

@@ -2263,6 +2263,8 @@ function createSenateMapSources()
     doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
+    null, // splitVoteDataFunction
+    null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
       if (mapDate == null) { return }
