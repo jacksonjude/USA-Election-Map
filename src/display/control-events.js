@@ -47,6 +47,16 @@ document.addEventListener('keydown', function(e) {
       break
     }
   }
+  else if (editingRegionVotesharePercentages && e.key == "ArrowUp")
+  {
+    e.preventDefault()
+    cycleSelectedRegionVoteshare(-1)
+  }
+  else if (editingRegionVotesharePercentages && e.key == "ArrowDown")
+  {
+    e.preventDefault()
+    cycleSelectedRegionVoteshare(1)
+  }
 })
 
 function arrowKeyCycle(keyString)
@@ -385,6 +395,11 @@ document.addEventListener('keypress', async function(e) {
       editingRegionMarginValue = false
       $("#regionboxcontainer").trigger('hide')
     }
+    else if (editingRegionVotesharePercentages)
+    {
+      editingRegionVotesharePercentages = false
+      $("#regionboxcontainer").trigger('hide')
+    }
     else if (currentMapType.getCustomMapEnabled())
     {
       toggleEditing()
@@ -457,6 +472,7 @@ var currentRegionID
 var ignoreNextClick = false
 var clickUsedToZoom = false
 
+var currentMouseX
 var currentMouseY
 
 document.addEventListener('mousedown', async function() {
@@ -487,7 +503,8 @@ function mouseEnteredRegion(div)
 {
   var regionID = getBaseRegionID($(div).attr('id')).baseID
   currentRegionID = regionID
-  if (currentEditingState == EditingState.editing && mouseIsDown && !regionIDsChanged.includes(regionID))
+
+  if (currentEditingState == EditingState.editing && shouldDragSelect && mouseIsDown && !regionIDsChanged.includes(regionID) && !editingRegionVotesharePercentages)
   {
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
@@ -539,7 +556,10 @@ function mouseLeftRegion(div)
     currentRegionID = null
   }
 
-  $("#regionboxcontainer").trigger('hide')
+  if (!editingRegionVotesharePercentages)
+  {
+    $("#regionboxcontainer").trigger('hide')
+  }
 
   if ($(div).css('stroke') != regionDeselectColor)
   {
@@ -561,31 +581,34 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
-  if (currentEditingState == EditingState.editing)
+  if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
   {
     if (mouseIsDown)
     {
       mouseMovedDuringClick = true
     }
-    if (mouseIsDown && currentRegionID && !regionIDsChanged.includes(currentRegionID))
+    if (shouldDragSelect && mouseIsDown && currentRegionID && !regionIDsChanged.includes(currentRegionID))
     {
       leftClickRegion($("#" + currentRegionID))
       regionIDsChanged.push(currentRegionID)
     }
   }
 
-  $("#regionboxcontainer").css("left", e.pageX+5)
-  updateRegionBoxYPosition(e.pageY)
+  if (!editingRegionVotesharePercentages)
+  {
+    updateRegionBoxPosition(e.pageX, e.pageY)
+  }
 
+  currentMouseX = e.pageX
   currentMouseY = e.pageY
 })
 
 document.addEventListener('mouseup', function() {
-  if (currentEditingState == EditingState.editing)
+  if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
   {
     regionIDsChanged = []
     mouseIsDown = false
-    if (currentRegionID != null && !clickUsedToZoom && startRegionID == currentRegionID && mouseMovedDuringClick)
+    if (currentRegionID != null && !clickUsedToZoom && startRegionID == currentRegionID && mouseMovedDuringClick && shouldDragSelect)
     {
       ignoreNextClick = true
     }
@@ -601,5 +624,5 @@ document.addEventListener('mouseup', function() {
 
 function isEditingTextbox()
 {
-  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID || editPartyMarginColor
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor
 }

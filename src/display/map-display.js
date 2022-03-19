@@ -43,10 +43,15 @@ const regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
 
 var showingDataMap = false
 
+var shouldDragSelect = false
+
 var editingRegionEVs = false
 var overrideRegionEVs = {}
 
 var editingRegionMarginValue = false
+var editingRegionVotesharePercentages = false
+var voteshareEditRegion
+var selectedVoteshareCandidate
 
 var ignoreMapUpdateClickArray
 
@@ -521,6 +526,9 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     }
     editingRegionEVs = false
     editingRegionMarginValue = false
+    editingRegionVotesharePercentages = false
+    voteshareEditRegion = null
+    selectedVoteshareCandidate = null
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
@@ -977,6 +985,9 @@ async function toggleEditing(stateToSet)
   }
   editingRegionEVs = false
   editingRegionMarginValue = false
+  editingRegionVotesharePercentages = false
+  voteshareEditRegion = null
+  selectedVoteshareCandidate = null
 
   if (stateToSet == null)
   {
@@ -1088,7 +1099,29 @@ async function leftClickRegion(div)
   let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
 
-  if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
+  var regionID = $(div).attr('id')
+  var regionDataCallback = getRegionData(regionID)
+  var regionData = regionDataCallback.regionData
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+  if (currentEditingState == EditingState.editing && (regionData.partyVotesharePercentages || editingRegionVotesharePercentages))
+  {
+    editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != regionID && regionData.partyVotesharePercentages)
+
+    regionData.partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
+
+    if (editingRegionVotesharePercentages)
+    {
+      voteshareEditRegion = currentRegionID
+      updateRegionBoxPosition(currentMouseX, currentMouseY)
+      updateRegionBox(currentRegionID)
+    }
+    else
+    {
+      $("#regionboxcontainer").trigger('hide')
+    }
+  }
+  else if (currentEditingState == EditingState.editing && (!canZoomCurrently || currentViewingState == ViewingState.zooming))
   {
     if (ignoreNextClick)
     {
@@ -1096,12 +1129,7 @@ async function leftClickRegion(div)
       return
     }
 
-    var regionID = $(div).attr('id')
     if (regionIDsChanged.includes(regionID)) { return }
-
-    var regionDataCallback = getRegionData(regionID)
-    var regionData = regionDataCallback.regionData
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
     if (regionData.disabled)
     {
@@ -1152,9 +1180,9 @@ async function leftClickRegion(div)
   }
   else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
   {
-    var regionID = getBaseRegionID($(div).attr('id')).baseID
+    var baseRegionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
-    currentMapZoomRegion = regionID.includes(subregionSeparator) ? regionID.split(subregionSeparator)[0] : regionID
+    currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
 
     displayDataMap()
 
@@ -1639,6 +1667,21 @@ async function updateRegionBox(regionID)
     return
   }
 
+  if (editingRegionVotesharePercentages)
+  {
+    let regionboxHTML = getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>"
+    for (let candidateData of regionData.partyVotesharePercentages)
+    {
+      regionboxHTML += "<div style='color: " + politicalParties[candidateData.partyID].getMarginColors().lean + ";'>" + candidateData.candidate + " "
+      regionboxHTML += "<input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'></span>"
+      regionboxHTML += "%" + "</div>"
+    }
+    $("#regionbox").html(regionboxHTML)
+    $("#regionVoteshare-" + regionData.partyVotesharePercentages[0].candidate).focus().select()
+
+    return
+  }
+
   regionMarginString += roundedMarginValue
 
   let tooltipsToShow = {
@@ -1758,6 +1801,12 @@ async function updateRegionBox(regionID)
   updateRegionBoxYPosition()
 }
 
+function updateRegionBoxPosition(mouseX, mouseY)
+{
+  $("#regionboxcontainer").css("left", mouseX+5)
+  updateRegionBoxYPosition(mouseY)
+}
+
 function updateRegionBoxYPosition(mouseY)
 {
   var newRegionBoxYPos = (mouseY+5) || (currentMouseY+5)
@@ -1829,15 +1878,65 @@ function applyRegionMarginValue(regionID)
   if (newMarginIsValid && newMargin != currentMargin)
   {
     regionData.margin = newMargin
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+    displayPartyTotals(getPartyTotals())
+    updateTotalsPieChart()
   }
   else if (!newMarginIsValid)
   {
     $("#regionMargin-text").val(currentMargin)
     $("#regionMargin-text").select()
   }
+}
 
-  updateRegionFillColors(regionIDsToFill, regionData, false)
-  displayPartyTotals(getPartyTotals())
+function applyRegionVotesharePercentage(textBoxDiv, regionID)
+{
+  let regionDataCallback = getRegionData(regionID)
+  let regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let regionData = regionDataCallback.regionData
+
+  let newVoteshareString = $(textBoxDiv).val()
+  let newVoteshare = newVoteshareString != "" ? parseFloat(newVoteshareString) : 0
+  let newVoteshareIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newVoteshareString) && !isNaN(newVoteshare) && newVoteshare >= 0
+
+  let currentVoteshareData = regionData.partyVotesharePercentages.find(voteshareData => voteshareData.candidate == $(textBoxDiv).data("candidate"))
+  if (newVoteshareIsValid && newVoteshare != currentVoteshareData.voteshare)
+  {
+    currentVoteshareData.voteshare = newVoteshare
+
+    let partyVotesharePercentages = regionData.partyVotesharePercentages.concat()
+    partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
+    regionData.margin = partyVotesharePercentages.length < 2 ? partyVotesharePercentages[0].voteshare : partyVotesharePercentages[0].voteshare-partyVotesharePercentages[1].voteshare
+    regionData.partyID = partyVotesharePercentages[0].partyID
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+    displayPartyTotals(getPartyTotals())
+    updateTotalsPieChart()
+  }
+  else if (!newVoteshareIsValid)
+  {
+    $(textBoxDiv).val(currentVoteshareData.voteshare)
+    $(textBoxDiv).select()
+  }
+}
+
+function cycleSelectedRegionVoteshare(directionToCycle)
+{
+  let regionData = getRegionData(voteshareEditRegion).regionData
+  let voteshareIndex = regionData.partyVotesharePercentages.findIndex(voteshareData => voteshareData.candidate == selectedVoteshareCandidate)
+
+  voteshareIndex += directionToCycle
+  if (voteshareIndex < 0)
+  {
+    voteshareIndex = regionData.partyVotesharePercentages.length-1
+  }
+  else if (voteshareIndex > regionData.partyVotesharePercentages.length-1)
+  {
+    voteshareIndex = 0
+  }
+
+  $("#regionVoteshare-" + regionData.partyVotesharePercentages[voteshareIndex].candidate).focus().select()
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)

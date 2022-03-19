@@ -513,10 +513,10 @@ class MapSource
 
   convertArrayToCSV(mapData, columnMap, regionNameToID, candidateNameToPartyIDs, convertMapDataRowToCSVFunction)
   {
-    var csvText = ""
+    let csvText = ""
 
-    var columnTitles = Object.values(columnMap)
-    for (var titleNum in columnTitles)
+    let columnTitles = Object.values(columnMap)
+    for (let titleNum in columnTitles)
     {
       csvText += columnTitles[titleNum]
       if (titleNum < columnTitles.length-1)
@@ -526,32 +526,35 @@ class MapSource
     }
     csvText += "\n"
 
-    for (var mapDate in mapData)
+    for (let mapDate in mapData)
     {
-      var mapDateObject = new Date(parseInt(mapDate))
-      var mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
-      for (var regionID in mapData[mapDate])
+      let mapDateObject = new Date(parseInt(mapDate))
+      let mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
+      for (let regionID in mapData[mapDate])
       {
-        var regionData = mapData[mapDate][regionID]
+        let regionData = mapData[mapDate][regionID]
 
-        var candidatesToAdd = cloneObject(candidateNameToPartyIDs)
+        let candidatesToAdd = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.reduce((candidateMap, partyPercentage) =>
+        {
+          return {...candidateMap, [partyPercentage.candidate]: partyPercentage.partyID}
+        }, {}) : cloneObject(candidateNameToPartyIDs)
 
         if (regionData.margin == 0)
         {
-          var independentPartyNameToID = {}
+          let independentPartyNameToID = {}
           independentPartyNameToID[IndependentGenericParty.getNames()[0]] = IndependentGenericParty.getID()
 
           candidatesToAdd = independentPartyNameToID
         }
 
-        for (var candidateName in candidatesToAdd)
+        for (let candidateName in candidatesToAdd)
         {
-          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && regionData.margin != 0) { continue }
+          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && regionData.margin != 0 && !regionData.partyVotesharePercentages) { continue }
 
-          for (var columnTitleNum in columnTitles)
+          for (let columnTitleNum in columnTitles)
           {
-            var columnTitle = columnTitles[columnTitleNum]
-            csvText += convertMapDataRowToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidatesToAdd, regionData, regionID, regionNameToID)
+            let columnKey = getKeyByValue(columnMap, columnTitles[columnTitleNum])
+            csvText += convertMapDataRowToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, candidateNameToPartyIDs[candidateName], regionData)
 
             if (columnTitleNum < columnTitles.length-1)
             {
@@ -1066,7 +1069,7 @@ function createPresidentialMapSources()
         }
 
         var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
-        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: !isCustomMap ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, voteSplits: electoralVoteSortedCandidateData, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
       }
 
       filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -1265,9 +1268,8 @@ function createPresidentialMapSources()
     return TossupParty.getID()
   }
 
-  function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
+  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData)
   {
-    var columnKey = getKeyByValue(columnMap, columnTitle)
     switch (columnKey)
     {
       case "date":
@@ -1277,10 +1279,15 @@ function createPresidentialMapSources()
       return candidateName
 
       case "partyID":
-      return candidateNameToPartyIDs[candidateName] || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
+      return partyID || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
 
       case "percentAdjusted":
-      if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
+      let voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      if (regionData.partyVotesharePercentages && voteshareData)
+      {
+        return voteshareData.voteshare
+      }
+      else if (regionData.partyID == partyID)
       {
         return regionData.margin
       }
@@ -1836,7 +1843,7 @@ function createPresidentialMapSources()
     true, // addDecimalPadding
     doubleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
-    countyZoomingDataFunction, // zoomingDataFunction
+    null, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
@@ -1844,7 +1851,7 @@ function createPresidentialMapSources()
     customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
     true, // isCustomMap
     false, // shouldClearDisabled
-    false, // shouldShowVoteshare
+    true, // shouldShowVoteshare
     null, // voteshareCutoffMargin
     getPresidentialSVGFromDate, // overrideSVGPath
     true // shouldSetDisabledWorthToZero
@@ -2177,9 +2184,8 @@ function createSenateMapSources()
     return TossupParty.getID()
   }
 
-  function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
+  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData)
   {
-    var columnKey = getKeyByValue(columnMap, columnTitle)
     switch (columnKey)
     {
       case "date":
@@ -2189,7 +2195,11 @@ function createSenateMapSources()
       return candidateName
 
       case "voteshare":
-      if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
+      if (regionData.partyVotesharePercentages)
+      {
+        return regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate).voteshare/100.0
+      }
+      else if (regionData.partyID == partyID)
       {
         return regionData.margin/100.0
       }
@@ -2203,7 +2213,7 @@ function createSenateMapSources()
       return regionData.seatClass
 
       case "partyID":
-      return candidateNameToPartyIDs[candidateName]
+      return partyID
 
       case "isSpecial":
       return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
@@ -2764,9 +2774,8 @@ function createGovernorMapSources()
     return TossupParty.getID()
   }
 
-  function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, regionNameToID)
+  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData)
   {
-    var columnKey = getKeyByValue(columnMap, columnTitle)
     switch (columnKey)
     {
       case "date":
@@ -2776,7 +2785,11 @@ function createGovernorMapSources()
       return candidateName
 
       case "voteshare":
-      if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
+      if (regionData.partyVotesharePercentages)
+      {
+        return regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate).voteshare/100.0
+      }
+      else if (regionData.partyID == partyID)
       {
         return regionData.margin/100.0
       }
@@ -2786,7 +2799,7 @@ function createGovernorMapSources()
       return getKeyByValue(regionNameToID, regionID)
 
       case "partyID":
-      return candidateNameToPartyIDs[candidateName]
+      return partyID
 
       case "isSpecial":
       return (regionData.isSpecial == null ? false : regionData.isSpecial).toString().toUpperCase()
@@ -3240,9 +3253,8 @@ function createHouseMapSources()
     return TossupParty.getID()
   }
 
-  function customMapConvertMapDataToCSVFunction(columnMap, columnTitle, mapDateString, candidateName, candidateNameToPartyIDs, regionData, regionID, _)
+  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, _, candidateName, partyID, regionData)
   {
-    var columnKey = getKeyByValue(columnMap, columnTitle)
     switch (columnKey)
     {
       case "date":
@@ -3252,9 +3264,13 @@ function createHouseMapSources()
       return candidateName
 
       case "voteshare":
-      if (candidateNameToPartyIDs[candidateName] == regionData.partyID)
+      if (regionData.partyVotesharePercentages)
       {
-        return regionData.margin
+        return regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate).voteshare/100.0
+      }
+      else if (regionData.partyID == partyID)
+      {
+        return regionData.margin/100.0
       }
       return 0
 
