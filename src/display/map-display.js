@@ -989,6 +989,8 @@ async function toggleEditing(stateToSet)
   voteshareEditRegion = null
   selectedVoteshareCandidate = null
 
+  $("#regionboxcontainer").trigger('hide')
+
   if (stateToSet == null)
   {
     switch (currentEditingState)
@@ -1012,8 +1014,6 @@ async function toggleEditing(stateToSet)
     case EditingState.editing:
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
-
-    $("#regionboxcontainer").trigger('hide')
 
     $("#marginEditButton").hide()
     $("#marginEditButton").addClass('topnavdisable')
@@ -1106,13 +1106,14 @@ async function leftClickRegion(div)
 
   if (currentEditingState == EditingState.editing && (regionData.partyVotesharePercentages || editingRegionVotesharePercentages))
   {
-    editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != regionID && regionData.partyVotesharePercentages)
+    let baseRegionID = getBaseRegionID(regionID).baseID
+    editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != baseRegionID && regionData.partyVotesharePercentages)
 
     regionData.partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
 
     if (editingRegionVotesharePercentages)
     {
-      voteshareEditRegion = currentRegionID
+      voteshareEditRegion = baseRegionID
       updateRegionBoxPosition(currentMouseX, currentMouseY)
       updateRegionBox(currentRegionID)
     }
@@ -1669,15 +1670,20 @@ async function updateRegionBox(regionID)
 
   if (editingRegionVotesharePercentages)
   {
-    let regionboxHTML = getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>"
-    for (let candidateData of regionData.partyVotesharePercentages)
+    let regionboxHTML = getKeyByValue(mapRegionNameToID, currentRegionID)
+    regionboxHTML += "<div style='border-radius: 50px; color: white; font-size: 17px; line-height: 100%; margin-top: 5px; margin-bottom: 8px; display: block;'>"
+    for (let candidateOn in regionData.partyVotesharePercentages)
     {
-      regionboxHTML += "<div style='color: " + politicalParties[candidateData.partyID].getMarginColors().lean + ";'>" + candidateData.candidate + " "
-      regionboxHTML += "<input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'></span>"
-      regionboxHTML += "%" + "</div>"
+      let candidateData = regionData.partyVotesharePercentages[candidateOn]
+      regionboxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px 0px 0px" : candidateOn == regionData.partyVotesharePercentages.length-1 ? "0px 0px 3px 3px" : "0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
+      regionboxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px;' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
+      regionboxHTML += "</div>"
     }
+    regionboxHTML += "</div>"
+
     $("#regionbox").html(regionboxHTML)
-    $("#regionVoteshare-" + regionData.partyVotesharePercentages[0].candidate).focus().select()
+    let candidateToSelect = selectedParty == null || selectedParty == TossupParty.getID() ? regionData.partyVotesharePercentages[0].candidate : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID()).candidate
+    $("#regionVoteshare-" + candidateToSelect).focus().select()
 
     return
   }
@@ -1714,7 +1720,7 @@ async function updateRegionBox(regionID)
     let hasVoteCountsForAll = true
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionMarginString += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : decimalPadding(Math.round(voteData.voteshare*100)/100) + "%"
       regionMarginString += "</span></span><br>"
 
@@ -1825,6 +1831,11 @@ function getRoundedMarginValue(fullMarginValue)
   return decimalPadding(roundValueToPlace(fullMarginValue, 2), currentMapSource.getAddDecimalPadding())
 }
 
+function getGradientCSS(fillColor, backgroundColor, fillPercentage)
+{
+  return "linear-gradient(90deg, " + fillColor + " " + fillPercentage + "%, " + backgroundColor + " 0%)"
+}
+
 function applyRegionEVEdit(regionID)
 {
   var regionData = getRegionData(regionID).regionData
@@ -1898,7 +1909,7 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
 
   let newVoteshareString = $(textBoxDiv).val()
   let newVoteshare = newVoteshareString != "" ? parseFloat(newVoteshareString) : 0
-  let newVoteshareIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newVoteshareString) && !isNaN(newVoteshare) && newVoteshare >= 0
+  let newVoteshareIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newVoteshareString) && !isNaN(newVoteshare) && newVoteshare >= 0 && newVoteshare <= 100
 
   let currentVoteshareData = regionData.partyVotesharePercentages.find(voteshareData => voteshareData.candidate == $(textBoxDiv).data("candidate"))
   if (newVoteshareIsValid && newVoteshare != currentVoteshareData.voteshare)
@@ -1909,6 +1920,8 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
     partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
     regionData.margin = partyVotesharePercentages.length < 2 ? partyVotesharePercentages[0].voteshare : partyVotesharePercentages[0].voteshare-partyVotesharePercentages[1].voteshare
     regionData.partyID = partyVotesharePercentages[0].partyID
+
+    $(textBoxDiv).parent().parent().css("background", getGradientCSS(politicalParties[currentVoteshareData.partyID].getMarginColors().safe, politicalParties[currentVoteshareData.partyID].getMarginColors().lean, currentVoteshareData.voteshare))
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
     displayPartyTotals(getPartyTotals())
