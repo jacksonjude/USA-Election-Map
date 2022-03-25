@@ -1520,7 +1520,7 @@ function getPartyTotals(includeFlipData)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) || regionDataArray[regionID].voteWorth
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
 
     if (currentViewingState != ViewingState.splitVote)
     {
@@ -1644,7 +1644,7 @@ async function updateRegionBox(regionID)
 
   var regionData = getRegionData(regionID).regionData
 
-  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently) || regionData.disabled == true)
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true)
   {
     $("#regionboxcontainer").trigger('hide')
     return
@@ -1675,7 +1675,7 @@ async function updateRegionBox(regionID)
     for (let candidateOn in regionData.partyVotesharePercentages)
     {
       let candidateData = regionData.partyVotesharePercentages[candidateOn]
-      regionboxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px 0px 0px" : candidateOn == regionData.partyVotesharePercentages.length-1 ? "0px 0px 3px 3px" : "0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
+      regionboxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px" + candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
       regionboxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px;' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
       regionboxHTML += "</div>"
     }

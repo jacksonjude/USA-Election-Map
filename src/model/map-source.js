@@ -271,6 +271,7 @@ class MapSource
         {
           this.mapData[mapDate][regionID].partyID = tossupPartyID
           this.mapData[mapDate][regionID].margin = 0
+          this.mapData[mapDate][regionID].partyVotesharePercentages = []
 
           mapIsClearExceptDisabled = false
         }
@@ -539,12 +540,9 @@ class MapSource
           return {...candidateMap, [partyPercentage.candidate]: partyPercentage.partyID}
         }, {}) : cloneObject(candidateNameToPartyIDs)
 
-        if (regionData.margin == 0)
+        if (regionData.margin == 0 && regionData.partyID == TossupParty.getID())
         {
-          let independentPartyNameToID = {}
-          independentPartyNameToID[IndependentGenericParty.getNames()[0]] = IndependentGenericParty.getID()
-
-          candidatesToAdd = independentPartyNameToID
+          candidatesToAdd[IndependentGenericParty.getNames()[0]] = IndependentGenericParty.getID()
         }
 
         for (let candidateName in candidatesToAdd)
