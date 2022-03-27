@@ -652,7 +652,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
-  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(!showingCompareMap ? dateToDisplay : currentSliderDate)
+  var newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(!showingCompareMap ? dateToDisplay : currentSliderDate)
 
   if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {

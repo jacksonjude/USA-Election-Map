@@ -336,7 +336,7 @@ class MapSource
 
   async canZoom(mapDateData)
   {
-    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData) != null)
+    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, null, true) != null)
   }
 
   openRegionLink(regionID, modelDate)
@@ -1464,7 +1464,7 @@ function createPresidentialMapSources()
     null // updateCustomMapFunction
   )
 
-  var getPresidentialSVGFromDate = function(dateTime)
+  var getPresidentialSVGFromDate = async function(dateTime)
   {
     var dateYear = (new Date(dateTime)).getFullYear()
 
@@ -1478,13 +1478,13 @@ function createPresidentialMapSources()
           currentMapZoomRegion = stateID
         }
       }
-      if (dateYear >= 2000)
+      if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), true))
       {
         return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
       }
       else
       {
-        return ["svg-sources/usa-presidential-map.svg", currentMapZoomRegion]
+        return ["svg-sources/usa-governor-map.svg", currentMapZoomRegion]
       }
     }
 
@@ -1542,23 +1542,17 @@ function createPresidentialMapSources()
     return voteSplitMapDateData
   }
 
-  var countyZoomingDataFunction = async (presidentialMapDateData) => {
+  var countyZoomingDataFunction = async (presidentialMapDateData, _, isZoomCheck) => {
     if (!CountyElectionResultMapSource.getMapData() || !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID())))
     {
+      if (isZoomCheck) { return null }
+
       await CountyElectionResultMapSource.loadMap()
     }
     let mapDateData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
-    if (mapDateData == null) { return null }
+    if (mapDateData == null && isZoomCheck) { return null }
 
     let countyZoomData = {}
-    for (let regionID in mapDateData)
-    {
-      if (mapDateData[regionID].state == currentMapZoomRegion)
-      {
-        countyZoomData[regionID] = mapDateData[regionID]
-        countyZoomData[regionID].voteWorth = 1
-      }
-    }
 
     let popularVoteRegionIDToUse = currentMapZoomRegion
     if (popularVoteRegionIDToUse == "NE" || popularVoteRegionIDToUse == "ME")
@@ -1566,6 +1560,22 @@ function createPresidentialMapSources()
       popularVoteRegionIDToUse += "-AL"
     }
     countyZoomData[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID] = presidentialMapDateData[popularVoteRegionIDToUse]
+
+    if (mapDateData != null)
+    {
+      for (let regionID in mapDateData)
+      {
+        if (mapDateData[regionID].state == currentMapZoomRegion)
+        {
+          countyZoomData[regionID] = mapDateData[regionID]
+          countyZoomData[regionID].voteWorth = 1
+        }
+      }
+    }
+    else
+    {
+      countyZoomData[currentMapZoomRegion] = presidentialMapDateData[popularVoteRegionIDToUse]
+    }
 
     return countyZoomData
   }
