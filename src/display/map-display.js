@@ -1732,7 +1732,9 @@ async function updateRegionBox(regionID)
     regionMarginString += "</div>"
   }
 
-  if (regionData.voteSplits && regionData.voteSplits.length > 0 && (canZoomCurrently || currentViewingState == ViewingState.splitVote))
+  let splitVoteDisplayOptions = currentMapSource.getSplitVoteDisplayOptions()
+
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && ((canZoomCurrently && splitVoteDisplayOptions.showSplitVotesOnCanZoom) || currentViewingState == ViewingState.splitVote))
   {
     let voteSplitDataToDisplay = regionData.voteSplits
     regionMarginString = "</span>"
@@ -1741,7 +1743,7 @@ async function updateRegionBox(regionID)
     })
   }
 
-  if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && currentSliderDate && currentMapSource.getMapData())
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && splitVoteDisplayOptions.showSplitVoteBoxes && currentSliderDate && currentMapSource.getMapData())
   {
     var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
     if (zoomingData)

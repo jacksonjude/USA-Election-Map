@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom)
   {
     this.id = id
     this.name = name
@@ -23,6 +23,7 @@ class MapSource
     this.splitVoteDataFunction = splitVoteDataFunction || ((mapData) => {
       return mapData
     })
+    this.splitVoteDisplayOptions = splitVoteDisplayOptions
     this.getFormattedRegionName = getFormattedRegionName
     this.customOpenRegionLinkFunction = customOpenRegionLinkFunction
     this.updateCustomMapFunction = updateCustomMapFunction
@@ -54,6 +55,7 @@ class MapSource
   // viewingDataFunction,
   // zoomingDataFunction,
   // splitVoteDataFunction,
+  // splitVoteDisplayOptions,
   // getFormattedRegionName,
   // customOpenRegionLinkFunction,
   // updateCustomMapFunction,
@@ -337,6 +339,11 @@ class MapSource
   async canZoom(mapDateData)
   {
     return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, null, true) != null)
+  }
+
+  getSplitVoteDisplayOptions()
+  {
+    return this.splitVoteDisplayOptions
   }
 
   openRegionLink(regionID, modelDate)
@@ -1399,6 +1406,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null // updateCustomMapFunction
@@ -1428,6 +1436,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null // updateCustomMapFunction
@@ -1455,6 +1464,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___)
     {
@@ -1609,6 +1619,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     countyZoomingDataFunction, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
+    {showSplitVotesOnCanZoom: false, showSplitVoteBoxes: false}, // splitVoteDisplayOptions
     (regionID) => {
       if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
 
@@ -1681,6 +1692,7 @@ function createPresidentialMapSources()
     }, // viewingDataFunction
     null, // zoomingDataFunction
     pastElectoralVoteCounts, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
     {
@@ -1783,6 +1795,7 @@ function createPresidentialMapSources()
     }, // viewingDataFunction
     countyZoomingDataFunction, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     (regionID) => {
       if (!regionID.includes(subregionSeparator)) { return regionID }
 
@@ -1853,6 +1866,7 @@ function createPresidentialMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
@@ -2282,6 +2296,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
@@ -2339,6 +2354,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
@@ -2391,6 +2407,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ____)
     {
@@ -2432,6 +2449,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
     {
@@ -2511,6 +2529,7 @@ function createSenateMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
@@ -2858,6 +2877,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___, ____)
     {
@@ -2916,6 +2936,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, _, __, mapDate, ___)
     {
@@ -2952,6 +2973,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
@@ -3020,6 +3042,7 @@ function createGovernorMapSources()
     null, // viewingDataFunction
     null, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
@@ -3472,6 +3495,7 @@ function createHouseMapSources()
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
+    {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
     (regionID) => {
       if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
 
@@ -3561,6 +3585,7 @@ function createHouseMapSources()
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
     null, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     function(displayRegionData, mapDateData)
