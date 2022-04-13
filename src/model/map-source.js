@@ -1742,7 +1742,8 @@ function createSenateMapSources()
     1638403200000: "skPfbpMb_g8",
     1640995200000: "BX9mEKXnBEg",
     1643673600000: "nIp2KnNLQUA",
-    1646092800000: "oGzo4mVU-w8"
+    1646092800000: "oGzo4mVU-w8",
+    1649116800000: "i58TKDsXX-Q"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
@@ -1798,7 +1799,9 @@ function createSenateMapSources()
     1628985600000: "eZGs7_uZ1YM",
     1633824000000: "R9WqiO-j2lY",
     1636156800000: "kAsztlIJm64",
-    1639267200000: "Elasgd8mVLE"
+    1639267200000: "Elasgd8mVLE",
+    1644624000000: "njSkvysshes",
+    1646524800000: "QU_mIwNflqI"
   }
 
   var PASenateProjectionMapSource = new MapSource(
