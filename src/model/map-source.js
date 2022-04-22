@@ -2330,7 +2330,7 @@ function createSenateMapSources()
     "PA Projection", // name
     "./csv-sources/pa-2022-senate.csv", // dataURL
     "https://www.youtube.com/watch?v=", // homepageURL
-    {regular: "./assets/pa-large.png", mini: "./assets/pa.png"}, // iconURL
+    {regular: "./assets/pa.png", mini: "./assets/pa.png"}, // iconURL
     {
       date: "date",
       region: "region",
@@ -2414,6 +2414,45 @@ function createSenateMapSources()
       if (mapDate == null) { return }
       window.open(homepageURL + (Cook2022SenateRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
     }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    false // shouldShowVoteshare
+  )
+
+  var SCBSenateProjectionMapSource = new MapSource(
+    "SCB-2022-Senate", // id
+    "Sabato's CB", // name
+    "./csv-sources/scb-2022-senate.csv", // dataURL
+    "https://centerforpolitics.org/crystalball/2022-senate/", // homepageURL
+    {regular: "./assets/scb.png", mini: "./assets/scb.png"}, // iconURL
+    {
+      date: "date",
+      region: "region",
+      seatClass: "class",
+      isSpecial: "special",
+      isRunoff: "runoff",
+      isOffyear: "offyear",
+      isDisabled: "disabled",
+      candidateName: "candidate",
+      partyID: "party",
+      voteshare: "voteshare"
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    regionNameToIDHistorical, // regionNameToIDMap
+    null, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    false, // addDecimalPadding
+    doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
+    null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
+    null, // getFormattedRegionName
+    null, // customOpenRegionLinkFunction
     null, // updateCustomMapFunction
     null, // convertMapDataRowToCSVFunction
     null, // isCustomMap
@@ -2545,10 +2584,11 @@ function createSenateMapSources()
   senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
   senateMapSources[PASenateProjectionMapSource.getID()] = PASenateProjectionMapSource
   senateMapSources[CookSenateProjectionMapSource.getID()] = CookSenateProjectionMapSource
+  senateMapSources[SCBSenateProjectionMapSource.getID()] = SCBSenateProjectionMapSource
   senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var senateMapSourceIDs = [LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), SCBSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USASenateMapType.getCustomMapEnabled())
   {
     senateMapSourceIDs.push(CustomMapSource.getID())
