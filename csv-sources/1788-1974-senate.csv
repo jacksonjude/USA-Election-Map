@@ -6397,9 +6397,9 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/05/1974,North Dakota,ND,3,FALSE,FALSE,,Jungroth,independent,0.028174420713830733
 11/05/1974,North Dakota,ND,3,FALSE,FALSE,,Guy,democratic,0.48374033468461436
 11/05/1974,North Dakota,ND,3,FALSE,FALSE,,Young,republican,0.4844869842528653
-11/05/1974,Iowa,IA,3,FALSE,FALSE,,Oxley,american,0.006776680932771683
-11/05/1974,Iowa,IA,3,FALSE,FALSE,,Stanley,republican,0.47277804571224286
-11/05/1974,Iowa,IA,3,FALSE,FALSE,,Culver,democratic,0.5204452733549855
+11/05/1974,Iowa,IA,3,FALSE,FALSE,,Oxley,american,0.0070625093
+11/05/1974,Iowa,IA,3,FALSE,FALSE,,Stanley,republican,0.4927189841
+11/05/1974,Iowa,IA,3,FALSE,FALSE,,Culver,democratic,0.5002185066
 11/05/1974,Missouri,MO,3,FALSE,FALSE,,Talmage,nonpartisan,0.0065098264073517745
 11/05/1974,Missouri,MO,3,FALSE,FALSE,,Curtis,republican,0.392794920865178
 11/05/1974,Missouri,MO,3,FALSE,FALSE,,Eagleton,democratic,0.6006952527274703
