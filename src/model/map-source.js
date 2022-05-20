@@ -1744,7 +1744,8 @@ function createSenateMapSources()
     1643673600000: "nIp2KnNLQUA",
     1646092800000: "oGzo4mVU-w8",
     1649116800000: "i58TKDsXX-Q",
-    1651536000000: "a7zKYQbpt2Y"
+    1651536000000: "a7zKYQbpt2Y",
+    1652918400000: "KVLw0DhkJXA"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
