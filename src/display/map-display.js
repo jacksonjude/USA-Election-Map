@@ -1106,6 +1106,11 @@ async function leftClickRegion(div)
 
   if (currentEditingState == EditingState.editing && (regionData.partyVotesharePercentages || editingRegionVotesharePercentages))
   {
+    if (editingRegionVotesharePercentages)
+    {
+      closeRegionVoteshareEditing(voteshareEditRegion)
+    }
+
     let baseRegionID = getBaseRegionID(regionID).baseID
     editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != baseRegionID && regionData.partyVotesharePercentages)
 
@@ -1670,6 +1675,13 @@ async function updateRegionBox(regionID)
 
   if (editingRegionVotesharePercentages)
   {
+    let candidateDataToSelect = (selectedParty == null || selectedParty == TossupParty.getID()) ? regionData.partyVotesharePercentages[0] : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID())
+    if (!candidateDataToSelect && selectedParty)
+    {
+      regionData.partyVotesharePercentages.push({partyID: selectedParty.id, candidate: selectedParty.getCandidateName(), voteshare: 0.0})
+      candidateDataToSelect = regionData.partyVotesharePercentages[regionData.partyVotesharePercentages.length-1]
+    }
+
     let regionboxHTML = getKeyByValue(mapRegionNameToID, currentRegionID)
     regionboxHTML += "<div style='border-radius: 50px; color: white; font-size: 17px; line-height: 100%; margin-top: 5px; margin-bottom: 8px; display: block;'>"
     for (let candidateOn in regionData.partyVotesharePercentages)
@@ -1682,8 +1694,11 @@ async function updateRegionBox(regionID)
     regionboxHTML += "</div>"
 
     $("#regionbox").html(regionboxHTML)
-    let candidateToSelect = selectedParty == null || selectedParty == TossupParty.getID() ? regionData.partyVotesharePercentages[0].candidate : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID()).candidate
-    $("#regionVoteshare-" + candidateToSelect).focus().select()
+
+    if (candidateDataToSelect)
+    {
+      $("#regionVoteshare-" + candidateDataToSelect.candidate).focus().select()
+    }
 
     return
   }
@@ -1952,6 +1967,13 @@ function cycleSelectedRegionVoteshare(directionToCycle)
   }
 
   $("#regionVoteshare-" + regionData.partyVotesharePercentages[voteshareIndex].candidate).focus().select()
+}
+
+function closeRegionVoteshareEditing(regionID)
+{
+  if (!regionID) { return }
+  let previousRegionData = getRegionData(regionID).regionData
+  previousRegionData.partyVotesharePercentages = previousRegionData.partyVotesharePercentages.filter(candidateData => candidateData.voteshare > 0.0)
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)

@@ -398,6 +398,7 @@ document.addEventListener('keypress', async function(e) {
     else if (editingRegionVotesharePercentages)
     {
       editingRegionVotesharePercentages = false
+      closeRegionVoteshareEditing(voteshareEditRegion)
       $("#regionboxcontainer").trigger('hide')
     }
     else if (currentMapType.getCustomMapEnabled())
