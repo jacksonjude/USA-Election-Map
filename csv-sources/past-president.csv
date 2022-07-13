@@ -4123,176 +4123,535 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/8/2016,National Popular Vote,NPV,Johnson,libertarian,3.2848209425,,20210915
 11/8/2016,National Popular Vote,NPV,Stein,green,1.0662367159,,20210915
 11/8/2016,National Popular Vote,NPV,McMullin,independent,0.5355929448,,20210915
-11/3/2020,Alabama,AL,Trump,republican,62.03,,20201214
-11/3/2020,Alabama,AL,Biden,democrat,36.57,,20201214
-11/3/2020,Alabama,AL,Jorgensen,libertarian,1.08,,20201214
-11/3/2020,Alaska,AK,Trump,republican,52.83,,20201214
-11/3/2020,Alaska,AK,Biden,democrat,42.77,,20201214
-11/3/2020,Alaska,AK,Jorgensen,libertarian,2.47,,20201214
-11/3/2020,Arizona,AZ,Biden,democrat,49.36,,20201214
-11/3/2020,Arizona,AZ,Trump,republican,49.06,,20201214
-11/3/2020,Arizona,AZ,Jorgensen,libertarian,1.52,,20201214
-11/3/2020,Arkansas,AR,Trump,republican,62.40,,20201214
-11/3/2020,Arkansas,AR,Biden,democrat,34.78,,20201214
-11/3/2020,Arkansas,AR,Jorgensen,libertarian,1.08,,20201214
-11/3/2020,California,CA,Biden,democrat,63.48,,20201214
-11/3/2020,California,CA,Trump,republican,34.32,,20201214
-11/3/2020,California,CA,Jorgensen,libertarian,1.07,,20201214
-11/3/2020,Colorado,CO,Biden,democrat,55.40,,20201214
-11/3/2020,Colorado,CO,Trump,republican,41.90,,20201214
-11/3/2020,Colorado,CO,Jorgensen,libertarian,1.61,,20201214
-11/3/2020,Connecticut,CT,Biden,democrat,59.24,,20201214
-11/3/2020,Connecticut,CT,Trump,republican,39.21,,20201214
-11/3/2020,Connecticut,CT,Jorgensen,libertarian,1.11,,20201214
-11/3/2020,Delaware,DE,Biden,democrat,58.74,,20201214
-11/3/2020,Delaware,DE,Trump,republican,39.77,,20201214
-11/3/2020,Delaware,DE,Jorgensen,libertarian,0.99,,20201214
-11/3/2020,District of Columbia,DC,Biden,democrat,92.15,,20201214
-11/3/2020,District of Columbia,DC,Trump,republican,5.40,,20201214
-11/3/2020,District of Columbia,DC,Jorgensen,libertarian,0.59,,20201214
-11/3/2020,Florida,FL,Trump,republican,51.22,,20201214
-11/3/2020,Florida,FL,Biden,democrat,47.86,,20201214
-11/3/2020,Florida,FL,Jorgensen,libertarian,0.64,,20201214
-11/3/2020,Georgia,GA,Biden,democrat,49.47,,20201214
-11/3/2020,Georgia,GA,Trump,republican,49.24,,20201214
-11/3/2020,Georgia,GA,Jorgensen,libertarian,1.24,,20201214
-11/3/2020,Hawaii,HI,Biden,democrat,63.73,,20201214
-11/3/2020,Hawaii,HI,Trump,republican,34.27,,20201214
-11/3/2020,Hawaii,HI,Jorgensen,libertarian,0.96,,20201214
-11/3/2020,Idaho,ID,Trump,republican,63.84,,20201214
-11/3/2020,Idaho,ID,Biden,democrat,33.07,,20201214
-11/3/2020,Idaho,ID,Jorgensen,libertarian,1.89,,20201214
-11/3/2020,Illinois,IL,Biden,democrat,57.54,,20201214
-11/3/2020,Illinois,IL,Trump,republican,40.55,,20201214
-11/3/2020,Illinois,IL,Jorgensen,libertarian,1.10,,20201214
-11/3/2020,Indiana,IN,Trump,republican,57.02,,20201214
-11/3/2020,Indiana,IN,Biden,democrat,40.96,,20201214
-11/3/2020,Indiana,IN,Jorgensen,libertarian,1.95,,20201214
-11/3/2020,Iowa,IA,Trump,republican,53.10,,20201214
-11/3/2020,Iowa,IA,Biden,democrat,44.95,,20201214
-11/3/2020,Iowa,IA,Jorgensen,libertarian,1.16,,20201214
-11/3/2020,Kansas,KS,Trump,republican,56.18,,20201214
-11/3/2020,Kansas,KS,Biden,democrat,41.53,,20201214
-11/3/2020,Kansas,KS,Jorgensen,libertarian,2.20,,20201214
-11/3/2020,Kentucky,KY,Trump,republican,62.09,,20201214
-11/3/2020,Kentucky,KY,Biden,democrat,36.15,,20201214
-11/3/2020,Kentucky,KY,Jorgensen,libertarian,1.23,,20201214
-11/3/2020,Louisiana,LA,Trump,republican,58.46,,20201214
-11/3/2020,Louisiana,LA,Biden,democrat,39.85,,20201214
-11/3/2020,Louisiana,LA,Jorgensen,libertarian,1.01,,20201214
-11/3/2020,Maine,ME,Biden,democrat,53.09,,20201214
-11/3/2020,Maine,ME,Trump,republican,44.02,,20201214
-11/3/2020,Maine,ME,Jorgensen,libertarian,1.73,,20201214
-11/3/2020,Maine,ME,Hawkins,green,1.00,,20201214
+11/3/2020,Alabama,AL,Biden,democrat,36.5699902121223,,20210113
+11/3/2020,Alabama,AL,Trump,republican,62.0316431668648,,20210113
+11/3/2020,Alabama,AL,Jorgensen,libertarian,1.08363943765759,,20210113
+11/3/2020,Alabama,AL,Write-In,,0.314727183355271,,20210113
+11/3/2020,Alaska,AK,Biden,democrat,42.7719522710205,,20210113
+11/3/2020,Alaska,AK,Trump,republican,52.8331432703808,,20210113
+11/3/2020,Alaska,AK,Jorgensen,libertarian,2.47461964231079,,20210113
+11/3/2020,Alaska,AK,De La Fuente,alliance,0.088448808166217,,20210113
+11/3/2020,Alaska,AK,Pierce,independent,0.229466247601035,,20210113
+11/3/2020,Alaska,AK,Janos,green,0.743470642227352,,20210113
+11/3/2020,Alaska,AK,Blankenship,constitution party,0.313464801268323,,20210113
+11/3/2020,Alaska,AK,Write-In,,0.545434317025005,,20210113
+11/3/2020,Arizona,AZ,Biden,democrat,49.3646906143666,,20210113
+11/3/2020,Arizona,AZ,Trump,republican,49.0559810304647,,20210113
+11/3/2020,Arizona,AZ,Jorgensen,libertarian,1.51934003399732,,20210113
+11/3/2020,Arizona,AZ,La Riva,party for socialism and liberation,0.00560914420401225,,20210113
+11/3/2020,Arizona,AZ,Cummings,constitution party,0.00106278521760232,,20210113
+11/3/2020,Arizona,AZ,Simmons,independent,0.00696714753761522,,20210113
+11/3/2020,Arizona,AZ,Boddie,independent,0.000383783550800838,,20210113
+11/3/2020,Arizona,AZ,Hawkins,green,0.0459654606613004,,20210113
+11/3/2020,Arkansas,AR,Carroll,american solidarity party,0.140517066712385,,20210113
+11/3/2020,Arkansas,AR,Blankenship,constitution party,0.17291884216562,,20210113
+11/3/2020,Arkansas,AR,Biden,democrat,34.775061953015,,20210113
+11/3/2020,Arkansas,AR,Hawkins,green,0.244448837596559,,20210113
+11/3/2020,Arkansas,AR,Pierce,independent,0.175625825937662,,20210113
+11/3/2020,Arkansas,AR,Gammon,independent,0.120993971629169,,20210113
+11/3/2020,Arkansas,AR,West,independent,0.33624019641218,,20210113
+11/3/2020,Arkansas,AR,Collins,independent,0.230667829302525,,20210113
+11/3/2020,Arkansas,AR,De La Fuente,independent,0.108361380692971,,20210113
+11/3/2020,Arkansas,AR,Jorgensen,libertarian,1.07729751146162,,20210113
+11/3/2020,Arkansas,AR,Myers,life and liberty party,0.112544901067946,,20210113
+11/3/2020,Arkansas,AR,Trump,republican,62.3957298561443,,20210113
+11/3/2020,Arkansas,AR,La Riva,party for socialism and liberation,0.109591827862082,,20210113
+11/3/2020,California,CA,Biden,democrat,63.4839468938735,,20210113
+11/3/2020,California,CA,Trump,republican,34.3207236252849,,20210113
+11/3/2020,California,CA,Jorgensen,libertarian,1.0736316646002,,20210113
+11/3/2020,California,CA,Hawkins,green,0.462999548422734,,20210113
+11/3/2020,California,CA,De La Fuente,american independent,0.343754123006722,,20210113
+11/3/2020,California,CA,La Riva,peace & freedom,0.291625318748239,,20210113
+11/3/2020,California,CA,Carroll,american solidarity party,0.014884964934051,,20210113
+11/3/2020,California,CA,Janos,independent,0.00349125281178702,,20210113
+11/3/2020,California,CA,Mark Charles,independent,0.00319412491291153,,20210113
+11/3/2020,California,CA,Pierce,independent,0.00105708964023011,,20210113
+11/3/2020,California,CA,Joseph Kishore,independent,0.000691393764691046,,20210113
+11/3/2020,Colorado,CO,Biden,democrat,55.3995419069199,,20210113
+11/3/2020,Colorado,CO,Trump,republican,41.8979238435606,,20210113
+11/3/2020,Colorado,CO,Jorgensen,libertarian,1.61069456981621,,20210113
+11/3/2020,Colorado,CO,Hawkins,green,0.275899759900276,,20210113
+11/3/2020,Colorado,CO,La Riva,party for socialism and liberation,0.0317779046847079,,20210113
+11/3/2020,Colorado,CO,De La Fuente,alliance,0.0195272921540814,,20210113
+11/3/2020,Colorado,CO,Pierce,independent,0.0175622816228531,,20210113
+11/3/2020,Colorado,CO,West,independent,0.248358909173529,,20210113
+11/3/2020,Colorado,CO,Blankenship,constitution party,0.155389348414789,,20210113
+11/3/2020,Colorado,CO,Hammons,unity party,0.0838199804727078,,20210113
+11/3/2020,Colorado,CO,Huber,approval voting party,0.0108996677904071,,20210113
+11/3/2020,Colorado,CO,Carroll,american solidarity party,0.0772187732193627,,20210113
+11/3/2020,Colorado,CO,Charles,independent,0.0617443152859397,,20210113
+11/3/2020,Colorado,CO,Collins,prohibition party,0.0174394684646513,,20210113
+11/3/2020,Colorado,CO,Hunter,progressive party,0.0116365467396177,,20210113
+11/3/2020,Colorado,CO,Jacob-Fambro,independent,0.015198128327469,,20210113
+11/3/2020,Colorado,CO,Kennedy,socialist workers party,0.0108689645008566,,20210113
+11/3/2020,Colorado,CO,Kishore,socialist equality party,0.00601784475188672,,20210113
+11/3/2020,Colorado,CO,Kopitke,independent american party,0.0233959066374371,,20210113
+11/3/2020,Colorado,CO,Mchugh,independent,0.0188518197839717,,20210113
+11/3/2020,Colorado,CO,Scott,independent,0.00537307567132743,,20210113
+11/3/2020,Colorado,CO,Cella,independent,0.00012281315820177,,20210113
+11/3/2020,Colorado,CO,Hoefling,non-affiliated,0.000736878949210618,,20210113
+11/3/2020,Connecticut,CT,Biden,democrat,59.2607315156835,,20210113
+11/3/2020,Connecticut,CT,Trump,republican,39.2196866311339,,20210113
+11/3/2020,Connecticut,CT,Jorgensen,libertarian,1.1091878365464,,20210113
+11/3/2020,Connecticut,CT,Hawkins,green,0.413299946212888,,20210113
+11/3/2020,Connecticut,CT,Carroll,american solidarity party,0.0121171780463052,,20210113
+11/3/2020,Connecticut,CT,Charles,independent,0.000603117459318357,,20210113
+11/3/2020,Connecticut,CT,Klojzy,,0,,20210113
+11/3/2020,Connecticut,CT,Weinstein,,0.0000548288599380324,,20210113
+11/3/2020,Connecticut,CT,Wells,non-affiliated,0.000328973159628195,,20210113
+11/3/2020,Connecticut,CT,Simmons,,0.000109657719876065,,20210113
+11/3/2020,Connecticut,CT,De La Fuente,alliance,0.000712775179194421,,20210113
+11/3/2020,Connecticut,CT,Howard,,0.000657946319256389,,20210113
+11/3/2020,Connecticut,CT,Simmons,independent,0.00120623491863671,,20210113
+11/3/2020,Connecticut,CT,West,independent,0.0141458458640124,,20210113
+11/3/2020,Delaware,DE,Bellar,,0.00138793605976849,,20210113
+11/3/2020,Delaware,DE,Carroll,american solidarity party,0.0172500624571227,,20210113
+11/3/2020,Delaware,DE,Pierce,independent,0.000991382899834637,,20210113
+11/3/2020,Delaware,DE,Rouse,,0.000198276579966927,,20210113
+11/3/2020,Delaware,DE,Ball,,0.000594829739900782,,20210113
+11/3/2020,Delaware,DE,La Riva,party for socialism and liberation,0.00277587211953698,,20210113
+11/3/2020,Delaware,DE,Simmons,independent,0.00555174423907397,,20210113
+11/3/2020,Delaware,DE,West,independent,0.0335087420144107,,20210113
+11/3/2020,Delaware,DE,Wells,non-affiliated,0.000198276579966927,,20210113
+11/3/2020,Delaware,DE,Gibson,,0.000198276579966927,,20210113
+11/3/2020,Delaware,DE,Charles,independent,0.00158621263973542,,20210113
+11/3/2020,Delaware,DE,Williams,,0.000396553159933855,,20210113
+11/3/2020,Delaware,DE,Boddie,independent,0.000198276579966927,,20210113
+11/3/2020,Delaware,DE,Jacob?fambro,independent,0.000396553159933855,,20210113
+11/3/2020,Delaware,DE,Howard,,0.00079310631986771,,20210113
+11/3/2020,Delaware,DE,Cella,independent,0.000396553159933855,,20210113
+11/3/2020,Delaware,DE,Hoefling,non-affiliated,0.000198276579966927,,20210113
+11/3/2020,Delaware,DE,Biden,democrat,58.7430057936417,,20210113
+11/3/2020,Delaware,DE,Trump,republican,39.7748767711056,,20210113
+11/3/2020,Delaware,DE,Jorgensen,libertarian,0.991382899834637,,20210113
+11/3/2020,Delaware,DE,Hawkins,green,0.424113604549258,,20210113
+11/3/2020,District of Columbia,DC,Biden,democrat,92.1496939214069,,20210113
+11/3/2020,District of Columbia,DC,Trump,republican,5.3973213767148,,20210113
+11/3/2020,District of Columbia,DC,Jorgensen,libertarian,0.591248591573836,,20210113
+11/3/2020,District of Columbia,DC,Hawkins,dc statehood green,0.501225475960924,,20210113
+11/3/2020,District of Columbia,DC,La Riva,independent,0.248289560803355,,20210113
+11/3/2020,District of Columbia,DC,Write-In,,0.910975850573244,,20210113
+11/3/2020,District of Columbia,DC,Pierce,independent,0.20124522296693,,20210113
+11/3/2020,Florida,FL,Biden,democrat,47.8614507254422,,20210113
+11/3/2020,Florida,FL,Trump,republican,51.219819622504,,20210113
+11/3/2020,Florida,FL,Jorgensen,libertarian,0.635412510336612,,20210113
+11/3/2020,Florida,FL,Hawkins,green,0.133011597245112,,20210113
+11/3/2020,Florida,FL,La Riva,party for socialism and liberation,0.0516107766771334,,20210113
+11/3/2020,Florida,FL,De La Fuente,alliance,0.053905793707244,,20210113
+11/3/2020,Florida,FL,Howard,,0.0000813195010669119,,20210113
+11/3/2020,Florida,FL,Blankenship,constitution party,0.0352565214625656,,20210113
+11/3/2020,Florida,FL,Wells,non-affiliated,0.0000722840009483661,,20210113
+11/3/2020,Florida,FL,Walls-windhauser,,0.0000180710002370915,,20210113
+11/3/2020,Florida,FL,Simmons,independent,0.00163542552145678,,20210113
+11/3/2020,Florida,FL,Carroll,american solidarity party,0.00771631710123808,,20210113
+11/3/2020,Florida,FL,Laboch,,0.00000903550011854576,,20210113
+11/3/2020,Georgia,GA,Bellar,,0.0002000016000128,,20210113
+11/3/2020,Georgia,GA,Carroll,american solidarity party,0.0140201121608973,,20210113
+11/3/2020,Georgia,GA,Byrne,,0.00012000096000768,,20210113
+11/3/2020,Georgia,GA,Rouse,,0.00002000016000128,,20210113
+11/3/2020,Georgia,GA,Blankenship,constitution party,0.00122000976007808,,20210113
+11/3/2020,Georgia,GA,La Riva,party for socialism and liberation,0.00318002544020352,,20210113
+11/3/2020,Georgia,GA,Hawkins,green,0.0202601620812967,,20210113
+11/3/2020,Georgia,GA,Simmons,independent,0.00362002896023168,,20210113
+11/3/2020,Georgia,GA,Wells,non-affiliated,0.00012000096000768,,20210113
+11/3/2020,Georgia,GA,Gibson,,0.00004000032000256,,20210113
+11/3/2020,Georgia,GA,Collins,,0.00022000176001408,,20210113
+11/3/2020,Georgia,GA,Charles,independent,0.0013000104000832,,20210113
+11/3/2020,Georgia,GA,Sherrill,,0.00016000128001024,,20210113
+11/3/2020,Georgia,GA,Boddie,independent,0.00016000128001024,,20210113
+11/3/2020,Georgia,GA,Jacob-Fambro,independent,0.00014000112000896,,20210113
+11/3/2020,Georgia,GA,Howard,,0.0001000008000064,,20210113
+11/3/2020,Georgia,GA,Biden,democrat,49.4730557844463,,20210113
+11/3/2020,Georgia,GA,Trump,republican,49.2374738997912,,20210113
+11/3/2020,Georgia,GA,Jorgensen,libertarian,1.24458995671965,,20210113
+11/3/2020,Hawaii,HI,Biden,democrat,63.733639239019,,20210113
+11/3/2020,Hawaii,HI,Trump,republican,34.2688639421796,,20210113
+11/3/2020,Hawaii,HI,Jorgensen,libertarian,0.964194760726863,,20210113
+11/3/2020,Hawaii,HI,Hawkins,green,0.665310051543251,,20210113
+11/3/2020,Hawaii,HI,Pierce,american shopping party,0.205929301668149,,20210113
+11/3/2020,Hawaii,HI,Blankenship,constitution party,0.1620627048631,,20210113
+11/3/2020,Idaho,ID,Biden,democrat,33.0694499812198,,20210113
+11/3/2020,Idaho,ID,Trump,republican,63.84344892584,,20210113
+11/3/2020,Idaho,ID,Jorgensen,libertarian,1.89000546124475,,20210113
+11/3/2020,Idaho,ID,Hawkins,green,0.0468929665158872,,20210113
+11/3/2020,Idaho,ID,Pierce,independent,0.323526904119438,,20210113
+11/3/2020,Idaho,ID,Blankenship,constitution party,0.208080337905878,,20210113
+11/3/2020,Idaho,ID,De La Fuente,independent,0.171787255712992,,20210113
+11/3/2020,Idaho,ID,West,independent,0.418464998490669,,20210113
+11/3/2020,Idaho,ID,La Riva,party for socialism and liberation,0.00564559056333777,,20210113
+11/3/2020,Idaho,ID,Carroll,american solidarity party,0.018780229833144,,20210113
+11/3/2020,Idaho,ID,Cella,independent,0.000115216133945669,,20210113
+11/3/2020,Idaho,ID,Franklin,,0.000115216133945669,,20210113
+11/3/2020,Idaho,ID,Hoefling,non-affiliated,0.000806512937619681,,20210113
+11/3/2020,Idaho,ID,Howard,,0.000460864535782675,,20210113
+11/3/2020,Idaho,ID,Simmons,independent,0.00241953881285904,,20210113
+11/3/2020,Illinois,IL,Biden,democrat,57.5416453766758,,20210113
+11/3/2020,Illinois,IL,Trump,republican,40.5534508181737,,20210113
+11/3/2020,Illinois,IL,Jorgensen,libertarian,1.10286434142124,,20210113
+11/3/2020,Illinois,IL,Hawkins,green,0.505391098029863,,20210113
+11/3/2020,Illinois,IL,Carroll,american solidarity party,0.158243398832201,,20210113
+11/3/2020,Illinois,IL,La Riva,party for socialism and liberation,0.133350061479251,,20210113
+11/3/2020,Illinois,IL,Farney,,0.00139217066421291,,20210113
+11/3/2020,Illinois,IL,Simmons,independent,0.00129272990248342,,20210113
+11/3/2020,Illinois,IL,Mark Charles,independent,0.00124300952161867,,20210113
+11/3/2020,Illinois,IL,Wells,non-affiliated,0.000298322285188481,,20210113
+11/3/2020,Illinois,IL,Blankenship,constitution party,0.000298322285188481,,20210113
+11/3/2020,Illinois,IL,Williams Jr.,,0.000132587682305991,,20210113
+11/3/2020,Illinois,IL,Bellar,,0.000116014222017743,,20210113
+11/3/2020,Illinois,IL,Kishore,independent,0.0000828673014412447,,20210113
+11/3/2020,Illinois,IL,Mckee,,0.0000662938411529957,,20210113
+11/3/2020,Illinois,IL,Collins,independent,0.0000497203808647468,,20210113
+11/3/2020,Illinois,IL,Struck,,0.0000331469205764979,,20210113
+11/3/2020,Illinois,IL,Rouse,,0.0000165734602882489,,20210113
+11/3/2020,Illinois,IL,Higgs,,0.0000165734602882489,,20210113
+11/3/2020,Illinois,IL,Simmons,,0.0000165734602882489,,20210113
+11/3/2020,Indiana,IN,Biden,democrat,40.9616770597122,,20210113
+11/3/2020,Indiana,IN,Trump,republican,57.0211577657051,,20210113
+11/3/2020,Indiana,IN,Jorgensen,libertarian,1.95284192702031,,20210113
+11/3/2020,Indiana,IN,Hawkins,green,0.0325737409490828,,20210113
+11/3/2020,Indiana,IN,Carroll,american solidarity party,0.0294416504732094,,20210113
+11/3/2020,Indiana,IN,Howard,,0.000758295588895651,,20210113
+11/3/2020,Indiana,IN,Mccray,,0.000560479348314177,,20210113
+11/3/2020,Indiana,IN,Schriner,,0.000428601854593194,,20210113
+11/3/2020,Indiana,IN,Johnson Jr. James L.,,0.000164846867151229,,20210113
+11/3/2020,Indiana,IN,Rouse,,0.000131877493720983,,20210113
+11/3/2020,Indiana,IN,Williams,,0.000131877493720983,,20210113
+11/3/2020,Indiana,IN,Stried,,0.0000659387468604914,,20210113
+11/3/2020,Indiana,IN,F,,0.0000329693734302457,,20210113
+11/3/2020,Indiana,IN,Wells,non-affiliated,0.0000329693734302457,,20210113
+11/3/2020,Iowa,IA,Trump,republican,53.0893249692023,,20210113
+11/3/2020,Iowa,IA,Biden,democrat,44.8917155714422,,20210113
+11/3/2020,Iowa,IA,De La Fuente,independent,0.0639906888225063,,20210113
+11/3/2020,Iowa,IA,Blankenship,constitution party,0.100953887079499,,20210113
+11/3/2020,Iowa,IA,King,geneology know your family history party,0.0322910499973091,,20210113
+11/3/2020,Iowa,IA,Hawkins,green,0.181858935424406,,20210113
+11/3/2020,Iowa,IA,Jorgensen,libertarian,1.16135411867611,,20210113
+11/3/2020,Iowa,IA,Pierce,independent,0.0321727677628867,,20210113
+11/3/2020,Iowa,IA,West,independent,0.189842986247916,,20210113
+11/3/2020,Iowa,IA,Write-In,,0.256495025344926,,20210113
+11/3/2020,Kansas,KS,Trump,republican,56.1434944941375,,20210113
+11/3/2020,Kansas,KS,Biden,democrat,41.5085262629277,,20210113
+11/3/2020,Kansas,KS,Jorgensen,libertarian,2.22519814554691,,20210113
+11/3/2020,Kansas,KS,Hawkins,green,0.0486903107009512,,20210113
+11/3/2020,Kentucky,KY,Trump,republican,62.0865718692904,,20210113
+11/3/2020,Kentucky,KY,Biden,democrat,36.151514811154,,20210113
+11/3/2020,Kentucky,KY,Jorgensen,libertarian,1.22774208524276,,20210113
+11/3/2020,Kentucky,KY,West,independent,0.303402147542457,,20210113
+11/3/2020,Kentucky,KY,Pierce,independent,0.168431949561206,,20210113
+11/3/2020,Kentucky,KY,Hawkins,green,0.0335085512325156,,20210113
+11/3/2020,Kentucky,KY,Carroll,american solidarity party,0.0190942582442268,,20210113
+11/3/2020,Kentucky,KY,La Riva,party for socialism and liberation,0.00458636595081918,,20210113
+11/3/2020,Kentucky,KY,Charles,independent,0.00201238506005331,,20210113
+11/3/2020,Kentucky,KY,Simmons,independent,0.001357189924222,,20210113
+11/3/2020,Kentucky,KY,Hoefling,non-affiliated,0.000935993051187588,,20210113
+11/3/2020,Kentucky,KY,Howard,,0.000421196873034415,,20210113
+11/3/2020,Kentucky,KY,Boddie,independent,0.000327597567915656,,20210113
+11/3/2020,Kentucky,KY,Wells,non-affiliated,0.0000467996525593794,,20210113
+11/3/2020,Kentucky,KY,Stevens,,0.0000467996525593794,,20210113
+11/3/2020,Louisiana,LA,Biden,democrat,39.8514568015262,,20210113
+11/3/2020,Louisiana,LA,Jorgensen,libertarian,1.0076524793046,,20210113
+11/3/2020,Louisiana,LA,Trump,republican,58.4608824140085,,20210113
+11/3/2020,Louisiana,LA,Carroll,american solidarity party,0.116244316970367,,20210113
+11/3/2020,Louisiana,LA,Jade Simmons,becoming one nation,0.0756961391244759,,20210113
+11/3/2020,Louisiana,LA,Boddie,c.u.p,0.0523727899846466,,20210113
+11/3/2020,Louisiana,LA,Blankenship,constitution party,0.0400360883438188,,20210113
+11/3/2020,Louisiana,LA,Pierce,freedom and prosperity,0.0348686397320003,,20210113
+11/3/2020,Louisiana,LA,Hoefling,life liberty constitution,0.0310977988531057,,20210113
+11/3/2020,Louisiana,LA,La Riva,party for socialism and liberation,0.0459483944131966,,20210113
+11/3/2020,Louisiana,LA,Kennedy,socialist workers party,0.0249527248282405,,20210113
+11/3/2020,Louisiana,LA,West,the birthday party,0.22797293560428,,20210113
+11/3/2020,Louisiana,LA,Hammons,unity party,0.0308184773065209,,20210113
+11/3/2020,Maine,ME,Biden,democrat,53.0924595557324,,20210113
+11/3/2020,Maine,ME,Jorgensen,libertarian,1.72698883778484,,20210113
+11/3/2020,Maine,ME,Trump,republican,44.0212529943463,,20210113
+11/3/2020,Maine,ME,Hawkins,green,1.00431869240879,,20210113
+11/3/2020,Maine,ME,De La Fuente,alliance,0.14436318506921,,20210113
+11/3/2020,Maine,ME,Write-In,,0.0106167346585133,,20210113
 11/3/2020,Maine 1st CD,ME-1,Biden,democrat,60.11,,20201214
 11/3/2020,Maine 1st CD,ME-1,Trump,republican,37.02,,20201214
-11/3/2020,Maine 1st CD,ME-1,Jorgensen,libertarian,1.66,,20201214
-11/3/2020,Maine 1st CD,ME-1,Hawkins,green,1.05,,20201214
 11/3/2020,Maine 2nd CD,ME-2,Trump,republican,52.26,,20201214
 11/3/2020,Maine 2nd CD,ME-2,Biden,democrat,44.82,,20201214
-11/3/2020,Maine 2nd CD,ME-2,Jorgensen,libertarian,1.81,,20201214
-11/3/2020,Maryland,MD,Biden,democrat,65.36,,20201214
-11/3/2020,Maryland,MD,Trump,republican,32.15,,20201214
-11/3/2020,Maryland,MD,Jorgensen,libertarian,1.10,,20201214
-11/3/2020,Massachusetts,MA,Biden,democrat,65.60,,20201214
-11/3/2020,Massachusetts,MA,Trump,republican,32.14,,20201214
-11/3/2020,Massachusetts,MA,Jorgensen,libertarian,1.29,,20201214
-11/3/2020,Michigan,MI,Biden,democrat,50.62,,20201214
-11/3/2020,Michigan,MI,Trump,republican,47.84,,20201214
-11/3/2020,Michigan,MI,Jorgensen,libertarian,1.09,,20201214
-11/3/2020,Minnesota,MN,Biden,democrat,52.40,,20201214
-11/3/2020,Minnesota,MN,Trump,republican,45.28,,20201214
-11/3/2020,Minnesota,MN,Jorgensen,libertarian,1.07,,20201214
-11/3/2020,Mississippi,MS,Trump,republican,57.60,,20201214
-11/3/2020,Mississippi,MS,Biden,democrat,41.06,,20201214
-11/3/2020,Mississippi,MS,Jorgensen,libertarian,0.61,,20201214
-11/3/2020,Missouri,MO,Trump,republican,56.80,,20201214
-11/3/2020,Missouri,MO,Biden,democrat,41.41,,20201214
-11/3/2020,Missouri,MO,Jorgensen,libertarian,1.36,,20201214
-11/3/2020,Montana,MT,Trump,republican,56.92,,20201214
-11/3/2020,Montana,MT,Biden,democrat,40.55,,20201214
-11/3/2020,Montana,MT,Jorgensen,libertarian,2.53,,20201214
-11/3/2020,Nebraska,NE,Trump,republican,58.51,,20201214
-11/3/2020,Nebraska,NE,Biden,democrat,39.36,,20201214
-11/3/2020,Nebraska,NE,Jorgensen,libertarian,2.13,,20201214
+11/3/2020,Maryland,MD,Trump,republican,32.1502915677488,,20210113
+11/3/2020,Maryland,MD,Biden,democrat,65.3606648600771,,20210113
+11/3/2020,Maryland,MD,Jorgensen,libertarian,1.10265621347171,,20210113
+11/3/2020,Maryland,MD,Hawkins,green,0.520212180979444,,20210113
+11/3/2020,Maryland,MD,Segal,bread and roses,0.193741912328821,,20210113
+11/3/2020,Maryland,MD,Ball,,0.000263415244498737,,20210113
+11/3/2020,Maryland,MD,Bellar,,0.00075731882793387,,20210113
+11/3/2020,Maryland,MD,Boddie,independent,0.000131707622249369,,20210113
+11/3/2020,Maryland,MD,Carroll,american solidarity party,0.026176889922062,,20210113
+11/3/2020,Maryland,MD,Cella,independent,0.000362195961185764,,20210113
+11/3/2020,Maryland,MD,Charles,independent,0.000987807166870265,,20210113
+11/3/2020,Maryland,MD,Collins,independent,0.000329269055623422,,20210113
+11/3/2020,Maryland,MD,De La Fuente,alliance,0.000856099544620896,,20210113
+11/3/2020,Maryland,MD,Hoefling,non-affiliated,0.000362195961185764,,20210113
+11/3/2020,Maryland,MD,Howard,,0.000658538111246843,,20210113
+11/3/2020,Maryland,MD,Lee,,0.0000329269055623422,,20210113
+11/3/2020,Maryland,MD,Pierce,independent,0.000526830488997475,,20210113
+11/3/2020,Maryland,MD,Rouse,,0.000197561433374053,,20210113
+11/3/2020,Maryland,MD,Sherrill,,0.0000987807166870265,,20210113
+11/3/2020,Maryland,MD,Simmons,becoming one nation,0.00431342462866682,,20210113
+11/3/2020,Maryland,MD,Wells,non-affiliated,0.000164634527811711,,20210113
+11/3/2020,Maryland,MD,West,the birthday party,0.0367793535131362,,20210113
+11/3/2020,Maryland,MD,La Riva,party for socialism and liberation,0.00411586319529277,,20210113
+11/3/2020,Maryland,MD,Raley,,0.00105366097799495,,20210113
+11/3/2020,Maryland,MD,Schawlb,,0.0000987807166870265,,20210113
+11/3/2020,Maryland,MD,Write-In,,0.594166010872464,,20210113
+11/3/2020,Massachusetts,MA,Biden,democrat,65.6000630059685,,20210113
+11/3/2020,Massachusetts,MA,Trump,republican,32.1419110305056,,20210113
+11/3/2020,Massachusetts,MA,Jorgensen,libertarian,1.2946239496481,,20210113
+11/3/2020,Massachusetts,MA,Hawkins,green-rainbow,0.513796049019084,,20210113
+11/3/2020,Massachusetts,MA,Write-In,,0.449605964858752,,20210113
+11/3/2020,Michigan,MI,Biden,democrat,50.6208182908244,,20210113
+11/3/2020,Michigan,MI,Trump,republican,47.8372906911376,,20210113
+11/3/2020,Michigan,MI,Jorgensen,libertarian,1.0900470853548,,20210113
+11/3/2020,Michigan,MI,Blankenship,us taxpayers party,0.130612124054619,,20210113
+11/3/2020,Michigan,MI,Hawkins,green,0.247648530446616,,20210113
+11/3/2020,Michigan,MI,De La Fuente,natural law,0.053905708697594,,20210113
+11/3/2020,Michigan,MI,Carroll,american solidarity party,0.0173848618472147,,20210113
+11/3/2020,Michigan,MI,Hoefling,,0.000577690113303084,,20210113
+11/3/2020,Michigan,MI,Hunter,,0.0000180528160407214,,20210113
+11/3/2020,Michigan,MI,Simmons,becoming one nation,0.0016067006276242,,20210113
+11/3/2020,Michigan,MI,Wells,non-affiliated,0.0000902640802036069,,20210113
+11/3/2020,Minnesota,MN,Trump,republican,45.2849424091694,,20210113
+11/3/2020,Minnesota,MN,Biden,democrat,52.39509930974,,20210113
+11/3/2020,Minnesota,MN,De La Fuente,alliance,0.171214745889061,,20210113
+11/3/2020,Minnesota,MN,Hawkins,green,0.306148199163242,,20210113
+11/3/2020,Minnesota,MN,West,independent,0.242282139076661,,20210113
+11/3/2020,Minnesota,MN,Pierce,independent,0.172435310821437,,20210113
+11/3/2020,Minnesota,MN,La Riva,party for socialism and liberation,0.0369220892043778,,20210113
+11/3/2020,Minnesota,MN,Kennedy,socialist workers party,0.0196205812879462,,20210113
+11/3/2020,Minnesota,MN,Jorgensen,libertarian,1.06726197686968,,20210113
+11/3/2020,Minnesota,MN,Write-In,,0.304073238778202,,20210113
+11/3/2020,Mississippi,MS,Biden,democrat,41.0576064559786,,20210113
+11/3/2020,Mississippi,MS,Trump,republican,57.6029545753825,,20210113
+11/3/2020,Mississippi,MS,Blankenship,constitution party,0.0973542331584408,,20210113
+11/3/2020,Mississippi,MS,Carroll,american solidarity party,0.0883723727106722,,20210113
+11/3/2020,Mississippi,MS,Collins,independent,0.100246696692468,,20210113
+11/3/2020,Mississippi,MS,Hawkins,green,0.114023957209808,,20210113
+11/3/2020,Mississippi,MS,Jorgensen,libertarian,0.610918745371107,,20210113
+11/3/2020,Mississippi,MS,Pierce,independent,0.0501614070769449,,20210113
+11/3/2020,Mississippi,MS,West,independent,0.278361556419404,,20210113
+11/3/2020,Missouri,MO,Trump,republican,56.7996557788895,,20210113
+11/3/2020,Missouri,MO,Biden,democrat,41.4087817361884,,20210113
+11/3/2020,Missouri,MO,Jorgensen,libertarian,1.36171571222639,,20210113
+11/3/2020,Missouri,MO,Hawkins,green,0.273731130794108,,20210113
+11/3/2020,Missouri,MO,Blankenship,constitution party,0.129512531882423,,20210113
+11/3/2020,Missouri,MO,Write-In,,0,,20210113
+11/3/2020,Missouri,MO,Wells,non-affiliated,0.0000991420249163737,,20210113
+11/3/2020,Missouri,MO,Simmons,becoming one nation,0.00244550328127055,,20210113
+11/3/2020,Missouri,MO,Carroll,american solidarity party,0.0219434348481574,,20210113
+11/3/2020,Missouri,MO,La Riva,party for socialism and liberation,0.00211502986488264,,20210113
+11/3/2020,Montana,MT,Jorgensen,libertarian,2.52652921941313,,20210113
+11/3/2020,Montana,MT,Trump,republican,56.9184692400203,,20210113
+11/3/2020,Montana,MT,Biden,democrat,40.5493693616091,,20210113
+11/3/2020,Montana,MT,Bellar,,0.000331304644559812,,20210113
+11/3/2020,Montana,MT,Simmons,becoming one nation,0.000993913933679436,,20210113
+11/3/2020,Montana,MT,Charles,independent,0.00381000341243784,,20210113
+11/3/2020,Montana,MT,Hoefling,,0.000496956966839718,,20210113
+11/3/2020,Nebraska,NE,Trump,republican,58.2241633320542,,20210113
+11/3/2020,Nebraska,NE,Biden,democrat,39.166630941788,,20210113
+11/3/2020,Nebraska,NE,Jorgensen,libertarian,2.12080306739037,,20210113
+11/3/2020,Nebraska,NE,Write-In,,0.48840265876746,,20210113
 11/3/2020,Nebraska 1st CD,NE-1,Trump,republican,56.01,,20201214
 11/3/2020,Nebraska 1st CD,NE-1,Biden,democrat,41.09,,20201214
-11/3/2020,Nebraska 1st CD,NE-1,Jorgensen,libertarian,2.34,,20201214
 11/3/2020,Nebraska 2nd CD,NE-2,Biden,democrat,52.30,,20201214
 11/3/2020,Nebraska 2nd CD,NE-2,Trump,republican,45.66,,20201214
-11/3/2020,Nebraska 2nd CD,NE-2,Jorgensen,libertarian,2.04,,20201214
 11/3/2020,Nebraska 3rd CD,NE-3,Trump,republican,75.59,,20201214
 11/3/2020,Nebraska 3rd CD,NE-3,Biden,democrat,22.41,,20201214
-11/3/2020,Nebraska 3rd CD,NE-3,Jorgensen,libertarian,2.00,,20201214
-11/3/2020,Nevada,NV,Biden,democrat,50.06,,20201214
-11/3/2020,Nevada,NV,Trump,republican,47.67,,20201214
-11/3/2020,Nevada,NV,Jorgensen,libertarian,1.05,,20201214
-11/3/2020,New Hampshire,NH,Biden,democrat,52.78,,20201214
-11/3/2020,New Hampshire,NH,Trump,republican,45.42,,20201214
-11/3/2020,New Hampshire,NH,Jorgensen,libertarian,1.64,,20201214
-11/3/2020,New Jersey,NJ,Biden,democrat,57.33,,20201214
-11/3/2020,New Jersey,NJ,Trump,republican,41.40,,20201214
-11/3/2020,New Jersey,NJ,Jorgensen,libertarian,0.70,,20201214
-11/3/2020,New Mexico,NM,Biden,democrat,54.29,,20201214
-11/3/2020,New Mexico,NM,Trump,republican,43.50,,20201214
-11/3/2020,New Mexico,NM,Jorgensen,libertarian,1.36,,20201214
-11/3/2020,New York,NY,Biden,democrat,60.86,,20201214
-11/3/2020,New York,NY,Trump,republican,37.75,,20201214
-11/3/2020,New York,NY,Jorgensen,libertarian,0.70,,20201214
-11/3/2020,North Carolina,NC,Trump,republican,49.93,,20201214
-11/3/2020,North Carolina,NC,Biden,democrat,48.59,,20201214
-11/3/2020,North Carolina,NC,Jorgensen,libertarian,0.88,,20201214
-11/3/2020,North Dakota,ND,Trump,republican,65.11,,20201214
-11/3/2020,North Dakota,ND,Biden,democrat,31.76,,20201214
-11/3/2020,North Dakota,ND,Jorgensen,libertarian,2.60,,20201214
-11/3/2020,Ohio,OH,Trump,republican,53.27,,20201214
-11/3/2020,Ohio,OH,Biden,democrat,45.24,,20201214
-11/3/2020,Ohio,OH,Jorgensen,libertarian,1.14,,20201214
-11/3/2020,Oklahoma,OK,Trump,republican,65.37,,20201214
-11/3/2020,Oklahoma,OK,Biden,democrat,32.29,,20201214
-11/3/2020,Oklahoma,OK,Jorgensen,libertarian,1.58,,20201214
-11/3/2020,Oregon,OR,Biden,democrat,56.45,,20201214
-11/3/2020,Oregon,OR,Trump,republican,40.37,,20201214
-11/3/2020,Oregon,OR,Jorgensen,libertarian,1.75,,20201214
-11/3/2020,Pennsylvania,PA,Biden,democrat,50.0,,20201214
-11/3/2020,Pennsylvania,PA,Trump,republican,48.8,,20201214
-11/3/2020,Pennsylvania,PA,Jorgensen,libertarian,1.15,,20201214
-11/3/2020,Rhode Island,RI,Biden,democrat,59.38,,20201214
-11/3/2020,Rhode Island,RI,Trump,republican,38.61,,20201214
-11/3/2020,Rhode Island,RI,Jorgensen,libertarian,0.98,,20201214
-11/3/2020,South Carolina,SC,Trump,republican,55.11,,20201214
-11/3/2020,South Carolina,SC,Biden,democrat,43.43,,20201214
-11/3/2020,South Carolina,SC,Jorgensen,libertarian,1.11,,20201214
-11/3/2020,South Dakota,SD,Trump,republican,61.77,,20201214
-11/3/2020,South Dakota,SD,Biden,democrat,35.60,,20201214
-11/3/2020,South Dakota,SD,Jorgensen,libertarian,2.63,,20201214
-11/3/2020,Tennessee,TN,Trump,republican,60.70,,20201214
-11/3/2020,Tennessee,TN,Biden,democrat,37.50,,20201214
-11/3/2020,Tennessee,TN,Jorgensen,libertarian,0.98,,20201214
-11/3/2020,Texas,TX,Trump,republican,52.06,,20201214
-11/3/2020,Texas,TX,Biden,democrat,46.48,,20201214
-11/3/2020,Texas,TX,Jorgensen,libertarian,1.12,,20201214
-11/3/2020,Utah,UT,Trump,republican,58.13,,20201214
-11/3/2020,Utah,UT,Biden,democrat,37.65,,20201214
-11/3/2020,Utah,UT,Jorgensen,libertarian,2.58,,20201214
-11/3/2020,Vermont,VT,Biden,democrat,66.09,,20201214
-11/3/2020,Vermont,VT,Trump,republican,30.67,,20201214
-11/3/2020,Vermont,VT,Jorgensen,libertarian,0.98,,20201214
-11/3/2020,Virginia,VA,Biden,democrat,54.11,,20201214
-11/3/2020,Virginia,VA,Trump,republican,44.00,,20201214
-11/3/2020,Virginia,VA,Jorgensen,libertarian,1.45,,20201214
-11/3/2020,Washington,WA,Biden,democrat,57.97,,20201214
-11/3/2020,Washington,WA,Trump,republican,38.77,,20201214
-11/3/2020,Washington,WA,Jorgensen,libertarian,1.97,,20201214
-11/3/2020,West Virginia,WV,Trump,republican,68.62,,20201214
-11/3/2020,West Virginia,WV,Biden,democrat,29.69,,20201214
-11/3/2020,West Virginia,WV,Jorgensen,libertarian,1.34,,20201214
-11/3/2020,Wisconsin,WI,Biden,democrat,49.45,,20201214
-11/3/2020,Wisconsin,WI,Trump,republican,48.82,,20201214
-11/3/2020,Wisconsin,WI,Jorgensen,libertarian,1.17,,20201214
-11/3/2020,Wyoming,WY,Trump,republican,69.94,,20201214
-11/3/2020,Wyoming,WY,Biden,democrat,26.55,,20201214
-11/3/2020,Wyoming,WY,Jorgensen,libertarian,2.08,,20201214
+11/3/2020,Nevada,NV,Jorgensen,libertarian,1.05188931645339,,20210113
+11/3/2020,Nevada,NV,Trump,republican,47.6662473245594,,20210113
+11/3/2020,Nevada,NV,Biden,democrat,50.056781957284,,20210113
+11/3/2020,Nevada,NV,Blankenship,independent american party,0.223285441049228,,20210113
+11/3/2020,Nevada,NV,Write-In,,1.00179596065395,,20210113
+11/3/2020,New Hampshire,NH,Jorgensen,libertarian,1.64168884941614,,20210113
+11/3/2020,New Hampshire,NH,Trump,republican,45.3562595046776,,20210113
+11/3/2020,New Hampshire,NH,Biden,democrat,52.7078252801477,,20210113
+11/3/2020,New Hampshire,NH,Buttigieg,,0.00582994906857261,,20210113
+11/3/2020,New Hampshire,NH,Cuomo,,0.00173658057361737,,20210113
+11/3/2020,New Hampshire,NH,Gabbard,,0.0176138886752619,,20210113
+11/3/2020,New Hampshire,NH,Hawkins,green,0.0269169988910693,,20210113
+11/3/2020,New Hampshire,NH,Huckabee,,0.00124041469544098,,20210113
+11/3/2020,New Hampshire,NH,Kasich,,0.00831077845945456,,20210113
+11/3/2020,New Hampshire,NH,Klobuchar,,0.00235678792133786,,20210113
+11/3/2020,New Hampshire,NH,Obama,,0.00124041469544098,,20210113
+11/3/2020,New Hampshire,NH,Paul,,0.00161253910407327,,20210113
+11/3/2020,New Hampshire,NH,Pence,,0.00694632229446949,,20210113
+11/3/2020,New Hampshire,NH,Rice,,0.00148849763452918,,20210113
+11/3/2020,New Hampshire,NH,Romney,,0.0210870498224967,,20210113
+11/3/2020,New Hampshire,NH,Sanders,,0.0238159621524668,,20210113
+11/3/2020,New Hampshire,NH,Shaheen,,0.00173658057361737,,20210113
+11/3/2020,New Hampshire,NH,Sununu,,0.00570590759902851,,20210113
+11/3/2020,New Hampshire,NH,Supreme,,0.00272891232997016,,20210113
+11/3/2020,New Hampshire,NH,Weld,,0.00285295379951425,,20210113
+11/3/2020,New Hampshire,NH,West,,0.010171400502616,,20210113
+11/3/2020,New Hampshire,NH,Yang,,0.00719440523355768,,20210113
+11/3/2020,New Hampshire,NH,Write-In,,0.143640021732065,,20210113
+11/3/2020,New Jersey,NJ,Trump,republican,41.3965238573485,,20210113
+11/3/2020,New Jersey,NJ,Biden,democrat,57.334196752813,,20210113
+11/3/2020,New Jersey,NJ,Jorgensen,libertarian,0.696296814074441,,20210113
+11/3/2020,New Jersey,NJ,Hawkins,green,0.312176258909783,,20210113
+11/3/2020,New Jersey,NJ,Hammons,unity party,0.0715486355971937,,20210113
+11/3/2020,New Jersey,NJ,Blankenship,constitution party,0.0649323101548726,,20210113
+11/3/2020,New Jersey,NJ,La Riva,party for socialism and liberation,0.064360800316001,,20210113
+11/3/2020,New Jersey,NJ,De La Fuente,alliance,0.0599645707862195,,20210113
+11/3/2020,New Mexico,NM,Hawkins,green,0.479022473795003,,20210113
+11/3/2020,New Mexico,NM,Jorgensen,libertarian,1.3620645803683,,20210113
+11/3/2020,New Mexico,NM,Biden,democrat,54.2892858495722,,20210113
+11/3/2020,New Mexico,NM,Tittle,constitution party,0.195461949316262,,20210113
+11/3/2020,New Mexico,NM,Trump,republican,43.4966692461295,,20210113
+11/3/2020,New Mexico,NM,La Riva,party for socialism and liberation,0.177495900818754,,20210113
+11/3/2020,New York,NY,Biden,democrat,60.8677104110186,,20210113
+11/3/2020,New York,NY,Trump,republican,37.7399264070756,,20210113
+11/3/2020,New York,NY,Hawkins,green,0.381020420313151,,20210113
+11/3/2020,New York,NY,Jorgensen,libertarian,0.700754021679124,,20210113
+11/3/2020,New York,NY,Pierce,independent,0.262926371911999,,20210113
+11/3/2020,North Carolina,NC,Trump,republican,49.9343324882955,,20210113
+11/3/2020,North Carolina,NC,Biden,democrat,48.5862117773632,,20210113
+11/3/2020,North Carolina,NC,Jorgensen,libertarian,0.881081349159662,,20210113
+11/3/2020,North Carolina,NC,Hawkins,green,0.220731892292249,,20210113
+11/3/2020,North Carolina,NC,Blankenship,constitution party,0.136638380886772,,20210113
+11/3/2020,North Carolina,NC,Simmons,becoming one nation,0.0021539233442212,,20210113
+11/3/2020,North Carolina,NC,Write-In,,0.238850188658345,,20210113
+11/3/2020,North Dakota,ND,Trump,republican,65.1140487370757,,20210113
+11/3/2020,North Dakota,ND,Biden,democrat,31.7567623590801,,20210113
+11/3/2020,North Dakota,ND,Jorgensen,libertarian,2.59604940591843,,20210113
+11/3/2020,North Dakota,ND,Write-In,,0.533139497925758,,20210113
+11/3/2020,Ohio,OH,Trump,republican,53.2713001008746,,20210113
+11/3/2020,Ohio,OH,Biden,democrat,45.239338340705,,20210113
+11/3/2020,Ohio,OH,Jorgensen,libertarian,1.14094385838241,,20210113
+11/3/2020,Ohio,OH,Boddie,independent,0.000050656833387311,,20210113
+11/3/2020,Ohio,OH,Carroll,american solidarity party,0.0244841361372003,,20210113
+11/3/2020,Ohio,OH,Hawkins,green,0.317652116560698,,20210113
+11/3/2020,Ohio,OH,Hoefling,,0.00192495966871782,,20210113
+11/3/2020,Ohio,OH,Hunter,,0.000455911500485799,,20210113
+11/3/2020,Ohio,OH,Simmons,becoming one nation,0.00357974955936998,,20210113
+11/3/2020,Ohio,OH,Wells,independent,0.000270169778065659,,20210113
+11/3/2020,Oklahoma,OK,Trump,republican,65.373271848063,,20210113
+11/3/2020,Oklahoma,OK,Biden,democrat,32.2861743359866,,20210113
+11/3/2020,Oklahoma,OK,Jorgensen,libertarian,1.58461048542993,,20210113
+11/3/2020,Oklahoma,OK,Simmons,independent,0.234125862834538,,20210113
+11/3/2020,Oklahoma,OK,West,independent,0.358621361325919,,20210113
+11/3/2020,Oklahoma,OK,Pierce,independent,0.163196106360035,,20210113
+11/3/2020,Oregon,OR,Trump,republican,40.3672460463434,,20210113
+11/3/2020,Oregon,OR,Biden,democrat,56.4533186540489,,20210113
+11/3/2020,Oregon,OR,Jorgensen,libertarian,1.75132174630136,,20210113
+11/3/2020,Oregon,OR,Hawkins,pacific green,0.498289826859974,,20210113
+11/3/2020,Oregon,OR,Hunter,progressive party,0.2100811137163,,20210113
+11/3/2020,Oregon,OR,Write-In,,0.719742612730124,,20210113
+11/3/2020,Pennsylvania,PA,Trump,republican,48.8436120401725,,20210113
+11/3/2020,Pennsylvania,PA,Biden,democrat,50.0084956754481,,20210113
+11/3/2020,Pennsylvania,PA,Jorgensen,libertarian,1.1478922843794,,20210113
+11/3/2020,Rhode Island,RI,Biden,democrat,59.3880913246948,,20210113
+11/3/2020,Rhode Island,RI,Trump,republican,38.6130945598032,,20210113
+11/3/2020,Rhode Island,RI,Jorgensen,libertarian,0.97594045082925,,20210113
+11/3/2020,Rhode Island,RI,Write-In,,0.532875460882229,,20210113
+11/3/2020,Rhode Island,RI,De La Fuente,alliance,0.178268956286443,,20210113
+11/3/2020,Rhode Island,RI,La Riva,party for socialism and liberation,0.163590255660474,,20210113
+11/3/2020,Rhode Island,RI,Carroll,american solidarity party,0.148138991843664,,20210113
+11/3/2020,South Carolina,SC,Hawkins,green,0.274814797426043,,20210113
+11/3/2020,South Carolina,SC,Trump,republican,55.1102939567402,,20210113
+11/3/2020,South Carolina,SC,De La Fuente,alliance,0.0740850083693778,,20210113
+11/3/2020,South Carolina,SC,Jorgensen,libertarian,1.11071809540255,,20210113
+11/3/2020,South Carolina,SC,Biden,democrat,43.4300881420618,,20210113
+11/3/2020,South Dakota,SD,Trump,republican,61.7693896722502,,20210113
+11/3/2020,South Dakota,SD,Biden,democrat,35.6052521361353,,20210113
+11/3/2020,South Dakota,SD,Jorgensen,libertarian,2.62535819161447,,20210113
+11/3/2020,Tennessee,TN,Trump,republican,60.6602941662838,,20210113
+11/3/2020,Tennessee,TN,Biden,democrat,37.4514342710237,,20210113
+11/3/2020,Tennessee,TN,Blankenship,independent,0.175679821969048,,20210113
+11/3/2020,Tennessee,TN,De La Fuente,independent,0.0609067043546001,,20210113
+11/3/2020,Tennessee,TN,Hawkins,independent,0.148828479189063,,20210113
+11/3/2020,Tennessee,TN,Jorgensen,independent,0.978338497850746,,20210113
+11/3/2020,Tennessee,TN,Kennedy,independent,0.0843525109771236,,20210113
+11/3/2020,Tennessee,TN,La Riva,independent,0.075347487483836,,20210113
+11/3/2020,Tennessee,TN,West,independent,0.336591405409105,,20210113
+11/3/2020,Tennessee,TN,Boddie,independent,0.0000327455399755915,,20210113
+11/3/2020,Tennessee,TN,Carroll,american solidarity party,0.0249521014614007,,20210113
+11/3/2020,Tennessee,TN,Hoefling,,0.00101511173924334,,20210113
+11/3/2020,Tennessee,TN,Simmons,becoming one nation,0.00222669671834022,,20210113
+11/3/2020,Texas,TX,Trump,republican,52.0576036035526,,20210113
+11/3/2020,Texas,TX,Biden,democrat,46.4790099138705,,20210113
+11/3/2020,Texas,TX,Jorgensen,libertarian,1.11570813259784,,20210113
+11/3/2020,Texas,TX,Hawkins,green,0.295146572849485,,20210113
+11/3/2020,Texas,TX,Boddie,independent,0.0177816176959266,,20210113
+11/3/2020,Texas,TX,Carroll,american solidarity party,0.0246132233017671,,20210113
+11/3/2020,Texas,TX,Cella,independent,0.00181174534178178,,20210113
+11/3/2020,Texas,TX,Cuellar,,0.000433051325596621,,20210113
+11/3/2020,Texas,TX,Hoefling,,0.00297833258624615,,20210113
+11/3/2020,Texas,TX,La Riva,party for socialism and liberation,0.00309322375426158,,20210113
+11/3/2020,Texas,TX,Loeb,,0.000318160157581191,,20210113
+11/3/2020,Texas,TX,Morrow,,0.000494915800681853,,20210113
+11/3/2020,Texas,TX,Wells,independent,0.00100750716567377,,20210113
+11/3/2020,Utah,UT,Pierce,independent,0.176242651796795,,20210113
+11/3/2020,Utah,UT,West,the birthday party,0.484650494628395,,20210113
+11/3/2020,Utah,UT,Biden,democrat,37.6460485833061,,20210113
+11/3/2020,Utah,UT,Blankenship,constitution party,0.372978635197868,,20210113
+11/3/2020,Utah,UT,Jorgensen,libertarian,2.58330203340883,,20210113
+11/3/2020,Utah,UT,Mchugh,,0.149769298839137,,20210113
+11/3/2020,Utah,UT,Hawkins,green,0.339517392119407,,20210113
+11/3/2020,Utah,UT,La Riva,party for socialism and liberation,0.0765308350730268,,20210113
+11/3/2020,Utah,UT,Trump,republican,58.1298390299196,,20210113
+11/3/2020,Utah,UT,Carroll,american solidarity party,0.0247263804274573,,20210113
+11/3/2020,Utah,UT,Hoefling,,0.00342675380924001,,20210113
+11/3/2020,Utah,UT,Simmons,becoming one nation,0.0124975727160518,,20210113
+11/3/2020,Utah,UT,Forbes,,0.0000671912511615688,,20210113
+11/3/2020,Utah,UT,Boddie,independent,0.000403147506969413,,20210113
+11/3/2020,Vermont,VT,Biden,democrat,66.086416930664,,20210113
+11/3/2020,Vermont,VT,Trump,republican,30.6737646559326,,20210113
+11/3/2020,Vermont,VT,Jorgensen,libertarian,0.981961091696877,,20210113
+11/3/2020,Vermont,VT,Hawkins,green,0.356532436286837,,20210113
+11/3/2020,Vermont,VT,West,independent,0.345373787517554,,20210113
+11/3/2020,Vermont,VT,Paige,grumpy old patriots,0.319790543997736,,20210113
+11/3/2020,Vermont,VT,Lafontaine,independent,0.232970813329414,,20210113
+11/3/2020,Vermont,VT,Duncan,independent,0.0579705411672491,,20210113
+11/3/2020,Vermont,VT,Carroll,american solidarity,0.0568818925068313,,20210113
+11/3/2020,Vermont,VT,Blankenship,constitution,0.0566097303417268,,20210113
+11/3/2020,Vermont,VT,Kennedy,socialist workers,0.0530716221953689,,20210113
+11/3/2020,Vermont,VT,La Riva,liberty union,0.0451789194073397,,20210113
+11/3/2020,Vermont,VT,Swing,boiling frog,0.0383748652797283,,20210113
+11/3/2020,Vermont,VT,Collins,prohibition,0.0372862166193104,,20210113
+11/3/2020,Vermont,VT,Mccormic,bull moose,0.0342924328031614,,20210113
+11/3/2020,Vermont,VT,Pierce,unaffiliated,0.0272162165104456,,20210113
+11/3/2020,Vermont,VT,Segal,bread and roses,0.0176905407317896,,20210113
+11/3/2020,Vermont,VT,Huber,approval voting,0.0146967569156406,,20210113
+11/3/2020,Vermont,VT,Kopitke,independent,0.0144245947505362,,20210113
+11/3/2020,Vermont,VT,De La Fuente,alliance,0.0130637839250139,,20210113
+11/3/2020,Vermont,VT,Write-In,,0.528538924632853,,20210113
+11/3/2020,Vermont,VT,Scalf,independent,0.00789270278802922,,20210113
+11/3/2020,Virginia,VA,Biden,democrat,54.1095171778024,,20210113
+11/3/2020,Virginia,VA,Trump,republican,43.9955036672821,,20210113
+11/3/2020,Virginia,VA,Jorgensen,libertarian,1.45186978032177,,20210113
+11/3/2020,Virginia,VA,Write-In,,0.443109374593658,,20210113
+11/3/2020,Washington,WA,Biden,democrat,57.9703011353031,,20210113
+11/3/2020,Washington,WA,Trump,republican,38.7669777433433,,20210113
+11/3/2020,Washington,WA,Jorgensen,libertarian,1.96935584449771,,20210113
+11/3/2020,Washington,WA,Hawkins,green,0.447422969441224,,20210113
+11/3/2020,Washington,WA,La Riva,party for socialism and liberation,0.11840599114744,,20210113
+11/3/2020,Washington,WA,Kennedy,socialist workers party,0.0608420867734881,,20210113
+11/3/2020,Washington,WA,Write-In,,0.666694229493807,,20210113
+11/3/2020,West Virginia,WV,Biden,democrat,29.6965212445196,,20210113
+11/3/2020,West Virginia,WV,Trump,republican,68.6315519246161,,20210113
+11/3/2020,West Virginia,WV,Jorgensen,libertarian,1.34486542536859,,20210113
+11/3/2020,West Virginia,WV,Hawkins,green,0.327061405495739,,20210113
+11/3/2020,Wisconsin,WI,Biden,democrat,49.4495368614277,,20210113
+11/3/2020,Wisconsin,WI,Trump,republican,48.8224373196088,,20210113
+11/3/2020,Wisconsin,WI,Blankenship,constitution party,0.156032020220488,,20210113
+11/3/2020,Wisconsin,WI,Jorgensen,independent,1.16708676453689,,20210113
+11/3/2020,Wisconsin,WI,Carroll,american solidarity party,0.159458296606986,,20210113
+11/3/2020,Wisconsin,WI,Wells,independent,0.00075802574922507,,20210113
+11/3/2020,Wisconsin,WI,Simmons,becoming one nation,0.0010915570788841,,20210113
+11/3/2020,Wisconsin,WI,Boddie,independent,0.000151605149845014,,20210113
+11/3/2020,Wisconsin,WI,Hawkins,green,0.0330196016362441,,20210113
+11/3/2020,Wisconsin,WI,La Riva,party for socialism and liberation,0.00333531329659031,,20210113
+11/3/2020,Wisconsin,WI,West,the birthday party,0.0124619433172602,,20210113
+11/3/2020,Wisconsin,WI,Charles,independent,0.00157669355838815,,20210113
+11/3/2020,Wisconsin,WI,Write-In,,0.193053997812641,,20210113
+11/3/2020,Wyoming,WY,Biden,democrat,26.5535743320145,,20210113
+11/3/2020,Wyoming,WY,Trump,republican,69.9362274854118,,20210113
+11/3/2020,Wyoming,WY,Jorgensen,libertarian,2.08407855039474,,20210113
+11/3/2020,Wyoming,WY,Pierce,independent,0.797788737737792,,20210113
+11/3/2020,Wyoming,WY,Write-In,,0.628330894441132,,20210113
 11/3/2020,National Popular Vote,NPV,Biden,democrat,51.31151526,,20210915
 11/3/2020,National Popular Vote,NPV,Trump,republican,46.85854237,,20210915
 11/3/2020,National Popular Vote,NPV,Jorgensen,libertarian,1.177979488,,20210915
