@@ -1735,8 +1735,8 @@ async function updateRegionBox(regionID)
     let hasVoteCountsForAll = true
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionMarginString += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : decimalPadding(Math.round(voteData.voteshare*100)/100) + "%"
+      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionMarginString += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + "%"
       regionMarginString += "</span></span><br>"
 
       hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
@@ -1845,7 +1845,8 @@ function updateRegionBoxYPosition(mouseY)
 
 function getRoundedMarginValue(fullMarginValue)
 {
-  return decimalPadding(roundValueToPlace(fullMarginValue, 2), currentMapSource.getAddDecimalPadding())
+  let roundedMarginValue = roundValueToPlace(fullMarginValue, 2)
+  return currentMapSource.getAddDecimalPadding() ? decimalPadding(roundedMarginValue) : roundedMarginValue
 }
 
 function getGradientCSS(fillColor, backgroundColor, fillPercentage)

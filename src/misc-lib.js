@@ -9,18 +9,23 @@ function zeroPadding(num)
   return num
 }
 
-function decimalPadding(num, shouldAddDecimalPadding)
+function decimalPadding(num, places = 1)
 {
-  if (shouldAddDecimalPadding == null)
+  num = num.toString()
+
+  for (let i=1; i <= places; i++)
   {
-    shouldAddDecimalPadding = true
+    if (!num.includes("."))
+    {
+      num += "."
+    }
+    if (num.split(".")[1].length < i)
+    {
+      num += "0"
+    }
   }
 
-  if (num-Math.floor(num) == 0 && shouldAddDecimalPadding)
-  {
-    return num + ".0"
-  }
-  return num.toString()
+  return num
 }
 
 function roundValue(valueToRound, decimalPlaceToRound)

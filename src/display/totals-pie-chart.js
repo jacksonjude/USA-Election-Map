@@ -446,7 +446,9 @@ function updateTotalsPieChart(regionDataArray)
     var regionMargin = regionDataArray[regionID].margin
 
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
-    var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
+    var formattedRegionMargin = Math.round(regionMargin*10)/10
+    formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
+    var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
@@ -572,7 +574,9 @@ function updateTotalsPieChart(regionDataArray)
     {
       var partyStrings = []
       partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
-        partyStrings.push(regionData.region + " +" + decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding()) + "\n")
+        let formattedRegionMargin = Math.round(regionData.margin*10)/10
+        formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
+        partyStrings.push(regionData.region + " +" + formattedRegionMargin + "\n")
       })
 
       if (currentDirection == PieChartDirection.clockwise)
