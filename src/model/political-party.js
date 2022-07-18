@@ -218,7 +218,7 @@ var Independent2016BSParty = new PoliticalParty(
   ["Sanders"],
   "Ind",
   "Sanders",
-  cloneObject(PoliticalPartyColors.green),
+  cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
 
