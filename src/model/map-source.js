@@ -559,7 +559,7 @@ class MapSource
           for (let columnTitleNum in columnTitles)
           {
             let columnKey = getKeyByValue(columnMap, columnTitles[columnTitleNum])
-            csvText += convertMapDataRowToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, candidateNameToPartyIDs[candidateName], regionData)
+            csvText += convertMapDataRowToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, candidatesToAdd[candidateName], regionData)
 
             if (columnTitleNum < columnTitles.length-1)
             {
@@ -957,6 +957,7 @@ function createPresidentialMapSources()
           var currentPartyName = row[columnMap.partyID]
           var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
           var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : null
+          var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
           var foundParty = currentCandidateToPartyIDMap[candidateName] ? politicalParties[currentCandidateToPartyIDMap[candidateName]] : null
 
@@ -1010,12 +1011,12 @@ function createPresidentialMapSources()
           }
           else
           {
-            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, electoralVotes: currentElectoralVotes}
+            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, electoralVotes: currentElectoralVotes, order: currentOrder}
           }
         }
 
         var voteshareSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
-          return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare}
+          return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare, order: singleCandidateData.order}
         })
         voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
         voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -1039,11 +1040,21 @@ function createPresidentialMapSources()
         var greatestMarginCandidateName
         var topTwoMargin
 
-        if (voteshareSortedCandidateData[0].voteshare > 0)
+        if (voteshareSortedCandidateData[0].voteshare > 0 || isCustomMap)
         {
-          greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-          greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          if (topCandidateData.length == 0)
+          {
+            topCandidateData = [voteshareSortedCandidateData[0]]
+            if (voteshareSortedCandidateData[1])
+            {
+              topCandidateData.push(voteshareSortedCandidateData[1])
+            }
+          }
+
+          greatestMarginPartyID = topCandidateData[0].partyID
+          greatestMarginCandidateName = topCandidateData[0].candidate
+          topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
         }
         else
         {
@@ -1287,7 +1298,7 @@ function createPresidentialMapSources()
       return partyID || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
 
       case "percentAdjusted":
-      let voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
       if (regionData.partyVotesharePercentages && voteshareData)
       {
         return voteshareData.voteshare
@@ -1297,6 +1308,14 @@ function createPresidentialMapSources()
         return regionData.margin
       }
       return 0
+
+      case "order":
+      var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      if (regionData.partyVotesharePercentages && voteshareData)
+      {
+        return voteshareData.order
+      }
+      return ""
 
       case "region":
       if (regionNameToID)
@@ -1612,9 +1631,9 @@ function createPresidentialMapSources()
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
-    (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin) => {
-      CountyElectionResultMapSource.loadMap()
-      return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, __, regionNameToID, ___, ____, isCustomMap, voteshareCutoffMargin)
+    (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin) => {
+      // CountyElectionResultMapSource.loadMap()
+      return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin)
     }, // organizeMapDataFunction
     null, // viewingDataFunction
     countyZoomingDataFunction, // zoomingDataFunction
@@ -1853,7 +1872,8 @@ function createPresidentialMapSources()
       disabled: "disabled",
       candidateName: "candidate",
       partyID: "party",
-      percentAdjusted: "percent"
+      percentAdjusted: "percent",
+      order: "order"
     }, // columnMap
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap

@@ -1724,9 +1724,19 @@ async function updateRegionBox(regionID)
 
   if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
   {
-    var sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
-      return voteData2.voteshare - voteData1.voteshare
-    })
+    let sortedPercentages
+    if (regionData.partyVotesharePercentages[0].order !== undefined)
+    {
+      sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
+        return voteData1.order - voteData2.order
+      })
+    }
+    else
+    {
+      sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
+        return voteData2.voteshare - voteData1.voteshare
+      })
+    }
 
     regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
 
@@ -2038,60 +2048,59 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   updateCompareMapSlidersVisibility()
 }
 
-function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
+async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
 {
-  var updateCompareMapSourcesPromise = new Promise(async (resolve) => {
-    if (compareSourcesToUpdate[0])
-    {
-      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])
-      $('.comparesourcecheckbox').prop('disabled', true)
-      await downloadDataForMapSource(compareMapSourceIDArray[0], iconDivDictionary, null, false)
-      $('.comparesourcecheckbox').prop('disabled', false)
-    }
-    if (compareSourcesToUpdate[1])
-    {
-      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[1])
-      $('.comparesourcecheckbox').prop('disabled', true)
-      await downloadDataForMapSource(compareMapSourceIDArray[1], iconDivDictionary, null, false)
-      $('.comparesourcecheckbox').prop('disabled', false)
-    }
+  $('.comparesourcecheckbox').prop('disabled', true)
+  if (compareSourcesToUpdate[0])
+  {
+    await loadCompareMapSource(compareMapSourceIDArray[0])
+  }
+  if (compareSourcesToUpdate[1] && compareSourcesToUpdate[1] != compareSourcesToUpdate[0])
+  {
+    await loadCompareMapSource(compareMapSourceIDArray[1])
+  }
+  $('.comparesourcecheckbox').prop('disabled', false)
 
-    if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
-    {
-      swapCompareMapSources()
-      compareSourcesToUpdate = [true, true]
-    }
+  if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
+  {
+    swapCompareMapSources()
+    compareSourcesToUpdate = [true, true]
+  }
 
-    var overrideDateValues = [null, null]
-    if (swapSliderValues)
-    {
-      overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
-      overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
-    }
+  var overrideDateValues = [null, null]
+  if (swapSliderValues)
+  {
+    overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
+    overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
+  }
 
-    var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
 
-    if (compareSourcesToUpdate[0])
-    {
-      setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      $("#compareItemImage-0").css('display', "block")
-      $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
-    }
-    if (compareSourcesToUpdate[1])
-    {
-      setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      $("#compareItemImage-1").css('display', "block")
-      $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
-    }
+  if (compareSourcesToUpdate[0])
+  {
+    setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
+    $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    $("#compareItemImage-0").css('display', "block")
+    $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
+  }
+  if (compareSourcesToUpdate[1])
+  {
+    setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
+    $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    $("#compareItemImage-1").css('display', "block")
+    $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
+  }
+}
 
-    resolve()
-  })
-
-  return updateCompareMapSourcesPromise
+async function loadCompareMapSource(sourceID)
+{
+  let mapSource = mapSources[sourceID]
+  let voteshareCutoff = mapSource.voteshareCutoffMargin
+  mapSource.voteshareCutoffMargin = null
+  await mapSource.loadMap()
+  mapSource.voteshareCutoffMargin = voteshareCutoff
 }
 
 function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
@@ -2177,6 +2186,9 @@ function applyCompareToCustomMap()
 {
   if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
 
+  let voteshareCutoffMargin0 = mapSources[compareMapSourceIDArray[0]].voteshareCutoffMargin
+  let voteshareCutoffMargin1 = mapSources[compareMapSourceIDArray[1]].voteshareCutoffMargin
+
   var resultMapArray = {}
   for (var regionID in compareMapDataArray[0])
   {
@@ -2232,6 +2244,63 @@ function applyCompareToCustomMap()
       if (compareRegionData0.seatClass)
       {
         resultMapArray[regionID].seatClass = compareRegionData0.seatClass
+      }
+
+      if (compareRegionData0.partyVotesharePercentages && compareRegionData1.partyVotesharePercentages)
+      {
+        let partiesChecked = new Set()
+        let partiesToRemove = new Set([IndependentGenericParty.getID()])
+        for (let candidateData0 of compareRegionData0.partyVotesharePercentages)
+        {
+          let candidateData1 = compareRegionData1.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData0.partyID)
+          if (candidateData0.voteshare < voteshareCutoffMargin0 && (!candidateData1 || candidateData1.voteshare < voteshareCutoffMargin1))
+          {
+            partiesToRemove.add(candidateData0.partyID)
+          }
+          partiesChecked.add(candidateData0.partyID)
+        }
+        for (let candidateData1 of compareRegionData1.partyVotesharePercentages)
+        {
+          if (partiesChecked.has(candidateData1.partyID)) { continue }
+          let candidateData0 = compareRegionData0.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData1.partyID)
+          if (candidateData1.voteshare < voteshareCutoffMargin1 && (!candidateData0 || candidateData0.voteshare < voteshareCutoffMargin0))
+          {
+            partiesToRemove.add(candidateData1.partyID)
+          }
+        }
+        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+
+        let candidateOn = 0
+
+        resultMapArray[regionID].partyVotesharePercentages = filteredVoteshares0.map(candidateData => {
+          let differenceCandidateData = cloneObject(candidateData)
+          let previousCandidateData = filteredVoteshares1.find(candidateData => candidateData.partyID == differenceCandidateData.partyID)
+          differenceCandidateData.voteshare = previousCandidateData ? differenceCandidateData.voteshare-previousCandidateData.voteshare : differenceCandidateData.voteshare
+
+          differenceCandidateData.order = candidateOn
+          candidateOn += 1
+
+          return differenceCandidateData
+        })
+
+        resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.concat(filteredVoteshares1.filter(candidateData => {
+          return resultMapArray[regionID].partyVotesharePercentages.every(existingCandidateData => existingCandidateData.partyID != candidateData.partyID)
+        }).map(candidateData => {
+          let newCandidateData = {...candidateData, voteshare: -candidateData.voteshare, order: candidateOn}
+          candidateOn += 1
+          return newCandidateData
+        }))
+
+        if (compareSortMode == CompareSortMode.shiftMargin)
+        {
+          resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare-cand1.voteshare)
+          for (let candidateOn in resultMapArray[regionID].partyVotesharePercentages)
+          {
+            let candidateData = resultMapArray[regionID].partyVotesharePercentages[candidateOn]
+            candidateData.order = candidateOn == 0 ? 0 : candidateOn+1
+          }
+        }
       }
     }
   }

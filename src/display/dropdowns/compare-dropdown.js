@@ -55,3 +55,26 @@ async function loadComparePreset(comparePresetNum)
     setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
   }
 }
+
+const CompareSortMode = {
+  voteshare: 0,
+  shiftMargin: 1
+}
+
+var compareSortMode = CompareSortMode.voteshare
+
+function toggleCompareSortMode(div)
+{
+  switch (compareSortMode)
+  {
+    case CompareSortMode.voteshare:
+    compareSortMode = CompareSortMode.shiftMargin
+    div.innerHTML = "Sort by shift"
+    break
+
+    case CompareSortMode.shiftMargin:
+    compareSortMode = CompareSortMode.voteshare
+    div.innerHTML = "Sort by voteshare"
+    break
+  }
+}
