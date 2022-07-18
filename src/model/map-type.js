@@ -289,27 +289,18 @@ var globalMapSettings =
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
     ],
-    shouldShowActive: (value) => {
-      return value
-    },
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
   {id: "piePopularVote", title: "Popular Vote", type: MapSettingType.optionCycle, options:
     [
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
     ],
-    shouldShowActive: (value) => {
-      return value
-    },
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
   {id: "pieStyle", title: "Pie Style", type: MapSettingType.optionCycle, options:
     [
       {id: "expanded", title: "Expanded", value: 0},
       {id: "compact", title: "Compact", value: 1}
     ],
-    shouldShowActive: (value) => {
-      return value == 1
-    },
   defaultValue: "expanded", reloadType: MapSettingReloadType.display},
   {id: "dateFormat", title: "Date Format", type: MapSettingType.optionCycle, options:
     [
