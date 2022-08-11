@@ -181,18 +181,20 @@ const svgStoreName = "SVGFiles"
 const svgSourceUpdatedTimesURL = "./svg-sources/source-updated-times.json"
 var SVGDatabase = new FilesDatabase()
 
-function initializeDatabases()
+async function initializeDatabases()
 {
-  CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
-  SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
+  await CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
+  await SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
 }
 
-function clearDatabases()
+async function clearDatabases()
 {
-  indexedDB.deleteDatabase(CSVDatabase.databaseName)
-  indexedDB.deleteDatabase(SVGDatabase.databaseName)
+  await indexedDB.deleteDatabase(CSVDatabase.databaseName)
+  await indexedDB.deleteDatabase(SVGDatabase.databaseName)
 
-  initializeDatabases()
+  await initializeDatabases()
+
+  location.reload()
 }
 
 initializeDatabases()

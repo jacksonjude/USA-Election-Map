@@ -195,6 +195,12 @@ body {
   margin-left: 0px !important;
 }
 
+.dropdown-button {
+  flex: 1;
+  margin-top: 4px;
+  border-radius: 2px;
+}
+
 .deletebutton {
   transition: background-color .3s !important;
 }
