@@ -3372,7 +3372,7 @@ function createHouseMapSources()
       return regionData.district || regionID.split(subregionSeparator)[1]
 
       case "partyID":
-      return candidateNameToPartyIDs[candidateName]
+      return partyID
     }
   }
 
@@ -3562,6 +3562,20 @@ function createHouseMapSources()
     return stateMapData
   }
 
+  var houseFormattedRegionName = (regionID) => {
+    if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
+
+    let state = regionID.split(subregionSeparator)[0]
+    let districtNumber = regionID.split(subregionSeparator)[1]
+
+    if (districtNumber == "0")
+    {
+      districtNumber = "AL"
+    }
+
+    return state + "-" + districtNumber
+  }
+
   var PastElectionResultMapSource = new MapSource(
     "Past-House-Elections", // id
     "Past Elections", // name
@@ -3588,19 +3602,7 @@ function createHouseMapSources()
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
     {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
-    (regionID) => {
-      if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
-
-      let state = regionID.split(subregionSeparator)[0]
-      let districtNumber = regionID.split(subregionSeparator)[1]
-
-      if (districtNumber == "0")
-      {
-        districtNumber = "AL"
-      }
-
-      return state + "-" + districtNumber
-    }, // getFormattedRegionName
+    houseFormattedRegionName, // getFormattedRegionName
     function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
     {
       if (mapDate == null) { return }
@@ -3615,7 +3617,7 @@ function createHouseMapSources()
       var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_House_of_Representatives_elections"
       if (!shouldOpenHomepage)
       {
-        if (getDecadeFromDate(mapDate) < 1990)
+        if (getDecadeFromDate(mapDate) < 2000)
         {
           linkToOpen += "#" + regionIDToLinkMap[regionID]
         }
@@ -3677,8 +3679,8 @@ function createHouseMapSources()
     houseViewingData, // viewingDataFunction
     houseZoomingData, // zoomingDataFunction
     null, // splitVoteDataFunction
-    null, // splitVoteDisplayOptions
-    null, // getFormattedRegionName
+    {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+    houseFormattedRegionName, // getFormattedRegionName
     null, // customOpenRegionLinkFunction
     function(displayRegionData, mapDateData)
     {
