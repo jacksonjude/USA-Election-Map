@@ -269,9 +269,8 @@ async function handleSVGZooming(resolve, svgPath, handleNewSVG)
       }
 
       $("#text").remove()
+      $("#mapCloseButton").show()
     }
-
-    $("#mapCloseButton").show()
 
     setTimeout(() => {
       var svgDataBoundingBox = $("#svgdata")[0].getBBox()
