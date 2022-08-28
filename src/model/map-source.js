@@ -1643,9 +1643,9 @@ function createPresidentialMapSources()
     {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
-    (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin) => {
+    (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare) => {
       // CountyElectionResultMapSource.loadMap()
-      return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin)
+      return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
     }, // organizeMapDataFunction
     null, // viewingDataFunction
     countyZoomingDataFunction, // zoomingDataFunction
