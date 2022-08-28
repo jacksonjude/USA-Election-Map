@@ -392,14 +392,11 @@ document.addEventListener('keypress', async function(e) {
     }
     else if (editingRegionMarginValue)
     {
-      editingRegionMarginValue = false
-      $("#regionboxcontainer").trigger('hide')
+      toggleRegionMarginEditing()
     }
     else if (editingRegionVotesharePercentages)
     {
-      editingRegionVotesharePercentages = false
-      closeRegionVoteshareEditing(voteshareEditRegion)
-      $("#regionboxcontainer").trigger('hide')
+      toggleRegionVoteshareEditing(voteshareEditRegion)
     }
     else if (currentMapType.getCustomMapEnabled())
     {
@@ -510,12 +507,8 @@ function mouseEnteredRegion(div)
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentEditingState == EditingState.viewing && showingDataMap)
-  {
-    updateRegionBox(regionID)
-  }
 
-  if (editingRegionMarginValue)
+  if (showingDataMap && !editingRegionVotesharePercentages)
   {
     updateRegionBox(regionID)
   }

@@ -25,6 +25,7 @@
     <script src="./src/display/dropdowns/shift-dropdown.js"></script>
     <script src="./src/display/dropdowns/settings-dropdown.js"></script>
     <script src="./src/display/dropdowns/compare-dropdown.js"></script>
+    <script src="./src/display/dropdowns/copy-dropdown.js"></script>
     <script src="./src/display/dropdowns/countdown-dropdown.js"></script>
     <script src="./src/display/totals-pie-chart.js"></script>
     <script src="./src/display/map-display.js"></script>
@@ -199,7 +200,21 @@
             </div>
           </div>
         </div>
-        <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
+          <div id="copyDropdownContent" class="dropdown-content" style="min-width: 160px">
+            <div id="copyDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+              <div class='dropdown-separator'></div>
+              <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)" style="text-align: center;">
+                Edit by margin
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="editVoteshareButton" onclick="selectEditMode(EditingMode.voteshare)" style="text-align: center;">
+                Edit by voteshare
+              </a>
+            </div>
+          </div>
+        </div>
         <a id="clearMapButton">Clear</a>
       </div>
       <div class="loader" id="loader"></div>
