@@ -501,7 +501,7 @@ function addTextBoxSpacingCSS()
   }
 }
 
-function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames)
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
   var loadDataMapPromise = new Promise(async (resolve) => {
     $("#dataMapDateSliderContainer").hide()
@@ -541,7 +541,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     shouldSetToMax = true
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    await displayDataMap(null, true)
+    await displayDataMap(null, reloadPartyDropdowns ?? true)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 

@@ -364,7 +364,7 @@ document.addEventListener('keypress', async function(e) {
     var partyToSelect = parseInt(e.key)
     if (partyToSelect == 0)
     {
-      selectParty()
+      deselectAllParties()
     }
     else
     {

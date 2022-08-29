@@ -56,7 +56,7 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
   }
 
   currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
-  loadDataMap()
+  loadDataMap(null, null, null, null, false)
 }
 
 function getTippingPointRegion()

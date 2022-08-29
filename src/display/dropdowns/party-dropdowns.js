@@ -150,6 +150,16 @@ function createPartyDropdowns()
   }
 
   jscolor.install()
+
+  let previousSelectedPartyID = selectedParty ? selectedParty.getID() : null
+  if (currentEditingState == EditingState.editing)
+  {
+    deselectAllParties()
+  }
+  if (previousSelectedPartyID != null && dropdownPoliticalPartyIDs.includes(previousSelectedPartyID))
+  {
+    selectParty($("#" + previousSelectedPartyID))
+  }
 }
 
 function createPartyMarginColorPickers(partyID)
@@ -296,51 +306,22 @@ function selectParty(div)
 
   if (currentEditingState == EditingState.editing)
   {
+    let previousSelectedPartyID = selectedParty ? selectedParty.getID() : null
     if (selectedParty != null)
     {
-      var selectedPartyDiv = $("#" + selectedParty.getID())
-      var marginColors = selectedParty.getMarginColors()
-      $("#" + selectedParty.getID()).removeClass('active')
-
-      if (!selectedPartyDiv.hasClass("hover"))
-      {
-        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.5))
-      }
-      else
-      {
-        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.8))
-      }
+      deselectAllParties()
     }
 
-    if (selectedParty != null && selectedParty.getID() == partyID)
-    {
-      selectedParty = null
-      $(div).removeClass('active')
-
-      if (partyID == null || partyID == TossupParty.getID()) { return }
-
-      var marginColors = politicalParties[partyID].getMarginColors()
-      if (!$(div).hasClass("hover"))
-      {
-        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.5))
-      }
-      else
-      {
-        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.8))
-      }
-    }
-    else
+    if (previousSelectedPartyID != partyID)
     {
       selectedParty = politicalParties[partyID]
       $(div).addClass('active')
-
-      if (partyID == null || partyID == TossupParty.getID()) { return }
 
       var marginColors = politicalParties[partyID].getMarginColors()
       $(div).css("background-color", marginColors.safe)
     }
 
-    if (selectedParty == null || selectedParty == TossupParty)
+    if (!selectedParty)
     {
       $(".partyShiftConstantButton").css('color', "gray")
       $(".partyShiftText").css('color', "gray")
