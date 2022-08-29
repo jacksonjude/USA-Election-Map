@@ -7,14 +7,14 @@ inputs:
   user-name:
     description: Name for the git commit
     required: true
-  source-repo-path:
-    description: The source repo path (username/repo)
+  source-repo:
+    description: The source repo
     required: true
   source-branch:
     description: The branch of the source repo
     required: true
-  dest-repo-path:
-    description: The destination repo (username/repo)
+  dest-repo:
+    description: The destination repo
     required: true
   dest-branch:
     description: The branch of the destination repo
@@ -25,9 +25,9 @@ runs:
   args:
     - '${{ inputs.user-email }}'
     - '${{ inputs.user-name }}'
-    - '${{ inputs.source-repo-path }}'
+    - '${{ inputs.source-repo }}'
     - '${{ inputs.source-branch }}'
-    - '${{ inputs.dest-repo-path }}'
+    - '${{ inputs.dest-repo }}'
     - '${{ inputs.dest-branch }}'
 branding:
   icon: git-commit

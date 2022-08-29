@@ -2,9 +2,9 @@
 
 USER_EMAIL="$1"
 USER_NAME="$2"
-SOURCE_REPO_PATH="$3"
+SOURCE_REPO="$3"
 SOURCE_BRANCH="$4"
-DEST_REPO_PATH="$5"
+DEST_REPO="$5"
 DEST_BRANCH="$6"
 
 set -e  # if a command fails it stops the execution
@@ -27,7 +27,7 @@ fi
 
 git config --global user.email "$USER_EMAIL"
 git config --global user.name "$USER_NAME"
-git clone --single-branch --branch "$DEST_BRANCH" "https://git@github.com/$DEST_REPO_PATH.git"
-cd "$REPO_NAME"
-git fetch "https://github.com/$SOURCE_REPO_PATH.git" "$SOURCE_BRANCH" && git merge FETCH_HEAD --allow-unrelated-histories
-git push -u "https://git@github.com/$DEST_REPO_PATH.git" "$DEST_BRANCH"
+git clone --single-branch --branch "$DEST_BRANCH" "https://git@github.com/$USER_NAME/$DEST_REPO.git"
+cd "$DEST_REPO"
+git fetch "https://github.com/$USER_NAME/$SOURCE_REPO.git" "$SOURCE_BRANCH" && git merge FETCH_HEAD --allow-unrelated-histories
+git push -u "https://git@github.com/$USER_NAME/$DEST_REPO.git" "$DEST_BRANCH"

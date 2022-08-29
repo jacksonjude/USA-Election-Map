@@ -28,7 +28,7 @@ jobs:
         with:
           user-email: ${{ secrets.EMAIL }}
           user-name: jacksonjude
-          source-repo-path: jacksonjude/USA-Election-Map
+          source-repo: USA-Election-Map
           source-branch: v5.0
-          dest-repo-path: jacksonjude/USA-Election-Map-Beta
+          dest-repo: USA-Election-Map-Beta
           dest-branch: main

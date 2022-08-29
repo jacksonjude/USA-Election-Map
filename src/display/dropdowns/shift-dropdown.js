@@ -12,24 +12,46 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 
     if (displayRegionDataArray[regionID].disabled) { continue }
 
-    if (displayRegionDataArray[regionID].partyID != partyToShift.getID())
-    {
-      displayRegionDataArray[regionID].margin -= marginToAdd
+    let regionData = displayRegionDataArray[regionID]
 
-      if (displayRegionDataArray[regionID].margin < 0)
+    if (regionData.partyVotesharePercentages)
+    {
+      let candidateDataToIncreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToShift.getID())
+
+      for (let candidateData of regionData.partyVotesharePercentages)
       {
-        displayRegionDataArray[regionID].margin *= -1
-        displayRegionDataArray[regionID].partyID = partyToShift.getID()
+        if (candidateData.candidate == candidateDataToIncreaseMargin.candidate) { continue }
+
+        candidateData.voteshare -= marginToAdd*candidateData.voteshare/(100.0-candidateDataToIncreaseMargin.voteshare)
+        if (candidateData.voteshare < 0)
+        {
+          candidateData.voteshare = 0
+        }
       }
+
+      candidateDataToIncreaseMargin.voteshare += marginToAdd
     }
     else
     {
-      displayRegionDataArray[regionID].margin += marginToAdd
-    }
+      if (regionData.partyID != partyToShift.getID())
+      {
+        regionData.margin -= marginToAdd
 
-    if (displayRegionDataArray[regionID].margin > 100)
-    {
-      displayRegionDataArray[regionID].margin = 100
+        if (regionData.margin < 0)
+        {
+          regionData.margin *= -1
+          regionData.partyID = partyToShift.getID()
+        }
+      }
+      else
+      {
+        regionData.margin += marginToAdd
+      }
+
+      if (regionData.margin > 100)
+      {
+        regionData.margin = 100
+      }
     }
   }
 
