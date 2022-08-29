@@ -191,10 +191,10 @@ async function reloadForNewMapType(initialLoad)
   resizeElements(false)
 
   populateRegionsArray()
-  for (var partyNum in dropdownPoliticalPartyIDs)
+  for (let partyID of dropdownPoliticalPartyIDs)
   {
-    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
+    if (partyID == TossupParty.getID() || !politicalParties[partyID]) { continue }
+    politicalParties[partyID].setCandidateName(politicalParties[partyID].getNames()[0])
   }
   displayPartyTotals(getPartyTotals())
 
