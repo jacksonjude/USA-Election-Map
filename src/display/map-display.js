@@ -991,7 +991,7 @@ async function toggleEditing(stateToSet)
   voteshareEditRegion = null
   selectedVoteshareCandidate = null
 
-  $("#regionboxcontainer").trigger('hide')
+  updateRegionBox(currentRegionID)
 
   if (stateToSet == null)
   {
@@ -1643,9 +1643,9 @@ async function updateRegionBox(regionID)
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
-  var regionData = getRegionData(regionID).regionData
+  var regionData = regionID ? getRegionData(regionID).regionData : null
 
-  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin))
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
   {
     $("#regionboxcontainer").trigger('hide')
     return
@@ -1715,14 +1715,15 @@ async function updateRegionBox(regionID)
 
   regionMarginString += roundedMarginValue
 
-  let regionBoxHTML = currentEditingState == EditingState.viewing ? regionMarginString : ""
+  let regionBoxHTML = (currentEditingState == EditingState.viewing || (isDiscreteRegion && currentMapSource.getEditingMode() == EditingMode.margin)) ? regionMarginString : ""
 
   let tooltipsToShow = {
     shiftForVotes: [false, "Shift to show votes"],
-    shiftClickEditEVs: [false, "Shift click to edit EVs"],
+    shiftClickToEditEVs: [false, "Shift click to edit EVs"],
     clickToZoom: [false, "Click to expand"],
     clickToOpenLink: [false, "Click to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
-    clickToEditVoteshare: [false, "Click to edit voteshare"]
+    clickToEditVoteshare: [false, "Click to edit voteshare"],
+    shiftClickToEditMargin: [false, "Shift click to edit margin"]
   }
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
@@ -1820,10 +1821,11 @@ async function updateRegionBox(regionID)
     regionBoxHTML += "<br></div>"
   }
 
-  tooltipsToShow.shiftClickEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentialMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing
-  tooltipsToShow.clickToZoom[0] = await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing
-  tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0]
-  tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentMapSource.isCustom() && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
+  tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentialMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing
+  tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
+  tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
+  tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
+  tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin
 
   if (currentMapType.getMapSettingValue("showTooltips"))
   {
