@@ -164,7 +164,7 @@ async function reloadForNewMapType(initialLoad)
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
   currentEditingState = EditingState.viewing
-  currentViewingState = ViewingState.viewing
+  currentViewingState = currentMapType.getMapSettingValue("presViewingType") ? ViewingState.splitVote : ViewingState.viewing
   currentMapZoomRegion = null
   showingCompareMap = false
   compareMapSourceIDArray = [null, null]
@@ -205,12 +205,12 @@ async function reloadForNewMapType(initialLoad)
 
   if (currentMapSource.getID() != NullMapSource.getID())
   {
-    updateNavBarForNewSource()
+    updateNavBarForNewSource(false, false)
     loadDataMap(false, false, previousDateOverride)
   }
   else
   {
-    updateNavBarForNewSource(true)
+    updateNavBarForNewSource(true, false)
   }
 }
 
@@ -783,7 +783,7 @@ function updateMapElectoralVoteText()
   }
 }
 
-function updateNavBarForNewSource(revertToDefault)
+function updateNavBarForNewSource(revertToDefault, resetViewingState)
 {
   revertToDefault = revertToDefault == null ? false : revertToDefault
   $("#mapSourcesDropdownContainer .active").removeClass("active")
@@ -827,7 +827,10 @@ function updateNavBarForNewSource(revertToDefault)
     updateCompareMapSlidersVisibility(true)
   }
 
-  currentViewingState = ViewingState.viewing
+  if (resetViewingState ?? true)
+  {
+    currentViewingState = ViewingState.viewing
+  }
 }
 
 function clearMap(fullClear, shouldResetCurrentMapSource)
