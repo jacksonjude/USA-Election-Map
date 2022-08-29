@@ -27,7 +27,7 @@ fi
 
 git config --global user.email "$USER_EMAIL"
 git config --global user.name "$USER_NAME"
-git clone --single-branch --branch "$DEST_BRANCH" "https://git@github.com/$USER_NAME/$DEST_REPO.git"
+git clone --single-branch --branch "$DEST_BRANCH" "https://git@github.com:$USER_NAME/$DEST_REPO.git"
 cd "$DEST_REPO"
 git fetch "https://github.com/$USER_NAME/$SOURCE_REPO.git" "$SOURCE_BRANCH" && git merge FETCH_HEAD --allow-unrelated-histories
-git push -u "https://git@github.com/$USER_NAME/$DEST_REPO.git" "$DEST_BRANCH"
+git push -u "https://git@github.com:$USER_NAME/$DEST_REPO.git" "$DEST_BRANCH"
