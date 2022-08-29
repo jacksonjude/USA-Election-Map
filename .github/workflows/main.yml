@@ -20,10 +20,13 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: cpina/github-action-push-to-another-repository@v1.5
+      - uses: ./.github/actions/mirror-monorepo
         env:
           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
         with:
-          source-directory: .
-          destination-github-username: jacksonjude
-          destination-repository-name: USA-Election-Map-Beta
+          user-email: ${{ secrets.EMAIL }}
+          user-name: jacksonjude
+          source-repo-path: jacksonjude/USA-Election-Map
+          source-branch: v5.0
+          dest-repo-path: jacksonjude/USA-Election-Map-Beta
+          dest-branch: main
