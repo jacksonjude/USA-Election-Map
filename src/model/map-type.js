@@ -67,27 +67,29 @@ class MapType
     return true
   }
 
-  async loadSVG(callback)
+  async loadSVG()
   {
-    $("#svgdata").css('opacity', "0")
+    let loadSVGPromise = new Promise(async (resolve) => {
+      let svgPath = this.getSVGPath()
+      let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
 
-    let svgPath = this.getSVGPath()
-    let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+      let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+      let svgData = await SVGDatabase.fetchFile(svgPathID)
+      if (svgData)
+      {
+        $("#mapcontainertmp").html(svgData)
+        resolve(svgPath)
+      }
+      else
+      {
+        $("#mapcontainertmp").load(svgPathString, () => {
+          SVGDatabase.insertFile(svgPathID, $("#mapcontainertmp").html())
+          resolve(svgPath)
+        })
+      }
+    })
 
-    let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
-    let svgData = await SVGDatabase.fetchFile(svgPathID)
-    if (svgData)
-    {
-      $("#mapzoom").html(svgData)
-      callback(svgPath)
-    }
-    else
-    {
-      $("#mapzoom").load(svgPathString, () => {
-        SVGDatabase.insertFile(svgPathID, $("#mapzoom").html())
-        callback(svgPath)
-      })
-    }
+    return loadSVGPromise
   }
 
   getTotalEV()

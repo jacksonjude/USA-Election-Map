@@ -216,12 +216,27 @@ async function reloadForNewMapType(initialLoad)
 
 function loadMapSVGFile()
 {
-  var loadSVGFilePromise = new Promise((resolve) => {
-    $("#svgdata").css('opacity', "0")
-    $("#mapCloseButton").hide()
+  let loadSVGFilePromise = new Promise(async (resolve) => {
+    $("#loader").show()
 
-    var handleNewSVG = () => {
-      $("#svgdata").css('opacity', "1")
+    let handleNewSVG = () => {
+      if (currentViewingState == ViewingState.zooming)
+      {
+        $("#mapCloseButton").show()
+      }
+      else
+      {
+        $("#mapCloseButton").hide()
+      }
+
+      if ($("#mapcontainertmp #svgdata").html() == $("#mapcontainer #svgdata").html())
+      {
+        resolve()
+        return
+      }
+
+      $("#mapcontainer").html($("#mapcontainertmp").html())
+      $("#mapcontainertmp").html("")
 
       setOutlineDivProperties()
       updateMapElectoralVoteText()
@@ -231,45 +246,40 @@ function loadMapSVGFile()
         generateFlipPatternsFromPartyMap(politicalParties)
       }
 
+      $("#loader").hide()
       resolve()
     }
 
-    currentMapType.loadSVG((svgPath) => {
-      if (svgPath instanceof Array)
+    let svgPath = await currentMapType.loadSVG()
+    if (svgPath instanceof Array)
+    {
+      var stateToShow = svgPath[1]
+      if (stateToShow != null)
       {
-        var stateToShow = svgPath[1]
-        if (stateToShow != null)
+        for (let districtPath of $("#mapcontainertmp #outlines")[0].querySelectorAll("*"))
         {
-          for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
+          var splitArray = districtPath.id.split(subregionSeparator)
+          if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
           {
-            var splitArray = districtPath.id.split(subregionSeparator)
-            if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
-            {
-              districtPath.remove()
-            }
+            districtPath.remove()
           }
-
-          $("#text").remove()
         }
 
-        if (currentViewingState == ViewingState.zooming)
-        {
-          $("#mapCloseButton").show()
-        }
-
-        setTimeout(() => {
-          var svgDataBoundingBox = $("#svgdata")[0].getBBox()
-          $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
-          $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
-
-          handleNewSVG()
-        }, 0)
+        $("#mapcontainertmp #text").remove()
       }
-      else
-      {
+
+      setTimeout(() => {
+        var svgDataBoundingBox = $("#mapcontainertmp #svgdata")[0].getBBox()
+        $("#mapcontainertmp #outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#mapcontainertmp #svgdata").width(), svgDataBoundingBox.height/$("#mapcontainertmp #svgdata").height())*1) + "px")
+        $("#mapcontainertmp #svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+
         handleNewSVG()
-      }
-    })
+      }, 0)
+    }
+    else
+    {
+      handleNewSVG()
+    }
   })
 
   return loadSVGFilePromise
@@ -323,12 +333,12 @@ function resizeElements(initilizedPieChart)
   var topnavZoom = 0.85*mapZoom
   if (navigator.userAgent.indexOf("Firefox") != -1)
   {
-    $("#mapzoom").css("transform", "scale(" + mapZoom + ")")
-    $("#mapzoom").css("transform-origin", "0 0")
+    $("#mapcontainer").css("transform", "scale(" + mapZoom + ")")
+    $("#mapcontainer").css("transform-origin", "0 0")
   }
   else
   {
-    $("#mapzoom").css("zoom", (mapZoom*100) + "%")
+    $("#mapcontainer").css("zoom", (mapZoom*100) + "%")
     $("#helpbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
     $(".topnav").css("zoom", (topnavZoom*100) + "%")
