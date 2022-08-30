@@ -1651,7 +1651,7 @@ function getCurrentDateOrToday()
 
 async function updateRegionBox(regionID)
 {
-  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let currentMapDataForDate = currentSliderDate.getTime() && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom()
 
   let isDiscreteRegion = viewingDiscreteRegions()
