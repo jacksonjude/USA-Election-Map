@@ -264,7 +264,7 @@
     <div id="sliderDateDisplayContainer" style="position: relative; float: left; left: 45px;">
       <span style="display: inline-block; float: left;">
         <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="displayMapQueue.unshift([this.value]); executeDisplayMapQueue()" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+          <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
           <span id="dataMapSliderStepList" class="ticks" style="max-height: 0px;">
           </span>
         </span>

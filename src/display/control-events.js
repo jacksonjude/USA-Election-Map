@@ -225,7 +225,7 @@ function incrementSlider(keyString)
   }
   else
   {
-    displayDataMap(sliderDiv.value)
+    addToDisplayMapQueue(sliderDiv.value)
   }
 }
 

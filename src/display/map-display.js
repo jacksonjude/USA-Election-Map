@@ -648,6 +648,12 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
+function addToDisplayMapQueue(index, reloadPartyDropdowns)
+{
+  displayMapQueue.unshift([index, reloadPartyDropdowns])
+  executeDisplayMapQueue()
+}
+
 async function executeDisplayMapQueue()
 {
   if (isRunningDisplayMapQueue) { return }
