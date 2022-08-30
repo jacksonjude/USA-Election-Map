@@ -1,4 +1,4 @@
-<svg width="930px" height="585px" id="svgdata" style="overflow: visible; margin-top: 10px; margin-bottom: 20px; opacity: 0;" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<svg width="930px" height="585px" id="svgdata" style="overflow: visible; margin-top: 10px; margin-bottom: 20px;" version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 <!-- generated via `mapshaper districts.shp -proj +proj=lcc +lon_0=-100 +lat_1=33 +lat_2=45 -simplify 4% -each "state_district = STATENAME + '__' + DISTRICT" -o format=svg id-field="state_district" test.svg` -->
 <defs id="svgdefinitions">
 </defs>
