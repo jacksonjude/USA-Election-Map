@@ -2297,7 +2297,17 @@ function createSenateMapSources()
     1633132800000: "SDfCEZF1uH8",
     1635984000000: "rTEnS6Jy9oM",
     1638403200000: "skPfbpMb_g8",
-    1640995200000: "BX9mEKXnBEg"
+    1640995200000: "BX9mEKXnBEg",
+    1643673600000: "nIp2KnNLQUA",
+    1646092800000: "oGzo4mVU-w8",
+    1649116800000: "i58TKDsXX-Q",
+    1651536000000: "a7zKYQbpt2Y",
+    1652918400000: "KVLw0DhkJXA",
+    1654128000000: "irPIXtfBqCc",
+    1655510400000: "gVozPu2PobM",
+    1656720000000: "hjJEtK5ZXw4",
+    1658102400000: "gKZaNGE1dbM",
+    1659830400000: "d9ij_Fh_TWU"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
@@ -2355,7 +2365,10 @@ function createSenateMapSources()
     1628985600000: "eZGs7_uZ1YM",
     1633824000000: "R9WqiO-j2lY",
     1636156800000: "kAsztlIJm64",
-    1639267200000: "Elasgd8mVLE"
+    1639267200000: "Elasgd8mVLE",
+    1644624000000: "njSkvysshes",
+    1646524800000: "QU_mIwNflqI",
+    1651190400000: "D3j334-rfNE"
   }
 
   var PASenateProjectionMapSource = new MapSource(
@@ -2408,7 +2421,9 @@ function createSenateMapSources()
     1610582400000: "231206",
     1611532800000: "231216",
     1626393600000: "231871",
-    1637280000000: ""
+    1637280000000: "236591",
+    1645747200000: "252446",
+    1646352000000: ""
   }
 
   var CookSenateProjectionMapSource = new MapSource(
@@ -2921,7 +2936,13 @@ function createGovernorMapSources()
     1628380800000: "XXjRhuaFWuc",
     1630886400000: "QCN0K03rmRI",
     1636416000000: "rG30Fokvs5E",
-    1641081600000: "Cei7ecOeqrU"
+    1641081600000: "Cei7ecOeqrU",
+    1643760000000: "b4QU6eTz-dM",
+    1646611200000: "NtnH-tK_IVU",
+    1650153600000: "qpdq8r_pKuI",
+    1654041600000: "Ps24mzQlaXM",
+    1658188800000: "RrRscvpmwEY",
+    1660176000000: "d9bZ6IQBrHI"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
@@ -2980,7 +3001,14 @@ function createGovernorMapSources()
     1631491200000: "231916",
     1631664000000: "231936",
     1632441600000: "231946",
-    1633392000000: "232571"
+    1633392000000: "232571",
+    1638489600000: "238396",
+    1644883200000: "248216",
+    1646352000000: "252481",
+    1652832000000: "288881",
+    1654646400000: "297341",
+    1658275200000: "303771",
+    1658448000000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(

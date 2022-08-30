@@ -8,6 +8,10 @@ var mapRegionNameToID
 
 var currentMapSource
 
+var currentDisplayDate
+var displayMapQueue = []
+var isRunningDisplayMapQueue = false
+
 var selectedParty
 
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
@@ -214,75 +218,78 @@ async function reloadForNewMapType(initialLoad)
   }
 }
 
-function loadMapSVGFile()
+function loadMapSVGFile(handleNewSVG)
 {
   let loadSVGFilePromise = new Promise(async (resolve) => {
     $("#loader").show()
 
-    let handleNewSVG = () => {
-      if (currentViewingState == ViewingState.zooming)
+    handleNewSVG = handleNewSVG || async function(resolve, svgPath) {
+      if (svgPath instanceof Array)
       {
-        $("#mapCloseButton").show()
+        await handleSVGZooming(resolve, svgPath, handleNewSVGFields)
       }
       else
       {
-        $("#mapCloseButton").hide()
+        handleNewSVGFields(resolve)
       }
-
-      if ($("#mapcontainertmp #svgdata").html() == $("#mapcontainer #svgdata").html())
-      {
-        resolve()
-        return
-      }
-
-      $("#mapcontainer").html($("#mapcontainertmp").html())
-      $("#mapcontainertmp").html("")
-
-      setOutlineDivProperties()
-      updateMapElectoralVoteText()
-
-      if (currentMapType.getMapSettingValue("flipStates"))
-      {
-        generateFlipPatternsFromPartyMap(politicalParties)
-      }
-
-      $("#loader").hide()
-      resolve()
     }
 
     let svgPath = await currentMapType.loadSVG()
-    if (svgPath instanceof Array)
-    {
-      var stateToShow = svgPath[1]
-      if (stateToShow != null)
-      {
-        for (let districtPath of $("#mapcontainertmp #outlines")[0].querySelectorAll("*"))
-        {
-          var splitArray = districtPath.id.split(subregionSeparator)
-          if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
-          {
-            districtPath.remove()
-          }
-        }
-
-        $("#mapcontainertmp #text").remove()
-      }
-
-      setTimeout(() => {
-        var svgDataBoundingBox = $("#mapcontainertmp #svgdata")[0].getBBox()
-        $("#mapcontainertmp #outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#mapcontainertmp #svgdata").width(), svgDataBoundingBox.height/$("#mapcontainertmp #svgdata").height())*1) + "px")
-        $("#mapcontainertmp #svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
-
-        handleNewSVG()
-      }, 0)
-    }
-    else
-    {
-      handleNewSVG()
-    }
+    handleNewSVG(resolve, svgPath)
   })
 
   return loadSVGFilePromise
+}
+
+function handleNewSVGFields(resolve)
+{
+  $("#mapcontainer").html($("#mapcontainertmp").html())
+  $("#mapcontainertmp").empty()
+
+  setOutlineDivProperties()
+  updateMapElectoralVoteText()
+
+  if (currentMapType.getMapSettingValue("flipStates"))
+  {
+    generateFlipPatternsFromPartyMap(politicalParties)
+  }
+
+  $("#loader").hide()
+
+  resolve()
+}
+
+async function handleSVGZooming(resolve, svgPath, handleNewSVG)
+{
+  var handleSVGZoomingPromise = new Promise((innerResolve) => {
+    var stateToShow = svgPath[1]
+    if (stateToShow != null)
+    {
+      for (let districtPath of $("#mapcontainertmp #outlines")[0].querySelectorAll("*"))
+      {
+        var splitArray = districtPath.id.split(subregionSeparator)
+        if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
+        {
+          districtPath.remove()
+        }
+      }
+
+      $("#mapcontainertmp #text").remove()
+    }
+
+    setTimeout(() => {
+      var svgDataBoundingBox = $("#mapcontainertmp #svgdata")[0].getBBox()
+      $("#mapcontainertmp #outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#mapcontainertmp #svgdata").width(), svgDataBoundingBox.height/$("#mapcontainertmp #svgdata").height())*1) + "px")
+      $("#mapcontainertmp #svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+
+      handleNewSVG(() => {
+        innerResolve()
+        resolve()
+      }, svgPath)
+    }, 0)
+  })
+
+  return handleSVGZoomingPromise
 }
 
 function setOutlineDivProperties()
@@ -641,24 +648,31 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   currentSliderDate = dateToDisplay
 }
 
+async function executeDisplayMapQueue()
+{
+  if (isRunningDisplayMapQueue) { return }
+
+  isRunningDisplayMapQueue = true
+
+  while (displayMapQueue.length > 0)
+  {
+    await displayDataMap(displayMapQueue[0][0], displayMapQueue[0][1])
+    displayMapQueue.splice(-1, 1)
+  }
+
+  isRunningDisplayMapQueue = false
+}
+
 async function displayDataMap(dateIndex, reloadPartyDropdowns)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
   var mapDates = currentMapSource.getMapDates()
-  var dateToDisplay
-  var overrideDateString
-  if (dateIndex-1 > mapDates.length-1)
-  {
-    dateToDisplay = new Date(mapDates[dateIndex-1-1])
-    overrideDateString = "Latest (" + getDateString(dateToDisplay, "/", false, true) + ")"
-  }
-  else
-  {
-    dateToDisplay = new Date(mapDates[dateIndex-1])
-  }
+  var dateToDisplay = new Date(mapDates[dateIndex-1])
 
-  updateSliderDateDisplay(dateToDisplay, overrideDateString)
+  currentDisplayDate = dateToDisplay
+
+  updateSliderDateDisplay(dateToDisplay)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
@@ -674,9 +688,13 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     shouldReloadSVG = currentMapType.resetOverrideSVGPath()
   }
 
+  var cachedSVGPathData
   if (shouldReloadSVG)
   {
-    await loadMapSVGFile()
+    await loadMapSVGFile((resolve, svgPath) => {
+      cachedSVGPathData = svgPath
+      resolve()
+    })
   }
   var svgPathData = currentMapType.getSVGPath()
   var usedFallbackMap = svgPathData[2] || false
@@ -697,6 +715,24 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     case ViewingState.splitVote:
     currentMapDataForDate = await currentMapSource.getSplitVoteData(currentMapDataForDate)
     break
+  }
+
+  if (currentDisplayDate.getTime() != dateToDisplay.getTime())
+  {
+    console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
+
+    return
+  }
+  else if (shouldReloadSVG)
+  {
+    if (cachedSVGPathData instanceof Array)
+    {
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields)
+    }
+    else
+    {
+      handleNewSVGFields(() => {})
+    }
   }
 
   if (currentViewingState == ViewingState.zooming && usedFallbackMap)

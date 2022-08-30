@@ -10948,7 +10948,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,SC,5,Horne,republican,38.746398
 11/3/1992,SC,5,Spratt,democrat,61.253602
 11/3/1992,SC,6,Chase,republican,34.713414
-11/3/1992,SC,6,Clybrun,democrat,65.286586
+11/3/1992,SC,6,Clyburn,democrat,65.286586
 11/3/1992,SC,PV,democrat,democrat,45.38096229129962
 11/3/1992,SC,PV,republican,republican,52.1332919490902
 11/3/1992,SC,PV,libertarian,libertarian,2.251793217529217
@@ -14380,7 +14380,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,FL,20,Deutsch,democrat,100
 11/3/1998,FL,21,Diaz-Balart,republican,74.751771
 11/3/1998,FL,21,Cusack,democrat,25.248229
-11/3/1998,FL,22,Shaw,democrat,100
+11/3/1998,FL,22,Shaw,republican,100
 11/3/1998,FL,23,Hastings,democrat,100
 11/3/1998,FL,PV,republican,republican,46.270628869468275
 11/3/1998,FL,PV,democrat,democrat,48.15974226769919
@@ -14520,7 +14520,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,KS,1,Philips,democrat,19.3344
 11/3/1998,KS,1,Moran,republican,80.6656
 11/3/1998,KS,2,Clark,democrat,39.046212
-11/3/1998,KS,2,Ryan,republican,60.953788
+11/3/1998,KS,2,Ryun,republican,60.953788
 11/3/1998,KS,3,Snowbarger,republican,47.608381
 11/3/1998,KS,3,Moore,democrat,52.391619
 11/3/1998,KS,4,Lawing,democrat,38.561585
@@ -15337,7 +15337,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,TX,28,Elmer,libertarian,9.456479
 11/3/1998,TX,28,Rodriguez,democrat,90.543521
 11/3/1998,TX,29,Chudleigh,libertarian,3.021142
-11/3/1998,TX,29,Green,republican,92.752619
+11/3/1998,TX,29,Green,democrat,92.752619
 11/3/1998,TX,29,Sherman,independent,4.226239
 11/3/1998,TX,30,Robinson,libertarian,1.016902
 11/3/1998,TX,30,Kelleher,republican,26.755442
@@ -22669,7 +22669,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,CO,2,Goss,american constitution,2.733306
 11/2/2010,CO,2,Harris,libertarian,1.95192
 11/2/2010,CO,2,Polis,democrat,57.414864
-11/2/2010,CO,3,Tiptin,republican,50.10641
+11/2/2010,CO,3,Tipton,republican,50.10641
 11/2/2010,CO,3,Gilman,libertarian,2.201074
 11/2/2010,CO,3,Segrest,unaffiliated,1.93127
 11/2/2010,CO,3,Salazar,democrat,45.761247
@@ -23662,7 +23662,7 @@ date,region,district,candidate,party,voteshare
 11/2/2010,TN,3,Fleischmann,republican,56.790245
 11/2/2010,TN,4,Curtis,independent,1.744323
 11/2/2010,TN,4,York,independent,1.18502
-11/2/2010,TN,4,Desjarlais,republican,57.065936
+11/2/2010,TN,4,DesJarlais,republican,57.065936
 11/2/2010,TN,4,Davis,democrat,38.560631
 11/2/2010,TN,4,Johnson,independent,0.503318
 11/2/2010,TN,4,Gray,independent,0.940771
@@ -25053,7 +25053,7 @@ date,region,district,candidate,party,voteshare
 11/6/2012,TN,3,Headrick,democrat,35.468736
 11/6/2012,TN,3,Deniston,independent,3.077923
 11/6/2012,TN,3,Fleischmann,republican,61.453341
-11/6/2012,TN,4,Desjarlais,republican,55.756104
+11/6/2012,TN,4,DesJarlais,republican,55.756104
 11/6/2012,TN,4,Stewart,democrat,44.243896
 11/6/2012,TN,5,Staats,republican,32.780529
 11/6/2012,TN,5,Miglietta,green,1.984925
@@ -27770,7 +27770,7 @@ date,region,district,candidate,party,voteshare
 11/8/2016,TN,3,Tyler,independent,1.916498
 11/8/2016,TN,3,Shekari,democrat,28.844086
 11/8/2016,TN,3,Fleischmann,republican,66.394367
-11/8/2016,TN,4,Desjarlais,republican,65.034106
+11/8/2016,TN,4,DesJarlais,republican,65.034106
 11/8/2016,TN,4,Reynolds,democrat,34.965894
 11/8/2016,TN,5,Snyder,republican,37.446627
 11/8/2016,TN,5,Cooper,democrat,62.553373
@@ -29106,7 +29106,7 @@ date,region,district,candidate,party,voteshare
 11/6/2018,TN,3,Tyler,independent,1.839969
 11/6/2018,TN,4,Phillips,democrat,33.584433
 11/6/2018,TN,4,Shupe,independent,3.03557
-11/6/2018,TN,4,Desjarlais,republican,63.379997
+11/6/2018,TN,4,DesJarlais,republican,63.379997
 11/6/2018,TN,5,Cooper,democrat,67.847392
 11/6/2018,TN,5,Ball,republican,32.152608
 11/6/2018,TN,6,Ross,independent,1.377342
@@ -29821,7 +29821,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,KS,1,Barnett,democrat,28.840279
 11/3/2020,KS,1,Mann,republican,71.159721
 11/3/2020,KS,2,Isla,democrat,40.631551
-11/3/2020,KS,2,Laturner,republican,55.14592
+11/3/2020,KS,2,LaTurner,republican,55.14592
 11/3/2020,KS,2,Garrard,libertarian,4.222529
 11/3/2020,KS,3,Hohe,libertarian,2.825412
 11/3/2020,KS,3,Davids,democrat,53.615826
@@ -30544,7 +30544,7 @@ date,region,district,candidate,party,voteshare
 11/3/2020,TN,3,Sweitzer,independent,0.621294
 11/3/2020,TN,3,James,write-in,0.002498
 11/3/2020,TN,4,Hale,democrat,33.334723
-11/3/2020,TN,4,Desjarlais,republican,66.665277
+11/3/2020,TN,4,DesJarlais,republican,66.665277
 11/3/2020,TN,5,Murphy,write-in,0.000397
 11/3/2020,TN,5,Cooper,democrat,99.994448
 11/3/2020,TN,5,Brooks,write-in,0.005155
