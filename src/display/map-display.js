@@ -719,8 +719,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   if (currentDisplayDate.getTime() != dateToDisplay.getTime())
   {
-    console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
-
+    // console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
     return
   }
   else if (shouldReloadSVG)
@@ -797,6 +796,18 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   if (currentViewingState == ViewingState.zooming)
   {
     svgPanZoom('#svgdata', {controlIconsEnabled: true, fit: true, contain: true, minZoom: 1, panEnabled: false})
+  }
+
+  if (shouldReloadSVG)
+  {
+    if (currentViewingState == ViewingState.zooming)
+    {
+      $("#mapCloseButton").show()
+    }
+    else
+    {
+      $("#mapCloseButton").hide()
+    }
   }
 
   showingDataMap = true
