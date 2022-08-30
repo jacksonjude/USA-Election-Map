@@ -218,19 +218,24 @@ async function reloadForNewMapType(initialLoad)
   }
 }
 
-function loadMapSVGFile(handleNewSVG)
+function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
 {
   let loadSVGFilePromise = new Promise(async (resolve) => {
     $("#loader").show()
 
+    if (fadeForNewSVG)
+    {
+      $("#svgdata").css('opacity', "0")
+    }
+
     handleNewSVG = handleNewSVG || async function(resolve, svgPath) {
       if (svgPath instanceof Array)
       {
-        await handleSVGZooming(resolve, svgPath, handleNewSVGFields)
+        await handleSVGZooming(resolve, svgPath, handleNewSVGFields, fadeForNewSVG)
       }
       else
       {
-        handleNewSVGFields(resolve)
+        handleNewSVGFields(resolve, fadeForNewSVG)
       }
     }
 
@@ -241,8 +246,13 @@ function loadMapSVGFile(handleNewSVG)
   return loadSVGFilePromise
 }
 
-function handleNewSVGFields(resolve)
+function handleNewSVGFields(resolve, _, fadeForNewSVG)
 {
+  if (fadeForNewSVG)
+  {
+    $("#mapcontainertmp #svgdata").css('opacity', "0")
+  }
+
   $("#mapcontainer").html($("#mapcontainertmp").html())
   $("#mapcontainertmp").empty()
 
@@ -256,10 +266,15 @@ function handleNewSVGFields(resolve)
 
   $("#loader").hide()
 
+  if (fadeForNewSVG)
+  {
+    $("#svgdata").css('opacity', "1")
+  }
+
   resolve()
 }
 
-async function handleSVGZooming(resolve, svgPath, handleNewSVG)
+async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
 {
   var handleSVGZoomingPromise = new Promise((innerResolve) => {
     var stateToShow = svgPath[1]
@@ -285,7 +300,7 @@ async function handleSVGZooming(resolve, svgPath, handleNewSVG)
       handleNewSVG(() => {
         innerResolve()
         resolve()
-      }, svgPath)
+      }, svgPath, fadeForNewSVG)
     }, 0)
   })
 
@@ -669,7 +684,7 @@ async function executeDisplayMapQueue()
   isRunningDisplayMapQueue = false
 }
 
-async function displayDataMap(dateIndex, reloadPartyDropdowns)
+async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
@@ -700,7 +715,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     await loadMapSVGFile((resolve, svgPath) => {
       cachedSVGPathData = svgPath
       resolve()
-    })
+    }, fadeForNewSVG)
   }
   var svgPathData = currentMapType.getSVGPath()
   var usedFallbackMap = svgPathData[2] || false
@@ -732,11 +747,11 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
   {
     if (cachedSVGPathData instanceof Array)
     {
-      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields)
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG)
     }
     else
     {
-      handleNewSVGFields(() => {})
+      handleNewSVGFields(() => {}, null, fadeForNewSVG)
     }
   }
 
@@ -1247,7 +1262,7 @@ async function leftClickRegion(div)
     currentViewingState = ViewingState.zooming
     currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
 
-    displayDataMap()
+    displayDataMap(null, null, true)
 
     currentRegionID = null
     updateRegionBox()
@@ -1380,7 +1395,7 @@ function zoomOutMap()
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
   }
 
-  displayDataMap()
+  displayDataMap(null, null, true)
 }
 
 function getRegionData(regionID)
