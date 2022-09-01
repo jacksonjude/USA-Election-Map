@@ -2013,6 +2013,7 @@ function createSenateMapSources()
 
             var candidateName = row[columnMap.candidateName]
             var currentVoteshare = parseFloat(row[columnMap.voteshare])*100
+            var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
             var currentPartyName = row[columnMap.partyID]
             var foundParty = Object.values(politicalParties).find(party => {
@@ -2050,7 +2051,7 @@ function createSenateMapSources()
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder}
             }
           }
 
@@ -2074,9 +2075,19 @@ function createSenateMapSources()
 
           if (voteshareSortedCandidateData[0].voteshare != 0)
           {
-            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+            let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+            if (topCandidateData.length == 0)
+            {
+              topCandidateData = [voteshareSortedCandidateData[0]]
+              if (voteshareSortedCandidateData[1])
+              {
+                topCandidateData.push(voteshareSortedCandidateData[1])
+              }
+            }
+
+            greatestMarginPartyID = topCandidateData[0].partyID
+            greatestMarginCandidateName = topCandidateData[0].candidate
+            topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
           }
           else
           {
@@ -2269,6 +2280,14 @@ function createSenateMapSources()
 
       case "partyID":
       return partyID
+
+      case "order":
+      var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      if (voteshareData)
+      {
+        return voteshareData.order
+      }
+      return ""
 
       case "isSpecial":
       return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
@@ -2603,7 +2622,8 @@ function createSenateMapSources()
       isDisabled: "disabled",
       candidateName: "candidate",
       partyID: "party",
-      voteshare: "voteshare"
+      voteshare: "voteshare",
+      order: "order"
     }, // columnMap
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
@@ -2710,6 +2730,7 @@ function createGovernorMapSources()
 
           var candidateName = row[columnMap.candidateName]
           var currentVoteshare = parseFloat(row[columnMap.voteshare])*100
+          var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
           var currentPartyName = row[columnMap.partyID]
           var foundParty = Object.values(politicalParties).find(party => {
@@ -2747,7 +2768,7 @@ function createGovernorMapSources()
           }
           else
           {
-            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder}
           }
         }
 
@@ -2771,9 +2792,19 @@ function createGovernorMapSources()
 
         if (voteshareSortedCandidateData[0].voteshare != 0)
         {
-          greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-          greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          if (topCandidateData.length == 0)
+          {
+            topCandidateData = [voteshareSortedCandidateData[0]]
+            if (voteshareSortedCandidateData[1])
+            {
+              topCandidateData.push(voteshareSortedCandidateData[1])
+            }
+          }
+
+          greatestMarginPartyID = topCandidateData[0].partyID
+          greatestMarginCandidateName = topCandidateData[0].candidate
+          topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
         }
         else
         {
@@ -2917,6 +2948,14 @@ function createGovernorMapSources()
 
       case "partyID":
       return partyID
+
+      case "order":
+      var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      if (voteshareData)
+      {
+        return voteshareData.order
+      }
+      return ""
 
       case "isSpecial":
       return (regionData.isSpecial == null ? false : regionData.isSpecial).toString().toUpperCase()
@@ -3132,7 +3171,8 @@ function createGovernorMapSources()
       isDisabled: "disabled",
       candidateName: "candidate",
       partyID: "party",
-      voteshare: "voteshare"
+      voteshare: "voteshare",
+      order: "order"
     }, // columnMap
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap
@@ -3262,6 +3302,7 @@ function createHouseMapSources()
 
             var candidateName = row[columnMap.candidateName]
             var currentVoteshare = parseFloat(row[columnMap.voteshare])
+            var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
             var currentPartyName = row[columnMap.partyID]
             var foundParty = Object.values(politicalParties).find(party => {
@@ -3299,7 +3340,7 @@ function createHouseMapSources()
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder}
             }
           }
 
@@ -3323,9 +3364,19 @@ function createHouseMapSources()
 
           if (voteshareSortedCandidateData[0].voteshare != 0)
           {
-            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+            let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+            if (topCandidateData.length == 0)
+            {
+              topCandidateData = [voteshareSortedCandidateData[0]]
+              if (voteshareSortedCandidateData[1])
+              {
+                topCandidateData.push(voteshareSortedCandidateData[1])
+              }
+            }
+
+            greatestMarginPartyID = topCandidateData[0].partyID
+            greatestMarginCandidateName = topCandidateData[0].candidate
+            topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
           }
           else
           {
@@ -3418,6 +3469,14 @@ function createHouseMapSources()
 
       case "partyID":
       return partyID
+
+      case "order":
+      var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+      if (voteshareData)
+      {
+        return voteshareData.order
+      }
+      return ""
     }
   }
 
@@ -3711,7 +3770,8 @@ function createHouseMapSources()
       district: "district",
       candidateName: "candidate",
       partyID: "party",
-      voteshare: "voteshare"
+      voteshare: "voteshare",
+      order: "order"
     }, // columnMap
     null, // cycleYear
     partyNamesToIDs, // candidateNameToPartyIDMap

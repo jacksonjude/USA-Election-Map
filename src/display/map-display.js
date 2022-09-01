@@ -2392,14 +2392,22 @@ function applyCompareToCustomMap()
 
       if (compareRegionData0.partyVotesharePercentages && compareRegionData1.partyVotesharePercentages)
       {
+        compareRegionData0.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
+        compareRegionData1.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
+
         let partiesChecked = new Set()
         let partiesToRemove = new Set([IndependentGenericParty.getID()])
+        let candidatesToKeep = new Set()
         for (let candidateData0 of compareRegionData0.partyVotesharePercentages)
         {
           let candidateData1 = compareRegionData1.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData0.partyID)
           if (candidateData0.voteshare < voteshareCutoffMargin0 && (!candidateData1 || candidateData1.voteshare < voteshareCutoffMargin1))
           {
             partiesToRemove.add(candidateData0.partyID)
+          }
+          else if (partiesToRemove.has(candidateData0.partyID))
+          {
+            candidatesToKeep.add(candidateData0.candidate)
           }
           partiesChecked.add(candidateData0.partyID)
         }
@@ -2411,9 +2419,13 @@ function applyCompareToCustomMap()
           {
             partiesToRemove.add(candidateData1.partyID)
           }
+          else if (partiesToRemove.has(candidateData1.partyID))
+          {
+            candidatesToKeep.add(candidateData1.candidate)
+          }
         }
-        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
-        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
 
         let candidateOn = 0
 
