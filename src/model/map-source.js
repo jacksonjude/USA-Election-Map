@@ -1052,7 +1052,7 @@ function createPresidentialMapSources()
         var greatestMarginCandidateName
         var topTwoMargin
 
-        if (voteshareSortedCandidateData[0].voteshare > 0)
+        if (voteshareSortedCandidateData[0].voteshare != 0)
         {
           let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
           if (topCandidateData.length == 0)
@@ -2072,7 +2072,7 @@ function createSenateMapSources()
           var greatestMarginCandidateName
           var topTwoMargin
 
-          if (voteshareSortedCandidateData[0].voteshare > 0)
+          if (voteshareSortedCandidateData[0].voteshare != 0)
           {
             greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
             greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
@@ -2769,7 +2769,7 @@ function createGovernorMapSources()
         var greatestMarginCandidateName
         var topTwoMargin
 
-        if (voteshareSortedCandidateData[0].voteshare > 0)
+        if (voteshareSortedCandidateData[0].voteshare != 0)
         {
           greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
           greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
@@ -3321,7 +3321,7 @@ function createHouseMapSources()
           var greatestMarginCandidateName
           var topTwoMargin
 
-          if (voteshareSortedCandidateData[0].voteshare > 0)
+          if (voteshareSortedCandidateData[0].voteshare != 0)
           {
             greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
             greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate

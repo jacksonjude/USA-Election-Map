@@ -2449,7 +2449,7 @@ function applyCompareToCustomMap()
     }
   }
 
-  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true)
+  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
   currentMapSource = currentCustomMapSource
   updateNavBarForNewSource()
   loadDataMap()

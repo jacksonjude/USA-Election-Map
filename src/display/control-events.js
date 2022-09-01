@@ -317,12 +317,12 @@ document.addEventListener('keypress', async function(e) {
     switch (selectedDropdownDivID)
     {
       case "compareDropdownContent":
-      if (parseInt(e.key)-1 >= getDefaultCompareSourceIDs().length) { return }
+      if (parseInt(e.key)-1 >= currentMapType.getDefaultCompareSourceIDs().length) { return }
 
       $(".comparesourcecheckbox").prop('checked', false)
       compareMapSourceIDArray = [null, null]
 
-      loadComparePreset(parseInt(e.key)-1)
+      loadComparePreset(parseInt(e.key))
       break
 
       case "marginsDropdownContent":
