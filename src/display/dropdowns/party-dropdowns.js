@@ -155,10 +155,10 @@ function createPartyDropdowns()
   if (currentEditingState == EditingState.editing)
   {
     deselectAllParties()
-  }
-  if (previousSelectedPartyID != null && dropdownPoliticalPartyIDs.includes(previousSelectedPartyID))
-  {
-    selectParty($("#" + previousSelectedPartyID))
+    if (previousSelectedPartyID != null && dropdownPoliticalPartyIDs.includes(previousSelectedPartyID))
+    {
+      selectParty($("#" + previousSelectedPartyID))
+    }
   }
 }
 
