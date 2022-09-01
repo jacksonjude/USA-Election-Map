@@ -485,7 +485,7 @@ class MapSource
 
   updateMapData(displayRegionArray, dateToUpdate, resetMapData, candidateNames, editingMode)
   {
-    this.editingMode = editingMode ?? this.editingMode
+    this.editingMode = editingMode ?? this.editingMode ?? EditingMode.margin
 
     if (!this.mapData || resetMapData)
     {
