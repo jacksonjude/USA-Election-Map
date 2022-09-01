@@ -1,3 +1,5 @@
+var isEnteringShiftAmount = false
+
 function addConstantMarginToMap(marginToAdd, partyToShift)
 {
   if (!marginToAdd) { return }
@@ -114,4 +116,30 @@ function getCurrentTotalEV()
     totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID])
   }
   return totalEV
+}
+
+function toggleEnteringShiftAmount()
+{
+  if (!isEnteringShiftAmount && !selectedParty) { return }
+
+  isEnteringShiftAmount = !isEnteringShiftAmount
+
+  if (isEnteringShiftAmount)
+  {
+    $("#shift-other").html("<span style='float: left'>Shift All by </span><span style='font-family: \"Bree5erif-Mono\"'><input class='textInput' type='text' id='shift-other-text' value='0.0'></span>")
+    $("#shift-other-text").focus()
+
+    $("#shiftButton").addClass('active')
+  }
+  else
+  {
+    var amountToShift = parseFloat($("#shift-other-text").val())
+    if (amountToShift)
+    {
+      addConstantMarginToMap(amountToShift)
+    }
+
+    $("#shift-other").html("Shift All by other")
+    $("#shiftButton").removeClass('active')
+  }
 }

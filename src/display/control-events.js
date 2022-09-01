@@ -377,6 +377,10 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleMarginEditing()
     }
+    else if (isEnteringShiftAmount)
+    {
+      toggleEnteringShiftAmount()
+    }
     else if (editCandidateNamePartyID)
     {
       toggleCandidateNameEditing()
@@ -618,5 +622,5 @@ document.addEventListener('mouseup', function() {
 
 function isEditingTextbox()
 {
-  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor || isEnteringShiftAmount
 }
