@@ -1490,6 +1490,10 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
         {
           fillColor = PoliticalPartyColors.purple.likely
         }
+        else if (voteSplitPartyIDs[0] == IndependentGenericParty.getID())
+        {
+          fillColor = politicalParties[voteSplitPartyIDs[1]].getMarginColors().lean
+        }
       }
     }
 
