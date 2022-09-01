@@ -1,5 +1,6 @@
 function createSettingsDropdownItems()
 {
+  $("#settingsButton").removeClass('active')
   $("#settingsDropdownContainer").html("")
 
   var didBeginGlobalSettings = false
