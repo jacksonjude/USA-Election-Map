@@ -619,7 +619,10 @@ function updateTotalsPieChart(regionDataArray)
       summedPercentage += sortedPopularVoteArray[partyNum]
     }
     var remainingPopularVote = 100-summedPercentage
-    sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
+    if (remainingPopularVote > 0)
+    {
+      sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
+    }
 
     totalsPieChart.data.datasets[2].hidden = false
     totalsPieChart.data.datasets[2].data = sortedPopularVoteArray

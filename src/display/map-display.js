@@ -560,6 +560,10 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     {
       toggleMarginHexColorEditing()
     }
+    if (editPartyPopularVote)
+    {
+      togglePartyPopularVoteEditing(editPartyPopularVote)
+    }
     editingRegionEVs = false
     editingRegionMarginValue = false
     editingRegionVotesharePercentages = false
@@ -1073,6 +1077,10 @@ async function toggleEditing(stateToSet)
   if (editPartyMarginColor)
   {
     toggleMarginHexColorEditing()
+  }
+  if (editPartyPopularVote)
+  {
+    togglePartyPopularVoteEditing(editPartyPopularVote)
   }
   editingRegionEVs = false
   editingRegionMarginValue = false
@@ -1690,7 +1698,7 @@ function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopula
     popularVoteData = regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID]
   }
 
-  if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
+  if (popularVoteData && popularVoteData.partyVotesharePercentages)
   {
     return popularVoteData.partyVotesharePercentages
   }
@@ -1731,7 +1739,7 @@ function getCurrentDateOrToday()
 
 async function updateRegionBox(regionID)
 {
-  let currentMapDataForDate = currentSliderDate.getTime() && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
 
   let isDiscreteRegion = viewingDiscreteRegions()

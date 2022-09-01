@@ -12,6 +12,7 @@ const shouldAlignPartyDropdownsToLeadingTrailing = true
 
 var editCandidateNamePartyID = null
 var editPartyMarginColor = null
+var editPartyPopularVote = null
 
 function createPartyDropdowns()
 {
@@ -63,20 +64,34 @@ function createPartyDropdowns()
     {
       dropdownDiv += '<div class="dropdown-separator"></div>'
     }
-    dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
-    dropdownDiv += '<div class="dropdown-separator"></div>'
 
-    dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
-    dropdownDiv += '<div class="dropdown-separator"></div>'
-
-    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
-
-    if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+    switch (currentEditingState)
     {
+      case EditingState.viewing:
+      dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
       dropdownDiv += '<div class="dropdown-separator"></div>'
 
-      dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+      dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
+      dropdownDiv += '<div class="dropdown-separator"></div>'
+
+      var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
+      dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+
+      if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+      {
+        dropdownDiv += '<div class="dropdown-separator"></div>'
+
+        dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+      }
+      break
+
+      case EditingState.editing:
+      if (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages)
+      {
+        let currentPopularVote = getCurrentPopularVote(currentPoliticalParty.getID())
+        dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-popular-vote" style="display:flex; justify-content:center; align-items: center; padding: 8px 0px; min-height: 31px" onclick="togglePartyPopularVoteEditing(\'' + currentPoliticalParty.getID() + '\')">' + decimalPadding(roundValue(currentPopularVote, 2), 2) + '%</a>'
+      }
+      break
     }
 
     if (shouldReverseOrder)
@@ -251,7 +266,7 @@ function cyclePartyColorPreset(partyID, div, incrementAmount)
 
 function updatePartyDropdownVisibility()
 {
-  if (currentEditingState != EditingState.editing)
+  if (currentEditingState != EditingState.editing || (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages))
   {
     $(".partyDropdownContainer").each(function() {
       $(this).css("display", "block")
@@ -529,4 +544,64 @@ function updatePoliticalPartyCandidateNames(mapDate)
       politicalParties[partyID].setCandidateName(candidateNames[partyID])
     }
   }
+}
+
+function togglePartyPopularVoteEditing(partyID)
+{
+  if (editPartyPopularVote)
+  {
+    let currentPopularVote = getCurrentPopularVote(partyID)
+    let popularVoteToSet = parseFloat($("#" + editPartyPopularVote + "-popular-vote-text").val())
+    if (popularVoteToSet && popularVoteToSet != currentPopularVote)
+    {
+      let partyVotesharePercentages = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages
+      if (!partyVotesharePercentages)
+      {
+        displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages = {}
+      }
+
+      let candidateData = partyVotesharePercentages.find(candidateData => candidateData.partyID == editPartyPopularVote)
+      if (!candidateData)
+      {
+        let candidateName = currentMapSource.getCandidateNames(currentSliderDate.getTime())[editPartyPopularVote] ?? politicalParties[editPartyPopularVote].getNames[0]
+        candidateData = {partyID: editPartyPopularVote, candidate: candidateName}
+        partyVotesharePercentages.push(candidateData)
+      }
+      candidateData.voteshare = popularVoteToSet
+
+      displayRegionDataArray[nationalPopularVoteID].partyID = partyVotesharePercentages.reduce((topParty, currentParty) => topParty.voteshare > currentParty.voteshare ? topParty : currentParty, partyVotesharePercentages[0]).partyID
+
+      updateTotalsPieChart()
+
+      currentPopularVote = popularVoteToSet
+    }
+
+    $("#" + editPartyPopularVote + "-popular-vote").html(decimalPadding(roundValue(currentPopularVote, 2), 2) + "%")
+  }
+
+  if (editPartyPopularVote != null && partyID == editPartyPopularVote)
+  {
+    editPartyPopularVote = null
+  }
+  else
+  {
+    editPartyPopularVote = partyID
+  }
+
+  if (editPartyPopularVote)
+  {
+    let currentPopularVote = getCurrentPopularVote(partyID)
+    $("#" + partyID + "-popular-vote").html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-popular-vote-text' value='" + decimalPadding(roundValue(currentPopularVote, 2), 2) + "'>")
+    $("#" + partyID + "-popular-vote-text").focus()
+  }
+}
+
+function getCurrentPopularVote(partyID)
+{
+  if (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages)
+  {
+    let candidateData = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages.find(candidateData => candidateData.partyID == partyID)
+    return candidateData ? candidateData.voteshare : 0.0
+  }
+  return null
 }
