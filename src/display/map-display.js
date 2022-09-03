@@ -1698,7 +1698,7 @@ function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopula
     popularVoteData = regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID]
   }
 
-  if (popularVoteData && popularVoteData.partyVotesharePercentages)
+  if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
   {
     return popularVoteData.partyVotesharePercentages
   }
