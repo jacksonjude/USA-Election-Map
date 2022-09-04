@@ -1545,9 +1545,9 @@ function createPresidentialMapSources()
     {
       return "svg-sources/usa-presidential-pre-1972-map.svg"
     }
-    else  if (dateYear < 1996)
+    else  if (dateYear < 1992)
     {
-      return "svg-sources/usa-presidential-pre-1996-map.svg"
+      return "svg-sources/usa-presidential-pre-1992-map.svg"
     }
     else
     {
@@ -2326,7 +2326,8 @@ function createSenateMapSources()
     1655510400000: "gVozPu2PobM",
     1656720000000: "hjJEtK5ZXw4",
     1658102400000: "gKZaNGE1dbM",
-    1659830400000: "d9ij_Fh_TWU"
+    1659830400000: "d9ij_Fh_TWU",
+    1662076800000: "r0GEgtLmDk4"
   }
 
   var LTESenateProjectionMapSource = new MapSource(
