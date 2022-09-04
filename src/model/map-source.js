@@ -1212,9 +1212,9 @@ function createPresidentialMapSources()
     {
       return "svg-sources/usa-presidential-pre-1972-map.svg"
     }
-    else  if (dateYear < 1996)
+    else  if (dateYear < 1992)
     {
-      return "svg-sources/usa-presidential-pre-1996-map.svg"
+      return "svg-sources/usa-presidential-pre-1992-map.svg"
     }
     else
     {
