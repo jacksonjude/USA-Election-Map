@@ -1864,7 +1864,8 @@ function createSenateMapSources()
     1637280000000: "236591",
     1645747200000: "252446",
     1646352000000: "252501",
-    1660780800000: ""
+    1660780800000: "303781",
+    1658793600000: ""
   }
 
   var CookSenateProjectionMapSource = new MapSource(
