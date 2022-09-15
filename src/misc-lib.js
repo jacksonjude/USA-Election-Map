@@ -60,6 +60,14 @@ function addCommaFormatting(num)
   return numString
 }
 
+function capitalize(string)
+{
+  if (string.length == 0) return ""
+  if (string.length == 1) return string.toUpperCase()
+
+  return string.slice(0, 1).toUpperCase() + string.slice(1)
+}
+
 function getKeyByValue(object, value, shouldStringifyToCompare)
 {
   return Object.keys(object).find(key => shouldStringifyToCompare ? JSON.stringify(object[key]) == JSON.stringify(value) : object[key] == value)

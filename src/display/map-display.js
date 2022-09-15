@@ -1827,14 +1827,55 @@ async function updateRegionBox(regionID)
     shiftClickToEditMargin: [false, "Shift click to edit margin"]
   }
 
+  if (currentEditingState == EditingState.viewing)
+  {
+    regionBoxHTML += "<br></span>"
+  }
+  else
+  {
+    regionBoxHTML += "</span>"
+  }
+
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
-    regionBoxHTML += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
     regionBoxHTML += "<span style='color: " + politicalParties[incumbentChallengerPartyIDs.challenger].getMarginColors().lean + ";'>" // Hardcoding challenger first
     regionBoxHTML += decimalPadding(Math.round(regionData.chanceChallenger*1000)/10)
     regionBoxHTML += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + politicalParties[incumbentChallengerPartyIDs.incumbent].getMarginColors().lean + ";'>"
     regionBoxHTML += decimalPadding(Math.round(regionData.chanceIncumbent*1000)/10)
     regionBoxHTML += "%</span></span>"
+  }
+
+  if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
+  {
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Chances<br></span>"
+
+    let sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => voteData2.winPercentage-voteData1.winPercentage)
+    let filteredSortedPercentages = []
+    for (let voteData of sortedPercentages)
+    {
+      let existingVoteData = filteredSortedPercentages.find(existingVoteData => existingVoteData.partyID == voteData.partyID)
+      if (!existingVoteData)
+      {
+        filteredSortedPercentages.push({...voteData})
+      }
+      else
+      {
+        existingVoteData.winPercentage += voteData.winPercentage
+      }
+    }
+
+    let colorPercentages = []
+    colorPercentages = filteredSortedPercentages.map(voteData => {
+      return {color: politicalParties[voteData.partyID].getMarginColors().likely, percentage: voteData.winPercentage}
+    })
+
+    regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, colorPercentages[1].color, colorPercentages[0].percentage, colorPercentages[1].percentage) + "; " + " width: 100%'>"
+    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*100)/100, 2) + "%" + "</span>"
+    regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*100)/100, 2) + "%" + "</span>"
+    regionBoxHTML += "</span>"
+    regionBoxHTML += "</div>"
   }
 
   if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
@@ -1855,11 +1896,7 @@ async function updateRegionBox(regionID)
 
     if (currentEditingState == EditingState.viewing)
     {
-      regionBoxHTML += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
-    }
-    else
-    {
-      regionBoxHTML += "</span>"
+      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
     }
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
@@ -1977,9 +2014,9 @@ function getRoundedMarginValue(fullMarginValue)
   return currentMapSource.getAddDecimalPadding() ? decimalPadding(roundedMarginValue) : roundedMarginValue
 }
 
-function getGradientCSS(fillColor, backgroundColor, fillPercentage)
+function getGradientCSS(fillColor, backgroundColor, fillPercentage, backgroundPercentage = 0)
 {
-  return "linear-gradient(90deg, " + fillColor + " " + fillPercentage + "%, " + backgroundColor + " 0%)"
+  return "linear-gradient(90deg, " + fillColor + " " + fillPercentage + "%, " + backgroundColor + " " + backgroundPercentage + "%)"
 }
 
 function applyRegionEVEdit(regionID)
