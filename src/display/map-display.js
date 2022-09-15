@@ -1848,7 +1848,7 @@ async function updateRegionBox(regionID)
 
   if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
   {
-    regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Chances<br></span>"
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 8px; padding-bottom: 1px; display: block; line-height: 100%;'>Probability<br></span>"
 
     let sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => voteData2.winPercentage-voteData1.winPercentage)
     let filteredSortedPercentages = []
@@ -1871,9 +1871,9 @@ async function updateRegionBox(regionID)
     })
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
-    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, colorPercentages[1].color, colorPercentages[0].percentage, colorPercentages[1].percentage) + "; " + " width: 100%'>"
-    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*100)/100, 2) + "%" + "</span>"
-    regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*100)/100, 2) + "%" + "</span>"
+    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, colorPercentages[1].color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
+    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + "%" + "</span>"
+    regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + "%" + "</span>"
     regionBoxHTML += "</span>"
     regionBoxHTML += "</div>"
   }
@@ -1896,7 +1896,7 @@ async function updateRegionBox(regionID)
 
     if (currentEditingState == EditingState.viewing)
     {
-      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
+      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 1px; display: block; line-height: 100%;'>Voteshare<br></span>"
     }
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"

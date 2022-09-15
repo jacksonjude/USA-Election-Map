@@ -1944,7 +1944,7 @@ function createSenateMapSources()
     const candidateNameColumnPrefix = "name_"
     const candidateVoteshareColumnPrefix = "voteshare_mean_"
     const candidateWinColumnPrefix = "winner_"
-    const heldSeatPartyIDs2022 = {"DE": democraticPartyID, "MA": democraticPartyID, "ME": democraticPartyID, "MI": democraticPartyID, "MN": democraticPartyID, "MS": republicanPartyID, "MT": democraticPartyID, "NJ": democraticPartyID, "NM": democraticPartyID, "RI": democraticPartyID, "TN": republicanPartyID, "TX": republicanPartyID, "VA": democraticPartyID, "WV": democraticPartyID, "WY": republicanPartyID, "NE": republicanPartyID, "WA-S": democraticPartyID, "OR-S": democraticPartyID, "CA-S": democraticPartyID, "NV-S": democraticPartyID, "UT-S": republicanPartyID, "AZ-S": democraticPartyID, "NM-S": democraticPartyID, "AK-S": republicanPartyID, "HI-S": democraticPartyID, "TX-S": republicanPartyID, "KS-S": republicanPartyID, "CO-S": democraticPartyID, "NE-S": republicanPartyID, "WY-S": republicanPartyID, "MT-S": republicanPartyID, "ID-S": republicanPartyID, "ND-S": republicanPartyID, "SD-S": republicanPartyID, "MN-S": democraticPartyID, "WI-S": democraticPartyID, "IA-S": republicanPartyID, "IL-S": democraticPartyID, "MO-S": republicanPartyID, "AR-S": republicanPartyID, "LA-S": republicanPartyID, "MS-S": republicanPartyID, "AL-S": republicanPartyID, "GA-S": democraticPartyID, "FL-S": republicanPartyID, "SC-S": republicanPartyID, "NC-S": republicanPartyID, "TN-S": republicanPartyID, "KY-S": republicanPartyID, "WV-S": republicanPartyID, "VA-S": democraticPartyID, "OH-S": democraticPartyID, "IN-S": republicanPartyID, "MI-S": democraticPartyID, "PA-S": democraticPartyID, "NY-S": democraticPartyID, "ME-S": republicanPartyID, "NH-S": democraticPartyID, "VT-S": democraticPartyID, "MA-S": democraticPartyID, "RI-S": democraticPartyID, "CT-S": democraticPartyID, "NJ-S": democraticPartyID, "DE-S": democraticPartyID, "MD-S": democraticPartyID}
+    const heldSeatPartyIDs2022 = {"AK-2": republicanPartyID, "HI-1": democraticPartyID, "AL-2": republicanPartyID, "AR-2": republicanPartyID, "AZ-1": democraticPartyID, "CA-1": democraticPartyID, "CO-2": democraticPartyID, "CT-1": democraticPartyID, "DE-2": democraticPartyID, "FL-1": republicanPartyID, "GA-2": democraticPartyID, "IA-2": republicanPartyID, "ID-2": republicanPartyID, "IL-2": democraticPartyID, "IN-1": republicanPartyID, "KS-2": republicanPartyID, "KY-2": republicanPartyID, "LA-2": republicanPartyID, "MA-2": democraticPartyID, "MD-1": democraticPartyID, "ME-2": republicanPartyID, "MI-2": democraticPartyID, "MN-2": democraticPartyID, "MO-1": republicanPartyID, "MS-2": republicanPartyID, "MT-2": republicanPartyID, "NC-2": republicanPartyID, "ND-1": republicanPartyID, "NH-2": democraticPartyID, "NJ-2": democraticPartyID, "NM-2": democraticPartyID, "NV-1": democraticPartyID, "NY-1": democraticPartyID, "OH-1": democraticPartyID, "OK-2": republicanPartyID, "OR-2": democraticPartyID, "PA-1": democraticPartyID, "RI-2": democraticPartyID, "SC-2": republicanPartyID, "SD-2": republicanPartyID, "TN-2": republicanPartyID, "TX-2": republicanPartyID, "UT-1": republicanPartyID, "VA-2": democraticPartyID, "VT-1": democraticPartyID, "WA-1": democraticPartyID, "WI-1": democraticPartyID, "WV-2": republicanPartyID, "WY-2": republicanPartyID, "NE-2": republicanPartyID, "WA-3": democraticPartyID, "OR-3": democraticPartyID, "CA-3": democraticPartyID, "NV-3": democraticPartyID, "UT-3": republicanPartyID, "AZ-3": democraticPartyID, "NM-1": democraticPartyID, "AK-3": republicanPartyID, "HI-3": democraticPartyID, "TX-1": republicanPartyID, "OK-3": republicanPartyID, "KS-3": republicanPartyID, "CO-3": democraticPartyID, "NE-1": republicanPartyID, "WY-1": republicanPartyID, "MT-1": democraticPartyID, "ID-3": republicanPartyID, "ND-3": republicanPartyID, "SD-3": republicanPartyID, "MN-1": democraticPartyID, "WI-3": republicanPartyID, "IA-3": republicanPartyID, "IL-3": democraticPartyID, "MO-3": republicanPartyID, "AR-3": republicanPartyID, "LA-3": republicanPartyID, "MS-1": republicanPartyID, "AL-3": republicanPartyID, "GA-3": democraticPartyID, "FL-3": republicanPartyID, "SC-3": republicanPartyID, "NC-3": republicanPartyID, "TN-1": republicanPartyID, "KY-3": republicanPartyID, "WV-1": democraticPartyID, "VA-1": democraticPartyID, "OH-3": republicanPartyID, "IN-3": republicanPartyID, "MI-1": democraticPartyID, "PA-3": republicanPartyID, "NY-3": democraticPartyID, "ME-1": democraticPartyID, "NH-3": democraticPartyID, "VT-3": democraticPartyID, "MA-1": democraticPartyID, "RI-1": democraticPartyID, "CT-3": democraticPartyID, "NJ-1": democraticPartyID, "DE-1": democraticPartyID, "MD-3": democraticPartyID, "NPV-1": republicanPartyID}
 
     let onCycleClass = ((cycleYear-2)%6)/2+1
     let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
@@ -2006,7 +2006,7 @@ function createSenateMapSources()
           partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
         }
 
-        dateData[regionID + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionID + (shouldBeSpecialRegion ? "-S" : ""), seatClass: regionClass, offYear: false, runoff: false, isSpecial: shouldBeSpecialRegion, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: false}
+        dateData[regionID + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionID + (shouldBeSpecialRegion ? "-S" : ""), seatClass: regionClass, offYear: false, runoff: false, isSpecial: shouldBeSpecialRegion, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatPartyIDs2022[regionID + "-" + regionClass] != greatestMarginPartyID}
       }
 
       for (let regionID of Object.values(regionNameToID))
@@ -2015,13 +2015,15 @@ function createSenateMapSources()
 
         let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
 
+        let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
+
         if (!dateData[regionID])
         {
-          dateData[regionID] = {region: regionID, seatClass: stateClasses[regionID][0], isSpecial: false, partyID: heldSeatPartyIDs2022[regionID], ...placeholderRegionData}
+          dateData[regionID] = {region: regionID, seatClass: seatClassesToUse[0], isSpecial: false, partyID: heldSeatPartyIDs2022[regionID + "-" + seatClassesToUse[0]], ...placeholderRegionData}
         }
         if (!dateData[regionID + "-S"])
         {
-          dateData[regionID + "-S"] = {region: regionID + "-S", seatClass: stateClasses[regionID][1], isSpecial: true, partyID: heldSeatPartyIDs2022[regionID + "-S"], ...placeholderRegionData}
+          dateData[regionID + "-S"] = {region: regionID + "-S", seatClass: seatClassesToUse[1], isSpecial: true, partyID: heldSeatPartyIDs2022[regionID + "-" + seatClassesToUse[1]], ...placeholderRegionData}
         }
       }
 
@@ -2394,7 +2396,7 @@ function createSenateMapSources()
     regionNameToIDHistorical, // regionNameToIDMap
     {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
     false, // shouldFilterOutDuplicateRows
-    false, // addDecimalPadding
+    true, // addDecimalPadding
     singleLineVoteshareFilterFunction, // organizeMapDataFunction
     null, // viewingDataFunction
     null, // zoomingDataFunction
@@ -2804,6 +2806,96 @@ function createGovernorMapSources()
 {
   const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":"NPV"}
 
+  var singleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, ___, ____, voteshareCutoffMargin)
+  {
+    let mapData = {}
+    let partyNameData = {}
+
+    const deluxeProjectionType = "_deluxe"
+    const candidateColumns = {[DemocraticParty.getID()]: ["D1", "D2", "D3", "D4"], [RepublicanParty.getID()]: ["R1", "R2", "R3", "R4"], [IndependentGenericParty.getID()]: ["I1", "O1"]}
+    const candidateNameColumnPrefix = "name_"
+    const candidateVoteshareColumnPrefix = "voteshare_mean_"
+    const candidateWinColumnPrefix = "winner_"
+    const heldSeatPartyIDs2022 = {"AK": republicanPartyID, "HI": democraticPartyID, "AL": republicanPartyID, "AR": republicanPartyID, "AZ": republicanPartyID, "CA": democraticPartyID, "CO": democraticPartyID, "CT": democraticPartyID, "DE": democraticPartyID, "FL": republicanPartyID, "GA": republicanPartyID, "IA": republicanPartyID, "ID": republicanPartyID, "IL": democraticPartyID, "IN": republicanPartyID, "KS": democraticPartyID, "KY": democraticPartyID, "LA": democraticPartyID, "MA": republicanPartyID, "MD": republicanPartyID, "ME": democraticPartyID, "MI": democraticPartyID, "MN": democraticPartyID, "MO": republicanPartyID, "MS": republicanPartyID, "MT": republicanPartyID, "NC": democraticPartyID, "ND": republicanPartyID, "NH": republicanPartyID, "NJ": democraticPartyID, "NM": democraticPartyID, "NV": democraticPartyID, "NY": democraticPartyID, "OH": republicanPartyID, "OK": republicanPartyID, "OR": democraticPartyID, "PA": democraticPartyID, "RI": democraticPartyID, "SC": republicanPartyID, "SD": republicanPartyID, "TN": republicanPartyID, "TX": republicanPartyID, "UT": republicanPartyID, "VA": republicanPartyID, "VT": republicanPartyID, "WA": democraticPartyID, "WI": democraticPartyID, "WV": republicanPartyID, "WY": republicanPartyID, "NE": republicanPartyID}
+
+    let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
+
+    for (let mapDate of mapDates)
+    {
+      let rawDateData = rawMapData[mapDate].filter(mapRow => mapRow[columnMap.pollType] == deluxeProjectionType)
+      let dateData = {}
+
+      for (let mapRow of rawDateData)
+      {
+        let [_, regionID] = /(\w\w)-G1/.exec(mapRow[columnMap.region])
+
+        let candidateArray = []
+
+        for (let partyID in candidateColumns)
+        {
+          for (let candidateID of candidateColumns[partyID])
+          {
+            let candidateName = mapRow[candidateNameColumnPrefix + candidateID]
+            if (candidateName == "") break
+
+            let candidateLastName = capitalize(candidateName.split(" ").reverse()[0])
+
+            candidateArray.push({candidate: candidateLastName, partyID: partyID, voteshare: parseFloat(mapRow[candidateVoteshareColumnPrefix + candidateID]), winPercentage: parseFloat(mapRow[candidateWinColumnPrefix + candidateID])*100})
+          }
+        }
+
+        let voteshareSortedCandidateData = candidateArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+
+        if (voteshareSortedCandidateData.length == 0)
+        {
+          console.log("No candidate data!", new Date(mapDate).getFullYear().toString(), regionID)
+          continue
+        }
+
+        let greatestMarginPartyID
+        let greatestMarginCandidateName
+        let topTwoMargin
+
+        if (voteshareSortedCandidateData[0].voteshare != 0)
+        {
+          greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+          greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+        }
+        else
+        {
+          greatestMarginPartyID = TossupParty.getID()
+          greatestMarginCandidateName = null
+          topTwoMargin = 0
+        }
+
+        let partyIDToCandidateNames = {}
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
+        }
+
+        dateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatPartyIDs2022[regionID] != greatestMarginPartyID}
+      }
+
+      for (let regionID of Object.values(regionNameToID))
+      {
+        if (regionID == nationalPopularVoteID) continue
+
+        if (!dateData[regionID])
+        {
+          dateData[regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 101, disabled: true, partyID: heldSeatPartyIDs2022[regionID]}
+        }
+      }
+
+      mapData[mapDate] = dateData
+      partyNameData[mapDate] = partyNames
+    }
+
+    return {mapData: mapData, candidateNameData: partyNameData, mapDates: mapDates}
+  }
+
   var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, ____, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
   {
     var filteredMapData = {}
@@ -3094,6 +3186,50 @@ function createGovernorMapSources()
     }
   }
 
+  var FiveThirtyEightGovernorProjectionMapSource = new MapSource(
+    "538-2022-Governor-Projection", // id
+    "538 Projection", // name
+    "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/governor_state_toplines_2022.csv", // dataURL
+    "https://projects.fivethirtyeight.com/2022-election-forecast/governor/", // homepageURL
+    {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
+    {
+      date: "forecastdate",
+      region: "district",
+      pollType: "expression"
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    regionNameToIDHistorical, // regionNameToIDMap
+    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    singleLineVoteshareFilterFunction, // organizeMapDataFunction
+    null, // viewingDataFunction
+    null, // zoomingDataFunction
+    null, // splitVoteDataFunction
+    null, // splitVoteDisplayOptions
+    null, // getFormattedRegionName
+    function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage)
+    {
+      if (!shouldOpenHomepage && !regionID) return
+
+      let linkToOpen = homepageURL
+      if (!shouldOpenHomepage)
+      {
+        linkToOpen += regionIDToLinkMap[regionID]
+      }
+
+      window.open(linkToOpen)
+    }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0 // voteshareCutoffMargin
+  )
+
   const LTE2022GovernorYouTubeIDs = {
     1628380800000: "XXjRhuaFWuc",
     1630886400000: "QCN0K03rmRI",
@@ -3322,12 +3458,13 @@ function createGovernorMapSources()
   CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
   var governorMapSources = {}
+  governorMapSources[FiveThirtyEightGovernorProjectionMapSource.getID()] = FiveThirtyEightGovernorProjectionMapSource
   governorMapSources[LTEGovernorProjectionMapSource.getID()] = LTEGovernorProjectionMapSource
   governorMapSources[CookGovernorProjectionMapSource.getID()] = CookGovernorProjectionMapSource
   governorMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   governorMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var governorMapSourceIDs = [LTEGovernorProjectionMapSource.getID(), CookGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+  var governorMapSourceIDs = [FiveThirtyEightGovernorProjectionMapSource.getID(), LTEGovernorProjectionMapSource.getID(), CookGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USAGovernorMapType.getCustomMapEnabled())
   {
     governorMapSourceIDs.push(CustomMapSource.getID())
