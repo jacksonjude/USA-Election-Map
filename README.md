@@ -1,14 +1,14 @@
 # USA Election Map
 
-An interactive USA presidential, senatorial, house, and governor election map. Created with HTML/CSS/JS (+[JQuery](https://jquery.com)), [chart.js](https://www.chartjs.org), and map svg outlines from [YAPms](https://www.yapms.com).
+An interactive USA presidential, senatorial, house, and governor election map. Created with HTML/CSS/JS, map svg outlines from [YAPms](https://www.yapms.com), and map data from [MIT Election Lab](https://electionlab.mit.edu/data) & [Dave Leip's Atlas](https://uselectionatlas.org).
 
 ## Features
 
 * Interactive and detailed map sources
-  * Displays projection data for the 2020 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), [JHK](https://projects.jhkforecasts.com/presidential-forecast/), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays projection data for the 2022 senate elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA), [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ), and [The Cook Political Report](https://cookpolitical.com)
-  * Displays projection data for the 2022 governor elections from [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [The Cook Political Report](https://cookpolitical.com)
-  * Displays presidential (1856-2020), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
+  * Displays projection data for the 2020 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/polls/president-general/), and [The Cook Political Report](https://cookpolitical.com)
+  * Displays projection data for the 2022 senate elections from [FiveThirtyEight](https://projects.fivethirtyeight.com/2022-election-forecast/senate/), [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA), [Political Analysis](https://www.youtube.com/channel/UC4bC-T3iypwMjLd-teG-sgQ), and [The Cook Political Report](https://cookpolitical.com)
+  * Displays projection data for the 2022 governor elections from [FiveThirtyEight](https://projects.fivethirtyeight.com/2022-election-forecast/governor/), [Let's Talk Elections](https://www.youtube.com/channel/UCZ0H9_lidl67AqiC9-RxfvA) and [The Cook Political Report](https://cookpolitical.com)
+  * Displays presidential (1788-2020), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) election results, showing both victory margin and voteshare percentages for each state & district
   * Pie chart to show electoral vote counts by party and by margin, as well as national popular vote totals for past elections
   * View states that flipped between election cycles on both the map and pie chart
   * Fully editable custom maps that can be downloaded and uploaded as JSON or CSV files
@@ -20,7 +20,7 @@ An interactive USA presidential, senatorial, house, and governor election map. C
 
 ## Development
 
-Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack (+ JQuery & chart.js, which are included locally). Just clone the repo and open index.html to run.
+Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack. Just clone the repo and open index.html to run.
 
 Since the site uses separate svg files for the map, Chrome and Safari might prevent them from loading over the file protocol due to CORS restrictions (this is a well known issue: see [more info](https://stackoverflow.com/a/8456586/) and [solution](https://stackoverflow.com/a/13262673/)).
 - Fixing this CORS issue on Safari is fairly simple: go to Develop > Disable Cross-Origin Restrictions.
@@ -53,12 +53,12 @@ Then open the address provided in the Terminal window (by default, it seems to b
   - [x] 1912-1956 presidential elections
   - [x] 1856-1908 presidential elections
 - [x] Past governor elections & 2022 governor projections (1980-2020)
-- [ ] Full third-party support in past results and custom maps
+- [x] Full third-party support in past results and custom maps
   - [x] Display in voteshare
   - [x] Display on pie chart
   - [x] Display in past result maps
   - [x] Add & Edit parties in custom map
-  - [ ] Shift & compare modes for multiple parties
+  - [x] Shift & compare modes for multiple parties
 - [ ] Custom map improvements
   - [x] Directly editable margins
   - [x] Direct electoral vote editing
