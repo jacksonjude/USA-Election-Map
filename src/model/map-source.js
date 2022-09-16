@@ -531,7 +531,7 @@ class MapSource
       {
         let regionData = mapData[mapDate][regionID]
 
-        let candidatesToAdd = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.reduce((candidateMap, partyPercentage) =>
+        let candidatesToAdd = regionData.partyVotesharePercentages && this.editingMode == EditingMode.voteshare ? regionData.partyVotesharePercentages.reduce((candidateMap, partyPercentage) =>
         {
           return {...candidateMap, [partyPercentage.candidate]: partyPercentage.partyID}
         }, {}) : cloneObject(candidateNameToPartyIDs)
@@ -548,7 +548,7 @@ class MapSource
 
         for (let candidateName in candidatesToAdd)
         {
-          if (candidateNameToPartyIDs[candidateName] != regionData.partyID && regionData.margin != 0 && !regionData.partyVotesharePercentages) { continue }
+          if (candidatesToAdd[candidateName] != regionData.partyID && regionData.margin != 0 && !regionData.partyVotesharePercentages) { continue }
 
           for (let columnTitleNum in columnTitles)
           {
@@ -3735,7 +3735,7 @@ function createHouseMapSources()
       {
         return voteshareData.voteshare
       }
-      else if (regionData.candidateName == candidateName)
+      else if (regionData.partyID == partyID)
       {
         return regionData.margin
       }
