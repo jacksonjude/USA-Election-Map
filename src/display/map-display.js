@@ -1871,9 +1871,12 @@ async function updateRegionBox(regionID)
     })
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
-    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, colorPercentages[1].color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
+    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, (colorPercentages[1] ?? colorPercentages[0]).color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
     regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + "%" + "</span>"
-    regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + "%" + "</span>"
+    if (filteredSortedPercentages[1])
+    {
+      regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + "%" + "</span>"
+    }
     regionBoxHTML += "</span>"
     regionBoxHTML += "</div>"
   }

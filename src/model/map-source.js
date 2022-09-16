@@ -1978,7 +1978,7 @@ function createSenateMapSources()
             let candidateName = mapRow[candidateNameColumnPrefix + candidateID]
             if (candidateName == "") break
 
-            let candidateLastName = capitalize(candidateName.split(" ").reverse()[0])
+            let candidateLastName = capitalize(candidateName.replaceAll(",", "").replaceAll(/ III?$/g, "").replaceAll(/ Jr\.?/g, "").replaceAll(/ Sr\.?/g, "").split(" ").reverse()[0])
 
             candidateArray.push({candidate: candidateLastName, partyID: partyID, voteshare: parseFloat(mapRow[candidateVoteshareColumnPrefix + candidateID]), winPercentage: parseFloat(mapRow[candidateWinColumnPrefix + candidateID])*100})
           }
@@ -2856,7 +2856,7 @@ function createGovernorMapSources()
             let candidateName = mapRow[candidateNameColumnPrefix + candidateID]
             if (candidateName == "") break
 
-            let candidateLastName = capitalize(candidateName.split(" ").reverse()[0])
+            let candidateLastName = capitalize(candidateName.replaceAll(",", "").replaceAll(/ III?$/g, "").replaceAll(/ Jr\.?/g, "").replaceAll(/ Sr\.?/g, "").split(" ").reverse()[0])
 
             candidateArray.push({candidate: candidateLastName, partyID: partyID, voteshare: parseFloat(mapRow[candidateVoteshareColumnPrefix + candidateID]), winPercentage: parseFloat(mapRow[candidateWinColumnPrefix + candidateID])*100})
           }
@@ -3508,6 +3508,120 @@ function createHouseMapSources()
 {
   const regionNameToIDHistorical = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", "NPV":"NPV"}
 
+  const heldSeatPartyIDs2022 = {"AL__1": republicanPartyID, "AL__2": republicanPartyID, "AL__3": republicanPartyID, "AL__4": republicanPartyID, "AL__5": republicanPartyID, "AL__6": republicanPartyID, "AL__7": democraticPartyID, "AK__0": republicanPartyID, "AZ__1": democraticPartyID, "AZ__2": democraticPartyID, "AZ__3": democraticPartyID, "AZ__4": republicanPartyID, "AZ__5": republicanPartyID, "AZ__6": republicanPartyID, "AZ__7": democraticPartyID, "AZ__8": republicanPartyID, "AZ__9": democraticPartyID, "AR__1": republicanPartyID, "AR__2": republicanPartyID, "AR__3": republicanPartyID, "AR__4": republicanPartyID, "CA__1": republicanPartyID, "CA__2": democraticPartyID, "CA__3": democraticPartyID, "CA__4": republicanPartyID, "CA__5": democraticPartyID, "CA__6": democraticPartyID, "CA__7": democraticPartyID, "CA__8": republicanPartyID, "CA__9": democraticPartyID, "CA__10": democraticPartyID, "CA__11": democraticPartyID, "CA__12": democraticPartyID, "CA__13": democraticPartyID, "CA__14": democraticPartyID, "CA__15": democraticPartyID, "CA__16": democraticPartyID, "CA__17": democraticPartyID, "CA__18": democraticPartyID, "CA__19": democraticPartyID, "CA__20": democraticPartyID, "CA__21": republicanPartyID, "CA__22": republicanPartyID, "CA__23": republicanPartyID, "CA__24": democraticPartyID, "CA__25": republicanPartyID, "CA__26": democraticPartyID, "CA__27": democraticPartyID, "CA__28": democraticPartyID, "CA__29": democraticPartyID, "CA__30": democraticPartyID, "CA__31": democraticPartyID, "CA__32": democraticPartyID, "CA__33": democraticPartyID, "CA__34": democraticPartyID, "CA__35": democraticPartyID, "CA__36": democraticPartyID, "CA__37": democraticPartyID, "CA__38": democraticPartyID, "CA__39": republicanPartyID, "CA__40": democraticPartyID, "CA__41": democraticPartyID, "CA__42": republicanPartyID, "CA__43": democraticPartyID, "CA__44": democraticPartyID, "CA__45": democraticPartyID, "CA__46": democraticPartyID, "CA__47": democraticPartyID, "CA__48": republicanPartyID, "CA__49": democraticPartyID, "CA__50": republicanPartyID, "CA__51": democraticPartyID, "CA__52": democraticPartyID, "CA__53": democraticPartyID, "CO__1": democraticPartyID, "CO__2": democraticPartyID, "CO__3": republicanPartyID, "CO__4": republicanPartyID, "CO__5": republicanPartyID, "CO__6": democraticPartyID, "CO__7": democraticPartyID, "CT__1": democraticPartyID, "CT__2": democraticPartyID, "CT__3": democraticPartyID, "CT__4": democraticPartyID, "CT__5": democraticPartyID, "DE__0": democraticPartyID, "FL__1": republicanPartyID, "FL__2": republicanPartyID, "FL__3": republicanPartyID, "FL__4": republicanPartyID, "FL__5": democraticPartyID, "FL__6": republicanPartyID, "FL__7": democraticPartyID, "FL__8": republicanPartyID, "FL__9": democraticPartyID, "FL__10": democraticPartyID, "FL__11": republicanPartyID, "FL__12": republicanPartyID, "FL__13": democraticPartyID, "FL__14": democraticPartyID, "FL__15": republicanPartyID, "FL__16": republicanPartyID, "FL__17": republicanPartyID, "FL__18": republicanPartyID, "FL__19": republicanPartyID, "FL__20": democraticPartyID, "FL__21": democraticPartyID, "FL__22": democraticPartyID, "FL__23": democraticPartyID, "FL__24": democraticPartyID, "FL__25": republicanPartyID, "FL__26": republicanPartyID, "FL__27": republicanPartyID, "GA__1": republicanPartyID, "GA__8": republicanPartyID, "GA__3": republicanPartyID, "GA__4": democraticPartyID, "GA__5": democraticPartyID, "GA__6": democraticPartyID, "GA__7": democraticPartyID, "GA__2": democraticPartyID, "GA__9": republicanPartyID, "GA__10": republicanPartyID, "GA__11": republicanPartyID, "GA__12": republicanPartyID, "GA__13": democraticPartyID, "GA__14": republicanPartyID, "HI__1": democraticPartyID, "HI__2": democraticPartyID, "ID__1": republicanPartyID, "ID__2": republicanPartyID, "IL__1": democraticPartyID, "IL__2": democraticPartyID, "IL__3": democraticPartyID, "IL__4": democraticPartyID, "IL__5": democraticPartyID, "IL__6": democraticPartyID, "IL__7": democraticPartyID, "IL__8": democraticPartyID, "IL__9": democraticPartyID, "IL__10": democraticPartyID, "IL__11": democraticPartyID, "IL__12": republicanPartyID, "IL__13": republicanPartyID, "IL__14": democraticPartyID, "IL__15": republicanPartyID, "IL__16": republicanPartyID, "IL__17": democraticPartyID, "IL__18": republicanPartyID, "IN__1": democraticPartyID, "IN__2": republicanPartyID, "IN__3": republicanPartyID, "IN__4": republicanPartyID, "IN__5": republicanPartyID, "IN__6": republicanPartyID, "IN__7": democraticPartyID, "IN__8": republicanPartyID, "IN__9": republicanPartyID, "IA__1": republicanPartyID, "IA__2": republicanPartyID, "IA__3": democraticPartyID, "IA__4": republicanPartyID, "KS__1": republicanPartyID, "KS__2": republicanPartyID, "KS__3": democraticPartyID, "KS__4": republicanPartyID, "KY__1": republicanPartyID, "KY__2": republicanPartyID, "KY__3": democraticPartyID, "KY__4": republicanPartyID, "KY__5": republicanPartyID, "KY__6": republicanPartyID, "LA__1": republicanPartyID, "LA__2": democraticPartyID, "LA__3": republicanPartyID, "LA__4": republicanPartyID, "LA__5": republicanPartyID, "LA__6": republicanPartyID, "ME__1": democraticPartyID, "ME__2": democraticPartyID, "MD__1": republicanPartyID, "MD__2": democraticPartyID, "MD__3": democraticPartyID, "MD__4": democraticPartyID, "MD__5": democraticPartyID, "MD__6": democraticPartyID, "MD__7": democraticPartyID, "MD__8": democraticPartyID, "MA__1": democraticPartyID, "MA__2": democraticPartyID, "MA__3": democraticPartyID, "MA__4": democraticPartyID, "MA__5": democraticPartyID, "MA__6": democraticPartyID, "MA__7": democraticPartyID, "MA__8": democraticPartyID, "MA__9": democraticPartyID, "MI__1": republicanPartyID, "MI__2": republicanPartyID, "MI__3": republicanPartyID, "MI__4": republicanPartyID, "MI__5": democraticPartyID, "MI__6": republicanPartyID, "MI__7": republicanPartyID, "MI__8": democraticPartyID, "MI__9": democraticPartyID, "MI__10": republicanPartyID, "MI__11": democraticPartyID, "MI__12": democraticPartyID, "MI__13": democraticPartyID, "MI__14": democraticPartyID, "MN__1": republicanPartyID, "MN__2": democraticPartyID, "MN__3": democraticPartyID, "MN__4": democraticPartyID, "MN__5": democraticPartyID, "MN__6": republicanPartyID, "MN__7": republicanPartyID, "MN__8": republicanPartyID, "MS__1": republicanPartyID, "MS__2": democraticPartyID, "MS__3": republicanPartyID, "MS__4": republicanPartyID, "MO__1": democraticPartyID, "MO__2": republicanPartyID, "MO__3": republicanPartyID, "MO__4": republicanPartyID, "MO__5": democraticPartyID, "MO__6": republicanPartyID, "MO__7": republicanPartyID, "MO__8": republicanPartyID, "MT__0": republicanPartyID, "NE__1": republicanPartyID, "NE__2": republicanPartyID, "NE__3": republicanPartyID, "NV__1": democraticPartyID, "NV__2": republicanPartyID, "NV__3": democraticPartyID, "NV__4": democraticPartyID, "NH__1": democraticPartyID, "NH__2": democraticPartyID, "NJ__1": democraticPartyID, "NJ__2": republicanPartyID, "NJ__3": democraticPartyID, "NJ__4": republicanPartyID, "NJ__5": democraticPartyID, "NJ__6": democraticPartyID, "NJ__7": democraticPartyID, "NJ__8": democraticPartyID, "NJ__9": democraticPartyID, "NJ__10": democraticPartyID, "NJ__11": democraticPartyID, "NJ__12": democraticPartyID, "NM__1": democraticPartyID, "NM__2": republicanPartyID, "NM__3": democraticPartyID, "NY__1": republicanPartyID, "NY__2": republicanPartyID, "NY__3": democraticPartyID, "NY__4": democraticPartyID, "NY__5": democraticPartyID, "NY__6": democraticPartyID, "NY__7": democraticPartyID, "NY__8": democraticPartyID, "NY__9": democraticPartyID, "NY__10": democraticPartyID, "NY__11": republicanPartyID, "NY__12": democraticPartyID, "NY__13": democraticPartyID, "NY__14": democraticPartyID, "NY__15": democraticPartyID, "NY__16": democraticPartyID, "NY__17": democraticPartyID, "NY__18": democraticPartyID, "NY__19": democraticPartyID, "NY__20": democraticPartyID, "NY__21": republicanPartyID, "NY__22": republicanPartyID, "NY__23": republicanPartyID, "NY__24": republicanPartyID, "NY__25": democraticPartyID, "NY__26": democraticPartyID, "NY__27": republicanPartyID, "NC__1": democraticPartyID, "NC__2": democraticPartyID, "NC__3": republicanPartyID, "NC__4": democraticPartyID, "NC__5": republicanPartyID, "NC__6": democraticPartyID, "NC__7": republicanPartyID, "NC__8": republicanPartyID, "NC__9": republicanPartyID, "NC__10": republicanPartyID, "NC__11": republicanPartyID, "NC__12": democraticPartyID, "NC__13": republicanPartyID, "ND__0": republicanPartyID, "OH__1": republicanPartyID, "OH__2": republicanPartyID, "OH__3": democraticPartyID, "OH__4": republicanPartyID, "OH__5": republicanPartyID, "OH__6": republicanPartyID, "OH__7": republicanPartyID, "OH__8": republicanPartyID, "OH__9": democraticPartyID, "OH__10": republicanPartyID, "OH__11": democraticPartyID, "OH__12": republicanPartyID, "OH__13": democraticPartyID, "OH__14": republicanPartyID, "OH__15": republicanPartyID, "OH__16": republicanPartyID, "OK__1": republicanPartyID, "OK__2": republicanPartyID, "OK__3": republicanPartyID, "OK__4": republicanPartyID, "OK__5": republicanPartyID, "OR__1": democraticPartyID, "OR__2": republicanPartyID, "OR__3": democraticPartyID, "OR__4": democraticPartyID, "OR__5": democraticPartyID, "PA__1": republicanPartyID, "PA__2": democraticPartyID, "PA__3": democraticPartyID, "PA__4": democraticPartyID, "PA__5": democraticPartyID, "PA__6": democraticPartyID, "PA__7": democraticPartyID, "PA__8": democraticPartyID, "PA__9": republicanPartyID, "PA__10": republicanPartyID, "PA__11": republicanPartyID, "PA__12": republicanPartyID, "PA__13": republicanPartyID, "PA__14": republicanPartyID, "PA__15": republicanPartyID, "PA__16": republicanPartyID, "PA__17": democraticPartyID, "PA__18": democraticPartyID, "RI__1": democraticPartyID, "RI__2": democraticPartyID, "SC__1": republicanPartyID, "SC__2": republicanPartyID, "SC__3": republicanPartyID, "SC__4": republicanPartyID, "SC__5": republicanPartyID, "SC__6": democraticPartyID, "SC__7": republicanPartyID, "SD__0": republicanPartyID, "TN__1": republicanPartyID, "TN__2": republicanPartyID, "TN__3": republicanPartyID, "TN__4": republicanPartyID, "TN__5": democraticPartyID, "TN__6": republicanPartyID, "TN__7": republicanPartyID, "TN__8": republicanPartyID, "TN__9": democraticPartyID, "TX__1": republicanPartyID, "TX__2": republicanPartyID, "TX__3": republicanPartyID, "TX__4": republicanPartyID, "TX__5": republicanPartyID, "TX__6": republicanPartyID, "TX__7": democraticPartyID, "TX__8": republicanPartyID, "TX__18": democraticPartyID, "TX__10": republicanPartyID, "TX__11": republicanPartyID, "TX__12": republicanPartyID, "TX__13": republicanPartyID, "TX__14": republicanPartyID, "TX__15": democraticPartyID, "TX__16": democraticPartyID, "TX__17": republicanPartyID, "TX__9": democraticPartyID, "TX__19": republicanPartyID, "TX__20": democraticPartyID, "TX__21": republicanPartyID, "TX__22": republicanPartyID, "TX__23": republicanPartyID, "TX__24": republicanPartyID, "TX__25": republicanPartyID, "TX__26": republicanPartyID, "TX__27": republicanPartyID, "TX__28": democraticPartyID, "TX__29": democraticPartyID, "TX__30": democraticPartyID, "TX__31": republicanPartyID, "TX__32": democraticPartyID, "TX__33": democraticPartyID, "TX__34": democraticPartyID, "TX__35": democraticPartyID, "TX__36": republicanPartyID, "UT__1": republicanPartyID, "UT__2": republicanPartyID, "UT__3": republicanPartyID, "UT__4": republicanPartyID, "VT__0": democraticPartyID, "VA__1": republicanPartyID, "VA__2": democraticPartyID, "VA__3": democraticPartyID, "VA__4": democraticPartyID, "VA__5": republicanPartyID, "VA__6": republicanPartyID, "VA__7": democraticPartyID, "VA__8": democraticPartyID, "VA__9": republicanPartyID, "VA__10": democraticPartyID, "VA__11": democraticPartyID, "WA__1": democraticPartyID, "WA__2": democraticPartyID, "WA__3": republicanPartyID, "WA__4": republicanPartyID, "WA__5": republicanPartyID, "WA__6": democraticPartyID, "WA__7": democraticPartyID, "WA__8": democraticPartyID, "WA__9": democraticPartyID, "WA__10": democraticPartyID, "WV__1": republicanPartyID, "WV__2": republicanPartyID, "WV__3": republicanPartyID, "WI__1": republicanPartyID, "WI__2": democraticPartyID, "WI__3": democraticPartyID, "WI__4": democraticPartyID, "WI__5": republicanPartyID, "WI__6": republicanPartyID, "WI__7": republicanPartyID, "WI__8": republicanPartyID, "WY__0": republicanPartyID}
+
+  var singleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, ___, heldRegionMap, ____, _____, voteshareCutoffMargin)
+  {
+    let mapData = {}
+    let partyNameData = {}
+
+    const deluxeProjectionType = "_deluxe"
+    const candidateColumns = {[DemocraticParty.getID()]: ["D1", "D2", "D3", "D4"], [RepublicanParty.getID()]: ["R1", "R2", "R3", "R4"], [IndependentGenericParty.getID()]: ["I1", "O1"]}
+    const candidateNameColumnPrefix = "name_"
+    const candidateVoteshareColumnPrefix = "voteshare_mean_"
+    const candidateWinColumnPrefix = "winner_"
+    const netPartyMarginColumn = "mean_netpartymargin"
+
+    const districtsToUsePartyForMargin = ["AK__1", "LA__5", "LA__3"]
+
+    let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
+
+    for (let mapDate of mapDates)
+    {
+      let rawDateData = rawMapData[mapDate].filter(mapRow => mapRow[columnMap.pollType] == deluxeProjectionType)
+      let dateData = {}
+
+      let stateDistrictCounts = {}
+
+      for (let mapRow of rawDateData)
+      {
+        let [_, state, district] = /(\w\w)-(\d\d?)/.exec(mapRow[columnMap.region])
+        let regionID = state + subregionSeparator + district
+
+        if (!stateDistrictCounts[state])
+        {
+          stateDistrictCounts[state] = 1
+        }
+        else
+        {
+          stateDistrictCounts[state] += 1
+        }
+
+        let candidateArray = []
+
+        for (let partyID in candidateColumns)
+        {
+          for (let candidateID of candidateColumns[partyID])
+          {
+            let candidateName = mapRow[candidateNameColumnPrefix + candidateID]
+            if (candidateName == "") break
+
+            let candidateLastName = capitalize(candidateName.replaceAll(",", "").replaceAll(/ III?$/g, "").replaceAll(/ Jr\.?/g, "").replaceAll(/ Sr\.?/g, "").split(" ").reverse()[0])
+
+            candidateArray.push({candidate: candidateLastName, partyID: partyID, voteshare: parseFloat(mapRow[candidateVoteshareColumnPrefix + candidateID]), winPercentage: parseFloat(mapRow[candidateWinColumnPrefix + candidateID])*100})
+          }
+        }
+
+        let voteshareSortedCandidateData = candidateArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+
+        if (voteshareSortedCandidateData.length == 0)
+        {
+          console.log("No candidate data!", new Date(mapDate).getFullYear().toString(), regionID)
+          continue
+        }
+
+        let greatestMarginPartyID
+        let greatestMarginCandidateName
+        let topTwoMargin
+
+        if (districtsToUsePartyForMargin.includes(regionID))
+        {
+          topTwoMargin = parseFloat(mapRow[netPartyMarginColumn])
+          greatestMarginPartyID = Math.sign(topTwoMargin) == 1 ? democraticPartyID : republicanPartyID
+          greatestMarginCandidateName = politicalParties[greatestMarginPartyID].getNames()[0]
+          topTwoMargin = Math.abs(topTwoMargin)
+
+          console.log(regionID, topTwoMargin, mapRow[netPartyMarginColumn])
+        }
+        else if (voteshareSortedCandidateData[0].voteshare != 0)
+        {
+          greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+          greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+        }
+        else
+        {
+          greatestMarginPartyID = TossupParty.getID()
+          greatestMarginCandidateName = null
+          topTwoMargin = 0
+        }
+
+        let partyIDToCandidateNames = {}
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
+        }
+
+        dateData[regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID}
+      }
+
+      for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
+      {
+        let regionData = cloneObject(dateData[state + subregionSeparator + "1"])
+        delete dateData[state + subregionSeparator + "1"]
+        regionData.district = "0"
+        regionData.region = state + subregionSeparator + "0"
+        dateData[state + subregionSeparator + "0"] = regionData
+      }
+
+      mapData[mapDate] = dateData
+      partyNameData[mapDate] = partyNames
+    }
+
+    return {mapData: mapData, candidateNameData: partyNameData, mapDates: mapDates}
+  }
+
   var doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, ___, _____, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
   {
     var filteredMapData = {}
@@ -3772,7 +3886,11 @@ function createHouseMapSources()
     if ((currentViewingState == ViewingState.viewing && currentMapType.getMapSettingValue("showAllDistricts")) || (currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("showStateDistricts")))
     {
       var dateYear = (new Date(dateTime)).getFullYear()
-      if (dateYear >= 2020)
+      if (dateYear >= 2022)
+      {
+        return ["svg-sources/usa-house-2022-map.svg", zoomRegion]
+      }
+      else if (dateYear >= 2020)
       {
         return ["svg-sources/usa-house-2020-map.svg", zoomRegion]
       }
@@ -3935,13 +4053,11 @@ function createHouseMapSources()
   var houseZoomingData = async (mapDateData, zoomRegion) => {
     var stateMapData = {}
 
-    for (let regionID in mapDateData)
-    {
-      if (mapDateData[regionID].state == zoomRegion)
-      {
-        stateMapData[regionID] = cloneObject(mapDateData[regionID])
-      }
-    }
+    Object.keys(mapDateData).filter(regionID => mapDateData[regionID].state == zoomRegion)
+    .sort((regionID1, regionID2) => mapDateData[regionID1].district-mapDateData[regionID2].district)
+    .forEach(regionID => {
+      stateMapData[regionID] = cloneObject(mapDateData[regionID])
+    })
 
     return stateMapData
   }
@@ -3959,6 +4075,54 @@ function createHouseMapSources()
 
     return state + "-" + districtNumber
   }
+
+  var FiveThirtyEightHouseProjectionMapSource = new MapSource(
+    "538-2022-House-Projection", // id
+    "538 Projection", // name
+    "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/house_district_toplines_2022.csv", // dataURL
+    "https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
+    {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
+    {
+      date: "forecastdate",
+      region: "district",
+      pollType: "expression"
+    }, // columnMap
+    2022, // cycleYear
+    null, // candidateNameToPartyIDMap
+    null, // shortCandidateNameOverride
+    regionNameToIDHistorical, // regionNameToIDMap
+    {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+    heldSeatPartyIDs2022, // heldRegionMap
+    false, // shouldFilterOutDuplicateRows
+    true, // addDecimalPadding
+    singleLineVoteshareFilterFunction, // organizeMapDataFunction
+    houseViewingData, // viewingDataFunction
+    houseZoomingData, // zoomingDataFunction
+    null, // splitVoteDataFunction
+    {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+    houseFormattedRegionName, // getFormattedRegionName
+    function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+    {
+      if (!shouldOpenHomepage && (!regionID || !mapData || !mapData[mapDate.getTime()] || !mapData[mapDate.getTime()][regionID])) return
+
+      let linkToOpen = homepageURL
+      if (!shouldOpenHomepage)
+      {
+        linkToOpen += regionIDToLinkMap[mapData[mapDate.getTime()][regionID].state] + "/" + mapData[mapDate.getTime()][regionID].district
+      }
+
+      window.open(linkToOpen)
+    }, // customOpenRegionLinkFunction
+    null, // updateCustomMapFunction
+    null, // convertMapDataRowToCSVFunction
+    null, // isCustomMap
+    null, // shouldClearDisabled
+    true, // shouldShowVoteshare
+    1.0, // voteshareCutoffMargin
+    getHouseSVGFromDate, // overrideSVGPath
+    null, // shouldSetDisabledWorthToZero
+    true // shouldUseOriginalMapDataForTotalsPieChart
+  )
 
   var PastElectionResultMapSource = new MapSource(
     "Past-House-Elections", // id
@@ -4096,10 +4260,11 @@ function createHouseMapSources()
   CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
   var houseMapSources = {}
+  houseMapSources[FiveThirtyEightHouseProjectionMapSource.getID()] = FiveThirtyEightHouseProjectionMapSource
   houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
   houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
-  var houseMapSourceIDs = [PastElectionResultMapSource.getID()]
+  var houseMapSourceIDs = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
   if (USAHouseMapType.getCustomMapEnabled())
   {
     houseMapSourceIDs.push(CustomMapSource.getID())
