@@ -1065,7 +1065,10 @@ function createPresidentialMapSources()
         for (var candidateDataNum in voteshareSortedCandidateData)
         {
           var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-          currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+          if (!Object.keys(partyNameData).includes(mainPartyID))
+          {
+            currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
+          }
         }
 
         var partyIDToCandidateNames = {}
@@ -1229,7 +1232,10 @@ function createPresidentialMapSources()
           for (var candidateDataNum in voteshareSortedCandidateData)
           {
             var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            if (!Object.keys(partyNameData).includes(mainPartyID))
+            {
+              currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
+            }
           }
 
           var partyIDToCandidateNames = {}
