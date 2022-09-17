@@ -2588,7 +2588,9 @@ function createSenateMapSources()
     1626393600000: "231871",
     1637280000000: "236591",
     1645747200000: "252446",
-    1646352000000: ""
+    1646352000000: "252501",
+    1660780800000: "303781",
+    1658793600000: ""
   }
 
   var CookSenateProjectionMapSource = new MapSource(
@@ -3265,7 +3267,8 @@ function createGovernorMapSources()
     1650153600000: "qpdq8r_pKuI",
     1654041600000: "Ps24mzQlaXM",
     1658188800000: "RrRscvpmwEY",
-    1660176000000: "d9bZ6IQBrHI"
+    1660176000000: "d9bZ6IQBrHI",
+    1662336000000: "LlpgR8l-b7g"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
@@ -3332,7 +3335,9 @@ function createGovernorMapSources()
     1652832000000: "288881",
     1654646400000: "297341",
     1658275200000: "303771",
-    1658448000000: ""
+    1658448000000: "303781",
+    1658793600000: "304101",
+    1663286400000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
