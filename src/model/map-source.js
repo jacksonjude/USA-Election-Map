@@ -3660,9 +3660,9 @@ function createHouseMapSources()
             }
 
             let decadeToFillFrom = getDecadeFromDate(currentMapDate)
-            if (decadeToFillFrom > 2010)
+            if (decadeToFillFrom > 2020)
             {
-              decadeToFillFrom = 2010 // default/fallback to 2010 since 2020 map has not been released yet
+              decadeToFillFrom = 2020 // default/fallback to 2020 map
             }
 
             let regionHouseSeatCount = USAHouseMapType.getEV(decadeToFillFrom, regionNameToID[regionToFind])
