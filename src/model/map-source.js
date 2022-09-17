@@ -2398,7 +2398,9 @@ function createGovernorMapSources()
     1652832000000: "288881",
     1654646400000: "297341",
     1658275200000: "303771",
-    1658448000000: ""
+    1658448000000: "303781",
+    1658793600000: "304101",
+    1663286400000: ""
   }
 
   var CookGovernorProjectionMapSource = new MapSource(
