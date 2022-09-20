@@ -212,6 +212,33 @@ function HSVtoRGB(h, s, v) {
   }
 }
 
+function getMaxFontSize(text, sizes, maxWidth)
+{
+  for (let size of sizes)
+  {
+    let width = text.width(size)
+    if (width <= maxWidth)
+    {
+      return size
+    }
+  }
+
+  return sizes.reverse()[0]
+}
+
+String.prototype.width = function(font) {
+  var f = font,
+      o = $('<div></div>')
+            .html(this)
+            .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
+            .appendTo($('body')),
+      w = o.width();
+
+  o.remove();
+
+  return w;
+}
+
 function cloneObject(objectToClone)
 {
   var newObject = JSON.parse(JSON.stringify(objectToClone) || "{}")

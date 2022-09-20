@@ -35,7 +35,7 @@ function createPartyDropdowns()
     }
     else if (partyIDNum%2 == 1)
     {
-      dropdownDiv += '<div class="dropdown" style="width: 15px;" onmouseenter="deselectDropdownButton()">'
+      dropdownDiv += '<div style="width: 15px; float: left">'
       dropdownDiv += '<a style="visibility: hidden"></a>'
       dropdownDiv += '</div>'
     }
@@ -51,7 +51,7 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 0px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 0px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis; white-space: nowrap;">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
@@ -524,10 +524,12 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
     }
   }
 
-  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  for (var partyID of dropdownPoliticalPartyIDs)
   {
-    if (politicalParties[dropdownPoliticalPartyIDs[partyIDNum]] == null) { continue }
-    $("#" + dropdownPoliticalPartyIDs[partyIDNum]).html(politicalParties[dropdownPoliticalPartyIDs[partyIDNum]].getCandidateName() + " (<span style='font-weight: bold'>" + (partyTotals[dropdownPoliticalPartyIDs[partyIDNum]] || 0) + "</span>)")
+    if (politicalParties[partyID] == null) { continue }
+    let partyTotalText = politicalParties[partyID].getCandidateName() + " (<span style='font-weight: bold'>" + (partyTotals[partyID] || 0) + "</span>)"
+    $("#" + partyID).html(partyTotalText)
+    $("#" + partyID).css('font-size', getMaxFontSize(partyTotalText, ["17px", "16px", "15px", "14px", "13px"], partyDropdownWidth*0.92))
   }
 }
 
