@@ -3613,14 +3613,20 @@ function createHouseMapSources()
           greatestMarginPartyID = Math.sign(topTwoMargin) == 1 ? democraticPartyID : republicanPartyID
           greatestMarginCandidateName = politicalParties[greatestMarginPartyID].getNames()[0]
           topTwoMargin = Math.abs(topTwoMargin)
-
-          console.log(regionID, topTwoMargin, mapRow[netPartyMarginColumn])
         }
         else if (voteshareSortedCandidateData[0].voteshare != 0)
         {
           greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
           greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          if (candidateArray.length == 1)
+          {
+            topTwoMargin = 101
+          }
+          else
+          {
+            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+            topTwoMargin = topTwoMargin == 0 ? 100 : topTwoMargin
+          }
         }
         else
         {
@@ -3805,7 +3811,15 @@ function createHouseMapSources()
 
             greatestMarginPartyID = topCandidateData[0].partyID
             greatestMarginCandidateName = topCandidateData[0].candidate
-            topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
+            if (!isCustomMap && Object.keys(candidateData).length == 1)
+            {
+              topTwoMargin = 101
+            }
+            else
+            {
+              topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
+              topTwoMargin = !isCustomMap && topTwoMargin == 0 ? 100 : topTwoMargin
+            }
           }
           else
           {
