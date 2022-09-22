@@ -64,6 +64,13 @@ const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 55
 
+var progressCircleDiv
+const progressCircleDuration = 100
+var lastIndicatorCircleProgress
+
+const downloadIndicatorColor = '#3498db'
+const csvParseIndicatorColor = '#3ac635'
+
 const ViewingState = {
   viewing: 0,
   zooming: 1,
@@ -192,6 +199,7 @@ async function reloadForNewMapType(initialLoad)
   $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
+  $("#loader-circle-container").hide()
   resizeElements(false)
 
   populateRegionsArray()
@@ -613,6 +621,39 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
   })
 
   return loadDataMapPromise
+}
+
+function createCSVParsingIndicator(color)
+{
+  if (progressCircleDiv)
+  {
+    progressCircleDiv.destroy()
+  }
+
+  progressCircleDiv = new ProgressBar.Circle('#loader-circle-container', {
+    color: color,
+    strokeWidth: 15,
+  })
+
+  $("#loader-circle-container").show()
+}
+
+function updateCSVParsingIndicator(progress)
+{
+  if (lastIndicatorCircleProgress && progress-lastIndicatorCircleProgress < 0.01) return
+
+  progressCircleDiv.set(progress)
+  progressCircleDiv.setText(Math.round(progress*100) + "%")
+
+  lastIndicatorCircleProgress = progress
+}
+
+function hideCSVParsingIndicator()
+{
+  lastIndicatorCircleProgress = null
+
+  progressCircleDiv.set(0)
+  $("#loader-circle-container").hide()
 }
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)

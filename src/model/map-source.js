@@ -160,16 +160,34 @@ class MapSource
         }
       }
 
-      $("#loader").show()
-      $.get(self.dataURL, null, function(data) {
-        $("#loader").hide()
+      createCSVParsingIndicator(downloadIndicatorColor)
+      $.ajax({
+        xhr: () => {
+          var xhr = new window.XMLHttpRequest();
 
-        CSVDatabase.insertFile(self.id, data)
-        resolve(data)
-      }, "text").fail(function() {
-        $("#loader").hide()
+          xhr.addEventListener("progress", function(evt) {
+            if (evt.lengthComputable) {
+              let percentComplete = evt.loaded / evt.total
+              updateCSVParsingIndicator(percentComplete)
+            }
+          }, false)
 
-        resolve(null)
+          return xhr
+        },
+        type: 'GET',
+        url: self.dataURL,
+        data: {},
+        success: (data) => {
+          hideCSVParsingIndicator()
+
+          CSVDatabase.insertFile(self.id, data)
+          resolve(data)
+        },
+        fail: () => {
+          hideCSVParsingIndicator()
+
+          resolve(null)
+        }
       })
     })
 
@@ -184,7 +202,7 @@ class MapSource
 
     let shouldDisplayIndicator = chunkPercentage < 0.5
 
-    shouldDisplayIndicator && createCSVParsingIndicator('#3ac635')
+    shouldDisplayIndicator && createCSVParsingIndicator(csvParseIndicatorColor)
 
     let csvReadPromise = new Promise(resolve => {
       let chunkOn = 1
