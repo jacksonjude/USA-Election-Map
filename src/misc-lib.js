@@ -257,15 +257,31 @@ function getMaxFontSize(text, sizes, maxWidth)
 
 String.prototype.width = function(font) {
   var f = font,
-      o = $('<div></div>')
-            .html(this)
-            .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
-            .appendTo($('body')),
-      w = o.width();
+    o = $('<div></div>')
+      .html(this)
+      .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
+      .appendTo($('body')),
+    w = o.width();
 
   o.remove();
 
   return w;
+}
+
+function correctOverflow(pos, divWidth, containerWidth)
+{
+  let difference = containerWidth - (pos+divWidth)
+  if (difference < 0)
+  {
+    pos += difference
+  }
+
+  if (pos < 0)
+  {
+    pos = 0
+  }
+
+  return pos
 }
 
 function cloneObject(objectToClone)

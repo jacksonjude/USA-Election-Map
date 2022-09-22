@@ -296,8 +296,12 @@
       </span>
       <h3 id="secondCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
     </div>
-    <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; user-select: none; -webkit-user-select: none; transition: opacity 0.1s linear">
+    <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; user-select: none; -webkit-user-select: none; pointer-events: none; transition: opacity 0.1s linear">
       <div id="regionbox" class="box">
+      </div>
+    </div>
+    <div id="charttooltipcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; user-select: none; -webkit-user-select: none; pointer-events: none; transition: opacity 0.1s linear, top 0.15s linear, left 0.15s linear">
+      <div id="charttooltip" class="box">
       </div>
     </div>
     <div id="mapcontainertmp" style="visibility: hidden; position: absolute; top: 0; left: 0; z-index: -1" oncontextmenu="return false">

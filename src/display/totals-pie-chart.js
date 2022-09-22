@@ -65,7 +65,7 @@ var partyOrdering = [
 
 var totalsPieChartCutoutPercent = 55
 const minTotalsPieChartSliceLabelPercent = 0.04
-const minTotalsPieChartSliceLabelBrightness = 0.7
+const minTotalsPieChartSliceLabelBrightness = 1.0
 
 function setupTotalsPieChart()
 {
@@ -91,10 +91,36 @@ function setupTotalsPieChart()
     },
     tooltips: {
       titleFontSize: 15,
-      titleFontStyle: "bold",
       bodyFontSize: 15,
-      bodyFontStyle: "bold",
       displayColors: false,
+      enabled: false,
+      custom: function(tooltipModel) {
+        if (tooltipModel.opacity === 0)
+        {
+          $("#charttooltipcontainer").trigger('hide')
+          return
+        }
+
+        $("#charttooltipcontainer").trigger('show')
+
+        let charttooltipHTML = "<div style='padding-bottom: 2px'>"
+        charttooltipHTML += "<span style='font-size: " + tooltipModel.titleFontSize + "px'>"
+        charttooltipHTML += tooltipModel.title.map(title => "<div>" + title + "</div>").join("")
+        charttooltipHTML += tooltipModel.body.map((bodyInfo, i) => "<div style='color: " + tooltipModel.labelTextColors[i] + "'>" + bodyInfo.lines.map(bodyLine => "<div>" + bodyLine + "</div>").join("") + "</div>").join("")
+        charttooltipHTML += "</div>"
+
+        $("#charttooltip").html(charttooltipHTML)
+
+        let {left: xPos, top: yPos} = this._chart.canvas.getBoundingClientRect()
+        xPos += tooltipModel.caretX
+        yPos += tooltipModel.caretY
+
+        xPos = correctOverflow(xPos, $("#charttooltipcontainer").width(), $(document).width())
+        yPos = correctOverflow(yPos, $("#charttooltipcontainer").height(), $(document).height())
+
+        $("#charttooltipcontainer").css('left', xPos)
+        $("#charttooltipcontainer").css('top', yPos)
+      },
       callbacks: {
         title: function(tooltipItem, data) {
           var label = data.datasets[tooltipItem[0].datasetIndex].labels[tooltipItem[0].index] || ''
@@ -499,7 +525,7 @@ function updateTotalsPieChart(regionDataArray)
 
         regionMarginStrings.push(regionMarginStringsData[partyID][marginKey])
 
-        if (marginKey == "current" && !currentMapType.getMapSettingValue("pieCurrentSeats"))
+        if (marginKey == "current" && currentMapType.getMapSettingValue("pieCurrentSeats") === false)
         {
           marginTotalsArray.push(0)
         }
