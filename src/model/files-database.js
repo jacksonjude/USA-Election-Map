@@ -193,12 +193,11 @@ async function initializeDatabases()
 
 async function clearDatabases()
 {
-  await indexedDB.deleteDatabase(CSVDatabase.databaseName)
-  await indexedDB.deleteDatabase(SVGDatabase.databaseName)
-
-  await initializeDatabases()
+  let databases = await indexedDB.databases()
+  for (let database of databases)
+  {
+    await indexedDB.deleteDatabase(database.name)
+  }
 
   location.reload()
 }
-
-initializeDatabases()

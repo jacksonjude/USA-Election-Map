@@ -99,6 +99,8 @@ $(async function() {
   currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
 
+  await initializeDatabases()
+
   reloadForNewMapType(true)
 
   preloadAssets([
