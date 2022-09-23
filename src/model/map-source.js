@@ -3586,7 +3586,7 @@ function createHouseMapSources()
           for (let candidateID of candidateColumns[partyID])
           {
             let candidateName = mapRow[candidateNameColumnPrefix + candidateID]
-            if (candidateName == "") break
+            if (candidateName == "") continue
 
             let candidateLastName = capitalize(candidateName.replaceAll(",", "").replaceAll(/ III?$/g, "").replaceAll(/ Jr\.?/g, "").replaceAll(/ Sr\.?/g, "").split(" ").reverse()[0])
 
