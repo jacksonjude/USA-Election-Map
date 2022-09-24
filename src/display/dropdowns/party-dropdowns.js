@@ -3,8 +3,6 @@ const addButtonPartyID = "ADDPARTY"
 const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
-const partyDropdownHeightExtended = 158
-const partyDropdownHeight = 119
 const partyDropdownWidth = 195
 const partyButtonWidth = browserName != "Firefox" ? 195 : 170
 const shouldReversePartyDropdownsIfNeeded = true
@@ -57,7 +55,7 @@ function createPartyDropdowns()
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + ((currentMapSource.isCustom() && currentMapType.getCustomMapEnabled()) ? partyDropdownHeightExtended : partyDropdownHeight) + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
 
     if (!shouldReverseOrder)
@@ -105,6 +103,11 @@ function createPartyDropdowns()
     dropdownDiv += '</div>'
 
     $("#partyDropdownsContainer").append(dropdownDiv)
+
+    if (shouldReverseOrder)
+    {
+      $("#" + currentPoliticalParty.getID() + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalParty.getID() + 'DropdownContent').height())
+    }
 
     $("#" + currentPoliticalParty.getID() + "Dropdown").hover(function() {
 
