@@ -1526,7 +1526,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   var shouldHide = false
 
   var canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
+  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats")))
   {
     if (regionData.disabled == true)
     {
