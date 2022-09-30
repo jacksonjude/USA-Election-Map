@@ -81,7 +81,7 @@ class FilesDatabase
           if (!self.sourceUpdatedTimesData || Date.now()-self.lastSourceUpdateCheck >= 1000*60*5)
           {
             await $.getJSON(self.sourceUpdatedTimesURL, null, data => {
-              self.lastSourceUpdateCheck = (new Date()).getTime()
+              self.lastSourceUpdateCheck = Date.now()
               self.sourceUpdatedTimesData = data
             }).fail((_, error) => {
               console.log(error)
