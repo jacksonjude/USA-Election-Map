@@ -43,7 +43,7 @@ document.addEventListener('keydown', function(e) {
 
       case "Shift":
       shiftKeyDown = true
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
       break
     }
   }
@@ -254,7 +254,7 @@ document.addEventListener('keyup', function(e) {
 
     case "Shift":
     shiftKeyDown = false
-    updateRegionBox(currentRegionID)
+    updateRegionBox()
     break
   }
 })
@@ -305,7 +305,7 @@ document.addEventListener('keypress', async function(e) {
     await loadDataMap()
     if (currentRegionID)
     {
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
     }
   }
   else if (currentEditingState == EditingState.viewing && !isEditingTextbox() && e.key == "0")
@@ -354,7 +354,7 @@ document.addEventListener('keypress', async function(e) {
       await loadDataMap(true, true)
       if (currentRegionID)
       {
-        updateRegionBox(currentRegionID)
+        updateRegionBox()
       }
       break
     }
@@ -396,7 +396,7 @@ document.addEventListener('keypress', async function(e) {
     else if (editingRegionEVs)
     {
       editingRegionEVs = false
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
     }
     else if (editingRegionMarginValue)
     {
@@ -560,7 +560,7 @@ function mouseLeftRegion(div)
 
   if (!editingRegionVotesharePercentages)
   {
-    $("#regionboxcontainer").trigger('hide')
+    updateRegionBox()
   }
 
   if ($(div).css('stroke') != regionDeselectColor)
