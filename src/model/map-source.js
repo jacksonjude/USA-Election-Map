@@ -1597,7 +1597,7 @@ function createPresidentialMapSources()
   }
 
   var countyZoomingDataFunction = async (presidentialMapDateData, _, isZoomCheck) => {
-    if (!CountyElectionResultMapSource.getMapData() || !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID())))
+    if (!CountyElectionResultMapSource.getMapData() || (!isZoomCheck && !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID()))))
     {
       if (isZoomCheck) { return null }
 
@@ -1658,7 +1658,7 @@ function createPresidentialMapSources()
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
     (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, ___, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare) => {
-      // CountyElectionResultMapSource.loadMap()
+      CountyElectionResultMapSource.loadMap()
       return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, ___, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
     }, // organizeMapDataFunction
     null, // viewingDataFunction
