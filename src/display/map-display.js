@@ -204,6 +204,8 @@ async function reloadForNewMapType(initialLoad)
   $("#loader-circle-container").hide()
   resizeElements(false)
 
+  $("#mapCloseButton").hide()
+
   populateRegionsArray()
   for (let partyID of dropdownPoliticalPartyIDs)
   {
