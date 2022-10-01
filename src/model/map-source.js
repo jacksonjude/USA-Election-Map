@@ -1613,7 +1613,13 @@ function createPresidentialMapSources()
     {
       popularVoteRegionIDToUse += "-AL"
     }
-    countyZoomData[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID] = presidentialMapDateData[popularVoteRegionIDToUse]
+
+    if (presidentialMapDateData[popularVoteRegionIDToUse])
+    {
+      let statePopularVoteID = currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID
+      countyZoomData[statePopularVoteID] = cloneObject(presidentialMapDateData[popularVoteRegionIDToUse])
+      countyZoomData[statePopularVoteID].region = statePopularVoteID
+    }
 
     if (mapDateData != null)
     {
@@ -1628,7 +1634,8 @@ function createPresidentialMapSources()
     }
     else
     {
-      countyZoomData[currentMapZoomRegion] = presidentialMapDateData[popularVoteRegionIDToUse]
+      countyZoomData[currentMapZoomRegion] = cloneObject(presidentialMapDateData[popularVoteRegionIDToUse])
+      countyZoomData[currentMapZoomRegion].region = currentMapZoomRegion
     }
 
     return countyZoomData
