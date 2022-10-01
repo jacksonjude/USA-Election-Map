@@ -1444,7 +1444,15 @@ function altClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    regionData.partyID = (selectedParty || TossupParty).getID()
+    if (currentEditingMode == EditingMode.margin)
+    {
+      regionData.partyID = (selectedParty || TossupParty).getID()
+    }
+    else if (currentEditingMode == EditingMode.voteshare)
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.partyVotesharePercentages = []
+    }
 
     if (regionData.disabled)
     {
