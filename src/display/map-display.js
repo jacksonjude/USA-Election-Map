@@ -4,7 +4,7 @@ var mapSources
 var mapSourceIDs
 var currentCustomMapSource
 
-var mapRegionNameToID
+var mapRegionIDToName
 
 var currentMapSource
 
@@ -147,7 +147,7 @@ async function reloadForNewMapType(initialLoad)
   mapSources = currentMapType.getMapSources()
   mapSourceIDs = currentMapType.getMapSourceIDs()
   currentCustomMapSource = currentMapType.getCustomMapSource()
-  mapRegionNameToID = currentMapType.getRegionNameToID()
+  mapRegionIDToName = currentMapType.getRegionIDToName()
 
   if (currentMapType.getCustomMapEnabled())
   {
@@ -904,7 +904,7 @@ function updateMapElectoralVoteText()
 {
   if (!currentMapType.getShouldDisplayEVOnMap()) { return }
 
-  var regionIDs = Object.values(mapRegionNameToID)
+  var regionIDs = Object.keys(mapRegionIDToName)
   for (var regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
@@ -1823,7 +1823,7 @@ async function updateRegionBox(regionID = currentRegionID)
   }
   $("#regionboxcontainer").trigger('show')
 
-  var formattedRegionID = (getKeyByValue(mapRegionNameToID, regionID) || regionID)
+  var formattedRegionID = mapRegionIDToName[regionID] ?? regionID
   if (currentMapSource.getFormattedRegionName)
   {
     formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID)

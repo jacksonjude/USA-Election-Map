@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionIDToName, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -15,7 +15,7 @@ class MapType
     this.compareMapEnabled = compareMapEnabled
     this.controlsHelpHTML = controlsHelpHTML
 
-    this.regionNameToID = regionNameToID
+    this.regionIDToName = regionIDToName
     this.regionsToHideOnDisable = regionsToHideOnDisable
     this.mapSettingsLayout = mapSettingsLayout.concat(globalMapSettings)
 
@@ -179,9 +179,9 @@ class MapType
     return this.getMapSources(this)[this.customSourceID]
   }
 
-  getRegionNameToID()
+  getRegionIDToName()
   {
-    return this.regionNameToID
+    return this.regionIDToName
   }
 
   getRegionsToHideOnDisable()
@@ -383,7 +383,7 @@ var USAPresidentialMapType = new MapType(
     &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
   </h5>
   `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maine-text":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nebraska-text":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","DC":"District of Columbia","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME-D1":"ME-1","ME-D2":"ME-2","ME-AL":"Maine","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE-D1":"NE-1","NE-D2":"NE-2","NE-D3":"NE-3","NE-AL":"Nebraska","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
     {id: "presViewingType", title: "Viewing Type", type: MapSettingType.optionCycle, options:
@@ -475,7 +475,7 @@ var USASenateMapType = new MapType(
     &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
   </h5>
   `,
-  {"Alabama":"AL", "Alabama Special":"AL-S", "Alaska":"AK", "Alaska Special":"AK-S", "Arizona":"AZ", "Arizona Special":"AZ-S", "Arkansas":"AR", "Arkansas Special":"AR-S", "California":"CA", "California Special":"CA-S", "Colorado":"CO", "Colorado Special":"CO-S", "Connecticut":"CT", "Connecticut Special":"CT-S", "Delaware":"DE", "Delaware Special":"DE-S", "Florida":"FL", "Florida Special":"FL-S", "Georgia":"GA", "Georgia Special":"GA-S", "Hawaii":"HI", "Hawaii Special":"HI-S", "Idaho":"ID", "Idaho Special":"ID-S", "Illinois":"IL", "Illinois Special":"IL-S", "Indiana":"IN", "Indiana Special":"IN-S", "Iowa":"IA", "Iowa Special":"IA-S", "Kansas":"KS", "Kansas Special":"KS-S", "Kentucky":"KY", "Kentucky Special":"KY-S", "Louisiana":"LA", "Louisiana Special":"LA-S", "Maine":"ME", "Maine Special":"ME-S", "Maryland":"MD", "Maryland Special":"MD-S", "Massachusetts":"MA", "Massachusetts Special":"MA-S", "Michigan":"MI", "Michigan Special":"MI-S", "Minnesota":"MN", "Minnesota Special":"MN-S", "Mississippi":"MS", "Mississippi Special":"MS-S", "Missouri":"MO", "Missouri Special":"MO-S", "Montana":"MT", "Montana Special":"MT-S", "Nebraska":"NE", "Nebraska Special":"NE-S", "Nevada":"NV", "Nevada Special":"NV-S", "New Hampshire":"NH", "New Hampshire Special":"NH-S", "New Jersey":"NJ", "New Jersey Special":"NJ-S", "New Mexico":"NM", "New Mexico Special":"NM-S", "New York":"NY", "New York Special":"NY-S", "North Carolina":"NC", "North Carolina Special":"NC-S", "North Dakota":"ND", "North Dakota Special":"ND-S", "Ohio":"OH", "Ohio Special":"OH-S", "Oklahoma":"OK", "Oklahoma Special":"OK-S", "Oregon":"OR", "Oregon Special":"OR-S", "Pennsylvania":"PA", "Pennsylvania Special":"PA-S", "Rhode Island":"RI", "Rhode Island Special":"RI-S", "South Carolina":"SC", "South Carolina Special":"SC-S", "South Dakota":"SD", "South Dakota Special":"SD-S", "Tennessee":"TN", "Tennessee Special":"TN-S", "Texas":"TX", "Texas Special":"TX-S", "Utah":"UT", "Utah Special":"UT-S", "Vermont":"VT", "Vermont Special":"VT-S", "Virginia":"VA", "Virginia Special":"VA-S", "Washington":"WA", "Washington Special":"WA-S", "West Virginia":"WV", "West Virginia Special":"WV-S", "Wisconsin":"WI", "Wisconsin Special":"WI-S", "Wyoming":"WY", "Wyoming Special":"WY-S"},
+  {"AL":"Alabama","AL-S":"Alabama Special","AK":"Alaska","AK-S":"Alaska Special","AZ":"Arizona","AZ-S":"Arizona Special","AR":"Arkansas","AR-S":"Arkansas Special","CA":"California","CA-S":"California Special","CO":"Colorado","CO-S":"Colorado Special","CT":"Connecticut","CT-S":"Connecticut Special","DE":"Delaware","DE-S":"Delaware Special","FL":"Florida","FL-S":"Florida Special","GA":"Georgia","GA-S":"Georgia Special","HI":"Hawaii","HI-S":"Hawaii Special","ID":"Idaho","ID-S":"Idaho Special","IL":"Illinois","IL-S":"Illinois Special","IN":"Indiana","IN-S":"Indiana Special","IA":"Iowa","IA-S":"Iowa Special","KS":"Kansas","KS-S":"Kansas Special","KY":"Kentucky","KY-S":"Kentucky Special","LA":"Louisiana","LA-S":"Louisiana Special","ME":"Maine","ME-S":"Maine Special","MD":"Maryland","MD-S":"Maryland Special","MA":"Massachusetts","MA-S":"Massachusetts Special","MI":"Michigan","MI-S":"Michigan Special","MN":"Minnesota","MN-S":"Minnesota Special","MS":"Mississippi","MS-S":"Mississippi Special","MO":"Missouri","MO-S":"Missouri Special","MT":"Montana","MT-S":"Montana Special","NE":"Nebraska","NE-S":"Nebraska Special","NV":"Nevada","NV-S":"Nevada Special","NH":"New Hampshire","NH-S":"New Hampshire Special","NJ":"New Jersey","NJ-S":"New Jersey Special","NM":"New Mexico","NM-S":"New Mexico Special","NY":"New York","NY-S":"New York Special","NC":"North Carolina","NC-S":"North Carolina Special","ND":"North Dakota","ND-S":"North Dakota Special","OH":"Ohio","OH-S":"Ohio Special","OK":"Oklahoma","OK-S":"Oklahoma Special","OR":"Oregon","OR-S":"Oregon Special","PA":"Pennsylvania","PA-S":"Pennsylvania Special","RI":"Rhode Island","RI-S":"Rhode Island Special","SC":"South Carolina","SC-S":"South Carolina Special","SD":"South Dakota","SD-S":"South Dakota Special","TN":"Tennessee","TN-S":"Tennessee Special","TX":"Texas","TX-S":"Texas Special","UT":"Utah","UT-S":"Utah Special","VT":"Vermont","VT-S":"Vermont Special","VA":"Virginia","VA-S":"Virginia Special","WA":"Washington","WA-S":"Washington Special","WV":"West Virginia","WV-S":"West Virginia Special","WI":"Wisconsin","WI-S":"Wisconsin Special","WY":"Wyoming","WY-S":"Wyoming Special"},
   [/.+-S/],
   [
     {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
@@ -570,7 +570,7 @@ var USAGovernorMapType = new MapType(
     &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
   </h5>
   `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
     {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
@@ -656,7 +656,7 @@ var USAHouseMapType = new MapType(
     &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
   </h5>
   `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
     {id: "showAllDistricts", title: "National View", type: MapSettingType.optionCycle, options:
