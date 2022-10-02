@@ -573,6 +573,15 @@ function addTextBoxSpacingCSS()
   }
 }
 
+async function setMapSource(mapSource, ...loadDataMapArgs)
+{
+  currentMapSource.cancelDownload()
+
+  currentMapSource = mapSource
+  updateNavBarForNewSource()
+  await loadDataMap(...loadDataMapArgs)
+}
+
 function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
   var loadDataMapPromise = new Promise(async (resolve) => {
@@ -1211,10 +1220,8 @@ async function toggleEditing(stateToSet)
 
       currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
-      currentMapSource = currentCustomMapSource
+      await setMapSource(currentCustomMapSource)
       updatePoliticalPartyCandidateNames()
-      updateNavBarForNewSource()
-      await loadDataMap()
     }
     else
     {
@@ -2595,7 +2602,6 @@ function applyCompareToCustomMap()
   }
 
   currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
-  currentMapSource = currentCustomMapSource
-  updateNavBarForNewSource()
-  loadDataMap()
+
+  setMapSource(currentCustomMapSource)
 }

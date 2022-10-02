@@ -19,9 +19,7 @@ function swapCompareMapSources()
 
 async function loadCompareItemMapSource(compareItemNum)
 {
-  currentMapSource = mapSources[compareMapSourceIDArray[compareItemNum]]
-  updateNavBarForNewSource()
-  await loadDataMap()
+  await setMapSource(mapSources[compareMapSourceIDArray[compareItemNum]])
 
   var dateIndexToSet
   switch (compareItemNum)

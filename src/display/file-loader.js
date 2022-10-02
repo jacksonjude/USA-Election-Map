@@ -100,9 +100,7 @@ function jsonFileLoaded(e)
 
   currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
-  currentMapSource = currentCustomMapSource
-  updateNavBarForNewSource()
-  loadDataMap(false, true)
+	setMapSource(currentCustomMapSource, false, true)
 }
 
 function csvFileLoaded(e)
@@ -112,9 +110,7 @@ function csvFileLoaded(e)
 
   currentCustomMapSource.setTextMapData(textMapData)
 
-  currentMapSource = currentCustomMapSource
-  updateNavBarForNewSource()
-  loadDataMap(false, true)
+	setMapSource(currentCustomMapSource, false, true)
 }
 
 function imageFileLoaded(e)

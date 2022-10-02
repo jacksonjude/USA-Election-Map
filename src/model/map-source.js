@@ -163,7 +163,11 @@ class MapSource
       createCSVParsingIndicator(downloadIndicatorColor)
       $.ajax({
         xhr: () => {
-          var xhr = new window.XMLHttpRequest();
+          let xhr = new window.XMLHttpRequest()
+          self.cancelXHR = () => {
+            xhr.abort()
+            resolve(null)
+          }
 
           xhr.addEventListener("progress", function(evt) {
             if (evt.lengthComputable) {
@@ -192,6 +196,15 @@ class MapSource
     })
 
     return fetchMapDataPromise
+  }
+
+  cancelDownload()
+  {
+    if (!this.cancelXHR) return
+    this.cancelXHR()
+    this.cancelXHR = null
+
+    hideCSVParsingIndicator()
   }
 
   async convertCSVToArray(self, strData)

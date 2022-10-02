@@ -300,9 +300,7 @@ function removeActiveClassFromDropdownButton()
 document.addEventListener('keypress', async function(e) {
   if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
   {
-    currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)]]
-    updateNavBarForNewSource()
-    await loadDataMap()
+    await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)]])
     if (currentRegionID)
     {
       updateRegionBox()
@@ -349,9 +347,7 @@ document.addEventListener('keypress', async function(e) {
       case "mapSourcesDropdownContent":
       if (parseInt(e.key)-1 >= mapSourceIDs.length) { return }
 
-      currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)-1]]
-      updateNavBarForNewSource()
-      await loadDataMap(true, true)
+      await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)-1]], true, true)
       if (currentRegionID)
       {
         updateRegionBox()

@@ -68,10 +68,7 @@ function updateMapSource(sourceID, _, forceDownload)
     return
   }
 
-  currentMapSource = mapSources[sourceID]
-
-  updateNavBarForNewSource()
-  loadDataMap(false, forceDownload)
+  setMapSource(mapSources[sourceID], false, forceDownload)
 }
 
 async function toggleCompareMapSourceCheckbox(mapSourceID, overrideAdd)
