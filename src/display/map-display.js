@@ -684,7 +684,7 @@ function hideCSVParsingIndicator()
   $("#loader-circle-container").hide()
 }
 
-function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
+function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate, shouldSetDate = true)
 {
   shouldSetToMax = shouldSetToMax == null ? false : shouldSetToMax
   sliderDivID = sliderDivID || "dataMapDateSlider"
@@ -702,7 +702,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   if ((currentSliderDate == null && previousDate == null) || shouldSetToMax || previousValueWasLatest)
   {
     $("#" + sliderDivID).val(mapDates.length+(latestSliderTickEnabled ? 1 : 0))
-    currentSliderDate = endDate
+    if (shouldSetDate) currentSliderDate = endDate
   }
   else
   {
@@ -718,7 +718,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
     }
 
     $("#" + sliderDivID).val(parseInt(closestDateIndex)+1)
-    currentSliderDate = new Date(closestDate)
+    if (shouldSetDate) currentSliderDate = new Date(closestDate)
   }
 
   $("#" + sliderTickDivID).empty()
@@ -735,7 +735,7 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   }
 }
 
-function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDisplayDivID)
+function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDisplayDivID, shouldSetDate = true)
 {
   sliderDateDisplayDivID = sliderDateDisplayDivID || "dateDisplay"
 
@@ -750,7 +750,8 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   }
 
   $("#" + sliderDateDisplayDivID).html(dateString)
-  currentSliderDate = dateToDisplay
+
+  if (shouldSetDate) currentSliderDate = dateToDisplay
 }
 
 function addToDisplayMapQueue(index, reloadPartyDropdowns)
@@ -2362,7 +2363,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
 
   if (compareSourcesToUpdate[0])
   {
-    setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
+    setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates(), null, false)
     $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
     setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
     $("#compareItemImage-0").css('display', "block")
@@ -2370,7 +2371,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   }
   if (compareSourcesToUpdate[1])
   {
-    setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
+    setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates(), null, false)
     $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
     setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
     $("#compareItemImage-1").css('display', "block")
@@ -2452,7 +2453,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
   {
     dateToDisplay = new Date(mapDates[dateIndex-1])
   }
-  updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay")
+  updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay", false)
 
   $("#compareItem-" + compareArrayIndex).html(mapSources[compareMapSourceIDArray[compareArrayIndex]].getName() + " (" + getDateString(dateToDisplay) + ")")
 
@@ -2461,6 +2462,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
   if (compareArrayIndex == 0)
   {
     currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
+    currentSliderDate = dateToDisplay
   }
 
   shouldApply && applyCompareToCustomMap()
