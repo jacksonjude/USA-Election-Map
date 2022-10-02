@@ -1599,12 +1599,12 @@ function createPresidentialMapSources()
   var countyZoomingDataFunction = async (presidentialMapDateData, _, isZoomCheck) => {
     if (!CountyElectionResultMapSource.getMapData() || (!isZoomCheck && !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID()))))
     {
-      if (isZoomCheck) { return null }
+      if (isZoomCheck) { return false }
 
       await CountyElectionResultMapSource.loadMap()
     }
     let mapDateData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
-    if (mapDateData == null && isZoomCheck) { return null }
+    if (isZoomCheck) { return mapDateData != null }
 
     let countyZoomData = {}
 
