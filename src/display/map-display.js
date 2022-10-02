@@ -629,7 +629,7 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
     shouldSetToMax = true
 
-    setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
+    !showingCompareMap && setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
     await displayDataMap(null, reloadPartyDropdowns ?? true)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
@@ -783,7 +783,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   currentDisplayDate = dateToDisplay
 
-  updateSliderDateDisplay(dateToDisplay)
+  !showingCompareMap && updateSliderDateDisplay(dateToDisplay)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
@@ -2364,7 +2364,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   {
     setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
     $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-    setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
     $("#compareItemImage-0").css('display', "block")
     $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
   }
@@ -2436,7 +2436,7 @@ function setMapCompareItem(compareArrayIndex)
   $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getDateString(currentSliderDate))
 }
 
-function setCompareSourceDate(compareArrayIndex, dateIndex)
+function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
 {
   var mapDates = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapDates()
 
@@ -2463,7 +2463,7 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
     currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
   }
 
-  applyCompareToCustomMap()
+  shouldApply && applyCompareToCustomMap()
 }
 
 function applyCompareToCustomMap()
