@@ -482,10 +482,12 @@ var currentMouseX
 var currentMouseY
 
 document.addEventListener('mousedown', async function() {
+  mouseIsDown = true
+  mouseMovedDuringClick = false
+
   if (currentEditingState == EditingState.editing)
   {
     startRegionID = currentRegionID
-    mouseIsDown = true
 
     var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
     if (await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing)
@@ -499,10 +501,11 @@ document.oncontextmenu = function() {
   if (currentEditingState == EditingState.editing)
   {
     regionIDsChanged = []
-    mouseIsDown = false
-    mouseMovedDuringClick = false
     startRegionID = null
   }
+
+  mouseIsDown = false
+  mouseMovedDuringClick = false
 }
 
 function mouseEnteredRegion(div)
@@ -583,12 +586,13 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
+  if (mouseIsDown)
+  {
+    mouseMovedDuringClick = true
+  }
+
   if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
   {
-    if (mouseIsDown)
-    {
-      mouseMovedDuringClick = true
-    }
     if (shouldDragSelect && mouseIsDown && currentRegionID && !regionIDsChanged.includes(currentRegionID))
     {
       leftClickRegion($("#" + currentRegionID))
@@ -609,14 +613,14 @@ document.addEventListener('mouseup', function() {
   if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
   {
     regionIDsChanged = []
-    mouseIsDown = false
     if (currentRegionID != null && !clickUsedToZoom && startRegionID == currentRegionID && mouseMovedDuringClick && shouldDragSelect)
     {
       ignoreNextClick = true
     }
-    mouseMovedDuringClick = false
     startRegionID = null
   }
+
+  mouseIsDown = false
 
   if (clickUsedToZoom)
   {

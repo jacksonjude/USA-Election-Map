@@ -347,7 +347,7 @@ function setOutlineDivProperties()
       {
         return // handled in contextmenu
       }
-      else
+      else if (currentViewingState != ViewingState.zooming || !mouseMovedDuringClick)
       {
         leftClickRegion(e.target)
       }
