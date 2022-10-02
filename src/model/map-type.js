@@ -97,9 +97,9 @@ class MapType
     return this.totalEV
   }
 
-  getEV(decade, regionID, disabled, shouldSetDisabledWorthToZero)
+  getEV(decade, regionID, regionData)
   {
-    return this.evFunction(decade, regionID, disabled, shouldSetDisabledWorthToZero)
+    return this.evFunction(decade, regionID, regionData)
   }
 
   getShouldDisplayEVOnMap()
@@ -334,8 +334,10 @@ var USAPresidentialMapType = new MapType(
   538,
   function(decade, regionID, regionData)
   {
+    const splitStates = {"ME": ["ME-AL", "ME-D1", "ME-D2"], "NE": ["NE-AL", "NE-D1", "NE-D2", "NE-D3"]}
+    if (splitStates[regionID]) return splitStates[regionID].reduce((total, regionID) => total + this.getEV(decade, regionID, displayRegionDataArray[regionID]), 0)
     if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
-    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData.disabled) return 0
+    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData && regionData.disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
