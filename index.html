@@ -236,67 +236,82 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div id="mapcontainer" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px; overflow: hidden;" oncontextmenu="return false">
-    </div>
-    <a id="mapCloseButton" onclick="zoomOutMap()" style="display: none; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="position: absolute; margin-top: 25px; width: 50px; height: 50px;  text-decoration: none;" /></a>
-    <div style="display: flex; flex-direction: column; float: right;">
-      <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
-        <canvas id="totalsPieChart"></canvas>
-      </div>
-      <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px; float: right;">
-        <div id="partyDropdownsBox" class="box" style="padding: 10px;">
-          <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
-            <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
-            </div>
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex">
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex">
+          <div id="mapcontainer" style="margin: 0px; zoom: 100%; margin-left: 25px; overflow: hidden;" oncontextmenu="return false">
+          </div>
+          </div>
+          <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="dataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="dateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+          <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="setCompareSourceDate(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="firstCompareDateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+          <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="setCompareSourceDate(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="secondCompareDateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+        </div>
+        <div id="mapZoomControls" style="display: none; margin-top: 25px; margin-left: 10px; width: 50px; flex-direction: column; justify-content: space-between">
+          <a id="mapCloseButton" onclick="zoomOutMap()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+          <div style="display: flex; flex-direction: column">
+            <a id="mapZoomInButton" onclick="svgPanZoomController.zoomIn()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapZoomInButtonImage" src="./assets/zoom-in-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+            <a id="mapResetZoomButton" onclick="svgPanZoomController.reset()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapResetZoomButtonImage" src="./assets/reset-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+            <a id="mapZoomOutButton" onclick="svgPanZoomController.zoomOut()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapZoomOutButtonImage" src="./assets/zoom-out-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
           </div>
         </div>
       </div>
-      <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none; float: right">
-        <div id="discordInviteBox" style="background-color: transparent"></div>
-        <script>
-        discordInvite.init({
-          inviteCode: '44HMc8AY3G',
-          title: 'jacksonjude.com',
-          introText: "Join the Discord Server",
-          width: 466
-        })
-        discordInvite.render()
-        </script>
+      <div style="display: flex; flex-direction: column">
+        <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
+          <canvas id="totalsPieChart"></canvas>
+        </div>
+        <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px">
+          <div id="partyDropdownsBox" class="box" style="padding: 10px;">
+            <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
+              <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none">
+          <div id="discordInviteBox" style="background-color: transparent"></div>
+          <script>
+          discordInvite.init({
+            inviteCode: '44HMc8AY3G',
+            title: 'jacksonjude.com',
+            introText: "Join the Discord Server",
+            width: 466
+          })
+          discordInvite.render()
+          </script>
+        </div>
       </div>
-    </div>
-    <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; float: right; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
-      <div id="helpbox" class="box">
+      <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
+        <div id="helpbox" class="box">
+        </div>
       </div>
-    </div>
-    <div id="sliderDateDisplayContainer" style="position: relative; float: left; left: 45px;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="dataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="dateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
-    </div>
-    <div id="firstCompareSliderDateDisplayContainer" style="position: relative; float: left; left: 45px; display: none;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="setCompareSourceDate(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="firstCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
-    </div>
-    <div id="secondCompareSliderDateDisplayContainer" style="position: relative; float: left; left: 45px; display: none;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="setCompareSourceDate(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="secondCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
     </div>
     <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; user-select: none; -webkit-user-select: none; pointer-events: none; transition: opacity 0.1s linear">
       <div id="regionbox" class="box">

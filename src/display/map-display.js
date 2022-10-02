@@ -12,6 +12,8 @@ var currentDisplayDate
 var displayMapQueue = []
 var isRunningDisplayMapQueue = false
 
+var svgPanZoomController
+
 var selectedParty
 
 var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
@@ -204,7 +206,7 @@ async function reloadForNewMapType(initialLoad)
   $("#loader-circle-container").hide()
   resizeElements(false)
 
-  $("#mapCloseButton").hide()
+  $("#mapZoomControls").trigger('hide')
 
   populateRegionsArray()
   for (let partyID of dropdownPoliticalPartyIDs)
@@ -378,6 +380,8 @@ function resizeElements(initilizedPieChart)
     $(".topnav").css("zoom", (topnavZoom*100) + "%")
   }
 
+  $("#mapZoomControls").css("height", $("#svgdata").height()*mapZoom)
+
   var mapWidth = $("#svgdata").width()*mapZoom
   var originalMapHeight = $("#svgdata").height()
 
@@ -535,10 +539,21 @@ function addDivEventListeners()
     }, 200)
   })
 
-  $("#mapCloseButton").hover(function() {
-    $("#mapCloseButtonImage").attr('src', "./assets/close-icon-hover.png")
-  }, function() {
-    $("#mapCloseButtonImage").attr('src', "./assets/close-icon.png")
+  let buttonImagePairs = [["mapCloseButton", "close-icon"], ["mapResetZoomButton", "reset-icon"], ["mapZoomInButton", "zoom-in-icon"], ["mapZoomOutButton", "zoom-out-icon"]]
+  buttonImagePairs.forEach(buttonData => {
+    let [buttonID, image] = buttonData
+    $("#" + buttonID).hover(function() {
+      $("#" + buttonID + "Image").attr('src', "./assets/" + image + "-hover.png")
+    }, function() {
+      $("#" + buttonID + "Image").attr('src', "./assets/" + image + ".png")
+    })
+  })
+
+  $("#mapZoomControls").on('show', function() {
+    $("#mapZoomControls").css("display", "flex")
+  })
+  $("#mapZoomControls").on('hide', function() {
+    $("#mapZoomControls").css("display", "none")
   })
 
   createPartyDropdownsBoxHoverHandler()
@@ -882,18 +897,18 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   if (currentViewingState == ViewingState.zooming)
   {
-    svgPanZoom('#svgdata', {controlIconsEnabled: true, fit: true, contain: true, minZoom: 1, panEnabled: false})
+    svgPanZoomController = svgPanZoom('#svgdata', {controlIconsEnabled: false, fit: true, contain: true, minZoom: 1, panEnabled: true})
   }
 
   if (shouldReloadSVG)
   {
     if (currentViewingState == ViewingState.zooming)
     {
-      $("#mapCloseButton").show()
+      $("#mapZoomControls").trigger('show')
     }
     else
     {
-      $("#mapCloseButton").hide()
+      $("#mapZoomControls").trigger('hide')
     }
   }
 
