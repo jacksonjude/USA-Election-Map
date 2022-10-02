@@ -2402,8 +2402,8 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
 
   if (showCompareSliders)
   {
-    $("#firstCompareSliderDateDisplayContainer").show()
-    $("#secondCompareSliderDateDisplayContainer").show()
+    $("#firstCompareSliderDateDisplayContainer").css('display', 'flex')
+    $("#secondCompareSliderDateDisplayContainer").css('display', 'flex')
 
     $("#sliderDateDisplayContainer").hide()
   }
@@ -2412,7 +2412,7 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
     $("#firstCompareSliderDateDisplayContainer").hide()
     $("#secondCompareSliderDateDisplayContainer").hide()
 
-    $("#sliderDateDisplayContainer").show()
+    $("#sliderDateDisplayContainer").css('display', 'flex')
   }
 
   if (showingCompareMap)
