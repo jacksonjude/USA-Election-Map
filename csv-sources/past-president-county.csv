@@ -7278,10 +7278,6 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/7/2000,NM,Valencia,Bush,republican,10803,21377
 11/7/2000,NM,Valencia,Nader,green,615,21377
 11/7/2000,NM,Valencia,Other,other,140,21377
-11/7/2000,MO,Kansas_City,Gore,democrat,NA,0
-11/7/2000,MO,Kansas_City,Bush,republican,NA,0
-11/7/2000,MO,Kansas_City,Nader,green,NA,0
-11/7/2000,MO,Kansas_City,Other,other,NA,0
 11/7/2000,NY,Albany,Gore,democrat,85617,141969
 11/7/2000,NY,Albany,Bush,republican,47624,141969
 11/7/2000,NY,Albany,Nader,green,7182,141969
@@ -50480,9 +50476,9 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/3/2020,AK,Juneau,Biden,democrat,11397.18866,18771.80949
 11/3/2020,AK,Juneau,Trump,republican,6591.482445,18771.80949
 11/3/2020,AK,Juneau,Jorgensen,libertarian,432.8954007,18771.80949
-11/3/2020,AK,Valdez-Cordova,Biden,democrat,2093.21,3663.049595
-11/3/2020,AK,Valdez-Cordova,Trump,republican,3052.45,3663.049595
-11/3/2020,AK,Valdez-Cordova,Jorgensen,libertarian,165.9932819,3663.049595
+11/3/2020,AK,Valdez-Cordova,Biden,democrat,1580.98,3663.049595
+11/3/2020,AK,Valdez-Cordova,Trump,republican,1882.23,3663.049595
+11/3/2020,AK,Valdez-Cordova,Jorgensen,libertarian,125.0680109,3663.049595
 11/3/2020,AK,Haines,Biden,democrat,957.1224577,1711.80848
 11/3/2020,AK,Haines,Trump,republican,699.6034368,1711.80848
 11/3/2020,AK,Haines,Jorgensen,libertarian,19.2232518,1711.80848
