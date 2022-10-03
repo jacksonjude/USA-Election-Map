@@ -220,7 +220,7 @@ async function reloadForNewMapType(initialLoad)
     if (partyID == TossupParty.getID() || !politicalParties[partyID]) { continue }
     politicalParties[partyID].setCandidateName(politicalParties[partyID].getNames()[0])
   }
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
 
   setupTotalsPieChart()
   updateTotalsPieChart()
@@ -900,7 +900,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   }
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
-  displayPartyTotals(getPartyTotals(), reloadPartyDropdowns)
+  displayPartyTotals(reloadPartyDropdowns)
 
   updateTotalsPieChart()
 
@@ -1082,7 +1082,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
 
   updateTotalsPieChart()
   if (currentRegionID != null)
@@ -1232,7 +1232,7 @@ async function toggleEditing(stateToSet)
     }
     else
     {
-      displayPartyTotals(getPartyTotals(), true)
+      displayPartyTotals(true)
     }
     deselectAllParties()
     break
@@ -1266,7 +1266,7 @@ async function toggleEditing(stateToSet)
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap()
-      displayPartyTotals(getPartyTotals(), true)
+      displayPartyTotals(true)
     }
 
     if (showingDataMap && currentRegionID)
@@ -1361,7 +1361,7 @@ async function leftClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
   else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
   {
@@ -1444,7 +1444,7 @@ function rightClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
 }
 
@@ -1496,7 +1496,7 @@ function altClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
     updateMapElectoralVoteText()
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
 }
 
@@ -2147,7 +2147,7 @@ function applyRegionEVEdit(regionID)
   if (shouldRefreshEV)
   {
     updateMapElectoralVoteText()
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
     updateTotalsPieChart()
   }
 }
@@ -2186,7 +2186,7 @@ function applyRegionMarginValue(regionID)
     regionData.margin = newMargin
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
     updateTotalsPieChart()
   }
   else if (!newMarginIsValid)
@@ -2243,7 +2243,7 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
     $(textBoxDiv).parent().parent().css("background", getGradientCSS(politicalParties[currentVoteshareData.partyID].getMarginColors().safe, politicalParties[currentVoteshareData.partyID].getMarginColors().lean, currentVoteshareData.voteshare))
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
     updateTotalsPieChart()
   }
   else if (!newVoteshareIsValid)

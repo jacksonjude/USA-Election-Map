@@ -383,7 +383,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
   }
   editCandidateNamePartyID = partyID
 
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
   if (shouldRefreshMap && showingDataMap && !skipReload)
   {
     if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
@@ -411,13 +411,13 @@ function createPartyDropdownsBoxHoverHandler()
 
     dropdownPoliticalPartyIDs.push(addButtonPartyID)
     $("#partyDropdownsBox").addClass("showingAddPartyButton")
-    displayPartyTotals(getPartyTotals(), true)
+    displayPartyTotals(true)
   }, function() {
     if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) || $("#partyDropdownsBox").find(".jscolor-active").length > 0) { return }
 
     dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
     $("#partyDropdownsBox").removeClass("showingAddPartyButton")
-    displayPartyTotals(getPartyTotals(), true)
+    displayPartyTotals(true)
   })
 }
 
@@ -450,7 +450,7 @@ function createNewCustomParty()
 
   currentMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
-  displayPartyTotals(getPartyTotals(), true)
+  displayPartyTotals(true)
 }
 
 async function deleteParty(partyID)
@@ -479,8 +479,10 @@ async function deleteParty(partyID)
   await loadDataMap(null, null, null, false)
 }
 
-function displayPartyTotals(partyTotals, overrideCreateDropdowns)
+function displayPartyTotals(overrideCreateDropdowns)
 {
+  let partyTotals = getPartyTotals()
+
   if (currentMapSource.getID() != NullMapSource.getID() && (currentMapSource.getID() != currentCustomMapSource.getID() || (showingCompareMap && currentEditingState == EditingState.viewing)))
   {
     var partyIDs = Object.keys(partyTotals).filter((partyID) => !(partyTotals[partyID] == 0 || partyID == TossupParty.getID()))
