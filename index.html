@@ -256,7 +256,7 @@
           <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
             <span style="display: inline-block">
               <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-                <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="setCompareSourceDate(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="addToCompareMapQueue(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
                 <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
                 </span>
               </span>
@@ -266,7 +266,7 @@
           <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
             <span style="display: inline-block">
               <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-                <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="setCompareSourceDate(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="addToCompareMapQueue(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
                 <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
                 </span>
               </span>

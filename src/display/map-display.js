@@ -12,6 +12,9 @@ var currentDisplayDate
 var displayMapQueue = []
 var isRunningDisplayMapQueue = false
 
+var compareMapQueue = []
+var isRunningCompareMapQueue = false
+
 var svgPanZoomController
 
 var selectedParty
@@ -2440,7 +2443,28 @@ function setMapCompareItem(compareArrayIndex)
   $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getDateString(currentSliderDate))
 }
 
-function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
+function addToCompareMapQueue(compareArrayIndex, dateIndex, shouldApply = true)
+{
+  compareMapQueue.unshift([compareArrayIndex, dateIndex, shouldApply])
+  executeCompareMapQueue()
+}
+
+async function executeCompareMapQueue()
+{
+  if (isRunningCompareMapQueue) { return }
+
+  isRunningCompareMapQueue = true
+
+  while (compareMapQueue.length > 0)
+  {
+    await setCompareSourceDate(...compareMapQueue[0])
+    compareMapQueue.splice(-1, 1)
+  }
+
+  isRunningCompareMapQueue = false
+}
+
+async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
 {
   var mapDates = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapDates()
 
@@ -2468,10 +2492,10 @@ function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
     currentCompareSliderDate = dateToDisplay
   }
 
-  shouldApply && applyCompareToCustomMap()
+  shouldApply && await applyCompareToCustomMap()
 }
 
-function applyCompareToCustomMap()
+async function applyCompareToCustomMap()
 {
   if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
 
@@ -2608,5 +2632,5 @@ function applyCompareToCustomMap()
 
   currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
 
-  setMapSource(currentCustomMapSource)
+  await setMapSource(currentCustomMapSource)
 }
