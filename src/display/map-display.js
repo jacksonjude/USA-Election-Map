@@ -1228,7 +1228,7 @@ async function toggleEditing(stateToSet)
       currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
       await setMapSource(currentCustomMapSource)
-      updatePoliticalPartyCandidateNames()
+      updatePoliticalPartyCandidateNames(getCurrentDateOrToday())
     }
     else
     {
