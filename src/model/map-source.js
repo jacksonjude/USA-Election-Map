@@ -4174,7 +4174,9 @@ function createHouseMapSources()
       let linkToOpen = homepageURL
       if (!shouldOpenHomepage)
       {
-        linkToOpen += regionIDToLinkMap[mapData[mapDate.getTime()][regionID].state] + "/" + mapData[mapDate.getTime()][regionID].district
+        let {state, district} = mapData[mapDate.getTime()][regionID]
+        if (district == "0") district = "1"
+        linkToOpen += regionIDToLinkMap[state] + "/" + district
       }
 
       window.open(linkToOpen)
