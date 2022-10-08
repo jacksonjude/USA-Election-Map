@@ -1225,7 +1225,8 @@ async function toggleEditing(stateToSet)
     {
       currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()), getCurrentDateOrToday())
 
-      currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
+      let dropdownPoliticalPartyIDsForEditing = currentMapType == USAPresidentialMapType ? getNonEVDropdownCandidates(cloneObject(dropdownPoliticalPartyIDs)) : dropdownPoliticalPartyIDs
+      currentCustomMapSource.setDropdownPartyIDs(dropdownPoliticalPartyIDsForEditing)
 
       await setMapSource(currentCustomMapSource)
       updatePoliticalPartyCandidateNames(getCurrentDateOrToday())

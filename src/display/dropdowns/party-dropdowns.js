@@ -485,7 +485,7 @@ function displayPartyTotals(overrideCreateDropdowns)
 
   if (currentMapSource.getID() != NullMapSource.getID() && (currentMapSource.getID() != currentCustomMapSource.getID() || (showingCompareMap && currentEditingState == EditingState.viewing)))
   {
-    var partyIDs = Object.keys(partyTotals).filter((partyID) => !(partyTotals[partyID] == 0 || partyID == TossupParty.getID()))
+    var partyIDs = Object.keys(partyTotals).filter((partyID) => partyTotals[partyID] > 0 && partyID != TossupParty.getID())
 
     var topPartyIDs = partyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, maxPartiesToDisplay)
 
@@ -532,6 +532,26 @@ function displayPartyTotals(overrideCreateDropdowns)
     $("#" + partyID).html(partyTotalText)
     $("#" + partyID).css('font-size', getMaxFontSize(partyTotalText, ["17px", "16px", "15px", "14px", "13px"], partyDropdownWidth*0.92))
   }
+}
+
+function getNonEVDropdownCandidates(partyIDs)
+{
+  const nationalMinimumVoteshare = 2.0
+  const stateMinimumVoteshare = 5.0
+  // const isOtherCandidate = (candidate) => candidate.candidate == "Other" && candidate.partyID == IndependentGenericParty.getID()
+
+  let candidatesWithNationalMinimumVoteshare = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages?.filter(candidate => candidate.voteshare >= nationalMinimumVoteshare) ?? []
+  let candidatesWithStateMinimumVoteshare = Object.values(displayRegionDataArray).flatMap(regionData => regionData.partyVotesharePercentages?.filter(candidate => candidate.voteshare >= stateMinimumVoteshare) ?? [])
+
+  let candidatesToAdd = [...candidatesWithNationalMinimumVoteshare, ...candidatesWithStateMinimumVoteshare]
+  candidatesToAdd.forEach(candidate => {
+    if (!partyIDs.includes(candidate.partyID))
+    {
+      partyIDs.push(candidate.partyID)
+    }
+  })
+
+  return partyIDs
 }
 
 function updatePoliticalPartyCandidateNames(mapDate)
