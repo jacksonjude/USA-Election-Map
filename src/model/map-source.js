@@ -1130,27 +1130,24 @@ function createPresidentialMapSources()
     return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
   }
 
-  var countyVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, ___, _____, isCustomMap, voteshareCutoffMargin)
+  var countyFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID)
   {
     var filteredMapData = {}
     var partyNameData = {}
 
-    var regionNames = Object.keys(regionNameToID)
+    var regionIDs = Object.keys(regionNameToID)
 
-    for (var dateNum in mapDates)
+    for (let currentMapDate of mapDates)
     {
-      var rawDateData = rawMapData[mapDates[dateNum]]
-      var filteredDateData = {}
+      let rawDateData = rawMapData[currentMapDate]
+      let filteredDateData = {}
 
-      var currentMapDate = new Date(mapDates[dateNum])
-      var currentDatePartyNameArray = {}
+      let currentDatePartyNameArray = {}
 
-      for (var regionNum in regionNames)
+      for (let regionID of regionIDs)
       {
-        var regionToFind = regionNames[regionNum]
-
-        var fullStateRows = rawDateData.filter(row => {
-          return row[columnMap.region] == regionToFind
+        let fullStateRows = rawDateData.filter(row => {
+          return row[columnMap.region] == regionID
         })
 
         if (fullStateRows.length == 0)
@@ -1158,138 +1155,140 @@ function createPresidentialMapSources()
           continue
         }
 
-        var stateCounties = [...new Set(fullStateRows.map(row => {
-          return row[columnMap.county]
-        }))]
+        let stateCountyMap = {}
 
-        if (stateCounties.length == 0)
+        for (let countyRow of fullStateRows)
         {
-          console.log(regionToFind, currentMapDate)
+          let countyID = countyRow[columnMap.county]
+          if (!stateCountyMap[countyID])
+          {
+            stateCountyMap[countyID] = []
+          }
+          stateCountyMap[countyID].push(countyRow)
         }
 
-        for (let stateCounty of stateCounties)
-        {
-          var countyRows = fullStateRows.filter(row => {
-            return row[columnMap.county] == stateCounty
-          })
-
-          var fullRegionName = regionToFind + (regionToFind != "NPV" ? "__" + stateCounty : "")
-
-          var candidateData = {}
-          var totalVoteshare = 0
-
-          for (var rowNum in countyRows)
-          {
-            var row = countyRows[rowNum]
-
-            var candidateName = row[columnMap.candidateName]
-            var candidateVotes = parseFloat(row[columnMap.candidateVotes])
-            var currentVoteshare = candidateVotes/parseFloat(row[columnMap.totalVotes])*100
-
-            var currentPartyName = row[columnMap.partyID]
-            var foundParty = Object.values(politicalParties).find(party => {
-              var partyNames = cloneObject(party.getNames())
-              for (var nameNum in partyNames)
-              {
-                partyNames[nameNum] = partyNames[nameNum].toLowerCase()
-              }
-              return partyNames.includes(currentPartyName)
-            })
-
-            if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
-            {
-              foundParty = politicalParties[currentPartyName]
-            }
-
-            var currentPartyID
-            if (foundParty)
-            {
-              currentPartyID = foundParty.getID()
-            }
-            else
-            {
-              currentPartyID = IndependentGenericParty.getID()
-            }
-
-            if (Object.keys(candidateData).includes(candidateName))
-            {
-              if (currentVoteshare > candidateData[candidateName].voteshare)
-              {
-                candidateData[candidateName].partyID = currentPartyID
-              }
-
-              candidateData[candidateName].voteshare += currentVoteshare
-              candidateData[candidateName].votes += candidateVotes
-            }
-            else
-            {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes}
-            }
-
-            totalVoteshare += currentVoteshare
-          }
-
-          if (totalVoteshare > 100.1)
-          {
-            console.log("Overflow voteshare!", currentMapDate.getFullYear().toString(), fullRegionName)
-          }
-
-          var voteshareSortedCandidateData = Object.values(candidateData)
-          voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
-          voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-          if (!isCustomMap && voteshareCutoffMargin != null)
-          {
-            voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
-          }
-
-          if (voteshareSortedCandidateData.length == 0)
-          {
-            console.log("No candidate data!", currentMapDate.getFullYear().toString(), fullRegionName)
-            continue
-          }
-
-          var greatestMarginPartyID
-          var greatestMarginCandidateName
-          var topTwoMargin
-
-          if (voteshareSortedCandidateData[0].voteshare > 0)
-          {
-            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
-            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
-            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
-          }
-          else
-          {
-            greatestMarginPartyID = TossupParty.getID()
-            greatestMarginCandidateName = null
-            topTwoMargin = 0
-          }
-
-          for (var candidateDataNum in voteshareSortedCandidateData)
-          {
-            var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-            if (!Object.keys(partyNameData).includes(mainPartyID))
-            {
-              currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
-            }
-          }
-
-          var partyIDToCandidateNames = {}
-          for (let partyCandidateName in candidateData)
-          {
-            partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
-          }
-
-          var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName)
-          filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
-        }
+        filteredDateData[regionID] = stateCountyMap
       }
 
-      filteredMapData[mapDates[dateNum]] = filteredDateData
-      partyNameData[mapDates[dateNum]] = currentDatePartyNameArray
+      filteredMapData[currentMapDate] = filteredDateData
+      partyNameData[currentMapDate] = currentDatePartyNameArray
     }
 
     return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
+  }
+
+  var stateCountyVoteshareFilterFunction = function(stateID, stateCountyRows, currentMapDate, previousMapDateData, columnMap, isCustomMap, voteshareCutoffMargin)
+  {
+    let filteredStateData = {}
+
+    for (let stateCounty in stateCountyRows)
+    {
+      let countyRows = stateCountyRows[stateCounty]
+      let fullRegionName = stateID + (stateID != "NPV" ? "__" + stateCounty : "")
+
+      var candidateData = {}
+      var totalVoteshare = 0
+
+      var totalCountyVotes = parseFloat(countyRows[0][columnMap.totalVotes])
+
+      for (var rowNum in countyRows)
+      {
+        var row = countyRows[rowNum]
+
+        var candidateName = row[columnMap.candidateName]
+        var candidateVotes = parseFloat(row[columnMap.candidateVotes])
+        var currentVoteshare = candidateVotes/totalCountyVotes*100
+
+        var currentPartyName = row[columnMap.partyID]
+        var foundParty = Object.values(politicalParties).find(party => {
+          var partyNames = cloneObject(party.getNames())
+          for (var nameNum in partyNames)
+          {
+            partyNames[nameNum] = partyNames[nameNum].toLowerCase()
+          }
+          return partyNames.includes(currentPartyName)
+        })
+
+        if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
+        {
+          foundParty = politicalParties[currentPartyName]
+        }
+
+        var currentPartyID
+        if (foundParty)
+        {
+          currentPartyID = foundParty.getID()
+        }
+        else
+        {
+          currentPartyID = IndependentGenericParty.getID()
+        }
+
+        if (Object.keys(candidateData).includes(candidateName))
+        {
+          if (currentVoteshare > candidateData[candidateName].voteshare)
+          {
+            candidateData[candidateName].partyID = currentPartyID
+          }
+
+          candidateData[candidateName].voteshare += currentVoteshare
+          candidateData[candidateName].votes += candidateVotes
+        }
+        else
+        {
+          candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes}
+        }
+
+        totalVoteshare += currentVoteshare
+      }
+
+      if (totalVoteshare > 100.1)
+      {
+        console.log("Overflow voteshare!", currentMapDate.getFullYear().toString(), fullRegionName)
+      }
+
+      var voteshareSortedCandidateData = Object.values(candidateData)
+      voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
+      voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+      if (!isCustomMap && voteshareCutoffMargin != null)
+      {
+        voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+      }
+
+      if (voteshareSortedCandidateData.length == 0)
+      {
+        console.log("No candidate data!", currentMapDate.getFullYear().toString(), fullRegionName)
+        continue
+      }
+
+      var greatestMarginPartyID
+      var greatestMarginCandidateName
+      var topTwoMargin
+
+      if (voteshareSortedCandidateData[0].voteshare > 0)
+      {
+        greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+        greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+        topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+      }
+      else
+      {
+        greatestMarginPartyID = TossupParty.getID()
+        greatestMarginCandidateName = null
+        topTwoMargin = 0
+      }
+
+      var partyIDToCandidateNames = {}
+      for (let partyCandidateName in candidateData)
+      {
+        partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
+      }
+
+      var mostRecentParty = previousMapDateData?.[fullRegionName]?.partyID
+      filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, flip: mostRecentParty != null && mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+    }
+
+    return filteredStateData
   }
 
   function mostRecentWinner(mapData, dateToStart, regionID)
@@ -1609,6 +1608,45 @@ function createPresidentialMapSources()
     return voteSplitMapDateData
   }
 
+  var countyViewingDataFunction = async (mapDateData) => {
+    let stateCandidateData = {}
+    let stateTotalVotes = {}
+
+    for (let regionID in mapDateData)
+    {
+      let regionData = mapDateData[regionID]
+      if (!stateCandidateData[regionData.state])
+      {
+        stateCandidateData[regionData.state] = {}
+        stateTotalVotes[regionData.state] = 0
+      }
+
+      stateTotalVotes[regionData.state] += regionData.totalVotes
+
+      regionData.partyVotesharePercentages.forEach(candidateData => {
+        if (!stateCandidateData[regionData.state][candidateData.candidate])
+        {
+          stateCandidateData[regionData.state][candidateData.candidate] = {...candidateData}
+        }
+        else
+        {
+          stateCandidateData[regionData.state][candidateData.candidate].votes += candidateData.votes
+        }
+      })
+    }
+
+    let aggregatedMapDateData = {}
+    for (let regionID in stateCandidateData)
+    {
+      let candidateArray = Object.values(stateCandidateData[regionID]).map(candidateData => {
+        return {...candidateData, voteshare: candidateData.votes/stateTotalVotes[regionID]*100}
+      })
+      console.log(regionID, stateTotalVotes[regionID], candidateArray)
+    }
+
+    return aggregatedMapDateData
+  }
+
   var countyZoomingDataFunction = async (presidentialMapDateData, _, isZoomCheck) => {
     if (!CountyElectionResultMapSource.getMapData() || (!isZoomCheck && !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID()))))
     {
@@ -1616,8 +1654,19 @@ function createPresidentialMapSources()
 
       await CountyElectionResultMapSource.loadMap()
     }
-    let mapDateData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
-    if (isZoomCheck) { return mapDateData != null }
+    let organizedCountyData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
+    if (isZoomCheck) { return organizedCountyData != null }
+
+    let previousMapDateIndex = CountyElectionResultMapSource.getMapDates().findIndex(mapDate => mapDate == currentSliderDate.getTime())-1
+    let previousMapDateData
+    if (previousMapDateIndex >= 0)
+    {
+      let previousDate = CountyElectionResultMapSource.getMapDates()[previousMapDateIndex]
+      let previousOrganizedCountyData = CountyElectionResultMapSource.getMapData()[previousDate]
+      previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin)
+    }
+
+    let mapDateData = organizedCountyData != null ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], currentSliderDate, previousMapDateData, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin) : null
 
     let countyZoomData = {}
 
@@ -1804,62 +1853,8 @@ function createPresidentialMapSources()
     null, // heldRegionMap
     false, // shouldFilterOutDuplicateRows
     true, // addDecimalPadding
-    countyVoteshareFilterFunction, // organizeMapDataFunction
-    (mapDateData) => {
-      var usedFallbackMap = USAHouseMapType.getSVGPath()[2] || false
-      if (currentMapType.getMapSettingValue("showAllDistricts") && !usedFallbackMap)
-      {
-        return mapDateData
-      }
-
-      var countiesPerStateMapData = {}
-
-      for (let regionID in mapDateData)
-      {
-        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
-
-        var regionData = mapDateData[regionID]
-
-        if (!(regionData.state in countiesPerStateMapData))
-        {
-          countiesPerStateMapData[regionData.state] = {region: regionData.state, voteSplits: []}
-        }
-
-        var partyVoteSplitData = countiesPerStateMapData[regionData.state].voteSplits
-        var partyVote = partyVoteSplitData.find(partyVoteItem => partyVoteItem.partyID == regionData.partyID)
-        if (!partyVote)
-        {
-          partyVote = {partyID: regionData.partyID, candidate: politicalParties[regionData.partyID].getNames()[0], votes: 0}
-          partyVoteSplitData.push(partyVote)
-        }
-        partyVote.votes++
-
-        if (regionData.flip)
-        {
-          countiesPerStateMapData[regionData.state].flip = true
-        }
-      }
-
-      for (let regionID in countiesPerStateMapData)
-      {
-        var partyVoteSplitData = countiesPerStateMapData[regionID].voteSplits
-        partyVoteSplitData.sort((partyVote1, partyVote2) => partyVote2.votes-partyVote1.votes)
-
-        var largestPartyCount = partyVoteSplitData[0].votes
-        var largestPartyID = partyVoteSplitData[0].partyID
-        var secondLargestPartyCount = partyVoteSplitData[1] ? partyVoteSplitData[1].votes : 0
-
-        countiesPerStateMapData[regionID].margin = (largestPartyCount/(largestPartyCount+secondLargestPartyCount)*100-50)*0.9001 // +0.001 to account for rounding errors
-        countiesPerStateMapData[regionID].partyID = largestPartyID
-      }
-
-      if (mapDateData["NPV"])
-      {
-        countiesPerStateMapData["NPV"] = cloneObject(mapDateData["NPV"])
-      }
-
-      return countiesPerStateMapData
-    }, // viewingDataFunction
+    countyFilterFunction, // organizeMapDataFunction
+    countyViewingDataFunction, // viewingDataFunction
     countyZoomingDataFunction, // zoomingDataFunction
     null, // splitVoteDataFunction
     null, // splitVoteDisplayOptions
@@ -4246,7 +4241,6 @@ function createHouseMapSources()
         {
           linkToOpen += "#" + regionIDToLinkMap[regionID]
         }
-        // linkToOpen += (USAHouseMapType.getEV(getDecadeFromDate(mapDate), regionID) > 1 ? "_in_" : "#") + regionIDToLinkMap[regionID] + (districtNumber ? "#District_" + districtNumber : "")
       }
       window.open(linkToOpen)
     }, // customOpenRegionLinkFunction
