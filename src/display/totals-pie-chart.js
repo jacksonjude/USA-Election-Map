@@ -134,7 +134,7 @@ function setupTotalsPieChart()
             break
 
             case 2:
-            label += roundValueToPlace(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index], 4) + "%"
+            label += getRoundedMarginValue(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]) + "%"
             break
           }
 
@@ -472,8 +472,7 @@ function updateTotalsPieChart(regionDataArray)
     var regionMargin = regionDataArray[regionID].margin
 
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
-    var formattedRegionMargin = Math.round(regionMargin*10)/10
-    formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
+    var formattedRegionMargin = getRoundedMarginValue(regionMargin)
     var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
@@ -687,6 +686,7 @@ function updateTotalsPieChart(regionDataArray)
   totalsPieChart.data.datasets[0].labels = preloadedData.datasets[0].labels
 
   totalsPieChart.update()
+  $("#charttooltipcontainer").trigger('hide')
 
   partyOrdering = fullPartyOrdering // To avoid transitions of colors between dataslices on every date load
 }
