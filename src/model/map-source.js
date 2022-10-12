@@ -2855,9 +2855,11 @@ function createSenateMapSources()
   }
 
   const kPastElectionsVsPastElections = 1
+  const k538ProjectionVsPastElections = 2
 
   var defaultSenateCompareSourceIDs = {}
   defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+  defaultSenateCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
   USASenateMapType.setMapSources(senateMapSources)
   USASenateMapType.setMapSourceIDs(senateMapSourceIDs)
@@ -3543,9 +3545,11 @@ function createGovernorMapSources()
   }
 
   const kPastElectionsVsPastElections = 1
+  const k538ProjectionVsPastElections = 2
 
   var defaultGovernorCompareSourceIDs = {}
   defaultGovernorCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+  defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
   USAGovernorMapType.setMapSources(governorMapSources)
   USAGovernorMapType.setMapSourceIDs(governorMapSourceIDs)
@@ -4333,9 +4337,11 @@ function createHouseMapSources()
   }
 
   const kPastElectionsVsPastElections = 1
+  const k538ProjectionVsPastElections = 2
 
   var defaultHouseCompareSourceIDs = {}
   defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+  defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
   USAHouseMapType.setMapSources(houseMapSources)
   USAHouseMapType.setMapSourceIDs(houseMapSourceIDs)
