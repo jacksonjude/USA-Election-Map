@@ -10,39 +10,48 @@ function createMapSourceDropdownItems()
     var mapSourceName = mapSources[mapSourceID].getName()
 
     var divStringToAppend = ""
+    divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' style='display: flex; justify-content: space-between; align-items: center' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "<span>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName + "</span>"
+    divStringToAppend += "<span style='display: flex; align-items: center'>"
 
     if (mapSourceID != currentCustomMapSource.getID())
     {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-icon' style='float: right;' onclick='downloadDataForMapSource(\"" + mapSourceID + "\", {\"" + mapSourceIDNoSpace + "-icon\":{loading: \"./assets/icon-loading.png\", error: \"./assets/icon-download-none.png\", success: \"./assets/icon-download-complete.png\", top: -1, width: 24, height: 24}}, \"" + mapSourceIDNoSpace + "\", true, true)'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-download-none.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
-      divStringToAppend += "</span>"
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='position: relative; top: -2px; right: -4px; float: right; width: 20px; height: 20px;' />"
-      divStringToAppend += "</a>"
+      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='width: 20px; height: 20px; margin: 0 8px 0 0' />"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 24px; height: 24px;'/>"
     }
     else
     {
-      divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName
-
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-download-icon' style='float:right;'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-download.png' style='position: relative; top: -1px; width: 24px; height: 24px;' />"
-      divStringToAppend += "</span>"
-
-      divStringToAppend += "<span id='" + mapSourceIDNoSpace + "-upload-icon' style='float:right;' onclick='ignoreMapUpdateClickArray.push(\"" + mapSourceID + "\"); $(\"#uploadFileInput\").click()'>"
-      divStringToAppend += "<img class='status' src='./assets/icon-upload.png' style='position: relative; top: -1px; width: 24px; height: 24px; margin-right: 6px' />"
-      divStringToAppend += "</span>"
-
-      divStringToAppend += "</a>"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-download-icon' class='status' src='./assets/icon-download.png' style='width: 24px; height: 24px; margin-right: 6px;' />"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-upload-icon' class='status' src='./assets/icon-upload.png' style='width: 24px; height: 24px;' />"
     }
+
+    divStringToAppend += "</span>"
+    divStringToAppend += "</a>"
 
     $("#mapSourcesDropdownContainer").append(divStringToAppend)
 
-    if (mapSources[mapSourceID].isCustom())
+    if (!mapSources[mapSourceID].isCustom())
+    {
+      $("#" + mapSourceIDNoSpace + "-icon")[0].addEventListener('click', function() {
+        let mapSource = $(this).data("mapsource")
+        let mapSourceNoSpace = mapSource.replace(/\s/g, '')
+        downloadDataForMapSource(mapSource, getIconDivsToUpdateArrayForSourceID(mapSource), mapSourceNoSpace, true, true)
+      })
+      $("#" + mapSourceIDNoSpace + "-compare")[0].addEventListener('click', function() {
+        let mapSource = $(this).data("mapsource")
+        let mapSourceNoSpace = mapSource.replace(/\s/g, '')
+        addCompareMapSource(mapSourceID, mapSourceNoSpace)
+      })
+    }
+    else
     {
       var customMapSourceID = mapSourceID
       $("#" + mapSourceIDNoSpace + "-download-icon")[0].addEventListener('click', function(e) {
         ignoreMapUpdateClickArray.push(customMapSourceID)
         downloadMapFile(currentMapSource, e.altKey ? kCSVFileType : kJSONFileType)
+      })
+      $("#" + mapSourceIDNoSpace + "-upload-icon")[0].addEventListener('click', function() {
+        ignoreMapUpdateClickArray.push(customMapSourceID)
+        $("#uploadFileInput").click()
       })
     }
   }
@@ -86,7 +95,7 @@ function getIconDivsToUpdateArrayForSourceID(mapSourceID)
   var iconDivID = mapSourceID.replace(/\s/g, '') + "-icon"
 
   var iconDivDictionary = {}
-  iconDivDictionary[iconDivID] = {loading: "./assets/icon-loading.png", error: "./assets/icon-download-none.png", success: "./assets/icon-download-complete.png", top: -1, width: 24, height: 24}
+  iconDivDictionary[iconDivID] = {loading: "./assets/icon-loading.png", error: "./assets/icon-download-none.png", success: "./assets/icon-download-complete.png"}
 
   return iconDivDictionary
 }
@@ -101,29 +110,22 @@ async function updateIconsBasedOnLocalCSVData()
     {
       for (let divID in divsToUpdateStatus)
       {
-        removeStatusImage(divID)
-        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+        setStatusImage(divID, divsToUpdateStatus[divID].success)
       }
     }
     else
     {
       for (let divID in divsToUpdateStatus)
       {
-        removeStatusImage(divID)
-        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+        setStatusImage(divID, divsToUpdateStatus[divID].error)
       }
     }
   }
 }
 
-function insertStatusImage(divID, icon, width, height, top)
+function setStatusImage(divID, icon)
 {
-  $("#" + divID).html($("#" + divID).html() + ('<span class="status">&nbsp;&nbsp;&nbsp;<img src="' + icon + '" style="position: relative; top: ' + (top || 2) + 'px; width: ' + (width || 16) + 'px; height: ' + (height || 16) + 'px;" /></span>'))
-}
-
-function removeStatusImage(divID)
-{
-  $("#" + divID + " .status").remove()
+  $("#" + divID).attr('src', icon)
 }
 
 function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch, resetCandidateNames)
@@ -135,25 +137,16 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
   var downloadDataPromise = new Promise(async (resolve) => {
     for (let divID in divsToUpdateStatus)
     {
-      removeStatusImage(divID)
-    }
-
-    for (let divID in divsToUpdateStatus)
-    {
-      insertStatusImage(divID, divsToUpdateStatus[divID].loading, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+      setStatusImage(divID, divsToUpdateStatus[divID].loading)
     }
 
     var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
-    for (let divID in divsToUpdateStatus)
-    {
-      removeStatusImage(divID)
-    }
 
     if (!loadedSuccessfully)
     {
       for (let divID in divsToUpdateStatus)
       {
-        insertStatusImage(divID, divsToUpdateStatus[divID].error, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+        setStatusImage(divID, divsToUpdateStatus[divID].error)
       }
       resolve(false)
     }
@@ -161,7 +154,7 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
     {
       for (let divID in divsToUpdateStatus)
       {
-        insertStatusImage(divID, divsToUpdateStatus[divID].success, divsToUpdateStatus[divID].width, divsToUpdateStatus[divID].height, divsToUpdateStatus[divID].top)
+        setStatusImage(divID, divsToUpdateStatus[divID].success)
       }
 
       if (refreshMap && currentMapSource.getID() == mapSourceID)

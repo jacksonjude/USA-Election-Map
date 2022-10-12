@@ -481,8 +481,11 @@ function addDivEventListeners()
       for (var mapSourceID in mapSources)
       {
         mapSources[mapSourceID].resetMapData()
-        removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
-        insertStatusImage(mapSourceID.replace(/\s/g, '') + "-icon", "./assets/icon-download-none.png", 24, 24, -1)
+        var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceID)
+        for (let divID in divsToUpdateStatus)
+        {
+          setStatusImage(divID, divsToUpdateStatus[divID].error)
+        }
       }
     }
   })
