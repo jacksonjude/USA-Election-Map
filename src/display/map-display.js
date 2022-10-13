@@ -1,3 +1,5 @@
+const currentAppVersion = "5"
+
 var currentMapType
 
 var mapSources

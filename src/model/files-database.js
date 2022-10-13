@@ -187,6 +187,13 @@ var SVGDatabase = new FilesDatabase()
 
 async function initializeDatabases()
 {
+  let lastAppVersion = getCookie("appVersion")
+  if (lastAppVersion != currentAppVersion)
+  {
+    await clearDatabases()
+    setCookie("appVersion", currentAppVersion)
+  }
+
   await CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
   await SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
 }
@@ -198,6 +205,4 @@ async function clearDatabases()
   {
     await indexedDB.deleteDatabase(database.name)
   }
-
-  location.reload()
 }
