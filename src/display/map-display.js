@@ -1568,8 +1568,9 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   var fillColor
   var shouldHide = false
 
+  var isDisabledOrTossup = regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats"))
   var canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats")))
+  if (isDisabledOrTossup)
   {
     if (regionData.disabled == true)
     {
@@ -1585,46 +1586,45 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
         }
       }
     }
-    else if (canUseVoteSplitsForColor)
-    {
-      if (currentViewingState == ViewingState.splitVote)
-      {
-        let party1Color = politicalParties[regionData.voteSplits[0].partyID].getMarginColors().safe
-        let party2Color = politicalParties[regionData.voteSplits[1].partyID].getMarginColors().safe
-        let patternID = "split-" + party1Color + "-" + party2Color
-        generateSVGPattern(patternID, party1Color, party2Color)
-        fillColor = "url(#" + patternID + ")"
-      }
-      else if (regionData.voteSplits[0].votes == regionData.voteSplits[1].votes)
-      {
-        var voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
-        voteSplitPartyIDs.sort()
-        if (voteSplitPartyIDs[0] == DemocraticParty.getID() && voteSplitPartyIDs[1] == RepublicanParty.getID())
-        {
-          fillColor = PoliticalPartyColors.purple.likely
-        }
-        else if (voteSplitPartyIDs[0] == IndependentGenericParty.getID())
-        {
-          fillColor = politicalParties[voteSplitPartyIDs[1]].getMarginColors().lean
-        }
-      }
-    }
-
-    if (!fillColor)
+    else
     {
       fillColor = TossupParty.getMarginColors().safe
+    }
+  }
+  else if (canUseVoteSplitsForColor)
+  {
+    if (currentViewingState == ViewingState.splitVote)
+    {
+      let party1Color = politicalParties[regionData.voteSplits[0].partyID].getMarginColors().safe
+      let party2Color = politicalParties[regionData.voteSplits[1].partyID].getMarginColors().safe
+      let patternID = "split-" + party1Color + "-" + party2Color
+      generateSVGPattern(patternID, party1Color, party2Color)
+      fillColor = "url(#" + patternID + ")"
+    }
+    else if (regionData.voteSplits[0].votes == regionData.voteSplits[1].votes)
+    {
+      var voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
+      voteSplitPartyIDs.sort()
+      if (voteSplitPartyIDs[0] == DemocraticParty.getID() && voteSplitPartyIDs[1] == RepublicanParty.getID())
+      {
+        fillColor = PoliticalPartyColors.purple.likely
+      }
+      else if (voteSplitPartyIDs[0] == IndependentGenericParty.getID())
+      {
+        fillColor = politicalParties[voteSplitPartyIDs[1]].getMarginColors().lean
+      }
     }
   }
   else
   {
     var marginIndex = getMarginIndexForValue(regionData.margin, regionData.partyID)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
+  }
 
-    if (currentMapType.getMapSettingValue("flipStates") && regionData.flip)
-    {
-      var patternID = generateFlipPattern(regionData.partyID, marginIndex)
-      fillColor = "url(#" + patternID + ")"
-    }
+  if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip)
+  {
+    var patternID = generateFlipPattern(fillColor)
+    fillColor = "url(#" + patternID + ")"
   }
 
   for (var regionIDNum in regionIDsToUpdate)
@@ -1686,10 +1686,9 @@ function generateSVGPattern(patternID, fillColor, strokeColor)
   }
 }
 
-function generateFlipPattern(partyID, margin)
+function generateFlipPattern(fillColor)
 {
-  var fillColor = politicalParties[partyID].getMarginColors()[margin]
-  var patternID = "flip-" + fillColor.slice(1)
+  let patternID = "flip-" + fillColor.slice(1)
 
   generateSVGPattern(patternID, fillColor, multiplyBrightness(fillColor, flipPatternBrightnessFactor))
 
@@ -1698,11 +1697,11 @@ function generateFlipPattern(partyID, margin)
 
 function generateFlipPatternsFromPartyMap(partyMap)
 {
-  for (var partyID in partyMap)
+  for (let partyID in partyMap)
   {
-    for (var margin in partyMap[partyID].getMarginColors())
+    for (let marginIndex in partyMap[partyID].getMarginColors())
     {
-      generateFlipPattern(partyID, margin)
+      generateFlipPattern(partyMap[partyID].getMarginColors()[marginIndex])
     }
   }
 }
