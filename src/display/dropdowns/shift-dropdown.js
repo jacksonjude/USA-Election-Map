@@ -1,6 +1,6 @@
 var isEnteringShiftAmount = false
 
-function addConstantMarginToMap(marginToAdd, partyToShift)
+function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldShiftNPV)
 {
   if (!marginToAdd) { return }
   var partyToShift = partyToShift || selectedParty
@@ -10,7 +10,7 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
 
   for (var regionID in displayRegionDataArray)
   {
-    if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
+    if ((regionID == nationalPopularVoteID && !shouldShiftNPV) || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
     if (displayRegionDataArray[regionID].disabled) { continue }
 
@@ -37,14 +37,25 @@ function addConstantMarginToMap(marginToAdd, partyToShift)
         regionData.partyVotesharePercentages.push(candidateDataToIncreaseMargin)
       }
 
-      for (let candidateData of regionData.partyVotesharePercentages)
+      if (partyToTake)
       {
-        if (candidateData.candidate == candidateDataToIncreaseMargin.candidate) { continue }
-
-        candidateData.voteshare -= marginToAdd*candidateData.voteshare/(100.0-candidateDataToIncreaseMargin.voteshare)
-        if (candidateData.voteshare < 0)
+        let candidateDataToDecreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToTake.getID())
+        if (candidateDataToDecreaseMargin)
         {
-          candidateData.voteshare = 0
+          candidateDataToDecreaseMargin.voteshare = Math.max(candidateDataToDecreaseMargin.voteshare-marginToAdd, 0)
+        }
+      }
+      else
+      {
+        for (let candidateData of regionData.partyVotesharePercentages)
+        {
+          if (candidateData.candidate == candidateDataToIncreaseMargin.candidate) { continue }
+
+          candidateData.voteshare -= marginToAdd*candidateData.voteshare/(100.0-candidateDataToIncreaseMargin.voteshare)
+          if (candidateData.voteshare < 0)
+          {
+            candidateData.voteshare = 0
+          }
         }
       }
 
@@ -93,7 +104,7 @@ function getTippingPointRegion()
 
   var winnerPartyID = getKeyByValue(partyTotals, greatestEVCount)
   var tippingPointRegion
-  var checkedStates = []
+  var checkedStates = [nationalPopularVoteID]
   while (greatestEVCount >= majorityEVCount)
   {
     var nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
@@ -142,4 +153,34 @@ function toggleEnteringShiftAmount()
     $("#shift-other").html("Shift All by other")
     $("#shiftButton").removeClass('active')
   }
+}
+
+function shiftByTippingPoint()
+{
+  let shiftMargin = (currentEditingMode == EditingMode.voteshare ? 1/2 : 1)*getTippingPointRegion().margin
+  addConstantMarginToMap(shiftMargin, politicalParties[dropdownPoliticalPartyIDs[1]], politicalParties[dropdownPoliticalPartyIDs[0]])
+}
+
+function shiftByNPV()
+{
+  if (!displayRegionDataArray[nationalPopularVoteID]) return
+  let npvData = displayRegionDataArray[nationalPopularVoteID]
+
+  let npvLeader = politicalParties[npvData.partyID]
+  let npvRunnerUp
+  let shiftMargin
+
+  if (currentEditingMode == EditingMode.voteshare)
+  {
+    shiftMargin = npvData.margin/2
+    npvData.partyVotesharePercentages.sort((cand1, cand2) => cand1.voteshare-cand2.voteshare)
+    npvRunnerUp = politicalParties[npvData.partyVotesharePercentages[1].partyID]
+  }
+  else
+  {
+    shiftMargin = npvData.margin
+    npvRunnerUp = politicalParties[dropdownPoliticalPartyIDs[0] == npvLeader.getID() ? dropdownPoliticalPartyIDs[1] : dropdownPoliticalPartyIDs[0]]
+  }
+
+  addConstantMarginToMap(shiftMargin, npvRunnerUp, npvLeader, true)
 }
