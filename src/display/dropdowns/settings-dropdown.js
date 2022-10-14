@@ -105,12 +105,12 @@ function cycleMapSetting(settingID, settingDiv, incrementAmount)
 
 function toggleMapSettingDisable(settingID, disableOverride)
 {
-  if (($("#" + settingID).hasClass("topnavdisable2") && disableOverride == null) || (disableOverride != null && disableOverride == false))
+  if (($("#" + settingID).hasClass("topnavdisable") && disableOverride == null) || (disableOverride != null && disableOverride == false))
   {
-    $("#" + settingID).removeClass("topnavdisable2")
+    $("#" + settingID).removeClass("topnavdisable")
   }
   else
   {
-    $("#" + settingID).addClass("topnavdisable2")
+    $("#" + settingID).addClass("topnavdisable")
   }
 }

@@ -160,23 +160,23 @@ async function reloadForNewMapType(initialLoad)
 
   if (currentMapType.getCustomMapEnabled())
   {
-    $("#editDoneButton").removeClass('topnavdisable2')
+    $("#editDoneButton").removeClass('topnavdisable')
   }
   else
   {
-    $("#editDoneButton").addClass('topnavdisable2')
+    $("#editDoneButton").addClass('topnavdisable')
   }
 
   if (currentMapType.getCompareMapEnabled())
   {
-    $("#compareButton").removeClass('topnavdisable2')
-    $("#compareDropdownContent").removeClass('topnavdisable2')
+    $("#compareButton").removeClass('topnavdisable')
+    $("#compareDropdownContent").removeClass('topnavdisable')
     $("#compareDropdownContent").css("opacity", "100%")
   }
   else
   {
-    $("#compareButton").addClass('topnavdisable2')
-    $("#compareDropdownContent").addClass('topnavdisable2')
+    $("#compareButton").addClass('topnavdisable')
+    $("#compareDropdownContent").addClass('topnavdisable')
     $("#compareDropdownContent").css("opacity", "0%")
   }
 
