@@ -243,7 +243,7 @@ async function reloadForNewMapType(initialLoad)
 function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
 {
   let loadSVGFilePromise = new Promise(async (resolve) => {
-    $("#loader").show()
+    if ($("#loader-circle-container").is(":hidden")) $("#loader").show()
 
     if (fadeForNewSVG)
     {
@@ -674,6 +674,7 @@ function createCSVParsingIndicator(color)
     strokeWidth: 15,
   })
 
+  if (!$("#loader").is(":hidden")) $("#loader").hide()
   $("#loader-circle-container").show()
 }
 

@@ -173,7 +173,6 @@ function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore
 
 async function downloadAllMapData()
 {
-  var sourcesLoaded = 0
   for (var sourceIDNum in mapSourceIDs)
   {
     var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
@@ -181,12 +180,6 @@ async function downloadAllMapData()
       if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID() && loadedSuccessfully)
       {
         loadDataMap(true)
-      }
-
-      sourcesLoaded += 1
-      if (sourcesLoaded < mapSourceIDs.length)
-      {
-        $("#loader").show()
       }
     })
   }
