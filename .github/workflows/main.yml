@@ -13,22 +13,4 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  copy-beta:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: Checkout monorepo
-        uses: actions/checkout@v2
-      - uses: ./.github/actions/mirror-monorepo
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-        with:
-          user-email: ${{ secrets.EMAIL }}
-          user-name: jacksonjude
-          source-repo: USA-Election-Map
-          source-branch: v5.0
-          dest-repo: USA-Election-Map-Beta
-          dest-branch: main
+  
