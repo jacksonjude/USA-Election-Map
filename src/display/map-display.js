@@ -1,16 +1,23 @@
-var currentMapType = mapTypes[mapTypeIDs[0]]
+const currentAppVersion = "5"
 
-var mapSources = currentMapType.getMapSources()
-var mapSourceIDs = currentMapType.getMapSourceIDs()
-var currentCustomMapSource = currentMapType.getCustomMapSource()
+var currentMapType
 
-var mapRegionNameToID = currentMapType.getRegionNameToID()
+var mapSources
+var mapSourceIDs
+var currentCustomMapSource
 
-var currentMapSource = NullMapSource
+var mapRegionIDToName
+
+var currentMapSource
 
 var currentDisplayDate
 var displayMapQueue = []
 var isRunningDisplayMapQueue = false
+
+var compareMapQueue = []
+var isRunningCompareMapQueue = false
+
+var svgPanZoomController
 
 var selectedParty
 
@@ -31,57 +38,115 @@ const flipPatternBrightnessFactor = 0.8
 const flipPatternHeight = 5
 const flipPatternWidth = 5
 
-const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
+const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button", "MA-N"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land", "ME"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land", "NE"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
 const noInteractSVGRegionAttribute = "data-nointeract"
 const noCountSVGRegionAttribute = "data-nocount"
 const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 
-const nationalPopularVoteID = "NPV"
+const subregionSeparator = "__"
 
-var displayRegionDataArray = {}
-var regionIDsToIgnore = [/.+-button/, /.+-land/]
+var displayRegionDataArray
+const regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
 
 var showingDataMap = false
+
+var shouldDragSelect = false
 
 var editingRegionEVs = false
 var overrideRegionEVs = {}
 
 var editingRegionMarginValue = false
+var editingRegionVotesharePercentages = false
+var voteshareEditRegion
+var selectedVoteshareCandidate
 
-var ignoreMapUpdateClickArray = []
+var ignoreMapUpdateClickArray
 
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 55
 
+var currentCompareSliderDate
+
+var progressCircleDiv
+const progressCircleDuration = 100
+var lastIndicatorCircleProgress
+
+const downloadIndicatorColor = '#3498db'
+const csvParseIndicatorColor = '#3ac635'
+
 const ViewingState = {
   viewing: 0,
-  zooming: 1
+  zooming: 1,
+  splitVote: 2
 }
-var currentViewingState = ViewingState.viewing
+var currentViewingState
 
 const EditingState = {
   viewing: 2,
   editing: 3
 }
-var currentEditingState = EditingState.viewing
+var currentEditingState
 
-var currentMapZoomRegion = null
+var currentMapZoomRegion
 
-var showingHelpBox = false
-
-var showingCompareMap = false
-var compareMapSourceIDArray = [null, null]
-var compareMapDataArray = [null, null]
-var selectedCompareSlider = null
+var showingCompareMap
+var compareMapSourceIDArray
+var compareMapDataArray
+var selectedCompareSlider
 
 var selectedDropdownDivID = null
+
+var showingHelpBox = false
+var currentHelpBoxPage = 0
+const helpBoxPages = [
+  {subtitle: "Selection & Viewing", body: `
+  Change the type with the <span style='text-decoration: underline'>type dropdown</span>, or press [T] to cycle between:<br>
+  [President] ⇒ [Senate] ⇒ [House] ⇒ [Govs]<br>
+  <br>
+
+  Select a source with the <span style='text-decoration: underline'>source dropdown</span>, or by using the number keys [0️⃣-9️⃣]<br>
+  <br>
+
+  Change the date with the <span style='text-decoration: underline'>slider</span>, or by using the arrow keys [⬇️ -5, ⬅️ -1, ➡️ +1, ⬆️ +5]<br>
+  <br>
+
+  Change the state color margin thresholds with the <span style='text-decoration: underline'>margins dropdown</span><br>
+  To switch between presets, press [M] then<br>
+  [1️⃣] Default ⇒ Safe 15%, Likely 5%, Lean 1%<br>
+  [2️⃣] Alt ⇒ Safe 5%, Likely 3%, Lean 1%<br>
+  <br>
+
+  Compare between preset maps using the <span style='text-decoration: underline'>compare dropdown</span><br>
+  Compare between other maps by selecting two checkboxes in the <span style='text-decoration: underline'>source dropdown</span>
+  `},
+  {subtitle: "Editing", body: `
+  Copy with the <span style='text-decoration: underline'>copy button</span>, or [Enter]<br>
+  Switch the current editing mode by selecting [Edit by margin] or [Edit by voteshare] in the <span style='text-decoration: underline'>copy dropdown</span><br>
+  <br>
+
+  When editing, first select a party in the <span style='text-decoration: underline'>parties box</span> by clicking the respective button or using the number keys [1️⃣-4️⃣]<br>
+  <br>
+
+  If editing by margin, [Left Click] to cycle:<br>
+  Safe ⇒ Likely ⇒ Lean ⇒ Tilt<br>
+  and [Right Click] to cycle in reverse:<br>
+  Tilt ⇒ Lean ⇒ Likely ⇒ Safe<br>
+  <br>
+
+  If editing by voteshare, click to begin editing a region, and click again to save<br>
+  Change the candidates with the cursor or by using the arrow keys [⬆️, ⬇️]<br>
+  Set a candidate's voteshare to 0 to remove<br>
+  `}
+]
 
 $(async function() {
   currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+
+  await initializeDatabases()
 
   reloadForNewMapType(true)
 
@@ -95,13 +160,13 @@ $(async function() {
     "assets/jhk-large.png",
     "assets/cookpolitical-large.png",
     "assets/wikipedia-large.png",
-    "assets/lte-large.png",
-    "assets/pa-large.png"
+    "assets/lte-large.png"
   ])
 
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
   createPartyDropdowns()
+  updateSelectedEditMode()
 
   addDivEventListeners()
 
@@ -129,40 +194,40 @@ async function reloadForNewMapType(initialLoad)
   mapSources = currentMapType.getMapSources()
   mapSourceIDs = currentMapType.getMapSourceIDs()
   currentCustomMapSource = currentMapType.getCustomMapSource()
-  mapRegionNameToID = currentMapType.getRegionNameToID()
+  mapRegionIDToName = currentMapType.getRegionIDToName()
 
   if (currentMapType.getCustomMapEnabled())
   {
-    $("#editDoneButton").removeClass('topnavdisable2')
+    $("#editDoneButton").removeClass('topnavdisable')
   }
   else
   {
-    $("#editDoneButton").addClass('topnavdisable2')
+    $("#editDoneButton").addClass('topnavdisable')
   }
 
   if (currentMapType.getCompareMapEnabled())
   {
-    $("#compareButton").removeClass('topnavdisable2')
-    $("#compareDropdownContent").removeClass('topnavdisable2')
+    $("#compareButton").removeClass('topnavdisable')
+    $("#compareDropdownContent").removeClass('topnavdisable')
     $("#compareDropdownContent").css("opacity", "100%")
   }
   else
   {
-    $("#compareButton").addClass('topnavdisable2')
-    $("#compareDropdownContent").addClass('topnavdisable2')
+    $("#compareButton").addClass('topnavdisable')
+    $("#compareDropdownContent").addClass('topnavdisable')
     $("#compareDropdownContent").css("opacity", "0%")
   }
 
   selectedParty = null
   displayRegionDataArray = {}
-  regionIDsToIgnore = [/.+-button/, /.+-land/]
   showingDataMap = false
   ignoreMapUpdateClickArray = []
   currentSliderDate = null
   currentEditingState = EditingState.viewing
-  currentViewingState = ViewingState.viewing
+  currentViewingState = currentMapType.getMapSettingValue("presViewingType") ? ViewingState.splitVote : ViewingState.viewing
   currentMapZoomRegion = null
   showingCompareMap = false
+  currentCompareSliderDate = null
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
   selectedCompareSlider = null
@@ -181,18 +246,20 @@ async function reloadForNewMapType(initialLoad)
   await loadMapSVGFile()
 
   $("#totalsPieChartContainer").html("<canvas id='totalsPieChart'></canvas>")
-  $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
+  $("#loader-circle-container").hide()
   resizeElements(false)
 
+  $("#mapZoomControls").trigger('hide')
+
   populateRegionsArray()
-  for (var partyNum in dropdownPoliticalPartyIDs)
+  for (let partyID of dropdownPoliticalPartyIDs)
   {
-    if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
-    politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
+    if (partyID == TossupParty.getID() || !politicalParties[partyID]) { continue }
+    politicalParties[partyID].setCandidateName(politicalParties[partyID].getNames()[0])
   }
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
 
   setupTotalsPieChart()
   updateTotalsPieChart()
@@ -201,46 +268,52 @@ async function reloadForNewMapType(initialLoad)
 
   if (currentMapSource.getID() != NullMapSource.getID())
   {
-    updateNavBarForNewSource()
+    updateNavBarForNewSource(false, false)
     loadDataMap(false, false, previousDateOverride)
   }
   else
   {
-    updateNavBarForNewSource(true)
+    updateNavBarForNewSource(true, false)
   }
 }
 
-function loadMapSVGFile(handleNewSVG)
+function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
 {
-  var loadSVGFilePromise = new Promise((resolve) => {
-    $("#svgdata").css('opacity', "0")
-    $("#mapCloseButton").hide()
+  let loadSVGFilePromise = new Promise(async (resolve) => {
+    if ($("#loader-circle-container").is(":hidden")) $("#loader").show()
+
+    if (fadeForNewSVG)
+    {
+      $("#svgdata").css('opacity', "0")
+    }
 
     handleNewSVG = handleNewSVG || async function(resolve, svgPath) {
-      $("#mapzoom").empty()
-      $("#mapzoom-preload").children().appendTo($("#mapzoom"))
-
       if (svgPath instanceof Array)
       {
-        await handleSVGZooming(resolve, svgPath, handleNewSVGFields)
+        await handleSVGZooming(resolve, svgPath, handleNewSVGFields, fadeForNewSVG)
       }
       else
       {
-        handleNewSVGFields(resolve)
+        handleNewSVGFields(resolve, fadeForNewSVG)
       }
     }
 
-    currentMapType.loadSVG((svgPath) => {
-      handleNewSVG(resolve, svgPath)
-    })
+    let svgPath = await currentMapType.loadSVG()
+    handleNewSVG(resolve, svgPath)
   })
 
   return loadSVGFilePromise
 }
 
-function handleNewSVGFields(resolve)
+function handleNewSVGFields(resolve, _, fadeForNewSVG)
 {
-  $("#svgdata").css('opacity', "1")
+  if (fadeForNewSVG)
+  {
+    $("#mapcontainertmp #svgdata").css('opacity', "0")
+  }
+
+  $("#mapcontainer").html($("#mapcontainertmp").html())
+  $("#mapcontainertmp").empty()
 
   setOutlineDivProperties()
   updateMapElectoralVoteText()
@@ -250,37 +323,43 @@ function handleNewSVGFields(resolve)
     generateFlipPatternsFromPartyMap(politicalParties)
   }
 
+  $("#loader").hide()
+
+  if (fadeForNewSVG)
+  {
+    $("#svgdata").css('opacity', "1")
+  }
+
   resolve()
 }
 
-async function handleSVGZooming(resolve, svgPath, handleNewSVG)
+async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
 {
   var handleSVGZoomingPromise = new Promise((innerResolve) => {
     var stateToShow = svgPath[1]
     if (stateToShow != null)
     {
-      for (let districtPath of $("#outlines")[0].querySelectorAll("*"))
+      for (let districtPath of $("#mapcontainertmp #outlines")[0].querySelectorAll("*"))
       {
-        var splitArray = districtPath.id.split("-")
+        var splitArray = districtPath.id.split(subregionSeparator)
         if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
         {
           districtPath.remove()
         }
       }
 
-      $("#text").remove()
-      $("#mapCloseButton").show()
+      $("#mapcontainertmp #text").remove()
     }
 
     setTimeout(() => {
-      var svgDataBoundingBox = $("#svgdata")[0].getBBox()
-      $("#outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#svgdata").width(), svgDataBoundingBox.height/$("#svgdata").height())*1) + "px")
-      $("#svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
+      var svgDataBoundingBox = $("#mapcontainertmp #svgdata")[0].getBBox()
+      $("#mapcontainertmp #outlines").css("stroke-width", (Math.max(svgDataBoundingBox.width/$("#mapcontainertmp #svgdata").width(), svgDataBoundingBox.height/$("#mapcontainertmp #svgdata").height())*1) + "px")
+      $("#mapcontainertmp #svgdata")[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
 
       handleNewSVG(() => {
         innerResolve()
         resolve()
-      }, svgPath)
+      }, svgPath, fadeForNewSVG)
     }, 0)
   })
 
@@ -313,7 +392,7 @@ function setOutlineDivProperties()
       {
         return // handled in contextmenu
       }
-      else
+      else if (currentViewingState != ViewingState.zooming || !(currentEditingState == EditingState.viewing && mouseMovedDuringClick))
       {
         leftClickRegion(e.target)
       }
@@ -335,16 +414,18 @@ function resizeElements(initilizedPieChart)
   var topnavZoom = 0.85*mapZoom
   if (navigator.userAgent.indexOf("Firefox") != -1)
   {
-    $("#mapzoom").css("transform", "scale(" + mapZoom + ")")
-    $("#mapzoom").css("transform-origin", "0 0")
+    $("#mapcontainer").css("transform", "scale(" + mapZoom + ")")
+    $("#mapcontainer").css("transform-origin", "0 0")
   }
   else
   {
-    $("#mapzoom").css("zoom", (mapZoom*100) + "%")
+    $("#mapcontainer").css("zoom", (mapZoom*100) + "%")
     $("#helpbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
 
     $(".topnav").css("zoom", (topnavZoom*100) + "%")
   }
+
+  $("#mapZoomControls").css("height", $("#svgdata").height()*mapZoom)
 
   var mapWidth = $("#svgdata").width()*mapZoom
   var originalMapHeight = $("#svgdata").height()
@@ -439,8 +520,11 @@ function addDivEventListeners()
       for (var mapSourceID in mapSources)
       {
         mapSources[mapSourceID].resetMapData()
-        removeStatusImage(mapSourceID.replace(/\s/g, '') + "-icon")
-        insertStatusImage(mapSourceID.replace(/\s/g, '') + "-icon", "./assets/icon-download-none.png", 24, 24, -1)
+        var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceID)
+        for (let divID in divsToUpdateStatus)
+        {
+          setStatusImage(divID, divsToUpdateStatus[divID].error)
+        }
       }
     }
   })
@@ -490,10 +574,34 @@ function addDivEventListeners()
     }, 200)
   })
 
-  $("#mapCloseButton").hover(function() {
-    $("#mapCloseButtonImage").attr('src', "./assets/close-icon-hover.png")
-  }, function() {
-    $("#mapCloseButtonImage").attr('src', "./assets/close-icon.png")
+  $("#charttooltipcontainer").on('show', function() {
+    $(this).show()
+    $(this).css('opacity', "1")
+  })
+
+  $("#charttooltipcontainer").on('hide', function() {
+    $(this).css('opacity', "0")
+
+    setTimeout(function() {
+      if ($("#charttooltipcontainer").css('opacity') == "0") { $("#charttooltipcontainer").hide() }
+    }, 200)
+  })
+
+  let buttonImagePairs = [["mapCloseButton", "close-icon"], ["mapResetZoomButton", "reset-icon"], ["mapZoomInButton", "zoom-in-icon"], ["mapZoomOutButton", "zoom-out-icon"]]
+  buttonImagePairs.forEach(buttonData => {
+    let [buttonID, image] = buttonData
+    $("#" + buttonID).hover(function() {
+      $("#" + buttonID + "Image").attr('src', "./assets/" + image + "-hover.png")
+    }, function() {
+      $("#" + buttonID + "Image").attr('src', "./assets/" + image + ".png")
+    })
+  })
+
+  $("#mapZoomControls").on('show', function() {
+    $("#mapZoomControls").css("display", "flex")
+  })
+  $("#mapZoomControls").on('hide', function() {
+    $("#mapZoomControls").css("display", "none")
   })
 
   createPartyDropdownsBoxHoverHandler()
@@ -513,7 +621,16 @@ function addTextBoxSpacingCSS()
   }
 }
 
-function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames)
+async function setMapSource(mapSource, ...loadDataMapArgs)
+{
+  currentMapSource.cancelDownload()
+
+  currentMapSource = mapSource
+  updateNavBarForNewSource()
+  await loadDataMap(...loadDataMapArgs)
+}
+
+function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
   var loadDataMapPromise = new Promise(async (resolve) => {
     $("#dataMapDateSliderContainer").hide()
@@ -528,6 +645,10 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     {
       toggleMarginEditing(editMarginID)
     }
+    if (isEnteringShiftAmount)
+    {
+      toggleEnteringShiftAmount()
+    }
     if (editCandidateNamePartyID)
     {
       toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
@@ -536,8 +657,15 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
     {
       toggleMarginHexColorEditing()
     }
+    if (editPartyPopularVote)
+    {
+      togglePartyPopularVoteEditing(editPartyPopularVote)
+    }
     editingRegionEVs = false
     editingRegionMarginValue = false
+    editingRegionVotesharePercentages = false
+    voteshareEditRegion = null
+    selectedVoteshareCandidate = null
 
     currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
@@ -546,10 +674,11 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
 
     if (!loadedSuccessfully) { resolve(); return }
 
-    shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+    // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+    shouldSetToMax = true
 
     setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    await displayDataMap(null, true)
+    await displayDataMap(null, reloadPartyDropdowns ?? true)
     $("#dataMapDateSliderContainer").show()
     $("#dateDisplay").show()
 
@@ -568,6 +697,40 @@ function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetC
   })
 
   return loadDataMapPromise
+}
+
+function createCSVParsingIndicator(color)
+{
+  if (progressCircleDiv)
+  {
+    progressCircleDiv.destroy()
+  }
+
+  progressCircleDiv = new ProgressBar.Circle('#loader-circle-container', {
+    color: color,
+    strokeWidth: 15,
+  })
+
+  if (!$("#loader").is(":hidden")) $("#loader").hide()
+  $("#loader-circle-container").show()
+}
+
+function updateCSVParsingIndicator(progress)
+{
+  if (lastIndicatorCircleProgress && progress-lastIndicatorCircleProgress < 0.01) return
+
+  progressCircleDiv.set(progress)
+  progressCircleDiv.setText(Math.round(progress*100) + "%")
+
+  lastIndicatorCircleProgress = progress
+}
+
+function hideCSVParsingIndicator()
+{
+  lastIndicatorCircleProgress = null
+
+  progressCircleDiv.set(0)
+  $("#loader-circle-container").hide()
 }
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)
@@ -636,7 +799,14 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
   }
 
   $("#" + sliderDateDisplayDivID).html(dateString)
+
   currentSliderDate = dateToDisplay
+}
+
+function addToDisplayMapQueue(index, reloadPartyDropdowns)
+{
+  displayMapQueue.unshift([index, reloadPartyDropdowns])
+  executeDisplayMapQueue()
 }
 
 async function executeDisplayMapQueue()
@@ -654,7 +824,7 @@ async function executeDisplayMapQueue()
   isRunningDisplayMapQueue = false
 }
 
-async function displayDataMap(dateIndex, reloadPartyDropdowns)
+async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 {
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
@@ -667,7 +837,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
-  var newOverrideSVGPath = currentMapSource.getOverrideSVGPath(!showingCompareMap ? dateToDisplay : currentSliderDate)
+  var newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(showingCompareMap && currentMapSource.isCustom() ? currentCompareSliderDate : dateToDisplay)
 
   if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {
@@ -685,7 +855,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     await loadMapSVGFile((resolve, svgPath) => {
       cachedSVGPathData = svgPath
       resolve()
-    })
+    }, fadeForNewSVG)
   }
   var svgPathData = currentMapType.getSVGPath()
   var usedFallbackMap = svgPathData[2] || false
@@ -702,29 +872,26 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     case ViewingState.zooming:
     currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
     break
+
+    case ViewingState.splitVote:
+    currentMapDataForDate = await currentMapSource.getSplitVoteData(currentMapDataForDate)
+    break
   }
 
   if (currentDisplayDate.getTime() != dateToDisplay.getTime())
   {
-    console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
-
-    $("#svgdata").css('opacity', "1")
-    $("#mapzoom-preload").empty()
-
+    // console.log(currentDisplayDate.getFullYear(), dateToDisplay.getFullYear())
     return
   }
   else if (shouldReloadSVG)
   {
-    $("#mapzoom").empty()
-    $("#mapzoom-preload").children().appendTo($("#mapzoom"))
-
     if (cachedSVGPathData instanceof Array)
     {
-      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields)
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG)
     }
     else
     {
-      handleNewSVGFields(() => {})
+      handleNewSVGFields(() => {}, null, fadeForNewSVG)
     }
   }
 
@@ -758,6 +925,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     }
 
     regionData.region = currentMapDataForDate[regionNum].region
+    regionData.state = currentMapDataForDate[regionNum].state
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID
     regionData.disabled = currentMapDataForDate[regionNum].disabled
@@ -768,13 +936,14 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
     regionData.flip = currentMapDataForDate[regionNum].flip
-    regionData.partyVoteSplits = currentMapDataForDate[regionNum].partyVoteSplits
+    regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
+    regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
-  displayPartyTotals(getPartyTotals(), reloadPartyDropdowns)
+  displayPartyTotals(reloadPartyDropdowns)
 
   updateTotalsPieChart()
 
@@ -782,7 +951,24 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns)
 
   if (currentRegionID && currentEditingState == EditingState.viewing)
   {
-    updateRegionBox(currentRegionID)
+    updateRegionBox()
+  }
+
+  if (currentViewingState == ViewingState.zooming)
+  {
+    svgPanZoomController = svgPanZoom('#svgdata', {controlIconsEnabled: false, fit: true, contain: true, minZoom: 1, panEnabled: true})
+  }
+
+  if (shouldReloadSVG)
+  {
+    if (currentViewingState == ViewingState.zooming)
+    {
+      $("#mapZoomControls").trigger('show')
+    }
+    else
+    {
+      $("#mapZoomControls").trigger('hide')
+    }
   }
 
   showingDataMap = true
@@ -792,13 +978,17 @@ function updateMapElectoralVoteText()
 {
   if (!currentMapType.getShouldDisplayEVOnMap()) { return }
 
-  var regionIDs = Object.values(mapRegionNameToID)
+  var regionIDs = Object.keys(mapRegionIDToName)
   for (var regionNum in regionIDs)
   {
     var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
     var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}))
     if (regionEV == undefined) { continue }
+    if (currentViewingState == ViewingState.splitVote && displayRegionDataArray[regionIDs[regionNum]] && displayRegionDataArray[regionIDs[regionNum]].voteSplits && displayRegionDataArray[regionIDs[regionNum]].voteSplits.length > 0)
+    {
+      regionEV = displayRegionDataArray[regionIDs[regionNum]].voteSplits.reduce((agg, curr) => agg + curr.votes, 0)
+    }
 
     if (regionChildren.length == 1)
     {
@@ -811,7 +1001,7 @@ function updateMapElectoralVoteText()
   }
 }
 
-function updateNavBarForNewSource(revertToDefault)
+function updateNavBarForNewSource(revertToDefault, resetViewingState)
 {
   revertToDefault = revertToDefault == null ? false : revertToDefault
   $("#mapSourcesDropdownContainer .active").removeClass("active")
@@ -836,10 +1026,12 @@ function updateNavBarForNewSource(revertToDefault)
   else if (currentEditingState != EditingState.editing && currentMapSource.isCustom())
   {
     $("#editDoneButton").html("Edit")
+    $("#copyDropdownContainer").hide()
   }
   else
   {
     $("#editDoneButton").html("Copy")
+    $("#copyDropdownContainer").show()
   }
 
   updatePartyDropdownVisibility()
@@ -851,6 +1043,11 @@ function updateNavBarForNewSource(revertToDefault)
   else if (showingCompareMap && currentMapSource.isCustom())
   {
     updateCompareMapSlidersVisibility(true)
+  }
+
+  if (resetViewingState ?? true)
+  {
+    currentViewingState = ViewingState.viewing
   }
 }
 
@@ -928,12 +1125,12 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
 
   updateTotalsPieChart()
   if (currentRegionID != null)
   {
-    updateRegionBox(currentRegionID)
+    updateRegionBox()
   }
 
   $("#dataMapDateSliderContainer").hide()
@@ -954,6 +1151,8 @@ function toggleHelpBox()
     $("#totalsPieChartContainer").hide()
     $("#partyDropdownsBoxContainer").hide()
     $("#discordInviteContainer").hide()
+
+    updateHelpBoxPage(0)
   }
   else
   {
@@ -965,12 +1164,31 @@ function toggleHelpBox()
   }
 }
 
-function selectCreditBoxTab(buttonDiv, contentDiv)
+function updateHelpBoxPage(increment)
 {
-  $(buttonDiv).parent().children().removeClass('active')
-  $(buttonDiv).addClass('active')
-  $("#creditbox .tabcontent").hide()
-  $(contentDiv).show()
+  if (currentHelpBoxPage+increment > helpBoxPages.length-1 || currentHelpBoxPage+increment < 0) return
+  currentHelpBoxPage += increment
+
+  $("#helpboxSubtitle").html(helpBoxPages[currentHelpBoxPage].subtitle)
+  $("#helpboxBody").html(helpBoxPages[currentHelpBoxPage].body)
+  $("#helpboxPage").html('[' + (currentHelpBoxPage+1) + '/' + helpBoxPages.length + ']')
+
+  if (currentHelpBoxPage-1 < 0)
+  {
+    $("#helpboxLeftButton").css('visibility', 'hidden')
+  }
+  else
+  {
+    $("#helpboxLeftButton").css('visibility', 'visible')
+  }
+  if (currentHelpBoxPage+1 > helpBoxPages.length-1)
+  {
+    $("#helpboxRightButton").css('visibility', 'hidden')
+  }
+  else
+  {
+    $("#helpboxRightButton").css('visibility', 'visible')
+  }
 }
 
 function populateRegionsArray()
@@ -1001,6 +1219,10 @@ async function toggleEditing(stateToSet)
   {
     toggleMarginEditing(editMarginID)
   }
+  if (isEnteringShiftAmount)
+  {
+    toggleEnteringShiftAmount()
+  }
   if (editCandidateNamePartyID)
   {
     toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
@@ -1009,8 +1231,17 @@ async function toggleEditing(stateToSet)
   {
     toggleMarginHexColorEditing()
   }
+  if (editPartyPopularVote)
+  {
+    togglePartyPopularVoteEditing(editPartyPopularVote)
+  }
   editingRegionEVs = false
   editingRegionMarginValue = false
+  editingRegionVotesharePercentages = false
+  voteshareEditRegion = null
+  selectedVoteshareCandidate = null
+
+  updateRegionBox()
 
   if (stateToSet == null)
   {
@@ -1036,7 +1267,7 @@ async function toggleEditing(stateToSet)
     $("#editDoneButton").html("Done")
     $("#editDoneButton").addClass('active')
 
-    $("#regionboxcontainer").trigger('hide')
+    $("#copyDropdownContainer").hide()
 
     $("#marginEditButton").hide()
     $("#marginEditButton").addClass('topnavdisable')
@@ -1048,24 +1279,25 @@ async function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "block")
 
+    $("#regionboxcontainer").css('pointer-events', "")
+
     var currentMapIsCustom = (currentMapSource.isCustom())
     var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
-    currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+    currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()), !currentMapIsCustom ? currentEditingMode : null)
 
     if (!currentMapIsCustom)
     {
       currentCustomMapSource.setCandidateNames(currentMapSource.getCandidateNames(getCurrentDateOrToday()), getCurrentDateOrToday())
 
-      currentCustomMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
+      let dropdownPoliticalPartyIDsForEditing = currentMapType == USAPresidentialMapType ? getNonEVDropdownCandidates(cloneObject(dropdownPoliticalPartyIDs)) : dropdownPoliticalPartyIDs
+      currentCustomMapSource.setDropdownPartyIDs(dropdownPoliticalPartyIDsForEditing)
 
-      currentMapSource = currentCustomMapSource
-      updatePoliticalPartyCandidateNames()
-      updateNavBarForNewSource()
-      await loadDataMap()
+      await setMapSource(currentCustomMapSource)
+      updatePoliticalPartyCandidateNames(getCurrentDateOrToday())
     }
     else
     {
-      displayPartyTotals(getPartyTotals(), true)
+      displayPartyTotals(true)
     }
     deselectAllParties()
     break
@@ -1074,10 +1306,12 @@ async function toggleEditing(stateToSet)
     if (currentMapSource.isCustom())
     {
       $("#editDoneButton").html("Edit")
+      $("#copyDropdownContainer").hide()
     }
     else
     {
       $("#editDoneButton").html("Copy")
+      $("#copyDropdownContainer").show()
     }
     $("#editDoneButton").removeClass('active')
 
@@ -1091,23 +1325,18 @@ async function toggleEditing(stateToSet)
 
     $("#fillDropdownContainer").css('display', "none")
 
+    $("#regionboxcontainer").css('pointer-events', "none")
+
     if (currentMapSource.isCustom())
     {
-      // Stuff for house editing that isn't done yet
-      // var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
-      // if (currentViewingState == ViewingState.zooming)
-      // {
-      //   currentMapDataForDate = mergeObject(currentMapDataForDate, displayRegionDataArray)
-      // }
-
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap()
-      displayPartyTotals(getPartyTotals(), true)
+      displayPartyTotals(true)
     }
 
     if (showingDataMap && currentRegionID)
     {
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
     }
 
     selectAllParties()
@@ -1117,9 +1346,32 @@ async function toggleEditing(stateToSet)
   updatePartyDropdownVisibility()
 }
 
-function leftClickRegion(div)
+function viewingDiscreteRegions()
 {
-  if (currentEditingState == EditingState.editing)
+  return currentMapType.getID() != USAHouseMapType.getID() || currentMapType.getMapSettingValue("showAllDistricts") === true || currentViewingState == ViewingState.zooming
+}
+
+async function leftClickRegion(div)
+{
+  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  var regionID = $(div).attr('id')
+  var regionDataCallback = getRegionData(regionID)
+  var regionData = regionDataCallback.regionData
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
+  {
+    toggleRegionVoteshareEditing(regionID, regionData)
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing && editingRegionMarginValue)
+  {
+    toggleRegionMarginEditing()
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing)
   {
     if (ignoreNextClick)
     {
@@ -1127,23 +1379,18 @@ function leftClickRegion(div)
       return
     }
 
-    var regionID = $(div).attr('id')
     if (regionIDsChanged.includes(regionID)) { return }
-
-    var regionDataCallback = getRegionData(regionID)
-    var regionData = regionDataCallback.regionData
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
     if (regionData.disabled)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = marginValues.safe
     }
     else if (selectedParty != null)
@@ -1179,15 +1426,18 @@ function leftClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
-  else if (currentMapSource.canZoom() && currentViewingState == ViewingState.viewing && showingDataMap)
+  else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
   {
-    var regionID = getBaseRegionID($(div).attr('id')).baseID
+    var baseRegionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
-    currentMapZoomRegion = regionID.includes("-") ? regionID.split("-")[0] : regionID
+    currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
 
-    displayDataMap()
+    displayDataMap(null, null, true)
+
+    currentRegionID = null
+    updateRegionBox()
   }
   else if (showingDataMap)
   {
@@ -1197,22 +1447,33 @@ function leftClickRegion(div)
 
 function rightClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing)
-  {
-    var regionDataCallback = getRegionData($(div).attr('id'))
-    var regionData = regionDataCallback.regionData
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let isDiscreteRegion = viewingDiscreteRegions()
 
+  var regionID = $(div).attr('id')
+  var regionDataCallback = getRegionData(regionID)
+  var regionData = regionDataCallback.regionData
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
+  {
+    toggleRegionVoteshareEditing(regionID, regionData)
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing && editingRegionMarginValue)
+  {
+    toggleRegionMarginEditing()
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing)
+  {
     if (regionData.disabled)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
       regionData.partyID = selectedParty.getID()
-      regionData.candidateName = regionData.candidateMap[regionData.partyID]
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
       regionData.margin = 0.1 // Hardcoding tilt == 0.1
     }
     else if (selectedParty != null)
@@ -1248,41 +1509,44 @@ function rightClickRegion(div)
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
 }
 
 function shiftClickRegion()
 {
-  if (currentEditingState == EditingState.editing)
-  {
-    editingRegionMarginValue = !editingRegionMarginValue
+  let isDiscreteRegion = viewingDiscreteRegions()
 
-    if (editingRegionMarginValue)
-    {
-      updateRegionBox(currentRegionID)
-    }
-    else
-    {
-      $("#regionboxcontainer").trigger('hide')
-    }
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin)
+  {
+    toggleRegionMarginEditing()
   }
-  else if (currentViewingState == ViewingState.viewing && currentMapSource.isCustom())
+  else if (isDiscreteRegion && currentMapType.getID() == USAPresidentialMapType.getID() && currentViewingState == ViewingState.viewing && currentMapSource.isCustom())
   {
     editingRegionEVs = !editingRegionEVs
-    updateRegionBox(currentRegionID)
+    updateRegionBox()
   }
 }
 
 function altClickRegion(div)
 {
-  if (currentEditingState == EditingState.editing)
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing)
   {
     var regionDataCallback = getRegionData($(div).attr('id'))
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    regionData.partyID = (selectedParty || TossupParty).getID()
+    if (currentEditingMode == EditingMode.margin)
+    {
+      regionData.partyID = (selectedParty || TossupParty).getID()
+    }
+    else if (currentEditingMode == EditingMode.voteshare)
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.partyVotesharePercentages = []
+    }
 
     if (regionData.disabled)
     {
@@ -1297,16 +1561,21 @@ function altClickRegion(div)
 
     updateRegionFillColors(regionIDsToFill, regionData)
     updateMapElectoralVoteText()
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
   }
 }
 
-function mapCloseButtonClicked()
+function zoomOutMap()
 {
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
 
-  displayDataMap()
+  if (currentMapSource.isCustom())
+  {
+    currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
+  }
+
+  displayDataMap(null, null, true)
 }
 
 function getRegionData(regionID)
@@ -1358,8 +1627,9 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   var fillColor
   var shouldHide = false
 
-  var canUseVoteSplitsForColor = regionData.margin == 0 && "partyVoteSplits" in regionData && regionData["partyVoteSplits"] != null
-  if (regionData.partyID == null || regionData.partyID == TossupParty.getID() || canUseVoteSplitsForColor || (regionData.disabled == true && currentMapType.getMapSettingValue("mapCurrentSeats") == false))
+  var isDisabledOrTossup = regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats"))
+  var canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
+  if (isDisabledOrTossup)
   {
     if (regionData.disabled == true)
     {
@@ -1375,34 +1645,45 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
         }
       }
     }
-    else if (canUseVoteSplitsForColor)
-    {
-      var evenParties = getKeyForMaxValue(regionData.partyVoteSplits, true, 0)
-      if (evenParties.length == 2 && evenParties.includes(DemocraticParty.getID()) && evenParties.includes(RepublicanParty.getID()))
-      {
-        fillColor = PoliticalPartyColors.purple.likely
-      }
-      else // Add better handling / more party combos
-      {
-        fillColor = TossupParty.getMarginColors().safe
-      }
-    }
     else
     {
       fillColor = TossupParty.getMarginColors().safe
+    }
+  }
+  else if (canUseVoteSplitsForColor)
+  {
+    if (currentViewingState == ViewingState.splitVote)
+    {
+      let party1Color = politicalParties[regionData.voteSplits[0].partyID].getMarginColors().safe
+      let party2Color = politicalParties[regionData.voteSplits[1].partyID].getMarginColors().safe
+      let patternID = "split-" + party1Color + "-" + party2Color
+      generateSVGPattern(patternID, party1Color, party2Color)
+      fillColor = "url(#" + patternID + ")"
+    }
+    else if (regionData.voteSplits[0].votes == regionData.voteSplits[1].votes)
+    {
+      var voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
+      voteSplitPartyIDs.sort()
+      if (voteSplitPartyIDs[0] == DemocraticParty.getID() && voteSplitPartyIDs[1] == RepublicanParty.getID())
+      {
+        fillColor = PoliticalPartyColors.purple.likely
+      }
+      else if (voteSplitPartyIDs[0] == IndependentGenericParty.getID())
+      {
+        fillColor = politicalParties[voteSplitPartyIDs[1]].getMarginColors().lean
+      }
     }
   }
   else
   {
     var marginIndex = getMarginIndexForValue(regionData.margin, regionData.partyID)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
+  }
 
-    if (currentMapType.getMapSettingValue("flipStates") && regionData.flip)
-    {
-      var patternID = generateFlipPattern(regionData.partyID, marginIndex)
-
-      fillColor = "url(#" + patternID + ")"
-    }
+  if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip)
+  {
+    var patternID = generateFlipPattern(fillColor)
+    fillColor = "url(#" + patternID + ")"
   }
 
   for (var regionIDNum in regionIDsToUpdate)
@@ -1449,33 +1730,37 @@ function getMarginIndexForValue(margin)
   }
 }
 
-function generateFlipPattern(partyID, margin)
+function generateSVGPattern(patternID, fillColor, strokeColor)
 {
-  var fillColor = politicalParties[partyID].getMarginColors()[margin]
-  var patternID = fillColor.slice(1)
-
   if ($("#" + patternID).length == 0)
   {
     var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" style="fill: ' + fillColor + ';"></rect>'
-    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + multiplyBrightness(fillColor, flipPatternBrightnessFactor) + '; stroke-width: ' + flipPatternWidth + '"></line>'
+    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + strokeColor + '; stroke-width: ' + flipPatternWidth + '"></line>'
     patternHTML += '</pattern>'
 
-    var tempDiv = document.createElement('div');
+    var tempDiv = document.createElement('div')
     document.getElementById("svgdefinitions").appendChild(tempDiv)
-    tempDiv.outerHTML = patternHTML;
+    tempDiv.outerHTML = patternHTML
   }
+}
+
+function generateFlipPattern(fillColor)
+{
+  let patternID = "flip-" + fillColor.slice(1)
+
+  generateSVGPattern(patternID, fillColor, multiplyBrightness(fillColor, flipPatternBrightnessFactor))
 
   return patternID
 }
 
 function generateFlipPatternsFromPartyMap(partyMap)
 {
-  for (var partyID in partyMap)
+  for (let partyID in partyMap)
   {
-    for (var margin in partyMap[partyID].getMarginColors())
+    for (let marginIndex in partyMap[partyID].getMarginColors())
     {
-      generateFlipPattern(partyID, margin)
+      generateFlipPattern(partyMap[partyID].getMarginColors()[marginIndex])
     }
   }
 }
@@ -1496,33 +1781,61 @@ function getPartyTotals(includeFlipData)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-    var partyIDToSet = regionDataArray[regionID].partyID
-    if (regionDataArray[regionID].partyID == null)
+    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
+
+    if (currentViewingState != ViewingState.splitVote)
     {
-      partyIDToSet = TossupParty.getID()
-    }
-
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
-
-    if (includeFlipData && regionDataArray[regionID].flip)
-    {
-      if (!(partyIDToSet in partyFlipTotals))
+      var partyIDToSet = regionDataArray[regionID].partyID
+      if (regionDataArray[regionID].partyID == null)
       {
-        partyFlipTotals[partyIDToSet] = 0
-        partyFlipData[partyIDToSet] = []
+        partyIDToSet = TossupParty.getID()
       }
-      partyFlipTotals[partyIDToSet] += currentRegionEV
-      partyFlipData[partyIDToSet].push({region: regionID, margin: regionDataArray[regionID].margin})
-    }
-    else
-    {
-      if (!(partyIDToSet in partyTotals))
+
+      if (includeFlipData && regionDataArray[regionID].flip)
       {
-        partyTotals[partyIDToSet] = 0
+        if (!(partyIDToSet in partyFlipTotals))
+        {
+          partyFlipTotals[partyIDToSet] = 0
+          partyFlipData[partyIDToSet] = []
+        }
+        partyFlipTotals[partyIDToSet] += currentRegionEV
+        partyFlipData[partyIDToSet].push({region: regionID, margin: regionDataArray[regionID].margin})
       }
-      partyTotals[partyIDToSet] += currentRegionEV
+      else
+      {
+        if (!(partyIDToSet in partyTotals))
+        {
+          partyTotals[partyIDToSet] = 0
+        }
+        partyTotals[partyIDToSet] += currentRegionEV
+      }
+    }
+    else if (currentViewingState == ViewingState.splitVote)
+    {
+      if (!regionDataArray[regionID].voteSplits) { continue }
+
+      for (let partyVote of regionDataArray[regionID].voteSplits)
+      {
+        let partyIDToSet = partyVote.partyID
+        let votesWon = partyVote.votes
+
+        if (!(partyIDToSet in partyTotals))
+        {
+          partyTotals[partyIDToSet] = 0
+        }
+        partyTotals[partyIDToSet] += votesWon
+      }
+
+      if (regionDataArray[regionID].voteSplits.length == 0)
+      {
+        if (!(regionDataArray[regionID].partyID in partyTotals))
+        {
+          partyTotals[regionDataArray[regionID].partyID] = 0
+        }
+        partyTotals[regionDataArray[regionID].partyID] += currentRegionEV
+      }
     }
   }
 
@@ -1533,20 +1846,24 @@ function getPartyTotals(includeFlipData)
   return includeFlipData ? {nonFlipTotals: partyTotals, flipTotals: partyFlipTotals, flipData: partyFlipData} : partyTotals
 }
 
-function getNationalPopularVotePartyVoteshareData()
+function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopularVote)
 {
-  var popularVoteData = getNationalPopularVoteData()
+  regionDataArray = regionDataArray ? regionDataArray : displayRegionDataArray
+  enforceNationalPopularVote = enforceNationalPopularVote === true
+
+  let popularVoteData
+  if (nationalPopularVoteID in regionDataArray && regionDataArray[nationalPopularVoteID].partyID != TossupParty.getID())
+  {
+    popularVoteData = regionDataArray[nationalPopularVoteID]
+  }
+  if (!enforceNationalPopularVote && currentViewingState == ViewingState.zooming && currentMapZoomRegion && currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID in regionDataArray && regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID].partyID != TossupParty.getID())
+  {
+    popularVoteData = regionDataArray[currentMapZoomRegion + subregionSeparator + statePopularVoteDistrictID]
+  }
+
   if (popularVoteData && "partyVotesharePercentages" in popularVoteData)
   {
     return popularVoteData.partyVotesharePercentages
-  }
-}
-
-function getNationalPopularVoteData()
-{
-  if (nationalPopularVoteID in displayRegionDataArray && displayRegionDataArray[nationalPopularVoteID].partyID != TossupParty.getID())
-  {
-    return displayRegionDataArray[nationalPopularVoteID]
   }
 }
 
@@ -1583,109 +1900,265 @@ function getCurrentDateOrToday()
   return dateToUse
 }
 
-async function updateRegionBox(regionID)
+async function updateRegionBox(regionID = currentRegionID)
 {
-  var regionData = getRegionData(regionID).regionData
-  if (regionID == null || regionData == null || regionData.partyID == null || regionData.partyID == TossupParty.getID() || regionData.disabled == true)
+  let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  var regionData = regionID ? getRegionData(regionID).regionData : null
+
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
   {
     $("#regionboxcontainer").trigger('hide')
     return
   }
   $("#regionboxcontainer").trigger('show')
 
+  var formattedRegionID = mapRegionIDToName[regionID] ?? regionID
+  if (currentMapSource.getFormattedRegionName)
+  {
+    formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID)
+  }
+
   if (editingRegionEVs)
   {
-    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData) + "'>")
+    $("#regionbox").html(formattedRegionID + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData) + "'>")
     $("#regionEV-text").focus().select()
     return
   }
 
   var roundedMarginValue = getRoundedMarginValue(regionData.margin)
-  var regionMarginString = (((currentMapSource.isCustom()) ? currentMapSource.getCandidateNames(currentSliderDate.getTime())[regionData.partyID] : regionData.candidateName) || politicalParties[regionData.partyID].getNames()[0]) + " +"
+  var regionMarginString = (regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]) + " +"
 
   if (editingRegionMarginValue)
   {
-    $("#regionbox").html(getKeyByValue(mapRegionNameToID, currentRegionID) + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
-    $("#regionMargin-text").focus().select()
+    $("#regionbox").html(formattedRegionID + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
+    $("#regionMargin-text").select()
+    return
+  }
+
+  if (editingRegionVotesharePercentages)
+  {
+    let candidateDataToSelect = (selectedParty == null || selectedParty == TossupParty.getID()) ? regionData.partyVotesharePercentages[0] : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID())
+    if (!candidateDataToSelect && selectedParty)
+    {
+      regionData.partyVotesharePercentages.push({partyID: selectedParty.id, candidate: selectedParty.getCandidateName(), voteshare: 0.0})
+      candidateDataToSelect = regionData.partyVotesharePercentages[regionData.partyVotesharePercentages.length-1]
+    }
+
+    let regionBoxHTML = formattedRegionID
+    regionBoxHTML += "<div style='border-radius: 50px; color: white; font-size: 17px; line-height: 100%; margin-top: 5px; margin-bottom: 8px; display: block;'>"
+    for (let candidateOn in regionData.partyVotesharePercentages)
+    {
+      let candidateData = regionData.partyVotesharePercentages[candidateOn]
+      regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
+      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px;' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
+      regionBoxHTML += "</div>"
+    }
+    regionBoxHTML += "</div>"
+
+    if (currentMapType.getMapSettingValue("showTooltips"))
+    {
+      regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
+      regionBoxHTML += "Click to save voteshare"
+      regionBoxHTML += "</div>"
+      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
+    }
+
+    $("#regionbox").html(regionBoxHTML)
+
+    if (candidateDataToSelect)
+    {
+      $("#regionVoteshare-" + candidateDataToSelect.candidate).select()
+    }
+
     return
   }
 
   regionMarginString += roundedMarginValue
 
+  let regionBoxHTML = (currentEditingState == EditingState.viewing || (isDiscreteRegion && currentMapSource.getEditingMode() == EditingMode.margin)) ? regionMarginString : ""
+
+  let tooltipsToShow = {
+    shiftForVotes: [false, "Shift to show votes"],
+    shiftClickToEditEVs: [false, "Shift click to edit EVs"],
+    clickToZoom: [false, "Click to expand"],
+    clickToOpenLink: [false, "Click to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
+    clickToEditVoteshare: [false, "Click to edit voteshare"],
+    shiftClickToEditMargin: [false, "Shift click to edit margin"]
+  }
+
+  if (currentEditingState == EditingState.viewing)
+  {
+    regionBoxHTML += "<br></span>"
+  }
+  else
+  {
+    regionBoxHTML += "</span>"
+  }
+
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
-    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
-    regionMarginString += "<span style='color: " + politicalParties[incumbentChallengerPartyIDs.challenger].getMarginColors().lean + ";'>" // Hardcoding challenger first
-    regionMarginString += decimalPadding(Math.round(regionData.chanceChallenger*1000)/10)
-    regionMarginString += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + politicalParties[incumbentChallengerPartyIDs.incumbent].getMarginColors().lean + ";'>"
-    regionMarginString += decimalPadding(Math.round(regionData.chanceIncumbent*1000)/10)
-    regionMarginString += "%</span></span>"
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
+    regionBoxHTML += "<span style='color: " + politicalParties[incumbentChallengerPartyIDs.challenger].getMarginColors().lean + ";'>" // Hardcoding challenger first
+    regionBoxHTML += decimalPadding(Math.round(regionData.chanceChallenger*1000)/10)
+    regionBoxHTML += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + politicalParties[incumbentChallengerPartyIDs.incumbent].getMarginColors().lean + ";'>"
+    regionBoxHTML += decimalPadding(Math.round(regionData.chanceIncumbent*1000)/10)
+    regionBoxHTML += "%</span></span>"
+  }
+
+  if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
+  {
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 8px; padding-bottom: 1px; display: block; line-height: 100%;'>Probability<br></span>"
+
+    let sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => voteData2.winPercentage-voteData1.winPercentage)
+    let filteredSortedPercentages = []
+    for (let voteData of sortedPercentages)
+    {
+      let existingVoteData = filteredSortedPercentages.find(existingVoteData => existingVoteData.partyID == voteData.partyID)
+      if (!existingVoteData)
+      {
+        filteredSortedPercentages.push({...voteData})
+      }
+      else
+      {
+        existingVoteData.winPercentage += voteData.winPercentage
+      }
+    }
+
+    let colorPercentages = []
+    colorPercentages = filteredSortedPercentages.map(voteData => {
+      return {color: politicalParties[voteData.partyID].getMarginColors().likely, percentage: voteData.winPercentage}
+    })
+
+    regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, (colorPercentages[1] ?? colorPercentages[0]).color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
+    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + "%" + "</span>"
+    if (filteredSortedPercentages[1])
+    {
+      regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + "%" + "</span>"
+    }
+    regionBoxHTML += "</span>"
+    regionBoxHTML += "</div>"
   }
 
   if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
   {
-    var sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
-      return voteData2.voteshare - voteData1.voteshare
-    })
+    let sortedPercentages
+    if (regionData.partyVotesharePercentages[0].order !== undefined)
+    {
+      sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
+        return voteData1.order - voteData2.order
+      })
+    }
+    else
+    {
+      sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
+        return voteData2.voteshare - voteData1.voteshare
+      })
+    }
 
-    regionMarginString += "<br></span><span style='font-size: 17px; padding-top: 5px; padding-bottom: 0px; display: block; line-height: 100%;'>Voteshare<br></span>"
+    if (currentEditingState == EditingState.viewing)
+    {
+      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 1px; display: block; line-height: 100%;'>Voteshare<br></span>"
+    }
 
-    regionMarginString += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+
+    let hasVoteCountsForAll = true
 
     sortedPercentages.forEach((voteData, i) => {
-      regionMarginString += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate).hashCode() + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: linear-gradient(90deg, " + politicalParties[voteData.partyID].getMarginColors().safe + " " + (parseFloat(voteData.voteshare)) + "%, " + politicalParties[voteData.partyID].getMarginColors().lean + " 0%); " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionMarginString += decimalPadding(Math.round(voteData.voteshare*100)/100)
-      regionMarginString += "%</span></span><br>"
+      regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionBoxHTML += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + "%"
+      regionBoxHTML += "</span></span><br>"
+
+      hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
     })
 
-    regionMarginString += "</div>"
+    tooltipsToShow.shiftForVotes[0] = hasVoteCountsForAll
+
+    regionBoxHTML += "</div>"
   }
 
-  if (regionData.partyVoteSplits)
+  let splitVoteDisplayOptions = currentMapSource.getSplitVoteDisplayOptions()
+
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && ((canZoomCurrently && splitVoteDisplayOptions.showSplitVotesOnCanZoom) || currentViewingState == ViewingState.splitVote))
   {
-    regionMarginString = "</span>"
-    Object.keys(regionData.partyVoteSplits).sort((partyID1, partyID2) => {
-      return regionData.partyVoteSplits[partyID2]-regionData.partyVoteSplits[partyID1]
-    }).forEach((partyID, i) => {
-      regionMarginString += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < Object.keys(regionData.partyVoteSplits).length-1 ? 0 : 5) + "px; color: " + politicalParties[partyID].getMarginColors().lean + ";'>" + politicalParties[partyID].getNames()[0] + ": " + regionData.partyVoteSplits[partyID] + "</div>"
+    let voteSplitDataToDisplay = regionData.voteSplits
+    regionBoxHTML = "</span>"
+    voteSplitDataToDisplay.forEach((candidateSplitVoteData, i) => {
+      regionBoxHTML += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < voteSplitDataToDisplay.length-1 ? 0 : 5) + "px; color: " + politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean + ";'>" + candidateSplitVoteData.candidate + ": " + candidateSplitVoteData.votes + "</div>"
     })
+  }
 
-    if (currentSliderDate && currentMapSource.getMapData())
+  if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && splitVoteDisplayOptions.showSplitVoteBoxes && currentSliderDate && currentMapSource.getMapData())
+  {
+    var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+    if (zoomingData)
     {
-      var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-      var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
-
       const districtsPerLine = 3
 
-      Object.keys(zoomingData).forEach((districtID, i) => {
+      Object.keys(zoomingData).filter(districtID => !districtID.endsWith(subregionSeparator + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
         if (i % districtsPerLine == 0 && i != 0)
         {
-          regionMarginString += "<br></div>"
+          regionBoxHTML += "<br></div>"
         }
         if (i % districtsPerLine == 0)
         {
-          var isLastDistrictLine = (i+((Object.keys(zoomingData).length-1) % districtsPerLine)) == Object.keys(zoomingData).length-1
-          regionMarginString += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
+          var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
+          regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
         }
         if (i % districtsPerLine > 0)
         {
-          regionMarginString += "&nbsp;&nbsp;"
+          regionBoxHTML += "&nbsp;&nbsp;"
         }
 
-        var districtNumber = districtID.split("-")[1]
+        var districtNumber = districtID.split(subregionSeparator)[1]
         var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
         var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
-        regionMarginString += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
+        regionBoxHTML += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
       })
+    }
+    regionBoxHTML += "<br></div>"
+  }
+
+  tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentialMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing
+  tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
+  tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
+  tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
+  tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin
+
+  if (currentMapType.getMapSettingValue("showTooltips"))
+  {
+    let isShowingSomeTooltip = false
+    Object.keys(tooltipsToShow).forEach((tooltipID) => {
+      if (tooltipsToShow[tooltipID][0])
+      {
+        regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
+        regionBoxHTML += tooltipsToShow[tooltipID][1]
+        regionBoxHTML += "</div>"
+
+        isShowingSomeTooltip = true
+      }
+    })
+    if (isShowingSomeTooltip)
+    {
+      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
     }
   }
 
-  //Couldn't get safe colors to look good
-  // + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors()[getMarginIndexForValue(roundedMarginValue, regionData.partyID)] + "; -webkit-text-stroke-width: 0.5px; -webkit-text-stroke-color: white;'>"
-  $("#regionbox").html((getKeyByValue(mapRegionNameToID, currentRegionID) || currentRegionID) + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "</span>")
+  $("#regionbox").html(formattedRegionID + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionBoxHTML + "</span>")
 
   updateRegionBoxYPosition()
+}
+
+function updateRegionBoxPosition(mouseX, mouseY)
+{
+  $("#regionboxcontainer").css("left", mouseX+5)
+  updateRegionBoxYPosition(mouseY)
 }
 
 function updateRegionBoxYPosition(mouseY)
@@ -1693,17 +2166,19 @@ function updateRegionBoxYPosition(mouseY)
   var newRegionBoxYPos = (mouseY+5) || (currentMouseY+5)
   if (!newRegionBoxYPos) { return }
 
-  var regionBoxHeightDifference = $(document).height() - (newRegionBoxYPos+$("#regionboxcontainer").height())
-  if (regionBoxHeightDifference < 0)
-  {
-    newRegionBoxYPos += regionBoxHeightDifference
-  }
+  newRegionBoxYPos = correctOverflow(newRegionBoxYPos, $("#regionboxcontainer").height(), $(document).height())
   $("#regionboxcontainer").css("top", newRegionBoxYPos)
 }
 
 function getRoundedMarginValue(fullMarginValue)
 {
-  return decimalPadding(roundValueToPlace(fullMarginValue, 2), currentMapSource.getAddDecimalPadding())
+  let roundedMarginValue = roundValueToPlace(fullMarginValue, 2)
+  return currentMapSource.getAddDecimalPadding() ? decimalPadding(roundedMarginValue) : roundedMarginValue
+}
+
+function getGradientCSS(fillColor, backgroundColor, fillPercentage, backgroundPercentage = 0)
+{
+  return "linear-gradient(90deg, " + fillColor + " " + fillPercentage + "%, " + backgroundColor + " " + backgroundPercentage + "%)"
 }
 
 function applyRegionEVEdit(regionID)
@@ -1736,8 +2211,22 @@ function applyRegionEVEdit(regionID)
   if (shouldRefreshEV)
   {
     updateMapElectoralVoteText()
-    displayPartyTotals(getPartyTotals())
+    displayPartyTotals()
     updateTotalsPieChart()
+  }
+}
+
+function toggleRegionMarginEditing()
+{
+  editingRegionMarginValue = !editingRegionMarginValue
+
+  if (editingRegionMarginValue)
+  {
+    updateRegionBox()
+  }
+  else
+  {
+    $("#regionboxcontainer").trigger('hide')
   }
 }
 
@@ -1759,15 +2248,98 @@ function applyRegionMarginValue(regionID)
   if (newMarginIsValid && newMargin != currentMargin)
   {
     regionData.margin = newMargin
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+    displayPartyTotals()
+    updateTotalsPieChart()
   }
   else if (!newMarginIsValid)
   {
     $("#regionMargin-text").val(currentMargin)
     $("#regionMargin-text").select()
   }
+}
 
-  updateRegionFillColors(regionIDsToFill, regionData, false)
-  displayPartyTotals(getPartyTotals())
+function toggleRegionVoteshareEditing(regionID, regionData)
+{
+  if (editingRegionVotesharePercentages)
+  {
+    closeRegionVoteshareEditing(voteshareEditRegion)
+  }
+
+  let baseRegionID = getBaseRegionID(regionID).baseID
+  editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != baseRegionID && regionData.partyVotesharePercentages)
+
+  regionData && regionData.partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
+
+  if (editingRegionVotesharePercentages)
+  {
+    voteshareEditRegion = baseRegionID
+    updateRegionBoxPosition(currentMouseX, currentMouseY)
+    updateRegionBox()
+  }
+  else
+  {
+    updateRegionBox(regionID)
+  }
+}
+
+function applyRegionVotesharePercentage(textBoxDiv, regionID)
+{
+  let regionDataCallback = getRegionData(regionID)
+  let regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let regionData = regionDataCallback.regionData
+
+  let newVoteshareString = $(textBoxDiv).val()
+  let newVoteshare = newVoteshareString != "" ? parseFloat(newVoteshareString) : 0
+  let newVoteshareIsValid = /^\d+\.?\d*e?[\+\-]?\d*$/.test(newVoteshareString) && !isNaN(newVoteshare) && newVoteshare >= 0 && newVoteshare <= 100
+
+  let currentVoteshareData = regionData.partyVotesharePercentages.find(voteshareData => voteshareData.candidate == $(textBoxDiv).data("candidate"))
+  if (newVoteshareIsValid && newVoteshare != currentVoteshareData.voteshare)
+  {
+    currentVoteshareData.voteshare = newVoteshare
+
+    let partyVotesharePercentages = regionData.partyVotesharePercentages.concat()
+    partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
+    regionData.margin = partyVotesharePercentages.length < 2 ? partyVotesharePercentages[0].voteshare : partyVotesharePercentages[0].voteshare-partyVotesharePercentages[1].voteshare
+    regionData.partyID = partyVotesharePercentages[0].partyID
+
+    $(textBoxDiv).parent().parent().css("background", getGradientCSS(politicalParties[currentVoteshareData.partyID].getMarginColors().safe, politicalParties[currentVoteshareData.partyID].getMarginColors().lean, currentVoteshareData.voteshare))
+
+    updateRegionFillColors(regionIDsToFill, regionData, false)
+    displayPartyTotals()
+    updateTotalsPieChart()
+  }
+  else if (!newVoteshareIsValid)
+  {
+    $(textBoxDiv).val(currentVoteshareData.voteshare)
+    $(textBoxDiv).select()
+  }
+}
+
+function cycleSelectedRegionVoteshare(directionToCycle)
+{
+  let regionData = getRegionData(voteshareEditRegion).regionData
+  let voteshareIndex = regionData.partyVotesharePercentages.findIndex(voteshareData => voteshareData.candidate == selectedVoteshareCandidate)
+
+  voteshareIndex += directionToCycle
+  if (voteshareIndex < 0)
+  {
+    voteshareIndex = regionData.partyVotesharePercentages.length-1
+  }
+  else if (voteshareIndex > regionData.partyVotesharePercentages.length-1)
+  {
+    voteshareIndex = 0
+  }
+
+  $("#regionVoteshare-" + regionData.partyVotesharePercentages[voteshareIndex].candidate).select()
+}
+
+function closeRegionVoteshareEditing(regionID)
+{
+  if (!regionID) { return }
+  let previousRegionData = getRegionData(regionID).regionData
+  previousRegionData.partyVotesharePercentages = previousRegionData.partyVotesharePercentages.filter(candidateData => candidateData.voteshare > 0.0)
 }
 
 async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
@@ -1831,60 +2403,59 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   updateCompareMapSlidersVisibility()
 }
 
-function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
+async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
 {
-  var updateCompareMapSourcesPromise = new Promise(async (resolve) => {
-    if (compareSourcesToUpdate[0])
-    {
-      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[0])
-      $('.comparesourcecheckbox').prop('disabled', true)
-      await downloadDataForMapSource(compareMapSourceIDArray[0], iconDivDictionary, null, false)
-      $('.comparesourcecheckbox').prop('disabled', false)
-    }
-    if (compareSourcesToUpdate[1])
-    {
-      let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(compareMapSourceIDArray[1])
-      $('.comparesourcecheckbox').prop('disabled', true)
-      await downloadDataForMapSource(compareMapSourceIDArray[1], iconDivDictionary, null, false)
-      $('.comparesourcecheckbox').prop('disabled', false)
-    }
+  $('.comparesourcecheckbox').prop('disabled', true)
+  if (compareSourcesToUpdate[0])
+  {
+    await loadCompareMapSource(compareMapSourceIDArray[0])
+  }
+  if (compareSourcesToUpdate[1] && compareSourcesToUpdate[1] != compareSourcesToUpdate[0])
+  {
+    await loadCompareMapSource(compareMapSourceIDArray[1])
+  }
+  $('.comparesourcecheckbox').prop('disabled', false)
 
-    if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
-    {
-      swapCompareMapSources()
-      compareSourcesToUpdate = [true, true]
-    }
+  if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
+  {
+    swapCompareMapSources()
+    compareSourcesToUpdate = [true, true]
+  }
 
-    var overrideDateValues = [null, null]
-    if (swapSliderValues)
-    {
-      overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
-      overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
-    }
+  var overrideDateValues = [null, null]
+  if (swapSliderValues)
+  {
+    overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
+    overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
+  }
 
-    var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
 
-    if (compareSourcesToUpdate[0])
-    {
-      setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-      $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      $("#compareItemImage-0").css('display', "block")
-      $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
-    }
-    if (compareSourcesToUpdate[1])
-    {
-      setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-      $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-      $("#compareItemImage-1").css('display', "block")
-      $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
-    }
+  if (compareSourcesToUpdate[0])
+  {
+    setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
+    $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
+    $("#compareItemImage-0").css('display', "block")
+    $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
+  }
+  if (compareSourcesToUpdate[1])
+  {
+    setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
+    $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    $("#compareItemImage-1").css('display', "block")
+    $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
+  }
+}
 
-    resolve()
-  })
-
-  return updateCompareMapSourcesPromise
+async function loadCompareMapSource(sourceID)
+{
+  let mapSource = mapSources[sourceID]
+  let voteshareCutoff = mapSource.voteshareCutoffMargin
+  mapSource.voteshareCutoffMargin = null
+  await mapSource.loadMap()
+  mapSource.voteshareCutoffMargin = voteshareCutoff
 }
 
 function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
@@ -1902,8 +2473,8 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
 
   if (showCompareSliders)
   {
-    $("#firstCompareSliderDateDisplayContainer").show()
-    $("#secondCompareSliderDateDisplayContainer").show()
+    $("#firstCompareSliderDateDisplayContainer").css('display', 'flex')
+    $("#secondCompareSliderDateDisplayContainer").css('display', 'flex')
 
     $("#sliderDateDisplayContainer").hide()
   }
@@ -1912,7 +2483,7 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
     $("#firstCompareSliderDateDisplayContainer").hide()
     $("#secondCompareSliderDateDisplayContainer").hide()
 
-    $("#sliderDateDisplayContainer").show()
+    $("#sliderDateDisplayContainer").css('display', 'flex')
   }
 
   if (showingCompareMap)
@@ -1936,7 +2507,28 @@ function setMapCompareItem(compareArrayIndex)
   $("#compareItem-" + compareArrayIndex).html(currentMapSource.getName() + " : " + getDateString(currentSliderDate))
 }
 
-function setCompareSourceDate(compareArrayIndex, dateIndex)
+function addToCompareMapQueue(compareArrayIndex, dateIndex, shouldApply = true)
+{
+  compareMapQueue.unshift([compareArrayIndex, dateIndex, shouldApply])
+  executeCompareMapQueue()
+}
+
+async function executeCompareMapQueue()
+{
+  if (isRunningCompareMapQueue) { return }
+
+  isRunningCompareMapQueue = true
+
+  while (compareMapQueue.length > 0)
+  {
+    await setCompareSourceDate(...compareMapQueue[0])
+    compareMapQueue.splice(-1, 1)
+  }
+
+  isRunningCompareMapQueue = false
+}
+
+async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
 {
   var mapDates = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapDates()
 
@@ -1961,14 +2553,18 @@ function setCompareSourceDate(compareArrayIndex, dateIndex)
   if (compareArrayIndex == 0)
   {
     currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
+    currentCompareSliderDate = dateToDisplay
   }
 
-  applyCompareToCustomMap()
+  shouldApply && await applyCompareToCustomMap()
 }
 
-function applyCompareToCustomMap()
+async function applyCompareToCustomMap()
 {
   if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
+
+  let voteshareCutoffMargin0 = mapSources[compareMapSourceIDArray[0]].voteshareCutoffMargin
+  let voteshareCutoffMargin1 = mapSources[compareMapSourceIDArray[1]].voteshareCutoffMargin
 
   var resultMapArray = {}
   for (var regionID in compareMapDataArray[0])
@@ -2026,11 +2622,79 @@ function applyCompareToCustomMap()
       {
         resultMapArray[regionID].seatClass = compareRegionData0.seatClass
       }
+
+      if (compareRegionData0.partyVotesharePercentages && compareRegionData1.partyVotesharePercentages)
+      {
+        compareRegionData0.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
+        compareRegionData1.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
+
+        let partiesChecked = new Set()
+        let partiesToRemove = new Set([IndependentGenericParty.getID()])
+        let candidatesToKeep = new Set()
+        for (let candidateData0 of compareRegionData0.partyVotesharePercentages)
+        {
+          let candidateData1 = compareRegionData1.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData0.partyID)
+          if (candidateData0.voteshare < voteshareCutoffMargin0 && (!candidateData1 || candidateData1.voteshare < voteshareCutoffMargin1))
+          {
+            partiesToRemove.add(candidateData0.partyID)
+          }
+          else if (partiesToRemove.has(candidateData0.partyID))
+          {
+            candidatesToKeep.add(candidateData0.candidate)
+          }
+          partiesChecked.add(candidateData0.partyID)
+        }
+        for (let candidateData1 of compareRegionData1.partyVotesharePercentages)
+        {
+          if (partiesChecked.has(candidateData1.partyID)) { continue }
+          let candidateData0 = compareRegionData0.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData1.partyID)
+          if (candidateData1.voteshare < voteshareCutoffMargin1 && (!candidateData0 || candidateData0.voteshare < voteshareCutoffMargin0))
+          {
+            partiesToRemove.add(candidateData1.partyID)
+          }
+          else if (partiesToRemove.has(candidateData1.partyID))
+          {
+            candidatesToKeep.add(candidateData1.candidate)
+          }
+        }
+        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+
+        let candidateOn = 0
+
+        resultMapArray[regionID].partyVotesharePercentages = filteredVoteshares0.map(candidateData => {
+          let differenceCandidateData = cloneObject(candidateData)
+          let previousCandidateData = filteredVoteshares1.find(candidateData => candidateData.partyID == differenceCandidateData.partyID)
+          differenceCandidateData.voteshare = previousCandidateData ? differenceCandidateData.voteshare-previousCandidateData.voteshare : differenceCandidateData.voteshare
+
+          differenceCandidateData.order = candidateOn
+          candidateOn += 1
+
+          return differenceCandidateData
+        })
+
+        resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.concat(filteredVoteshares1.filter(candidateData => {
+          return resultMapArray[regionID].partyVotesharePercentages.every(existingCandidateData => existingCandidateData.partyID != candidateData.partyID)
+        }).map(candidateData => {
+          let newCandidateData = {...candidateData, voteshare: -candidateData.voteshare, order: candidateOn}
+          candidateOn += 1
+          return newCandidateData
+        }))
+
+        if (compareSortMode == CompareSortMode.shiftMargin)
+        {
+          resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare-cand1.voteshare)
+          for (let candidateOn in resultMapArray[regionID].partyVotesharePercentages)
+          {
+            let candidateData = resultMapArray[regionID].partyVotesharePercentages[candidateOn]
+            candidateData.order = candidateOn == 0 ? 0 : candidateOn+1
+          }
+        }
+      }
     }
   }
 
-  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true)
-  currentMapSource = currentCustomMapSource
-  updateNavBarForNewSource()
-  loadDataMap()
+  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
+
+  await setMapSource(currentCustomMapSource)
 }

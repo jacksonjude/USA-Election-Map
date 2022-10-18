@@ -1,0 +1,34 @@
+name: Mirror the monorepo in other downstream repos
+description: Copy's this repo into another downstream repo
+inputs:
+  user-email:
+    description: Email for the git commit
+    required: true
+  user-name:
+    description: Name for the git commit
+    required: true
+  source-repo:
+    description: The source repo
+    required: true
+  source-branch:
+    description: The branch of the source repo
+    required: true
+  dest-repo:
+    description: The destination repo
+    required: true
+  dest-branch:
+    description: The branch of the destination repo
+    required: true
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - '${{ inputs.user-email }}'
+    - '${{ inputs.user-name }}'
+    - '${{ inputs.source-repo }}'
+    - '${{ inputs.source-branch }}'
+    - '${{ inputs.dest-repo }}'
+    - '${{ inputs.dest-branch }}'
+branding:
+  icon: git-commit
+  color: green

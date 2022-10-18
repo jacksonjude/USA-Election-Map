@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="./assets/discord-invite.css">
     <script src="./src/console-capture.js"></script>
     <script src="./lib/jquery-3.5.1.min.js"></script>
+    <script src="./lib/papaparse-5.0.2.min.js"></script>
     <script src="./lib/chart.js-2.8.0.js"></script>
     <script src="./lib/chartjs-plugin-datalabels-0.7.0.js"></script>
     <script src="./lib/jscolor.min.js"></script>
     <script src="./lib/bowser-2.9.0.min.js"></script>
     <script src="./lib/discord-invite.js"></script>
+    <script src="./lib/svg-pan-zoom-3.6.1.min.js"></script>
+    <script src="./lib/progressbar-1.0.1.min.js"></script>
     <script src="./src/misc-lib.js"></script>
     <script src="./src/model/files-database.js"></script>
     <script src="./src/model/map-type.js"></script>
@@ -24,6 +27,7 @@
     <script src="./src/display/dropdowns/shift-dropdown.js"></script>
     <script src="./src/display/dropdowns/settings-dropdown.js"></script>
     <script src="./src/display/dropdowns/compare-dropdown.js"></script>
+    <script src="./src/display/dropdowns/copy-dropdown.js"></script>
     <script src="./src/display/dropdowns/countdown-dropdown.js"></script>
     <script src="./src/display/totals-pie-chart.js"></script>
     <script src="./src/display/map-display.js"></script>
@@ -61,8 +65,8 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="sourceToggleButton" style="min-width: 204px">Select Source</a>
-          <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 240px;">
+          <a id="sourceToggleButton" style="min-width: 206px">Select Source</a>
+          <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 242px;">
             <div id="mapSourcesDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
             </div>
           </div>
@@ -81,7 +85,7 @@
                 </div>
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
-                  <a class="not-dropdown-item" href="https://fivethirtyeight.com" target="_blank"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://fivethirtyeight.com" target="_blank" style="color: white;">FiveThirtyEight</a>: 2020 <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/polls/president-general/" target="_blank" style="color: white;">poll</a> and <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/2020-election-forecast/" target="_blank" style="color: white;">projection</a> data<br>
+                  <a class="not-dropdown-item" href="https://fivethirtyeight.com" target="_blank"><img src="./assets/fivethirtyeight.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://fivethirtyeight.com" target="_blank" style="color: white;">FiveThirtyEight</a>: <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/2020-election-forecast/" target="_blank" style="color: white;">2020</a> and <a class="not-dropdown-item" href="https://projects.fivethirtyeight.com/2022-election-forecast/" target="_blank" style="color: white;">2022</a> projection data<br>
                 </div>
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
@@ -97,7 +101,7 @@
                 </div>
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
-                  <a class="not-dropdown-item" href="https://electionlab.mit.edu/data" target="_blank"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://electionlab.mit.edu/data" target="_blank" style="color: white;">MIT Election Data</a>: past <a class="not-dropdown-item" href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" target="_blank" style="color: white;">pres</a>, <a class="not-dropdown-item" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" target="_blank" style="color: white;">senate</a>, house data<br>
+                  <a class="not-dropdown-item" href="https://electionlab.mit.edu/data" target="_blank"><img src="./assets/mit.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://electionlab.mit.edu/data" target="_blank" style="color: white;">MIT Election Lab</a>: past <a class="not-dropdown-item" href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/42MVDX/MFU99O&version=5.0" target="_blank" style="color: white;">pres</a>, <a class="not-dropdown-item" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/PEJ5QU" target="_blank" style="color: white;">senate</a>, <a class="not-dropdown-item" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2" target="_blank" style="color: white;">house</a> data<br>
                 </div>
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
@@ -105,14 +109,12 @@
                 </div>
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
-                  <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map" target="_blank"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map" target="_blank" style="color: white;">Source code and update notes on GitHub</a>
-                  <a class="not-dropdown-item" style="text-decoration: none !important" onclick="downloadConsoleBlob()">
-                    <span id="console-blob-download-icon" style="float: right; padding-left: 5px;"><img class="status" src="./assets/icon-download.png" style="position: relative; top: 4px; width: 24px; height: 24px;"></span>
-                  </a>
-                  <a class="not-dropdown-item" style="text-decoration: none !important" onclick="clearDatabases()">
-                    <span id="console-blob-download-icon" style="float: right"><img class="status" src="./assets/icon-error.png" style="position: relative; top: 4px; width: 24px; height: 24px;"></span>
-                  </a>
-                  <br>
+                  <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map" target="_blank"><img src="./assets/github.png" style="position: relative; top: 5px; width: 20px; height: 20px;" /></a>&nbsp; <a class="not-dropdown-item" href="https://github.com/jacksonjude/USA-Election-Map" target="_blank" style="color: white;">Source code and update notes on GitHub page</a><br>
+                </div>
+                <div class='dropdown-separator'></div>
+                <div class="dropdown-item" style="display: flex; text-align: center">
+                  <div class="dropdown-button" style="background-color: #e02e2e; margin-right: 5px" onclick="clearDatabases(); location.reload()">Clear Cache</div>
+                  <div class="dropdown-button" style="background-color: #4279bd; margin-left: 5px" onclick="downloadConsoleBlob()">Download Logs</div><br>
                 </div>
               </h5>
             </div>
@@ -145,11 +147,15 @@
                 Shift All by&nbsp;<span class="partyShiftText">+15</span>
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="addConstantMarginToMap(getTippingPointRegion().margin, politicalParties[dropdownPoliticalPartyIDs[1]])" style="display:flex; justify-content:center;">
+              <a id="shift-other" class="partyShiftConstantButton" onclick="toggleEnteringShiftAmount()" style="text-align:center; padding-top: 14px; min-height: 25px;">
+                Shift All by other
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="shiftByTippingPoint()" style="display:flex; justify-content:center;">
                 Shift by tipping point
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="if (!getNationalPopularVoteData()) return; addConstantMarginToMap(getNationalPopularVoteData().margin, politicalParties[dropdownPoliticalPartyIDs[dropdownPoliticalPartyIDs[1] == getNationalPopularVoteData().partyID ? 0 : 1]])" style="display:flex; justify-content:center;">
+              <a onclick="shiftByNPV()" style="display:flex; justify-content:center;">
                 Shift by NPV margin
               </a>
             </div>
@@ -191,15 +197,34 @@
               <a id="swapCompareButton" onclick="swapCompareMapSources(); updateCompareMapSources([true, true], true, true)" style="text-align: center;">
                 Swap Compare Sources
               </a>
+              <div class='dropdown-separator'></div>
+              <a id="compareSortModeButton" onclick="toggleCompareSortMode(this); applyCompareToCustomMap()" style="text-align: center;">
+                Sort by voteshare
+              </a>
             </div>
             <div id="comparePresetsDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
             </div>
           </div>
         </div>
-        <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39px">Copy</a>
+          <div id="copyDropdownContent" class="dropdown-content" style="min-width: 160px">
+            <div id="copyDropdownContainer" style="border-radius: 4px; margin-left: 4px; overflow: hidden;">
+              <div class='dropdown-separator'></div>
+              <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)" style="text-align: center;">
+                Edit by margin
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="editVoteshareButton" onclick="selectEditMode(EditingMode.voteshare)" style="text-align: center;">
+                Edit by voteshare
+              </a>
+            </div>
+          </div>
+        </div>
         <a id="clearMapButton">Clear</a>
       </div>
       <div class="loader" id="loader"></div>
+      <div class="progress-loader" id="loader-circle-container" style="display: none"></div>
       <div style="display: inline-block; margin-top: 4px; margin-right: 8px; float: right;">
         <div class="dropdown">
           <a href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="min-width: 300px; font-size: 25px; font-family: 'Bree5erif-Mono'; padding: 8.5px 16px;"></a>
@@ -211,73 +236,102 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div id="mapzoom" style="margin: 0px; zoom: 100%; position: relative; float: left; margin-left: 25px;" oncontextmenu="return false">
-    </div>
-    <div id="mapzoom-preload" style="display: none">
-    </div>
-    <a id="mapCloseButton" onclick="mapCloseButtonClicked()" style="display: none; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="position: absolute; margin-top: 25px; width: 50px; height: 50px;  text-decoration: none;" /></a>
-    <div style="display: flex; flex-direction: column; float: right;">
-      <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; float: right; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
-        <canvas id="totalsPieChart"></canvas>
-      </div>
-      <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px; float: right;">
-        <div id="partyDropdownsBox" class="box" style="padding: 10px;">
-          <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
-            <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
-            </div>
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex">
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex">
+          <div id="mapcontainer" style="margin: 0px; zoom: 100%; margin-left: 25px; overflow: hidden;" oncontextmenu="return false">
+          </div>
+          </div>
+          <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="dataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="dateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+          <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="addToCompareMapQueue(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="firstCompareDateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+          <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; position: relative; left: 45px; display: none;">
+            <span style="display: inline-block">
+              <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
+                <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="addToCompareMapQueue(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
+                <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
+                </span>
+              </span>
+            </span>
+            <h3 id="secondCompareDateDisplay" style="display: inline-block; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
+          </div>
+        </div>
+        <div id="mapZoomControls" style="display: none; margin-top: 25px; margin-left: 10px; width: 50px; flex-direction: column; justify-content: space-between">
+          <a id="mapCloseButton" onclick="zoomOutMap()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+          <div style="display: flex; flex-direction: column">
+            <a id="mapZoomInButton" onclick="svgPanZoomController.zoomIn()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapZoomInButtonImage" src="./assets/zoom-in-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+            <a id="mapResetZoomButton" onclick="svgPanZoomController.reset()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapResetZoomButtonImage" src="./assets/reset-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
+            <a id="mapZoomOutButton" onclick="svgPanZoomController.zoomOut()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapZoomOutButtonImage" src="./assets/zoom-out-icon.png" style="width: 100%; height: 50px; text-decoration: none;" /></a>
           </div>
         </div>
       </div>
-      <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none; float: right">
-        <div id="discordInviteBox" style="background-color: transparent"></div>
-        <script>
-        discordInvite.init({
-          inviteCode: '44HMc8AY3G',
-          title: 'jacksonjude.com',
-          introText: "Join the Discord Server",
-          width: 466
-        })
-        discordInvite.render()
-        </script>
+      <div style="display: flex; flex-direction: column">
+        <div id="totalsPieChartContainer" style="display: inline-block; vertical-align: top; padding-top: 10px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
+          <canvas id="totalsPieChart"></canvas>
+        </div>
+        <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10px; margin-right: 45px">
+          <div id="partyDropdownsBox" class="box" style="padding: 10px;">
+            <div id="partyDropdownsFlexbox" style="display: flex; justify-content: center; min-height: 110px; align-items: center">
+              <div id="partyDropdownsContainer" class="topnav" style="user-select: none; -webkit-user-select: none; background-color: transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="discordInviteContainer" style="display: inline-block; padding-top: 10px; margin-right: 50px; user-select: none; -webkit-user-select: none">
+          <div id="discordInviteBox" style="background-color: transparent"></div>
+          <script>
+          discordInvite.init({
+            inviteCode: '44HMc8AY3G',
+            title: 'jacksonjude.com',
+            introText: "Join the Discord Server",
+            width: 466
+          })
+          discordInvite.render()
+          </script>
+        </div>
+      </div>
+      <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; padding-top: 40px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
+        <div id="helpbox" class="box" style='min-height: 740px; display: flex; flex-direction: column; justify-content: space-between'>
+          <div>
+            <h2 style='margin: 0px;'>Controls</h2>
+            <h3 id="helpboxSubtitle" style='margin: 0px;'></h3>
+            <h4 id="helpboxBody" style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left;'></h4>
+          </div>
+          <div style='display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px'>
+            <a id="helpboxLeftButton" style='width: 50px; height: 50px; cursor: pointer' onclick="updateHelpBoxPage(-1)"><img src='assets/arrow-left-icon.png' style='width: 100%; height: 100%;'/></a>
+            <h3 id="helpboxPage" style='margin: 0;'></h3>
+            <a id="helpboxRightButton" style='width: 50px; height: 50px; cursor: pointer' onclick="updateHelpBoxPage(1)"><img src='assets/arrow-right-icon.png' style='width: 100%; height: 100%;'/></a>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; float: right; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
-      <div id="helpbox" class="box">
-      </div>
-    </div>
-    <div id="sliderDateDisplayContainer" style="position: relative; float: left; left: 45px;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="displayMapQueue.unshift([this.value]); executeDisplayMapQueue()" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="dataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="dateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
-    </div>
-    <div id="firstCompareSliderDateDisplayContainer" style="position: relative; float: left; left: 45px; display: none;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="setCompareSourceDate(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="firstCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
-    </div>
-    <div id="secondCompareSliderDateDisplayContainer" style="position: relative; float: left; left: 45px; display: none;">
-      <span style="display: inline-block; float: left;">
-        <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
-          <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="setCompareSourceDate(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0px">
-          <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0px;">
-          </span>
-        </span>
-      </span>
-      <h3 id="secondCompareDateDisplay" style="display: inline-block; float: left; padding-left: 20px; vertical-align: center; min-width: 200px; color: white; font-family: 'Bree5erif-Mono'; font-size: 18px; user-select: none; -webkit-user-select: none;"></h3>
-    </div>
-    <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; pointer-events: none; user-select: none; -webkit-user-select: none; transition: opacity 0.1s linear">
+    <div id="regionboxcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; font-family: 'Bree5erif-Mono'; user-select: none; -webkit-user-select: none; pointer-events: none; transition: opacity 0.1s linear">
       <div id="regionbox" class="box">
       </div>
+    </div>
+    <div id="charttooltipcontainer" class="boxcontainer" style="display: none; opacity: 0; position: fixed; user-select: none; -webkit-user-select: none; pointer-events: none; transition: opacity 0.1s linear, top 0.15s linear, left 0.15s linear">
+      <div id="charttooltip" class="box">
+      </div>
+    </div>
+    <div id="mapcontainertmp" style="visibility: hidden; position: absolute; top: 0; left: 0; z-index: -1" oncontextmenu="return false">
     </div>
   </body>
 </html>

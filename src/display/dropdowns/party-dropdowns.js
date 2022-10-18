@@ -3,8 +3,6 @@ const addButtonPartyID = "ADDPARTY"
 const customPartyIDPrefix = "CUSTOM"
 
 const maxPartiesToDisplay = 4
-const partyDropdownHeightExtended = 158
-const partyDropdownHeight = 119
 const partyDropdownWidth = 195
 const partyButtonWidth = browserName != "Firefox" ? 195 : 170
 const shouldReversePartyDropdownsIfNeeded = true
@@ -12,6 +10,7 @@ const shouldAlignPartyDropdownsToLeadingTrailing = true
 
 var editCandidateNamePartyID = null
 var editPartyMarginColor = null
+var editPartyPopularVote = null
 
 function createPartyDropdowns()
 {
@@ -56,27 +55,41 @@ function createPartyDropdowns()
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldReverseOrder ? 'margin-top: -' + ((currentMapSource.isCustom() && currentMapType.getCustomMapEnabled()) ? partyDropdownHeightExtended : partyDropdownHeight) + 'px; ' : '') + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
 
     if (!shouldReverseOrder)
     {
       dropdownDiv += '<div class="dropdown-separator"></div>'
     }
-    dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
-    dropdownDiv += '<div class="dropdown-separator"></div>'
 
-    dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
-    dropdownDiv += '<div class="dropdown-separator"></div>'
-
-    var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
-
-    if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+    switch (currentEditingState)
     {
+      case EditingState.viewing:
+      dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
       dropdownDiv += '<div class="dropdown-separator"></div>'
 
-      dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+      dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
+      dropdownDiv += '<div class="dropdown-separator"></div>'
+
+      var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
+      dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+
+      if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+      {
+        dropdownDiv += '<div class="dropdown-separator"></div>'
+
+        dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+      }
+      break
+
+      case EditingState.editing:
+      if (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages)
+      {
+        let currentPopularVote = getCurrentPopularVote(currentPoliticalParty.getID())
+        dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-popular-vote" style="display:flex; justify-content:center; align-items: center; padding: 8px 0px; min-height: 31px" onclick="togglePartyPopularVoteEditing(\'' + currentPoliticalParty.getID() + '\')">' + decimalPadding(roundValue(currentPopularVote, 2), 2) + '%</a>'
+      }
+      break
     }
 
     if (shouldReverseOrder)
@@ -90,6 +103,11 @@ function createPartyDropdowns()
     dropdownDiv += '</div>'
 
     $("#partyDropdownsContainer").append(dropdownDiv)
+
+    if (shouldReverseOrder)
+    {
+      $("#" + currentPoliticalParty.getID() + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalParty.getID() + 'DropdownContent').height())
+    }
 
     $("#" + currentPoliticalParty.getID() + "Dropdown").hover(function() {
 
@@ -150,6 +168,16 @@ function createPartyDropdowns()
   }
 
   jscolor.install()
+
+  let previousSelectedPartyID = selectedParty ? selectedParty.getID() : null
+  if (currentEditingState == EditingState.editing)
+  {
+    deselectAllParties()
+    if (previousSelectedPartyID != null && dropdownPoliticalPartyIDs.includes(previousSelectedPartyID))
+    {
+      selectParty($("#" + previousSelectedPartyID))
+    }
+  }
 }
 
 function createPartyMarginColorPickers(partyID)
@@ -241,7 +269,7 @@ function cyclePartyColorPreset(partyID, div, incrementAmount)
 
 function updatePartyDropdownVisibility()
 {
-  if (currentEditingState != EditingState.editing)
+  if (currentEditingState != EditingState.editing || (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages))
   {
     $(".partyDropdownContainer").each(function() {
       $(this).css("display", "block")
@@ -296,51 +324,22 @@ function selectParty(div)
 
   if (currentEditingState == EditingState.editing)
   {
+    let previousSelectedPartyID = selectedParty ? selectedParty.getID() : null
     if (selectedParty != null)
     {
-      var selectedPartyDiv = $("#" + selectedParty.getID())
-      var marginColors = selectedParty.getMarginColors()
-      $("#" + selectedParty.getID()).removeClass('active')
-
-      if (!selectedPartyDiv.hasClass("hover"))
-      {
-        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.5))
-      }
-      else
-      {
-        selectedPartyDiv.css("background-color", multiplySaturation(marginColors.safe, 0.8))
-      }
+      deselectAllParties()
     }
 
-    if (selectedParty != null && selectedParty.getID() == partyID)
-    {
-      selectedParty = null
-      $(div).removeClass('active')
-
-      if (partyID == null || partyID == TossupParty.getID()) { return }
-
-      var marginColors = politicalParties[partyID].getMarginColors()
-      if (!$(div).hasClass("hover"))
-      {
-        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.5))
-      }
-      else
-      {
-        $(div).css("background-color", multiplySaturation(marginColors.safe, 0.8))
-      }
-    }
-    else
+    if (previousSelectedPartyID != partyID)
     {
       selectedParty = politicalParties[partyID]
       $(div).addClass('active')
-
-      if (partyID == null || partyID == TossupParty.getID()) { return }
 
       var marginColors = politicalParties[partyID].getMarginColors()
       $(div).css("background-color", marginColors.safe)
     }
 
-    if (selectedParty == null || selectedParty == TossupParty)
+    if (!selectedParty)
     {
       $(".partyShiftConstantButton").css('color', "gray")
       $(".partyShiftText").css('color', "gray")
@@ -384,7 +383,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
   }
   editCandidateNamePartyID = partyID
 
-  displayPartyTotals(getPartyTotals())
+  displayPartyTotals()
   if (shouldRefreshMap && showingDataMap && !skipReload)
   {
     if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
@@ -412,13 +411,13 @@ function createPartyDropdownsBoxHoverHandler()
 
     dropdownPoliticalPartyIDs.push(addButtonPartyID)
     $("#partyDropdownsBox").addClass("showingAddPartyButton")
-    displayPartyTotals(getPartyTotals(), true)
+    displayPartyTotals(true)
   }, function() {
     if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) || $("#partyDropdownsBox").find(".jscolor-active").length > 0) { return }
 
     dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
     $("#partyDropdownsBox").removeClass("showingAddPartyButton")
-    displayPartyTotals(getPartyTotals(), true)
+    displayPartyTotals(true)
   })
 }
 
@@ -451,7 +450,7 @@ function createNewCustomParty()
 
   currentMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
-  displayPartyTotals(getPartyTotals(), true)
+  displayPartyTotals(true)
 }
 
 async function deleteParty(partyID)
@@ -480,11 +479,13 @@ async function deleteParty(partyID)
   await loadDataMap(null, null, null, false)
 }
 
-function displayPartyTotals(partyTotals, overrideCreateDropdowns)
+function displayPartyTotals(overrideCreateDropdowns)
 {
-  if (currentMapSource.getID() != NullMapSource.getID() && currentMapSource.getID() != currentCustomMapSource.getID())
+  let partyTotals = getPartyTotals()
+
+  if (currentMapSource.getID() != NullMapSource.getID() && (currentMapSource.getID() != currentCustomMapSource.getID() || (showingCompareMap && currentEditingState == EditingState.viewing)))
   {
-    var partyIDs = Object.keys(partyTotals).filter((partyID) => !(partyTotals[partyID] == 0 || partyID == TossupParty.getID()))
+    var partyIDs = Object.keys(partyTotals).filter((partyID) => partyTotals[partyID] > 0 && partyID != TossupParty.getID())
 
     var topPartyIDs = partyIDs.sort((party1, party2) => partyTotals[party2]-partyTotals[party1]).slice(0, maxPartiesToDisplay)
 
@@ -533,6 +534,26 @@ function displayPartyTotals(partyTotals, overrideCreateDropdowns)
   }
 }
 
+function getNonEVDropdownCandidates(partyIDs)
+{
+  const nationalMinimumVoteshare = 2.0
+  const stateMinimumVoteshare = 5.0
+  // const isOtherCandidate = (candidate) => candidate.candidate == "Other" && candidate.partyID == IndependentGenericParty.getID()
+
+  let candidatesWithNationalMinimumVoteshare = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages?.filter(candidate => candidate.voteshare >= nationalMinimumVoteshare) ?? []
+  let candidatesWithStateMinimumVoteshare = Object.values(displayRegionDataArray).flatMap(regionData => regionData.partyVotesharePercentages?.filter(candidate => candidate.voteshare >= stateMinimumVoteshare) ?? [])
+
+  let candidatesToAdd = [...candidatesWithNationalMinimumVoteshare, ...candidatesWithStateMinimumVoteshare]
+  candidatesToAdd.forEach(candidate => {
+    if (!partyIDs.includes(candidate.partyID))
+    {
+      partyIDs.push(candidate.partyID)
+    }
+  })
+
+  return partyIDs
+}
+
 function updatePoliticalPartyCandidateNames(mapDate)
 {
   var candidateNames = currentMapSource.getCandidateNames(mapDate)
@@ -550,4 +571,64 @@ function updatePoliticalPartyCandidateNames(mapDate)
       politicalParties[partyID].setCandidateName(candidateNames[partyID])
     }
   }
+}
+
+function togglePartyPopularVoteEditing(partyID)
+{
+  if (editPartyPopularVote)
+  {
+    let currentPopularVote = getCurrentPopularVote(partyID)
+    let popularVoteToSet = parseFloat($("#" + editPartyPopularVote + "-popular-vote-text").val())
+    if (popularVoteToSet && popularVoteToSet != currentPopularVote)
+    {
+      let partyVotesharePercentages = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages
+      if (!partyVotesharePercentages)
+      {
+        displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages = {}
+      }
+
+      let candidateData = partyVotesharePercentages.find(candidateData => candidateData.partyID == editPartyPopularVote)
+      if (!candidateData)
+      {
+        let candidateName = currentMapSource.getCandidateNames(currentSliderDate.getTime())[editPartyPopularVote] ?? politicalParties[editPartyPopularVote].getNames[0]
+        candidateData = {partyID: editPartyPopularVote, candidate: candidateName}
+        partyVotesharePercentages.push(candidateData)
+      }
+      candidateData.voteshare = popularVoteToSet
+
+      displayRegionDataArray[nationalPopularVoteID].partyID = partyVotesharePercentages.reduce((topParty, currentParty) => topParty.voteshare > currentParty.voteshare ? topParty : currentParty, partyVotesharePercentages[0]).partyID
+
+      updateTotalsPieChart()
+
+      currentPopularVote = popularVoteToSet
+    }
+
+    $("#" + editPartyPopularVote + "-popular-vote").html(decimalPadding(roundValue(currentPopularVote, 2), 2) + "%")
+  }
+
+  if (editPartyPopularVote != null && partyID == editPartyPopularVote)
+  {
+    editPartyPopularVote = null
+  }
+  else
+  {
+    editPartyPopularVote = partyID
+  }
+
+  if (editPartyPopularVote)
+  {
+    let currentPopularVote = getCurrentPopularVote(partyID)
+    $("#" + partyID + "-popular-vote").html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-popular-vote-text' value='" + decimalPadding(roundValue(currentPopularVote, 2), 2) + "'>")
+    $("#" + partyID + "-popular-vote-text").focus()
+  }
+}
+
+function getCurrentPopularVote(partyID)
+{
+  if (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages)
+  {
+    let candidateData = displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages.find(candidateData => candidateData.partyID == partyID)
+    return candidateData ? candidateData.voteshare : 0.0
+  }
+  return null
 }

@@ -8,19 +8,41 @@ const PieChartDirection = {
 }
 
 var partyOrdering = [
+  {partyID: FederalistParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: DemocraticParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: GreenParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: IndependentRNParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1824AJParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1824WCParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: FreeSoilParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1932NTParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1948SMParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1948HWParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1956WJParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1960HBParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1968GWParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1976EMParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1988LBParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2004JEParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2016SEParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2016JKParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2016RPParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2016BSParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent2016CPParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent2016EMParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: IndependentGWParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: IndependentGenericParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: TossupParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: Independent1808GCParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1820JAParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1824HCParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1832JFParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1832WWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836WMParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836DWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1836HWParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1844JBParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1856MFParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1860JohnBellParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1888CFParty.getID(), direction: PieChartDirection.counterclockwise},
@@ -30,16 +52,20 @@ var partyOrdering = [
   {partyID: Independent1916ABParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1920EDParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1924RLParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: Independent1976RRParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: Independent1980JAParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: ReformParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: LibertarianParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: RepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
-  {partyID: Independent1912TRParty.getID(), direction: PieChartDirection.counterclockwise}
+  {partyID: Independent1912TRParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: WhigParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: NationalRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: DemocraticRepublicanParty.getID(), direction: PieChartDirection.counterclockwise}
 ]
 
 var totalsPieChartCutoutPercent = 55
 const minTotalsPieChartSliceLabelPercent = 0.04
-const minTotalsPieChartSliceLabelBrightness = 0.7
+const minTotalsPieChartSliceLabelBrightness = 1.0
 
 function setupTotalsPieChart()
 {
@@ -65,10 +91,36 @@ function setupTotalsPieChart()
     },
     tooltips: {
       titleFontSize: 15,
-      titleFontStyle: "bold",
       bodyFontSize: 15,
-      bodyFontStyle: "bold",
       displayColors: false,
+      enabled: false,
+      custom: function(tooltipModel) {
+        if (tooltipModel.opacity === 0)
+        {
+          $("#charttooltipcontainer").trigger('hide')
+          return
+        }
+
+        $("#charttooltipcontainer").trigger('show')
+
+        let charttooltipHTML = "<div style='padding-bottom: 2px'>"
+        charttooltipHTML += "<span style='font-size: " + tooltipModel.titleFontSize + "px'>"
+        charttooltipHTML += tooltipModel.title.map(title => "<div>" + title + "</div>").join("")
+        charttooltipHTML += tooltipModel.body.map((bodyInfo, i) => "<div style='color: " + tooltipModel.labelTextColors[i] + "'>" + bodyInfo.lines.map(bodyLine => "<div>" + bodyLine + "</div>").join("") + "</div>").join("")
+        charttooltipHTML += "</div>"
+
+        $("#charttooltip").html(charttooltipHTML)
+
+        let {left: xPos, top: yPos} = this._chart.canvas.getBoundingClientRect()
+        xPos += tooltipModel.caretX
+        yPos += tooltipModel.caretY
+
+        xPos = correctOverflow(xPos, $("#charttooltipcontainer").width(), $(document).width())
+        yPos = correctOverflow(yPos, $("#charttooltipcontainer").height(), $(document).height())
+
+        $("#charttooltipcontainer").css('left', xPos)
+        $("#charttooltipcontainer").css('top', yPos)
+      },
       callbacks: {
         title: function(tooltipItem, data) {
           var label = data.datasets[tooltipItem[0].datasetIndex].labels[tooltipItem[0].index] || ''
@@ -82,7 +134,7 @@ function setupTotalsPieChart()
             break
 
             case 2:
-            label += roundValueToPlace(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index], 4) + "%"
+            label += getRoundedMarginValue(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]) + "%"
             break
           }
 
@@ -400,7 +452,7 @@ function updateTotalsPieChart(regionDataArray)
 
   for (var regionID in regionDataArray)
   {
-    if (regionID == nationalPopularVoteID) { continue }
+    if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
     var regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
@@ -419,8 +471,9 @@ function updateTotalsPieChart(regionDataArray)
 
     var regionMargin = regionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID])
-    var regionString = regionID + " +" + decimalPadding(Math.round(regionMargin*10)/10, currentMapSource.getAddDecimalPadding())
+    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
+    var formattedRegionMargin = getRoundedMarginValue(regionMargin)
+    var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
@@ -471,7 +524,7 @@ function updateTotalsPieChart(regionDataArray)
 
         regionMarginStrings.push(regionMarginStringsData[partyID][marginKey])
 
-        if (marginKey == "current" && !currentMapType.getMapSettingValue("pieCurrentSeats"))
+        if (marginKey == "current" && currentMapType.getMapSettingValue("pieCurrentSeats") === false)
         {
           marginTotalsArray.push(0)
         }
@@ -489,7 +542,7 @@ function updateTotalsPieChart(regionDataArray)
     else
     {
       regionMarginStrings.push(regionMarginStringsData[partyID].safe)
-      marginTotalsArray.push(marginTotalsData[partyID].safe)
+      marginTotalsArray.push(marginTotalsData[partyID].safe || 0)
       safeMarginTotalsArray.push(marginTotalsData[partyID].safe)
     }
   }
@@ -546,7 +599,9 @@ function updateTotalsPieChart(regionDataArray)
     {
       var partyStrings = []
       partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
-        partyStrings.push(regionData.region + " +" + decimalPadding(Math.round(regionData.margin*10)/10, currentMapSource.getAddDecimalPadding()) + "\n")
+        let formattedRegionMargin = Math.round(regionData.margin*10)/10
+        formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
+        partyStrings.push(regionData.region + " +" + formattedRegionMargin + "\n")
       })
 
       if (currentDirection == PieChartDirection.clockwise)
@@ -577,8 +632,8 @@ function updateTotalsPieChart(regionDataArray)
   }
   totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
-  var popularVoteData = getNationalPopularVotePartyVoteshareData()
-  var showingPopularVote = popularVoteData && currentMapType.getMapSettingValue("piePopularVote")
+  var popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
+  var showingPopularVote = popularVoteData && (currentMapType.getMapSettingValue("piePopularVote") || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
   if (showingPopularVote)
   {
     var sortedPopularVoteArray = []
@@ -589,7 +644,10 @@ function updateTotalsPieChart(regionDataArray)
       summedPercentage += sortedPopularVoteArray[partyNum]
     }
     var remainingPopularVote = 100-summedPercentage
-    sortedPopularVoteArray[genericPartyOrderingIndex] = remainingPopularVote
+    if (remainingPopularVote > 0)
+    {
+      sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
+    }
 
     totalsPieChart.data.datasets[2].hidden = false
     totalsPieChart.data.datasets[2].data = sortedPopularVoteArray
@@ -608,7 +666,7 @@ function updateTotalsPieChart(regionDataArray)
     nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
   }
 
-  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded"))
+  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded") || currentViewingState == ViewingState.splitVote)
   {
     totalsPieChart.data.datasets[0].hidden = true
     totalsPieChart.data.datasets[0].data = []
@@ -628,6 +686,7 @@ function updateTotalsPieChart(regionDataArray)
   totalsPieChart.data.datasets[0].labels = preloadedData.datasets[0].labels
 
   totalsPieChart.update()
+  $("#charttooltipcontainer").trigger('hide')
 
   partyOrdering = fullPartyOrdering // To avoid transitions of colors between dataslices on every date load
 }

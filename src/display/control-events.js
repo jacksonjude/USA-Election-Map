@@ -2,6 +2,7 @@ const shiftNumberKeycodes = ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
+var shiftKeyDown = false
 
 document.addEventListener('keydown', function(e) {
   if (!isEditingTextbox() && showingDataMap)
@@ -39,7 +40,22 @@ document.addEventListener('keydown', function(e) {
 
       incrementSlider("up")
       break
+
+      case "Shift":
+      shiftKeyDown = true
+      updateRegionBox()
+      break
     }
+  }
+  else if (editingRegionVotesharePercentages && e.key == "ArrowUp")
+  {
+    e.preventDefault()
+    cycleSelectedRegionVoteshare(-1)
+  }
+  else if (editingRegionVotesharePercentages && e.key == "ArrowDown")
+  {
+    e.preventDefault()
+    cycleSelectedRegionVoteshare(1)
   }
 })
 
@@ -209,7 +225,7 @@ function incrementSlider(keyString)
   }
   else
   {
-    displayDataMap(sliderDiv.value)
+    addToDisplayMapQueue(sliderDiv.value)
   }
 }
 
@@ -234,6 +250,11 @@ document.addEventListener('keyup', function(e) {
     case "ArrowUp":
     arrowKeysDown.up = 0
     clearTimeout(arrowKeyTimeouts.up)
+    break
+
+    case "Shift":
+    shiftKeyDown = false
+    updateRegionBox()
     break
   }
 })
@@ -279,12 +300,10 @@ function removeActiveClassFromDropdownButton()
 document.addEventListener('keypress', async function(e) {
   if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
   {
-    currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)]]
-    updateNavBarForNewSource()
-    await loadDataMap()
+    await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)]])
     if (currentRegionID)
     {
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
     }
   }
   else if (currentEditingState == EditingState.viewing && !isEditingTextbox() && e.key == "0")
@@ -296,12 +315,12 @@ document.addEventListener('keypress', async function(e) {
     switch (selectedDropdownDivID)
     {
       case "compareDropdownContent":
-      if (parseInt(e.key)-1 >= getDefaultCompareSourceIDs().length) { return }
+      if (parseInt(e.key)-1 >= currentMapType.getDefaultCompareSourceIDs().length) { return }
 
       $(".comparesourcecheckbox").prop('checked', false)
       compareMapSourceIDArray = [null, null]
 
-      loadComparePreset(parseInt(e.key)-1)
+      loadComparePreset(parseInt(e.key))
       break
 
       case "marginsDropdownContent":
@@ -328,12 +347,10 @@ document.addEventListener('keypress', async function(e) {
       case "mapSourcesDropdownContent":
       if (parseInt(e.key)-1 >= mapSourceIDs.length) { return }
 
-      currentMapSource = mapSources[mapSourceIDs[parseInt(e.key)-1]]
-      updateNavBarForNewSource()
-      await loadDataMap(true, true)
+      await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)-1]], true, true)
       if (currentRegionID)
       {
-        updateRegionBox(currentRegionID)
+        updateRegionBox()
       }
       break
     }
@@ -343,7 +360,7 @@ document.addEventListener('keypress', async function(e) {
     var partyToSelect = parseInt(e.key)
     if (partyToSelect == 0)
     {
-      selectParty()
+      deselectAllParties()
     }
     else
     {
@@ -356,6 +373,10 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleMarginEditing()
     }
+    else if (isEnteringShiftAmount)
+    {
+      toggleEnteringShiftAmount()
+    }
     else if (editCandidateNamePartyID)
     {
       toggleCandidateNameEditing()
@@ -364,15 +385,22 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleMarginHexColorEditing()
     }
+    else if (editPartyPopularVote)
+    {
+      togglePartyPopularVoteEditing(editPartyPopularVote)
+    }
     else if (editingRegionEVs)
     {
       editingRegionEVs = false
-      updateRegionBox(currentRegionID)
+      updateRegionBox()
     }
     else if (editingRegionMarginValue)
     {
-      editingRegionMarginValue = false
-      $("#regionboxcontainer").trigger('hide')
+      toggleRegionMarginEditing()
+    }
+    else if (editingRegionVotesharePercentages)
+    {
+      toggleRegionVoteshareEditing(voteshareEditRegion)
     }
     else if (currentMapType.getCustomMapEnabled())
     {
@@ -434,10 +462,7 @@ document.addEventListener('keypress', async function(e) {
   }
   else if (e.key == "Escape" && currentViewingState == ViewingState.zooming)
   {
-    currentViewingState = ViewingState.viewing
-    currentMapZoomRegion = null
-
-    displayDataMap()
+    zoomOutMap()
   }
 })
 
@@ -447,14 +472,24 @@ var startRegionID
 var mouseMovedDuringClick = false
 var currentRegionID
 var ignoreNextClick = false
+var clickUsedToZoom = false
 
+var currentMouseX
 var currentMouseY
 
-document.addEventListener('mousedown', function() {
+document.addEventListener('mousedown', async function() {
+  mouseIsDown = true
+  mouseMovedDuringClick = false
+
   if (currentEditingState == EditingState.editing)
   {
     startRegionID = currentRegionID
-    mouseIsDown = true
+
+    var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+    if (await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing)
+    {
+      clickUsedToZoom = true
+    }
   }
 })
 
@@ -462,32 +497,30 @@ document.oncontextmenu = function() {
   if (currentEditingState == EditingState.editing)
   {
     regionIDsChanged = []
-    mouseIsDown = false
-    mouseMovedDuringClick = false
     startRegionID = null
   }
+
+  mouseIsDown = false
+  mouseMovedDuringClick = false
 }
 
 function mouseEnteredRegion(div)
 {
   var regionID = getBaseRegionID($(div).attr('id')).baseID
   currentRegionID = regionID
-  if (currentEditingState == EditingState.editing && mouseIsDown && !regionIDsChanged.includes(regionID))
+
+  if (currentEditingState == EditingState.editing && shouldDragSelect && mouseIsDown && !regionIDsChanged.includes(regionID) && !editingRegionVotesharePercentages)
   {
     leftClickRegion(div)
     regionIDsChanged.push(regionID)
   }
-  else if (currentEditingState == EditingState.viewing && showingDataMap)
+
+  if (showingDataMap && !editingRegionVotesharePercentages)
   {
     updateRegionBox(regionID)
   }
 
-  if (editingRegionMarginValue)
-  {
-    updateRegionBox(regionID)
-  }
-
-  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !(currentMapType.getMapSettingValue("flipStates") && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
+  if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !((currentMapType.getMapSettingValue("flipStates") || currentViewingState == ViewingState.splitVote) && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
     for (var linkedRegionSetNum in linkedRegions)
@@ -524,7 +557,10 @@ function mouseLeftRegion(div)
     currentRegionID = null
   }
 
-  $("#regionboxcontainer").trigger('hide')
+  if (!editingRegionVotesharePercentages)
+  {
+    updateRegionBox()
+  }
 
   if ($(div).css('stroke') != regionDeselectColor)
   {
@@ -546,40 +582,49 @@ function mouseLeftRegion(div)
 }
 
 document.addEventListener('mousemove', function(e) {
-  if (currentViewingState == ViewingState.editing)
+  if (mouseIsDown)
   {
-    if (mouseIsDown)
-    {
-      mouseMovedDuringClick = true
-    }
-    if (mouseIsDown && currentRegionID && !regionIDsChanged.includes(currentRegionID))
+    mouseMovedDuringClick = true
+  }
+
+  if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
+  {
+    if (shouldDragSelect && mouseIsDown && currentRegionID && !regionIDsChanged.includes(currentRegionID))
     {
       leftClickRegion($("#" + currentRegionID))
       regionIDsChanged.push(currentRegionID)
     }
   }
 
-  $("#regionboxcontainer").css("left", e.pageX+5)
-  updateRegionBoxYPosition(e.pageY)
+  if (!editingRegionVotesharePercentages)
+  {
+    updateRegionBoxPosition(e.pageX, e.pageY)
+  }
 
+  currentMouseX = e.pageX
   currentMouseY = e.pageY
 })
 
 document.addEventListener('mouseup', function() {
-  if (currentEditingState == EditingState.editing)
+  if (currentEditingState == EditingState.editing && !editingRegionVotesharePercentages)
   {
     regionIDsChanged = []
-    mouseIsDown = false
-    if (currentRegionID != null && startRegionID == currentRegionID && mouseMovedDuringClick)
+    if (currentRegionID != null && !clickUsedToZoom && startRegionID == currentRegionID && mouseMovedDuringClick && shouldDragSelect)
     {
       ignoreNextClick = true
     }
-    mouseMovedDuringClick = false
     startRegionID = null
+  }
+
+  mouseIsDown = false
+
+  if (clickUsedToZoom)
+  {
+    clickUsedToZoom = false
   }
 })
 
 function isEditingTextbox()
 {
-  return editMarginID || editingRegionEVs || editingRegionMarginValue || editCandidateNamePartyID || editPartyMarginColor
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor || isEnteringShiftAmount || editPartyPopularVote
 }

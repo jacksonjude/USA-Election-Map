@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionNameToID, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, regionIDToName, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -13,9 +13,8 @@ class MapType
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
-    this.controlsHelpHTML = controlsHelpHTML
 
-    this.regionNameToID = regionNameToID
+    this.regionIDToName = regionIDToName
     this.regionsToHideOnDisable = regionsToHideOnDisable
     this.mapSettingsLayout = mapSettingsLayout.concat(globalMapSettings)
 
@@ -67,27 +66,29 @@ class MapType
     return true
   }
 
-  async loadSVG(callback)
+  async loadSVG()
   {
-    $("#svgdata").css('opacity', "0")
+    let loadSVGPromise = new Promise(async (resolve) => {
+      let svgPath = this.getSVGPath()
+      let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
 
-    let svgPath = this.getSVGPath()
-    let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+      let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+      let svgData = await SVGDatabase.fetchFile(svgPathID)
+      if (svgData)
+      {
+        $("#mapcontainertmp").html(svgData)
+        resolve(svgPath)
+      }
+      else
+      {
+        $("#mapcontainertmp").load(svgPathString, () => {
+          SVGDatabase.insertFile(svgPathID, $("#mapcontainertmp").html())
+          resolve(svgPath)
+        })
+      }
+    })
 
-    let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
-    let svgData = await SVGDatabase.fetchFile(svgPathID)
-    if (svgData)
-    {
-      $("#mapzoom-preload").html(svgData)
-      callback(svgPath)
-    }
-    else
-    {
-      $("#mapzoom-preload").load(svgPathString, () => {
-        SVGDatabase.insertFile(svgPathID, $("#mapzoom-preload").html())
-        callback(svgPath)
-      })
-    }
+    return loadSVGPromise
   }
 
   getTotalEV()
@@ -95,9 +96,9 @@ class MapType
     return this.totalEV
   }
 
-  getEV(decade, regionID, disabled, shouldSetDisabledWorthToZero)
+  getEV(decade, regionID, regionData)
   {
-    return this.evFunction(decade, regionID, disabled, shouldSetDisabledWorthToZero)
+    return this.evFunction(decade, regionID, regionData)
   }
 
   getShouldDisplayEVOnMap()
@@ -118,11 +119,6 @@ class MapType
   getCompareMapEnabled()
   {
     return this.compareMapEnabled
-  }
-
-  getControlsHelpHTML()
-  {
-    return this.controlsHelpHTML
   }
 
   setMapSources(mapSources)
@@ -177,9 +173,9 @@ class MapType
     return this.getMapSources(this)[this.customSourceID]
   }
 
-  getRegionNameToID()
+  getRegionIDToName()
   {
-    return this.regionNameToID
+    return this.regionIDToName
   }
 
   getRegionsToHideOnDisable()
@@ -261,7 +257,10 @@ const regionEVArray = {
   1880: {"AL":10, "AK":0, "AZ":0, "AR":7, "CA":8, "CO":3, "CT":6, "DE":3, "DC":0, "FL":4, "GA":12, "HI":0, "ID":0, "IL":22, "IN":15, "IA":13, "KS":9, "KY":13, "LA":8, "ME-D1":0, "ME-D2":0, "ME-AL":6, "MD":8, "MA":14, "MI":13, "MN":7, "MS":9, "MO":16, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":5, "NV":3, "NH":4, "NJ":9, "NM":0, "NY":36, "NC":11, "ND":0, "OH":23, "OK":0, "OR":3, "PA":30, "RI":4, "SC":9, "SD":0, "TN":12, "TX":13, "UT":0, "VT":4, "VA":12, "WA":0, "WV":6, "WI":11, "WY":0},
   1870: {"AL":10, "AK":0, "AZ":0, "AR":6, "CA":6, "CO":3, "CT":6, "DE":3, "DC":0, "FL":4, "GA":11, "HI":0, "ID":0, "IL":21, "IN":15, "IA":11, "KS":5, "KY":12, "LA":8, "ME-D1":0, "ME-D2":0, "ME-AL":7, "MD":8, "MA":13, "MI":11, "MN":5, "MS":8, "MO":15, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":3, "NV":3, "NH":5, "NJ":9, "NM":0, "NY":35, "NC":10, "ND":0, "OH":22, "OK":0, "OR":3, "PA":29, "RI":4, "SC":7, "SD":0, "TN":12, "TX":8, "UT":0, "VT":5, "VA":11, "WA":0, "WV":5, "WI":10, "WY":0},
   1860: {"AL":8, "AK":0, "AZ":0, "AR":5, "CA":5, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":9, "HI":0, "ID":0, "IL":16, "IN":13, "IA":8, "KS":3, "KY":11, "LA":7, "ME-D1":0, "ME-D2":0, "ME-AL":7, "MD":7, "MA":12, "MI":8, "MN":4, "MS":0, "MO":11, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":3, "NV":3, "NH":5, "NJ":7, "NM":0, "NY":33, "NC":9, "ND":0, "OH":21, "OK":0, "OR":3, "PA":26, "RI":4, "SC":6, "SD":0, "TN":10, "TX":0, "UT":0, "VT":5, "VA":0, "WA":0, "WV":5, "WI":8, "WY":0},
-  1850: {"AL":9, "AK":0, "AZ":0, "AR":4, "CA":4, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":10, "HI":0, "ID":0, "IL":11, "IN":13, "IA":4, "KS":0, "KY":12, "LA":6, "ME-D1":0, "ME-D2":0, "ME-AL":8, "MD":8, "MA":13, "MI":6, "MN":4, "MS":7, "MO":9, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":5, "NJ":7, "NM":0, "NY":35, "NC":10, "ND":0, "OH":23, "OK":0, "OR":3, "PA":27, "RI":4, "SC":8, "SD":0, "TN":12, "TX":4, "UT":0, "VT":5, "VA":15, "WA":0, "WV":0, "WI":5, "WY":0}
+  1850: {"AL":9, "AK":0, "AZ":0, "AR":4, "CA":4, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":10, "HI":0, "ID":0, "IL":11, "IN":13, "IA":4, "KS":0, "KY":12, "LA":6, "ME-D1":0, "ME-D2":0, "ME-AL":8, "MD":8, "MA":13, "MI":6, "MN":4, "MS":7, "MO":9, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":5, "NJ":7, "NM":0, "NY":35, "NC":10, "ND":0, "OH":23, "OK":0, "OR":3, "PA":27, "RI":4, "SC":8, "SD":0, "TN":12, "TX":4, "UT":0, "VT":5, "VA":15, "WA":0, "WV":0, "WI":5, "WY":0},
+  1840: {"AL":9, "AK":0, "AZ":0, "AR":3, "CA":0, "CO":0, "CT":6, "DE":3, "DC":0, "FL":3, "GA":10, "HI":0, "ID":0, "IL":9, "IN":12, "IA":4, "KS":0, "KY":12, "LA":6, "ME-D1":0, "ME-D2":0, "ME-AL":9, "MD":8, "MA":12, "MI":5, "MN":0, "MS":6, "MO":7, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":6, "NJ":7, "NM":0, "NY":36, "NC":11, "ND":0, "OH":23, "OK":0, "OR":0, "PA":26, "RI":4, "SC":9, "SD":0, "TN":13, "TX":4, "UT":0, "VT":6, "VA":17, "WA":0, "WV":0, "WI":4, "WY":0},
+  1830: {"AL":7, "AK":0, "AZ":0, "AR":3, "CA":0, "CO":0, "CT":8, "DE":3, "DC":0, "FL":0, "GA":11, "HI":0, "ID":0, "IL":5, "IN":9, "IA":0, "KS":0, "KY":15, "LA":5, "ME-D1":0, "ME-D2":0, "ME-AL":10, "MD":10, "MA":14, "MI":3, "MN":0, "MS":4, "MO":4, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":7, "NJ":8, "NM":0, "NY":42, "NC":15, "ND":0, "OH":21, "OK":0, "OR":0, "PA":30, "RI":4, "SC":11, "SD":0, "TN":15, "TX":0, "UT":0, "VT":7, "VA":23, "WA":0, "WV":0, "WI":0, "WY":0},
+  1820: {"AL":5, "AK":0, "AZ":0, "AR":0, "CA":0, "CO":0, "CT":8, "DE":3, "DC":0, "FL":0, "GA":9, "HI":0, "ID":0, "IL":3, "IN":5, "IA":0, "KS":0, "KY":14, "LA":5, "ME-D1":0, "ME-D2":0, "ME-AL":9, "MD":11, "MA":15, "MI":0, "MN":0, "MS":3, "MO":3, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":8, "NJ":8, "NM":0, "NY":36, "NC":15, "ND":0, "OH":16, "OK":0, "OR":0, "PA":28, "RI":4, "SC":11, "SD":0, "TN":11, "TX":0, "UT":0, "VT":7, "VA":24, "WA":0, "WV":0, "WI":0, "WY":0}
 }
 
 const MapSettingType =
@@ -275,7 +274,8 @@ const MapSettingReloadType =
 {
   none: 0,
   display: 1,
-  data: 2
+  data: 2,
+  custom: 3
 }
 
 var globalMapSettings =
@@ -285,27 +285,18 @@ var globalMapSettings =
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
     ],
-    shouldShowActive: (value) => {
-      return value
-    },
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
   {id: "piePopularVote", title: "Popular Vote", type: MapSettingType.optionCycle, options:
     [
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
     ],
-    shouldShowActive: (value) => {
-      return value
-    },
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
   {id: "pieStyle", title: "Pie Style", type: MapSettingType.optionCycle, options:
     [
       {id: "expanded", title: "Expanded", value: 0},
       {id: "compact", title: "Compact", value: 1}
     ],
-    shouldShowActive: (value) => {
-      return value == 1
-    },
   defaultValue: "expanded", reloadType: MapSettingReloadType.display},
   {id: "dateFormat", title: "Date Format", type: MapSettingType.optionCycle, options:
     [
@@ -314,12 +305,12 @@ var globalMapSettings =
       {id: "ymd", title: "YYYY/MM/DD", value: 2}
     ],
   defaultValue: "mdy", reloadType: MapSettingReloadType.display},
-  {id: "startAtLatest", title: "Start At Latest", type: MapSettingType.optionCycle, options:
+  {id: "showTooltips", title: "Control Tooltips", type: MapSettingType.optionCycle, options:
     [
-      {id: "enabled", title: "Enabled", value: true},
-      {id: "disabled", title: "Disabled", value: false}
+      {id: "show", title: "Shown", value: true},
+      {id: "hide", title: "Hidden", value: false}
     ],
-  defaultValue: "enabled", reloadType: MapSettingReloadType.none}
+  defaultValue: "show", reloadType: MapSettingReloadType.none}
 ]
 
 var currentGlobalMapSettings = {}
@@ -337,58 +328,34 @@ var USAPresidentialMapType = new MapType(
   538,
   function(decade, regionID, regionData)
   {
+    const splitStates = {"ME": ["ME-AL", "ME-D1", "ME-D2"], "NE": ["NE-AL", "NE-D1", "NE-D2", "NE-D3"]}
+    if (splitStates[regionID]) return splitStates[regionID].reduce((total, regionID) => total + this.getEV(decade, regionID, displayRegionDataArray[regionID]), 0)
     if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
-    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData.disabled) return 0
+    if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData && regionData.disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]
   },
   true,
   5,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #ec7039;'>1</span>, <span style='color: #ec7039;'>2</span>, <span style='color: #4a84ff;'>3</span>, <span style='color: #0c71c0;'>4</span>, <span style='color: #aaa;'>5</span>, 6 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -5, Left: -1, Right: +1, Up: +5<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-5 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; C key: Toggle compare dropdown selection<br>
-    &#x2022; 1 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #aaa;'>Past Results</span><br>
-    &#x2022; 2 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Projection</span><br>
-    &#x2022; 3 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Poll Avg</span><br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    &#x2022; M key: Toggle margins dropdown selection<br>
-    &#x2022; 1 key: <span style='color: #d9202f;'>15</span>/<span style='color: #ff5864;'>5</span>/<span style='color: #ff8b98;'>1</span> margins (default)<br>
-    &#x2022; 2 key: <span style='color: #d9202f;'>5</span>/<span style='color: #ff5864;'>3</span>/<span style='color: #ff8b98;'>1</span> margins (election shift)<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maine-text":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nebraska-text":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","DC":"District of Columbia","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME-D1":"ME-1","ME-D2":"ME-2","ME-AL":"Maine","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE-D1":"NE-1","NE-D2":"NE-2","NE-D3":"NE-3","NE-AL":"Nebraska","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
+    {id: "presViewingType", title: "Viewing Type", type: MapSettingType.optionCycle, options:
+      [
+        {id: "popularVotes", title: "Popular Votes", value: false},
+        {id: "electoralVotes", title: "Electoral Votes", value: true}
+      ],
+      shouldShowActive: (value) => {
+        return value
+      },
+    defaultValue: "popularVotes", reloadType: MapSettingReloadType.custom, customReloadFunction: (value) => {
+      currentViewingState = value ? ViewingState.splitVote : ViewingState.viewing
+      if (showingDataMap)
+      {
+        displayDataMap()
+      }
+    }},
     {id: "evDecadeOverrideSelection", title: "EV Decade", type: MapSettingType.optionCycle, options:
     Object.keys(regionEVArray).map((decade) => {
       return {id: decade, title: decade, value: parseInt(decade)}
@@ -421,49 +388,7 @@ var USASenateMapType = new MapType(
   3,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #BCBCBC;'>2</span>, <span style='color: #0A5EA0;'>3</span>, <span style='color: #aaa;'>4</span>, 5 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -3, Left: -1, Right: +1, Up: +3<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-4 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Current Seats: Show seats not up for election<br>
-    &#x2022; Pie Current Seats: Show seats not up for election<br>
-    &#x2022; Seat Arrangement:<br>
-    &nbsp;&nbsp;&nbsp;* By Election (regular or special)<br>
-    &nbsp;&nbsp;&nbsp;* By Class (specific seat for the state: <span style='color: #D93314;'>1</span>/<span style='color: #F0A300;'>2</span>/<span style='color: #E8D500;'>3</span>)<br>
-    &nbsp;&nbsp;&nbsp;** <span style='color: #D93314;'>1: 2018</span>, <span style='color: #F0A300;'>2: 2020</span>, <span style='color: #E8D500;'>3: 2016/2022</span><br>
-    &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
-  {"Alabama":"AL", "Alabama Special":"AL-S", "Alaska":"AK", "Alaska Special":"AK-S", "Arizona":"AZ", "Arizona Special":"AZ-S", "Arkansas":"AR", "Arkansas Special":"AR-S", "California":"CA", "California Special":"CA-S", "Colorado":"CO", "Colorado Special":"CO-S", "Connecticut":"CT", "Connecticut Special":"CT-S", "Delaware":"DE", "Delaware Special":"DE-S", "Florida":"FL", "Florida Special":"FL-S", "Georgia":"GA", "Georgia Special":"GA-S", "Hawaii":"HI", "Hawaii Special":"HI-S", "Idaho":"ID", "Idaho Special":"ID-S", "Illinois":"IL", "Illinois Special":"IL-S", "Indiana":"IN", "Indiana Special":"IN-S", "Iowa":"IA", "Iowa Special":"IA-S", "Kansas":"KS", "Kansas Special":"KS-S", "Kentucky":"KY", "Kentucky Special":"KY-S", "Louisiana":"LA", "Louisiana Special":"LA-S", "Maine":"ME", "Maine Special":"ME-S", "Maryland":"MD", "Maryland Special":"MD-S", "Massachusetts":"MA", "Massachusetts Special":"MA-S", "Michigan":"MI", "Michigan Special":"MI-S", "Minnesota":"MN", "Minnesota Special":"MN-S", "Mississippi":"MS", "Mississippi Special":"MS-S", "Missouri":"MO", "Missouri Special":"MO-S", "Montana":"MT", "Montana Special":"MT-S", "Nebraska":"NE", "Nebraska Special":"NE-S", "Nevada":"NV", "Nevada Special":"NV-S", "New Hampshire":"NH", "New Hampshire Special":"NH-S", "New Jersey":"NJ", "New Jersey Special":"NJ-S", "New Mexico":"NM", "New Mexico Special":"NM-S", "New York":"NY", "New York Special":"NY-S", "North Carolina":"NC", "North Carolina Special":"NC-S", "North Dakota":"ND", "North Dakota Special":"ND-S", "Ohio":"OH", "Ohio Special":"OH-S", "Oklahoma":"OK", "Oklahoma Special":"OK-S", "Oregon":"OR", "Oregon Special":"OR-S", "Pennsylvania":"PA", "Pennsylvania Special":"PA-S", "Rhode Island":"RI", "Rhode Island Special":"RI-S", "South Carolina":"SC", "South Carolina Special":"SC-S", "South Dakota":"SD", "South Dakota Special":"SD-S", "Tennessee":"TN", "Tennessee Special":"TN-S", "Texas":"TX", "Texas Special":"TX-S", "Utah":"UT", "Utah Special":"UT-S", "Vermont":"VT", "Vermont Special":"VT-S", "Virginia":"VA", "Virginia Special":"VA-S", "Washington":"WA", "Washington Special":"WA-S", "West Virginia":"WV", "West Virginia Special":"WV-S", "Wisconsin":"WI", "Wisconsin Special":"WI-S", "Wyoming":"WY", "Wyoming Special":"WY-S"},
+  {"AL":"Alabama","AL-S":"Alabama Special","AK":"Alaska","AK-S":"Alaska Special","AZ":"Arizona","AZ-S":"Arizona Special","AR":"Arkansas","AR-S":"Arkansas Special","CA":"California","CA-S":"California Special","CO":"Colorado","CO-S":"Colorado Special","CT":"Connecticut","CT-S":"Connecticut Special","DE":"Delaware","DE-S":"Delaware Special","FL":"Florida","FL-S":"Florida Special","GA":"Georgia","GA-S":"Georgia Special","HI":"Hawaii","HI-S":"Hawaii Special","ID":"Idaho","ID-S":"Idaho Special","IL":"Illinois","IL-S":"Illinois Special","IN":"Indiana","IN-S":"Indiana Special","IA":"Iowa","IA-S":"Iowa Special","KS":"Kansas","KS-S":"Kansas Special","KY":"Kentucky","KY-S":"Kentucky Special","LA":"Louisiana","LA-S":"Louisiana Special","ME":"Maine","ME-S":"Maine Special","MD":"Maryland","MD-S":"Maryland Special","MA":"Massachusetts","MA-S":"Massachusetts Special","MI":"Michigan","MI-S":"Michigan Special","MN":"Minnesota","MN-S":"Minnesota Special","MS":"Mississippi","MS-S":"Mississippi Special","MO":"Missouri","MO-S":"Missouri Special","MT":"Montana","MT-S":"Montana Special","NE":"Nebraska","NE-S":"Nebraska Special","NV":"Nevada","NV-S":"Nevada Special","NH":"New Hampshire","NH-S":"New Hampshire Special","NJ":"New Jersey","NJ-S":"New Jersey Special","NM":"New Mexico","NM-S":"New Mexico Special","NY":"New York","NY-S":"New York Special","NC":"North Carolina","NC-S":"North Carolina Special","ND":"North Dakota","ND-S":"North Dakota Special","OH":"Ohio","OH-S":"Ohio Special","OK":"Oklahoma","OK-S":"Oklahoma Special","OR":"Oregon","OR-S":"Oregon Special","PA":"Pennsylvania","PA-S":"Pennsylvania Special","RI":"Rhode Island","RI-S":"Rhode Island Special","SC":"South Carolina","SC-S":"South Carolina Special","SD":"South Dakota","SD-S":"South Dakota Special","TN":"Tennessee","TN-S":"Tennessee Special","TX":"Texas","TX-S":"Texas Special","UT":"Utah","UT-S":"Utah Special","VT":"Vermont","VT-S":"Vermont Special","VA":"Virginia","VA-S":"Virginia Special","WA":"Washington","WA-S":"Washington Special","WV":"West Virginia","WV-S":"West Virginia Special","WI":"Wisconsin","WI-S":"Wisconsin Special","WY":"Wyoming","WY-S":"Wyoming Special"},
   [/.+-S/],
   [
     {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
@@ -520,45 +445,7 @@ var USAGovernorMapType = new MapType(
   4,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Current Seats: Show seats not up for election<br>
-    &#x2022; Pie Current Seats: Show seats not up for election<br>
-    &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
     {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
@@ -604,47 +491,9 @@ var USAHouseMapType = new MapType(
   },
   false,
   2,
-  false,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
-    &#x2022; Click state: Reveal state districts<br>
-    &#x2022; Right click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Seats: Show totals or all districts<br>
-    &#x2022; Seat Totals: Show totals for selected state or all states<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
-  {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"},
+  true,
+  {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
     {id: "showAllDistricts", title: "National View", type: MapSettingType.optionCycle, options:

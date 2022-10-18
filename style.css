@@ -65,20 +65,10 @@ body {
 .topnavdisable {
   background-color: #3d3d3d !important;
   color: #666 !important;
-}
-
-.topnavdisable:hover {
-  background-color: #3d3d3d !important;
-  color: #666 !important;
-}
-
-.topnavdisable2 {
-  background-color: #3d3d3d !important;
-  color: #666 !important;
   pointer-events: none;
 }
 
-.topnavdisable2:hover {
+.topnavdisable:hover {
   background-color: #3d3d3d !important;
   color: #666 !important;
   pointer-events: none;
@@ -195,6 +185,12 @@ body {
   margin-left: 0px !important;
 }
 
+.dropdown-button {
+  flex: 1;
+  margin-top: 4px;
+  border-radius: 4px;
+}
+
 .deletebutton {
   transition: background-color .3s !important;
 }
@@ -288,12 +284,12 @@ body {
   border-top: 8px solid #3498db;
   /* Blue */
   border-radius: 50%;
-  width: 25px;
-  height: 25px;
+  width: 34px;
+  height: 34px;
   animation: spin 0.5s linear infinite;
   display: inline-block;
   margin-left: 5px;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 
 @keyframes spin {
@@ -306,37 +302,16 @@ body {
   }
 }
 
-.tab {
-  overflow: hidden;
-  background-color: #555;
-  border-radius: 4px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+.progress-loader {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
 }
 
-.tab button {
-  background-color: inherit;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 10px 16px;
-  transition: 0.3s;
-  color: white;
-  border-radius: 4px;
-  width: 48%;
-  font-family: "Bree5erif-Regular";
-  font-size: 16px;
-  margin: 3px;
-}
-
-.tab button:hover {
-  background-color: #666;
-}
-
-.tab button.active {
-  background-color: #888;
+.progress-loader > svg {
+  overflow: visible;
 }
 
 #svgdata {

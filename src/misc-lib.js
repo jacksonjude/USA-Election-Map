@@ -9,18 +9,23 @@ function zeroPadding(num)
   return num
 }
 
-function decimalPadding(num, shouldAddDecimalPadding)
+function decimalPadding(num, places = 1)
 {
-  if (shouldAddDecimalPadding == null)
+  num = num.toString()
+
+  for (let i=1; i <= places; i++)
   {
-    shouldAddDecimalPadding = true
+    if (!num.includes("."))
+    {
+      num += "."
+    }
+    if (num.split(".")[1].length < i)
+    {
+      num += "0"
+    }
   }
 
-  if (num-Math.floor(num) == 0 && shouldAddDecimalPadding)
-  {
-    return num + ".0"
-  }
-  return num.toString()
+  return num
 }
 
 function roundValue(valueToRound, decimalPlaceToRound)
@@ -37,6 +42,30 @@ function roundValueToPlace(valueToRound, figuresToInclude)
   }
 
   return roundValue(valueToRound, decimalPlaceToRound)
+}
+
+function addCommaFormatting(num)
+{
+  let numString = ""
+  let rawNumString = num.toString()
+  for (let i=0; i < rawNumString.length; i++)
+  {
+    numString += rawNumString.slice(i, i+1)
+    if (i != rawNumString.length-1 && (rawNumString.length-1-i) % 3 == 0)
+    {
+      numString += ","
+    }
+  }
+
+  return numString
+}
+
+function capitalize(string)
+{
+  if (string.length == 0) return ""
+  if (string.length == 1) return string.toUpperCase()
+
+  return string.slice(0, 1).toUpperCase() + string.slice(1)
 }
 
 function getKeyByValue(object, value, shouldStringifyToCompare)
@@ -228,15 +257,31 @@ function getMaxFontSize(text, sizes, maxWidth)
 
 String.prototype.width = function(font) {
   var f = font,
-      o = $('<div></div>')
-            .html(this)
-            .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
-            .appendTo($('body')),
-      w = o.width();
+    o = $('<div></div>')
+      .html(this)
+      .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
+      .appendTo($('body')),
+    w = o.width();
 
   o.remove();
 
   return w;
+}
+
+function correctOverflow(pos, divWidth, containerWidth)
+{
+  let difference = containerWidth - (pos+divWidth)
+  if (difference < 0)
+  {
+    pos += difference
+  }
+
+  if (pos < 0)
+  {
+    pos = 0
+  }
+
+  return pos
 }
 
 function cloneObject(objectToClone)

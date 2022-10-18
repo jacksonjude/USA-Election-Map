@@ -48,7 +48,7 @@ class FilesDatabase
       var transaction = db.transaction(self.storeName, 'readwrite')
       var store = transaction.objectStore(self.storeName)
 
-      store.put({text: fileText, updatedAt: Date.now()}, sourceID)
+      store.put({text: fileText, updatedAt: self.sourceUpdatedTimesData ? (self.sourceUpdatedTimesData[sourceID] ? self.sourceUpdatedTimesData[sourceID] : Date.now()) : 0}, sourceID)
 
       transaction.oncomplete = function() {
         db.close()
@@ -81,7 +81,7 @@ class FilesDatabase
           if (!self.sourceUpdatedTimesData || Date.now()-self.lastSourceUpdateCheck >= 1000*60*5)
           {
             await $.getJSON(self.sourceUpdatedTimesURL, null, data => {
-              self.lastSourceUpdateCheck = (new Date()).getTime()
+              self.lastSourceUpdateCheck = Date.now()
               self.sourceUpdatedTimesData = data
             }).fail((_, error) => {
               console.log(error)
@@ -90,6 +90,10 @@ class FilesDatabase
           }
 
           if (updatedTime && self.sourceUpdatedTimesData && updatedTime >= self.sourceUpdatedTimesData[sourceID])
+          {
+            resolve(textResult)
+          }
+          else if (updatedTime && self.sourceUpdatedTimesData && self.sourceUpdatedTimesData[sourceID] == null && Date.now()-updatedTime < 1000*60*60*24)
           {
             resolve(textResult)
           }
@@ -181,18 +185,24 @@ const svgStoreName = "SVGFiles"
 const svgSourceUpdatedTimesURL = "./svg-sources/source-updated-times.json"
 var SVGDatabase = new FilesDatabase()
 
-function initializeDatabases()
+async function initializeDatabases()
 {
-  CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
-  SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
+  let lastAppVersion = getCookie("appVersion")
+  if (lastAppVersion != currentAppVersion)
+  {
+    await clearDatabases()
+    setCookie("appVersion", currentAppVersion)
+  }
+
+  await CSVDatabase.initialize(csvDatabaseName, csvDatabaseVersion, csvStoreName, csvSourceUpdatedTimesURL)
+  await SVGDatabase.initialize(svgDatabaseName, svgDatabaseVersion, svgStoreName, svgSourceUpdatedTimesURL)
 }
 
-function clearDatabases()
+async function clearDatabases()
 {
-  indexedDB.deleteDatabase(CSVDatabase.databaseName)
-  indexedDB.deleteDatabase(SVGDatabase.databaseName)
-
-  initializeDatabases()
+  let databases = await indexedDB.databases()
+  for (let database of databases)
+  {
+    await indexedDB.deleteDatabase(database.name)
+  }
 }
-
-initializeDatabases()
