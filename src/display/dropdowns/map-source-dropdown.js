@@ -8,9 +8,11 @@ function createMapSourceDropdownItems()
     var mapSourceID = mapSourceIDs[sourceNum]
     var mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
     var mapSourceName = mapSources[mapSourceID].getName()
+    var mapSourceIcon = mapSources[mapSourceID].getIconURL(true) ?? "./assets/edit-icon.png"
 
     var divStringToAppend = ""
-    divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' style='display: flex; justify-content: space-between; align-items: center' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "<span>" + "(" + (parseInt(sourceNum)+1) + ")" + "&nbsp;&nbsp;" + mapSourceName + "</span>"
+    divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' style='display: flex; justify-content: space-between; align-items: center' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "<span style='display: flex; align-items: center'>"
+    divStringToAppend += "<img style='width: 20px; height: 20px' src='" + mapSourceIcon + "' />" + "<span style='margin-left: 8px'>" + mapSourceName + "</span></span>"
     divStringToAppend += "<span style='display: flex; align-items: center'>"
 
     if (mapSourceID != currentCustomMapSource.getID())
