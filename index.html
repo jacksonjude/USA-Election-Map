@@ -308,8 +308,18 @@
           </script>
         </div>
       </div>
-      <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; padding-top: 20px; padding-right: 50px;  user-select: none; -webkit-user-select: none;">
-        <div id="helpbox" class="box">
+      <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; padding-top: 40px; padding-right: 50px; user-select: none; -webkit-user-select: none;">
+        <div id="helpbox" class="box" style='min-height: 740px; display: flex; flex-direction: column; justify-content: space-between'>
+          <div>
+            <h2 style='margin: 0px;'>Controls</h2>
+            <h3 id="helpboxSubtitle" style='margin: 0px;'></h3>
+            <h4 id="helpboxBody" style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left;'></h4>
+          </div>
+          <div style='display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px'>
+            <a id="helpboxLeftButton" style='width: 50px; height: 50px; cursor: pointer' onclick="updateHelpBoxPage(-1)"><img src='assets/arrow-left-icon.png' style='width: 100%; height: 100%;'/></a>
+            <h3 id="helpboxPage" style='margin: 0;'></h3>
+            <a id="helpboxRightButton" style='width: 50px; height: 50px; cursor: pointer' onclick="updateHelpBoxPage(1)"><img src='assets/arrow-right-icon.png' style='width: 100%; height: 100%;'/></a>
+          </div>
         </div>
       </div>
     </div>

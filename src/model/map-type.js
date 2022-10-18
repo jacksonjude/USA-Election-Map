@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, controlsHelpHTML, regionIDToName, regionsToHideOnDisable, mapSettingsLayout)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, regionIDToName, regionsToHideOnDisable, mapSettingsLayout)
   {
     this.id = id
     this.name = name
@@ -13,7 +13,6 @@ class MapType
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
-    this.controlsHelpHTML = controlsHelpHTML
 
     this.regionIDToName = regionIDToName
     this.regionsToHideOnDisable = regionsToHideOnDisable
@@ -120,11 +119,6 @@ class MapType
   getCompareMapEnabled()
   {
     return this.compareMapEnabled
-  }
-
-  getControlsHelpHTML()
-  {
-    return this.controlsHelpHTML
   }
 
   setMapSources(mapSources)
@@ -344,47 +338,6 @@ var USAPresidentialMapType = new MapType(
   5,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #ec7039;'>1</span>, <span style='color: #ec7039;'>2</span>, <span style='color: #4a84ff;'>3</span>, <span style='color: #0c71c0;'>4</span>, <span style='color: #aaa;'>5</span>, 6 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -5, Left: -1, Right: +1, Up: +5<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-5 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; C key: Toggle compare dropdown selection<br>
-    &#x2022; 1 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #aaa;'>Past Results</span><br>
-    &#x2022; 2 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Projection</span><br>
-    &#x2022; 3 key: Compare <span style='color: #aaa;'>Past Results</span> vs <span style='color: #ec7039;'>538 Poll Avg</span><br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    &#x2022; M key: Toggle margins dropdown selection<br>
-    &#x2022; 1 key: <span style='color: #d9202f;'>15</span>/<span style='color: #ff5864;'>5</span>/<span style='color: #ff8b98;'>1</span> margins (default)<br>
-    &#x2022; 2 key: <span style='color: #d9202f;'>5</span>/<span style='color: #ff5864;'>3</span>/<span style='color: #ff8b98;'>1</span> margins (election shift)<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","DC":"District of Columbia","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME-D1":"ME-1","ME-D2":"ME-2","ME-AL":"Maine","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE-D1":"NE-1","NE-D2":"NE-2","NE-D3":"NE-3","NE-AL":"Nebraska","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
@@ -435,48 +388,6 @@ var USASenateMapType = new MapType(
   3,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #BCBCBC;'>2</span>, <span style='color: #0A5EA0;'>3</span>, <span style='color: #aaa;'>4</span>, 5 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -3, Left: -1, Right: +1, Up: +3<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-4 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Current Seats: Show seats not up for election<br>
-    &#x2022; Pie Current Seats: Show seats not up for election<br>
-    &#x2022; Seat Arrangement:<br>
-    &nbsp;&nbsp;&nbsp;* By Election (regular or special)<br>
-    &nbsp;&nbsp;&nbsp;* By Class (specific seat for the state: <span style='color: #D93314;'>1</span>/<span style='color: #F0A300;'>2</span>/<span style='color: #E8D500;'>3</span>)<br>
-    &nbsp;&nbsp;&nbsp;** <span style='color: #D93314;'>1: 2018</span>, <span style='color: #F0A300;'>2: 2020</span>, <span style='color: #E8D500;'>3: 2016/2022</span><br>
-    &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
   {"AL":"Alabama","AL-S":"Alabama Special","AK":"Alaska","AK-S":"Alaska Special","AZ":"Arizona","AZ-S":"Arizona Special","AR":"Arkansas","AR-S":"Arkansas Special","CA":"California","CA-S":"California Special","CO":"Colorado","CO-S":"Colorado Special","CT":"Connecticut","CT-S":"Connecticut Special","DE":"Delaware","DE-S":"Delaware Special","FL":"Florida","FL-S":"Florida Special","GA":"Georgia","GA-S":"Georgia Special","HI":"Hawaii","HI-S":"Hawaii Special","ID":"Idaho","ID-S":"Idaho Special","IL":"Illinois","IL-S":"Illinois Special","IN":"Indiana","IN-S":"Indiana Special","IA":"Iowa","IA-S":"Iowa Special","KS":"Kansas","KS-S":"Kansas Special","KY":"Kentucky","KY-S":"Kentucky Special","LA":"Louisiana","LA-S":"Louisiana Special","ME":"Maine","ME-S":"Maine Special","MD":"Maryland","MD-S":"Maryland Special","MA":"Massachusetts","MA-S":"Massachusetts Special","MI":"Michigan","MI-S":"Michigan Special","MN":"Minnesota","MN-S":"Minnesota Special","MS":"Mississippi","MS-S":"Mississippi Special","MO":"Missouri","MO-S":"Missouri Special","MT":"Montana","MT-S":"Montana Special","NE":"Nebraska","NE-S":"Nebraska Special","NV":"Nevada","NV-S":"Nevada Special","NH":"New Hampshire","NH-S":"New Hampshire Special","NJ":"New Jersey","NJ-S":"New Jersey Special","NM":"New Mexico","NM-S":"New Mexico Special","NY":"New York","NY-S":"New York Special","NC":"North Carolina","NC-S":"North Carolina Special","ND":"North Dakota","ND-S":"North Dakota Special","OH":"Ohio","OH-S":"Ohio Special","OK":"Oklahoma","OK-S":"Oklahoma Special","OR":"Oregon","OR-S":"Oregon Special","PA":"Pennsylvania","PA-S":"Pennsylvania Special","RI":"Rhode Island","RI-S":"Rhode Island Special","SC":"South Carolina","SC-S":"South Carolina Special","SD":"South Dakota","SD-S":"South Dakota Special","TN":"Tennessee","TN-S":"Tennessee Special","TX":"Texas","TX-S":"Texas Special","UT":"Utah","UT-S":"Utah Special","VT":"Vermont","VT-S":"Vermont Special","VA":"Virginia","VA-S":"Virginia Special","WA":"Washington","WA-S":"Washington Special","WV":"West Virginia","WV-S":"West Virginia Special","WI":"Wisconsin","WI-S":"Wisconsin Special","WY":"Wyoming","WY-S":"Wyoming Special"},
   [/.+-S/],
   [
@@ -534,44 +445,6 @@ var USAGovernorMapType = new MapType(
   4,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
-    &#x2022; Click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Current Seats: Show seats not up for election<br>
-    &#x2022; Pie Current Seats: Show seats not up for election<br>
-    &#x2022; Off Cycle Elections: Show elections not on election day<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
@@ -620,44 +493,6 @@ var USAHouseMapType = new MapType(
   2,
   true,
   true,
-  `
-  <h3 style='margin: 0px;'>Controls</h3>
-  <h5 style='margin: 0px; margin-top: 8px; margin-bottom: 10px; text-align: left; font-size: 15px;'>
-    &#x2022; Select Source / <span style='color: #E9353B;'>1</span>, <span style='color: #0A5EA0;'>2</span>, <span style='color: #aaa;'>3</span>, 4 keys: Change map source<br>
-    &#x2022; Clear button / 0 key: <span style='color: #aaa;'>Clear map</span><br>
-    &#x2022; Slider / arrow keys: Select map date<br>
-    &nbsp;&nbsp;&nbsp;* Down: -4, Left: -1, Right: +1, Up: +4<br>
-    &#x2022; Click state: Reveal state districts<br>
-    &#x2022; Right click state: View more poll / projection / result data<br>
-    <br>
-    &#x2022; Copy / Edit & Done button / enter key: Edit map<br>
-    &#x2022; Party buttons / 0-4 keys: Select party to fill<br>
-    &#x2022; Left click state: Cycle <span style='color: #d9202f;'>safe</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #cf8980;'>tilt</span> margins<br>
-    &#x2022; Right click state: Cycle <span style='color: #cf8980;'>tilt</span>,  <span style='color: #ff8b98;'>lean</span>,  <span style='color: #ff5864;'>likely</span>,  <span style='color: #d9202f;'>safe</span> margins<br>
-    &#x2022; Shift click state: Enter specific margin<br>
-    &#x2022; Alt click state: Disable state<br>
-    &#x2022; Hold and drag: <span style='color: #587ccc;'>Fill states</span><br>
-    <br>
-    &#x2022; Party buttons: Click to edit cadndiate name<br>
-    &#x2022; Left / right click preset button: Cycle preset colors<br>
-    &#x2022; Left click margin color: Select with color picker<br>
-    &#x2022; Right click margin color: Enter exact hex value<br>
-    <br>
-    &#x2022; Source checkbox: Select map source to compare<br>
-    &#x2022; Shift + 1-3 keys: Select map source to compare<br>
-    &#x2022; Up/Down, Left/Right arrow keys: Select, adjust slider<br>
-    <br>
-    &#x2022; Settings dropdown: Click setting to toggle/cycle options<br>
-    &#x2022; Map Seats: Show totals or all districts<br>
-    &#x2022; Seat Totals: Show totals for selected state or all states<br>
-    <br>
-    &#x2022; Margins button / enter key: Apply entered margins<br>
-    &#x2022; Margin dropdown button: Edit margin value<br>
-    <br>
-    &#x2022; Drop JPEG / PNG image file: Set icon inside pie chart<br>
-    &#x2022; Drop <span style='color: #22a366;'>CSV</span> / <span style='color: #f7df1c;'>JSON</span> file: Load custom map<br>
-  </h5>
-  `,
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [

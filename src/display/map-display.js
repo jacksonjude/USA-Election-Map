@@ -95,14 +95,55 @@ var currentEditingState
 
 var currentMapZoomRegion
 
-var showingHelpBox = false
-
 var showingCompareMap
 var compareMapSourceIDArray
 var compareMapDataArray
 var selectedCompareSlider
 
 var selectedDropdownDivID = null
+
+var showingHelpBox = false
+var currentHelpBoxPage = 0
+const helpBoxPages = [
+  {subtitle: "Selection & Viewing", body: `
+  Change the type with the <span style='text-decoration: underline'>type dropdown</span>, or press [T] to cycle between:<br>
+  [President] ⇒ [Senate] ⇒ [House] ⇒ [Govs]<br>
+  <br>
+
+  Select a source with the <span style='text-decoration: underline'>source dropdown</span>, or by using the number keys [0️⃣-9️⃣]<br>
+  <br>
+
+  Change the date with the <span style='text-decoration: underline'>slider</span>, or by using the arrow keys [⬇️ -5, ⬅️ -1, ➡️ +1, ⬆️ +5]<br>
+  <br>
+
+  Change the state color margin thresholds with the <span style='text-decoration: underline'>margins dropdown</span><br>
+  To switch between presets, press [M] then<br>
+  [1️⃣] Default ⇒ Safe 15%, Likely 5%, Lean 1%<br>
+  [2️⃣] Alt ⇒ Safe 5%, Likely 3%, Lean 1%<br>
+  <br>
+
+  Compare between preset maps using the <span style='text-decoration: underline'>compare dropdown</span><br>
+  Compare between other maps by selecting two checkboxes in the <span style='text-decoration: underline'>source dropdown</span>
+  `},
+  {subtitle: "Editing", body: `
+  Copy with the <span style='text-decoration: underline'>copy button</span>, or [Enter]<br>
+  Switch the current editing mode by selecting [Edit by margin] or [Edit by voteshare] in the <span style='text-decoration: underline'>copy dropdown</span><br>
+  <br>
+
+  When editing, first select a party in the <span style='text-decoration: underline'>parties box</span> by clicking the respective button or using the number keys [1️⃣-4️⃣]<br>
+  <br>
+
+  If editing by margin, [Left Click] to cycle:<br>
+  Safe ⇒ Likely ⇒ Lean ⇒ Tilt<br>
+  and [Right Click] to cycle in reverse:<br>
+  Tilt ⇒ Lean ⇒ Likely ⇒ Safe<br>
+  <br>
+
+  If editing by voteshare, click to begin editing a region, and click again to save<br>
+  Change the candidates with the cursor or by using the arrow keys [⬆️, ⬇️]<br>
+  Set a candidate's voteshare to 0 to remove<br>
+  `}
+]
 
 $(async function() {
   currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
@@ -208,7 +249,6 @@ async function reloadForNewMapType(initialLoad)
   await loadMapSVGFile()
 
   $("#totalsPieChartContainer").html("<canvas id='totalsPieChart'></canvas>")
-  $("#helpbox").html(currentMapType.getControlsHelpHTML())
 
   $("#loader").hide()
   $("#loader-circle-container").hide()
@@ -1114,6 +1154,8 @@ function toggleHelpBox()
     $("#totalsPieChartContainer").hide()
     $("#partyDropdownsBoxContainer").hide()
     $("#discordInviteContainer").hide()
+
+    updateHelpBoxPage(0)
   }
   else
   {
@@ -1125,12 +1167,31 @@ function toggleHelpBox()
   }
 }
 
-function selectCreditBoxTab(buttonDiv, contentDiv)
+function updateHelpBoxPage(increment)
 {
-  $(buttonDiv).parent().children().removeClass('active')
-  $(buttonDiv).addClass('active')
-  $("#creditbox .tabcontent").hide()
-  $(contentDiv).show()
+  if (currentHelpBoxPage+increment > helpBoxPages.length-1 || currentHelpBoxPage+increment < 0) return
+  currentHelpBoxPage += increment
+
+  $("#helpboxSubtitle").html(helpBoxPages[currentHelpBoxPage].subtitle)
+  $("#helpboxBody").html(helpBoxPages[currentHelpBoxPage].body)
+  $("#helpboxPage").html('[' + (currentHelpBoxPage+1) + '/' + helpBoxPages.length + ']')
+
+  if (currentHelpBoxPage-1 < 0)
+  {
+    $("#helpboxLeftButton").css('visibility', 'hidden')
+  }
+  else
+  {
+    $("#helpboxLeftButton").css('visibility', 'visible')
+  }
+  if (currentHelpBoxPage+1 > helpBoxPages.length-1)
+  {
+    $("#helpboxRightButton").css('visibility', 'hidden')
+  }
+  else
+  {
+    $("#helpboxRightButton").css('visibility', 'visible')
+  }
 }
 
 function populateRegionsArray()
