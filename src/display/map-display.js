@@ -44,9 +44,6 @@ const noInteractSVGRegionAttribute = "data-nointeract"
 const noCountSVGRegionAttribute = "data-nocount"
 const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 
-const nationalPopularVoteID = "NPV"
-const statePopularVoteDistrictID = "PV"
-
 const subregionSeparator = "__"
 
 var displayRegionDataArray

@@ -702,6 +702,9 @@ partyIDToCandidateLastNames[2020][republicanPartyID] = "Trump"
 
 const currentCycleYear = 2020
 
+const nationalPopularVoteID = "NPV"
+const statePopularVoteDistrictID = "PV"
+
 function createPresidentialMapSources()
 {
   var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID)
