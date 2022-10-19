@@ -2238,7 +2238,14 @@ function createSenateMapSources()
           for (var candidateDataNum in voteshareSortedCandidateData)
           {
             var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            if (mainPartyID.startsWith(customPartyIDPrefix))
+            {
+              currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getCandidateName()
+            }
+            else
+            {
+              currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            }
           }
 
           var partyIDToCandidateNames = {}
@@ -3113,7 +3120,14 @@ function createGovernorMapSources()
         for (var candidateDataNum in voteshareSortedCandidateData)
         {
           var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-          currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+          if (mainPartyID.startsWith(customPartyIDPrefix))
+          {
+            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getCandidateName()
+          }
+          else
+          {
+            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+          }
         }
 
         var partyIDToCandidateNames = {}
@@ -3866,7 +3880,14 @@ function createHouseMapSources()
           for (var candidateDataNum in voteshareSortedCandidateData)
           {
             var mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            if (mainPartyID.startsWith(customPartyIDPrefix))
+            {
+              currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getCandidateName()
+            }
+            else
+            {
+              currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            }
           }
 
           var partyIDToCandidateNames = {}
