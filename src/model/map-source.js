@@ -2004,7 +2004,10 @@ function createSenateMapSources()
     const candidateWinColumnPrefix = "winner_"
 
     let onCycleClass = ((cycleYear-2)%6)/2+1
-    let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
+    let partyNames = Object.keys(candidateColumns).reduce((partyMap, partyID) => {
+      partyMap[partyID] = politicalParties[partyID].getNames()[0]
+      return partyMap
+    }, {})
 
     for (let mapDate of mapDates)
     {
@@ -2891,7 +2894,10 @@ function createGovernorMapSources()
     const candidateVoteshareColumnPrefix = "voteshare_mean_"
     const candidateWinColumnPrefix = "winner_"
 
-    let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
+    let partyNames = Object.keys(candidateColumns).reduce((partyMap, partyID) => {
+      partyMap[partyID] = politicalParties[partyID].getNames()[0]
+      return partyMap
+    }, {})
 
     for (let mapDate of mapDates)
     {
@@ -3582,7 +3588,10 @@ function createHouseMapSources()
 
     const districtsToUsePartyForMargin = ["AK__1", "LA__5", "LA__3"]
 
-    let partyNames = Object.keys(candidateColumns).map(partyID => politicalParties[partyID].getNames()[0])
+    let partyNames = Object.keys(candidateColumns).reduce((partyMap, partyID) => {
+      partyMap[partyID] = politicalParties[partyID].getNames()[0]
+      return partyMap
+    }, {})
 
     for (let mapDate of mapDates)
     {
