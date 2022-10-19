@@ -956,7 +956,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   if (currentViewingState == ViewingState.zooming)
   {
-    svgPanZoomController = svgPanZoom('#svgdata', {controlIconsEnabled: false, fit: true, contain: true, minZoom: 1, panEnabled: true})
+    svgPanZoomController = svgPanZoom('#svgdata', {controlIconsEnabled: false, fit: true, contain: true, minZoom: 1, panEnabled: true, dblClickZoomEnabled: false})
   }
 
   if (shouldReloadSVG)
