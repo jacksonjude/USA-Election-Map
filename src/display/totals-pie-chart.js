@@ -104,8 +104,8 @@ function setupTotalsPieChart()
 
         $("#charttooltipcontainer").trigger('show')
 
-        let charttooltipHTML = "<div style='padding-bottom: 2rem'>"
-        charttooltipHTML += "<span style='font-size: " + tooltipModel.titleFontSize + "rem'>"
+        let charttooltipHTML = "<div style='padding-bottom: 2px'>"
+        charttooltipHTML += "<span style='font-size: " + tooltipModel.titleFontSize + "px'>"
         charttooltipHTML += tooltipModel.title.map(title => "<div>" + title + "</div>").join("")
         charttooltipHTML += tooltipModel.body.map((bodyInfo, i) => "<div style='color: " + tooltipModel.labelTextColors[i] + "'>" + bodyInfo.lines.map(bodyLine => "<div>" + bodyLine + "</div>").join("") + "</div>").join("")
         charttooltipHTML += "</div>"

@@ -1868,7 +1868,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (editingRegionEVs)
   {
-    $("#regionbox").html(formattedRegionID + "<div style='height: 10rem'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData) + "'>")
+    $("#regionbox").html(formattedRegionID + "<div style='height: 10px'></div>" + "EV: <input id='regionEV-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionEVEdit(\"" + regionID + "\")' value='" + currentMapType.getEV(getCurrentDecade(), regionID, regionData) + "'>")
     $("#regionEV-text").focus().select()
     return
   }
@@ -1878,7 +1878,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (editingRegionMarginValue)
   {
-    $("#regionbox").html(formattedRegionID + "<div style='height: 10rem'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
+    $("#regionbox").html(formattedRegionID + "<div style='height: 10px'></div>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionMarginString + "<input id='regionMargin-text' class='textInput' style='float: none; position: inherit' type='text' oninput='applyRegionMarginValue(\"" + regionID + "\")' value='" + roundedMarginValue + "'></span>")
     $("#regionMargin-text").select()
     return
   }
@@ -1893,22 +1893,22 @@ async function updateRegionBox(regionID = currentRegionID)
     }
 
     let regionBoxHTML = formattedRegionID
-    regionBoxHTML += "<div style='border-radius: 50rem; color: white; font-size: 17rem; line-height: 100%; margin-top: 5rem; margin-bottom: 8rem; display: block;'>"
+    regionBoxHTML += "<div style='border-radius: 50px; color: white; font-size: 17px; line-height: 100%; margin-top: 5px; margin-bottom: 8px; display: block;'>"
     for (let candidateOn in regionData.partyVotesharePercentages)
     {
       let candidateData = regionData.partyVotesharePercentages[candidateOn]
-      regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1rem 4rem; margin: 2rem 0rem; border-radius: " + (candidateOn == 0 ? "3rem 3rem" : "0rem 0rem") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3rem 3rem" : " 0rem 0rem") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5rem;'>" + candidateData.candidate + "</span>"
-      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40rem; max-height: 20rem;' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
+      regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
+      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px;' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
       regionBoxHTML += "</div>"
     }
     regionBoxHTML += "</div>"
 
     if (currentMapType.getMapSettingValue("showTooltips"))
     {
-      regionBoxHTML += "<div style='color: gray; font-size: 15rem; font-style: italic'>"
+      regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
       regionBoxHTML += "Click to save voteshare"
       regionBoxHTML += "</div>"
-      regionBoxHTML += "<div style='padding-bottom: 3rem;'></div>"
+      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
     }
 
     $("#regionbox").html(regionBoxHTML)
@@ -1929,7 +1929,7 @@ async function updateRegionBox(regionID = currentRegionID)
     shiftForVotes: [false, "Shift to show votes"],
     shiftClickToEditEVs: [false, "Shift click to edit EVs"],
     clickToZoom: [false, "Click to expand"],
-    clickToOpenLink: [false, "Click to open<img style='position: relative; left: 5rem; top: 3rem; height: 16rem; width: 16rem;' src='" + currentMapSource.getIconURL(true) + "'>"],
+    clickToOpenLink: [false, "Click to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
     clickToEditVoteshare: [false, "Click to edit voteshare"],
     shiftClickToEditMargin: [false, "Shift click to edit margin"]
   }
@@ -1945,7 +1945,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (regionData.chanceChallenger && regionData.chanceIncumbent)
   {
-    regionBoxHTML += "<span style='font-size: 17rem; padding-top: 5rem; padding-bottom: 5rem; display: block; line-height: 100%;'>Chances<br>"
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 5px; display: block; line-height: 100%;'>Chances<br>"
     regionBoxHTML += "<span style='color: " + politicalParties[incumbentChallengerPartyIDs.challenger].getMarginColors().lean + ";'>" // Hardcoding challenger first
     regionBoxHTML += decimalPadding(Math.round(regionData.chanceChallenger*1000)/10)
     regionBoxHTML += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + politicalParties[incumbentChallengerPartyIDs.incumbent].getMarginColors().lean + ";'>"
@@ -1955,7 +1955,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
   {
-    regionBoxHTML += "<span style='font-size: 17rem; padding-top: 8rem; padding-bottom: 1rem; display: block; line-height: 100%;'>Probability<br></span>"
+    regionBoxHTML += "<span style='font-size: 17px; padding-top: 8px; padding-bottom: 1px; display: block; line-height: 100%;'>Probability<br></span>"
 
     let sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => voteData2.winPercentage-voteData1.winPercentage)
     let filteredSortedPercentages = []
@@ -1977,8 +1977,8 @@ async function updateRegionBox(regionID = currentRegionID)
       return {color: politicalParties[voteData.partyID].getMarginColors().likely, percentage: voteData.winPercentage}
     })
 
-    regionBoxHTML += "<div style='font-size: 17rem; padding-top: 2rem; padding-bottom: 5rem; padding-right: 8rem; display: block; line-height: 100%; border-radius: 50rem;'>"
-    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4rem; color: #fff; border-radius: 3rem; " + "background: " + getGradientCSS(colorPercentages[0].color, (colorPercentages[1] ?? colorPercentages[0]).color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
+    regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+    regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, (colorPercentages[1] ?? colorPercentages[0]).color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
     regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + "%" + "</span>"
     if (filteredSortedPercentages[1])
     {
@@ -2006,15 +2006,15 @@ async function updateRegionBox(regionID = currentRegionID)
 
     if (currentEditingState == EditingState.viewing)
     {
-      regionBoxHTML += "<span style='font-size: 17rem; padding-top: 5rem; padding-bottom: 1rem; display: block; line-height: 100%;'>Voteshare<br></span>"
+      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 1px; display: block; line-height: 100%;'>Voteshare<br></span>"
     }
 
-    regionBoxHTML += "<div style='font-size: 17rem; padding-top: 2rem; padding-bottom: 5rem; padding-right: 8rem; display: block; line-height: 100%; border-radius: 50rem;'>"
+    regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
     let hasVoteCountsForAll = true
 
     sortedPercentages.forEach((voteData, i) => {
-      regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4rem; color: #fff; border-radius: " + (i == 0 ? "3rem 3rem" : "0rem 0rem") + " " + (i == sortedPercentages.length-1 ? "3rem 3rem" : "0rem 0rem") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
       regionBoxHTML += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + "%"
       regionBoxHTML += "</span></span><br>"
 
@@ -2033,7 +2033,7 @@ async function updateRegionBox(regionID = currentRegionID)
     let voteSplitDataToDisplay = regionData.voteSplits
     regionBoxHTML = "</span>"
     voteSplitDataToDisplay.forEach((candidateSplitVoteData, i) => {
-      regionBoxHTML += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "rem; margin-bottom: " + (i < voteSplitDataToDisplay.length-1 ? 0 : 5) + "rem; color: " + politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean + ";'>" + candidateSplitVoteData.candidate + ": " + candidateSplitVoteData.votes + "</div>"
+      regionBoxHTML += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < voteSplitDataToDisplay.length-1 ? 0 : 5) + "px; color: " + politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean + ";'>" + candidateSplitVoteData.candidate + ": " + candidateSplitVoteData.votes + "</div>"
     })
   }
 
@@ -2052,7 +2052,7 @@ async function updateRegionBox(regionID = currentRegionID)
         if (i % districtsPerLine == 0)
         {
           var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
-          regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4rem" : "") + "'>"
+          regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
         }
         if (i % districtsPerLine > 0)
         {
@@ -2063,7 +2063,7 @@ async function updateRegionBox(regionID = currentRegionID)
         var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
         var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
-        regionBoxHTML += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2rem; border-radius: 2rem; border: solid " + (zoomingData[districtID].flip ? "gold 3rem; width: 11rem; height: 11rem;" : "gray 1rem; width: 15rem; height: 15rem;") + " background-color: " + marginColor + "'></div>"
+        regionBoxHTML += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
       })
     }
     regionBoxHTML += "<br></div>"
@@ -2081,7 +2081,7 @@ async function updateRegionBox(regionID = currentRegionID)
     Object.keys(tooltipsToShow).forEach((tooltipID) => {
       if (tooltipsToShow[tooltipID][0])
       {
-        regionBoxHTML += "<div style='color: gray; font-size: 15rem; font-style: italic'>"
+        regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
         regionBoxHTML += tooltipsToShow[tooltipID][1]
         regionBoxHTML += "</div>"
 
@@ -2090,7 +2090,7 @@ async function updateRegionBox(regionID = currentRegionID)
     })
     if (isShowingSomeTooltip)
     {
-      regionBoxHTML += "<div style='padding-bottom: 3rem;'></div>"
+      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
     }
   }
 

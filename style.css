@@ -293,6 +293,18 @@ body {
   text-align: center;
 }
 
+.boxfixed {
+  border: 1px solid gray;
+  /* max-width: 200rem; */
+  background-color: rgba(51, 51, 51, 0.9);
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
 .loader {
   border: 8rem solid #999;
   /* Grey */
