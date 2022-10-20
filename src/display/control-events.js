@@ -300,7 +300,7 @@ function removeActiveClassFromDropdownButton()
 document.addEventListener('keypress', async function(e) {
   if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
   {
-    await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)]])
+    await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)-1]])
     if (currentRegionID)
     {
       updateRegionBox()
