@@ -407,10 +407,6 @@ document.addEventListener('keypress', async function(e) {
       toggleEditing()
     }
   }
-  else if (e.key == "r" && !isEditingTextbox())
-  {
-    resizeElements()
-  }
   else if (shiftNumberKeycodes.includes(e.key) && shiftNumberKeycodes.indexOf(e.key) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
     var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.key)]

@@ -249,7 +249,7 @@ async function reloadForNewMapType(initialLoad)
 
   $("#loader").hide()
   $("#loader-circle-container").hide()
-  resizeElements(false)
+  updateSVGViewbox()
 
   $("#mapZoomControls").trigger('hide')
 
@@ -400,72 +400,6 @@ function setOutlineDivProperties()
       rightClickRegion(e.target)
     })
   })
-}
-
-function resizeElements(initilizedPieChart)
-{
-  // var windowWidth = $(window).width()
-
-  //1.0*svgdatawidth*zoom/windowwidth == 0.6
-  // const defaultMapZoom = 120.634/100
-  // var mapZoom = 0.62*windowWidth/$("#svgdata").width()
-  // var topnavZoom = 0.85*mapZoom
-  // if (navigator.userAgent.indexOf("Firefox") != -1)
-  // {
-  //   $("#mapcontainer").css("transform", "scale(" + mapZoom + ")")
-  //   $("#mapcontainer").css("transform-origin", "0 0")
-  // }
-  // else
-  // {
-  //   $("#mapcontainer").css("zoom", (mapZoom*100) + "%")
-  //   $("#helpbox").css("zoom", (mapZoom*100/defaultMapZoom) + "%")
-  //
-  //   $(".topnav").css("zoom", (topnavZoom*100) + "%")
-  // }
-
-  // $("#mapZoomControls").css("height", $("#svgdata").height())
-
-  // var mapWidth = $("#svgdata").width()
-  // var originalMapHeight = $("#svgdata").height()
-
-  // $(".slider").width(mapWidth*0.85)
-
-  // setSliderTickMarginShift("dataMapDateSliderContainer", "dataMapDateSlider", "dataMapSliderStepList")
-  // setSliderDateDisplayMarginShift("dateDisplay", "sliderDateDisplayContainer", "dataMapDateSlider", originalMapHeight, mapZoom)
-
-  // setSliderTickMarginShift("firstCompareSliderDateDisplayContainer", "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList")
-  // setSliderDateDisplayMarginShift("firstCompareDateDisplay", "firstCompareSliderDateDisplayContainer", "firstCompareDataMapDateSlider", originalMapHeight, mapZoom)
-  // setSliderTickMarginShift("secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList")
-  // setSliderDateDisplayMarginShift("secondCompareDateDisplay", "secondCompareSliderDateDisplayContainer", "secondCompareDataMapDateSlider", originalMapHeight, mapZoom)
-
-  // if (navigator.userAgent.indexOf("Firefox") != -1)
-  // {
-  //   $("#totalsPieChart").width(windowWidth-windowWidth*0.15-mapWidth)
-  //   $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
-  // }
-  // else
-  // {
-  //   $("#totalsPieChart").width(windowWidth-windowWidth*0.12-mapWidth)
-  //   $("#totalsPieChart").height(windowWidth-windowWidth*0.09-mapWidth)
-  // }
-  // $("#totalsPieChart").css("background-size", $("#totalsPieChart").width()*totalsPieChartCutoutPercent/100.0*0.5)
-  // $("#totalsPieChart").css("background-position", "center")
-  // $("#totalsPieChart").css("background-repeat", "no-repeat")
-  //
-  // $("#helpboxcontainer").css('width', $("#totalsPieChart").width())
-  // $("#partyDropdownsBoxContainer").css('width', $("#totalsPieChart").width())
-  // $("#partyDropdownsFlexbox").css('min-height', (110*mapZoom/defaultMapZoom))
-  //
-  // $("#discordInvite").css("width", $("#totalsPieChart").width())
-  // $("#discordInvite").css("border-radius", "5rem")
-  // $("#discordInvite").css("border", "1rem solid gray")
-
-  updateSVGViewbox()
-
-  if (initilizedPieChart == true || initilizedPieChart == null)
-  {
-    updateTotalsPieChart()
-  }
 }
 
 function updateSVGViewbox(svgDiv = $("#mapcontainer #svgdata"), setOutlines = false)
