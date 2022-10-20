@@ -67,7 +67,9 @@
     font:normal normal 400 normal 16px/16px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
     margin:0;
     padding:10px 15px 10px 10px;
-    display:inline-block
+    display:inline-block;
+    border-radius: 5rem;
+    border: 1rem solid gray;
 }
 #offlineInd,#onlineInd{
     height:8px;

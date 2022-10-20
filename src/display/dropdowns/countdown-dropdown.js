@@ -21,7 +21,7 @@ function createCountdownDropdownItems()
   for (var timeName in countdownTimes)
   {
     $("#countdownsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#countdownsDropdownContainer").append("<a id='" + timeName + "-countdown' style='padding-top: 14px; min-height: 25px;' onclick='selectCountdownTime(\"" + timeName + "\", this)'>" + timeName + "</a>")
+    $("#countdownsDropdownContainer").append("<a id='" + timeName + "-countdown' style='padding-top: 14rem; min-height: 25rem;' onclick='selectCountdownTime(\"" + timeName + "\", this)'>" + timeName + "</a>")
   }
 
   updateCountdownTimer()
@@ -78,5 +78,5 @@ function updateCountdownTimer()
   var minutesUntilDay = Math.floor(timeUntilDay/(1000*60)%60)
   var secondsUntilDay = Math.floor(timeUntilDay/1000%60)
 
-  $("#countdownDisplay").html((timeHasPassed ? "+" : "–") + " " + daysUntilDay + "<span style='font-size: 16px;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16px;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16px;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16px;'> s" + "</span>")
+  $("#countdownDisplay").html((timeHasPassed ? "+" : "–") + " " + daysUntilDay + "<span style='font-size: 16rem;'> day" + (daysUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(hoursUntilDay) + "<span style='font-size: 16rem;'> hr" + (hoursUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(minutesUntilDay) + "<span style='font-size: 16rem;'> min" + (minutesUntilDay == 1 ? "" : "s") + "</span>&nbsp;&nbsp;" + zeroPadding(secondsUntilDay) + "<span style='font-size: 16rem;'> s" + "</span>")
 }

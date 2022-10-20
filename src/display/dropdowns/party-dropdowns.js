@@ -34,14 +34,14 @@ function createPartyDropdowns()
     }
     else if (partyIDNum%2 == 1)
     {
-      dropdownDiv += '<div style="width: 15px; float: left">'
+      dropdownDiv += '<div style="width: 15rem; float: left">'
       dropdownDiv += '<a style="visibility: hidden"></a>'
       dropdownDiv += '</div>'
     }
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
-      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'px; padding: 12px 0px; margin: 0px; background-color: transparent; border: 2px dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'rem; padding: 12rem 0rem; margin: 0rem; background-color: transparent; border: 2rem dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
       continue
     }
@@ -50,13 +50,13 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'px; height: 51px; display: flex; align-items: center; justify-content: center; padding: 0px 0px; margin: 0px; background-color: ' + marginColors.safe + '; text-overflow: ellipsis; white-space: nowrap;">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'rem; height: 51rem; display: flex; align-items: center; justify-content: center; padding: 0rem 0rem; margin: 0rem; background-color: ' + marginColors.safe + '; text-overflow: ellipsis; white-space: nowrap;">' + currentPoliticalParty.getID() + '</a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'px; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'px' : '') + '">'
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4px; margin-left: 0px; overflow: hidden;">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'rem; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'rem' : '') + '">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4rem; margin-left: 0rem; overflow: hidden;">'
 
     if (!shouldReverseOrder)
     {
@@ -66,20 +66,20 @@ function createPartyDropdowns()
     switch (currentEditingState)
     {
       case EditingState.viewing:
-      dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8px 0px;">' + currentPoliticalParty.getNames()[0] + '</a>'
+      dropdownDiv += '<a style="display:flex; justify-content:center; padding: 8rem 0rem;">' + currentPoliticalParty.getNames()[0] + '</a>'
       dropdownDiv += '<div class="dropdown-separator"></div>'
 
       dropdownDiv += createPartyMarginColorPickers(currentPoliticalParty.getID())
       dropdownDiv += '<div class="dropdown-separator"></div>'
 
       var colorPreset = getKeyByValue(PoliticalPartyColors, currentPoliticalParty.getMarginColors(), true) || 'custom'
-      dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8px 0px;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
+      dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-color-preset" onclick="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, 1)" oncontextmenu="cyclePartyColorPreset(\'' + currentPoliticalParty.getID() + '\', this, -1); return false" style="display:flex; justify-content:center; padding: 8rem 0rem;" data-color-preset="' + colorPreset + '">Preset: ' + colorPreset.toTitle() + '</a>'
 
       if (currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
       {
         dropdownDiv += '<div class="dropdown-separator"></div>'
 
-        dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8px 0px">Delete</a>'
+        dropdownDiv += '<a onclick="deleteParty(\'' + currentPoliticalParty.getID() + '\')" class="deletebutton" style="display:flex; justify-content:center; padding: 8rem 0rem">Delete</a>'
       }
       break
 
@@ -87,7 +87,7 @@ function createPartyDropdowns()
       if (displayRegionDataArray[nationalPopularVoteID] && displayRegionDataArray[nationalPopularVoteID].partyVotesharePercentages)
       {
         let currentPopularVote = getCurrentPopularVote(currentPoliticalParty.getID())
-        dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-popular-vote" style="display:flex; justify-content:center; align-items: center; padding: 8px 0px; min-height: 31px" onclick="togglePartyPopularVoteEditing(\'' + currentPoliticalParty.getID() + '\')">' + decimalPadding(roundValue(currentPopularVote, 2), 2) + '%</a>'
+        dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '-popular-vote" style="display:flex; justify-content:center; align-items: center; padding: 8rem 0rem; min-height: 31rem" onclick="togglePartyPopularVoteEditing(\'' + currentPoliticalParty.getID() + '\')">' + decimalPadding(roundValue(currentPopularVote, 2), 2) + '%</a>'
       }
       break
     }
@@ -183,7 +183,7 @@ function createPartyDropdowns()
 function createPartyMarginColorPickers(partyID)
 {
   var marginColors = politicalParties[partyID].getMarginColors()
-  var pickersDiv = '<a id="' + partyID + '-color-pickers" style="display:flex; justify-content:center; align-items:center; padding: 0px 0px; height: 39px">'
+  var pickersDiv = '<a id="' + partyID + '-color-pickers" style="display:flex; justify-content:center; align-items:center; padding: 0rem 0rem; height: 39rem">'
   for (var marginName in marginColors)
   {
     pickersDiv += '<button id="' + partyID + '-' + marginName + '-color-picker" class="partyColorPickerButton" data-jscolor="{preset:\'small dark\', position:\'top\', value:\'' + marginColors[marginName] + '\', onChange:\'updatePartyColor(\\\'' + partyID + '\\\', \\\'' + marginName + '\\\')\'}" oncontextmenu="toggleMarginHexColorEditing(\'' + partyID + '\', \'' + marginName + '\'); jscolor.hide(); return false;"></button>'
@@ -530,7 +530,7 @@ function displayPartyTotals(overrideCreateDropdowns)
     if (politicalParties[partyID] == null) { continue }
     let partyTotalText = politicalParties[partyID].getCandidateName() + " (<span style='font-weight: bold'>" + (partyTotals[partyID] || 0) + "</span>)"
     $("#" + partyID).html(partyTotalText)
-    $("#" + partyID).css('font-size', getMaxFontSize(partyTotalText, ["17px", "16px", "15px", "14px", "13px"], partyDropdownWidth*0.92))
+    $("#" + partyID).css('font-size', getMaxFontSize(partyTotalText, ["17rem", "16rem", "15rem", "14rem", "13rem"], partyDropdownWidth*0.92))
   }
 }
 

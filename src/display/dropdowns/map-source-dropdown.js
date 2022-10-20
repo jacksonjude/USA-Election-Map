@@ -12,18 +12,18 @@ function createMapSourceDropdownItems()
 
     var divStringToAppend = ""
     divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' style='display: flex; justify-content: space-between; align-items: center' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "<span style='display: flex; align-items: center'>"
-    divStringToAppend += "<img style='width: 20px; height: 20px' src='" + mapSourceIcon + "' />" + "<span style='margin-left: 8px'>" + mapSourceName + "</span></span>"
+    divStringToAppend += "<img style='width: 20rem; height: 20rem' src='" + mapSourceIcon + "' />" + "<span style='margin-left: 8rem'>" + mapSourceName + "</span></span>"
     divStringToAppend += "<span style='display: flex; align-items: center'>"
 
     if (mapSourceID != currentCustomMapSource.getID())
     {
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='width: 20px; height: 20px; margin: 0 8px 0 0' />"
-      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 24px; height: 24px;'/>"
+      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='width: 20rem; height: 20rem; margin: 0 8rem 0 0' />"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 24rem; height: 24rem;'/>"
     }
     else
     {
-      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-download-icon' class='status' src='./assets/icon-download.png' style='width: 24px; height: 24px; margin-right: 6px;' />"
-      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-upload-icon' class='status' src='./assets/icon-upload.png' style='width: 24px; height: 24px;' />"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-download-icon' class='status' src='./assets/icon-download.png' style='width: 24rem; height: 24rem; margin-right: 6rem;' />"
+      divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-upload-icon' class='status' src='./assets/icon-upload.png' style='width: 24rem; height: 24rem;' />"
     }
 
     divStringToAppend += "</span>"

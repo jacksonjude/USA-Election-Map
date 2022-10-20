@@ -14,8 +14,8 @@ function createMapTypeDropdownItems()
 
     var mapType = mapTypes[typeID]
 
-    var divStringToAppend = "<a onclick='setMapType(\"" + typeID + "\")' style='padding: 0; padding-left: 3px; padding-right: 3px; margin-top: 0px;'>"
-    divStringToAppend += "<img src='" + mapType.getIconURL() + "' style='position: relative; top: 2px; padding-top: 1px; width: 45px; height: 45px;'/>"
+    var divStringToAppend = "<a onclick='setMapType(\"" + typeID + "\")' style='padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;'>"
+    divStringToAppend += "<img src='" + mapType.getIconURL() + "' style='position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;'/>"
     divStringToAppend += "</a>"
 
     $("#mapTypesDropdownContainer").append(divStringToAppend)
