@@ -176,6 +176,8 @@ class MapSource
             }
           }, false)
 
+          xhr.overrideMimeType("text/plain; charset=x-user-defined")
+
           return xhr
         },
         type: 'GET',

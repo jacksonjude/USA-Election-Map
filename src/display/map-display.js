@@ -826,6 +826,8 @@ async function executeDisplayMapQueue()
 
 async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 {
+  if (!currentMapSource) return
+
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
   var mapDates = currentMapSource.getMapDates()
