@@ -3337,7 +3337,8 @@ function createGovernorMapSources()
     1654041600000: "Ps24mzQlaXM",
     1658188800000: "RrRscvpmwEY",
     1660176000000: "d9bZ6IQBrHI",
-    1662336000000: "LlpgR8l-b7g"
+    1662336000000: "LlpgR8l-b7g",
+    1666224000000: "Fre640zYHC4"
   }
 
   var LTEGovernorProjectionMapSource = new MapSource(
