@@ -1199,7 +1199,7 @@ function createPresidentialMapSources()
         var row = countyRows[rowNum]
 
         var candidateName = row[columnMap.candidateName]
-        var candidateVotes = parseFloat(row[columnMap.candidateVotes])
+        var candidateVotes = Math.round(parseFloat(row[columnMap.candidateVotes]))
         var currentVoteshare = candidateVotes/totalCountyVotes*100
 
         var currentPartyName = row[columnMap.partyID]
