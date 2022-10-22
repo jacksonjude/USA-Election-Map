@@ -587,6 +587,7 @@ class MapSource
         for (let candidateName in candidatesToAdd)
         {
           if (candidatesToAdd[candidateName] != regionData.partyID && regionData.margin != 0 && !regionData.partyVotesharePercentages) { continue }
+          if (regionData.margin == 0 && regionData.partyID == TossupParty.getID() && candidatesToAdd[candidateName] != IndependentGenericParty.getID()) { continue }
 
           for (let columnTitleNum in columnTitles)
           {

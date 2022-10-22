@@ -1953,7 +1953,7 @@ async function updateRegionBox(regionID = currentRegionID)
     regionBoxHTML += "%</span></span>"
   }
 
-  if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
+  if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.length > 0 && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
   {
     regionBoxHTML += "<span style='font-size: 17px; padding-top: 8px; padding-bottom: 1px; display: block; line-height: 100%;'>Probability<br></span>"
 
@@ -1991,7 +1991,7 @@ async function updateRegionBox(regionID = currentRegionID)
   if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
   {
     let sortedPercentages
-    if (regionData.partyVotesharePercentages[0].order !== undefined)
+    if (regionData.partyVotesharePercentages?.[0]?.order !== undefined)
     {
       sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
         return voteData1.order - voteData2.order
@@ -2214,10 +2214,25 @@ function toggleRegionVoteshareEditing(regionID, regionData)
   let baseRegionID = getBaseRegionID(regionID).baseID
   editingRegionVotesharePercentages = !editingRegionVotesharePercentages || (voteshareEditRegion != baseRegionID && regionData.partyVotesharePercentages)
 
+  if (regionData && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.length == 0))
+  {
+    regionData.partyVotesharePercentages = [{partyID: IndependentGenericParty.getID(), candidate: IndependentGenericParty.getCandidateName(), voteshare: 0.0}]
+  }
   regionData && regionData.partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
 
   if (editingRegionVotesharePercentages)
   {
+    if (regionData)
+    {
+      for (let partyID of dropdownPoliticalPartyIDs)
+      {
+        if (!regionData.partyVotesharePercentages.some(cand => cand.partyID == partyID))
+        {
+          regionData.partyVotesharePercentages.push({partyID: partyID, candidate: politicalParties[partyID].getCandidateName(), voteshare: 0.0})
+        }
+      }
+    }
+
     voteshareEditRegion = baseRegionID
     updateRegionBoxPosition(currentMouseX, currentMouseY)
     updateRegionBox()
@@ -2246,7 +2261,7 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
     let partyVotesharePercentages = regionData.partyVotesharePercentages.concat()
     partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
     regionData.margin = partyVotesharePercentages.length < 2 ? partyVotesharePercentages[0].voteshare : partyVotesharePercentages[0].voteshare-partyVotesharePercentages[1].voteshare
-    regionData.partyID = partyVotesharePercentages[0].partyID
+    regionData.partyID = partyVotesharePercentages.some(voteshareData => voteshareData.voteshare != 0) ? partyVotesharePercentages[0].partyID : TossupParty.getID()
 
     $(textBoxDiv).parent().parent().css("background", getGradientCSS(politicalParties[currentVoteshareData.partyID].getMarginColors().safe, politicalParties[currentVoteshareData.partyID].getMarginColors().lean, currentVoteshareData.voteshare))
 
