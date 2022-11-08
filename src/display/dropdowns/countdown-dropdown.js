@@ -1,11 +1,11 @@
-const electionDayTime2020 = 1604361600000 //1604390400000 PST
+const electionDayTime2020 = 1604444400000 //1604390400000 PST
 const electorsCastVotesTime = 1607965200000
 const congressCountsVotesTime = 1609952400000
 const inaugurationDayTime2021 = 1611162000000
 
-const electionDayTime2021 = 1635868800000
-const electionDayTime2022 = 1667926800000
-const electionDayTime2024 = 1730826000000
+const electionDayTime2021 = 1635890400000
+const electionDayTime2022 = 1667948400000
+const electionDayTime2024 = 1730847600000
 
 const countdownTimes = {
   "2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
