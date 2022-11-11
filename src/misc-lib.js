@@ -405,3 +405,8 @@ String.prototype.toTitle = function() {
 Date.prototype.getUTCAdjustedTime = function() {
   return this.getTime()-1000*60*this.getTimezoneOffset()
 }
+
+function isString(object)
+{
+  return typeof object === 'string' || object instanceof String || object === null || object === undefined
+}

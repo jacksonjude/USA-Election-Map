@@ -882,6 +882,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     regionData.flip = currentMapDataForDate[regionNum].flip
     regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
     regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
+    regionData.reportingPercent = currentMapDataForDate[regionNum].reportingPercent
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }
@@ -2024,6 +2025,11 @@ async function updateRegionBox(regionID = currentRegionID)
     tooltipsToShow.shiftForVotes[0] = hasVoteCountsForAll
 
     regionBoxHTML += "</div>"
+  }
+
+  if (regionData.reportingPercent)
+  {
+    regionBoxHTML += "<div style='color: gray; font-size: 16px; margin-top: -5px; margin-bottom: 5px'>" + regionData.reportingPercent + "% reporting" + "</div>"
   }
 
   let splitVoteDisplayOptions = currentMapSource.getSplitVoteDisplayOptions()

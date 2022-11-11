@@ -89,7 +89,11 @@ class FilesDatabase
             })
           }
 
-          if (updatedTime && self.sourceUpdatedTimesData && updatedTime >= self.sourceUpdatedTimesData[sourceID])
+          if (self.sourceUpdatedTimesData && self.sourceUpdatedTimesData[sourceID] == 0)
+          {
+            resolve(null)
+          }
+          else if (updatedTime && self.sourceUpdatedTimesData && updatedTime >= self.sourceUpdatedTimesData[sourceID])
           {
             resolve(textResult)
           }
