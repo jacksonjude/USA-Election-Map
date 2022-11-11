@@ -602,7 +602,7 @@ function updateTotalsPieChart(regionDataArray)
       partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
         let formattedRegionMargin = Math.round(regionData.margin*10)/10
         formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
-        partyStrings.push(regionData.region + " +" + formattedRegionMargin + "\n")
+        partyStrings.push((currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionData.region) : regionData.region) + " +" + formattedRegionMargin + "\n")
       })
 
       if (currentDirection == PieChartDirection.clockwise)
