@@ -2410,10 +2410,12 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
 
 async function loadCompareMapSource(sourceID)
 {
-  let mapSource = mapSources[sourceID]
+  await downloadDataForMapSource(sourceID, getIconDivsToUpdateArrayForSourceID(sourceID))
+
+  // let mapSource = mapSources[sourceID]
   // let voteshareCutoff = mapSource.voteshareCutoffMargin
   // mapSource.voteshareCutoffMargin = null
-  await mapSource.loadMap()
+  // await mapSource.loadMap()
   // mapSource.voteshareCutoffMargin = voteshareCutoff
 }
 
