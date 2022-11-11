@@ -2369,7 +2369,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   {
     await loadCompareMapSource(compareMapSourceIDArray[0])
   }
-  if (compareSourcesToUpdate[1] && compareSourcesToUpdate[1] != compareSourcesToUpdate[0])
+  if (compareSourcesToUpdate[1] && compareMapSourceIDArray[1] != compareMapSourceIDArray[0])
   {
     await loadCompareMapSource(compareMapSourceIDArray[1])
   }
@@ -2411,10 +2411,10 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
 async function loadCompareMapSource(sourceID)
 {
   let mapSource = mapSources[sourceID]
-  let voteshareCutoff = mapSource.voteshareCutoffMargin
-  mapSource.voteshareCutoffMargin = null
+  // let voteshareCutoff = mapSource.voteshareCutoffMargin
+  // mapSource.voteshareCutoffMargin = null
   await mapSource.loadMap()
-  mapSource.voteshareCutoffMargin = voteshareCutoff
+  // mapSource.voteshareCutoffMargin = voteshareCutoff
 }
 
 function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
