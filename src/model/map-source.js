@@ -3037,10 +3037,12 @@ function createSenateMapSources()
     senateMapSourceIDs.push(CustomMapSource.getID())
   }
 
-  const kPastElectionsVsPastElections = 1
-  const k538ProjectionVsPastElections = 2
+  const kCNNResultsVS538Projection = 1
+  const kPastElectionsVsPastElections = 2
+  const k538ProjectionVsPastElections = 3
 
   var defaultSenateCompareSourceIDs = {}
+  defaultSenateCompareSourceIDs[kCNNResultsVS538Projection] = [CNNSenateResultsMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID()]
   defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
   defaultSenateCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
@@ -3894,10 +3896,12 @@ function createGovernorMapSources()
     governorMapSourceIDs.push(CustomMapSource.getID())
   }
 
-  const kPastElectionsVsPastElections = 1
-  const k538ProjectionVsPastElections = 2
+  const kCNNResultsVS538Projection = 1
+  const kPastElectionsVsPastElections = 2
+  const k538ProjectionVsPastElections = 3
 
   var defaultGovernorCompareSourceIDs = {}
+  defaultGovernorCompareSourceIDs[kCNNResultsVS538Projection] = [CNNGovernorResultsMapSource.getID(), FiveThirtyEightGovernorProjectionMapSource.getID()]
   defaultGovernorCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
   defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
@@ -4868,10 +4872,12 @@ function createHouseMapSources()
     houseMapSourceIDs.push(CustomMapSource.getID())
   }
 
-  const kPastElectionsVsPastElections = 1
-  const k538ProjectionVsPastElections = 2
+  const kCNNResultsVS538Projection = 1
+  const kPastElectionsVsPastElections = 2
+  const k538ProjectionVsPastElections = 3
 
   var defaultHouseCompareSourceIDs = {}
+  defaultHouseCompareSourceIDs[kCNNResultsVS538Projection] = [CNNHouseResultsMapSource.getID(), FiveThirtyEightHouseProjectionMapSource.getID()]
   defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
   defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
