@@ -17,7 +17,7 @@ function createMapSourceDropdownItems()
 
     if (mapSourceID != currentCustomMapSource.getID())
     {
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' onclick='addCompareMapSource(\"" + mapSourceID + "\", \"" + mapSourceIDNoSpace + "\")' style='width: 20rem; height: 20rem; margin: 0 8rem 0 0' />"
+      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' style='width: 20rem; height: 20rem; margin: 0 8rem 0 0' />"
       divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 24rem; height: 24rem;'/>"
     }
     else
@@ -41,7 +41,7 @@ function createMapSourceDropdownItems()
       $("#" + mapSourceIDNoSpace + "-compare")[0].addEventListener('click', function() {
         let mapSource = $(this).data("mapsource")
         let mapSourceNoSpace = mapSource.replace(/\s/g, '')
-        addCompareMapSource(mapSourceID, mapSourceNoSpace)
+        addCompareMapSource(mapSource, mapSourceNoSpace)
       })
     }
     else
