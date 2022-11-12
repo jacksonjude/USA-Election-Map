@@ -46,12 +46,16 @@ Then open the address provided in the Terminal window (by default, it seems to b
 
 
 ## TODO List
+
+This is an outdated list. See the [project issue board](https://github.com/users/jacksonjude/projects/2) for upcoming features.
+
 - [x] Past senate election results & 2022 senate projections
   - [x] More past senate election results (1960-1974)
 - [x] More past election results
   - [x] 1960-1972 presidential elections
   - [x] 1912-1956 presidential elections
   - [x] 1856-1908 presidential elections
+  - [x] 1788-1856 presidential elections
 - [x] Past governor elections & 2022 governor projections (1980-2020)
 - [x] Full third-party support in past results and custom maps
   - [x] Display in voteshare
@@ -59,19 +63,12 @@ Then open the address provided in the Terminal window (by default, it seems to b
   - [x] Display in past result maps
   - [x] Add & Edit parties in custom map
   - [x] Shift & compare modes for multiple parties
-- [ ] Custom map improvements
+- [x] Custom map improvements
   - [x] Directly editable margins
   - [x] Direct electoral vote editing
   - [x] Set map-wide electoral votes from decade
-  - [ ] Add multiple dates, edit dates, create & remove dates
-  - [ ] Split electoral votes between multiple candidates
 - [x] National popular vote totals for past elections
 - [x] Past house election results
-- [ ] Presidential election results by county
-- [ ] Profiles and custom map sharing
-- [ ] Popularity rating source (by state)
-- [ ] Custom countdown timer events
-- [ ] 2024 presidential primaries
-  - [ ] Past presidential primaries?
+- [x] Presidential election results by county
 
 If you have any questions, suggestions, or feature ideas, feel free to open an issue here on GitHub. Alternatively, you can email **jjcooley0@gmail.com**.
