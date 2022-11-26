@@ -268,7 +268,7 @@ async function reloadForNewMapType(initialLoad)
 
 function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
 {
-  let loadSVGFilePromise = new Promise(async (resolve) => {
+  let loadSVGFilePromise = new Promise((resolve) => {
     if ($("#loader-circle-container").is(":hidden")) $("#loader").show()
 
     if (fadeForNewSVG)
@@ -287,8 +287,9 @@ function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
       }
     }
 
-    let svgPath = await currentMapType.loadSVG()
-    handleNewSVG(resolve, svgPath)
+    currentMapType.loadSVG().then((svgPath) => {
+      handleNewSVG(resolve, svgPath)
+    })
   })
 
   return loadSVGFilePromise
@@ -561,73 +562,67 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
   await loadDataMap(...loadDataMapArgs)
 }
 
-function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
+async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
-  var loadDataMapPromise = new Promise(async (resolve) => {
-    $("#dataMapDateSliderContainer").hide()
-    $("#dateDisplay").hide()
+  $("#dataMapDateSliderContainer").hide()
+  $("#dateDisplay").hide()
 
-    if (selectedDropdownDivID != "mapSourcesDropdownContent")
-    {
-      $("#sourceToggleButton").removeClass('active')
-    }
+  if (selectedDropdownDivID != "mapSourcesDropdownContent")
+  {
+    $("#sourceToggleButton").removeClass('active')
+  }
 
-    if (editMarginID)
-    {
-      toggleMarginEditing(editMarginID)
-    }
-    if (isEnteringShiftAmount)
-    {
-      toggleEnteringShiftAmount()
-    }
-    if (editCandidateNamePartyID)
-    {
-      toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
-    }
-    if (editPartyMarginColor)
-    {
-      toggleMarginHexColorEditing()
-    }
-    if (editPartyPopularVote)
-    {
-      togglePartyPopularVoteEditing(editPartyPopularVote)
-    }
-    editingRegionEVs = false
-    editingRegionMarginValue = false
-    editingRegionVotesharePercentages = false
-    voteshareEditRegion = null
-    selectedVoteshareCandidate = null
+  if (editMarginID)
+  {
+    toggleMarginEditing(editMarginID)
+  }
+  if (isEnteringShiftAmount)
+  {
+    toggleEnteringShiftAmount()
+  }
+  if (editCandidateNamePartyID)
+  {
+    toggleCandidateNameEditing(editCandidateNamePartyID, null, true)
+  }
+  if (editPartyMarginColor)
+  {
+    toggleMarginHexColorEditing()
+  }
+  if (editPartyPopularVote)
+  {
+    togglePartyPopularVoteEditing(editPartyPopularVote)
+  }
+  editingRegionEVs = false
+  editingRegionMarginValue = false
+  editingRegionVotesharePercentages = false
+  voteshareEditRegion = null
+  selectedVoteshareCandidate = null
 
-    currentMapType.setCurrentMapSourceID(currentMapSource.getID())
+  currentMapType.setCurrentMapSourceID(currentMapSource.getID())
 
-    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
-    var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
+  var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
+  var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
-    if (!loadedSuccessfully) { resolve(); return }
+  if (!loadedSuccessfully) { return }
 
-    // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
-    shouldSetToMax = true
+  // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
+  shouldSetToMax = true
 
-    setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
-    await displayDataMap(null, reloadPartyDropdowns ?? true)
-    $("#dataMapDateSliderContainer").show()
-    $("#dateDisplay").show()
+  setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
+  await displayDataMap(null, reloadPartyDropdowns ?? true)
+  $("#dataMapDateSliderContainer").show()
+  $("#dateDisplay").show()
 
-    $("#totalsPieChart").attr('onclick', "!currentMapZoomRegion ? currentMapSource.openHomepageLink(currentSliderDate) : currentMapSource.openRegionLink(currentMapZoomRegion, currentSliderDate)")
+  $("#totalsPieChart").attr('onclick', "!currentMapZoomRegion ? currentMapSource.openHomepageLink(currentSliderDate) : currentMapSource.openRegionLink(currentMapZoomRegion, currentSliderDate)")
 
-    if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
-    {
-      $("#totalsPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
-    }
-    else
-    {
-      $("#totalsPieChart").css("background-image", "")
-    }
-
-    resolve()
-  })
-
-  return loadDataMapPromise
+  if (currentMapSource.getIconURL() != null && currentMapSource.getIconURL() != "none")
+  {
+    $("#totalsPieChart").css("background-image", "url(" + currentMapSource.getIconURL() + ")")
+  }
+  else
+  {
+    $("#totalsPieChart").css("background-image", "")
+  }
 }
 
 function createCSVParsingIndicator(color)

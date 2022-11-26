@@ -298,7 +298,7 @@ function removeActiveClassFromDropdownButton()
 }
 
 document.addEventListener('keypress', async function(e) {
-  if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
+  if (currentEditingState == EditingState.viewing && !isEditingTextbox() && !selectedDropdownDivID && !isNaN(parseInt(e.key)) && parseInt(e.key) > 0 && parseInt(e.key) < mapSourceIDs.length)
   {
     await setMapSource(mapSources[mapSourceIDs[parseInt(e.key)-1]])
     if (currentRegionID)
@@ -310,7 +310,7 @@ document.addEventListener('keypress', async function(e) {
   {
     clearMap()
   }
-  else if (selectedDropdownDivID && parseInt(e.key) != NaN && parseInt(e.key) > 0)
+  else if (selectedDropdownDivID && !isNaN(parseInt(e.key)) && parseInt(e.key) > 0)
   {
     switch (selectedDropdownDivID)
     {
@@ -355,7 +355,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
   }
-  else if (currentEditingState == EditingState.editing && !isEditingTextbox() && parseInt(e.key) != NaN && parseInt(e.key) <= dropdownPoliticalPartyIDs.length)
+  else if (currentEditingState == EditingState.editing && !isEditingTextbox() && !isNaN(parseInt(e.key)) && parseInt(e.key) <= dropdownPoliticalPartyIDs.length)
   {
     var partyToSelect = parseInt(e.key)
     if (partyToSelect == 0)

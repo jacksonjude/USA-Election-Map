@@ -24,7 +24,7 @@ function createPartyDropdowns()
   }
 
   $("#partyDropdownsContainer").html("")
-  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  for (let partyIDNum in dropdownPoliticalPartyIDs)
   {
     var dropdownDiv = ""
 
@@ -120,7 +120,7 @@ function createPartyDropdowns()
   }
   $("#partyDropdownsContainer").append("</div>")
 
-  for (var partyIDNum in dropdownPoliticalPartyIDs)
+  for (let partyIDNum in dropdownPoliticalPartyIDs)
   {
     $("#" + dropdownPoliticalPartyIDs[partyIDNum]).hover(function() {
       if (this.id == addButtonPartyID)

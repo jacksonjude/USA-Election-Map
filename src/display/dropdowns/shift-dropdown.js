@@ -3,7 +3,7 @@ var isEnteringShiftAmount = false
 function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldShiftNPV)
 {
   if (!marginToAdd) { return }
-  var partyToShift = partyToShift || selectedParty
+  partyToShift = partyToShift || selectedParty
   if (partyToShift.getID() == TossupParty.getID()) { return }
 
   if (currentEditingState != EditingState.editing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }

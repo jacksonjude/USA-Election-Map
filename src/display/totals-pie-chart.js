@@ -63,20 +63,20 @@ var partyOrdering = [
   {partyID: DemocraticRepublicanParty.getID(), direction: PieChartDirection.counterclockwise}
 ]
 
-var totalsPieChartCutoutPercent = 55
+const totalsPieChartCutoutPercent = 55
 const minTotalsPieChartSliceLabelPercent = 0.04
 const minTotalsPieChartSliceLabelBrightness = 1.0
 
 function setupTotalsPieChart()
 {
-  for (var customPartyOn=1; customPartyOn <= maxPartiesToDisplay; customPartyOn++)
+  for (let customPartyOn=1; customPartyOn <= maxPartiesToDisplay; customPartyOn++)
   {
     insertPartyIntoTotalsPieChartOrdering(customPartyIDPrefix + customPartyOn)
   }
 
-  var data = setupTotalsPieChartDatasets()
+  let data = setupTotalsPieChartDatasets()
 
-  var options = {
+  let options = {
     responsive: true,
     aspectRatio: 1,
     cutoutPercentage: totalsPieChartCutoutPercent,
@@ -236,37 +236,36 @@ function setupTotalsPieChart()
 
 function setupTotalsPieChartDatasets(partyOrderingArg)
 {
-  var fullPartyOrdering = partyOrderingArg || partyOrdering
+  let fullPartyOrdering = partyOrderingArg || partyOrdering
 
-  var marginSectionData = []
-  var marginSectionBackgroundColors = []
-  var marginSectionLabels = []
+  let marginSectionData = []
+  let marginSectionBackgroundColors = []
+  let marginSectionLabels = []
 
-  var partySectionData = []
-  var partySectionBackgroundColors = []
-  var partySectionLabels = []
+  let partySectionData = []
+  let partySectionBackgroundColors = []
+  let partySectionLabels = []
 
-  var popularVoteSectionData = []
-  var popularVoteSectionBackgroundColors = []
-  var popularVoteSectionLabels = []
+  let popularVoteSectionData = []
+  let popularVoteSectionBackgroundColors = []
+  let popularVoteSectionLabels = []
 
-  for (var partyNum in fullPartyOrdering)
+  for (let partyNum in fullPartyOrdering)
   {
-    var partyID = fullPartyOrdering[partyNum].partyID
+    let partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
       if (politicalParties[partyID] != null)
       {
-        var marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
-        if (fullPartyOrdering[partyNum].direction == PieChartDirection.clockwise) {}
-        else if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
+        let marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
+        if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
         {
           marginNames.reverse()
         }
 
-        for (var marginKeyNum in marginNames)
+        for (let marginKeyNum in marginNames)
         {
-          var marginKey = marginNames[marginKeyNum]
+          let marginKey = marginNames[marginKeyNum]
 
           marginSectionData.push(0)
           marginSectionBackgroundColors.push(politicalParties[partyID].getMarginColors()[marginKey])
@@ -278,7 +277,7 @@ function setupTotalsPieChartDatasets(partyOrderingArg)
         partySectionLabels.push(politicalParties[partyID].getNames()[0])
         partySectionLabels.push(politicalParties[partyID].getNames()[0])
 
-        var colorPattern = createHashCanvasPattern(politicalParties[partyID].getMarginColors().safe)
+        let colorPattern = createHashCanvasPattern(politicalParties[partyID].getMarginColors().safe)
         if (fullPartyOrdering[partyNum].direction == PieChartDirection.clockwise)
         {
           partySectionBackgroundColors.push(politicalParties[partyID].getMarginColors().safe)
@@ -296,7 +295,7 @@ function setupTotalsPieChartDatasets(partyOrderingArg)
       }
       else
       {
-        for (var marginKey in defaultMarginNames)
+        for (let marginKey in defaultMarginNames)
         {
           marginSectionData.push(0)
           marginSectionBackgroundColors.push("#000")
@@ -334,7 +333,7 @@ function setupTotalsPieChartDatasets(partyOrderingArg)
     }
   }
 
-  var data = {
+  let data = {
     datasets: [
       {
         data: marginSectionData,
@@ -366,8 +365,8 @@ function createHashCanvasPattern(baseColor)
     return hashCanvasPatternCache[baseColor]
   }
 
-  var patternCanvas = document.createElement('canvas')
-  var patternContext = patternCanvas.getContext('2d')
+  let patternCanvas = document.createElement('canvas')
+  let patternContext = patternCanvas.getContext('2d')
 
   const WIDTH = flipPatternWidth*2
   const HEIGHT = flipPatternWidth*2
@@ -408,21 +407,21 @@ function createHashCanvasPattern(baseColor)
   patternContext.lineTo(WIDTH, HEIGHT * ((DIVISIONS - 1) / DIVISIONS))
   patternContext.fill()
 
-  var colorPattern = document.getElementById('totalsPieChart').getContext('2d').createPattern(patternCanvas, 'repeat')
+  let colorPattern = document.getElementById('totalsPieChart').getContext('2d').createPattern(patternCanvas, 'repeat')
   hashCanvasPatternCache[baseColor] = colorPattern
 
   return colorPattern
 }
 
-function updateTotalsPieChart(regionDataArray)
+function updateTotalsPieChart()
 {
-  var shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
-  var regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+  let shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
+  let regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
 
-  var marginTotalsData = {}
-  var regionMarginStringsData = {}
+  let marginTotalsData = {}
+  let regionMarginStringsData = {}
 
-  for (var partyNum in partyOrdering)
+  for (let partyNum in partyOrdering)
   {
     let partyID = partyOrdering[partyNum].partyID
 
@@ -431,7 +430,7 @@ function updateTotalsPieChart(regionDataArray)
 
     if (partyID != TossupParty.getID())
     {
-      var marginNames = defaultMarginNames
+      let marginNames = defaultMarginNames
       if (politicalParties[partyID] != null)
       {
         marginNames = politicalParties[partyID].getMarginNames()
@@ -449,13 +448,13 @@ function updateTotalsPieChart(regionDataArray)
     }
   }
 
-  var fullPartyOrdering = cloneObject(partyOrdering)
+  let fullPartyOrdering = cloneObject(partyOrdering)
 
-  for (var regionID in regionDataArray)
+  for (let regionID in regionDataArray)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-    var regionParty = regionDataArray[regionID].partyID
+    let regionParty = regionDataArray[regionID].partyID
     if (regionParty != null && !fullPartyOrdering.some((orderingData) => orderingData.partyID == regionParty))
     {
       insertPartyIntoTotalsPieChartOrdering(regionParty, fullPartyOrdering)
@@ -470,11 +469,11 @@ function updateTotalsPieChart(regionDataArray)
       }
     }
 
-    var regionMargin = regionDataArray[regionID].margin
+    let regionMargin = regionDataArray[regionID].margin
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
-    var formattedRegionMargin = getRoundedMarginValue(regionMargin)
-    var regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
+    let regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
+    let formattedRegionMargin = getRoundedMarginValue(regionMargin)
+    let regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
@@ -501,27 +500,27 @@ function updateTotalsPieChart(regionDataArray)
   }
 
   regionMarginStrings = []
-  var marginTotalsArray = []
-  var safeMarginTotalsArray = []
+  let marginTotalsArray = []
+  let safeMarginTotalsArray = []
   for (partyNum in fullPartyOrdering)
   {
-    var partyID = fullPartyOrdering[partyNum].partyID
+    let partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
     {
-      var marginNames = Object.keys(defaultMarginNames)
+      let marginNames = Object.keys(defaultMarginNames)
       if (politicalParties[partyID] != null)
       {
         marginNames = Object.keys(cloneObject(politicalParties[partyID].getMarginNames()))
       }
-      if (fullPartyOrdering[partyNum].direction == PieChartDirection.clockwise) {}
-      else if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
+      
+      if (fullPartyOrdering[partyNum].direction == PieChartDirection.counterclockwise)
       {
         marginNames.reverse()
       }
 
-      for (var marginKeyNum in marginNames)
+      for (let marginKeyNum in marginNames)
       {
-        var marginKey = marginNames[marginKeyNum]
+        let marginKey = marginNames[marginKeyNum]
 
         regionMarginStrings.push(regionMarginStringsData[partyID][marginKey])
 
@@ -548,14 +547,14 @@ function updateTotalsPieChart(regionDataArray)
     }
   }
 
-  var shouldShowFlips = currentMapType.getMapSettingValue("flipStates")
-  var partyTotalsCallback = getPartyTotals(shouldShowFlips)
+  let shouldShowFlips = currentMapType.getMapSettingValue("flipStates")
+  let partyTotalsCallback = getPartyTotals(shouldShowFlips)
 
-  var partyTotals
+  let partyTotals
 
-  var partyNonFlipTotals
-  var partyFlipTotals
-  var partyFlipData
+  let partyNonFlipTotals
+  let partyFlipTotals
+  let partyFlipData
 
   if (shouldShowFlips)
   {
@@ -568,12 +567,12 @@ function updateTotalsPieChart(regionDataArray)
     partyTotals = partyTotalsCallback
   }
 
-  var sortedPartyTotalsArray = []
+  let sortedPartyTotalsArray = []
   regionPartyStrings = []
-  for (var partyNum in fullPartyOrdering)
+  for (let partyNum in fullPartyOrdering)
   {
-    var currentPartyID = fullPartyOrdering[partyNum].partyID
-    var currentDirection = fullPartyOrdering[partyNum].direction
+    let currentPartyID = fullPartyOrdering[partyNum].partyID
+    let currentDirection = fullPartyOrdering[partyNum].direction
 
     if (!shouldShowFlips)
     {
@@ -598,7 +597,7 @@ function updateTotalsPieChart(regionDataArray)
     }
     else
     {
-      var partyStrings = []
+      let partyStrings = []
       partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
         let formattedRegionMargin = Math.round(regionData.margin*10)/10
         formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
@@ -626,25 +625,25 @@ function updateTotalsPieChart(regionDataArray)
       delete partyNonFlipTotals[currentPartyID]
     }
   }
-  var genericPartyOrderingIndex = fullPartyOrdering.findIndex((orderingData) => orderingData.partyID == IndependentGenericParty.getID())
-  for (var partyTotalNum in partyTotals)
+  let genericPartyOrderingIndex = fullPartyOrdering.findIndex((orderingData) => orderingData.partyID == IndependentGenericParty.getID())
+  for (let partyTotalNum in partyTotals)
   {
     sortedPartyTotalsArray[genericPartyOrderingIndex] += partyTotals[partyTotalNum]
   }
   totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
-  var popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
-  var showingPopularVote = popularVoteData && (currentMapType.getMapSettingValue("piePopularVote") || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
+  let popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
+  let showingPopularVote = popularVoteData && (currentMapType.getMapSettingValue("piePopularVote") || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
   if (showingPopularVote)
   {
-    var sortedPopularVoteArray = []
-    var summedPercentage = 0
+    let sortedPopularVoteArray = []
+    let summedPercentage = 0
     for (partyNum in fullPartyOrdering)
     {
       sortedPopularVoteArray.push((popularVoteData.find(voteshareData => voteshareData.partyID == fullPartyOrdering[partyNum].partyID) || {}).voteshare || 0)
       summedPercentage += sortedPopularVoteArray[partyNum]
     }
-    var remainingPopularVote = 100-summedPercentage
+    let remainingPopularVote = 100-summedPercentage
     if (remainingPopularVote > 0)
     {
       sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
@@ -659,9 +658,9 @@ function updateTotalsPieChart(regionDataArray)
     totalsPieChart.data.datasets[2].data = []
   }
 
-  var nonFlipSortedPartyTotalsArray = []
-  var tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
-  for (var totalIndex in sortedPartyTotalsArray)
+  let nonFlipSortedPartyTotalsArray = []
+  let tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
+  for (let totalIndex in sortedPartyTotalsArray)
   {
     if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { continue }
     nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
@@ -678,7 +677,7 @@ function updateTotalsPieChart(regionDataArray)
     totalsPieChart.data.datasets[0].data = marginTotalsArray
   }
 
-  var preloadedData = setupTotalsPieChartDatasets(fullPartyOrdering)
+  let preloadedData = setupTotalsPieChartDatasets(fullPartyOrdering)
   totalsPieChart.data.datasets[2].backgroundColor = preloadedData.datasets[2].backgroundColor
   totalsPieChart.data.datasets[2].labels = preloadedData.datasets[2].labels
   totalsPieChart.data.datasets[1].backgroundColor = preloadedData.datasets[1].backgroundColor
@@ -698,6 +697,6 @@ function insertPartyIntoTotalsPieChartOrdering(partyID, orderingObject)
 
   if (orderingObject.some(partyOrderData => partyOrderData.partyID == partyID)) { return }
 
-  var genericOrderingIndex = orderingObject.findIndex(partyOrderData => partyOrderData.partyID == IndependentGenericParty.getID())
+  let genericOrderingIndex = orderingObject.findIndex(partyOrderData => partyOrderData.partyID == IndependentGenericParty.getID())
   orderingObject.splice(genericOrderingIndex, 0, {partyID: partyID, direction: PieChartDirection.clockwise})
 }

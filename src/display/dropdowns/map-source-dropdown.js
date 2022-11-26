@@ -130,47 +130,44 @@ function setStatusImage(divID, icon)
   $("#" + divID).attr('src', icon)
 }
 
-function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch, resetCandidateNames)
+async function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDToIgnore, forceDownload, refreshMap, onlyAttemptLocalFetch, resetCandidateNames)
 {
   if (mapIDToIgnore != null)
   {
     ignoreMapUpdateClickArray.push(mapIDToIgnore)
   }
-  var downloadDataPromise = new Promise(async (resolve) => {
+
+  for (let divID in divsToUpdateStatus)
+  {
+    setStatusImage(divID, divsToUpdateStatus[divID].loading)
+  }
+
+  var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
+
+  if (!loadedSuccessfully)
+  {
     for (let divID in divsToUpdateStatus)
     {
-      setStatusImage(divID, divsToUpdateStatus[divID].loading)
+      setStatusImage(divID, divsToUpdateStatus[divID].error)
     }
-
-    var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
-
-    if (!loadedSuccessfully)
+    return false
+  }
+  else
+  {
+    for (let divID in divsToUpdateStatus)
     {
-      for (let divID in divsToUpdateStatus)
-      {
-        setStatusImage(divID, divsToUpdateStatus[divID].error)
-      }
-      resolve(false)
+      setStatusImage(divID, divsToUpdateStatus[divID].success)
     }
-    else
+
+    if (refreshMap && currentMapSource.getID() == mapSourceID)
     {
-      for (let divID in divsToUpdateStatus)
-      {
-        setStatusImage(divID, divsToUpdateStatus[divID].success)
-      }
-
-      if (refreshMap && currentMapSource.getID() == mapSourceID)
-      {
-        setDataMapDateSliderRange()
-        await displayDataMap()
-        $("#dataMapDateSliderContainer").show()
-        $("#dateDisplay").show()
-      }
-      resolve(true)
+      setDataMapDateSliderRange()
+      await displayDataMap()
+      $("#dataMapDateSliderContainer").show()
+      $("#dateDisplay").show()
     }
-  })
-
-  return downloadDataPromise
+    return true
+  }
 }
 
 async function downloadAllMapData()

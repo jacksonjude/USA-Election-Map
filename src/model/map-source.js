@@ -71,93 +71,89 @@ class MapSource
   // shouldUseOriginalMapDataForTotalsPieChart
   // shouldForcePopularVoteDisplayOnZoom
 
-  loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
+  async loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
     var self = this
+    
+    reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
+    resetCandidateNames = resetCandidateNames != null ? resetCandidateNames : true
 
-    var loadMapPromise = new Promise(async (resolve) => {
-      reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
-      resetCandidateNames = resetCandidateNames != null ? resetCandidateNames : true
-
-      if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
+    if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
+    {
+      var textData
+      if (self.dataURL)
       {
-        var textData
-        if (self.dataURL)
-        {
-          textData = await self.loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
-        }
-        else
-        {
-          textData = self.textMapData
-        }
-        if (textData == null) { resolve(false); return }
-        self.rawMapData = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? await self.convertCSVToArray(self, textData) : textData
+        textData = await self.loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
       }
-
-      if (self.rawMapData == null) { resolve(false); return }
-
-      self.mapDates = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? Object.keys(self.rawMapData) : [Date.now()]
-      for (var dateNum in self.mapDates)
+      else
       {
-        self.mapDates[dateNum] = parseInt(self.mapDates[dateNum])
+        textData = self.textMapData
       }
-      self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
+      if (textData == null) { return false }
+      self.rawMapData = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? await self.convertCSVToArray(self, textData) : textData
+    }
 
-      var filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.regionNameToIDMap, self.heldRegionMap, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin, !self.isCustomMap || self.editingMode == EditingMode.voteshare)
-      self.mapData = filterMapDataCallback.mapData
+    if (self.rawMapData == null) { return false }
 
-      if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
+    self.mapDates = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? Object.keys(self.rawMapData) : [Date.now()]
+    for (let dateNum in self.mapDates)
+    {
+      self.mapDates[dateNum] = parseInt(self.mapDates[dateNum])
+    }
+    self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
+
+    let filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.regionNameToIDMap, self.heldRegionMap, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin, !self.isCustomMap || self.editingMode == EditingMode.voteshare)
+    self.mapData = filterMapDataCallback.mapData
+
+    if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
+    {
+      if (self.candidateNameData != null)
       {
-        if (self.candidateNameData != null)
+        for (let date in filterMapDataCallback.candidateNameData)
         {
-          for (var date in filterMapDataCallback.candidateNameData)
-          {
-            self.candidateNameData[date] = mergeObject(self.candidateNameData[date], filterMapDataCallback.candidateNameData[date])
-          }
-        }
-        else
-        {
-          self.candidateNameData = filterMapDataCallback.candidateNameData
+          self.candidateNameData[date] = mergeObject(self.candidateNameData[date], filterMapDataCallback.candidateNameData[date])
         }
       }
-      for (var date in self.candidateNameData)
+      else
       {
-        if (self.candidateNameData[date] == null) { continue }
-        if (Object.keys(self.candidateNameData[date]).length == 0)
-        {
-          self.candidateNameData[date] = cloneObject(self.shortCandidateNameOverride)
-        }
+        self.candidateNameData = filterMapDataCallback.candidateNameData
       }
-
-      if (filterMapDataCallback.mapDates != null)
+    }
+    for (let date in self.candidateNameData)
+    {
+      if (self.candidateNameData[date] == null) { continue }
+      if (Object.keys(self.candidateNameData[date]).length == 0)
       {
-        self.mapDates = filterMapDataCallback.mapDates
+        self.candidateNameData[date] = cloneObject(self.shortCandidateNameOverride)
       }
+    }
 
-      resolve(true)
-    })
+    if (filterMapDataCallback.mapDates != null)
+    {
+      self.mapDates = filterMapDataCallback.mapDates
+    }
 
-    return loadMapPromise
+    return true
   }
 
-  loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
+  async loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
   {
     self = self || this
 
-    var fetchMapDataPromise = new Promise(async (resolve) => {
-      if (!reloadCache)
+    if (!reloadCache)
+    {
+      var savedCSVText = await CSVDatabase.fetchFile(this.id)
+      if (savedCSVText != null)
       {
-        var savedCSVText = await CSVDatabase.fetchFile(this.id)
-        if (savedCSVText != null)
-        {
-          return resolve(savedCSVText)
-        }
-        else if (onlyAttemptLocalFetch)
-        {
-          return resolve()
-        }
+        return savedCSVText
       }
+      else if (onlyAttemptLocalFetch)
+      {
+        return null
+      }
+    }
 
+    var fetchMapDataPromise = new Promise((resolve) => {
       createCSVParsingIndicator(downloadIndicatorColor)
       $.ajax({
         xhr: () => {

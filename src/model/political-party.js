@@ -501,15 +501,6 @@ var Independent1832JFParty = new PoliticalParty(
   defaultMarginNames
 )
 
-var Independent1832JFParty = new PoliticalParty(
-  "IND1832JF",
-  ["Nullifier"],
-  "Ind",
-  "Floyd",
-  cloneObject(PoliticalPartyColors.green),
-  defaultMarginNames
-)
-
 var Independent1824AJParty = new PoliticalParty(
   "IND1824AJ",
   ["Democratic Republican"],

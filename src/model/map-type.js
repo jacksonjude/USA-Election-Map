@@ -74,12 +74,13 @@ class MapType
 
   async loadSVG()
   {
-    let loadSVGPromise = new Promise(async (resolve) => {
-      let svgPath = this.getSVGPath()
-      let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
+    let svgPath = this.getSVGPath()
+    let svgPathString = (svgPath instanceof Array) ? svgPath[0] : svgPath
 
-      let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
-      let svgData = await SVGDatabase.fetchFile(svgPathID)
+    let svgPathID = svgPathString.includes("/") ? svgPathString.split("/").reverse()[0] : svgPathString
+    let svgData = await SVGDatabase.fetchFile(svgPathID)
+    
+    let loadSVGPromise = new Promise((resolve) => {
       if (svgData)
       {
         $("#mapcontainertmp").html(svgData)
