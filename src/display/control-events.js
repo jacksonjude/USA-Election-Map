@@ -620,6 +620,225 @@ document.addEventListener('mouseup', function() {
   }
 })
 
+function viewingDiscreteRegions()
+{
+  return currentMapType.getID() != USAHouseMapType.getID() || currentMapType.getMapSettingValue("showAllDistricts") === true || currentViewingState == ViewingState.zooming
+}
+
+async function leftClickRegion(div)
+{
+  let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  var regionID = $(div).attr('id')
+  var regionDataCallback = getRegionData(regionID)
+  var regionData = regionDataCallback.regionData
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
+  {
+    toggleRegionVoteshareEditing(regionID, regionData)
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing && editingRegionMarginValue)
+  {
+    toggleRegionMarginEditing()
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing)
+  {
+    if (ignoreNextClick)
+    {
+      ignoreNextClick = false
+      return
+    }
+
+    if (regionIDsChanged.includes(regionID)) { return }
+
+    if (regionData.disabled)
+    {
+      regionData.partyID = (selectedParty || TossupParty).getID()
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
+      regionData.margin = 101
+    }
+    else if (selectedParty != null && regionData.partyID != selectedParty.getID())
+    {
+      regionData.partyID = selectedParty.getID()
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
+      regionData.margin = marginValues.safe
+    }
+    else if (selectedParty != null)
+    {
+      var marginValueArray = Object.values(marginValues)
+      var marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      if (marginValueIndex == -1)
+      {
+        for (var marginValueNum in marginValueArray)
+        {
+          if (regionData.margin >= marginValueArray[marginValueNum])
+          {
+            regionData.margin = marginValueArray[marginValueNum]
+            break
+          }
+        }
+        marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      }
+
+      marginValueIndex += 1
+      if (marginValueIndex > marginValueArray.length-1)
+      {
+        marginValueIndex = 0
+      }
+
+      // Hardcoding tilt = 0.1
+      regionData.margin = marginValueIndex == marginValueArray.length-1 ? 0.1 : marginValueArray[marginValueIndex]
+    }
+    else
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.margin = 0
+    }
+
+    updateRegionFillColors(regionIDsToFill, regionData)
+    displayPartyTotals()
+  }
+  else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
+  {
+    var baseRegionID = getBaseRegionID($(div).attr('id')).baseID
+    currentViewingState = ViewingState.zooming
+    currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
+
+    displayDataMap(null, null, true)
+
+    currentRegionID = null
+    updateRegionBox()
+  }
+  else if (showingDataMap)
+  {
+    currentMapSource.openRegionLink(currentRegionID ?? currentMapZoomRegion, currentSliderDate)
+  }
+}
+
+function rightClickRegion(div)
+{
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  var regionID = $(div).attr('id')
+  var regionDataCallback = getRegionData(regionID)
+  var regionData = regionDataCallback.regionData
+  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
+  {
+    toggleRegionVoteshareEditing(regionID, regionData)
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing && editingRegionMarginValue)
+  {
+    toggleRegionMarginEditing()
+  }
+  else if (isDiscreteRegion && currentEditingState == EditingState.editing)
+  {
+    if (regionData.disabled)
+    {
+      regionData.partyID = (selectedParty || TossupParty).getID()
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
+      regionData.margin = 101
+    }
+    else if (selectedParty != null && regionData.partyID != selectedParty.getID())
+    {
+      regionData.partyID = selectedParty.getID()
+      regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
+      regionData.margin = 0.1 // Hardcoding tilt == 0.1
+    }
+    else if (selectedParty != null)
+    {
+      var marginValueArray = Object.values(marginValues)
+      var marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      if (marginValueIndex == -1)
+      {
+        for (var marginValueNum in marginValueArray)
+        {
+          if (regionData.margin >= marginValueArray[marginValueNum])
+          {
+            regionData.margin = marginValueArray[marginValueNum]
+            break
+          }
+        }
+        marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      }
+
+      marginValueIndex -= 1
+      if (marginValueIndex < 0)
+      {
+        marginValueIndex = marginValueArray.length-1
+      }
+
+      // Hardcoding tilt == 0.1
+      regionData.margin = marginValueIndex == marginValueArray.length-1 ? 0.1 : marginValueArray[marginValueIndex]
+    }
+    else
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.margin = 0
+    }
+
+    updateRegionFillColors(regionIDsToFill, regionData)
+    displayPartyTotals()
+  }
+}
+
+function shiftClickRegion()
+{
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin)
+  {
+    toggleRegionMarginEditing()
+  }
+  else if (isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentViewingState == ViewingState.viewing && currentMapSource.isCustom())
+  {
+    editingRegionEVs = !editingRegionEVs
+    updateRegionBox()
+  }
+}
+
+function altClickRegion(div)
+{
+  let isDiscreteRegion = viewingDiscreteRegions()
+
+  if (isDiscreteRegion && currentEditingState == EditingState.editing)
+  {
+    var regionDataCallback = getRegionData($(div).attr('id'))
+    var regionData = regionDataCallback.regionData
+    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+
+    if (currentEditingMode == EditingMode.margin)
+    {
+      regionData.partyID = (selectedParty || TossupParty).getID()
+    }
+    else if (currentEditingMode == EditingMode.voteshare)
+    {
+      regionData.partyID = TossupParty.getID()
+      regionData.partyVotesharePercentages = []
+    }
+
+    if (regionData.disabled)
+    {
+      regionData.disabled = false
+      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 100
+    }
+    else
+    {
+      regionData.disabled = true
+      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 101
+    }
+
+    updateRegionFillColors(regionIDsToFill, regionData)
+    updateMapElectoralVoteText()
+    displayPartyTotals()
+  }
+}
+
 function isEditingTextbox()
 {
   return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor || isEnteringShiftAmount || editPartyPopularVote
