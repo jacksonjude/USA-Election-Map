@@ -170,7 +170,7 @@ class MapSource
             }
           }, false)
 
-          xhr.overrideMimeType("text/plain; charset=x-user-defined")
+          xhr.overrideMimeType("text/plain; charset=UTF-8")
 
           return xhr
         },
