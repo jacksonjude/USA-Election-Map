@@ -495,6 +495,7 @@ var USAHouseMapType = new MapType(
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, _, candidateName, partyID, regionData, shouldUseVoteshare)
     {
+      let voteshareData
       switch (columnKey)
       {
         case "date":
@@ -504,7 +505,7 @@ var USAHouseMapType = new MapType(
         return candidateName
 
         case "voteshare":
-        var voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.voteshare
@@ -525,7 +526,7 @@ var USAHouseMapType = new MapType(
         return partyID
 
         case "order":
-        var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.order
@@ -667,15 +668,15 @@ var USAHouseMapType = new MapType(
       {
         if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-        var regionData = mapDateData[regionID]
+        let regionData = mapDateData[regionID]
 
         if (!(regionData.state in housePerStateMapData))
         {
           housePerStateMapData[regionData.state] = {region: regionData.state, voteSplits: []}
         }
 
-        var partyVoteSplitData = housePerStateMapData[regionData.state].voteSplits
-        var partyVote = partyVoteSplitData.find(partyVoteItem => partyVoteItem.partyID == regionData.partyID)
+        let partyVoteSplitData = housePerStateMapData[regionData.state].voteSplits
+        let partyVote = partyVoteSplitData.find(partyVoteItem => partyVoteItem.partyID == regionData.partyID)
         if (!partyVote)
         {
           partyVote = {partyID: regionData.partyID, candidate: politicalParties[regionData.partyID].getNames()[0], votes: 0}
@@ -691,12 +692,12 @@ var USAHouseMapType = new MapType(
 
       for (let regionID in housePerStateMapData)
       {
-        var partyVoteSplitData = housePerStateMapData[regionID].voteSplits
+        let partyVoteSplitData = housePerStateMapData[regionID].voteSplits
         partyVoteSplitData.sort((partyVote1, partyVote2) => partyVote2.votes-partyVote1.votes)
 
-        var largestPartyCount = partyVoteSplitData[0].votes
-        var largestPartyID = partyVoteSplitData[0].partyID
-        var secondLargestPartyCount = partyVoteSplitData[1] ? partyVoteSplitData[1].votes : 0
+        let largestPartyCount = partyVoteSplitData[0].votes
+        let largestPartyID = partyVoteSplitData[0].partyID
+        let secondLargestPartyCount = partyVoteSplitData[1] ? partyVoteSplitData[1].votes : 0
 
         housePerStateMapData[regionID].margin = (largestPartyCount/(largestPartyCount+secondLargestPartyCount)*100-50)*0.9001 // +0.001 to account for rounding errors
         housePerStateMapData[regionID].partyID = largestPartyID

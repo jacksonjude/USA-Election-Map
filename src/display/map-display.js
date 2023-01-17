@@ -977,6 +977,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   if (resetViewingState ?? true)
   {
     currentViewingState = ViewingState.viewing
+    currentMapZoomRegion = null
   }
 }
 

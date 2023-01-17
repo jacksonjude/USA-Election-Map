@@ -12,7 +12,7 @@ class FilesDatabase
 
   async openDatabase(self)
   {
-    var self = self || this
+    self = self || this
 
     var openDatabasePromise = new Promise((resolve) => {
       const request = indexedDB.open(self.databaseName, self.databaseVersion)
@@ -39,7 +39,7 @@ class FilesDatabase
 
   async insertFile(sourceID, fileText, self)
   {
-    var self = self || this
+    self = self || this
 
     try
     {
@@ -62,25 +62,26 @@ class FilesDatabase
 
   async fetchFile(sourceID, self)
   {
-    var self = self || this
+    self = self || this
 
-    var fetchFilePromise = new Promise(async (resolve) => {
+    var db = await self.openDatabase()
+    if (db == null) { return null }
+
+    var fetchFilePromise = new Promise((resolve) => {
       try
       {
-        var db = await self.openDatabase()
-        if (db == null) { return resolve(null) }
         var transaction = db.transaction(self.storeName, 'readonly')
         var store = transaction.objectStore(self.storeName)
 
         var query = store.get(sourceID)
 
-        query.onsuccess = async function() {
+        query.onsuccess = function() {
           var textResult = query.result ? query.result.text : null
           var updatedTime = query.result ? query.result.updatedAt : null
 
           if (!self.sourceUpdatedTimesData || Date.now()-self.lastSourceUpdateCheck >= 1000*60*5)
           {
-            await $.getJSON(self.sourceUpdatedTimesURL, null, data => {
+            $.getJSON(self.sourceUpdatedTimesURL, null, data => {
               self.lastSourceUpdateCheck = Date.now()
               self.sourceUpdatedTimesData = data
             }).fail((_, error) => {
@@ -128,13 +129,14 @@ class FilesDatabase
 
   async hasFile(sourceID, self)
   {
-    var self = self || this
+    self = self || this
 
-    var hasFilePromise = new Promise(async (resolve) => {
+    var db = await self.openDatabase()
+    if (db == null) { return false }
+
+    var hasFilePromise = new Promise((resolve) => {
       try
       {
-        var db = await self.openDatabase()
-        if (db == null) { return resolve(false) }
         var transaction = db.transaction(self.storeName, 'readonly')
         var store = transaction.objectStore(self.storeName)
 
@@ -165,13 +167,10 @@ class FilesDatabase
 
   async isSourceUpdated(sourceID, self)
   {
-    var self = self || this
-    var isSourceUpdatedPromise = new Promise(async (resolve) => {
-      var result = await self.fetchFile(sourceID)
-      resolve(result != null)
-    })
+    self = self || this
 
-    return isSourceUpdatedPromise
+    var result = await self.fetchFile(sourceID)
+    return result != null
   }
 }
 
@@ -204,7 +203,7 @@ async function initializeDatabases()
 
 async function clearDatabases()
 {
-  let databases = indexedDB.databases ? await indexedDB.databases() : [{name: "CSVDatabase", name: "SVGDatabase"}]
+  let databases = indexedDB.databases ? await indexedDB.databases() : [{name: "CSVDatabase"}, {name: "SVGDatabase"}]
   for (let database of databases)
   {
     await indexedDB.deleteDatabase(database.name)

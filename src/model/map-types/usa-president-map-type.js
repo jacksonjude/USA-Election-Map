@@ -677,6 +677,7 @@ var USAPresidentMapType = new MapType(
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
     {
+      let voteshareData
       switch (columnKey)
       {
         case "date":
@@ -689,7 +690,7 @@ var USAPresidentMapType = new MapType(
         return partyID || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
 
         case "percentAdjusted":
-        var voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.voteshare
@@ -701,7 +702,7 @@ var USAPresidentMapType = new MapType(
         return 0
 
         case "order":
-        var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.order

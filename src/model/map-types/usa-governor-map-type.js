@@ -486,6 +486,7 @@ var USAGovernorMapType = new MapType(
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
     {
+      let voteshareData
       switch (columnKey)
       {
         case "date":
@@ -495,7 +496,7 @@ var USAGovernorMapType = new MapType(
         return candidateName
 
         case "voteshare":
-        var voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.voteshare/100.0
@@ -513,7 +514,7 @@ var USAGovernorMapType = new MapType(
         return partyID
 
         case "order":
-        var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.order

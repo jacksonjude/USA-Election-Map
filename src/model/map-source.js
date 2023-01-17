@@ -203,7 +203,7 @@ class MapSource
     hideCSVParsingIndicator()
   }
 
-  async convertCSVToArray(self, strData)
+  convertCSVToArray(self, strData)
   {
     let csvTextSize = new Blob([strData]).size
     const chunkSize = 1*1024*1024

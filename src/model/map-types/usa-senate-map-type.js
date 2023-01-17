@@ -542,7 +542,7 @@ var USASenateMapType = new MapType(
 
         var currentYear = (new Date(parseInt(reversedMapDates[dateNum]))).getFullYear()
 
-        if (startYear-currentYear > 7) // Need to include runoffs, which may take place as late as Janurary
+        if (startYear-currentYear > 7) // Need to include runoffs, which may take place as late as January
         {
           return TossupParty.getID()
         }
@@ -577,6 +577,7 @@ var USASenateMapType = new MapType(
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
     {
+      let voteshareData
       switch (columnKey)
       {
         case "date":
@@ -586,7 +587,7 @@ var USASenateMapType = new MapType(
         return candidateName
 
         case "voteshare":
-        var voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.voteshare/100.0
@@ -608,7 +609,7 @@ var USASenateMapType = new MapType(
         return partyID
 
         case "order":
-        var voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
           return voteshareData.order
