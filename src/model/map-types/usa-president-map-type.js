@@ -51,7 +51,6 @@ var USAPresidentMapType = new MapType(
     defaultValue: "disabled", reloadType: MapSettingReloadType.display}
   ],
   (customMapEnabled) => {
-    const incumbentChallengerPartyIDs = {incumbent: RepublicanParty.getID(), challenger: DemocraticParty.getID(), tossup: TossupParty.getID()}
     const partyCandiateLastNames = {2020: {"Biden":DemocraticParty.getID(), "Trump":RepublicanParty.getID()}}
     const partyCandiateFullNames = {2020: {"Joseph R. Biden Jr.":DemocraticParty.getID(), "Donald Trump":RepublicanParty.getID()}}
 
@@ -1331,3 +1330,5 @@ var USAPresidentMapType = new MapType(
     return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, defaultCompareSourceIDs: defaultPresidentialCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
 )
+
+const incumbentChallengerPartyIDs = {incumbent: RepublicanParty.getID(), challenger: DemocraticParty.getID(), tossup: TossupParty.getID()}
