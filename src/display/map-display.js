@@ -1391,7 +1391,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
   }
 
-  if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip)
+  if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip && !(canUseVoteSplitsForColor && currentViewingState == ViewingState.splitVote))
   {
     var patternID = generateFlipPattern(fillColor)
     fillColor = "url(#" + patternID + ")"
