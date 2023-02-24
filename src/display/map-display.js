@@ -97,7 +97,7 @@ const helpBoxPages = [
   [President] ⇒ [Senate] ⇒ [House] ⇒ [Govs]<br>
   <br>
 
-  Select a source with the <span style='text-decoration: underline'>source dropdown</span>, or by using the number keys [0️⃣-9️⃣]<br>
+  Select a map with the <span style='text-decoration: underline'>map dropdown</span>, or by using the number keys [0️⃣-9️⃣]<br>
   <br>
 
   Change the date with the <span style='text-decoration: underline'>slider</span>, or by using the arrow keys [⬇️ -5, ⬅️ -1, ➡️ +1, ⬆️ +5]<br>
@@ -110,7 +110,7 @@ const helpBoxPages = [
   <br>
 
   Compare between preset maps using the <span style='text-decoration: underline'>compare dropdown</span><br>
-  Compare between other maps by selecting two checkboxes in the <span style='text-decoration: underline'>source dropdown</span>
+  Compare between other maps by selecting two checkboxes in the <span style='text-decoration: underline'>map dropdown</span>
   `},
   {subtitle: "Editing", body: `
   Copy with the <span style='text-decoration: underline'>copy button</span>, or [Enter]<br>
@@ -936,11 +936,11 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
-    $("#sourceToggleButton").html("Select Source")
+    $("#sourceToggleButton").html("Select Map")
   }
   else
   {
-    $("#sourceToggleButton").html("Source: " + currentMapSource.getName())
+    $("#sourceToggleButton").html("Map: " + currentMapSource.getName())
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
