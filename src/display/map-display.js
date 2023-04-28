@@ -63,7 +63,7 @@ var ignoreMapUpdateClickArray
 var currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
-const maxDateSliderTicks = 55
+const maxDateSliderTicks = 60
 
 var progressCircleDiv
 const progressCircleDuration = 100

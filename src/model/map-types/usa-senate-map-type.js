@@ -326,6 +326,7 @@ var USASenateMapType = new MapType(
             var shouldBeSpecialRegion = currentMapType.getMapSettings().seatArrangement == "election-type" ? isSpecialElection : (stateClasses[regionNameToID[regionToFind]].indexOf(classNum) == 1)
 
             var isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
+            // var totalStateVotes = countyRows[0][columnMap.totalVotes] ? parseFloat(countyRows[0][columnMap.totalVotes]) : null
 
             var candidateData = {}
 
@@ -334,6 +335,7 @@ var USASenateMapType = new MapType(
               var row = mapDataRows[rowNum]
 
               var candidateName = row[columnMap.candidateName]
+              var candidateVotes = row[columnMap.candidateVotes] ? Math.round(parseFloat(row[columnMap.candidateVotes])) : null
               var currentVoteshare = parseFloat(row[columnMap.voteshare])*100
               var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
@@ -373,7 +375,7 @@ var USASenateMapType = new MapType(
               }
               else
               {
-                candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder}
+                candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder, votes: candidateVotes}
               }
             }
 
@@ -995,7 +997,9 @@ var USASenateMapType = new MapType(
         isOffyear: "offyear",
         candidateName: "candidate",
         partyID: "party",
-        voteshare: "voteshare"
+        voteshare: "voteshare",
+        candidateVotes: "candidatevotes",
+        totalVotes: "totalvotes"
       }, // columnMap
       null, // cycleYear
       null, // candidateNameToPartyIDMap
@@ -1105,7 +1109,6 @@ var USASenateMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var senateMapSources = {}
-    senateMapSources[CNNSenateResultsMapSource.getID()] = CNNSenateResultsMapSource
     senateMapSources[FiveThirtyEightSenateProjectionMapSource.getID()] = FiveThirtyEightSenateProjectionMapSource
     senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
     senateMapSources[PASenateProjectionMapSource.getID()] = PASenateProjectionMapSource
@@ -1114,18 +1117,16 @@ var USASenateMapType = new MapType(
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var senateMapSourceIDs = [CNNSenateResultsMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID(), LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    var senateMapSourceIDs = [FiveThirtyEightSenateProjectionMapSource.getID(), LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
     if (customMapEnabled)
     {
       senateMapSourceIDs.push(CustomMapSource.getID())
     }
 
-    const kCNNResultsVS538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const k538ProjectionVsPastElections = 3
+    const kPastElectionsVsPastElections = 1
+    const k538ProjectionVsPastElections = 2
 
     var defaultSenateCompareSourceIDs = {}
-    defaultSenateCompareSourceIDs[kCNNResultsVS538Projection] = [CNNSenateResultsMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
