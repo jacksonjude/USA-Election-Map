@@ -518,6 +518,9 @@ var USASenateMapType = new MapType(
             {
               if (fullFilteredMapData[mapDate][regionID].runoff)
               {
+                var originalMapData = cloneObject(fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID])
+                originalMapData.altText = "general"
+                fullFilteredMapData[mapDate][regionID].altData = originalMapData
                 fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID] = fullFilteredMapData[mapDate][regionID]
               }
             }

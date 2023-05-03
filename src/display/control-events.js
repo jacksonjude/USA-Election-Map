@@ -3,6 +3,7 @@ const shiftNumberKeycodes = ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
 var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
 var shiftKeyDown = false
+var altKeyDown = false
 
 document.addEventListener('keydown', function(e) {
   if (!isEditingTextbox() && showingDataMap)
@@ -43,6 +44,11 @@ document.addEventListener('keydown', function(e) {
 
       case "Shift":
       shiftKeyDown = true
+      updateRegionBox()
+      break
+      
+      case "Alt":
+      altKeyDown = true
       updateRegionBox()
       break
     }
@@ -254,6 +260,11 @@ document.addEventListener('keyup', function(e) {
 
     case "Shift":
     shiftKeyDown = false
+    updateRegionBox()
+    break
+    
+    case "Alt":
+    altKeyDown = false
     updateRegionBox()
     break
   }
@@ -475,6 +486,7 @@ var currentMouseY
 
 document.addEventListener('mousedown', async function() {
   mouseIsDown = true
+  updateRegionBox()
   mouseMovedDuringClick = false
 
   if (currentEditingState == EditingState.editing)
@@ -497,6 +509,7 @@ document.oncontextmenu = function() {
   }
 
   mouseIsDown = false
+  updateRegionBox()
   mouseMovedDuringClick = false
 }
 
@@ -613,6 +626,7 @@ document.addEventListener('mouseup', function() {
   }
 
   mouseIsDown = false
+  updateRegionBox()
 
   if (clickUsedToZoom)
   {
@@ -716,6 +730,10 @@ async function leftClickRegion(div)
   else if (showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID ?? currentMapZoomRegion, currentSliderDate)
+    
+    shiftKeyDown = false
+    altKeyDown = false
+    updateRegionBox()
   }
 }
 
@@ -787,7 +805,7 @@ function rightClickRegion(div)
   }
 }
 
-function shiftClickRegion()
+function shiftClickRegion(div)
 {
   let isDiscreteRegion = viewingDiscreteRegions()
 
@@ -799,6 +817,10 @@ function shiftClickRegion()
   {
     editingRegionEVs = !editingRegionEVs
     updateRegionBox()
+  }
+  else
+  {
+    leftClickRegion(div)
   }
 }
 
@@ -836,6 +858,14 @@ function altClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     updateMapElectoralVoteText()
     displayPartyTotals()
+  }
+  else if (shiftKeyDown)
+  {
+    shiftClickRegion(div)
+  }
+  else
+  {
+    leftClickRegion(div)
   }
 }
 

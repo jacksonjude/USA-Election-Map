@@ -13,6 +13,13 @@ async function updateRegionBox(regionID = currentRegionID)
     return
   }
   $("#regionboxcontainer").trigger('show')
+  
+  let showingAltData = false
+  if (altKeyDown && regionData.altData)
+  {
+    regionData = regionData.altData
+    showingAltData = true
+  }
 
   var formattedRegionID = mapRegionIDToName[regionID] ?? regionID
   if (currentMapSource.getFormattedRegionName)
@@ -80,12 +87,13 @@ async function updateRegionBox(regionID = currentRegionID)
   let regionBoxHTML = (currentEditingState == EditingState.viewing || (isDiscreteRegion && currentMapSource.getEditingMode() == EditingMode.margin)) ? regionMarginString : ""
 
   let tooltipsToShow = {
-    shiftForVotes: [false, "Shift to show votes"],
-    shiftClickToEditEVs: [false, "Shift click to edit EVs"],
-    clickToZoom: [false, "Click to expand"],
-    clickToOpenLink: [false, "Click to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
-    clickToEditVoteshare: [false, "Click to edit voteshare"],
-    shiftClickToEditMargin: [false, "Shift click to edit margin"]
+    shiftForVotes: [false, "<span id='shifttext'>Shift</span> to show votes"],
+    altForAlternateData: [false, "<span id='alttext'>Alt</span> to show " + ((regionData.altData ?? regionData).altText ?? " alt race")],
+    shiftClickToEditEVs: [false, "<span id='shifttext'>Shift</span> click to edit EVs"],
+    clickToZoom: [false, "<span id='clicktext'>Click</span> to expand"],
+    clickToOpenLink: [false, "<span id='clicktext'>Click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
+    clickToEditVoteshare: [false, "<span id='clicktext>Click</span> to edit voteshare"],
+    shiftClickToEditMargin: [false, "<span id='shifttext'>Shift</span> <span id='clicktext'>click</span> to edit margin"]
   }
 
   if (currentEditingState == EditingState.viewing)
@@ -227,7 +235,8 @@ async function updateRegionBox(regionID = currentRegionID)
     }
     regionBoxHTML += "<br></div>"
   }
-
+  
+  tooltipsToShow.altForAlternateData[0] = regionData.altData || showingAltData
   tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
@@ -256,6 +265,19 @@ async function updateRegionBox(regionID = currentRegionID)
   $("#regionbox").html(formattedRegionID + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionBoxHTML + "</span>")
 
   updateRegionBoxYPosition()
+  
+  if (shiftKeyDown)
+  {
+    $("#shifttext").css('font-weight', 'bold').css('color', '#D8D8D8')
+  }
+  if (altKeyDown)
+  {
+    $("#alttext").css('font-weight', 'bold').css('color', '#D8D8D8')
+  }
+  if (mouseIsDown)
+  {
+    $("#clicktext").css('font-weight', 'bold').css('color', '#D8D8D8')
+  }
 }
 
 function updateRegionBoxPosition(mouseX, mouseY)
