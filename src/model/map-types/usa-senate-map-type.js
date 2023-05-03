@@ -372,6 +372,10 @@ var USASenateMapType = new MapType(
                 }
 
                 candidateData[candidateName].voteshare += currentVoteshare
+                if (candidateData[candidateName].votes && candidateVotes)
+                {
+                  candidateData[candidateName].votes += candidateVotes
+                }
               }
               else
               {
