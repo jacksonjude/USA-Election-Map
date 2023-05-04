@@ -1124,7 +1124,7 @@ var USASenateMapType = new MapType(
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var senateMapSourceIDs = [FiveThirtyEightSenateProjectionMapSource.getID(), LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    var senateMapSourceIDs = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID(), LTESenateProjectionMapSource.getID(), PASenateProjectionMapSource.getID(), CookSenateProjectionMapSource.getID()]
     if (customMapEnabled)
     {
       senateMapSourceIDs.push(CustomMapSource.getID())
