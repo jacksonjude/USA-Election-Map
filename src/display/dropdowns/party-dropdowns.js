@@ -318,6 +318,15 @@ function deselectAllParties()
   $(".partyShiftText").css('color', "gray")
 }
 
+function selectFirstParty()
+{
+  let firstPartyDiv = $(".partyDropdownButton")[0]
+  if (firstPartyDiv != null)
+  {
+    selectParty(firstPartyDiv)
+  }
+}
+
 function selectParty(div)
 {
   var partyID = $(div).attr('id')

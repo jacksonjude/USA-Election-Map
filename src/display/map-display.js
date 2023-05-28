@@ -1230,7 +1230,9 @@ async function toggleEditing(stateToSet)
     {
       displayPartyTotals(true)
     }
+    
     deselectAllParties()
+    selectFirstParty()
     break
 
     case EditingState.viewing:
