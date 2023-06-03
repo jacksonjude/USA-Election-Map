@@ -6161,7 +6161,7 @@ date,region,district,candidate,party,voteshare
 11/6/1984,TX,21,Loeffler,republican,80.614969
 11/6/1984,TX,22,Other,independent,0.016167
 11/6/1984,TX,22,Williams,democrat,34.677785
-11/6/1984,TX,22,Delay,republican,65.306048
+11/6/1984,TX,22,DeLay,republican,65.306048
 11/6/1984,TX,23,Bustamente,democrat,100
 11/6/1984,TX,24,Frost,democrat,59.468228
 11/6/1984,TX,24,Other,independent,0.002826
@@ -7320,7 +7320,7 @@ date,region,district,candidate,party,voteshare
 11/4/1986,TX,21,Smith,republican,60.611149
 11/4/1986,TX,21,Robinson,libertarian,0.864959
 11/4/1986,TX,21,Snelson,democrat,38.523892
-11/4/1986,TX,22,Delay,republican,71.766881
+11/4/1986,TX,22,DeLay,republican,71.766881
 11/4/1986,TX,22,Director,democrat,28.233119
 11/4/1986,TX,23,Hendrix,libertarian,9.318267
 11/4/1986,TX,23,Bustamante,democrat,90.681733
@@ -8479,7 +8479,7 @@ date,region,district,candidate,party,voteshare
 11/8/1988,TX,20,Travino,republican,27.52588
 11/8/1988,TX,21,Robinson,libertarian,6.764934
 11/8/1988,TX,21,Smith,republican,93.235066
-11/8/1988,TX,22,Delay,republican,67.424389
+11/8/1988,TX,22,DeLay,republican,67.424389
 11/8/1988,TX,22,Walker,democrat,31.355105
 11/8/1988,TX,22,Harper,libertarian,1.220506
 11/8/1988,TX,23,Bustamante,democrat,64.525301
@@ -9606,7 +9606,7 @@ date,region,district,candidate,party,voteshare
 11/6/1990,TX,21,Smith,republican,74.846626
 11/6/1990,TX,21,Roberts,democrat,25.153374
 11/6/1990,TX,22,Director,democrat,28.7626
-11/6/1990,TX,22,Delay,republican,71.2374
+11/6/1990,TX,22,DeLay,republican,71.2374
 11/6/1990,TX,23,Bustamante,democrat,63.491439
 11/6/1990,TX,23,Gonzales,republican,36.508561
 11/6/1990,TX,24,Frost,democrat,100
@@ -11051,7 +11051,7 @@ date,region,district,candidate,party,voteshare
 11/3/1992,TX,21,Smith,republican,72.162039
 11/3/1992,TX,21,Gaddy,democrat,23.739387
 11/3/1992,TX,22,Konrad,democrat,31.101714
-11/3/1992,TX,22,Delay,republican,68.898286
+11/3/1992,TX,22,DeLay,republican,68.898286
 11/3/1992,TX,23,Bonilla,republican,59.068694
 11/3/1992,TX,23,Alter,libertarian,2.579548
 11/3/1992,TX,23,Bustamante,democrat,38.351759
@@ -12334,7 +12334,7 @@ date,region,district,candidate,party,voteshare
 11/8/1994,TX,21,Smith,republican,89.960614
 11/8/1994,TX,22,Pepper,independent,2.461629
 11/8/1994,TX,22,Cunningham,democrat,23.798607
-11/8/1994,TX,22,Delay,republican,73.739764
+11/8/1994,TX,22,DeLay,republican,73.739764
 11/8/1994,TX,23,Bonilla,republican,62.599647
 11/8/1994,TX,23,Rios,democrat,37.400353
 11/8/1994,TX,24,Frost,democrat,52.826188
@@ -13929,7 +13929,7 @@ date,region,district,candidate,party,voteshare
 11/5/1996,TX,21,Wharton,democrat,22.404913
 11/5/1996,TX,21,Rutenbeck,natural law,1.165584
 11/5/1996,TX,22,Cunningham,democrat,31.893282
-11/5/1996,TX,22,Delay,republican,68.106718
+11/5/1996,TX,22,DeLay,republican,68.106718
 11/5/1996,TX,23,Jones,democrat,36.374734
 11/5/1996,TX,23,Caswell,natural law,1.776744
 11/5/1996,TX,23,Bonilla,republican,61.848522
@@ -15317,7 +15317,7 @@ date,region,district,candidate,party,voteshare
 11/3/1998,TX,21,Blunt,libertarian,8.615897
 11/3/1998,TX,21,Smith,republican,91.384103
 11/3/1998,TX,22,Kemp,democrat,33.689133
-11/3/1998,TX,22,Delay,republican,65.2019
+11/3/1998,TX,22,DeLay,republican,65.2019
 11/3/1998,TX,22,Grupe,libertarian,1.108967
 11/3/1998,TX,23,Bonilla,republican,63.787483
 11/3/1998,TX,23,Jones,democrat,35.112448
@@ -16898,7 +16898,7 @@ date,region,district,candidate,party,voteshare
 11/7/2000,TX,21,Smith,republican,75.873585
 11/7/2000,TX,21,Green,democrat,22.161038
 11/7/2000,TX,21,Steinbrecher,libertarian,1.965377
-11/7/2000,TX,22,Delay,republican,60.351899
+11/7/2000,TX,22,DeLay,republican,60.351899
 11/7/2000,TX,22,Matranga,democrat,36.151748
 11/7/2000,TX,22,Probst,libertarian,1.320108
 11/7/2000,TX,22,Schneider,independent,2.176246
@@ -18302,7 +18302,7 @@ date,region,district,candidate,party,voteshare
 11/5/2002,TX,21,Roberts,libertarian,1.824011
 11/5/2002,TX,21,Courage,democrat,25.307416
 11/5/2002,TX,22,West,green,0.790149
-11/5/2002,TX,22,Delay,republican,63.173544
+11/5/2002,TX,22,DeLay,republican,63.173544
 11/5/2002,TX,22,Riley,democrat,35.023007
 11/5/2002,TX,22,Lafleur,libertarian,1.013301
 11/5/2002,TX,23,Blunt,libertarian,0.73463
@@ -19631,7 +19631,7 @@ date,region,district,candidate,party,voteshare
 11/2/2004,TX,21,Pratt,libertarian,2.994849
 11/2/2004,TX,21,Smith,republican,61.495842
 11/2/2004,TX,22,Morrison,libertarian,1.792238
-11/2/2004,TX,22,Delay,republican,55.163231
+11/2/2004,TX,22,DeLay,republican,55.163231
 11/2/2004,TX,22,Morrison,democrat,41.095297
 11/2/2004,TX,22,Fjetland,independent,1.949233
 11/2/2004,TX,23,Perez,libertarian,1.341566
