@@ -486,7 +486,12 @@ var currentMouseY
 
 document.addEventListener('mousedown', async function() {
   mouseIsDown = true
-  updateRegionBox()
+  
+  if (!editingRegionVotesharePercentages)
+  {
+    updateRegionBox()
+  }
+  
   mouseMovedDuringClick = false
 
   if (currentEditingState == EditingState.editing)
@@ -626,7 +631,11 @@ document.addEventListener('mouseup', function() {
   }
 
   mouseIsDown = false
-  updateRegionBox()
+  
+  if (!editingRegionVotesharePercentages)
+  {
+    updateRegionBox()
+  }
 
   if (clickUsedToZoom)
   {
