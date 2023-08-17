@@ -985,23 +985,21 @@ var USAHouseMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var houseMapSources = {}
-    houseMapSources[CNNHouseResultsMapSource.getID()] = CNNHouseResultsMapSource
-    houseMapSources[FiveThirtyEightHouseProjectionMapSource.getID()] = FiveThirtyEightHouseProjectionMapSource
     houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+    houseMapSources[FiveThirtyEightHouseProjectionMapSource.getID()] = FiveThirtyEightHouseProjectionMapSource
+    houseMapSources[CNNHouseResultsMapSource.getID()] = CNNHouseResultsMapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var houseMapSourceIDs = [CNNHouseResultsMapSource.getID(), FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    var houseMapSourceIDs = [PastElectionResultMapSource.getID(), FiveThirtyEightHouseProjectionMapSource.getID()]
     if (customMapEnabled)
     {
       houseMapSourceIDs.push(CustomMapSource.getID())
     }
 
-    const kCNNResultsVS538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const k538ProjectionVsPastElections = 3
+    const kPastElectionsVsPastElections = 1
+    const k538ProjectionVsPastElections = 2
 
     var defaultHouseCompareSourceIDs = {}
-    defaultHouseCompareSourceIDs[kCNNResultsVS538Projection] = [CNNHouseResultsMapSource.getID(), FiveThirtyEightHouseProjectionMapSource.getID()]
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
