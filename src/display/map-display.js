@@ -15,6 +15,7 @@ var displayMapQueue = []
 var isRunningDisplayMapQueue = false
 
 var svgPanZoomController
+var pannedDuringClick = false
 
 var selectedParty
 
@@ -380,7 +381,7 @@ function setOutlineDivProperties()
       {
         return // handled in contextmenu
       }
-      else if (currentViewingState != ViewingState.zooming || !(currentEditingState == EditingState.viewing && mouseMovedDuringClick))
+      else if (currentViewingState != ViewingState.zooming || !(currentEditingState == EditingState.viewing && pannedDuringClick))
       {
         leftClickRegion(e.target)
       }
@@ -886,7 +887,20 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   if (currentViewingState == ViewingState.zooming)
   {
-    svgPanZoomController = svgPanZoom('#svgdata', {controlIconsEnabled: false, fit: true, contain: true, minZoom: 1, panEnabled: true, dblClickZoomEnabled: false})
+    svgPanZoomController = svgPanZoom('#svgdata', {
+      controlIconsEnabled: false,
+      fit: true,
+      contain: true,
+      minZoom: 1,
+      panEnabled: true,
+      dblClickZoomEnabled: false,
+      beforePan: () => {
+        if (mouseIsDown)
+        {
+          pannedDuringClick = true
+        }
+      }
+    })
   }
 
   if (shouldReloadSVG)

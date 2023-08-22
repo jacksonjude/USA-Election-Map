@@ -493,6 +493,7 @@ document.addEventListener('mousedown', async function() {
   }
   
   mouseMovedDuringClick = false
+  pannedDuringClick = false
 
   if (currentEditingState == EditingState.editing)
   {
