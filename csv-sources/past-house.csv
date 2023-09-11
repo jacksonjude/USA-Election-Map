@@ -31058,9 +31058,9 @@ date,region,district,candidate,party,voteshare,candidatevotes,totalvotes
 11/8/2022,CT,4,Independent,independent,1.05598,2493,236084
 11/8/2022,CT,4,Himes,democrat,59.411904,140262,236084
 11/8/2022,CT,5,Logan,republican,48.622631,123342,253672
-11/8/2022,CT,5,Independent,independent,0.982371,2492,253672
+11/8/2022,CT,5,Logan,independent,0.982371,2492,253672
 11/8/2022,CT,5,Hayes,democrat,48.810275,123818,253672
-11/8/2022,CT,5,Families,independent,1.584724,4020,253672
+11/8/2022,CT,5,Hayes,working families,1.584724,4020,253672
 11/8/2022,CT,PV,republican,republican,41.33559968636800,521387,1261351
 11/8/2022,CT,PV,democrat,democrat,56.512659838538200,712823,1261351
 11/8/2022,DE,0,Murphy,republican,42.966401,138201,321649
