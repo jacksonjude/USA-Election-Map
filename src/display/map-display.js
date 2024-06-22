@@ -303,10 +303,12 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
     $("#mapcontainertmp #svgdata").css('opacity', "0")
   }
 
-  updateSVGViewbox($("#mapcontainertmp #svgdata"), updateViewboxOutlines)
+  // updateSVGViewbox($("#mapcontainertmp #svgdata"), updateViewboxOutlines)
 
   $("#mapcontainer").html($("#mapcontainertmp").html())
   $("#mapcontainertmp").empty()
+  
+  updateSVGViewbox($("#mapcontainer #svgdata"), updateViewboxOutlines)
 
   setOutlineDivProperties()
   updateMapElectoralVoteText()
