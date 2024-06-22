@@ -399,7 +399,7 @@ function updateSVGViewbox(svgDiv = $("#mapcontainer #svgdata"), setOutlines = fa
 {
   if (svgDiv.length == 0) return
   var svgDataBoundingBox = svgDiv[0].getBBox()
-  setOutlines && svgDiv.children("#outlines").css("stroke-width", ((Math.max(svgDataBoundingBox.width/svgDiv.width(), svgDataBoundingBox.height/svgDiv.height()))/3) + "rem")
+  setOutlines && svgDiv.children("#outlines").css("stroke-width", ((Math.max(svgDataBoundingBox.width/svgDiv.width(), svgDataBoundingBox.height/svgDiv.height()))) + "rem")
   svgDiv[0].setAttribute('viewBox', (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height))
 }
 
