@@ -195,6 +195,15 @@ var IndependentRNParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var Independent2024RFKParty = new PoliticalParty(
+  "IND2024RFK",
+  ["Kennedy"],
+  "Ind",
+  "Kennedy",
+  cloneObject(PoliticalPartyColors.gray),
+  defaultMarginNames
+)
+
 var Independent2016EMParty = new PoliticalParty(
   "IND2016EM",
   ["McMullin"],
@@ -581,6 +590,7 @@ politicalParties[ReformParty.getID()] = ReformParty
 politicalParties[FreeSoilParty.getID()] = FreeSoilParty
 
 politicalParties[IndependentRNParty.getID()] = IndependentRNParty
+politicalParties[Independent2024RFKParty.getID()] = Independent2024RFKParty
 politicalParties[Independent2016EMParty.getID()] = Independent2016EMParty
 politicalParties[Independent2016CPParty.getID()] = Independent2016CPParty
 politicalParties[Independent2016BSParty.getID()] = Independent2016BSParty
@@ -627,6 +637,7 @@ politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 var defaultDropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
 var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), WhigParty.getID(), FreeSoilParty.getID(), NationalRepublicanParty.getID(), DemocraticRepublicanParty.getID(), FederalistParty.getID(), IndependentGenericParty.getID()]
 var majorThirdPartyCandidates = [
+  Independent2024RFKParty.getID(),
   Independent2016EMParty.getID(),
   Independent2004JEParty.getID(),
   Independent1988LBParty.getID(),

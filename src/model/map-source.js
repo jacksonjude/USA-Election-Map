@@ -90,7 +90,19 @@ class MapSource
         textData = self.textMapData
       }
       if (textData == null) { return false }
-      self.rawMapData = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? await self.convertCSVToArray(self, textData) : textData
+      
+      if (isString(self.dataURL) || self.dataURL.type == csvSourceType)
+      {
+        self.rawMapData = await self.convertCSVToArray(self, textData)
+      }
+      else if (self.dataURL.type == jsonSourceType && isString(textData) && !self.isCustomMap)
+      {
+        self.rawMapData = JSON.parse(textData)
+      }
+      else
+      {
+        self.rawMapData = textData
+      }
     }
 
     if (self.rawMapData == null) { return false }
