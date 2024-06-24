@@ -1413,12 +1413,10 @@ var USAPresidentMapType = new MapType(
 
     const kPastElectionsVsPastElections = 1
     const kPastElectionsVs538Projection = 2
-    const kPastElectionsVs538PollAvg = 3
 
     var defaultPresidentialCompareSourceIDs = {}
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjectionMapSource.getID()]
-    defaultPresidentialCompareSourceIDs[kPastElectionsVs538PollAvg] = [PastElectionResultMapSource.getID(), FiveThirtyEightPollAverageMapSource.getID()]
 
     return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, defaultCompareSourceIDs: defaultPresidentialCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
