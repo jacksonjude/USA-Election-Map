@@ -882,18 +882,16 @@ var USAGovernorMapType = new MapType(
     governorMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     governorMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var governorMapSourceIDs = [CNNGovernorResultsMapSource.getID(), FiveThirtyEightGovernorProjectionMapSource.getID(), LTEGovernorProjectionMapSource.getID(), CookGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    var governorMapSourceIDs = [PastElectionResultMapSource.getID(), FiveThirtyEightGovernorProjectionMapSource.getID(), LTEGovernorProjectionMapSource.getID(), CookGovernorProjectionMapSource.getID()]
     if (customMapEnabled)
     {
       governorMapSourceIDs.push(CustomMapSource.getID())
     }
 
-    const kCNNResultsVS538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const k538ProjectionVsPastElections = 3
+    const kPastElectionsVsPastElections = 1
+    const k538ProjectionVsPastElections = 2
 
     var defaultGovernorCompareSourceIDs = {}
-    defaultGovernorCompareSourceIDs[kCNNResultsVS538Projection] = [CNNGovernorResultsMapSource.getID(), FiveThirtyEightGovernorProjectionMapSource.getID()]
     defaultGovernorCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
