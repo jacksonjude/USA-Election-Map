@@ -2,16 +2,20 @@ const electionDayTime2020 = 1604444400000 //1604390400000 PST
 const electorsCastVotesTime = 1607965200000
 const congressCountsVotesTime = 1609952400000
 const inaugurationDayTime2021 = 1611162000000
+const inaugurationDayTime2025 = 1737392400000
 
 const electionDayTime2021 = 1635890400000
 const electionDayTime2022 = 1667948400000
 const electionDayTime2024 = 1730847600000
+const electionDayTime2026 = 1793746800000
 
 const countdownTimes = {
-  "2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
+  // "2020 Presidential Election": {time: electionDayTime2020, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
   "2021 Inauguration Day": {time: inaugurationDayTime2021, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"},
-  "2022 Midterm Elections": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"},
-  "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"}
+  // "2022 Midterm Elections": {time: electionDayTime2022, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"},
+  "2024 Presidential Election": {time: electionDayTime2024, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"},
+  "2025 Inauguration Day": {time: inaugurationDayTime2025, url: null},
+  "2026 Midterm Elections": {time: electionDayTime2026, url: "https://en.wikipedia.org/wiki/2026_United_States_elections"},
 }
 var currentCountdownTimeName
 
