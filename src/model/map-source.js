@@ -354,9 +354,9 @@ class MapSource
     return this.splitVoteDataFunction(mapDateData)
   }
 
-  async canZoom(mapDateData)
+  async canZoom(mapDateData, regionID)
   {
-    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, null, true))
+    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, regionID, true))
   }
 
   getSplitVoteDisplayOptions()

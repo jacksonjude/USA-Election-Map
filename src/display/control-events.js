@@ -500,7 +500,7 @@ document.addEventListener('mousedown', async function() {
     startRegionID = currentRegionID
 
     var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
-    if (await currentMapSource.canZoom(currentMapDataForDate) && currentViewingState == ViewingState.viewing)
+    if (await currentMapSource.canZoom(currentMapDataForDate, startRegionID) && currentViewingState == ViewingState.viewing)
     {
       clickUsedToZoom = true
     }
@@ -651,12 +651,13 @@ function viewingDiscreteRegions()
 
 async function leftClickRegion(div)
 {
+  var regionID = $(div).attr('id')
+  
   let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
-  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
-  var regionID = $(div).attr('id')
   var regionDataCallback = getRegionData(regionID)
   var regionData = regionDataCallback.regionData
   var regionIDsToFill = regionDataCallback.linkedRegionIDs

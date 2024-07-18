@@ -994,7 +994,7 @@ var USAPresidentMapType = new MapType(
             currentMapZoomRegion = stateID
           }
         }
-        if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), true))
+        if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData()))
         {
           return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
         }
@@ -1097,7 +1097,7 @@ var USAPresidentMapType = new MapType(
       return aggregatedMapDateData
     }
 
-    var countyZoomingDataFunction = async (presidentialMapDateData, _, isZoomCheck) => {
+    var countyZoomingDataFunction = async (presidentialMapDateData, regionID, isZoomCheck) => {
       if (!CountyElectionResultMapSource.getMapData() || (!isZoomCheck && !(await CSVDatabase.isSourceUpdated(CountyElectionResultMapSource.getID()))))
       {
         if (isZoomCheck) { return false }
@@ -1105,7 +1105,7 @@ var USAPresidentMapType = new MapType(
         await CountyElectionResultMapSource.loadMap()
       }
       let organizedCountyData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
-      if (isZoomCheck) { return organizedCountyData != null }
+      if (isZoomCheck) { return regionID ? organizedCountyData[regionID] != null : organizedCountyData != null }
 
       let previousMapDateIndex = CountyElectionResultMapSource.getMapDates().findIndex(mapDate => mapDate == currentSliderDate.getTime())-1
       let previousMapDateData

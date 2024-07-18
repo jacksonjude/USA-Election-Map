@@ -1,7 +1,7 @@
 async function updateRegionBox(regionID = currentRegionID)
 {
   let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
-  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate)
+  let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
