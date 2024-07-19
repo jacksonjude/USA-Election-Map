@@ -1105,7 +1105,7 @@ var USAPresidentMapType = new MapType(
         await CountyElectionResultMapSource.loadMap()
       }
       let organizedCountyData = CountyElectionResultMapSource.getMapData()[currentSliderDate.getTime()]
-      if (isZoomCheck) { return regionID ? organizedCountyData[regionID] != null : organizedCountyData != null }
+      if (isZoomCheck) { return organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) }
 
       let previousMapDateIndex = CountyElectionResultMapSource.getMapDates().findIndex(mapDate => mapDate == currentSliderDate.getTime())-1
       let previousMapDateData
