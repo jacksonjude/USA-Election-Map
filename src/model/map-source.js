@@ -356,7 +356,12 @@ class MapSource
 
   async canZoom(mapDateData, regionID)
   {
-    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, regionID, true))
+    let baseRegionID = regionID ? getBaseRegionID(regionID).baseID : null
+    if (baseRegionID && baseRegionID.includes("-"))
+    {
+      baseRegionID = baseRegionID.split("-")[0]
+    }
+    return this.zoomingDataFunction != null && (!mapDateData || await this.zoomingDataFunction(mapDateData, baseRegionID, true))
   }
 
   getSplitVoteDisplayOptions()
