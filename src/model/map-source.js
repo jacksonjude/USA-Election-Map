@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom, customDefaultMargins, customVotesharePrefix, customVoteshareSuffix)
   {
     this.id = id
     this.name = name
@@ -37,6 +37,9 @@ class MapSource
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
     this.shouldUseOriginalMapDataForTotalsPieChart = shouldUseOriginalMapDataForTotalsPieChart == null ? false : shouldUseOriginalMapDataForTotalsPieChart
     this.shouldForcePopularVoteDisplayOnZoom = shouldForcePopularVoteDisplayOnZoom == null ? false : shouldForcePopularVoteDisplayOnZoom
+    this.customDefaultMargins = customDefaultMargins
+    this.customVoteshareSuffix = customVoteshareSuffix
+    this.customVotesharePrefix = customVotesharePrefix
   }
 
   // id,
@@ -70,6 +73,9 @@ class MapSource
   // shouldSetDisabledWorthToZero
   // shouldUseOriginalMapDataForTotalsPieChart
   // shouldForcePopularVoteDisplayOnZoom
+  // customDefaultMargins
+  // customVotesharePrefix
+  // customVoteshareSuffix
 
   async loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
@@ -489,6 +495,26 @@ class MapSource
   getShouldForcePopularVoteDisplayOnZoom()
   {
     return this.shouldForcePopularVoteDisplayOnZoom
+  }
+  
+  getCustomDefaultMargins()
+  {
+    return this.customDefaultMargins
+  }
+  
+  getVotesharePrefix()
+  {
+    return this.customVotesharePrefix ?? '+'
+  }
+  
+  getVoteshareSuffix()
+  {
+    return this.customVoteshareSuffix ?? '%'
+  }
+  
+  getCustomVoteshareSuffix()
+  {
+    return this.customVoteshareSuffix
   }
 
   getDropdownPartyIDs()

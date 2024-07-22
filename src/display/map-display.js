@@ -19,8 +19,9 @@ var pannedDuringClick = false
 
 var selectedParty
 
-var defaultMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
-var marginValues = JSON.parse(getCookie(marginsCookieName)) || cloneObject(defaultMarginValues)
+const standardMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
+var defaultMarginValues = JSON.parse(getCookie(marginsCookieName)) || standardMarginValues
+var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
@@ -486,8 +487,8 @@ function addDivEventListeners()
 
     if (e.altKey)
     {
-      marginValues = cloneObject(defaultMarginValues)
-      createMarginEditDropdownItems()
+      marginValues = cloneObject(standardMarginValues)
+      createMarginEditDropdownItems(currentMapSource.getCustomDefaultMargins() == null)
 
       if (showingDataMap)
       {
@@ -607,6 +608,16 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
   if (!loadedSuccessfully) { return }
+  
+  if (currentMapSource.getCustomDefaultMargins() != null)
+  {
+    marginValues = currentMapSource.getCustomDefaultMargins()
+  }
+  else
+  {
+    marginValues = cloneObject(defaultMarginValues)
+  }
+  createMarginEditDropdownItems()
 
   // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
   shouldSetToMax = true

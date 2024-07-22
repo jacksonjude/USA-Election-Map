@@ -348,7 +348,7 @@ document.addEventListener('keypress', async function(e) {
         break
       }
 
-      createMarginEditDropdownItems()
+      createMarginEditDropdownItems(currentMapSource.getCustomDefaultMargins() == null)
       if (showingDataMap)
       {
         displayDataMap()

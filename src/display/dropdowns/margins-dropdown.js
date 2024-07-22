@@ -2,9 +2,12 @@ var editMarginID = null
 
 const marginsCookieName = "global-margins"
 
-function createMarginEditDropdownItems()
+function createMarginEditDropdownItems(shouldSetDefault)
 {
-  setCookie(marginsCookieName, JSON.stringify(marginValues))
+  if (shouldSetDefault)
+  {
+    setCookie(marginsCookieName, JSON.stringify(marginValues))
+  }
 
   $("#marginsDropdownContainer").html("")
   for (var marginID in marginNames)
@@ -44,7 +47,7 @@ function toggleMarginEditing(marginID, div)
 
     marginValues[editMarginID] = marginValueToSet
 
-    if (shouldRefreshMap && showingDataMap)
+    if (shouldRefreshMap && showingDataMap && currentMapSource.getCustomDefaultMargins() == null)
     {
       setCookie(marginsCookieName, JSON.stringify(marginValues))
       displayDataMap()

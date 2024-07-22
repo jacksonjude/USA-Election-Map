@@ -35,7 +35,7 @@ async function updateRegionBox(regionID = currentRegionID)
   }
 
   var roundedMarginValue = getRoundedMarginValue(regionData.margin)
-  var regionMarginString = (regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]) + " +"
+  var regionMarginString = (regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]) + " " + currentMapSource.getVotesharePrefix()
 
   if (editingRegionMarginValue)
   {
@@ -59,7 +59,7 @@ async function updateRegionBox(regionID = currentRegionID)
     {
       let candidateData = regionData.partyVotesharePercentages[candidateOn]
       regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
-      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px; font-size: 17px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>%</span>"
+      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px; font-size: 17px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>" + currentMapSource.getVoteshareSuffix() + "</span>"
       regionBoxHTML += "</div>"
     }
     regionBoxHTML += "</div>"
@@ -82,7 +82,7 @@ async function updateRegionBox(regionID = currentRegionID)
     return
   }
 
-  regionMarginString += roundedMarginValue
+  regionMarginString += roundedMarginValue + (currentMapSource.getCustomVoteshareSuffix() ?? "")
 
   let regionBoxHTML = (currentEditingState == EditingState.viewing || (isDiscreteRegion && currentMapSource.getEditingMode() == EditingMode.margin)) ? regionMarginString : ""
 
@@ -112,7 +112,7 @@ async function updateRegionBox(regionID = currentRegionID)
     regionBoxHTML += decimalPadding(Math.round(regionData.chanceChallenger*1000)/10)
     regionBoxHTML += "%</span>&nbsp;&nbsp;&nbsp;<span style='color: " + politicalParties[incumbentChallengerPartyIDs.incumbent].getMarginColors().lean + ";'>"
     regionBoxHTML += decimalPadding(Math.round(regionData.chanceIncumbent*1000)/10)
-    regionBoxHTML += "%</span></span>"
+    regionBoxHTML += currentMapSource.getVoteshareSuffix() + "</span></span>"
   }
 
   if (regionData.partyVotesharePercentages && regionData.partyVotesharePercentages.length > 0 && regionData.partyVotesharePercentages.every(candidateData => candidateData.winPercentage != null))
@@ -141,10 +141,10 @@ async function updateRegionBox(regionID = currentRegionID)
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
     regionBoxHTML += "<span id='win-percentage-" + regionID + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: 3px; " + "background: " + getGradientCSS(colorPercentages[0].color, (colorPercentages[1] ?? colorPercentages[0]).color, colorPercentages[0].percentage) + "; " + " width: 100%'>"
-    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + "%" + "</span>"
+    regionBoxHTML += "<span style='float: left;'>" + decimalPadding(Math.round(filteredSortedPercentages[0].winPercentage*10)/10, 1) + currentMapSource.getVoteshareSuffix() + "</span>"
     if (filteredSortedPercentages[1])
     {
-      regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + "%" + "</span>"
+      regionBoxHTML += "<span style='float: right;'>" + decimalPadding(Math.round(filteredSortedPercentages[1].winPercentage*10)/10, 1) + currentMapSource.getVoteshareSuffix() + "</span>"
     }
     regionBoxHTML += "</span>"
     regionBoxHTML += "</div>"
@@ -177,7 +177,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
     sortedPercentages.forEach((voteData, i) => {
       regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionBoxHTML += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + "%"
+      regionBoxHTML += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + currentMapSource.getVoteshareSuffix()
       regionBoxHTML += "</span></span><br>"
 
       hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null

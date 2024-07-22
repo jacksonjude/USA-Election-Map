@@ -135,7 +135,7 @@ function setupTotalsPieChart()
             break
 
             case 2:
-            label += getRoundedMarginValue(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]) + "%"
+            label += getRoundedMarginValue(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]) + currentMapSource.getVoteshareSuffix()
             break
           }
 
@@ -219,7 +219,7 @@ function setupTotalsPieChart()
             return value
 
             case 2:
-            return Math.round(value) + "%"
+            return Math.round(value) + currentMapSource.getVoteshareSuffix()
           }
         }
       }
@@ -473,7 +473,7 @@ function updateTotalsPieChart()
 
     let regionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
     let formattedRegionMargin = getRoundedMarginValue(regionMargin)
-    let regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " +" + formattedRegionMargin
+    let regionString = (currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionID) : regionID) + " " + currentMapSource.getVotesharePrefix() + formattedRegionMargin + (currentMapSource.getCustomVoteshareSuffix() ?? "")
 
     if (regionParty == null || regionParty == TossupParty.getID() || regionMargin == 0)
     {
@@ -601,7 +601,7 @@ function updateTotalsPieChart()
       partyFlipData[currentPartyID] && partyFlipData[currentPartyID].forEach(regionData => {
         let formattedRegionMargin = Math.round(regionData.margin*10)/10
         formattedRegionMargin = currentMapSource.getAddDecimalPadding() ? decimalPadding(formattedRegionMargin) : formattedRegionMargin
-        partyStrings.push((currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionData.region) : regionData.region) + " +" + formattedRegionMargin + "\n")
+        partyStrings.push((currentMapSource.getFormattedRegionName ? currentMapSource.getFormattedRegionName(regionData.region) : regionData.region) + " " + currentMapSource.getVotesharePrefix() + formattedRegionMargin + (currentMapSource.getCustomVoteshareSuffix() ?? "") + "\n")
       })
 
       if (currentDirection == PieChartDirection.clockwise)
