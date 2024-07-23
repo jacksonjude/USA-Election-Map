@@ -1063,7 +1063,7 @@ var USAPresidentMapType = new MapType(
     var PolymarketPricesMapSource = new MapSource(
       "Polymarket-2024-Presidential", // id
       "Polymarket", // name
-      {url: "http://localhost:3000/data?source=polymarket", type: jsonSourceType}, // dataURL
+      {url: "https://jacksonjude.com/USA-Election-Map-Data/polymarket-prices.json", type: jsonSourceType}, // dataURL
       "https://polymarket.com", // homepageURL
       {regular: "./assets/polymarket-large.png", mini: "./assets/polymarket.png"}, // iconURL
       {
@@ -1110,7 +1110,7 @@ var USAPresidentMapType = new MapType(
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
       null, // shouldForcePopularVoteDisplayOnZoom
-      {safe: 90, likely: 70, lean: 60, tilt: Number.MIN_VALUE}, // customDefaultMargins
+      {safe: 90, likely: 75, lean: 60, tilt: Number.MIN_VALUE}, // customDefaultMargins
       '', // customVotesharePrefix
       '¢', // customVoteshareSuffix
     )
@@ -1541,7 +1541,7 @@ var USAPresidentMapType = new MapType(
     presidentialMapSources[CountyElectionResultMapSource.getID()] = CountyElectionResultMapSource
     presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var presidentialMapSourceIDs = [FiveThirtyEightProjectionMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID()]
+    var presidentialMapSourceIDs = [FiveThirtyEightProjectionMapSource.getID(), PolymarketPricesMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID()]
     if (customMapEnabled)
     {
       presidentialMapSourceIDs.push(CustomMapSource.getID())
