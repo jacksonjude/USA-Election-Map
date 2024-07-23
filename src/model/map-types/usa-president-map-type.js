@@ -1129,7 +1129,7 @@ var USAPresidentMapType = new MapType(
             currentMapZoomRegion = stateID
           }
         }
-        if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData()))
+        if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), currentMapZoomRegion))
         {
           return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
         }
@@ -1251,7 +1251,7 @@ var USAPresidentMapType = new MapType(
         previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin)
       }
 
-      let mapDateData = organizedCountyData != null ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], currentSliderDate, previousMapDateData, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin) : null
+      let mapDateData = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], currentSliderDate, previousMapDateData, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin) : null
 
       let countyZoomData = {}
 
