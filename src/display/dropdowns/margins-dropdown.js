@@ -47,9 +47,12 @@ function toggleMarginEditing(marginID, div)
 
     marginValues[editMarginID] = marginValueToSet
 
-    if (shouldRefreshMap && showingDataMap && currentMapSource.getCustomDefaultMargins() == null)
+    if (shouldRefreshMap && showingDataMap)
     {
-      setCookie(marginsCookieName, JSON.stringify(marginValues))
+      if (currentMapSource.getCustomDefaultMargins() == null)
+      {
+        setCookie(marginsCookieName, JSON.stringify(marginValues))
+      }
       displayDataMap()
     }
 
