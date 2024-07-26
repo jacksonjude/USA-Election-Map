@@ -1063,7 +1063,7 @@ var USAPresidentMapType = new MapType(
     var PolymarketPricesMapSource = new MapSource(
       "Polymarket-2024-Presidential", // id
       "Polymarket", // name
-      {url: "https://jacksonjude.com/USA-Election-Map-Data/polymarket-prices.json", type: jsonSourceType}, // dataURL
+      {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2024-president-polymarket-prices.json", type: jsonSourceType}, // dataURL
       "https://polymarket.com", // homepageURL
       {regular: "./assets/polymarket-large.png", mini: "./assets/polymarket.png"}, // iconURL
       {
