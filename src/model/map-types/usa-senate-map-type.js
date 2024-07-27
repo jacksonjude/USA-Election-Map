@@ -1294,11 +1294,9 @@ var USASenateMapType = new MapType(
     }
 
     const kPastElectionsVsPastElections = 1
-    const k538ProjectionVsPastElections = 2
 
     var defaultSenateCompareSourceIDs = {}
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultSenateCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightSenateProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
 
     return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
