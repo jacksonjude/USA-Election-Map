@@ -333,10 +333,10 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/03/1992,AR,Randolph,Dole,republican,1766,6314
 11/03/1992,AR,Randolph,Perot,reform,578,6314
 11/03/1992,AR,Randolph,Other,other,49,6314
-11/03/1992,AR,St._Francis,Clinton,democrat,6548,10635
-11/03/1992,AR,St._Francis,Dole,republican,3289,10635
-11/03/1992,AR,St._Francis,Perot,reform,766,10635
-11/03/1992,AR,St._Francis,Other,other,32,10635
+11/03/1992,AR,St_Francis,Clinton,democrat,6548,10635
+11/03/1992,AR,St_Francis,Dole,republican,3289,10635
+11/03/1992,AR,St_Francis,Perot,reform,766,10635
+11/03/1992,AR,St_Francis,Other,other,32,10635
 11/03/1992,AR,Saline,Clinton,democrat,12671,25661
 11/03/1992,AR,Saline,Dole,republican,10105,25661
 11/03/1992,AR,Saline,Perot,reform,2751,25661
@@ -425,7 +425,7 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/3/1992,AZ,Mohave,Bush,republican,13684,40616
 11/3/1992,AZ,Mohave,Perot,reform,12706,40616
 11/3/1992,AZ,Mohave,Other,other,971,40616
-11/3/1992,AZ,Navajo,Clinton,democrat,10882,249638
+11/3/1992,AZ,Navajo,Clinton,democrat,10882,24638
 11/3/1992,AZ,Navajo,Bush,republican,7994,24638
 11/3/1992,AZ,Navajo,Perot,reform,4787,24638
 11/3/1992,AZ,Navajo,Other,other,975,24638
