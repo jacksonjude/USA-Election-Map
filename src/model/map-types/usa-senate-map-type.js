@@ -182,17 +182,19 @@ var USASenateMapType = new MapType(
       let filteredMapData = {}
       let mapDates = []
       
-      const relativePositiveParty = DemocraticParty.getID()
-      const relativeNegativeParty = RepublicanParty.getID()
+      const defaultRelativePositiveParty = DemocraticParty.getID()
+      const defaultRelativeNegativeParty = RepublicanParty.getID()
+      const positiveParties = {"NE":IndependentGenericParty.getID()}
       
       let onCycleClass = ((cycleYear-2)%6)/2+1
-      
-      let partyObjects = [relativePositiveParty, relativeNegativeParty].map(partyID => politicalParties[partyID])
-      let partyIDToCandidateNames = {[relativePositiveParty]: politicalParties[relativePositiveParty].getNames()[0], [relativeNegativeParty]: politicalParties[relativeNegativeParty].getNames()[0]}
       
       for (let regionName in rawMapData)
       {
         let region = regionNameToIDMap[regionName]
+        const relativePositiveParty = positiveParties[region] ?? defaultRelativePositiveParty
+        const relativeNegativeParty = defaultRelativeNegativeParty
+        
+        let partyIDToCandidateNames = {[relativePositiveParty]: politicalParties[relativePositiveParty].getNames()[0], [relativeNegativeParty]: politicalParties[relativeNegativeParty].getNames()[0]}
         
         for (let dateData of rawMapData[regionName])
         {
@@ -210,10 +212,9 @@ var USASenateMapType = new MapType(
           
           let voteshareSortedCandidateData = []
           
-          for (let party of partyObjects)
+          for (let partyID of [relativePositiveParty, relativeNegativeParty])
           {
-            const partyID = party.getID()
-            if (partyID != relativePositiveParty && partyID != relativeNegativeParty) { continue }
+            const party = politicalParties[partyID]
             
             const voteshare = dateData[columnMap.price]*100*(partyID == relativeNegativeParty ? -1 : 1)+(partyID == relativeNegativeParty ? 100 : 0)
             voteshareSortedCandidateData.push({candidate: party.getNames()[0], partyID: partyID, voteshare: voteshare, winPercentage: voteshare})
