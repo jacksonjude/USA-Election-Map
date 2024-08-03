@@ -22,8 +22,8 @@ var USAPresidentMapType = new MapType(
   [
     {id: "presViewingType", title: "Viewing Type", type: MapSettingType.optionCycle, options:
       [
-        {id: "popularVotes", title: "Popular Votes", value: false},
-        {id: "electoralVotes", title: "Electoral Votes", value: true}
+        {id: "popularVotes", title: "State Votes", value: false},
+        {id: "electoralVotes", title: "Official EVs", value: true}
       ],
       shouldShowActive: (value) => {
         return value

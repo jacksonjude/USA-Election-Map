@@ -251,7 +251,7 @@ var globalMapSettings =
       {id: "hide", title: "Hidden", value: false}
     ],
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
-  {id: "piePopularVote", title: "National Vote", type: MapSettingType.optionCycle, options:
+  {id: "piePopularVote", title: "Popular Vote", type: MapSettingType.optionCycle, options:
     [
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
