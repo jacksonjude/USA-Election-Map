@@ -562,7 +562,7 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
   currentMapSource.cancelDownload()
 
   currentMapSource = mapSource
-  updateNavBarForNewSource()
+  updateNavBarForNewSource(false, false)
   await loadDataMap(...loadDataMapArgs)
 }
 
