@@ -1096,7 +1096,7 @@ var USAPresidentMapType = new MapType(
           const linkData = regionIDToLinkMap[regionID]
           const dataIsArray = Array.isArray(linkData)
           
-          linkToOpen += "/event/" + linkData + "-presidential-election-winner" + (dataIsArray && linkData.length > 1 ? linkData[1] : "")
+          linkToOpen += "/event/" + (dataIsArray ? linkData[0] : linkData) + "-presidential-election-winner" + (dataIsArray && linkData.length > 1 ? linkData[1] : "")
         }
         window.open(linkToOpen)
       }, // customOpenRegionLinkFunction
