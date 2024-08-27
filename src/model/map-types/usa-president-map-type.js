@@ -527,7 +527,7 @@ var USAPresidentMapType = new MapType(
             voteshareSortedCandidateData.push({candidate: partyIDToCandidateNames[party.getID()], partyID: party.getID(), voteshare: dateData[party.getShortName().toLowerCase()]?.[columnMap.voteshare], winPercentage: dateData[columnMap.winprob]?.[party.getShortName().toLowerCase()]})
           }
           
-          let blankCandidateData =  voteshareSortedCandidateData.filter((candData) => isNaN(candData.voteshare))
+          let blankCandidateData = voteshareSortedCandidateData.filter((candData) => isNaN(candData.voteshare))
           voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
           
           if (blankCandidateData.length == 1)
@@ -619,6 +619,11 @@ var USAPresidentMapType = new MapType(
             greatestValuePartyID = TossupParty.getID()
             greatestValueCandidateName = null
             topValue = 50
+          }
+          
+          if ((voteshareSortedCandidateData[0].voteshare*2)%2 == 1)
+          {
+            voteshareSortedCandidateData[1].voteshare -= 0.00001
           }
           
           filteredMapData[date][region] = {region: region, margin: topValue, partyID: greatestValuePartyID, candidateName: greatestValueCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[region] != greatestValuePartyID}
