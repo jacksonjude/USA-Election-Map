@@ -16,7 +16,7 @@ var USASenateMapType = new MapType(
   {"AL":"Alabama","AL-S":"Alabama Special","AK":"Alaska","AK-S":"Alaska Special","AZ":"Arizona","AZ-S":"Arizona Special","AR":"Arkansas","AR-S":"Arkansas Special","CA":"California","CA-S":"California Special","CO":"Colorado","CO-S":"Colorado Special","CT":"Connecticut","CT-S":"Connecticut Special","DE":"Delaware","DE-S":"Delaware Special","FL":"Florida","FL-S":"Florida Special","GA":"Georgia","GA-S":"Georgia Special","HI":"Hawaii","HI-S":"Hawaii Special","ID":"Idaho","ID-S":"Idaho Special","IL":"Illinois","IL-S":"Illinois Special","IN":"Indiana","IN-S":"Indiana Special","IA":"Iowa","IA-S":"Iowa Special","KS":"Kansas","KS-S":"Kansas Special","KY":"Kentucky","KY-S":"Kentucky Special","LA":"Louisiana","LA-S":"Louisiana Special","ME":"Maine","ME-S":"Maine Special","MD":"Maryland","MD-S":"Maryland Special","MA":"Massachusetts","MA-S":"Massachusetts Special","MI":"Michigan","MI-S":"Michigan Special","MN":"Minnesota","MN-S":"Minnesota Special","MS":"Mississippi","MS-S":"Mississippi Special","MO":"Missouri","MO-S":"Missouri Special","MT":"Montana","MT-S":"Montana Special","NE":"Nebraska","NE-S":"Nebraska Special","NV":"Nevada","NV-S":"Nevada Special","NH":"New Hampshire","NH-S":"New Hampshire Special","NJ":"New Jersey","NJ-S":"New Jersey Special","NM":"New Mexico","NM-S":"New Mexico Special","NY":"New York","NY-S":"New York Special","NC":"North Carolina","NC-S":"North Carolina Special","ND":"North Dakota","ND-S":"North Dakota Special","OH":"Ohio","OH-S":"Ohio Special","OK":"Oklahoma","OK-S":"Oklahoma Special","OR":"Oregon","OR-S":"Oregon Special","PA":"Pennsylvania","PA-S":"Pennsylvania Special","RI":"Rhode Island","RI-S":"Rhode Island Special","SC":"South Carolina","SC-S":"South Carolina Special","SD":"South Dakota","SD-S":"South Dakota Special","TN":"Tennessee","TN-S":"Tennessee Special","TX":"Texas","TX-S":"Texas Special","UT":"Utah","UT-S":"Utah Special","VT":"Vermont","VT-S":"Vermont Special","VA":"Virginia","VA-S":"Virginia Special","WA":"Washington","WA-S":"Washington Special","WV":"West Virginia","WV-S":"West Virginia Special","WI":"Wisconsin","WI-S":"Wisconsin Special","WY":"Wyoming","WY-S":"Wyoming Special"},
   [/.+-S/],
   [
-    {id: "mapCurrentSeats", title: "Map Current Seats", type: MapSettingType.optionCycle, options:
+    {id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
@@ -25,7 +25,7 @@ var USASenateMapType = new MapType(
         return value
       },
     defaultValue: "hide", reloadType: MapSettingReloadType.display},
-    {id: "pieCurrentSeats", title: "Pie Current Seats", type: MapSettingType.optionCycle, options:
+    {id: "pieCurrentSeats", title: "🥧 Pie Held Seats", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
@@ -34,7 +34,7 @@ var USASenateMapType = new MapType(
         return !value
       },
     defaultValue: "show", reloadType: MapSettingReloadType.display},
-    {id: "seatArrangement", title: "Seat Arrangement", type: MapSettingType.optionCycle, options:
+    {id: "seatArrangement", title: "🪑 Seat Arrangement", type: MapSettingType.optionCycle, options:
       [
         {id: "election-type", title: "Election", value: 0},
         {id: "seat-class", title: "Class", value: 1}
@@ -43,7 +43,7 @@ var USASenateMapType = new MapType(
         return value == 1
       },
     defaultValue: "election-type", reloadType: MapSettingReloadType.data},
-    {id: "offYear", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
+    {id: "offYear", title: "🔄 Off Cycle Elections", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
@@ -237,6 +237,11 @@ var USASenateMapType = new MapType(
             greatestValuePartyID = TossupParty.getID()
             greatestValueCandidateName = null
             topValue = 50
+          }
+          
+          if ((voteshareSortedCandidateData[0].voteshare*2)%2 == 1)
+          {
+            voteshareSortedCandidateData[1].voteshare -= 0.00001
           }
           
           filteredMapData[date][region] = {region: region, seatClass: onCycleClass, offYear: false, runoff: false, isSpecial: false, margin: topValue, partyID: greatestValuePartyID, candidateName: greatestValueCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[region + "-" + onCycleClass] != greatestValuePartyID}

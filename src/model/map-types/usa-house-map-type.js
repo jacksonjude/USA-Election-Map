@@ -16,19 +16,19 @@ var USAHouseMapType = new MapType(
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
-    {id: "showAllDistricts", title: "National View", type: MapSettingType.optionCycle, options:
+    {id: "showAllDistricts", title: "🇺🇸 National View", type: MapSettingType.optionCycle, options:
       [
         {id: "totals", title: "Show Totals", value: false},
         {id: "all", title: "Show Districts", value: true}
       ],
     defaultValue: "totals", reloadType: MapSettingReloadType.display},
-    {id: "showStateDistricts", title: "State View", type: MapSettingType.optionCycle, options:
+    {id: "showStateDistricts", title: "🏳️ State View", type: MapSettingType.optionCycle, options:
       [
         {id: "boxes", title: "Show Boxes", value: false},
         {id: "districts", title: "Show Districts", value: true}
       ],
     defaultValue: "districts", reloadType: MapSettingReloadType.display},
-    {id: "zoomSeatTotals", title: "Seat Totals", type: MapSettingType.optionCycle, options:
+    {id: "zoomSeatTotals", title: "🧮 Seat Totals", type: MapSettingType.optionCycle, options:
       [
         {id: "all", title: "All Seats", value: false},
         {id: "selected", title: "Selected State", value: true}
