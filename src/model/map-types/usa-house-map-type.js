@@ -990,7 +990,7 @@ var USAHouseMapType = new MapType(
     houseMapSources[CNNHouseResultsMapSource.getID()] = CNNHouseResultsMapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var houseMapSourceIDs = [PastElectionResultMapSource.getID(), FiveThirtyEightHouseProjectionMapSource.getID()]
+    var houseMapSourceIDs = [PastElectionResultMapSource.getID()]
     if (customMapEnabled)
     {
       houseMapSourceIDs.push(CustomMapSource.getID())

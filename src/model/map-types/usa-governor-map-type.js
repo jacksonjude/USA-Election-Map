@@ -882,7 +882,7 @@ var USAGovernorMapType = new MapType(
     governorMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     governorMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var governorMapSourceIDs = [PastElectionResultMapSource.getID(), FiveThirtyEightGovernorProjectionMapSource.getID(), LTEGovernorProjectionMapSource.getID(), CookGovernorProjectionMapSource.getID()]
+    var governorMapSourceIDs = [PastElectionResultMapSource.getID()]
     if (customMapEnabled)
     {
       governorMapSourceIDs.push(CustomMapSource.getID())
