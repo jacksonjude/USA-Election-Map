@@ -80,7 +80,7 @@ function setupTotalsPieChart()
     responsive: true,
     aspectRatio: 1,
     cutoutPercentage: totalsPieChartCutoutPercent,
-    rotation: 0.5*Math.PI,
+    rotation: 180,
     elements: {
       arc: {
         borderWidth: 2,
@@ -90,94 +90,96 @@ function setupTotalsPieChart()
     legend: {
       display: false
     },
-    tooltips: {
-      titleFontSize: 15,
-      bodyFontSize: 15,
-      displayColors: false,
-      enabled: false,
-      custom: function(tooltipModel) {
-        if (tooltipModel.opacity === 0)
-        {
-          $("#charttooltipcontainer").trigger('hide')
-          return
-        }
-
-        $("#charttooltipcontainer").trigger('show')
-
-        let charttooltipHTML = "<div style='padding-bottom: 2px'>"
-        charttooltipHTML += "<span style='font-size: " + tooltipModel.titleFontSize + "px'>"
-        charttooltipHTML += tooltipModel.title.map(title => "<div>" + title + "</div>").join("")
-        charttooltipHTML += tooltipModel.body.map((bodyInfo, i) => "<div style='color: " + tooltipModel.labelTextColors[i] + "'>" + bodyInfo.lines.map(bodyLine => "<div>" + bodyLine + "</div>").join("") + "</div>").join("")
-        charttooltipHTML += "</div>"
-
-        $("#charttooltip").html(charttooltipHTML)
-
-        let {left: xPos, top: yPos} = this._chart.canvas.getBoundingClientRect()
-        xPos += tooltipModel.caretX
-        yPos += tooltipModel.caretY
-
-        xPos = correctOverflow(xPos, $("#charttooltipcontainer").width(), $(document).width())
-        yPos = correctOverflow(yPos, $("#charttooltipcontainer").height(), $(document).height())
-
-        $("#charttooltipcontainer").css('left', xPos)
-        $("#charttooltipcontainer").css('top', yPos)
-      },
-      callbacks: {
-        title: function(tooltipItem, data) {
-          var label = data.datasets[tooltipItem[0].datasetIndex].labels[tooltipItem[0].index] || ''
-          label += ': '
-
-          switch (tooltipItem[0].datasetIndex)
-          {
-            case 0:
-            case 1:
-            label += data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]
-            break
-
-            case 2:
-            label += getRoundedMarginValue(data.datasets[tooltipItem[0].datasetIndex].data[tooltipItem[0].index]) + currentMapSource.getVoteshareSuffix()
-            break
-          }
-
-          return label
-        },
-        label: function(tooltipItem, _) {
-          switch (tooltipItem.datasetIndex)
-          {
-            case 0:
-            var labelArray = regionMarginStrings[tooltipItem.index].concat()
-            return labelArray
-
-            case 1:
-            var regionPartyStringArray = regionPartyStrings[tooltipItem.index]
-            if (regionPartyStringArray) { return regionPartyStringArray.concat() }
-            return
-
-            case 2:
-            return
-          }
-        },
-        labelTextColor: function(tooltipItem, chart) {
-          var backgroundColors = chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
-          var indexToUse = tooltipItem.index
-          if (tooltipItem.datasetIndex == 1 && typeof backgroundColors[indexToUse] !== 'string')
-          {
-            if (partyOrdering[Math.floor(indexToUse/2)].direction == PieChartDirection.clockwise)
-            {
-              indexToUse -= 1
-            }
-            else
-            {
-              indexToUse += 1
-            }
-          }
-
-          var color = backgroundColors[indexToUse]
-          return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
-        }
-      }
-    },
     plugins: {
+      tooltip: {
+        displayColors: false,
+        enabled: false,
+        external: function(context) {
+          const tooltipModel = context.tooltip
+          
+          if (tooltipModel.opacity === 0)
+          {
+            $("#charttooltipcontainer").trigger('hide')
+            return
+          }
+      
+          $("#charttooltipcontainer").trigger('show')
+      
+          let charttooltipHTML = "<div style='padding-bottom: 2px'>"
+          charttooltipHTML += "<span style='font-size: 15px'>"
+          charttooltipHTML += tooltipModel.title.map(title => "<div>" + title + "</div>").join("")
+          charttooltipHTML += tooltipModel.body.map((bodyInfo, i) => "<div style='color: " + tooltipModel.labelTextColors[i] + "'>" + bodyInfo.lines.map(bodyLine => "<div>" + bodyLine + "</div>").join("") + "</div>").join("")
+          charttooltipHTML += "</div>"
+      
+          $("#charttooltip").html(charttooltipHTML)
+      
+          let {left: xPos, top: yPos} = context.chart.canvas.getBoundingClientRect()
+          xPos += tooltipModel.caretX
+          yPos += tooltipModel.caretY
+      
+          xPos = correctOverflow(xPos, $("#charttooltipcontainer").width(), $(document).width())
+          yPos = correctOverflow(yPos, $("#charttooltipcontainer").height(), $(document).height())
+      
+          $("#charttooltipcontainer").css('left', xPos)
+          $("#charttooltipcontainer").css('top', yPos)
+        },
+        callbacks: {
+          title: function(tooltipItems) {
+            const tooltipItem = tooltipItems[0]
+            
+            var label = tooltipItem.dataset.labels[tooltipItem.dataIndex] || ''
+            label += ': '
+      
+            switch (tooltipItem.datasetIndex)
+            {
+              case 0:
+              case 1:
+              label += tooltipItem.dataset.data[tooltipItem.dataIndex]
+              break
+      
+              case 2:
+              label += getRoundedMarginValue(tooltipItem.dataset.data[tooltipItem.dataIndex]) + currentMapSource.getVoteshareSuffix()
+              break
+            }
+      
+            return label
+          },
+          label: function(tooltipItem) {
+            switch (tooltipItem.datasetIndex)
+            {
+              case 0:
+              var labelArray = regionMarginStrings[tooltipItem.dataIndex].concat()
+              return labelArray
+      
+              case 1:
+              var regionPartyStringArray = regionPartyStrings[tooltipItem.dataIndex]
+              if (regionPartyStringArray) { return regionPartyStringArray.concat() }
+              return null
+      
+              case 2:
+              return null
+            }
+          },
+          labelTextColor: function(tooltipItem) {
+            var backgroundColors = tooltipItem.chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
+            var indexToUse = tooltipItem.dataIndex
+            if (tooltipItem.datasetIndex == 1 && typeof backgroundColors[indexToUse] !== 'string')
+            {
+              if (partyOrdering[Math.floor(indexToUse/2)].direction == PieChartDirection.clockwise)
+              {
+                indexToUse -= 1
+              }
+              else
+              {
+                indexToUse += 1
+              }
+            }
+      
+            var color = backgroundColors[indexToUse]
+            return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
+          }
+        }
+      },
       datalabels: {
         color: function(context) {
           var value = context.dataset.data[context.dataIndex]
@@ -230,7 +232,8 @@ function setupTotalsPieChart()
   totalsPieChart = new Chart(ctx, {
     type: 'doughnut',
     data: data,
-    options: options
+    options: options,
+    plugins: [ChartDataLabels]
   })
 }
 
