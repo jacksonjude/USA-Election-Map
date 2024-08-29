@@ -224,9 +224,9 @@ async function reloadForNewMapType(initialLoad)
   initializeCompareVariables()
 
   createMapTypeDropdownItems()
+  createComparePresetDropdownItems()
   createMapSourceDropdownItems()
   createSettingsDropdownItems()
-  createComparePresetDropdownItems()
 
   currentMapSource = (currentMapType.getCurrentMapSourceID() && currentMapType.getCurrentMapSourceID() in mapSources && !(!currentMapType.getCustomMapEnabled() && currentMapType.getCurrentMapSourceID() == currentMapType.getCustomMapSource().getID())) ? mapSources[currentMapType.getCurrentMapSourceID()] : mapSources[currentMapType.getMapSourceIDs()[0]]
   if (currentMapSource.getID() == NullMapSource.getID())

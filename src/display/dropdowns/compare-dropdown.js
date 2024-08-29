@@ -8,6 +8,8 @@ var compareMapSourceIDArray
 var compareMapDataArray
 var selectedCompareSlider
 
+var showingCompareCheckboxes = false
+
 function initializeCompareVariables()
 {
   showingCompareMap = false
@@ -26,6 +28,24 @@ function createComparePresetDropdownItems()
 
     $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
     $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
+  }
+  
+  $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
+  $("#comparePresetsDropdownContainer").append("<a style='' onclick='toggleCompareCheckboxes()'><span class='comparecheckboxtoggleicon'>☑️</span> Custom Checkboxes Enabled</a>")
+}
+
+function toggleCompareCheckboxes(value)
+{
+  showingCompareCheckboxes = value ?? !showingCompareCheckboxes
+  if (showingCompareCheckboxes)
+  {
+    $(".comparesourcecheckbox").show()
+    $(".comparecheckboxtoggleicon").html('✅')
+  }
+  else
+  {
+    $(".comparesourcecheckbox").hide()
+    $(".comparecheckboxtoggleicon").html('❌')
   }
 }
 

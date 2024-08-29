@@ -36,9 +36,13 @@ function createMapSourceDropdownItems()
       $("#" + mapSourceIDNoSpace + "-icon")[0].addEventListener('click', function() {
         let mapSource = $(this).data("mapsource")
         let mapSourceNoSpace = mapSource.replace(/\s/g, '')
-        downloadDataForMapSource(mapSource, getIconDivsToUpdateArrayForSourceID(mapSource), mapSourceNoSpace, true, true)
+        downloadDataForMapSource(mapSource, getIconDivsToUpdateArrayForSourceID(mapSource), mapSourceNoSpace, true, true).then(() => {
+          updateMapSource(mapSource, "#sourceToggleButton")
+        })
       })
       $("#" + mapSourceIDNoSpace + "-compare")[0].addEventListener('click', function() {
+        if (!showingCompareCheckboxes) { return }
+        
         let mapSource = $(this).data("mapsource")
         let mapSourceNoSpace = mapSource.replace(/\s/g, '')
         addCompareMapSource(mapSource, mapSourceNoSpace)
@@ -57,6 +61,8 @@ function createMapSourceDropdownItems()
       })
     }
   }
+  
+  toggleCompareCheckboxes(showingCompareCheckboxes)
 }
 
 function toggleMapSource(buttonDiv)
