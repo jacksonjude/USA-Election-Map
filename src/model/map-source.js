@@ -451,6 +451,15 @@ class MapSource
     self = self || this
     this.iconURL = newIconURL
   }
+  
+  getIconOverlayText()
+  {
+    if (this.iconURL.getOverlayText != null)
+    {
+      return this.iconURL.getOverlayText()
+    }
+    return null
+  }
 
   hasHomepageURL()
   {

@@ -236,7 +236,9 @@ async function reloadForNewMapType(initialLoad)
 
   await loadMapSVGFile()
 
-  $("#totalsPieChartContainer").html("<canvas id='totalsPieChart'></canvas>")
+  $("#totalsPieChart").remove()
+  $("#totalsPieChartContainer").prepend('<canvas id="totalsPieChart"></canvas>')
+  $("#totalsPieChartOverlayText").html("")
 
   $("#loader").hide()
   $("#loader-circle-container").hide()
@@ -890,6 +892,16 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   displayPartyTotals(reloadPartyDropdowns)
 
   updateTotalsPieChart()
+  
+  let iconOverlayText = currentMapSource.getIconOverlayText()
+  if (iconOverlayText != null)
+  {
+    $("#totalsPieChartOverlayText").html(iconOverlayText)
+  }
+  else
+  {
+    $("#totalsPieChartOverlayText").html(iconOverlayText)
+  }
 
   updateMapElectoralVoteText()
 

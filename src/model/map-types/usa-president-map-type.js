@@ -1298,7 +1298,10 @@ var USAPresidentMapType = new MapType(
       "Past Elections", // name
       "./csv-sources/past-president.csv", // dataURL
       "https://en.wikipedia.org/wiki/", // homepageURL
-      "./assets/wikipedia-large.png", // iconURL
+      {regular: "./assets/wikipedia-large.png", mini: "./assets/wikipedia-large.png", getOverlayText: () => {
+        let currentYear = currentSliderDate.getFullYear()
+        return currentYear
+      }}, // iconURL
       {
         date: "date",
         region: "region",
@@ -1365,7 +1368,10 @@ var USAPresidentMapType = new MapType(
       "Older Elections", // name
       "./csv-sources/historical-president.csv", // dataURL
       "https://en.wikipedia.org/wiki/", // homepageURL
-      "./assets/wikipedia-large.png", // iconURL
+      {regular: "./assets/wikipedia-large.png", mini: "./assets/wikipedia-large.png", getOverlayText: () => {
+        let currentYear = currentSliderDate.getFullYear()
+        return currentYear
+      }}, // iconURL
       {
         date: "date",
         region: "region",

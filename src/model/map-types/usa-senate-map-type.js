@@ -1161,7 +1161,10 @@ var USASenateMapType = new MapType(
       "Past Elections", // name
       "./csv-sources/past-senate.csv", // dataURL
       "https://en.wikipedia.org/wiki/", // homepageURL
-      "./assets/wikipedia-large.png", // iconURL
+      {regular: "./assets/wikipedia-large.png", mini: "./assets/wikipedia-large.png", getOverlayText: () => {
+        let currentYear = currentSliderDate.getFullYear()
+        return currentYear
+      }}, // iconURL
       {
         date: "date",
         region: "region",
