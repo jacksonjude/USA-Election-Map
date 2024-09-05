@@ -454,7 +454,7 @@ class MapSource
   
   getIconOverlayText()
   {
-    if (this.iconURL.getOverlayText != null)
+    if (this.iconURL != null && this.iconURL.getOverlayText != null)
     {
       return this.iconURL.getOverlayText()
     }
