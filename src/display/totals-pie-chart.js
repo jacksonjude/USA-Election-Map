@@ -647,7 +647,7 @@ function updateTotalsPieChart()
       summedPercentage += sortedPopularVoteArray[partyNum]
     }
     let remainingPopularVote = 100-summedPercentage
-    if (remainingPopularVote > 0)
+    if (remainingPopularVote > 0 && !showingCompareMap)
     {
       sortedPopularVoteArray[genericPartyOrderingIndex] += remainingPopularVote
     }
