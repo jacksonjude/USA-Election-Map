@@ -1328,7 +1328,7 @@ function zoomOutMap()
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
   
-  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID())
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom())
   {
     const pastResultMapSourceID = "Past-Presidential-Elections"
     compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
