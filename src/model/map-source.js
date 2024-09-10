@@ -350,9 +350,9 @@ class MapSource
     return this.viewingDataFunction(mapDateData)
   }
 
-  getZoomingData(mapDateData, zoomRegion)
+  getZoomingData(mapDateData, zoomRegion, date)
   {
-    return this.zoomingDataFunction(mapDateData, zoomRegion)
+    return this.zoomingDataFunction(mapDateData, zoomRegion, false, date)
   }
 
   getSplitVoteData(mapDateData)
@@ -443,7 +443,12 @@ class MapSource
     {
       return this.iconURL.mini
     }
-    return this.iconURL
+    if (isString(this.iconURL))
+    {
+      return this.iconURL
+    }
+    
+    return null
   }
 
   setIconURL(newIconURL, self)

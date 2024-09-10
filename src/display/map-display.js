@@ -20,6 +20,7 @@ var pannedDuringClick = false
 var selectedParty
 
 const standardMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
+const alternateMarginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
 var defaultMarginValues = JSON.parse(getCookie(marginsCookieName)) || standardMarginValues
 var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
@@ -615,6 +616,10 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   {
     marginValues = currentMapSource.getCustomDefaultMargins()
   }
+  else if (currentMapSource.isCustom() && showingCompareMap)
+  {
+    marginValues = cloneObject(alternateMarginValues)
+  }
   else
   {
     marginValues = cloneObject(defaultMarginValues)
@@ -814,7 +819,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     break
 
     case ViewingState.zooming:
-    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
+    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion, dateToDisplay.getTime())
     break
 
     case ViewingState.splitVote:
@@ -1322,8 +1327,18 @@ function zoomOutMap()
 {
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
-
-  if (currentMapSource.isCustom())
+  
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID())
+  {
+    const pastResultMapSourceID = "Past-Presidential-Elections"
+    compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
+    compareResultCustomMapSource = null
+    getCompareMajorParties = null
+    shouldSetCompareMapSource = true
+    
+    updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+  }
+  else if (currentMapSource.isCustom())
   {
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
   }
