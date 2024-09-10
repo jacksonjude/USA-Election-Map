@@ -1610,8 +1610,8 @@ var USAPresidentMapType = new MapType(
           .map(dateIndex => PastElectionResultMapSource.getMapDates()[dateIndex])
           .map(dateTime => new Date(dateTime).getFullYear())
         
-        let compareYearsText = [compareYears[0], "=====", compareYears[1]]
-          .map(text => `<div style='line-height: 40rem'>${text}</div>`)
+        let compareYearsText = [compareYears[0], "↕️", compareYears[1]]
+          .map(text => `<div>${text}</div>`)
           .join("")
         
         return compareYearsText
