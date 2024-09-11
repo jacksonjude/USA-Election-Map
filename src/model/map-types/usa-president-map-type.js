@@ -1764,12 +1764,10 @@ var USAPresidentMapType = new MapType(
     }
 
     const kPastElectionsVsPastElections = 1
-    const kPastCountiesVsPastCounties = 2
-    const kPastElectionsVs538Projection = 3
+    const kPastElectionsVs538Projection = 2
 
     var defaultPresidentialCompareSourceIDs = {}
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    // defaultPresidentialCompareSourceIDs[kPastCountiesVsPastCounties] = [CountyElectionResultMapSource.getID(), CountyElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjectionMapSource.getID()]
 
     return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, defaultCompareSourceIDs: defaultPresidentialCompareSourceIDs, customSourceID: CustomMapSource.getID()}
