@@ -176,9 +176,10 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
     $("#" + mapSourceToUncheck.replace(/\s/g, '') + "-compare").prop('checked', false)
   }
 
-  await updateCompareMapSources(compareSourcesUpdated, false)
-
   showingCompareMap = true
+  
+  await updateCompareMapSources(compareSourcesUpdated, false)
+  
   toggleMapSettingDisable("seatArrangement", true)
   updateCompareMapSlidersVisibility()
 }
@@ -326,7 +327,7 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
   $("#compareItem-" + compareArrayIndex).html(mapSource.getName() + " (" + getDateString(dateToDisplay) + ")")
   
   compareMapDataArray[compareArrayIndex] = mapSource.getMapData()[dateToDisplay.getTime()]
-  if (currentMapZoomRegion != null)
+  if (currentMapZoomRegion != null && currentMapType.getID() == USAPresidentMapType.getID())
   {
     compareMapDataArray[compareArrayIndex] = await mapSource.getZoomingData(compareMapDataArray[compareArrayIndex], currentMapZoomRegion, dateToDisplay.getTime())
   }
