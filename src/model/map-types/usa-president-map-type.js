@@ -1602,7 +1602,11 @@ var USAPresidentMapType = new MapType(
       null, // dateURL
       null, // homepageURL
       {getOverlayText: () => {
-        const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray[0] == PastElectionResultMapSource.getID() && compareMapSourceIDArray[1] == PastElectionResultMapSource.getID()
+        const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray.every(sourceID => 
+          sourceID == PastElectionResultMapSource.getID() ||
+          sourceID == CountyElectionResultMapSource.getID() ||
+          sourceID == HistoricalElectionResultMapSource.getID()
+        )
         if (!isPastElectionCompare) { return null }
         
         let compareYears = [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
