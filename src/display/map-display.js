@@ -1328,15 +1328,18 @@ function zoomOutMap()
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
   
-  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom())
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID())
   {
     const pastResultMapSourceID = "Past-Presidential-Elections"
     compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
     compareResultCustomMapSource = null
     getCompareMajorParties = null
-    shouldSetCompareMapSource = true
+    shouldSetCompareMapSource = currentMapSource.isCustom();
     
-    updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+    (async () => {
+      await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+      shouldSetCompareMapSource = true
+    })()
   }
   else if (currentMapSource.isCustom())
   {
