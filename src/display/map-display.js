@@ -616,10 +616,10 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   {
     marginValues = currentMapSource.getCustomDefaultMargins()
   }
-  else if (currentMapSource.isCustom() && showingCompareMap)
-  {
-    marginValues = cloneObject(alternateMarginValues)
-  }
+  // else if (currentMapSource.isCustom() && showingCompareMap)
+  // {
+  //   marginValues = cloneObject(alternateMarginValues)
+  // }
   else
   {
     marginValues = cloneObject(defaultMarginValues)
