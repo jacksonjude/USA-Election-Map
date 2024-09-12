@@ -1342,7 +1342,7 @@ var USAPresidentMapType = new MapType(
       }
       let organizedCountyData = mapSource.getMapData()[date ?? currentSliderDate.getTime()]
 
-      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || showingCompareMap }
+      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCustom()) }
 
       let previousMapDateIndex = mapSource.getMapDates().findIndex(mapDate => mapDate == date ?? currentSliderDate.getTime())-1
       let previousMapDateData
