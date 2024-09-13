@@ -11,18 +11,22 @@ var selectedCompareSlider
 var showingCompareCheckboxes = false
 
 var shouldCombineMinorThirdParties = true
-var getCompareMajorParties = null
+var getCompareMajorParties
 
-var compareResultCustomMapSource = null
-var shouldSetCompareMapSource = true
+var compareResultCustomMapSource
+var shouldSetCompareMapSource
 
-function initializeCompareVariables()
+function resetCompareVariables()
 {
   showingCompareMap = false
   currentCompareSliderDate = null
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
   selectedCompareSlider = null
+  
+  getCompareMajorParties = null
+  compareResultCustomMapSource = null
+  shouldSetCompareMapSource = true
 }
 
 function createComparePresetDropdownItems()

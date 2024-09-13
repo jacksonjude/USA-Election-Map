@@ -222,7 +222,7 @@ async function reloadForNewMapType(initialLoad)
   currentViewingState = currentMapType.getMapSettingValue("presViewingType") ? ViewingState.splitVote : ViewingState.viewing
   currentMapZoomRegion = null
 
-  initializeCompareVariables()
+  resetCompareVariables()
 
   createMapTypeDropdownItems()
   createComparePresetDropdownItems()
@@ -1070,14 +1070,10 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
   if (showingCompareMap)
   {
-    showingCompareMap = false
-
+    resetCompareVariables()
+    
     $(".comparesourcecheckbox").prop('checked', false)
 
-    compareMapSourceIDArray = [null, null]
-    getCompareMajorParties = null
-    compareResultCustomMapSource = null
-    shouldSetCompareMapSource = true
     updateCompareMapSlidersVisibility()
 
     $(".compareitemtext").html("&lt;Empty&gt;")
