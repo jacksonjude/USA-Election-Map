@@ -811,6 +811,11 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   var populateSVGBoxesFunction = svgPathData[3]
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
+  
+  if (currentViewingState == ViewingState.zooming && !currentMapSource.zoomingDataFunction)
+  {
+    await zoomOutMap(false)
+  }
 
   switch (currentViewingState)
   {
@@ -1069,6 +1074,9 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     $(".comparesourcecheckbox").prop('checked', false)
 
     compareMapSourceIDArray = [null, null]
+    getCompareMajorParties = null
+    compareResultCustomMapSource = null
+    shouldSetCompareMapSource = true
     updateCompareMapSlidersVisibility()
 
     $(".compareitemtext").html("&lt;Empty&gt;")
@@ -1076,6 +1084,11 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     $(".compareitemimage").attr('src', "")
 
     toggleMapSettingDisable("seatArrangement", false)
+    
+    if (currentViewingState == ViewingState.zooming)
+    {
+      zoomOutMap(false)
+    }
   }
 
   marginValues = cloneObject(defaultMarginValues)
@@ -1323,12 +1336,13 @@ async function toggleEditing(stateToSet)
   updatePartyDropdownVisibility()
 }
 
-function zoomOutMap()
+async function zoomOutMap(displayMap = true)
 {
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
   
-  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID())
+  const countyResultMapSourceID = "Presidential-Counties"
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID() && compareMapSourceIDArray[0] == countyResultMapSourceID && compareMapSourceIDArray[1] == countyResultMapSourceID)
   {
     const pastResultMapSourceID = "Past-Presidential-Elections"
     compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
@@ -1336,17 +1350,15 @@ function zoomOutMap()
     getCompareMajorParties = null
     shouldSetCompareMapSource = currentMapSource.isCustom();
     
-    (async () => {
-      await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
-      shouldSetCompareMapSource = true
-    })()
+    await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+    shouldSetCompareMapSource = true
   }
   else if (currentMapSource.isCustom())
   {
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
   }
 
-  displayDataMap(null, null, true)
+  displayMap && displayDataMap(null, null, true)
 }
 
 function getRegionData(regionID)

@@ -1641,6 +1641,12 @@ var USAPresidentMapType = new MapType(
       null, // viewingDataFunction
       async (mapDateData, regionID, isZoomCheck, date) => {
         const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray[0] == PastElectionResultMapSource.getID() && compareMapSourceIDArray[1] == PastElectionResultMapSource.getID()
+        
+        if (isZoomCheck)
+        {
+          return isPastElectionCompare
+        }
+        
         if (!isZoomCheck && isPastElectionCompare)
         {
           getCompareMajorParties = () => [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
@@ -1656,10 +1662,6 @@ var USAPresidentMapType = new MapType(
           await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
           
           shouldSetCompareMapSource = true
-        }
-        else if (isZoomCheck && isPastElectionCompare)
-        {
-          return true
         }
         
         let countyZoomingData = await countyZoomingDataFunction(mapDateData, regionID, isZoomCheck, date, CustomCountyMapSource)

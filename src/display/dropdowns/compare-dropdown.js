@@ -88,7 +88,10 @@ async function loadComparePreset(comparePresetNum)
   var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
 
   await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
-  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+  if (defaultCompareSourceIDs[comparePresetNum][0] != defaultCompareSourceIDs[comparePresetNum][1])
+  {
+    await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+  }
 
   var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
 
@@ -127,6 +130,11 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   if (clickDivIDToIgnore != null)
   {
     ignoreMapUpdateClickArray.push(clickDivIDToIgnore)
+  }
+  
+  if (currentViewingState == ViewingState.zooming && showingCompareMap && currentMapSource.isCustom() && !mapSources[mapSourceID].zoomingDataFunction)
+  {
+    await zoomOutMap()
   }
 
   var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
