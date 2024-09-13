@@ -234,7 +234,8 @@ async function reloadForNewMapType(initialLoad)
   {
     $("#sourceToggleButton").addClass('active')
   }
-
+  
+  currentMapType.resetOverrideSVGPath()
   await loadMapSVGFile()
 
   $("#totalsPieChart").remove()
