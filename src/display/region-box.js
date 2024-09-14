@@ -173,11 +173,14 @@ async function updateRegionBox(regionID = currentRegionID)
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
-    let hasVoteCountsForAll = true
+    let hasVoteCountsForAll = !(showingCompareMap && currentMapSource.isCustom())
 
     sortedPercentages.forEach((voteData, i) => {
+      const roundedVoteshare = Math.round(voteData.voteshare*100)/100
+      if (roundedVoteshare <= 0 && !currentMapSource.isCustom()) { return }
+      
       regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionBoxHTML += shiftKeyDown && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(Math.round(voteData.voteshare*100)/100, 2) + currentMapSource.getVoteshareSuffix()
+      regionBoxHTML += shiftKeyDown && !(showingCompareMap && currentMapSource.isCustom()) && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
       regionBoxHTML += "</span></span><br>"
 
       hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
@@ -237,7 +240,7 @@ async function updateRegionBox(regionID = currentRegionID)
   }
   
   tooltipsToShow.altForAlternateData[0] = regionData.altData || showingAltData
-  tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing
+  tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
   tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare

@@ -344,7 +344,7 @@ document.addEventListener('keypress', async function(e) {
         break
 
         case 2:
-        marginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
+        marginValues = cloneObject(alternateMarginValues)
         break
       }
 

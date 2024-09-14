@@ -10,13 +10,23 @@ var selectedCompareSlider
 
 var showingCompareCheckboxes = false
 
-function initializeCompareVariables()
+var shouldCombineMinorThirdParties = true
+var getCompareMajorParties
+
+var compareResultCustomMapSource
+var shouldSetCompareMapSource
+
+function resetCompareVariables()
 {
   showingCompareMap = false
   currentCompareSliderDate = null
   compareMapSourceIDArray = [null, null]
   compareMapDataArray = [null, null]
   selectedCompareSlider = null
+  
+  getCompareMajorParties = null
+  compareResultCustomMapSource = null
+  shouldSetCompareMapSource = true
 }
 
 function createComparePresetDropdownItems()
@@ -82,7 +92,10 @@ async function loadComparePreset(comparePresetNum)
   var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
 
   await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
-  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+  if (defaultCompareSourceIDs[comparePresetNum][0] != defaultCompareSourceIDs[comparePresetNum][1])
+  {
+    await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+  }
 
   var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
 
@@ -106,12 +119,12 @@ function toggleCompareSortMode(div)
   {
     case CompareSortMode.voteshare:
     compareSortMode = CompareSortMode.shiftMargin
-    div.innerHTML = "Sort by shift"
+    div.innerHTML = "Sort by: shift"
     break
 
     case CompareSortMode.shiftMargin:
     compareSortMode = CompareSortMode.voteshare
-    div.innerHTML = "Sort by voteshare"
+    div.innerHTML = "Sort by: voteshare"
     break
   }
 }
@@ -121,6 +134,11 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   if (clickDivIDToIgnore != null)
   {
     ignoreMapUpdateClickArray.push(clickDivIDToIgnore)
+  }
+  
+  if (currentViewingState == ViewingState.zooming && showingCompareMap && currentMapSource.isCustom() && !mapSources[mapSourceID].zoomingDataFunction)
+  {
+    await zoomOutMap()
   }
 
   var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
@@ -170,14 +188,15 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
     $("#" + mapSourceToUncheck.replace(/\s/g, '') + "-compare").prop('checked', false)
   }
 
-  await updateCompareMapSources(compareSourcesUpdated, false)
-
   showingCompareMap = true
+  
+  await updateCompareMapSources(compareSourcesUpdated, false)
+  
   toggleMapSettingDisable("seatArrangement", true)
   updateCompareMapSlidersVisibility()
 }
 
-async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues)
+async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
 {
   $('.comparesourcecheckbox').prop('disabled', true)
   if (compareSourcesToUpdate[0])
@@ -196,7 +215,6 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
     compareSourcesToUpdate = [true, true]
   }
 
-  var overrideDateValues = [null, null]
   if (swapSliderValues)
   {
     overrideDateValues[0] = $("#secondCompareDataMapDateSlider").val()
@@ -209,7 +227,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   {
     setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
     $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-    setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
+    await setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
     $("#compareItemImage-0").css('display', "block")
     $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
   }
@@ -217,7 +235,7 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   {
     setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
     $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-    setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    await setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
     $("#compareItemImage-1").css('display', "block")
     $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
   }
@@ -226,12 +244,6 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
 async function loadCompareMapSource(sourceID)
 {
   await downloadDataForMapSource(sourceID, getIconDivsToUpdateArrayForSourceID(sourceID))
-
-  // let mapSource = mapSources[sourceID]
-  // let voteshareCutoff = mapSource.voteshareCutoffMargin
-  // mapSource.voteshareCutoffMargin = null
-  // await mapSource.loadMap()
-  // mapSource.voteshareCutoffMargin = voteshareCutoff
 }
 
 function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
@@ -306,7 +318,9 @@ async function executeCompareMapQueue()
 
 async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = true)
 {
-  var mapDates = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapDates()
+  let mapSource = mapSources[compareMapSourceIDArray[compareArrayIndex]]
+  
+  var mapDates = mapSource.getMapDates()
 
   var dateToDisplay
   var overrideDateString
@@ -322,13 +336,18 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
   }
   updateSliderDateDisplay(dateToDisplay, overrideDateString, compareArrayIndex == 0 ? "firstCompareDateDisplay" : "secondCompareDateDisplay")
 
-  $("#compareItem-" + compareArrayIndex).html(mapSources[compareMapSourceIDArray[compareArrayIndex]].getName() + " (" + getDateString(dateToDisplay) + ")")
-
-  compareMapDataArray[compareArrayIndex] = mapSources[compareMapSourceIDArray[compareArrayIndex]].getMapData()[dateToDisplay.getTime()]
+  $("#compareItem-" + compareArrayIndex).html(mapSource.getName() + " (" + getDateString(dateToDisplay) + ")")
+  
+  compareMapDataArray[compareArrayIndex] = mapSource.getMapData()[dateToDisplay.getTime()]
+  if (currentMapZoomRegion != null && currentMapType.getID() == USAPresidentMapType.getID())
+  {
+    compareMapDataArray[compareArrayIndex] = await mapSource.getZoomingData(compareMapDataArray[compareArrayIndex], currentMapZoomRegion, dateToDisplay.getTime())
+  }
 
   if (compareArrayIndex == 0)
   {
-    currentCustomMapSource.setCandidateNames(mapSources[compareMapSourceIDArray[compareArrayIndex]].getCandidateNames(dateToDisplay.getTime()), dateToDisplay.getTime())
+    let candidateNames = mapSource.getCandidateNames(dateToDisplay.getTime())
+    currentCustomMapSource.setCandidateNames(candidateNames, dateToDisplay.getTime())
     currentCompareSliderDate = dateToDisplay
   }
 
@@ -401,6 +420,31 @@ async function applyCompareToCustomMap()
 
       if (compareRegionData0.partyVotesharePercentages && compareRegionData1.partyVotesharePercentages)
       {
+        const compareMajorParties = getCompareMajorParties?.()
+        if (shouldCombineMinorThirdParties && compareMajorParties?.length == 2)
+        {
+          [[compareRegionData0, compareMajorParties[0]], [compareRegionData1, compareMajorParties[1]]].forEach(compareData => {
+            let compareRegionData = compareData[0]
+            let majorPartyIDs = compareData[1]
+            
+            let minorPartyData = compareRegionData.partyVotesharePercentages
+              .filter(voteshareData => !majorPartyIDs.includes(voteshareData.partyID))
+              
+            compareRegionData.partyVotesharePercentages = compareRegionData.partyVotesharePercentages
+              .filter(voteshareData => majorPartyIDs.includes(voteshareData.partyID))
+            
+            let totalMinorPartyVoteshare = minorPartyData.reduce((otherVoteshare, voteshareData) => {
+              return otherVoteshare + voteshareData.voteshare
+            }, 0)
+            
+            compareRegionData.partyVotesharePercentages.push({
+              candidate: "Other",
+              partyID: IndependentGenericParty.getID(),
+              voteshare: totalMinorPartyVoteshare
+            })
+          })
+        }
+        
         compareRegionData0.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
         compareRegionData1.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
 
@@ -470,7 +514,10 @@ async function applyCompareToCustomMap()
     }
   }
 
-  currentCustomMapSource.updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
+  (compareResultCustomMapSource ?? currentCustomMapSource).updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
 
-  await setMapSource(currentCustomMapSource)
+  if (shouldSetCompareMapSource)
+  {
+    await setMapSource(currentCustomMapSource)
+  }
 }

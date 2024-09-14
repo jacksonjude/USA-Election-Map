@@ -20,6 +20,7 @@ var pannedDuringClick = false
 var selectedParty
 
 const standardMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
+const alternateMarginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
 var defaultMarginValues = JSON.parse(getCookie(marginsCookieName)) || standardMarginValues
 var marginValues = cloneObject(defaultMarginValues)
 var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
@@ -221,7 +222,7 @@ async function reloadForNewMapType(initialLoad)
   currentViewingState = currentMapType.getMapSettingValue("presViewingType") ? ViewingState.splitVote : ViewingState.viewing
   currentMapZoomRegion = null
 
-  initializeCompareVariables()
+  resetCompareVariables()
 
   createMapTypeDropdownItems()
   createComparePresetDropdownItems()
@@ -233,7 +234,8 @@ async function reloadForNewMapType(initialLoad)
   {
     $("#sourceToggleButton").addClass('active')
   }
-
+  
+  currentMapType.resetOverrideSVGPath()
   await loadMapSVGFile()
 
   $("#totalsPieChart").remove()
@@ -615,6 +617,10 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   {
     marginValues = currentMapSource.getCustomDefaultMargins()
   }
+  // else if (currentMapSource.isCustom() && showingCompareMap)
+  // {
+  //   marginValues = cloneObject(alternateMarginValues)
+  // }
   else
   {
     marginValues = cloneObject(defaultMarginValues)
@@ -806,6 +812,11 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   var populateSVGBoxesFunction = svgPathData[3]
 
   var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
+  
+  if (currentViewingState == ViewingState.zooming && !currentMapSource.zoomingDataFunction)
+  {
+    await zoomOutMap(false)
+  }
 
   switch (currentViewingState)
   {
@@ -814,7 +825,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     break
 
     case ViewingState.zooming:
-    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion)
+    currentMapDataForDate = await currentMapSource.getZoomingData(currentMapDataForDate, currentMapZoomRegion, dateToDisplay.getTime())
     break
 
     case ViewingState.splitVote:
@@ -1059,11 +1070,10 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
 
   if (showingCompareMap)
   {
-    showingCompareMap = false
-
+    resetCompareVariables()
+    
     $(".comparesourcecheckbox").prop('checked', false)
 
-    compareMapSourceIDArray = [null, null]
     updateCompareMapSlidersVisibility()
 
     $(".compareitemtext").html("&lt;Empty&gt;")
@@ -1071,6 +1081,11 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     $(".compareitemimage").attr('src', "")
 
     toggleMapSettingDisable("seatArrangement", false)
+    
+    if (currentViewingState == ViewingState.zooming)
+    {
+      zoomOutMap(false)
+    }
   }
 
   marginValues = cloneObject(defaultMarginValues)
@@ -1318,17 +1333,29 @@ async function toggleEditing(stateToSet)
   updatePartyDropdownVisibility()
 }
 
-function zoomOutMap()
+async function zoomOutMap(displayMap = true)
 {
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
-
-  if (currentMapSource.isCustom())
+  
+  const countyResultMapSourceID = "Presidential-Counties"
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID() && compareMapSourceIDArray[0] == countyResultMapSourceID && compareMapSourceIDArray[1] == countyResultMapSourceID)
+  {
+    const pastResultMapSourceID = "Past-Presidential-Elections"
+    compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
+    compareResultCustomMapSource = null
+    getCompareMajorParties = null
+    shouldSetCompareMapSource = currentMapSource.isCustom();
+    
+    await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+    shouldSetCompareMapSource = true
+  }
+  else if (currentMapSource.isCustom())
   {
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
   }
 
-  displayDataMap(null, null, true)
+  displayMap && displayDataMap(null, null, true)
 }
 
 function getRegionData(regionID)
@@ -1474,9 +1501,12 @@ function getMarginIndexForValue(margin)
   {
     return "current"
   }
+  
+  const roundedMargin = getRoundedMarginValue(margin)
+  
   for (var marginName in marginValues)
   {
-    if (Math.abs(margin) >= marginValues[marginName])
+    if (Math.abs(roundedMargin) >= marginValues[marginName])
     {
       return marginName
     }
