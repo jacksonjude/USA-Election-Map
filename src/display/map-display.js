@@ -1501,9 +1501,12 @@ function getMarginIndexForValue(margin)
   {
     return "current"
   }
+  
+  const roundedMargin = getRoundedMarginValue(margin)
+  
   for (var marginName in marginValues)
   {
-    if (Math.abs(margin) >= marginValues[marginName])
+    if (Math.abs(roundedMargin) >= marginValues[marginName])
     {
       return marginName
     }
