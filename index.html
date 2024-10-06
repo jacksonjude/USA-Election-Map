@@ -64,7 +64,7 @@
         <img src="./assets/favicon.ico" style="position: relative; width: 45rem; height: 45rem;" />
       </a>
       <div style="display: inline-block;">
-        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Controls</a>
+        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-pres.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
           <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 45rem;">
@@ -324,8 +324,7 @@
         <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; margin-top: 40rem; user-select: none; -webkit-user-select: none;">
           <div id="helpbox" class="box" style='min-height: 740rem; display: flex; flex-direction: column; justify-content: space-between'>
             <div>
-              <h2 style='margin: 0rem;'>Controls</h2>
-              <h3 id="helpboxSubtitle" style='margin: 0rem;'></h3>
+              <h2 style='margin: 0rem; margin-top: 5rem;'>Help: <span id="helpboxSubtitle"></span></h2>
               <h4 id="helpboxBody" style='margin: 0rem; margin-top: 8rem; margin-bottom: 10rem; text-align: left;'></h4>
             </div>
             <div style='display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10rem'>

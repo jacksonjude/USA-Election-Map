@@ -95,25 +95,29 @@ var selectedDropdownDivID = null
 var showingHelpBox = false
 var currentHelpBoxPage = 0
 const helpBoxPages = [
-  {subtitle: "Selection & Viewing", body: `
-  Change the type with the <span style='text-decoration: underline'>type dropdown</span>, or press [T] to cycle between:<br>
+  {subtitle: "Map Selection", body: `
+  [T] Change types with the <span style='text-decoration: underline'>type dropdown</span><br>
   [President] ⇒ [Senate] ⇒ [House] ⇒ [Govs]<br>
+  <img style='width: 85%; margin-top: 5rem;' src='./assets/help/map-type.png' /><br>
   <br>
 
-  Select a map with the <span style='text-decoration: underline'>map dropdown</span>, or by using the number keys [0️⃣-9️⃣]<br>
+  [0️⃣-9️⃣] Select maps with the <span style='text-decoration: underline'>map dropdown</span><br>
+  <img style='width: 85%; margin-top: 5rem;' src='./assets/help/map-source.png' />
+  `},
+  {subtitle: "Map Viewing", body: `
+  [⬇️ -5, ⬅️ -1, ➡️ +1, ⬆️ +5] Change the date with the <span style='text-decoration: underline'>slider</span><br>
+  <img style='width: 75%; margin-top: 5rem;' src='./assets/help/slider.png' /><br>
   <br>
-
-  Change the date with the <span style='text-decoration: underline'>slider</span>, or by using the arrow keys [⬇️ -5, ⬅️ -1, ➡️ +1, ⬆️ +5]<br>
-  <br>
-
-  Change the state color margin thresholds with the <span style='text-decoration: underline'>margins dropdown</span><br>
-  To switch between presets, press [M] then<br>
-  [1️⃣] Default ⇒ Safe 15%, Likely 5%, Lean 1%<br>
-  [2️⃣] Alt ⇒ Safe 5%, Likely 3%, Lean 1%<br>
-  <br>
-
+  
+  Change margin thresholds with the <span style='text-decoration: underline'>margins dropdown</span><br>
+  [M+1️⃣] Std ⇒ Safe 15%, Likely 5%, Lean 1%<br>
+  [M+2️⃣] Alt ⇒ Safe 5%, Likely 3%, Lean 1%<br>
+  <img style='width: 80%; margin-top: 5rem;' src='./assets/help/margins.png' /><br>
+  
+  <!--
   Compare between preset maps using the <span style='text-decoration: underline'>compare dropdown</span><br>
   Compare between other maps by selecting two checkboxes in the <span style='text-decoration: underline'>map dropdown</span>
+  -->
   `},
   {subtitle: "Editing", body: `
   Copy with the <span style='text-decoration: underline'>copy button</span>, or [Enter]<br>
