@@ -33,8 +33,13 @@ async function updateRegionBox(regionID = currentRegionID)
     $("#regionEV-text").focus().select()
     return
   }
-
-  var roundedMarginValue = getRoundedMarginValue(regionData.margin)
+  
+  const shouldShowVotes = shiftKeyDown && !(showingCompareMap && currentMapSource.isCustom())
+  let voteshareSortedData = cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare)
+  var roundedMarginValue = shouldShowVotes && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes)
+  ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
+  : getRoundedMarginValue(regionData.margin)
+  
   var regionMarginString = (regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]) + " " + currentMapSource.getVotesharePrefix()
 
   if (editingRegionMarginValue)
@@ -173,14 +178,14 @@ async function updateRegionBox(regionID = currentRegionID)
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
 
-    let hasVoteCountsForAll = !(showingCompareMap && currentMapSource.isCustom())
+    let hasVoteCountsForAll = shouldShowVotes
 
     sortedPercentages.forEach((voteData, i) => {
       const roundedVoteshare = Math.round(voteData.voteshare*100)/100
       if (roundedVoteshare <= 0 && !currentMapSource.isCustom()) { return }
       
       regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionBoxHTML += shiftKeyDown && !(showingCompareMap && currentMapSource.isCustom()) && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
+      regionBoxHTML += shouldShowVotes && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
       regionBoxHTML += "</span></span><br>"
 
       hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
