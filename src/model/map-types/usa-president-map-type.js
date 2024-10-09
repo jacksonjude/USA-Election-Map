@@ -499,17 +499,11 @@ var USAPresidentMapType = new MapType(
     
       for (let regionData of rawMapData)
       {
-        let latestData = regionData.latest
-        for (let party in latestData.pv)
-        {
-          latestData[party] = latestData.pv[party]
-        }
-        
         let region = regionIDMap[regionData.latest[columnMap.region]]
         
-        for (let dateData of [...regionData.timeseries, latestData])
+        for (let dateData of regionData.timeseries)
         {
-          let date = new Date(dateData[columnMap.date]).getTime()
+          let date = new Date(`${dateData[columnMap.date]} 12:00`).getTime()
           if (!mapDates.includes(date))
           {
             mapDates.push(date)
@@ -541,6 +535,8 @@ var USAPresidentMapType = new MapType(
           let greatestMarginPartyID
           let greatestMarginCandidateName
           let topTwoMargin
+          
+          // console.log(region, date, dateData)
           
           if (voteshareSortedCandidateData[0].voteshare != 0)
           {
