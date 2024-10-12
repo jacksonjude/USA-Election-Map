@@ -1,5 +1,7 @@
 async function updateRegionBox(regionID = currentRegionID)
 {
+  updateTimelineChart()
+  
   let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
 
@@ -35,7 +37,7 @@ async function updateRegionBox(regionID = currentRegionID)
   }
   
   const shouldShowVotes = shiftKeyDown && !(showingCompareMap && currentMapSource.isCustom())
-  let voteshareSortedData = cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare)
+  let voteshareSortedData = regionData.partyVotesharePercentages ? cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare) : []
   var roundedMarginValue = shouldShowVotes && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
   : getRoundedMarginValue(regionData.margin)
