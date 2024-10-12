@@ -1,7 +1,5 @@
 async function updateRegionBox(regionID = currentRegionID)
 {
-  updateTimelineChart()
-  
   let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
 
