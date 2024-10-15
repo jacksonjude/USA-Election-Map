@@ -879,7 +879,7 @@ var USAHouseMapType = new MapType(
         {
           let {state, district} = mapData[mapDate.getTime()][regionID]
           if (district == "0") district = "1"
-          linkToOpen += regionIDToLinkMap[state] + "/" + district
+          linkToOpen += regionIDToLinkMap[state] + "-" + district
         }
 
         window.open(linkToOpen)
