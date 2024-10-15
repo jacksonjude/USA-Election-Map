@@ -845,7 +845,7 @@ var USAHouseMapType = new MapType(
     )
 
     var FiveThirtyEightHouseProjectionMapSource = new MapSource(
-      "538-2022-House-Projection", // id
+      "538-2024-House-Projection", // id
       "538 Projection", // name
       {url: "https://projects.fivethirtyeight.com/2024-election-forecast/house/states_timeseries.json", type: jsonSourceType}, // dataURL
       "https://projects.fivethirtyeight.com/2024-election-forecast/house/", // homepageURL
