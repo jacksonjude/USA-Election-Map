@@ -289,6 +289,121 @@ var USASenateMapType = new MapType(
       
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
+    
+    var jsonVoteshare538FilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, regionNameToID, heldRegionMap)
+    {
+      let filteredMapData = {}
+      let mapDates = []
+      
+      const onCycleClass = ((cycleYear-2)%6)/2+1
+      
+      const overridePartyCandidates = {
+        "Sanders": "dem",
+        "King": "dem"
+      }
+    
+      for (let regionData of rawMapData)
+      {
+        let region = regionData.latest[columnMap.region]
+        let rawPartyIDToCandidateNames = regionData.latest[columnMap.candidates]
+        const candidateToRawPartyID = invertObject(rawPartyIDToCandidateNames)
+        
+        let candidateToPartyID = {}
+        for (let partyID in rawPartyIDToCandidateNames)
+        {
+          const candidate = rawPartyIDToCandidateNames[partyID]
+          if (overridePartyCandidates[candidate])
+          {
+            partyID = overridePartyCandidates[candidate]
+          }
+          const formattedPartyID = partyID.replace(/\d/, "").toUpperCase()
+          
+          candidateToPartyID[candidate] = politicalParties[formattedPartyID] ? formattedPartyID : IndependentGenericParty.getID()
+        }
+        
+        for (let dateData of regionData.timeseries)
+        {
+          let date = new Date(`${dateData[columnMap.date]} 12:00`).getTime()
+          if (!mapDates.includes(date))
+          {
+            mapDates.push(date)
+          }
+          
+          if (!filteredMapData[date])
+          {
+            filteredMapData[date] = {}
+          }
+          
+          let voteshareSortedCandidateData = []
+          
+          for (let candidate in candidateToPartyID)
+          {
+            const partyObject = politicalParties[candidateToPartyID[candidate]] ?? IndependentGenericParty
+            const rawPartyID = candidateToRawPartyID[candidate]
+            
+            voteshareSortedCandidateData.push({candidate: candidate, partyID: partyObject.getID(), voteshare: dateData[rawPartyID]?.[columnMap.voteshare], winPercentage: dateData[columnMap.winprob]?.[rawPartyID]})
+          }
+          
+          let blankCandidateData = voteshareSortedCandidateData.filter((candData) => isNaN(candData.voteshare))
+          voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
+          
+          if (blankCandidateData.length == 1)
+          {
+            blankCandidateData[0].voteshare = 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.voteshare, 0)
+            voteshareSortedCandidateData.push(blankCandidateData[0])
+          }
+          
+          voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          
+          let greatestMarginPartyID
+          let greatestMarginCandidateName
+          let topTwoMargin
+          
+          if (voteshareSortedCandidateData[0].voteshare != 0)
+          {
+            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          }
+          else
+          {
+            greatestMarginPartyID = TossupParty.getID()
+            greatestMarginCandidateName = null
+            topTwoMargin = 0
+          }
+          
+          const isSpecial = region.endsWith('-2')
+          const state = region.replace('-2', '')
+          const seatClass = isSpecial ? stateClasses[state].filter(c => c != onCycleClass)[0] : onCycleClass
+          const formattedRegion = `${state}${isSpecial ? '-S' : ''}`
+          
+          filteredMapData[date][formattedRegion] = {region: formattedRegion, seatClass: seatClass, offYear: false, runoff: false, isSpecial: isSpecial, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: invertObject(candidateToPartyID), partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[state + "-" + seatClass] != greatestMarginPartyID}
+        }
+      }
+      
+      for (let mapDate in filteredMapData)
+      {
+        for (let regionID of Object.values(regionNameToID))
+        {
+          if (regionID == nationalPopularVoteID) continue
+          
+          let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+          
+          let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
+          
+          if (!filteredMapData[mapDate][regionID])
+          {
+            filteredMapData[mapDate][regionID] = {region: regionID, seatClass: seatClassesToUse[0], isSpecial: false, partyID: heldRegionMap[regionID + "-" + seatClassesToUse[0]], ...placeholderRegionData}
+          }
+          if (!filteredMapData[mapDate][regionID + "-S"])
+          {
+            filteredMapData[mapDate][regionID + "-S"] = {region: regionID + "-S", seatClass: seatClassesToUse[1], isSpecial: true, partyID: heldRegionMap[regionID + "-" + seatClassesToUse[1]], ...placeholderRegionData}
+          }
+        }
+      }
+      
+      return {mapData: filteredMapData, mapDates: mapDates.sort()}
+    }
 
     var singleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, _, regionNameToID, heldRegionMap, ___, ____, voteshareCutoffMargin)
     {
@@ -811,25 +926,26 @@ var USASenateMapType = new MapType(
     )
 
     var FiveThirtyEightSenateProjectionMapSource = new MapSource(
-      "538-2022-Senate-Projection", // id
+      "538-2024-Senate-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/senate_state_toplines_2022.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
+      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/senate/states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://projects.fivethirtyeight.com/2024-election-forecast/senate/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
-        date: "forecastdate",
-        region: "district",
-        pollType: "expression"
+        date: "date",
+        region: "seat",
+        candidates: "candidates",
+        voteshare: "median"
       }, // columnMap
-      2022, // cycleYear
+      2024, // cycleYear
       null, // candidateNameToPartyIDMap
       null, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
       {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
-      heldSeatPartyIDs2022, // heldRegionMap
+      heldSeatPartyIDs2024, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      singleLineVoteshareFilterFunction, // organizeMapDataFunction
+      jsonVoteshare538FilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
@@ -848,7 +964,7 @@ var USASenateMapType = new MapType(
         let linkToOpen = homepageURL
         if (!shouldOpenHomepage)
         {
-          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + (isSpecial ? "-special" : "")
+          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + (isSpecial ? "-2" : "")
         }
 
         window.open(linkToOpen)
@@ -1299,16 +1415,18 @@ var USASenateMapType = new MapType(
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var senateMapSourceIDs = [PolymarketSenateMapSource.getID(), PastElectionResultMapSource.getID()]
+    var senateMapSourceIDs = [FiveThirtyEightSenateProjectionMapSource.getID(), PolymarketSenateMapSource.getID(), PastElectionResultMapSource.getID()]
     if (customMapEnabled)
     {
       senateMapSourceIDs.push(CustomMapSource.getID())
     }
 
     const kPastElectionsVsPastElections = 1
+    const kPastElectionsVs538Projection = 2
 
     var defaultSenateCompareSourceIDs = {}
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID()]
 
     return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
