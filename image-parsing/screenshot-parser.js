@@ -89,7 +89,7 @@ const marginToValue = {
 const originalImageSize = {w: 960, h: 546};
 
 (async () => {
-	const imageFilename = "IMG_1689-resized.png"
+	const imageFilename = process.argv[2]
 	
 	const image = await Jimp.read(imageFilename);
 	image.resize(originalImageSize);
