@@ -5,5 +5,5 @@ assets/niu
 jsconfig.json
 csv-helper
 .nova
-image-parsing/*.csv
-image-parsing/*.png
+image-parsing/*
+!image-parsing/*.js
