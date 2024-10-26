@@ -2,6 +2,7 @@ const { Jimp } = require("jimp");
 const ColorConvert = require("color-convert");
 const CSVConverter = require('json-2-csv');
 const fs = require('fs');
+const path = require('path');
 
 const regionCoords = {
 	"AK": [227,118],
@@ -79,35 +80,39 @@ const marginToValue = {
 	demSafe: ['dem', 15],
 	demLikely: ['dem', 5],
 	demLean: ['dem', 1],
-	demTilt: ['dem', 0.1],
+	demTilt: ['dem', 0.01],
 	repSafe: ['rep', 15],
 	repLikely: ['rep', 5],
 	repLean: ['rep', 1],
-	repTilt:['rep', 0.1]
-}
+	repTilt:['rep', 0.01]
+};
 
 const originalImageSize = {w: 960, h: 546};
 
 (async () => {
-	const imageFilename = process.argv[2]
+	const imagePath = process.argv[2] ?? __dirname;
+	const verbose = process.argv[3] ?? false;
 	
+	let imageFiles = [imagePath];
+	if (fs.lstatSync(imagePath).isDirectory()) {
+		imageFiles = fs.readdirSync(imagePath)
+			.map(file => path.join(imagePath, file))
+			.filter(file => fs.lstatSync(file).isFile() && path.extname(file) == '.png');
+	}
+	
+	for (let imageFile of imageFiles) {
+		processImage(imageFile, verbose);
+	}
+})();
+
+async function processImage(imageFilename, verbose) {
 	const image = await Jimp.read(imageFilename);
 	image.resize(originalImageSize);
 	
 	const regionResults = parseImageMargins(image);
-	console.log(regionResults);
+	verbose && console.log(regionResults);
 	
-	// await writeDotsImage();
-	
-	const evTotals = Object.keys(regionResults)
-		.reduce((totals, region) => {
-			const party = marginToValue[regionResults[region]][0];
-			if (!totals[party]) totals[party] = 0;
-			totals[party] += regionEVs[region];
-			return totals;
-		}, {});
-	
-	console.log(evTotals);
+	verbose && await writeDotsImage(image, imageFilename);
 	
 	const evByRegion = Object.keys(regionResults)
 		.reduce((results, region) => {
@@ -118,11 +123,21 @@ const originalImageSize = {w: 960, h: 546};
 			results[region] = (party == 'dem' ? -1 : 1) * margin;
 			return results;
 		}, {});
-	console.log(evByRegion);
+	verbose && console.log(evByRegion);
+	
+	const evTotals = Object.keys(regionResults)
+		.reduce((totals, region) => {
+			const party = marginToValue[regionResults[region]][0];
+			if (!totals[party]) totals[party] = 0;
+			totals[party] += regionEVs[region];
+			return totals;
+		}, {});
+	
+	console.log("Processed image:", imageFilename, evTotals);
 	
 	const csvJSON = await CSVConverter.json2csvAsync([evByRegion]);
 	fs.writeFileSync(`${imageFilename}-results.csv`, csvJSON);
-})();
+}
 
 function parseImageMargins(image) {
 	let regionResults = {}
@@ -142,7 +157,7 @@ function parseImageMargins(image) {
 	return regionResults;
 }
 
-async function writeDotsImage(image) {
+async function writeDotsImage(image, imageFilename) {
 	image.greyscale();
 	
 	for (let region in regionCoords) {
