@@ -75,6 +75,14 @@ var lastIndicatorCircleProgress
 const downloadIndicatorColor = '#3498db'
 const csvParseIndicatorColor = '#3ac635'
 
+const LoaderType = {
+  hidden: 0,
+  standard: 1,
+  progress: 2
+}
+
+var loaderStack = [LoaderType.hidden]
+
 const ViewingState = {
   viewing: 0,
   zooming: 1,
@@ -246,8 +254,9 @@ async function reloadForNewMapType(initialLoad)
   $("#totalsPieChartContainer").prepend('<canvas id="totalsPieChart"></canvas>')
   $("#totalsPieChartOverlayText").html("")
 
-  $("#loader").hide()
-  $("#loader-circle-container").hide()
+  loaderStack = [LoaderType.hidden]
+  updateLoaderVisibility()
+  
   updateSVGViewbox()
 
   $("#mapZoomControls").trigger('hide')
@@ -279,7 +288,7 @@ async function reloadForNewMapType(initialLoad)
 function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
 {
   let loadSVGFilePromise = new Promise((resolve) => {
-    if ($("#loader-circle-container").is(":hidden")) $("#loader").show()
+    addLoader(LoaderType.standard)
 
     if (fadeForNewSVG)
     {
@@ -327,7 +336,7 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
     generateFlipPatternsFromPartyMap(politicalParties)
   }
 
-  $("#loader").hide()
+  removeLoader(LoaderType.standard)
 
   if (fadeForNewSVG)
   {
@@ -611,11 +620,17 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   selectedVoteshareCandidate = null
 
   currentMapType.setCurrentMapSourceID(currentMapSource.getID())
+  
+  addLoader(LoaderType.standard)
 
   var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
   var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
-  if (!loadedSuccessfully) { return }
+  if (!loadedSuccessfully)
+  {
+    removeLoader(LoaderType.standard)
+    return
+  }
   
   if (currentMapSource.getCustomDefaultMargins() != null)
   {
@@ -649,6 +664,51 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   {
     $("#totalsPieChart").css("background-image", "")
   }
+  
+  removeLoader(LoaderType.standard)
+}
+
+function addLoader(loaderType, progressColor)
+{
+  if (loaderType == LoaderType.progress)
+  {
+    createCSVParsingIndicator(progressColor)
+  }
+  else
+  {
+    loaderStack.unshift(loaderType)
+  }
+  
+  updateLoaderVisibility()
+}
+
+function removeLoader(loaderType)
+{
+  const i = loaderStack.findIndex(l => l == loaderType)
+  if (i !== -1) loaderStack.splice(i, 1)
+  
+  updateLoaderVisibility()
+}
+
+function updateLoaderVisibility()
+{
+  switch (loaderStack[0])
+  {
+    case LoaderType.hidden:
+    $("#loader").hide()
+    $("#loader-circle-container").hide()
+    break
+    
+    case LoaderType.standard:
+    $("#loader-circle-container").hide()
+    $("#loader").show()
+    break
+    
+    case LoaderType.progress:
+    $("#loader").hide()
+    $("#loader-circle-container").show()
+    break
+  }
 }
 
 function createCSVParsingIndicator(color)
@@ -656,33 +716,29 @@ function createCSVParsingIndicator(color)
   if (progressCircleDiv)
   {
     progressCircleDiv.destroy()
+    lastIndicatorCircleProgress = null
   }
 
   progressCircleDiv = new ProgressBar.Circle('#loader-circle-container', {
     color: color,
     strokeWidth: 15,
   })
-
-  if (!$("#loader").is(":hidden")) $("#loader").hide()
-  $("#loader-circle-container").show()
 }
 
 function updateCSVParsingIndicator(progress)
 {
   if (lastIndicatorCircleProgress && progress-lastIndicatorCircleProgress < 0.01) return
+  
+  if (!loaderStack.includes(LoaderType.progress))
+  {
+    loaderStack.unshift(LoaderType.progress)
+    updateLoaderVisibility()
+  }
 
   progressCircleDiv.set(progress)
   progressCircleDiv.setText(Math.round(progress*100) + "%")
 
   lastIndicatorCircleProgress = progress
-}
-
-function hideCSVParsingIndicator()
-{
-  lastIndicatorCircleProgress = null
-
-  progressCircleDiv.set(0)
-  $("#loader-circle-container").hide()
 }
 
 function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID, mapDates, previousDate)

@@ -172,7 +172,7 @@ class MapSource
     }
 
     var fetchMapDataPromise = new Promise((resolve) => {
-      createCSVParsingIndicator(downloadIndicatorColor)
+      addLoader(LoaderType.progress, downloadIndicatorColor)
       $.ajax({
         xhr: () => {
           let xhr = new window.XMLHttpRequest()
@@ -196,13 +196,13 @@ class MapSource
         url: isString(self.dataURL) ? self.dataURL : self.dataURL.url,
         data: {},
         success: (data) => {
-          hideCSVParsingIndicator()
+          removeLoader(LoaderType.progress)
 
           CSVDatabase.insertFile(self.id, data)
           resolve(data)
         },
         fail: () => {
-          hideCSVParsingIndicator()
+          removeLoader(LoaderType.progress)
 
           resolve(null)
         }
@@ -218,7 +218,7 @@ class MapSource
     this.cancelXHR()
     this.cancelXHR = null
 
-    hideCSVParsingIndicator()
+    removeLoader(LoaderType.progress)
   }
 
   convertCSVToArray(self, strData)
@@ -229,7 +229,7 @@ class MapSource
 
     let shouldDisplayIndicator = chunkPercentage < 0.5
 
-    shouldDisplayIndicator && createCSVParsingIndicator(csvParseIndicatorColor)
+    shouldDisplayIndicator && addLoader(LoaderType.progress, csvParseIndicatorColor)
 
     let csvReadPromise = new Promise(resolve => {
       let chunkOn = 1
@@ -252,7 +252,7 @@ class MapSource
             finalArray[rowModelDate.getTime()].push(rowDataArray)
           }
 
-          shouldDisplayIndicator && hideCSVParsingIndicator()
+          shouldDisplayIndicator && removeLoader(LoaderType.progress)
 
           resolve(finalArray)
         },
