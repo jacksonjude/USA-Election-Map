@@ -311,11 +311,11 @@ body {
   border-top: 8rem solid #3498db;
   /* Blue */
   border-radius: 50%;
-  width: 34rem;
-  height: 34rem;
+  width: 35rem;
+  height: 35rem;
   animation: spin 0.5s linear infinite;
   display: inline-block;
-  margin-left: 5rem;
+  margin-left: 10rem;
   /* margin-bottom: 5rem; */
 }
 
