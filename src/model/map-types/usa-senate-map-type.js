@@ -53,7 +53,7 @@ var USASenateMapType = new MapType(
       },
     defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ],
-  (customMapEnabled) => {
+  () => {
     const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":nationalPopularVoteID}
 
     const stateClasses = {
@@ -869,7 +869,7 @@ var USASenateMapType = new MapType(
       }
     }
 
-    var CNNSenateResultsMapSource = new MapSource(
+    var CNNSenateResults2022MapSource = new MapSource(
       "CNN-2022-Senate-Results", // id
       "CNN Results", // name
       {url: "https://politics.api.cnn.io/results/national-races/2022-SG.json", type: jsonSourceType}, // dataURL
@@ -924,8 +924,59 @@ var USASenateMapType = new MapType(
       true, // shouldShowVoteshare
       1.0 // voteshareCutoffMargin
     )
+    
+    var FiveThirtyEightSenateProjection2022MapSource = new MapSource(
+      "538-2022-Senate-Projection", // id
+      "538 Projection", // name
+      "./csv-sources/538-2022-senate-toplines.csv", // dataURL
+      "https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
+      {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
+      {
+        date: "forecastdate",
+        region: "district",
+        pollType: "expression"
+      }, // columnMap
+      2022, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+      heldSeatPartyIDs2022, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      singleLineVoteshareFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      null, // getFormattedRegionName
+      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+      {
+        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
+    
+        let isSpecial = false
+        if (regionID != null && mapDate != null && mapData != null)
+        {
+          isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
+        }
+    
+        let linkToOpen = homepageURL
+        if (!shouldOpenHomepage)
+        {
+          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + (isSpecial ? "-special" : "")
+        }
+    
+        window.open(linkToOpen)
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0 // voteshareCutoffMargin
+    )
 
-    var FiveThirtyEightSenateProjectionMapSource = new MapSource(
+    var FiveThirtyEightSenateProjection2024MapSource = new MapSource(
       "538-2024-Senate-Projection", // id
       "538 Projection", // name
       {url: "https://projects.fivethirtyeight.com/2024-election-forecast/senate/states_timeseries.json", type: jsonSourceType}, // dataURL
@@ -977,7 +1028,7 @@ var USASenateMapType = new MapType(
       1.0 // voteshareCutoffMargin
     )
     
-    var PolymarketSenateMapSource = new MapSource(
+    var PolymarketSenate2024MapSource = new MapSource(
       "Polymarket-2024-Senate", // id
       "Polymarket", // name
       {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2024-senate-polymarket-prices.json", type: jsonSourceType}, // dataURL
@@ -1066,7 +1117,7 @@ var USASenateMapType = new MapType(
       1667779200000: "kMzwdTAF1xM"
     }
 
-    var LTESenateProjectionMapSource = new MapSource(
+    var LTESenateProjection2022MapSource = new MapSource(
       "LTE-2022-Senate-Projection", // id
       "LTE Projection", // name
       "./csv-sources/lte-2022-senate.csv", // dataURL
@@ -1128,7 +1179,7 @@ var USASenateMapType = new MapType(
       1651190400000: "D3j334-rfNE"
     }
 
-    var PASenateProjectionMapSource = new MapSource(
+    var PASenateProjection2022MapSource = new MapSource(
       "PA-2022-Senate-Projection", // id
       "PA Projection", // name
       "./csv-sources/pa-2022-senate.csv", // dataURL
@@ -1191,7 +1242,7 @@ var USASenateMapType = new MapType(
       1667779200000: ""
     }
 
-    var CookSenateProjectionMapSource = new MapSource(
+    var CookSenateProjection2022MapSource = new MapSource(
       "Cook-2022-Senate", // id
       "Cook Political", // name
       "./csv-sources/cook-senate-2022/cook-latest.csv", // dataURL
@@ -1235,7 +1286,7 @@ var USASenateMapType = new MapType(
       false // shouldShowVoteshare
     )
 
-    var SCBSenateProjectionMapSource = new MapSource(
+    var SCBSenateProjection2022MapSource = new MapSource(
       "SCB-2022-Senate", // id
       "Sabato's CB", // name
       "./csv-sources/scb-2022-senate.csv", // dataURL
@@ -1405,20 +1456,22 @@ var USASenateMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var senateMapSources = {}
-    senateMapSources[CNNSenateResultsMapSource.getID()] = CNNSenateResultsMapSource
-    senateMapSources[FiveThirtyEightSenateProjectionMapSource.getID()] = FiveThirtyEightSenateProjectionMapSource
-    senateMapSources[PolymarketSenateMapSource.getID()] = PolymarketSenateMapSource
-    senateMapSources[LTESenateProjectionMapSource.getID()] = LTESenateProjectionMapSource
-    senateMapSources[PASenateProjectionMapSource.getID()] = PASenateProjectionMapSource
-    senateMapSources[CookSenateProjectionMapSource.getID()] = CookSenateProjectionMapSource
-    senateMapSources[SCBSenateProjectionMapSource.getID()] = SCBSenateProjectionMapSource
+    senateMapSources[CNNSenateResults2022MapSource.getID()] = CNNSenateResults2022MapSource
+    senateMapSources[FiveThirtyEightSenateProjection2022MapSource.getID()] = FiveThirtyEightSenateProjection2022MapSource
+    senateMapSources[FiveThirtyEightSenateProjection2024MapSource.getID()] = FiveThirtyEightSenateProjection2024MapSource
+    senateMapSources[PolymarketSenate2024MapSource.getID()] = PolymarketSenate2024MapSource
+    senateMapSources[LTESenateProjection2022MapSource.getID()] = LTESenateProjection2022MapSource
+    senateMapSources[PASenateProjection2022MapSource.getID()] = PASenateProjection2022MapSource
+    senateMapSources[CookSenateProjection2022MapSource.getID()] = CookSenateProjection2022MapSource
+    senateMapSources[SCBSenateProjection2022MapSource.getID()] = SCBSenateProjection2022MapSource
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var senateMapSourceIDs = [FiveThirtyEightSenateProjectionMapSource.getID(), PolymarketSenateMapSource.getID(), PastElectionResultMapSource.getID()]
-    if (customMapEnabled)
-    {
-      senateMapSourceIDs.push(CustomMapSource.getID())
+    const senateMapCycles = [2022, 2024]
+    const senateMapSourceIDs = {
+      [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
+      [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
 
     const kPastElectionsVsPastElections = 1
@@ -1426,8 +1479,8 @@ var USASenateMapType = new MapType(
 
     var defaultSenateCompareSourceIDs = {}
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjectionMapSource.getID()]
+    defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID()]
 
-    return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
+    return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, mapCycles: senateMapCycles, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
 )

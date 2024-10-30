@@ -44,7 +44,7 @@ var USAGovernorMapType = new MapType(
       },
     defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ],
-  (customMapEnabled) => {
+  () => {
     const regionNameToIDHistorical = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "Maine":"ME", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "Nebraska":"NE", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":nationalPopularVoteID}
 
     const heldSeatPartyIDs2022 = {"AK": RepublicanParty.getID(), "HI": DemocraticParty.getID(), "AL": RepublicanParty.getID(), "AR": RepublicanParty.getID(), "AZ": RepublicanParty.getID(), "CA": DemocraticParty.getID(), "CO": DemocraticParty.getID(), "CT": DemocraticParty.getID(), "DE": DemocraticParty.getID(), "FL": RepublicanParty.getID(), "GA": RepublicanParty.getID(), "IA": RepublicanParty.getID(), "ID": RepublicanParty.getID(), "IL": DemocraticParty.getID(), "IN": RepublicanParty.getID(), "KS": DemocraticParty.getID(), "KY": DemocraticParty.getID(), "LA": DemocraticParty.getID(), "MA": RepublicanParty.getID(), "MD": RepublicanParty.getID(), "ME": DemocraticParty.getID(), "MI": DemocraticParty.getID(), "MN": DemocraticParty.getID(), "MO": RepublicanParty.getID(), "MS": RepublicanParty.getID(), "MT": RepublicanParty.getID(), "NC": DemocraticParty.getID(), "ND": RepublicanParty.getID(), "NH": RepublicanParty.getID(), "NJ": DemocraticParty.getID(), "NM": DemocraticParty.getID(), "NV": DemocraticParty.getID(), "NY": DemocraticParty.getID(), "OH": RepublicanParty.getID(), "OK": RepublicanParty.getID(), "OR": DemocraticParty.getID(), "PA": DemocraticParty.getID(), "RI": DemocraticParty.getID(), "SC": RepublicanParty.getID(), "SD": RepublicanParty.getID(), "TN": RepublicanParty.getID(), "TX": RepublicanParty.getID(), "UT": RepublicanParty.getID(), "VA": RepublicanParty.getID(), "VT": RepublicanParty.getID(), "WA": DemocraticParty.getID(), "WI": DemocraticParty.getID(), "WV": RepublicanParty.getID(), "WY": RepublicanParty.getID(), "NE": RepublicanParty.getID()}
@@ -535,7 +535,7 @@ var USAGovernorMapType = new MapType(
       }
     }
 
-    var CNNGovernorResultsMapSource = new MapSource(
+    var CNNGovernorResults2022MapSource = new MapSource(
       "CNN-2022-Governor-Results", // id
       "CNN Results", // name
       {url: "https://politics.api.cnn.io/results/national-races/2022-GG.json", type: jsonSourceType}, // dataURL
@@ -591,7 +591,7 @@ var USAGovernorMapType = new MapType(
       1.0 // voteshareCutoffMargin
     )
 
-    var FiveThirtyEightGovernorProjectionMapSource = new MapSource(
+    var FiveThirtyEightGovernorProjection2022MapSource = new MapSource(
       "538-2022-Governor-Projection", // id
       "538 Projection", // name
       "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/governor_state_toplines_2022.csv", // dataURL
@@ -652,7 +652,7 @@ var USAGovernorMapType = new MapType(
       1667779200000: "kMzwdTAF1xM"
     }
 
-    var LTEGovernorProjectionMapSource = new MapSource(
+    var LTEGovernorProjection2022MapSource = new MapSource(
       "LTE-2022-Governor-Projection", // id
       "LTE Projection", // name
       "./csv-sources/lte-2022-governor.csv", // dataURL
@@ -723,7 +723,7 @@ var USAGovernorMapType = new MapType(
       1666915200000: ""
     }
 
-    var CookGovernorProjectionMapSource = new MapSource(
+    var CookGovernorProjection2022MapSource = new MapSource(
       "Cook-2022-Governor", // id
       "Cook Political", // name
       "./csv-sources/cook-governor-2022.csv", // dataURL
@@ -878,26 +878,26 @@ var USAGovernorMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var governorMapSources = {}
-    governorMapSources[CNNGovernorResultsMapSource.getID()] = CNNGovernorResultsMapSource
-    governorMapSources[FiveThirtyEightGovernorProjectionMapSource.getID()] = FiveThirtyEightGovernorProjectionMapSource
-    governorMapSources[LTEGovernorProjectionMapSource.getID()] = LTEGovernorProjectionMapSource
-    governorMapSources[CookGovernorProjectionMapSource.getID()] = CookGovernorProjectionMapSource
+    governorMapSources[CNNGovernorResults2022MapSource.getID()] = CNNGovernorResults2022MapSource
+    governorMapSources[FiveThirtyEightGovernorProjection2022MapSource.getID()] = FiveThirtyEightGovernorProjection2022MapSource
+    governorMapSources[LTEGovernorProjection2022MapSource.getID()] = LTEGovernorProjection2022MapSource
+    governorMapSources[CookGovernorProjection2022MapSource.getID()] = CookGovernorProjection2022MapSource
     governorMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     governorMapSources[CustomMapSource.getID()] = CustomMapSource
-
-    var governorMapSourceIDs = [PastElectionResultMapSource.getID()]
-    if (customMapEnabled)
-    {
-      governorMapSourceIDs.push(CustomMapSource.getID())
+    
+    const governorMapCycles = [2022]
+    const governorMapSourceIDs = {
+      2022: [FiveThirtyEightGovernorProjection2022MapSource.getID(), LTEGovernorProjection2022MapSource.getID(), CookGovernorProjection2022MapSource.getID()],
+      [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
-
+    
     const kPastElectionsVsPastElections = 1
     const k538ProjectionVsPastElections = 2
 
     var defaultGovernorCompareSourceIDs = {}
     defaultGovernorCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjection2022MapSource.getID(), PastElectionResultMapSource.getID()]
 
-    return {mapSources: governorMapSources, mapSourceIDs: governorMapSourceIDs, defaultCompareSourceIDs: defaultGovernorCompareSourceIDs, customSourceID: CustomMapSource.getID()}
+    return {mapSources: governorMapSources, mapSourceIDs: governorMapSourceIDs, mapCycles: governorMapCycles, defaultCompareSourceIDs: defaultGovernorCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
 )

@@ -27,9 +27,12 @@ class MapType
       this.currentMapSettings[this.mapSettingsLayout[settingNum].id] = getCookie((isGlobal ? "" : (this.id + "-")) + this.mapSettingsLayout[settingNum].id) || this.mapSettingsLayout[settingNum].defaultValue
     }
 
-    var {mapSources, mapSourceIDs, defaultCompareSourceIDs, customSourceID} = createMapSources(this.customMapEnabled)
+    var {mapSources, mapSourceIDs, mapCycles, defaultCompareSourceIDs, customSourceID} = createMapSources()
     this.mapSources = mapSources
     this.mapSourceIDs = mapSourceIDs
+    this.mapCycles = mapCycles
+    this.currentCycle = getCookie(this.id + currentMapCycleSettingIDSuffix)
+    if (this.currentCycle == null || this.currentCycle.length == 0) this.currentCycle = mapCycles[0]
     this.defaultCompareSourceIDs = defaultCompareSourceIDs
     this.customSourceID = customSourceID
   }
@@ -134,9 +137,20 @@ class MapType
     return self.mapSources
   }
 
-  getMapSourceIDs()
+  getMapSourceIDs(cycle = this.currentCycle)
   {
-    return this.mapSourceIDs
+    if (cycle == allYearsCycle)
+    {
+      return Object.entries(this.mapSourceIDs).sort((pair1, pair2) => {
+        if (pair1[0] == allYearsCycle) return 1
+        if (pair2[0] == allYearsCycle) return -1
+        return parseInt(pair2[0])-parseInt(pair1[0])
+      }).flatMap(pair => pair[1])
+    }
+    else
+    {
+      return this.mapSourceIDs[cycle].concat(this.mapSourceIDs[allYearsCycle])
+    }
   }
 
   setCurrentMapSourceID(currentMapSourceID)
@@ -148,6 +162,22 @@ class MapType
   getCurrentMapSourceID()
   {
     return this.currentMapSourceID
+  }
+  
+  setMapCycle(newCycle)
+  {
+    this.currentCycle = newCycle
+    setCookie(this.id + currentMapCycleSettingIDSuffix, newCycle != this.mapCycles[0] ? newCycle : "")
+  }
+  
+  getMapCycles()
+  {
+    return this.mapCycles
+  }
+  
+  getCurrentMapCycle()
+  {
+    return this.currentCycle
   }
 
   getDefaultCompareSourceIDs()
@@ -226,7 +256,10 @@ class MapType
   }
 }
 
+const allYearsCycle = "All"
+
 const currentMapSourceSettingIDSuffix = "-currentMapSource"
+const currentMapCycleSettingIDSuffix = "-currentCycle"
 
 const MapSettingType =
 {

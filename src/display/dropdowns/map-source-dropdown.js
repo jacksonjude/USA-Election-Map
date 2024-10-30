@@ -1,16 +1,31 @@
 function createMapSourceDropdownItems()
 {
   $("#mapSourcesDropdownContainer").html("")
-  for (var sourceNum in mapSourceIDs)
+  for (let sourceNum in mapSourceIDs)
   {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
 
-    var mapSourceID = mapSourceIDs[sourceNum]
-    var mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
-    var mapSourceName = mapSources[mapSourceID].getName()
-    var mapSourceIcon = mapSources[mapSourceID].getIconURL(true) ?? "./assets/edit-icon.png"
+    const mapSourceID = mapSourceIDs[sourceNum]
+    const mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
+    const mapSourceName = mapSources[mapSourceID].getName()
+    const mapSourceIcon = mapSources[mapSourceID].getIconURL(true) ?? "./assets/edit-icon.png"
+    const mapCycleYear = mapSources[mapSourceID].getCycleYear()
+    
+    if (currentMapType.getCurrentMapCycle() == allYearsCycle && (sourceNum == 0 || mapSources[mapSourceIDs[parseInt(sourceNum)-1]].getCycleYear() != mapCycleYear))
+    {
+      if (sourceNum > 0)
+      {
+        $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator-big'></div>")
+      }
+      
+      if (mapCycleYear != allYearsCycle)
+      {
+        $("#mapSourcesDropdownContainer").append(`<a style='display: flex; align-items: center; padding-top: 0rem; padding-bottom: 0rem; height: 30rem;'><span>${mapCycleYear} Election</span></a>`)
+        $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
+      }
+    }
 
-    var divStringToAppend = ""
+    let divStringToAppend = ""
     divStringToAppend += "<a id='" + mapSourceIDNoSpace + "' style='display: flex; justify-content: space-between; align-items: center' onclick='updateMapSource(\"" + mapSourceID + "\", \"#sourceToggleButton\")'>" + "<span style='display: flex; align-items: center'>"
     divStringToAppend += "<img style='width: 20rem; height: 20rem' src='" + mapSourceIcon + "' />" + "<span style='margin-left: 8rem'>" + mapSourceName + "</span></span>"
     divStringToAppend += "<span style='display: flex; align-items: center'>"

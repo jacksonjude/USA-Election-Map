@@ -470,6 +470,11 @@ class MapSource
   {
     return this.homepageURL != null
   }
+  
+  getCycleYear()
+  {
+    return this.cycleYear ?? allYearsCycle
+  }
 
   getAddDecimalPadding()
   {

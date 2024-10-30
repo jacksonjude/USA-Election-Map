@@ -35,7 +35,7 @@ var USAHouseMapType = new MapType(
       ],
     defaultValue: "selected", reloadType: MapSettingReloadType.display}
   ],
-  (customMapEnabled) => {
+  () => {
     const regionNameToIDHistorical = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", [nationalPopularVoteID]:nationalPopularVoteID}
     
     const democraticPartyID = DemocraticParty.getID()
@@ -843,8 +843,58 @@ var USAHouseMapType = new MapType(
       null, // shouldSetDisabledWorthToZero
       true // shouldUseOriginalMapDataForTotalsPieChart
     )
+    
+    var FiveThirtyEightHouseProjection2022MapSource = new MapSource(
+      "538-2022-House-Projection", // id
+      "538 Projection", // name
+      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/house_district_toplines_2022.csv", // dataURL
+      "https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
+      {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
+      {
+        date: "forecastdate",
+        region: "district",
+        pollType: "expression"
+      }, // columnMap
+      2022, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      singleLineVoteshareFilterFunction, // organizeMapDataFunction
+      houseViewingData, // viewingDataFunction
+      houseZoomingData, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+      houseFormattedRegionName, // getFormattedRegionName
+      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
+      {
+        if (!shouldOpenHomepage && (!regionID || !mapData || !mapData[mapDate.getTime()] || !mapData[mapDate.getTime()][regionID])) return
+    
+        let linkToOpen = homepageURL
+        if (!shouldOpenHomepage)
+        {
+          let {state, district} = mapData[mapDate.getTime()][regionID]
+          if (district == "0") district = "1"
+          linkToOpen += regionIDToLinkMap[state] + "/" + district
+        }
+    
+        window.open(linkToOpen)
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0, // voteshareCutoffMargin
+      getHouseSVGFromDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      true // shouldUseOriginalMapDataForTotalsPieChart
+    )
 
-    var FiveThirtyEightHouseProjectionMapSource = new MapSource(
+    var FiveThirtyEightHouseProjection2024MapSource = new MapSource(
       "538-2024-House-Projection", // id
       "538 Projection", // name
       {url: "https://projects.fivethirtyeight.com/2024-election-forecast/house/states_timeseries.json", type: jsonSourceType}, // dataURL
@@ -1034,23 +1084,25 @@ var USAHouseMapType = new MapType(
 
     var houseMapSources = {}
     houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
-    houseMapSources[FiveThirtyEightHouseProjectionMapSource.getID()] = FiveThirtyEightHouseProjectionMapSource
+    houseMapSources[FiveThirtyEightHouseProjection2022MapSource.getID()] = FiveThirtyEightHouseProjection2022MapSource
+    houseMapSources[FiveThirtyEightHouseProjection2024MapSource.getID()] = FiveThirtyEightHouseProjection2024MapSource
     houseMapSources[CNNHouseResultsMapSource.getID()] = CNNHouseResultsMapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    var houseMapSourceIDs = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
-    if (customMapEnabled)
-    {
-      houseMapSourceIDs.push(CustomMapSource.getID())
+    const houseMapCycles = [2024, 2022]
+    const houseMapSourceIDs = {
+      2024: [FiveThirtyEightHouseProjection2024MapSource.getID()],
+      2022: [FiveThirtyEightHouseProjection2022MapSource.getID()],
+      [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
-
+    
     const kPastElectionsVsPastElections = 1
     const k538ProjectionVsPastElections = 2
 
     var defaultHouseCompareSourceIDs = {}
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjectionMapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjection2024MapSource.getID(), PastElectionResultMapSource.getID()]
 
-    return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}
+    return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, mapCycles: houseMapCycles, defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
 )

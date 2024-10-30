@@ -50,7 +50,7 @@ var USAPresidentMapType = new MapType(
       },
     defaultValue: "disabled", reloadType: MapSettingReloadType.display}
   ],
-  (customMapEnabled) => {
+  () => {
     const partyCandiateLastNames = {2020: {"Biden":DemocraticParty.getID(), "Trump":RepublicanParty.getID()}, 2024: {"Harris":DemocraticParty.getID(), "Trump":RepublicanParty.getID(), "Kennedy":Independent2024RFKParty.getID()}}
     const partyCandiateFullNames = {2020: {"Joseph R. Biden Jr.":DemocraticParty.getID(), "Donald Trump":RepublicanParty.getID()}, 2024: {"Harris":DemocraticParty.getID(), "Trump":RepublicanParty.getID(), "Kennedy":Independent2024RFKParty.getID()}}
 
@@ -1022,24 +1022,24 @@ var USAPresidentMapType = new MapType(
     const regionNameToIDCounty = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "DC":"DC", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", [nationalPopularVoteID]:nationalPopularVoteID}
     const regionNameToIDCustom = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":nationalPopularVoteID}
 
-    var FiveThirtyEightPollAverageMapSource = new MapSource(
+    var FiveThirtyEightPollAverage2020MapSource = new MapSource(
       "538-2020-Presidential-PollAvg", // id
       "538 Poll Avg", // name
-      "https://projects.fivethirtyeight.com/polls/data/presidential_general_averages.csv", // dataURL
+      "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv", // dataURL
       "https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
-        date: "date",
+        date: "modeldate",
         region: "state",
-        candidateName: "candidate",
-        percentAdjusted: "pct_estimate"
+        candidateName: "candidate_name",
+        percentAdjusted: "pct_trend_adjusted"
       }, // columnMap
-      2024, // cycleYear
+      2020, // cycleYear
       partyCandiateFullNames, // candidateNameToPartyIDMap
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDFiveThirtyEight, // regionNameToIDMap
       {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine/1", "ME-D2":"maine/2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska/1", "NE-D2":"nebraska/2", "NE-D3":"nebraska/3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
-      ev2020, // heldRegionMap
+      ev2016, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
       doubleLineMarginFilterFunction, // organizeMapDataFunction
@@ -1051,8 +1051,39 @@ var USAPresidentMapType = new MapType(
       null, // customOpenRegionLinkFunction
       null // updateCustomMapFunction
     )
+    
+    var FiveThirtyEightProjection2020MapSource = new MapSource(
+      "538-2020-Presidential-Projection", // id
+      "538 Projection", // name
+      "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", // dataURL
+      "https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
+      {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
+      {
+        date: "modeldate",
+        region: "state",
+        margin: "margin",
+        incumbentWinChance: "winstate_inc",
+        challengerWinChance: "winstate_chal"
+      }, // columnMap
+      2020, // cycleYear
+      partyCandiateLastNames, // candidateNameToPartyIDMap
+      partyIDToCandidateLastNames, // shortCandidateNameOverride
+      regionNameToIDFiveThirtyEight, // regionNameToIDMap
+      {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "DC":"district-of-columbia", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"maine-1", "ME-D2":"maine-2", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"nebraska-1", "NE-D2":"nebraska-2", "NE-D3":"nebraska-3", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+      ev2016, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      singleLineMarginFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      null, // getFormattedRegionName
+      null, // customOpenRegionLinkFunction
+      null // updateCustomMapFunction
+    )
 
-    var FiveThirtyEightProjectionMapSource = new MapSource(
+    var FiveThirtyEightProjection2024MapSource = new MapSource(
       "538-2024-Presidential-Projection", // id
       "538 Projection", // name
       {url: "https://projects.fivethirtyeight.com/2024-election-forecast/states_timeseries.json", type: jsonSourceType}, // dataURL
@@ -1086,7 +1117,7 @@ var USAPresidentMapType = new MapType(
       true, // shouldShowVoteshare
     )
 
-    var CookProjectionMapSource = new MapSource(
+    var CookProjection2020MapSource = new MapSource(
       "Cook-2020-Presidential", // id
       "Cook Political", // name
       "./csv-sources/cook-pres-2020/cook-latest.csv", // dataURL
@@ -1119,7 +1150,7 @@ var USAPresidentMapType = new MapType(
       null // updateCustomMapFunction
     )
     
-    var PolymarketPricesMapSource = new MapSource(
+    var PolymarketPrices2024MapSource = new MapSource(
       "Polymarket-2024-Presidential", // id
       "Polymarket", // name
       {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2024-president-polymarket-prices.json", type: jsonSourceType}, // dataURL
@@ -1749,20 +1780,22 @@ var USAPresidentMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var presidentialMapSources = {}
-    presidentialMapSources[FiveThirtyEightPollAverageMapSource.getID()] = FiveThirtyEightPollAverageMapSource
-    presidentialMapSources[FiveThirtyEightProjectionMapSource.getID()] = FiveThirtyEightProjectionMapSource
-    presidentialMapSources[CookProjectionMapSource.getID()] = CookProjectionMapSource
-    presidentialMapSources[PolymarketPricesMapSource.getID()] = PolymarketPricesMapSource
+    presidentialMapSources[FiveThirtyEightPollAverage2020MapSource.getID()] = FiveThirtyEightPollAverage2020MapSource
+    presidentialMapSources[FiveThirtyEightProjection2020MapSource.getID()] = FiveThirtyEightProjection2020MapSource
+    presidentialMapSources[FiveThirtyEightProjection2024MapSource.getID()] = FiveThirtyEightProjection2024MapSource
+    presidentialMapSources[CookProjection2020MapSource.getID()] = CookProjection2020MapSource
+    presidentialMapSources[PolymarketPrices2024MapSource.getID()] = PolymarketPrices2024MapSource
     presidentialMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     presidentialMapSources[HistoricalElectionResultMapSource.getID()] = HistoricalElectionResultMapSource
     presidentialMapSources[CountyElectionResultMapSource.getID()] = CountyElectionResultMapSource
     presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
     presidentialMapSources[CustomCountyMapSource.getID()] = CustomCountyMapSource
 
-    var presidentialMapSourceIDs = [FiveThirtyEightProjectionMapSource.getID(), PolymarketPricesMapSource.getID(), PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID()]
-    if (customMapEnabled)
-    {
-      presidentialMapSourceIDs.push(CustomMapSource.getID())
+    const presidentialMapCycles = [2024, 2020]
+    const presidentialMapSourceIDs = {
+      2024: [FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
+      2020: [FiveThirtyEightPollAverage2020MapSource.getID(), FiveThirtyEightProjection2020MapSource.getID(), CookProjection2020MapSource.getID()],
+      [allYearsCycle]: [PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
 
     const kPastElectionsVsPastElections = 1
@@ -1770,9 +1803,9 @@ var USAPresidentMapType = new MapType(
 
     var defaultPresidentialCompareSourceIDs = {}
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjectionMapSource.getID()]
+    defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjection2024MapSource.getID()]
 
-    return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, defaultCompareSourceIDs: defaultPresidentialCompareSourceIDs, customSourceID: CustomMapSource.getID()}
+    return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, mapCycles: presidentialMapCycles, defaultCompareSourceIDs: defaultPresidentialCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
 )
 

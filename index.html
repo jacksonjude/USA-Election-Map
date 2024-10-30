@@ -25,6 +25,7 @@
     <script src="./src/model/map-types/usa-governor-map-type.js"></script>
     <script src="./src/model/map-types/usa-house-map-type.js"></script>
     <script src="./src/display/dropdowns/map-type-dropdown.js"></script>
+    <script src="./src/display/dropdowns/map-cycle-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-source-dropdown.js"></script>
     <script src="./src/display/dropdowns/party-dropdowns.js"></script>
     <script src="./src/display/dropdowns/margins-dropdown.js"></script>
@@ -69,6 +70,15 @@
           <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-pres.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
           <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 45rem;">
             <div id="mapTypesDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            </div>
+          </div>
+        </div>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="cycleMapCycleButton" onclick="cycleMapCycle()" style="min-width: 50rem; font-size: 25rem; padding: 0; height: 51rem; display: flex; justify-content: center; align-items: center;">
+            <span>'24</span>
+          </a>
+          <div id="mapCyclesDropdownContent" class="dropdown-content">
+            <div id="mapCyclesDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>

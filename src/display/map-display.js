@@ -237,6 +237,7 @@ async function reloadForNewMapType(initialLoad)
   resetCompareVariables()
 
   createMapTypeDropdownItems()
+  createMapCycleDropdownItems()
   createComparePresetDropdownItems()
   createMapSourceDropdownItems()
   createSettingsDropdownItems()
@@ -272,7 +273,7 @@ async function reloadForNewMapType(initialLoad)
   setupTotalsPieChart()
   updateTotalsPieChart()
 
-  updateIconsBasedOnLocalCSVData()
+  await updateIconsBasedOnLocalCSVData()
 
   if (currentMapSource.getID() != NullMapSource.getID())
   {
@@ -572,6 +573,23 @@ function addTextBoxSpacingCSS()
     $(".textbox").css('letter-spacing', "0.8rem")
     break
   }
+}
+
+async function setMapCycle(mapCycle)
+{
+  currentMapType.setMapCycle(mapCycle)
+  createMapCycleDropdownItems()
+
+  mapSourceIDs = currentMapType.getMapSourceIDs(mapCycle)
+  createMapSourceDropdownItems()
+  await updateIconsBasedOnLocalCSVData()
+
+  updateNavBarForNewSource(false, false)
+
+  if (mapSourceIDs.includes(currentMapSource.getID())) return
+
+  clearMap(true, false)
+  await setMapSource(mapSources[mapSourceIDs[0]])
 }
 
 async function setMapSource(mapSource, ...loadDataMapArgs)
