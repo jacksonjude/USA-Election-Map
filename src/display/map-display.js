@@ -559,6 +559,13 @@ function addDivEventListeners()
   })
 
   createPartyDropdownsBoxHoverHandler()
+  
+  let overlayShadowClass = 'chart-overlay-shadow-big'
+  if (browserName == "Safari")
+  {
+    overlayShadowClass = 'chart-overlay-shadow-small'
+  }
+  $('#totalsPieChartOverlayText').addClass(overlayShadowClass)
 }
 
 function addTextBoxSpacingCSS()

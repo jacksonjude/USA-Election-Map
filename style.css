@@ -350,3 +350,22 @@ body {
 #svgdata {
   transition: opacity 0.3s;
 }
+
+.chart-overlay-text {
+  font-size: 45rem;
+  font-family: 'Bree5erif-Mono';
+  font-weight: bold;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-overlay-shadow-small {
+  text-shadow: 0 0 2rem #ffffff, 0 0 5rem #000000;
+}
+
+.chart-overlay-shadow-big {
+  text-shadow: 0 0 2rem #ffffff, 0 0 9rem #000000;
+}
