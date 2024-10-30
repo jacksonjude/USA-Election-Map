@@ -130,6 +130,12 @@ body {
   width: 100%;
 }
 
+.dropdown-separator-big {
+  border-top: 3rem solid gray;
+  height: 0rem;
+  width: 100%;
+}
+
 .textInput {
   max-width: 32rem;
   background-color: #444;
@@ -333,7 +339,7 @@ body {
   width: 50rem;
   height: 50rem;
   display: inline-block;
-  margin-left: 8rem;
+  margin-left: 10rem;
   font-size: 12rem;
 }
 

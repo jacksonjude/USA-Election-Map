@@ -9,9 +9,7 @@ function createSettingsDropdownItems()
     var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
     if (!didBeginGlobalSettings && globalMapSettings.some(setting => setting.id == settingLayout.id))
     {
-      $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
-      $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
-      $("#settingsDropdownContainer").append("<div class='dropdown-separator'></div>")
+      $("#settingsDropdownContainer").append("<div class='dropdown-separator-big'></div>")
 
       didBeginGlobalSettings = true
     }
