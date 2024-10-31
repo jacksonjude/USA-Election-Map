@@ -8,7 +8,7 @@ var compareMapSourceIDArray
 var compareMapDataArray
 var selectedCompareSlider
 
-var showingCompareCheckboxes = false
+var showingCompareCheckboxes = parseInt(getCookie('compare-checkboxes')) ? true : false
 
 var shouldCombineMinorThirdParties = true
 var getCompareMajorParties
@@ -47,6 +47,8 @@ function createComparePresetDropdownItems()
 function toggleCompareCheckboxes(value)
 {
   showingCompareCheckboxes = value ?? !showingCompareCheckboxes
+  setCookie('compare-checkboxes', showingCompareCheckboxes ? 1 : 0)
+  
   if (showingCompareCheckboxes)
   {
     $(".comparesourcecheckbox").show()
