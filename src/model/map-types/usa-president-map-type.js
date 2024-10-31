@@ -538,7 +538,7 @@ var USAPresidentMapType = new MapType(
           
           // console.log(region, date, dateData)
           
-          if (voteshareSortedCandidateData[0].voteshare != 0)
+          if (voteshareSortedCandidateData[0].voteshare != 0 && (!voteshareSortedCandidateData[1] || voteshareSortedCandidateData[0].voteshare != voteshareSortedCandidateData[1].voteshare))
           {
             greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
             greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate

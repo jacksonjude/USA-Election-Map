@@ -7,7 +7,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   var regionData = regionID ? getRegionData(regionID).regionData : null
 
-  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.reduce((s, p) => s+p.voteshare, 0) == 0) && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
   {
     $("#regionboxcontainer").trigger('hide')
     return
