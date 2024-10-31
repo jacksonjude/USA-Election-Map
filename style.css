@@ -336,8 +336,8 @@ body {
 }
 
 .progress-loader {
-  width: 50rem;
-  height: 50rem;
+  width: 49rem;
+  height: 49rem;
   display: inline-block;
   margin-left: 10rem;
   font-size: 12rem;
