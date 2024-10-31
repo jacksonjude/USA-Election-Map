@@ -404,8 +404,16 @@ async function applyCompareToCustomMap()
 
       if (resultMapArray[regionID].margin < 0)
       {
-        var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-        resultMapArray[regionID].partyID = sortedVoteshareArray.length >= 2 ? sortedVoteshareArray[1].partyID : TossupParty.getID()
+        if (compareRegionData0.partyVotesharePercentages)
+        {
+          var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          resultMapArray[regionID].partyID = sortedVoteshareArray.length >= 2 ? sortedVoteshareArray[1].partyID : TossupParty.getID()
+        }
+        else
+        {
+          resultMapArray[regionID].partyID = Object.keys(compareRegionData0.candidateMap).filter(p => p != resultMapArray[regionID].partyID)[0] ?? TossupParty.getID()
+        }
+        
         resultMapArray[regionID].margin = Math.abs(resultMapArray[regionID].margin)
       }
       else
