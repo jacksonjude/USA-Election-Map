@@ -158,7 +158,7 @@ async function updateRegionBox(regionID = currentRegionID)
   if (regionData.partyVotesharePercentages && currentMapSource.getShouldShowVoteshare() == true)
   {
     let sortedPercentages
-    if (regionData.partyVotesharePercentages?.[0]?.order !== undefined)
+    if (regionData.partyVotesharePercentages?.[0]?.order != null)
     {
       sortedPercentages = regionData.partyVotesharePercentages.sort((voteData1, voteData2) => {
         return voteData1.order - voteData2.order
