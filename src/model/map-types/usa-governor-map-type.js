@@ -831,7 +831,7 @@ var USAGovernorMapType = new MapType(
         partyID: "party",
         voteshare: "voteshare"
       }, // columnMap
-      null, // cycleYear
+      2022, // cycleYear
       null, // candidateNameToPartyIDMap
       null, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
@@ -902,7 +902,7 @@ var USAGovernorMapType = new MapType(
         partyID: "party",
         voteshare: "voteshare"
       }, // columnMap
-      null, // cycleYear
+      2022, // cycleYear
       null, // candidateNameToPartyIDMap
       null, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
