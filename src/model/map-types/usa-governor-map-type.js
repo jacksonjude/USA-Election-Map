@@ -150,7 +150,7 @@ var USAGovernorMapType = new MapType(
       return {mapData: mapData, candidateNameData: partyNameArray, mapDates: [mapDate]}
     }
     
-    var jsonPricesFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToIDMap, heldRegionMap)
+    var jsonPricesFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToIDMap, heldRegionMap)
     {
       let filteredMapData = {}
       let mapDates = []
