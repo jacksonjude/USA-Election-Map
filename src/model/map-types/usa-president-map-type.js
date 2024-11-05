@@ -1952,11 +1952,13 @@ var USAPresidentMapType = new MapType(
       2020: [FiveThirtyEightPollAverage2020MapSource.getID(), FiveThirtyEightProjection2020MapSource.getID(), CookProjection2020MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
-
-    const kPastElectionsVsPastElections = 1
-    const kPastElectionsVs538Projection = 2
+    
+    const kCNNVs538Projection = 1
+    const kPastElectionsVsPastElections = 2
+    const kPastElectionsVs538Projection = 3
 
     var defaultPresidentialCompareSourceIDs = {}
+    defaultPresidentialCompareSourceIDs[kCNNVs538Projection] = [CNNResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjection2024MapSource.getID()]
 

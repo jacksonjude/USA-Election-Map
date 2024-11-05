@@ -1539,11 +1539,13 @@ var USASenateMapType = new MapType(
       [2024]: [CNNSenateResults2024MapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
-
-    const kPastElectionsVsPastElections = 1
-    const kPastElectionsVs538Projection = 2
+    
+    const kCNNVs538Projection = 1
+    const kPastElectionsVsPastElections = 2
+    const kPastElectionsVs538Projection = 3
 
     var defaultSenateCompareSourceIDs = {}
+    defaultSenateCompareSourceIDs[kCNNVs538Projection] = [CNNSenateResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID()]
 

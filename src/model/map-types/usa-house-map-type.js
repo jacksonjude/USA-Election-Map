@@ -1160,10 +1160,12 @@ var USAHouseMapType = new MapType(
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
-    const kPastElectionsVsPastElections = 1
-    const k538ProjectionVsPastElections = 2
+    const kCNNVs538Projection = 1
+    const kPastElectionsVsPastElections = 2
+    const k538ProjectionVsPastElections = 3
 
     var defaultHouseCompareSourceIDs = {}
+    defaultHouseCompareSourceIDs[kCNNVs538Projection] = [CNNHouseResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjection2024MapSource.getID(), PastElectionResultMapSource.getID()]
 
