@@ -977,7 +977,7 @@ var USASenateMapType = new MapType(
         }
         else
         {
-          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-2" : "")
+          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-general-special-election" : "")
         }
     
         window.open(linkToOpen)
