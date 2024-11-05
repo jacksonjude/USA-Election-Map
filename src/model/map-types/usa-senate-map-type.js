@@ -70,12 +70,17 @@ var USASenateMapType = new MapType(
     
     const heldSeatPartyIDs2024 = {"AK-2": republicanPartyID, "HI-1": democraticPartyID, "AL-2": republicanPartyID, "AR-2": republicanPartyID, "AZ-1": democraticPartyID, "CA-1": democraticPartyID, "CO-2": democraticPartyID, "CT-1": democraticPartyID, "DE-2": democraticPartyID, "FL-1": republicanPartyID, "GA-2": democraticPartyID, "IA-2": republicanPartyID, "ID-2": republicanPartyID, "IL-2": democraticPartyID, "IN-1": republicanPartyID, "KS-2": republicanPartyID, "KY-2": republicanPartyID, "LA-2": republicanPartyID, "MA-2": democraticPartyID, "MD-1": democraticPartyID, "ME-2": republicanPartyID, "MI-2": democraticPartyID, "MN-2": democraticPartyID, "MO-1": republicanPartyID, "MS-2": republicanPartyID, "MT-2": republicanPartyID, "NC-2": republicanPartyID, "ND-1": republicanPartyID, "NH-2": democraticPartyID, "NJ-2": democraticPartyID, "NM-2": democraticPartyID, "NV-1": democraticPartyID, "NY-1": democraticPartyID, "OH-1": democraticPartyID, "OK-2": republicanPartyID, "OR-2": democraticPartyID, "PA-1": democraticPartyID, "RI-2": democraticPartyID, "SC-2": republicanPartyID, "SD-2": republicanPartyID, "TN-2": republicanPartyID, "TX-2": republicanPartyID, "UT-1": republicanPartyID, "VA-2": democraticPartyID, "VT-1": democraticPartyID, "WA-1": democraticPartyID, "WI-1": democraticPartyID, "WV-2": republicanPartyID, "WY-2": republicanPartyID, "NE-2": republicanPartyID, "WA-3": democraticPartyID, "OR-3": democraticPartyID, "CA-3": democraticPartyID, "NV-3": democraticPartyID, "UT-3": republicanPartyID, "AZ-3": democraticPartyID, "NM-1": democraticPartyID, "AK-3": republicanPartyID, "HI-3": democraticPartyID, "TX-1": republicanPartyID, "OK-3": republicanPartyID, "KS-3": republicanPartyID, "CO-3": democraticPartyID, "NE-1": republicanPartyID, "WY-1": republicanPartyID, "MT-1": democraticPartyID, "ID-3": republicanPartyID, "ND-3": republicanPartyID, "SD-3": republicanPartyID, "MN-1": democraticPartyID, "WI-3": republicanPartyID, "IA-3": republicanPartyID, "IL-3": democraticPartyID, "MO-3": republicanPartyID, "AR-3": republicanPartyID, "LA-3": republicanPartyID, "MS-1": republicanPartyID, "AL-3": republicanPartyID, "GA-3": democraticPartyID, "FL-3": republicanPartyID, "SC-3": republicanPartyID, "NC-3": republicanPartyID, "TN-1": republicanPartyID, "KY-3": republicanPartyID, "WV-1": democraticPartyID, "VA-1": democraticPartyID, "OH-3": republicanPartyID, "IN-3": republicanPartyID, "MI-1": democraticPartyID, "PA-3": democraticPartyID, "NY-3": democraticPartyID, "ME-1": democraticPartyID, "NH-3": democraticPartyID, "VT-3": democraticPartyID, "MA-1": democraticPartyID, "RI-1": democraticPartyID, "CT-3": democraticPartyID, "NJ-1": democraticPartyID, "DE-1": democraticPartyID, "MD-3": democraticPartyID, "NPV-1": republicanPartyID}
 
-    var jsonVoteshareFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
+    var jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
     {
       let onCycleClass = ((cycleYear-2)%6)/2+1
 
       let racesToIgnore = ["2022-S2P-CA"]
       let candidateExceptions = {"None of these candidates": "None"}
+      
+      const overridePartyCandidates = {
+        "Sanders": "DEM",
+        "King": "DEM"
+      }
 
       let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
 
@@ -110,12 +115,16 @@ var USASenateMapType = new MapType(
           {
             candidateName = candidateExceptions[candidateName]
           }
+          if (overridePartyCandidates[candidateName])
+          {
+            partyID = overridePartyCandidates[candidateName]
+          }
           if (!politicalParties[partyID])
           {
             partyID = IndependentGenericParty.getID()
           }
 
-          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: candidateVotes/totalVotes*100, votes: candidateVotes})
+          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : 0, votes: candidateVotes})
         }
 
         let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -895,7 +904,7 @@ var USASenateMapType = new MapType(
       heldSeatPartyIDs2022, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
@@ -923,6 +932,62 @@ var USASenateMapType = new MapType(
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
       1.0 // voteshareCutoffMargin
+    )
+    
+    var CNNSenateResults2024MapSource = new MapSource(
+      "CNN-2024-Senate-Results", // id
+      "CNN Results", // name
+      {url: "https://politics.api.cnn.io/results/national-races/2024-SG.json", type: jsonSourceType}, // dataURL
+      "https://www.cnn.com/election/2024/results/", // homepageURL
+      {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
+      {
+        date: "extractedAt",
+        raceKey: "ecKey",
+        region: "stateAbbreviation",
+        special: "raceType",
+        totalVotes: "totalVote",
+        reportingPercent: "percentReporting",
+        candidates: "candidates",
+        candidateName: "lastName",
+        partyID: "majorParty",
+        candidateVotes: "voteNum"
+      }, // columnMap
+      2024, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+      heldSeatPartyIDs2024, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      null, // getFormattedRegionName
+      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+      {
+        if (!shouldOpenHomepage && !regionID) return
+    
+        let linkToOpen = homepageURL
+        if (shouldOpenHomepage)
+        {
+          homepageURL += "senate"
+        }
+        else
+        {
+          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-2" : "")
+        }
+    
+        window.open(linkToOpen)
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      0.0 // voteshareCutoffMargin
     )
     
     var FiveThirtyEightSenateProjection2022MapSource = new MapSource(
@@ -1457,6 +1522,7 @@ var USASenateMapType = new MapType(
 
     var senateMapSources = {}
     senateMapSources[CNNSenateResults2022MapSource.getID()] = CNNSenateResults2022MapSource
+    senateMapSources[CNNSenateResults2024MapSource.getID()] = CNNSenateResults2024MapSource
     senateMapSources[FiveThirtyEightSenateProjection2022MapSource.getID()] = FiveThirtyEightSenateProjection2022MapSource
     senateMapSources[FiveThirtyEightSenateProjection2024MapSource.getID()] = FiveThirtyEightSenateProjection2024MapSource
     senateMapSources[PolymarketSenate2024MapSource.getID()] = PolymarketSenate2024MapSource
@@ -1470,7 +1536,7 @@ var USASenateMapType = new MapType(
     const senateMapCycles = [2024, 2022]
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
-      [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      [2024]: [CNNSenateResults2024MapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
 

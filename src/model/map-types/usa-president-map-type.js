@@ -489,7 +489,104 @@ var USAPresidentMapType = new MapType(
       return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
     }
     
-    var jsonVoteshareFilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionIDMap, heldRegionMap)
+    var jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
+    {
+      let racesToIgnore = []
+      let candidateExceptions = {"None of these candidates": "None"}
+      let overrideRegionMap = {"NE": "NE-AL", "ME": "ME-AL"}
+    
+      let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
+    
+      let mapData = {[mapDate]: {}}
+      let partyNameArray = {[mapDate]: {}}
+    
+      for (let raceData of rawMapData)
+      {
+        let raceKey = raceData[columnMap.raceKey]
+        if (racesToIgnore.includes(raceKey)) continue
+    
+        let regionID = raceData[columnMap.region]
+        if (overrideRegionMap[regionID]) regionID = overrideRegionMap[regionID]
+    
+        let totalVotes = raceData[columnMap.totalVotes]
+        let reportingPercent = raceData[columnMap.reportingPercent]
+    
+        let formattedCandidatesArray = []
+    
+        let candiatesArray = raceData[columnMap.candidates]
+        for (let candidateData of candiatesArray)
+        {
+          let candidateName = candidateData[columnMap.candidateName]
+          let partyID = candidateData[columnMap.partyID]
+          let candidateVotes = candidateData[columnMap.candidateVotes]
+    
+          if (candidateExceptions[candidateName])
+          {
+            candidateName = candidateExceptions[candidateName]
+          }
+          if (!politicalParties[partyID])
+          {
+            partyID = IndependentGenericParty.getID()
+          }
+    
+          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : 0, votes: candidateVotes})
+        }
+    
+        let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+    
+        if (voteshareSortedCandidateData.length == 0)
+        {
+          console.log("No candidate data!", new Date(mapDate).getFullYear().toString(), regionID)
+          continue
+        }
+    
+        let greatestMarginPartyID
+        let greatestMarginCandidateName
+        let topTwoMargin
+    
+        if (voteshareSortedCandidateData[0].voteshare != 0)
+        {
+          greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+          greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+          topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+        }
+        else
+        {
+          greatestMarginPartyID = TossupParty.getID()
+          greatestMarginCandidateName = null
+          topTwoMargin = 0
+        }
+    
+        let partyIDToCandidateNames = {}
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
+        }
+    
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          let mainPartyID = candidateData.partyID
+          partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
+        }
+    
+        mapData[mapDate][regionID] = {region: regionID, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent}
+      }
+      
+      for (let regionID of Object.values(regionNameToID))
+      {
+        if (regionID == nationalPopularVoteID) continue
+        
+        if (!mapData[mapDate][regionID])
+        {
+          mapData[mapDate][regionID] = {region: regionID, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+        }
+      }
+    
+      return {mapData: mapData, candidateNameData: partyNameArray, mapDates: [mapDate]}
+    }
+    
+    var jsonVoteshare538FilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionIDMap, heldRegionMap)
     {
       let filteredMapData = {}
       let mapDates = []
@@ -1022,6 +1119,59 @@ var USAPresidentMapType = new MapType(
     const regionNameToIDCounty = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "DC":"DC", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME":"ME", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE":"NE", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY", [nationalPopularVoteID]:nationalPopularVoteID}
     const regionNameToIDCustom = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY", "National Popular Vote":nationalPopularVoteID}
 
+    var CNNResults2024MapSource = new MapSource(
+      "CNN-2024-Presidential-Results", // id
+      "CNN Results", // name
+      {url: "https://politics.api.cnn.io/results/national-races/2024-PG.json", type: jsonSourceType}, // dataURL
+      "https://www.cnn.com/election/2024/results/", // homepageURL
+      {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
+      {
+        date: "extractedAt",
+        raceKey: "ecKey",
+        region: "stateAbbreviation",
+        special: "raceType",
+        totalVotes: "totalVote",
+        reportingPercent: "percentReporting",
+        candidates: "candidates",
+        candidateName: "lastName",
+        partyID: "majorParty",
+        candidateVotes: "voteNum"
+      }, // columnMap
+      2024, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
+      ev2020, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      null, // getFormattedRegionName
+      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+      {
+        if (!shouldOpenHomepage && !regionID) return
+    
+        let linkToOpen = homepageURL
+        if (!shouldOpenHomepage)
+        {
+          linkToOpen += regionIDToLinkMap[regionID]
+        }
+    
+        window.open(linkToOpen)
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      0.0, // voteshareCutoffMargin
+      "svg-sources/usa-presidential-map-no-districts.svg" // overrideSVGPath
+    )
+
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
       "538-2020-Presidential-PollAvg", // id
       "538 Poll Avg", // name
@@ -1103,7 +1253,7 @@ var USAPresidentMapType = new MapType(
       ev2020, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareFilterFunction, // organizeMapDataFunction
+      jsonVoteshare538FilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
@@ -1780,6 +1930,7 @@ var USAPresidentMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     var presidentialMapSources = {}
+    presidentialMapSources[CNNResults2024MapSource.getID()] = CNNResults2024MapSource
     presidentialMapSources[FiveThirtyEightPollAverage2020MapSource.getID()] = FiveThirtyEightPollAverage2020MapSource
     presidentialMapSources[FiveThirtyEightProjection2020MapSource.getID()] = FiveThirtyEightProjection2020MapSource
     presidentialMapSources[FiveThirtyEightProjection2024MapSource.getID()] = FiveThirtyEightProjection2024MapSource
@@ -1793,7 +1944,7 @@ var USAPresidentMapType = new MapType(
 
     const presidentialMapCycles = [2024, 2020]
     const presidentialMapSourceIDs = {
-      2024: [FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
+      2024: [CNNResults2024MapSource.getID(), FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
       2020: [FiveThirtyEightPollAverage2020MapSource.getID(), FiveThirtyEightProjection2020MapSource.getID(), CookProjection2020MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CustomMapSource.getID()]
     }

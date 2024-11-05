@@ -7,7 +7,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   var regionData = regionID ? getRegionData(regionID).regionData : null
 
-  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.reduce((s, p) => s+p.voteshare, 0) == 0) && !canZoomCurrently && !editingRegionVotesharePercentages) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
+  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.reduce((s, p) => s+p.voteshare, 0) == 0) && !canZoomCurrently && !editingRegionVotesharePercentages && regionData.reportingPercent == null) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
   {
     $("#regionboxcontainer").trigger('hide')
     return
@@ -36,7 +36,7 @@ async function updateRegionBox(regionID = currentRegionID)
   
   const shouldShowVotes = !(showingCompareMap && currentMapSource.isCustom())
   let voteshareSortedData = regionData.partyVotesharePercentages ? cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare) : []
-  var roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes)
+  var roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes != null)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
   : getRoundedMarginValue(regionData.margin)
   
@@ -182,10 +182,10 @@ async function updateRegionBox(regionID = currentRegionID)
 
     sortedPercentages.forEach((voteData, i) => {
       const roundedVoteshare = Math.round(voteData.voteshare*100)/100
-      if (roundedVoteshare <= 0 && !currentMapSource.isCustom()) { return }
+      if (roundedVoteshare <= 0 && !currentMapSource.isCustom() && regionData.reportingPercent == null) { return }
       
       regionBoxHTML += "<span id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
-      regionBoxHTML += shiftKeyDown && shouldShowVotes && voteData.votes ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
+      regionBoxHTML += shiftKeyDown && shouldShowVotes && voteData.votes != null ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
       regionBoxHTML += "</span></span><br>"
 
       hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
@@ -196,7 +196,7 @@ async function updateRegionBox(regionID = currentRegionID)
     regionBoxHTML += "</div>"
   }
 
-  if (regionData.reportingPercent)
+  if (regionData.reportingPercent != null)
   {
     regionBoxHTML += "<div style='color: gray; font-size: 16px; margin-top: -5px; margin-bottom: 5px'>" + regionData.reportingPercent + "% reporting" + "</div>"
   }
