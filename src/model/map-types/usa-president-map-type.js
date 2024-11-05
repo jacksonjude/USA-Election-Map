@@ -1156,9 +1156,13 @@ var USAPresidentMapType = new MapType(
         if (!shouldOpenHomepage && !regionID) return
     
         let linkToOpen = homepageURL
-        if (!shouldOpenHomepage)
+        if (shouldOpenHomepage)
         {
-          linkToOpen += regionIDToLinkMap[regionID]
+          linkToOpen += "president"
+        }
+        else
+        {
+          linkToOpen += regionIDToLinkMap[regionID] + "/" + "president"
         }
     
         window.open(linkToOpen)

@@ -822,7 +822,7 @@ var USAHouseMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "house"
+          linkToOpen += "house"
         }
         else
         {
@@ -885,7 +885,7 @@ var USAHouseMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "house"
+          linkToOpen += "house"
         }
         else
         {

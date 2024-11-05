@@ -681,7 +681,7 @@ var USAGovernorMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "governor"
+          linkToOpen += "governor"
         }
         else
         {
@@ -737,7 +737,7 @@ var USAGovernorMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "governor"
+          linkToOpen += "governor"
         }
         else
         {

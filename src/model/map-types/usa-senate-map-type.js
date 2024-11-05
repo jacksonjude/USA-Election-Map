@@ -917,7 +917,7 @@ var USASenateMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "senate"
+          linkToOpen += "senate"
         }
         else
         {
@@ -973,7 +973,7 @@ var USASenateMapType = new MapType(
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
         {
-          homepageURL += "senate"
+          linkToOpen += "senate"
         }
         else
         {
