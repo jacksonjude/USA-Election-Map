@@ -5,10 +5,17 @@ var USAPresidentMapType = new MapType(
   "assets/usa-pres.png",
   "svg-sources/usa-presidential-map.svg",
   538,
-  function(decade, regionID, regionData)
+  function(decade, regionID, regionData, isUpdatingMapText)
   {
     const splitStates = {"ME": ["ME-AL", "ME-D1", "ME-D2"], "NE": ["NE-AL", "NE-D1", "NE-D2", "NE-D3"]}
-    if (splitStates[regionID]) return splitStates[regionID].reduce((total, regionID) => total + this.getEV(decade, regionID, displayRegionDataArray[regionID]), 0)
+    if (splitStates[regionID])
+    {
+      // determine if CDs exist in given state for that decade
+      // if so, don't double count them when summing party totals
+      if (regionEVArray[decade][splitStates[regionID][1]] >= 0 && !isUpdatingMapText) return this.getEV(decade, splitStates[regionID][0], displayRegionDataArray[regionID])
+      
+      return splitStates[regionID].reduce((total, regionID) => total + this.getEV(decade, regionID, displayRegionDataArray[regionID]), 0) // otherwise, sum state totals
+    }
     if (currentMapSource.isCustom() && regionID in overrideRegionEVs) return overrideRegionEVs[regionID]
     if (currentMapSource.getShouldSetDisabledWorthToZero() && regionData && regionData.disabled) return 0
     return (regionEVArray[decade] || regionEVArray[2020])[regionID]

@@ -106,9 +106,9 @@ class MapType
     return this.totalEV
   }
 
-  getEV(decade, regionID, regionData)
+  getEV(decade, regionID, regionData, isUpdatingMapText)
   {
-    return this.evFunction(decade, regionID, regionData)
+    return this.evFunction(decade, regionID, regionData, isUpdatingMapText)
   }
 
   getShouldDisplayEVOnMap()
