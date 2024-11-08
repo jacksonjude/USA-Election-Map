@@ -8,7 +8,7 @@ var USAPresidentMapType = new MapType(
   function(decade, regionID, regionData, isUpdatingMapText)
   {
     const splitStates = {"ME": ["ME-AL", "ME-D1", "ME-D2"], "NE": ["NE-AL", "NE-D1", "NE-D2", "NE-D3"]}
-    if (splitStates[regionID])
+    if (splitStates[regionID] && regionEVArray[decade])
     {
       // determine if CDs exist in given state for that decade
       // if so, don't double count them when summing party totals
