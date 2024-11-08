@@ -47,6 +47,10 @@ var USAHouseMapType = new MapType(
     {
       let racesToIgnore = []
       let candidateExceptions = {"None of these candidates": "None"}
+      let unopposedRaceDefaults = {
+        "FL__20": democraticPartyID,
+        "OK__3": republicanPartyID
+      }
 
       let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
 
@@ -94,8 +98,10 @@ var USAHouseMapType = new MapType(
           {
             partyID = IndependentGenericParty.getID()
           }
+          
+          const shouldSetHold = reportingPercent <= 0 && unopposedRaceDefaults[regionID] == partyID
 
-          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : 0, votes: candidateVotes})
+          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : (shouldSetHold ? 101 : 0), votes: candidateVotes})
         }
 
         let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
