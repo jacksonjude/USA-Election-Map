@@ -486,7 +486,7 @@ var USAPresidentMapType = new MapType(
           }
 
           var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
-          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "true", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, disabled: mapDataRows[0][columnMap.disabled] == "TRUE", candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
         }
 
         filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -914,7 +914,7 @@ var USAPresidentMapType = new MapType(
         }
 
         var mostRecentParty = previousMapDateData?.[fullRegionName]?.partyID
-        filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, flip: mostRecentParty != null && mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+        filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, disabled: countyRows[0][columnMap.disabled] == "TRUE", flip: countyRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != null && mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
 
       return filteredStateData
@@ -992,7 +992,10 @@ var USAPresidentMapType = new MapType(
         }
 
         case "disabled":
-        return regionData.disabled || false
+        return (regionData.disabled ?? false).toString().toUpperCase()
+        
+        case "flip":
+        return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
     
@@ -1039,7 +1042,10 @@ var USAPresidentMapType = new MapType(
         return regionID.split(subregionSeparator)[0]
     
         case "disabled":
-        return regionData.disabled || false
+        return (regionData.disabled ?? false).toString().toUpperCase()
+        
+        case "flip":
+        return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
 
@@ -1815,7 +1821,8 @@ var USAPresidentMapType = new MapType(
         candidateName: "candidate",
         partyID: "party",
         percentAdjusted: "percent",
-        order: "order"
+        order: "order",
+        flip: "flip"
       }, // columnMap
       null, // cycleYear
       partyNamesToIDs, // candidateNameToPartyIDMap
@@ -1894,7 +1901,9 @@ var USAPresidentMapType = new MapType(
         partyID: "party",
         candidateName: "candidate",
         county: "county",
-        order: "order"
+        order: "order",
+        disabled: "disabled",
+        flip: "flip"
       }, // columnMap
       null, // cycleYear
       partyNamesToIDs, // candidateNameToPartyIDMap

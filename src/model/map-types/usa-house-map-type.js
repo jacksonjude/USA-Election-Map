@@ -466,7 +466,7 @@ var USAHouseMapType = new MapType(
             }
 
             var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName)
-            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: districtRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
           }
         }
 
@@ -632,6 +632,9 @@ var USAHouseMapType = new MapType(
           return voteshareData.order
         }
         return ""
+        
+        case "flip":
+        return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
 
@@ -753,7 +756,7 @@ var USAHouseMapType = new MapType(
         housePerStateMapData[regionID].partyID = largestPartyID
       }
 
-      if (mapDateData[nationalPopularVoteID])
+      if (mapDateData?.[nationalPopularVoteID])
       {
         housePerStateMapData[nationalPopularVoteID] = cloneObject(mapDateData[nationalPopularVoteID])
       }
@@ -1108,7 +1111,8 @@ var USAHouseMapType = new MapType(
         candidateName: "candidate",
         partyID: "party",
         voteshare: "voteshare",
-        order: "order"
+        order: "order",
+        flip: "flip"
       }, // columnMap
       null, // cycleYear
       partyNamesToIDs, // candidateNameToPartyIDMap

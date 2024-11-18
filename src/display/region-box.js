@@ -7,7 +7,34 @@ async function updateRegionBox(regionID = currentRegionID)
 
   var regionData = regionID ? getRegionData(regionID).regionData : null
 
-  if (regionID == null || regionData == null || regionData.partyID == null || (regionData.partyID == TossupParty.getID() && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.reduce((s, p) => s+p.voteshare, 0) == 0) && !canZoomCurrently && !editingRegionVotesharePercentages && regionData.reportingPercent == null) || regionData.disabled == true || (currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !shiftKeyDown && !editingRegionMarginValue))
+  if (
+    regionID == null ||
+    regionData == null ||
+    regionData.partyID == null ||
+    (
+      regionData.partyID == TossupParty.getID() &&
+      (
+        !regionData.partyVotesharePercentages ||
+        regionData.partyVotesharePercentages.reduce((s, p) => s+p.voteshare, 0) == 0
+      ) &&
+      !canZoomCurrently &&
+      !editingRegionVotesharePercentages &&
+      regionData.reportingPercent == null
+    ) ||
+    (
+      regionData.disabled == true &&
+      (
+        currentEditingState != EditingState.editing ||
+        !altKeyDown
+      )
+    ) ||
+    (
+      currentEditingState == EditingState.editing &&
+      currentMapSource.getEditingMode() == EditingMode.margin &&
+      !shiftKeyDown &&
+      !altKeyDown &&
+      !editingRegionMarginValue)
+    )
   {
     $("#regionboxcontainer").trigger('hide')
     return
@@ -92,13 +119,15 @@ async function updateRegionBox(regionID = currentRegionID)
   let regionBoxHTML = (currentEditingState == EditingState.viewing || (isDiscreteRegion && currentMapSource.getEditingMode() == EditingMode.margin)) ? regionMarginString : ""
 
   let tooltipsToShow = {
-    shiftForVotes: [false, "<span id='shifttext'>Shift</span> to show votes"],
-    altForAlternateData: [false, "<span id='alttext'>Alt</span> to show " + ((regionData.altData ?? regionData).altText ?? " alt race")],
-    shiftClickToEditEVs: [false, "<span id='shifttext'>Shift</span> click to edit EVs"],
-    clickToZoom: [false, "<span id='clicktext'>Click</span> to expand"],
-    clickToOpenLink: [false, "<span id='clicktext'>Click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
-    clickToEditVoteshare: [false, "<span id='clicktext>Click</span> to edit voteshare"],
-    shiftClickToEditMargin: [false, "<span id='shifttext'>Shift</span> <span id='clicktext'>click</span> to edit margin"]
+    shiftForVotes: [false, "<span class='shifttext'>Shift</span> to show votes"],
+    altForAlternateData: [false, "<span class='alttext'>Alt</span> to show " + ((regionData.altData ?? regionData).altText ?? " alt race")],
+    shiftClickToEditEVs: [false, "<span class='shifttext'>Shift</span> click to edit EVs"],
+    clickToZoom: [false, "<span class='clicktext'>Click</span> to expand"],
+    clickToOpenLink: [false, "<span class='clicktext'>Click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
+    clickToEditVoteshare: [false, "<span class='clicktext>Click</span> to edit voteshare"],
+    shiftClickToEditMargin: [false, "<span class='shifttext'>Shift</span> <span class='clicktext'>click</span> to edit margin"],
+    altClickToFlip: [false, "<span class='alttext'>Alt</span> <span class='clicktext'>click</span> to flip"],
+    altShiftClickToDisable: [false, "<span class='alttext'>Alt</span>+<span class='shifttext'>shift</span> <span class='clicktext'>click</span> to disable"]
   }
 
   if (currentEditingState == EditingState.viewing)
@@ -249,7 +278,9 @@ async function updateRegionBox(regionID = currentRegionID)
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
   tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
-  tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin
+  tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !regionData.disabled
+  tooltipsToShow.altClickToFlip[0] = isDiscreteRegion && currentEditingState == EditingState.editing
+  tooltipsToShow.altShiftClickToDisable[0] = isDiscreteRegion && currentEditingState == EditingState.editing
 
   if (currentMapType.getMapSettingValue("showTooltips"))
   {
@@ -276,15 +307,15 @@ async function updateRegionBox(regionID = currentRegionID)
   
   if (shiftKeyDown)
   {
-    $("#shifttext").css('font-weight', 'bold').css('color', '#D8D8D8')
+    $(".shifttext").css('font-weight', 'bold').css('color', '#D8D8D8')
   }
   if (altKeyDown)
   {
-    $("#alttext").css('font-weight', 'bold').css('color', '#D8D8D8')
+    $(".alttext").css('font-weight', 'bold').css('color', '#D8D8D8')
   }
   if (mouseIsDown)
   {
-    $("#clicktext").css('font-weight', 'bold').css('color', '#D8D8D8')
+    $(".clicktext").css('font-weight', 'bold').css('color', '#D8D8D8')
   }
 }
 

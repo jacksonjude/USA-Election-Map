@@ -71,6 +71,7 @@ function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldSh
         {
           regionData.margin *= -1
           regionData.partyID = partyToShift.getID()
+          regionData.flip = false
         }
       }
       else

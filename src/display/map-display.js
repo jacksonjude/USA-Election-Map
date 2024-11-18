@@ -390,22 +390,11 @@ function setOutlineDivProperties()
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
     outlineDiv.on('click', function(e) {
-      if (e.altKey)
-      {
-        altClickRegion(e.target)
-      }
-      else if (e.shiftKey)
-      {
-        shiftClickRegion(e.target)
-      }
-      else if (e.which == 3 || e.ctrlKey)
-      {
-        return // handled in contextmenu
-      }
-      else if (currentViewingState != ViewingState.zooming || !(currentEditingState == EditingState.viewing && pannedDuringClick))
-      {
-        leftClickRegion(e.target)
-      }
+      if (e.altKey && e.shiftKey && altShiftClickRegion(e.target)) return
+      if (e.altKey && altClickRegion(e.target)) return
+      if (e.shiftKey && shiftClickRegion(e.target)) return
+      if (e.which == 3 || e.ctrlKey) return // handled in contextmenu
+      if (currentViewingState != ViewingState.zooming || !(currentEditingState == EditingState.viewing && pannedDuringClick)) leftClickRegion(e.target)
     })
 
     outlineDiv.on('contextmenu', function(e) {

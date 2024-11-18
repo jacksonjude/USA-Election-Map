@@ -683,7 +683,7 @@ var USASenateMapType = new MapType(
             }
 
             var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection)
-            filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID()}
+            filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
           }
         }
 
@@ -868,13 +868,16 @@ var USASenateMapType = new MapType(
         return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
 
         case "isRunoff":
-        return (regionData.runoff == null ? false : regionData.runoff).toString().toUpperCase()
+        return (regionData.runoff ?? false).toString().toUpperCase()
 
         case "isOffyear":
-        return (regionData.offYear == null ? false : regionData.offYear).toString().toUpperCase()
+        return (regionData.offYear ?? false).toString().toUpperCase()
 
         case "isDisabled":
-        return (regionData.disabled == null ? false : regionData.disabled).toString().toUpperCase()
+        return (regionData.disabled ?? false).toString().toUpperCase()
+        
+        case "flip":
+        return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
 
@@ -1493,7 +1496,8 @@ var USASenateMapType = new MapType(
         candidateName: "candidate",
         partyID: "party",
         voteshare: "voteshare",
-        order: "order"
+        order: "order",
+        flip: "flip"
       }, // columnMap
       null, // cycleYear
       partyNamesToIDs, // candidateNameToPartyIDMap

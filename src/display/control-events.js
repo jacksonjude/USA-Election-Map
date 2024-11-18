@@ -679,6 +679,11 @@ async function leftClickRegion(div)
     }
 
     if (regionIDsChanged.includes(regionID)) { return }
+    
+    if (regionData.partyID != (selectedParty ?? TossupParty).getID())
+    {
+      regionData.flip = false
+    }
 
     if (regionData.disabled)
     {
@@ -816,26 +821,48 @@ function rightClickRegion(div)
   }
 }
 
-function shiftClickRegion(div)
+function shiftClickRegion(_div)
 {
   let isDiscreteRegion = viewingDiscreteRegions()
 
   if (isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin)
   {
     toggleRegionMarginEditing()
+    return true
   }
   else if (isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentViewingState == ViewingState.viewing && currentMapSource.isCustom())
   {
     editingRegionEVs = !editingRegionEVs
     updateRegionBox()
+    return true
   }
-  else
-  {
-    leftClickRegion(div)
-  }
+  
+  return false
 }
 
 function altClickRegion(div)
+{
+  let isDiscreteRegion = viewingDiscreteRegions()
+  
+  if (isDiscreteRegion && currentEditingState == EditingState.editing)
+  {
+    const {regionData, linkedRegionIDs: regionIDsToFill} = getRegionData($(div).attr('id'))
+    
+    regionData.flip = !regionData.flip
+  
+    updateRegionFillColors(regionIDsToFill, regionData)
+    updateMapElectoralVoteText()
+    displayPartyTotals()
+    
+    updateRegionBox()
+    
+    return true
+  }
+  
+  return false
+}
+
+function altShiftClickRegion(div)
 {
   let isDiscreteRegion = viewingDiscreteRegions()
 
@@ -869,15 +896,13 @@ function altClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     updateMapElectoralVoteText()
     displayPartyTotals()
+    
+    updateRegionBox()
+    
+    return true
   }
-  else if (shiftKeyDown)
-  {
-    shiftClickRegion(div)
-  }
-  else
-  {
-    leftClickRegion(div)
-  }
+  
+  return false
 }
 
 function isEditingTextbox()
