@@ -975,7 +975,8 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
   displayPartyTotals(reloadPartyDropdowns)
-
+  
+  // console.log(Object.keys(displayRegionDataArray)[0])
   updateTotalsPieChart()
   
   let iconOverlayText = currentMapSource.getIconOverlayText()

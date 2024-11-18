@@ -120,7 +120,7 @@ class MapSource
     }
     self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
 
-    let filterMapDataCallback = self.filterMapDataFunction(self.rawMapData, self.mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.regionNameToIDMap, self.heldRegionMap, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin, !self.isCustomMap || self.editingMode == EditingMode.voteshare)
+    let filterMapDataCallback = self.executeFilter(self.rawMapData, self.mapDates, self)
     self.mapData = filterMapDataCallback.mapData
 
     if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
@@ -152,6 +152,11 @@ class MapSource
     }
 
     return true
+  }
+  
+  executeFilter(rawData, mapDates, self = this, ...args)
+  {
+    return self.filterMapDataFunction(rawData, mapDates, self.columnMap, self.cycleYear, self.candidateNameToPartyIDMap, self.regionNameToIDMap, self.heldRegionMap, self.shouldFilterOutDuplicateRows, self.isCustomMap, self.voteshareCutoffMargin, !self.isCustomMap || self.editingMode == EditingMode.voteshare, ...args)
   }
 
   async loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
