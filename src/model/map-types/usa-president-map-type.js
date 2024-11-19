@@ -1993,12 +1993,23 @@ var USAPresidentMapType = new MapType(
       doubleLineVoteshareFilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       async (mapDateData, regionID, isZoomCheck, date) => {
+        const allSourcesCanZoom = 
+          showingCompareMap
+          && await presidentialMapSources[compareMapSourceIDArray[0]].canZoom(null, regionID)
+          && await presidentialMapSources[compareMapSourceIDArray[1]].canZoom(null, regionID)
+        
         if (isZoomCheck)
         {
-          return showingCompareMap
+          return allSourcesCanZoom
         }
         else if (showingCompareMap)
         {
+          if (!allSourcesCanZoom)
+          {
+            zoomOutMap()
+            return null
+          }
+          
           compareResultCustomMapSource = CustomCountyMapSource
           shouldSetCompareMapSource = false
           await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
