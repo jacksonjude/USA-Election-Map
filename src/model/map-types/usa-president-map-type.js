@@ -2029,7 +2029,7 @@ var USAPresidentMapType = new MapType(
         
         let compareYears = [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
           .map(slider => slider.val()-1)
-          .map(dateIndex => PastElectionResultMapSource.getMapDates()[dateIndex])
+          .map((dateIndex, i) => presidentialMapSources[compareMapSourceIDArray[i]].getMapDates()[dateIndex])
           .map(dateTime => new Date(dateTime).getFullYear())
         
         let compareYearsText = [compareYears[0], "↕️", compareYears[1]]
@@ -2059,23 +2059,12 @@ var USAPresidentMapType = new MapType(
       doubleLineVoteshareFilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       async (mapDateData, regionID, isZoomCheck, date) => {
-        const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray[0] == PastElectionResultMapSource.getID() && compareMapSourceIDArray[1] == PastElectionResultMapSource.getID()
-        
         if (isZoomCheck)
         {
-          return isPastElectionCompare
+          return showingCompareMap
         }
-        
-        if (!isZoomCheck && isPastElectionCompare)
+        else if (showingCompareMap)
         {
-          getCompareMajorParties = () => [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
-            .map(slider => slider.val()-1)
-            .map(dateIndex => PastElectionResultMapSource.getMapData()[PastElectionResultMapSource.getMapDates()[dateIndex]])
-            .map(mapData => mapData?.[nationalPopularVoteID]?.partyVotesharePercentages)
-            .map(popularVoteshares => popularVoteshares?.filter(voteshareData => voteshareData.voteshare >= 5))
-            .map(popularVoteshares => popularVoteshares?.map(voteshareData => voteshareData.partyID))
-          
-          compareMapSourceIDArray = [CountyElectionResultMapSource.getID(), CountyElectionResultMapSource.getID()]
           compareResultCustomMapSource = CustomCountyMapSource
           shouldSetCompareMapSource = false
           await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
@@ -2084,7 +2073,7 @@ var USAPresidentMapType = new MapType(
         }
         
         let countyZoomingData = await countyZoomingDataFunction(mapDateData, regionID, isZoomCheck, date, CustomCountyMapSource)
-        if (showingCompareMap && compareMapSourceIDArray[0] == CountyElectionResultMapSource.getID() && compareMapSourceIDArray[1] == CountyElectionResultMapSource.getID())
+        if (showingCompareMap)
         {
           delete countyZoomingData[regionID + subregionSeparator + statePopularVoteDistrictID]
         }
