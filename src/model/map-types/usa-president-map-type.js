@@ -505,7 +505,6 @@ var USAPresidentMapType = new MapType(
       let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
     
       let mapData = {[mapDate]: {}}
-      let partyNameArray = {[mapDate]: {}}
     
       for (let raceData of rawMapData)
       {
@@ -571,12 +570,6 @@ var USAPresidentMapType = new MapType(
           partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
         }
     
-        for (let candidateData of voteshareSortedCandidateData)
-        {
-          let mainPartyID = candidateData.partyID
-          partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
-        }
-    
         mapData[mapDate][regionID] = {region: regionID, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent}
       }
       
@@ -590,7 +583,7 @@ var USAPresidentMapType = new MapType(
         }
       }
     
-      return {mapData: mapData, candidateNameData: partyNameArray, mapDates: [mapDate]}
+      return {mapData: mapData, mapDates: [mapDate]}
     }
     
     var jsonVoteshare538FilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionIDMap, heldRegionMap)
@@ -1151,8 +1144,8 @@ var USAPresidentMapType = new MapType(
         candidateVotes: "voteNum"
       }, // columnMap
       2024, // cycleYear
-      null, // candidateNameToPartyIDMap
-      null, // shortCandidateNameOverride
+      partyCandiateFullNames, // candidateNameToPartyIDMap
+      partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
       {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}, // regionIDToLinkMap
       ev2020, // heldRegionMap
