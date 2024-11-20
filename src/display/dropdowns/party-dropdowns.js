@@ -579,6 +579,10 @@ function updatePoliticalPartyCandidateNames(mapDate)
     {
       politicalParties[partyID].setCandidateName(candidateNames[partyID])
     }
+    else
+    {
+      politicalParties[partyID].setCandidateName()
+    }
   }
 }
 
