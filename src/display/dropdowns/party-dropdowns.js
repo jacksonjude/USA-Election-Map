@@ -2,9 +2,12 @@ var dropdownPoliticalPartyIDs = cloneObject(defaultDropdownPoliticalPartyIDs)
 const addButtonPartyID = "ADDPARTY"
 const customPartyIDPrefix = "CUSTOM"
 
-const maxPartiesToDisplay = 4
+const maxPartiesToDisplay = 6
+const largeMaxPartiesToDisplay = 4
 const partyDropdownWidth = 195
-const partyButtonWidth = browserName != "Firefox" ? 195 : 170
+const largePartyButtonWidth = 195
+const smallPartyButtonWidth = largePartyButtonWidth*2/3
+
 const shouldReversePartyDropdownsIfNeeded = true
 const shouldAlignPartyDropdownsToLeadingTrailing = true
 
@@ -22,22 +25,15 @@ function createPartyDropdowns()
   {
     toggleMarginHexColorEditing()
   }
+  
+  const shouldUseSmallButtons = dropdownPoliticalPartyIDs.length > largeMaxPartiesToDisplay
+  const partyButtonWidth = shouldUseSmallButtons ? smallPartyButtonWidth : largePartyButtonWidth
+  const shouldStackText = shouldUseSmallButtons
 
   $("#partyDropdownsContainer").html("")
   for (let partyIDNum in dropdownPoliticalPartyIDs)
   {
     var dropdownDiv = ""
-
-    if (partyIDNum != 0 && partyIDNum%2 == 0)
-    {
-      dropdownDiv += "<br><br>"
-    }
-    else if (partyIDNum%2 == 1)
-    {
-      dropdownDiv += '<div style="width: 15rem; float: left">'
-      dropdownDiv += '<a style="visibility: hidden"></a>'
-      dropdownDiv += '</div>'
-    }
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
@@ -50,11 +46,11 @@ function createPartyDropdowns()
     var marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'rem; height: 51rem; display: flex; align-items: center; justify-content: center; padding: 0rem 0rem; margin: 0rem; background-color: ' + marginColors.safe + '; text-overflow: ellipsis; white-space: nowrap;">' + currentPoliticalParty.getID() + '</a>'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'rem; height: 51rem; display: flex; align-items: center; justify-content: ' + (shouldStackText ? 'center' : 'center') + '; flex-direction: ' + (shouldStackText ? 'column' : 'row') + '; gap: ' + (shouldStackText ? '0' : '10rem') + '; padding: 0rem 0rem; margin: 0rem; background-color: ' + marginColors.safe + ';"><span id="' + currentPoliticalParty.getID() + '-name">' + currentPoliticalParty.getID() + '</span><span id="' + currentPoliticalParty.getID() + '-votes" style="font-weight: bold; font-size: 17rem;">0</span></a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
-    var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 2 && partyIDNum < 2
-    var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%2 == 1
+    var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 3 && partyIDNum < 3
+    var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%3 == 1
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'rem; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'rem' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4rem; margin-left: 0rem; overflow: hidden;">'
 
@@ -415,17 +411,17 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
 
 function createPartyDropdownsBoxHoverHandler()
 {
-  $("#partyDropdownsBox").hover(function() {
+  $("#partyDropdownsContainer").hover(function() {
     if (!(currentMapSource.isCustom() && currentMapType.getCustomMapEnabled()) || currentEditingState == EditingState.editing || dropdownPoliticalPartyIDs.includes(addButtonPartyID) || dropdownPoliticalPartyIDs.length >= maxPartiesToDisplay) { return }
 
     dropdownPoliticalPartyIDs.push(addButtonPartyID)
-    $("#partyDropdownsBox").addClass("showingAddPartyButton")
+    $("#partyDropdownsContainer").addClass("showingAddPartyButton")
     displayPartyTotals(true)
   }, function() {
-    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) || $("#partyDropdownsBox").find(".jscolor-active").length > 0) { return }
+    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) || $("#partyDropdownsContainer").find(".jscolor-active").length > 0) { return }
 
     dropdownPoliticalPartyIDs.splice(dropdownPoliticalPartyIDs.indexOf(addButtonPartyID), 1)
-    $("#partyDropdownsBox").removeClass("showingAddPartyButton")
+    $("#partyDropdownsContainer").removeClass("showingAddPartyButton")
     displayPartyTotals(true)
   })
 }
@@ -515,7 +511,7 @@ function displayPartyTotals(overrideCreateDropdowns)
     {
       dropdownPoliticalPartyIDs = cloneObject(currentMapSource.getDropdownPartyIDs())
     }
-    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsBox").hasClass("showingAddPartyButton") && currentEditingState != EditingState.editing)
+    if (!dropdownPoliticalPartyIDs.includes(addButtonPartyID) && $("#partyDropdownsContainer").hasClass("showingAddPartyButton") && currentEditingState != EditingState.editing)
     {
       dropdownPoliticalPartyIDs.push(addButtonPartyID)
     }
@@ -537,9 +533,9 @@ function displayPartyTotals(overrideCreateDropdowns)
   for (var partyID of dropdownPoliticalPartyIDs)
   {
     if (politicalParties[partyID] == null) { continue }
-    let partyTotalText = politicalParties[partyID].getCandidateName() + " (<span style='font-weight: bold'>" + (partyTotals[partyID] || 0) + "</span>)"
-    $("#" + partyID).html(partyTotalText)
-    $("#" + partyID).css('font-size', getMaxFontSize(partyTotalText, ["17rem", "16rem", "15rem", "14rem", "13rem"], partyDropdownWidth*0.92))
+    $("#" + partyID + "-name").html(politicalParties[partyID].getCandidateName())
+    $("#" + partyID + "-votes").html(partyTotals[partyID] ?? 0)
+    $("#" + partyID + "-name").css('font-size', getMaxFontSize(politicalParties[partyID].getCandidateName(), ["18rem", "17rem", "16rem", "15rem", "14rem", "13rem"], partyDropdownWidth*0.65))
   }
 }
 
