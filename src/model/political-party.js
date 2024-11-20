@@ -568,7 +568,7 @@ var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
   "Ind",
-  "Generic",
+  "Other",
   cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
