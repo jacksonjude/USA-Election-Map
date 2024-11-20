@@ -226,20 +226,24 @@ async function updateRegionBox(regionID = currentRegionID)
     regionBoxHTML += "</div>"
   }
 
-  if (regionData.reportingPercent != null)
-  {
-    regionBoxHTML += "<div style='color: gray; font-size: 16px; margin-top: -5px; margin-bottom: 5px'>" + regionData.reportingPercent + "% reporting" + "</div>"
-  }
-
   let splitVoteDisplayOptions = currentMapSource.getSplitVoteDisplayOptions()
 
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && ((canZoomCurrently && splitVoteDisplayOptions.showSplitVotesOnCanZoom) || currentViewingState == ViewingState.splitVote))
   {
     let voteSplitDataToDisplay = regionData.voteSplits
     regionBoxHTML = "</span>"
+    
+    regionBoxHTML += "<div style='margin-top: 6px; margin-bottom: 6px; font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
+    
+    const totalVotes = voteSplitDataToDisplay.reduce((agg, curr) => agg+curr.votes, 0)
+    
     voteSplitDataToDisplay.forEach((candidateSplitVoteData, i) => {
-      regionBoxHTML += "<div style='margin-top: " + (i == 0 ? 0 : -5) + "px; margin-bottom: " + (i < voteSplitDataToDisplay.length-1 ? 0 : 5) + "px; color: " + politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean + ";'>" + candidateSplitVoteData.candidate + ": " + candidateSplitVoteData.votes + "</div>"
+      regionBoxHTML += "<span id='votesplit-" + (candidateSplitVoteData.partyID + "-" + candidateSplitVoteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == voteSplitDataToDisplay.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[candidateSplitVoteData.partyID].getMarginColors().safe, politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean, candidateSplitVoteData.votes/totalVotes*100) + "; " + " width: 100%'><span style='float: left;'>" + candidateSplitVoteData.candidate + "</span><span style='float: right;'>"
+      regionBoxHTML += candidateSplitVoteData.votes
+      regionBoxHTML += "</span></span><br>"
     })
+    
+    regionBoxHTML += "</div>"
   }
 
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && splitVoteDisplayOptions.showSplitVoteBoxes && currentSliderDate && currentMapSource.getMapData())
@@ -247,38 +251,41 @@ async function updateRegionBox(regionID = currentRegionID)
     var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
     if (zoomingData)
     {
-      const districtsPerLine = 3
+      const districtsPerLine = 4
 
       Object.keys(zoomingData).filter(districtID => !districtID.endsWith(subregionSeparator + statePopularVoteDistrictID)).forEach((districtID, i, districtIDs) => {
         if (i % districtsPerLine == 0 && i != 0)
         {
-          regionBoxHTML += "<br></div>"
+          regionBoxHTML += "</div>"
         }
         if (i % districtsPerLine == 0)
         {
           var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
-          regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 4px" : "") + "'>"
-        }
-        if (i % districtsPerLine > 0)
-        {
-          regionBoxHTML += "&nbsp;&nbsp;"
+          regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 6px" : "margin-bottom: 6px") + "; gap: 6px;'>"
         }
 
         var districtNumber = districtID.split(subregionSeparator)[1]
         var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
         var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
-        regionBoxHTML += (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + ":&nbsp;<div style='display: inline-block; margin-top: 2px; border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 11px; height: 11px;" : "gray 1px; width: 15px; height: 15px;") + " background-color: " + marginColor + "'></div>"
+        regionBoxHTML += "<div style='border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 20px; height: 20px;" : "gray 1px; width: 24px; height: 24px;") + " background-color: " + marginColor + "; display: flex; justify-content: center; align-items: center;'><span style='margin-bottom: 2px; margin-left: 1px; font-size: 16px;'>" + (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + "</span></div>"
       })
     }
-    regionBoxHTML += "<br></div>"
+    regionBoxHTML += "</div>"
   }
+  
+  if (regionData.reportingPercent != null)
+  {
+    regionBoxHTML += "<div style='color: gray; font-size: 16px; margin-top: -5px; margin-bottom: 5px'>" + regionData.reportingPercent + "% reporting" + "</div>"
+  }
+  
+  const canOpenLink = currentEditingState == EditingState.viewing && currentMapSource.openRegionLink(regionID, currentSliderDate, true)
   
   tooltipsToShow.altForAlternateData[0] = regionData.altData || showingAltData
   tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
-  tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
-  tooltipsToShow.rightClickToOpenLink[0] = currentMapSource.hasHomepageURL() && tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing && currentMapSource.openRegionLink(regionID, currentSliderDate, true)
+  tooltipsToShow.clickToOpenLink[0] = canOpenLink && !tooltipsToShow.clickToZoom[0]
+  tooltipsToShow.rightClickToOpenLink[0] = canOpenLink && tooltipsToShow.clickToZoom[0]
   tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
   tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !regionData.disabled
   tooltipsToShow.altClickToFlip[0] = isDiscreteRegion && currentEditingState == EditingState.editing
