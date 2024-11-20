@@ -661,7 +661,8 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/7/1972,Vermont,VT,Other,independent,0.8681651386,,JJCooley
 11/7/1972,Virginia,VA,Nixon,republican,67.8435216,11,JJCooley
 11/7/1972,Virginia,VA,McGovern,democrat,30.12225647,,JJCooley
-11/7/1972,Virginia,VA,Other,independent,2.034221928,1,JJCooley
+11/7/1972,Virginia,VA,Other,independent,2.034221928,,JJCooley
+11/7/1972,Virginia,VA,Hospers,libertarian,0.0,1,JJCooley
 11/7/1972,Washington,WA,Nixon,republican,56.91516521,,JJCooley
 11/7/1972,Washington,WA,McGovern,democrat,38.63991292,,JJCooley
 11/7/1972,Washington,WA,Other,independent,4.444921872,,JJCooley
@@ -2085,19 +2086,19 @@ date,region,state_po,candidate,party,voteshare,ev,version
 11/3/1992,Montana,MT,Bush,republican,35.122496547592100,,20171015
 11/3/1992,Montana,MT,Perot,independent,26.115304335542400,,20171015
 11/3/1992,Montana,MT,Marrou,libertarian,0.24014632851335800,,20171015
-11/3/1992,Nebraska,NE,Bush,republican,46.597500359299600,5,20171015
+11/3/1992,Nebraska,NE,Bush,republican,46.597500359299600,,20171015
 11/3/1992,Nebraska,NE,Clinton,democrat,29.403454157435600,,20171015
 11/3/1992,Nebraska,NE,Perot,independent,23.605849669037600,,20171015
 11/3/1992,Nebraska,NE,Marrou,libertarian,0.18168358312566300,,20171015
-11/3/1992,Nebraska 1st CD,NE-1,Bush,republican,43.2221688575,JJCooley
-11/3/1992,Nebraska 1st CD,NE-1,Clinton,democrat,32.5703976656,JJCooley
-11/3/1992,Nebraska 1st CD,NE-1,Perot,independent,24.2074334769,JJCooley
-11/3/1992,Nebraska 2nd CD,NE-2,Bush,republican,47.5050805258,JJCooley
-11/3/1992,Nebraska 2nd CD,NE-2,Clinton,democrat,32.4399302536,JJCooley
-11/3/1992,Nebraska 2nd CD,NE-1,Perot,independent,20.0549892206,JJCooley
-11/3/1992,Nebraska 3rd CD,NE-3,Bush,republican,49.6729190034,JJCooley
-11/3/1992,Nebraska 3rd CD,NE-3,Clinton,democrat,23.5248606119,JJCooley
-11/3/1992,Nebraska 3rd CD,NE-1,Perot,independent,26.8022203846,JJCooley
+11/3/1992,Nebraska 1st CD,NE-1,Bush,republican,43.2221688575,,JJCooley
+11/3/1992,Nebraska 1st CD,NE-1,Clinton,democrat,32.5703976656,,JJCooley
+11/3/1992,Nebraska 1st CD,NE-1,Perot,independent,24.2074334769,,JJCooley
+11/3/1992,Nebraska 2nd CD,NE-2,Bush,republican,47.5050805258,,JJCooley
+11/3/1992,Nebraska 2nd CD,NE-2,Clinton,democrat,32.4399302536,,JJCooley
+11/3/1992,Nebraska 2nd CD,NE-2,Perot,independent,20.0549892206,,JJCooley
+11/3/1992,Nebraska 3rd CD,NE-3,Bush,republican,49.6729190034,,JJCooley
+11/3/1992,Nebraska 3rd CD,NE-3,Clinton,democrat,23.5248606119,,JJCooley
+11/3/1992,Nebraska 3rd CD,NE-3,Perot,independent,26.8022203846,,JJCooley
 11/3/1992,Nevada,NV,Clinton,democrat,37.357549998222500,,20171015
 11/3/1992,Nevada,NV,Bush,republican,34.7267922530900,,20171015
 11/3/1992,Nevada,NV,Perot,independent,26.185124763488600,,20171015
