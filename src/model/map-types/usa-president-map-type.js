@@ -1177,7 +1177,7 @@ var USAPresidentMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID] + "/" + "president"
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1311,7 +1311,7 @@ var USAPresidentMapType = new MapType(
       function(homepageURL, _, __, mapDate, ___)
       {
         if (mapDate == null) { return }
-        window.open(homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf")
+        return homepageURL + mapDate.getFullYear() + zeroPadding(mapDate.getMonth()+1) + mapDate.getDate() + ".pdf"
       }, // customOpenRegionLinkFunction
       null // updateCustomMapFunction
     )
@@ -1354,7 +1354,7 @@ var USAPresidentMapType = new MapType(
           
           linkToOpen += "/event/" + (dataIsArray ? linkData[0] : linkData) + "-presidential-election-winner" + (dataIsArray && linkData.length > 1 ? linkData[1] : "")
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1639,7 +1639,7 @@ var USAPresidentMapType = new MapType(
         {
           linkToOpen += "_in_" + regionIDToLinkMap[regionID]
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1704,7 +1704,7 @@ var USAPresidentMapType = new MapType(
         {
           linkToOpen += "_in_" + regionIDToLinkMap[regionID]
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1761,7 +1761,7 @@ var USAPresidentMapType = new MapType(
         {
           linkToOpen += "_in_" + regionIDToLinkMap[regionID.split(subregionSeparator)[0]]
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction

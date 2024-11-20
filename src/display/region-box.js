@@ -124,6 +124,7 @@ async function updateRegionBox(regionID = currentRegionID)
     shiftClickToEditEVs: [false, "<span class='shifttext'>Shift</span> click to edit EVs"],
     clickToZoom: [false, "<span class='clicktext'>Click</span> to expand"],
     clickToOpenLink: [false, "<span class='clicktext'>Click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
+    rightClickToOpenLink: [false, "<span class=''>Right-click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
     clickToEditVoteshare: [false, "<span class='clicktext>Click</span> to edit voteshare"],
     shiftClickToEditMargin: [false, "<span class='shifttext'>Shift</span> <span class='clicktext'>click</span> to edit margin"],
     altClickToFlip: [false, "<span class='alttext'>Alt</span> <span class='clicktext'>click</span> to flip"],
@@ -277,6 +278,7 @@ async function updateRegionBox(regionID = currentRegionID)
   tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToOpenLink[0] = currentMapSource.hasHomepageURL() && !tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing
+  tooltipsToShow.rightClickToOpenLink[0] = currentMapSource.hasHomepageURL() && tooltipsToShow.clickToZoom[0] && currentEditingState == EditingState.viewing && currentMapSource.openRegionLink(regionID, currentSliderDate, true)
   tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
   tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !regionData.disabled
   tooltipsToShow.altClickToFlip[0] = isDiscreteRegion && currentEditingState == EditingState.editing

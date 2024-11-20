@@ -930,7 +930,7 @@ var USASenateMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-2" : "")
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -986,7 +986,7 @@ var USASenateMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-general-special-election" : "")
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1037,7 +1037,7 @@ var USASenateMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + (isSpecial ? "-special" : "")
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1089,7 +1089,7 @@ var USASenateMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + (isSpecial ? "-2" : "")
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1137,7 +1137,7 @@ var USASenateMapType = new MapType(
           
           linkToOpen += "/event/" + linkData + "-us-senate-election-winner" + (dataIsArray && linkData.length > 1 ? linkData[1] : "")
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1226,7 +1226,7 @@ var USASenateMapType = new MapType(
 
         var linkToOpen = homepageURL
         linkToOpen += LTE2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1288,7 +1288,7 @@ var USASenateMapType = new MapType(
 
         var linkToOpen = homepageURL
         linkToOpen += PA2022SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1348,7 +1348,7 @@ var USASenateMapType = new MapType(
       function(homepageURL, _, __, mapDate, ____)
       {
         if (mapDate == null) { return }
-        window.open(homepageURL + (Cook2022SenateRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
+        return homepageURL + (Cook2022SenateRatingIDs[mapDate.getUTCAdjustedTime()] || "")
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1462,7 +1462,7 @@ var USASenateMapType = new MapType(
         {
           linkToOpen += "election"
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction

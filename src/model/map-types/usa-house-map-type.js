@@ -844,7 +844,7 @@ var USAHouseMapType = new MapType(
           linkToOpen += regionIDToLinkMap[state] + "/" + (district ? "us-house-district-" + district : "")
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -907,7 +907,7 @@ var USAHouseMapType = new MapType(
           linkToOpen += regionIDToLinkMap[state] + "/" + (district ? "us-house-district-" + district : "")
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -957,7 +957,7 @@ var USAHouseMapType = new MapType(
           linkToOpen += regionIDToLinkMap[state] + "/" + district
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1008,7 +1008,7 @@ var USAHouseMapType = new MapType(
           linkToOpen += regionIDToLinkMap[state] + "-" + district
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1079,7 +1079,7 @@ var USAHouseMapType = new MapType(
             linkToOpen += "#" + regionIDToLinkMap[regionID]
           }
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction

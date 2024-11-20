@@ -375,30 +375,38 @@ class MapSource
     return this.splitVoteDisplayOptions
   }
 
-  openRegionLink(regionID, modelDate)
+  openRegionLink(regionID, modelDate, isCheck = false)
   {
+    let linkToOpen = null
     if (this.customOpenRegionLinkFunction == undefined)
     {
-      if (!this.homepageURL) { return }
-      window.open(this.homepageURL + this.regionIDToLinkMap[regionID])
+      if (!this.homepageURL) { return false }
+      linkToOpen = this.homepageURL + this.regionIDToLinkMap[regionID]
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
+      linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
     }
+    
+    !isCheck && window.open(linkToOpen)
+    return linkToOpen != null
   }
 
-  openHomepageLink(modelDate)
+  openHomepageLink(modelDate, isCheck = false)
   {
+    let linkToOpen = null
     if (this.customOpenRegionLinkFunction == undefined)
     {
       if (!this.homepageURL) { return }
-      window.open(this.homepageURL)
+      linkToOpen = this.homepageURL
     }
     else
     {
-      this.customOpenRegionLinkFunction(this.homepageURL, null, null, modelDate, true, this.mapData)
+      linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, null, null, modelDate, true, this.mapData)
     }
+    
+    !isCheck && window.open(linkToOpen)
+    return linkToOpen != null
   }
 
   getID()

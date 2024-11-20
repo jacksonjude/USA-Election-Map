@@ -694,7 +694,7 @@ var USAGovernorMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID] + "/" + "governor"
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -750,7 +750,7 @@ var USAGovernorMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID] + "/" + "governor"
         }
     
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -798,7 +798,7 @@ var USAGovernorMapType = new MapType(
           
           linkToOpen += "/event/" + linkData + "-governor-election-winner" + (dataIsArray && linkData.length > 1 ? linkData[1] : "")
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -850,7 +850,7 @@ var USAGovernorMapType = new MapType(
           linkToOpen += regionIDToLinkMap[regionID]
         }
 
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -913,7 +913,7 @@ var USAGovernorMapType = new MapType(
 
         var linkToOpen = homepageURL
         linkToOpen += LTE2022GovernorYouTubeIDs[mapDate.getUTCAdjustedTime()]
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -981,7 +981,7 @@ var USAGovernorMapType = new MapType(
       function(homepageURL, _, __, mapDate, ___)
       {
         if (mapDate == null) { return }
-        window.open(homepageURL + (Cook2022GovernorRatingIDs[mapDate.getUTCAdjustedTime()] || ""))
+        return homepageURL + (Cook2022GovernorRatingIDs[mapDate.getUTCAdjustedTime()] || "")
       }, // customOpenRegionLinkFunction
       null // updateCustomMapFunction
     )
@@ -1038,7 +1038,7 @@ var USAGovernorMapType = new MapType(
         {
           linkToOpen += "_United_States_gubernatorial_elections"
         }
-        window.open(linkToOpen)
+        return linkToOpen
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
