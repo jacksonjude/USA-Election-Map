@@ -154,6 +154,7 @@ var USAHouseMapType = new MapType(
         delete mapData[mapDate][state + subregionSeparator + "1"]
         regionData.district = "0"
         regionData.region = state + subregionSeparator + "0"
+        regionData.flip = heldRegionMap[regionData.region] != regionData.partyID
         mapData[mapDate][state + subregionSeparator + "0"] = regionData
       }
 
