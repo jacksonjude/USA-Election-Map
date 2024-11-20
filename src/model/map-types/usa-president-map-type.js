@@ -481,7 +481,7 @@ var USAPresidentMapType = new MapType(
 
           for (let candidateElectoralVote of electoralVoteSortedCandidateData)
           {
-            if (!currentDatePartyNameArray[candidateElectoralVote.partyID] || candidateElectoralVote.partyID == IndependentGenericParty.getID()) { continue }
+            if (candidateElectoralVote.partyID == IndependentGenericParty.getID()) { continue }
             currentDatePartyNameArray[candidateElectoralVote.partyID] = candidateElectoralVote.candidate
           }
 
