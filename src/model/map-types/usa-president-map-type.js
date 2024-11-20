@@ -1096,7 +1096,7 @@ var USAPresidentMapType = new MapType(
       1960: {"Kennedy":DemocraticParty.getID(), "Nixon":RepublicanParty.getID(), "Byrd":Independent1960HBParty.getID(), "Other":IndependentGenericParty.getID()},
       1964: {"Johnson":DemocraticParty.getID(), "Goldwater":RepublicanParty.getID(), "Other":IndependentGenericParty.getID()},
       1968: {"Humphrey":DemocraticParty.getID(), "Nixon":RepublicanParty.getID(), "Wallace":Independent1968GWParty.getID(), "Other":IndependentGenericParty.getID()},
-      1972: {"McGovern":DemocraticParty.getID(), "Nixon":RepublicanParty.getID(), "Other":IndependentGenericParty.getID()},
+      1972: {"McGovern":DemocraticParty.getID(), "Nixon":RepublicanParty.getID(), "Other":IndependentGenericParty.getID(), "Hospers":LibertarianParty.getID()},
       1976: {"Carter":DemocraticParty.getID(), "Ford":RepublicanParty.getID(), "McCarthy":Independent1976EMParty.getID(), "Reagan": Independent1976RRParty.getID()},
       1980: {"Carter":DemocraticParty.getID(), "Reagan":RepublicanParty.getID(), "Anderson":Independent1980JAParty.getID(), "Clark":LibertarianParty.getID()},
       1984: {"Mondale":DemocraticParty.getID(), "Reagan":RepublicanParty.getID(), "Bergland":LibertarianParty.getID()},
