@@ -49,8 +49,11 @@ function createPartyDropdowns()
     dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: ' + partyButtonWidth + 'rem; height: 51rem; display: flex; align-items: center; justify-content: ' + (shouldStackText ? 'center' : 'center') + '; flex-direction: ' + (shouldStackText ? 'column' : 'row') + '; gap: ' + (shouldStackText ? '0' : '10rem') + '; padding: 0rem 0rem; margin: 0rem; background-color: ' + marginColors.safe + ';"><span id="' + currentPoliticalParty.getID() + '-name">' + currentPoliticalParty.getID() + '</span><span id="' + currentPoliticalParty.getID() + '-votes" style="font-weight: bold; font-size: 17rem;">0</span></a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
-    var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && dropdownPoliticalPartyIDs.length > 3 && partyIDNum < 3
-    var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && partyIDNum%3 == 1
+    var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && (
+      (!shouldUseSmallButtons && dropdownPoliticalPartyIDs.length > largeMaxPartiesToDisplay/2 && partyIDNum < largeMaxPartiesToDisplay/2)
+      || (shouldUseSmallButtons && dropdownPoliticalPartyIDs.length > maxPartiesToDisplay/2 && partyIDNum < maxPartiesToDisplay/2)
+    )
+    var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && shouldUseSmallButtons
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + partyDropdownWidth + 'rem; ' + (shouldAlignToTrailing ? 'margin-left: -' + ((partyDropdownWidth-(partyButtonWidth+32+1))) + 'rem' : '') + '">'
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4rem; margin-left: 0rem; overflow: hidden;">'
 
