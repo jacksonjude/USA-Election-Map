@@ -2045,11 +2045,14 @@ var USAPresidentMapType = new MapType(
             return null
           }
           
-          compareResultCustomMapSource = CustomCountyMapSource
-          shouldSetCompareMapSource = false
-          await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
-          
-          shouldSetCompareMapSource = true
+          if (compareResultCustomMapSource?.getID() != CustomCountyMapSource.getID())
+          {
+            compareResultCustomMapSource = CustomCountyMapSource
+            shouldSetCompareMapSource = false
+            await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+            
+            shouldSetCompareMapSource = true
+          }
         }
         
         let countyZoomingData = await countyZoomingDataFunction(mapDateData, regionID, isZoomCheck, date, CustomCountyMapSource)
