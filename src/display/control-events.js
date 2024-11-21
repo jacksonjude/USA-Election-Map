@@ -819,6 +819,14 @@ function rightClickRegion(div)
     updateRegionFillColors(regionIDsToFill, regionData)
     displayPartyTotals()
   }
+  else if (showingDataMap)
+  {
+    currentMapSource.openRegionLink(currentRegionID ?? currentMapZoomRegion, currentSliderDate)
+    
+    shiftKeyDown = false
+    altKeyDown = false
+    updateRegionBox()
+  }
 }
 
 function shiftClickRegion(_div)
