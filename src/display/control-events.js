@@ -737,6 +737,15 @@ async function leftClickRegion(div)
     var baseRegionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
     currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
+    
+    if (currentMapType.getID() == USAPresidentMapType.getID() && currentMapZoomRegion.includes("-"))
+    {
+      let stateID = currentMapZoomRegion.split("-")[0]
+      if (stateID == "NE" || stateID == "ME")
+      {
+        currentMapZoomRegion = stateID
+      }
+    }
 
     displayDataMap(null, null, true)
 

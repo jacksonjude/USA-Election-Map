@@ -656,12 +656,6 @@ var USAPresidentMapType = new MapType(
           partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
         }
     
-        for (let candidateData of voteshareSortedCandidateData)
-        {
-          let mainPartyID = candidateData.partyID
-          partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
-        }
-    
         mapData[mapDate][regionID] = {region: regionID, state: useCountyIDs ? stateID : null, county: useCountyIDs ? countyName : null, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: !useCountyIDs && heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
       
@@ -1386,7 +1380,15 @@ var USAPresidentMapType = new MapType(
       null, // isCustomMap
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
-      0.0 // voteshareCutoffMargin
+      0.0, // voteshareCutoffMargin
+      () => {
+        if (currentViewingState == ViewingState.viewing)
+        {
+          return "svg-sources/usa-presidential-map.svg" 
+        }
+    
+        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+      } // overrideSVGPath
     )
     
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
@@ -1578,14 +1580,6 @@ var USAPresidentMapType = new MapType(
 
       if (currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
       {
-        if (currentMapZoomRegion.includes("-"))
-        {
-          let stateID = currentMapZoomRegion.split("-")[0]
-          if (stateID == "NE" || stateID == "ME")
-          {
-            currentMapZoomRegion = stateID
-          }
-        }
         if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), currentMapZoomRegion))
         {
           return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
