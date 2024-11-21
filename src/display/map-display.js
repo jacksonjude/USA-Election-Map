@@ -975,7 +975,8 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   updatePoliticalPartyCandidateNames(dateToDisplay.getTime())
   displayPartyTotals(reloadPartyDropdowns)
-
+  
+  // console.log(Object.keys(displayRegionDataArray)[0])
   updateTotalsPieChart()
   
   let iconOverlayText = currentMapSource.getIconOverlayText()
@@ -1412,14 +1413,11 @@ async function zoomOutMap(displayMap = true)
   currentViewingState = ViewingState.viewing
   currentMapZoomRegion = null
   
-  const countyResultMapSourceID = "Presidential-Counties"
-  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID() && compareMapSourceIDArray[0] == countyResultMapSourceID && compareMapSourceIDArray[1] == countyResultMapSourceID)
+  if (showingCompareMap && currentMapType.getID() == USAPresidentMapType.getID())
   {
-    const pastResultMapSourceID = "Past-Presidential-Elections"
-    compareMapSourceIDArray = [pastResultMapSourceID, pastResultMapSourceID]
     compareResultCustomMapSource = null
     getCompareMajorParties = null
-    shouldSetCompareMapSource = currentMapSource.isCustom();
+    shouldSetCompareMapSource = currentMapSource.isCustom()
     
     await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
     shouldSetCompareMapSource = true

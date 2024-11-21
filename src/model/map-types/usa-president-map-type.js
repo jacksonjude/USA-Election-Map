@@ -69,6 +69,15 @@ var USAPresidentMapType = new MapType(
     partyIDToCandidateLastNames[2024][Independent2024RFKParty.getID()] = "Kennedy"
 
     const currentCycleYear = 2024
+    
+    const countyToCityMap = {
+      "RI": {"Bristol": ["Barrington","Bristol","Warren"],"Kent": ["Coventry","East Greenwich","Warwick","West Greenwich","West Warwick"],"Newport": ["Jamestown","Little Compton","Middletown","Newport","Portsmouth","Tiverton"],"Providence": ["Burrillville","Central Falls","Cranston","Cumberland","East Providence","Foster","Glocester","Johnston","Lincoln","North Providence","North Smithfield","Pawtucket","Providence","Scituate","Smithfield","Woonsocket"],"Washington": ["Charlestown","Exeter","Hopkinton","Narragansett","New Shoreham","North Kingstown","Richmond","South Kingstown","Westerly"]},
+      "MA": {"Barnstable": ["Barnstable","Bourne","Brewster","Chatham","Dennis","Eastham","Falmouth","Harwich","Mashpee","Orleans","Provincetown","Sandwich","Truro","Wellfleet","Yarmouth"],"Berkshire": ["Adams","Alford","Becket","Cheshire","Clarksburg","Dalton","Egremont","Florida","Great Barrington","Hancock","Hinsdale","Lanesborough","Lee","Lenox","Monterey","Mount Washington","New Ashford","New Marlborough","North Adams","Otis","Peru","Pittsfield","Richmond","Sandisfield","Savoy","Sheffield","Stockbridge","Tyringham","Washington","West Stockbridge","Williamstown","Windsor"],"Bristol": ["Acushnet","Attleboro","Berkley","Dartmouth","Dighton","Easton","Fairhaven","Fall River","Freetown","Mansfield","New Bedford","North Attleborough","Norton","Raynham","Rehoboth","Seekonk","Somerset","Swansea","Taunton","Westport"],"Dukes": ["Aquinnah","Chilmark","Edgartown","Gosnold","Oak Bluffs","Tisbury","West Tisbury"],"Essex": ["Amesbury","Andover","Beverly","Boxford","Danvers","Essex","Georgetown","Gloucester","Groveland","Hamilton","Haverhill","Ipswich","Lawrence","Lynn","Lynnfield","Manchester","Marblehead","Merrimac","Methuen","Middleton","Nahant","Newbury","Newburyport","North Andover","Peabody","Rockport","Rowley","Salem","Salisbury","Saugus","Swampscott","Topsfield","Wenham","West Newbury"],"Franklin": ["Ashfield","Bernardston","Buckland","Charlemont","Colrain","Conway","Deerfield","Erving","Gill","Greenfield","Hawley","Heath","Leverett","Leyden","Monroe","Montague","New Salem","Northfield","Orange","Rowe","Shelburne","Shutesbury","Sunderland","Warwick","Wendell","Whately"],"Hampden": ["Agawam","Blandford","Brimfield","Chester","Chicopee","East Longmeadow","Granville","Hampden","Holland","Holyoke","Longmeadow","Ludlow","Monson","Montgomery","Palmer","Russell","Southwick","Springfield","Tolland","Wales","Westfield","West Springfield","Wilbraham"],"Hampshire": ["Amherst","Belchertown","Chesterfield","Cummington","Easthampton","Goshen","Granby","Hadley","Hatfield","Huntington","Middlefield","Northampton","Pelham","Plainfield","Southampton","South Hadley","Ware","Westhampton","Williamsburg","Worthington"],"Middlesex": ["Acton","Arlington","Ashby","Ashland","Ayer","Bedford","Belmont","Billerica","Boxborough","Burlington","Cambridge","Carlisle","Chelmsford","Concord","Dracut","Dunstable","Everett","Framingham","Groton","Holliston","Hopkinton","Hudson","Lexington","Lincoln","Littleton","Lowell","Malden","Marlborough","Maynard","Medford","Melrose","Natick","Newton","North Reading","Pepperell","Reading","Sherborn","Shirley","Somerville","Stoneham","Stow","Sudbury","Tewksbury","Townsend","Tyngsborough","Wakefield","Waltham","Watertown","Wayland","Westford","Weston","Wilmington","Winchester","Woburn"],"Nantucket": ["Nantucket"],"Norfolk": ["Avon","Bellingham","Braintree","Brookline","Canton","Cohasset","Dedham","Dover","Foxborough","Franklin","Holbrook","Medfield","Medway","Millis","Milton","Needham","Norfolk","Norwood","Plainville","Quincy","Randolph","Sharon","Stoughton","Walpole","Wellesley","Westwood","Weymouth","Wrentham"],"Plymouth": ["Abington","Bridgewater","Brockton","Carver","Duxbury","East Bridgewater","Halifax","Hanover","Hanson","Hingham","Hull","Kingston","Lakeville","Marion","Marshfield","Mattapoisett","Middleborough","Norwell","Pembroke","Plymouth","Plympton","Rochester","Rockland","Scituate","Wareham","West Bridgewater","Whitman"],"Suffolk": ["Boston","Chelsea","Revere","Winthrop"],"Worcester": ["Ashburnham","Athol","Auburn","Barre","Berlin","Blackstone","Bolton","Boylston","Brookfield","Charlton","Clinton","Douglas","Dudley","East Brookfield","Fitchburg","Gardner","Grafton","Hardwick","Harvard","Holden","Hopedale","Hubbardston","Lancaster","Leicester","Leominster","Lunenburg","Mendon","Milford","Millbury","Millville","New Braintree","Northborough","Northbridge","North Brookfield","Oakham","Oxford","Paxton","Petersham","Phillipston","Princeton","Royalston","Rutland","Shrewsbury","Southborough","Southbridge","Spencer","Sterling","Sturbridge","Sutton","Templeton","Upton","Uxbridge","Warren","Webster","Westborough","West Boylston","West Brookfield","Westminster","Winchendon","Worcester"]},
+      "VT": {"Addison": ["Addison","Bridport","Bristol","Cornwall","Ferrisburg","Goshen","Granville","Hancock","Leicester","Lincoln","Middlebury","Monkton","New Haven","Orwell","Panton","Ripton","Salisbury","Shoreham","Starksboro","Vergennes","Waltham","Weybridge","Whiting"],"Bennington": ["Arlington","Bennington","Dorset","Glastenbury","Landgrove","Manchester","Peru","Pownal","Readsboro","Rupert","Sandgate","Searsburg","Shaftsbury","Stamford","Sunderland","Winhall","Woodford"],"Caledonia": ["Barnet","Burke","Danville","Groton","Hardwick","Kirby","Lyndon","Newark","Peacham","Ryegate","Sheffield","Stannard","St Johnsbury","Sutton","Walden","Waterford","Wheelock"],"Chittenden": ["Bolton","Buel s Gore","Burlington","Charlotte","Colchester","Essex","Essex Junction","Hinesburg","Huntington","Jericho","Milton","Richmond","Shelburne","South Burlington","St George","Underhill","Westford","Williston","Winooski"],"Essex": ["Averill","Avery s Gore","Bloomfield","Brighton","Brunswick","Canaan","Concord","East Haven","Ferdinand","Granby","Guildhall","Lemington","Lewis","Lunenburg","Maidstone","Norton","Victory","Warner s Grant","Warren s Gore"],"Franklin": ["Bakersfield","Berkshire","Enosburgh","Fairfax","Fairfield","Fletcher","Franklin","Georgia","Highgate","Montgomery","Richford","Sheldon","St Albans","St Albans Town","Swanton"],"Grand Isle": ["Alburgh","Grand Isle","Isle La Motte","North Hero","South Hero"],"Lamoille": ["Belvidere","Cambridge","Eden","Elmore","Hyde Park","Johnson","Morristown","Stowe","Waterville","Wolcott"],"Orange": ["Bradford","Braintree","Brookfield","Chelsea","Corinth","Fairlee","Newbury","Orange","Randolph","Strafford","Thetford","Topsham","Tunbridge","Vershire","Washington","West Fairlee","Williamstown"],"Orleans": ["Albany","Barton","Brownington","Charleston","Coventry","Craftsbury","Derby","Glover","Greensboro","Holland","Irasburg","Jay","Lowell","Morgan","Newport","Newport Town","Troy","Westfield","Westmore"],"Rutland": ["Benson","Brandon","Castleton","Chittenden","Clarendon","Danby","Fair Haven","Hubbardton","Ira","Killington","Mendon","Middletown Springs","Mount Holly","Mount Tabor","Pawlet","Pittsfield","Pittsford","Poultney","Proctor","Rutland","Rutland Town","Shrewsbury","Sudbury","Tinmouth","Wallingford","Wells","West Haven","West Rutland"],"Washington": ["Barre","Barre Town","Berlin","Cabot","Calais","Duxbury","East Montpelier","Fayston","Marshfield","Middlesex","Montpelier","Moretown","Northfield","Plainfield","Roxbury","Waitsfield","Warren","Waterbury","Woodbury","Worcester"],"Windham": ["Athens","Brattleboro","Brookline","Dover","Dummerston","Grafton","Guilford","Halifax","Jamaica","Londonderry","Marlboro","Newfane","Putney","Rockingham","Somerset","Stratton","Townshend","Vernon","Wardsboro","Westminster","Whitingham","Wilmington","Windham"],"Windsor": ["Andover","Baltimore","Barnard","Bethel","Bridgewater","Cavendish","Chester","Hartford","Hartland","Ludlow","Norwich","Plymouth","Pomfret","Reading","Rochester","Royalton","Sharon","Springfield","Stockbridge","Weathersfield","Weston","West Windsor","Windsor","Woodstock"]},
+      "NH": {"Belknap": ["Alton","Barnstead","Belmont","Center Harbor","Gilford","Gilmanton","Laconia","Meredith","New Hampton","Sanbornton","Tilton"],"Carroll": ["Albany","Bartlett","Brookfield","Chatham","Conway","Eaton","Effingham","Freedom","Hale s Location","Hart s Location","Jackson","Madison","Moultonborough","Ossipee","Sandwich","Tamworth","Tuftonboro","Wakefield","Wolfeboro"],"Cheshire": ["Alstead","Chesterfield","Dublin","Fitzwilliam","Gilsum","Harrisville","Hinsdale","Jaffrey","Keene","Marlborough","Marlow","Nelson","Richmond","Rindge","Roxbury","Stoddard","Sullivan","Surry","Swanzey","Troy","Walpole","Westmoreland","Winchester"],"Coos": ["Atkinson and Gilmanton Academy Grant","Bean s Grant","Bean s Purchase","Berlin","Cambridge","Carroll","Chandler s Purchase","Clarksville","Colebrook","Columbia","Crawford s Purchase","Cutt s Grant","Dalton","Dix s Grant","Dixville","Dummer","Errol","Erving s Location","Gorham","Green s Grant","Hadley s Purchase","Jefferson","Kilkenny","Lancaster","Low and Burbank s Grant","Martin s Location","Milan","Millsfield","Northumberland","Odell","Pinkhams Grant","Pittsburg","Randolph","Sargent s Purchase","Second College Grant","Shelburne","Stark","Stewartstown","Stratford","Success","Thompson and Meserve s Purchase","Wentworth s Location","Whitefield"],"Grafton": ["Alexandria","Ashland","Bath","Benton","Bethlehem","Bridgewater","Bristol","Campton","Canaan","Dorchester","Easton","Ellsworth","Enfield","Franconia","Grafton","Groton","Hanover","Haverhill","Hebron","Holderness","Landaff","Lebanon","Lincoln","Lisbon","Littleton","Livermore","Lyman","Lyme","Monroe","Orange","Orford","Piermont","Plymouth","Rumney","Sugar Hill","Thornton","Warren","Waterville","Wentworth","Woodstock"],"Hillsborough": ["Amherst","Antrim","Bedford","Bennington","Brookline","Deering","Francestown","Goffstown","Greenfield","Greenville","Hancock","Hillsborough","Hollis","Hudson","Litchfield","Lyndeborough","Manchester","Mason","Merrimack","Milford","Mont Vernon","Nashua","New Boston","New Ipswich","Pelham","Peterborough","Sharon","Temple","Weare","Wilton","Windsor"],"Merrimack": ["Allenstown","Andover","Boscawen","Bow","Bradford","Canterbury","Chichester","Concord","Danbury","Dunbarton","Epsom","Franklin","Henniker","Hill","Hooksett","Hopkinton","Loudon","Newbury","New London","Northfield","Pembroke","Pittsfield","Salisbury","Sutton","Warner","Webster","Wilmot"],"Rockingham": ["Atkinson","Auburn","Brentwood","Candia","Chester","Danville","Deerfield","Derry","East Kingston","Epping","Exeter","Fremont","Greenland","Hampstead","Hampton","Hampton Falls","Kensington","Kingston","Londonderry","New Castle","Newfields","Newington","Newmarket","Newton","North Hampton","Northwood","Nottingham","Plaistow","Portsmouth","Raymond","Rye","Salem","Sandown","Seabrook","South Hampton","Stratham","Windham"],"Strafford": ["Barrington","Dover","Durham","Farmington","Lee","Madbury","Middleton","Milton","New Durham","Rochester","Rollinsford","Somersworth","Strafford"],"Sullivan": ["Acworth","Charlestown","Claremont","Cornish","Croydon","Goshen","Grantham","Langdon","Lempster","Newport","Plainfield","Springfield","Sunapee","Unity","Washington"]},
+      "ME": {"Androscoggin": ["Auburn","Durham","Greene","Leeds","Lewiston","Lisbon","Livermore","Livermore Falls","Mechanic Falls","Minot","Poland","Sabattus","Turner","Wales"],"Aroostook": ["Allagash","Amity","Ashland","Bancroft","Blaine","Bridgewater","Caribou","Castle Hill","Caswell","Central Aroostook","Chapman","Connor","Crystal","Cyr Plt","Dyer Brook","Eagle Lake","Easton","Fort Fairfield","Fort Kent","Frenchville","Garfield Plt","Glenwood Plt","Grand Isle","Hamlin","Hammond","Haynesville","Hersey","Hodgdon","Houlton","Island Falls","Limestone","Linneus","Littleton","Ludlow","Macwahoc Plt","Madawaska","Mapleton","Mars Hill","Masardis","Merrill","Monticello","Moro Plt","Nashville Plt","New Canada","New Limerick","New Sweden","Northwest Aroostook","Oakfield","Orient","Penobscot Indian Island Reservation","Perham","Portage Lake","Presque Isle","Reed Plt","Sherman","Smyrna","South Aroostook","Square Lake","St Agatha","St Francis","St John Plt","Stockholm","Van Buren","Wade","Wallagrass","Washburn","Westfield","Westmanland","Weston","Winterville Plt","Woodland", "Aroostook Cty Townships", "Cary Plt", "Oxbow Plt"],"Cumberland": ["Baldwin","Bridgton","Brunswick","Cape Elizabeth","Casco","Chebeague Island","Cumberland","Falmouth","Freeport","Frye Island","Gorham","Gray","Harpswell","Harrison","Long Island","Naples","New Gloucester","North Yarmouth","Portland","Pownal","Raymond","Scarborough","Sebago","South Portland","Standish","Westbrook","Windham","Yarmouth"],"Franklin": ["Avon","Carrabassett Valley","Carthage","Chesterville","Coplin Plt","Dallas Plt","East Central Franklin","Eustis","Farmington","Industry","Jay","Kingfield","New Sharon","New Vineyard","North Franklin","Phillips","Rangeley","Rangeley Plt","Sandy River Plt","South Franklin","Strong","Temple","Weld","West Central Franklin","Wilton","Wyman"],"Hancock": ["Amherst","Aurora","Bar Harbor","Blue Hill","Brooklin","Brooksville","Bucksport","Castine","Central Hancock","Cranberry Isles","Dedham","Deer Isle","Eastbrook","East Hancock","Ellsworth","Franklin","Frenchboro","Gouldsboro","Great Pond","Hancock","Lamoine","Mariaville","Marshall Island","Mount Desert","Northwest Hancock","Orland","Osborn","Otis","Penobscot","Sedgwick","Sorrento","Southwest Harbor","Stonington","Sullivan","Surry","Swan s Island","Tremont","Trenton","Verona","Waltham","Winter Harbor", "Franklin Cty Townships", "Hancock Cty Townships"],"Kennebec": ["Albion","Augusta","Belgrade","Benton","Chelsea","China","Clinton","Farmingdale","Fayette","Gardiner","Hallowell","Litchfield","Manchester","Monmouth","Mount Vernon","Oakland","Pittston","Randolph","Readfield","Rome","Sidney","Unity","Vassalboro","Vienna","Waterville","Wayne","West Gardiner","Windsor","Winslow","Winthrop"],"Knox": ["Appleton","Camden","Criehaven","Cushing","Friendship","Hope","Isle Au Haut","Matinicus Isle Plt","Muscle Ridge Islands","North Haven","Owl s Head","Rockland","Rockport","South Thomaston","St George","Thomaston","Union","Vinalhaven","Warren","Washington","Washington Cty Townships"],"Lincoln": ["Alna","Boothbay","Boothbay Harbor","Bremen","Bristol","Damariscotta","Dresden","Edgecomb","Hibbert s Gore","Jefferson","Louds Island","Monhegan Plt","Newcastle","Nobleboro","Somerville","South Bristol","Southport","Waldoboro","Westport","Whitefield","Wiscasset"],"Oxford": ["Andover","Bethel","Brownfield","Buckfield","Byron","Canton","Denmark","Dixfield","Fryeburg","Gilead","Greenwood","Hanover","Hartford","Hebron","Hiram","Lincoln Plt","Lovell","Mexico","Milton","Newry","North Oxford","Norway","Otisfield","Oxford","Paris","Peru","Porter","Roxbury","Rumford","South Oxford","Stoneham","Stow","Sumner","Sweden","Upton","Waterford","West Paris","Woodstock", "Magalloway Plt", "Oxford Cty Townships"],"Penobscot": ["Alton","Argyle","Bangor","Bradford","Bradley","Brewer","Burlington","Carmel","Carroll Plt","Charleston","Chester","Clifton","Corinna","Corinth","Dexter","Dixmont","Drew Plt","East Central Penobscot","East Millinocket","Eddington","Edinburg","Enfield","Etna","Exeter","Garland","Glenburn","Greenbush","Hampden","Hermon","Holden","Howland","Hudson","Kenduskeag","Kingman","LaGrange","Lakeville","Lee","Levant","Lincoln","Lowell","Mattawamkeag","Maxfield","Medway","Milford","Millinocket","Mount Chase","Newburgh","Newport","North Penobscot","Old Town","Orono","Orrington","Passadumkeag","Patten","Penobscot Indian Island Reservation","Plymouth","Prentiss","Seboeis Plt","Springfield","Stacyville","Stetson","Twombly Ridge","Veazie","Webster Plt","Whitney","Winn","Woodville", "Penobscot Cty Townships", "Penobscot Nation Vot Dst"],"Piscataquis": ["Abbot","Beaver Cove","Blanchard","Bowerbank","Brownville","Dover-Foxcroft","Greenville","Guilford","Kingsbury Plt","Lake View Plt","Medford","Milo","Monson","Northeast Piscataquis","Northwest Piscataquis","Parkman","Sangerville","Sebec","Shirley","Southeast Piscataquis","Wellington","Willimantic","Atkinson", "Piscataquis Cty Townships"],"Sagadahoc": ["Arrowsic","Bath","Bowdoin","Bowdoinham","Georgetown","Perkins","Phippsburg","Richmond","Topsham","West Bath","Woolwich"],"Somerset": ["Anson","Athens","Bingham","Brighton Plt","Cambridge","Canaan","Caratunk","Central Somerset","Cornville","Dennistown Plt","Detroit","Embden","Fairfield","Harmony","Hartland","Highland Plt","Jackman","Madison","Mercer","Moose River","Moscow","New Portland","Norridgewock","Northeast Somerset","Northwest Somerset","Palmyra","Pittsfield","Pleasant Ridge Plt","Ripley","Seboomook Lake","Skowhegan","Smithfield","Solon","St Albans","Starks","The Forks Plt","West Forks Plt", "Somerset Cty Townships"],"Waldo": ["Belfast","Belmont","Brooks","Burnham","Frankfort","Freedom","Islesboro","Jackson","Knox","Liberty","Lincolnville","Monroe","Montville","Morrill","Northport","Palermo","Prospect","Searsmont","Searsport","Stockton Springs","Swanville","Thorndike","Troy","Unity","Waldo","Winterport"],"Washington": ["Addison","Alexander","Baileyville","Baring Plt","Beals","Beddington","Calais","Charlotte","Cherryfield","Codyville Plt","Columbia","Columbia Falls","Cooper","Crawford","Cutler","Danforth","Deblois","Dennysville","East Central Washington","East Machias","Eastport","Grand Lake Stream Plt","Harrington","Jonesboro","Jonesport","Lubec","Machias","Machiasport","Marshfield","Meddybemps","Milbridge","Northfield","North Washington","Passamaquoddy Indian Township Reservation","Passamaquoddy Pleasant Point Reservation","Pembroke","Perry","Princeton","Robbinston","Roque Bluffs","Steuben","Talmadge","Topsfield","Vanceboro","Waite","Wesley","Whiting","Whitneyville", "Pleasant Point Votng Dst", "Indian Township Vtng Dst"],"York": ["Acton","Alfred","Arundel","Berwick","Biddeford","Buxton","Cornish","Dayton","Eliot","Hollis","Kennebunk","Kennebunkport","Kittery","Lebanon","Limerick","Limington","Lyman","Newfield","North Berwick","Ogunquit","Old Orchard Beach","Parsonsfield","Saco","Sanford","Shapleigh","South Berwick","Waterboro","Wells","York"]},
+      "CT": {"Fairfield":["Bethel","Bridgeport","Brookfield","Danbury","Darien","Easton","Fairfield","Greenwich","Monroe","New Canaan","New Fairfield","Newtown","Norwalk","Redding","Ridgefield","Shelton","Sherman","Stamford","Stratford","Trumbull","Weston","Westport","Wilton"],"Hartford":["Avon","Berlin","Bloomfield","Bristol","Burlington","Canton","East Granby","East Hartford","East Windsor","Enfield","Farmington","Glastonbury","Granby","Hartford","Hartland","Manchester","Marlborough","New Britain","Newington","Plainville","Rocky Hill","Simsbury","Southington","South Windsor","Suffield","West Hartford","Wethersfield","Windsor","Windsor Locks"],"Litchfield":["Barkhamsted","Bethlehem","Bridgewater","Canaan","Colebrook","Cornwall","Goshen","Harwinton","Kent","Litchfield","Morris","New Hartford","New Milford","Norfolk","North Canaan","Plymouth","Roxbury","Salisbury","Sharon","Thomaston","Torrington","Warren","Washington","Watertown","Winchester","Woodbury"],"Middlesex":["Chester","Clinton","Cromwell","Deep River","Durham","East Haddam","East Hampton","Essex","Haddam","Killingworth","Middlefield","Middletown","Old Saybrook","Portland","Westbrook"],"New Haven":["Ansonia","Beacon Falls","Bethany","Branford","Cheshire","Derby","East Haven","Guilford","Hamden","Madison","Meriden","Middlebury","Milford","Naugatuck","New Haven","North Branford","North Haven","Orange","Oxford","Prospect","Seymour","Southbury","Wallingford","Waterbury","West Haven","Wolcott","Woodbridge"],"New London":["Bozrah","Colchester","East Lyme","Franklin","Griswold","Groton","Lebanon","Ledyard","Lisbon","Lyme","Montville","New London","North Stonington","Norwich","Old Lyme","Preston","Salem","Sprague","Stonington","Voluntown","Waterford"],"Tolland":["Andover","Bolton","Columbia","Coventry","Ellington","Hebron","Mansfield","Somers","Stafford","Tolland","Union","Vernon","Willington"],"Windham":["Ashford","Brooklyn","Canterbury","Chaplin","Eastford","Hampton","Killingly","Plainfield","Pomfret","Putnam","Scotland","Sterling","Thompson","Windham","Woodstock"]}
+    }
 
     var singleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID)
     {
@@ -496,11 +505,31 @@ var USAPresidentMapType = new MapType(
       return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
     }
     
-    var jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
+    var jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin, ______, useCountyIDs = false)
     {
       let racesToIgnore = []
       let candidateExceptions = {"None of these candidates": "None"}
       let overrideRegionMap = {"NE": "NE-AL", "ME": "ME-AL"}
+      
+      let overrideCountyMap = {
+        "DeBaca": "De_Baca",
+        "LeFlore": "Le_Flore",
+        "St. Louis": "Saint_Louis",
+        "Jackson Suburbs": "Jackson",
+        "LaClede": "Laclede",
+        "St. Louis County": "St_Louis_County",
+        "LaRue": "Larue",
+        "Manhattan": {value: "New_York", state: "NY"},
+        "Brooklyn": {value: "Kings", state: "NY"},
+        "Staten Island": "Richmond",
+        "Franklin County": "Franklin_Co",
+        "Fairfax County": "Fairfax_Co",
+        "Fairfax City": "Fairfax",
+        "Richmond County": "Richmond_Co",
+        "Richmond City": "Richmond",
+        "Roanoke County": "Roanoke_Co",
+        "Roanoke City": "Roanoke",
+      }
       
       let overrideRawRegionData = [
         {[columnMap.region]: "NE-D1", [columnMap.totalVotes]: 317605, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
@@ -550,7 +579,26 @@ var USAPresidentMapType = new MapType(
         if (racesToIgnore.includes(raceKey)) continue
     
         let regionID = raceData[columnMap.region]
-        if (overrideRegionMap[regionID]) regionID = overrideRegionMap[regionID]
+        
+        let stateID = regionID
+        let countyName = raceData[columnMap.county]
+        if (overrideCountyMap[countyName])
+        {
+          const overrideData = overrideCountyMap[countyName]
+          countyName = isString(overrideData) ? overrideData : (overrideData.state == stateID ? overrideData.value : countyName)
+        }
+        else if (countyName)
+        {
+          countyName = countyName
+            .replace(/[\s']/g, "_")
+            .replace('St.', "St")
+            .replace('Ste.', "Ste")
+            .replace('Plt.', "Plt")
+            .replace(/_County$/, "")
+        }
+        
+        if (overrideRegionMap[regionID] && !useCountyIDs) regionID = overrideRegionMap[regionID]
+        if (useCountyIDs) regionID = `${regionID}${subregionSeparator}${countyName}`
     
         let totalVotes = raceData[columnMap.totalVotes]
         let reportingPercent = raceData[columnMap.reportingPercent]
@@ -608,16 +656,19 @@ var USAPresidentMapType = new MapType(
           partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
         }
     
-        mapData[mapDate][regionID] = {region: regionID, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent}
+        mapData[mapDate][regionID] = {region: regionID, state: useCountyIDs ? stateID : null, county: useCountyIDs ? countyName : null, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: !useCountyIDs && heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
       
-      for (let regionID of Object.values(regionNameToID))
+      if (!useCountyIDs)
       {
-        if (regionID == nationalPopularVoteID) continue
-        
-        if (!mapData[mapDate][regionID])
+        for (let regionID of Object.values(regionNameToID))
         {
-          mapData[mapDate][regionID] = {region: regionID, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+          if (regionID == nationalPopularVoteID) continue
+          
+          if (!mapData[mapDate][regionID])
+          {
+            mapData[mapDate][regionID] = {region: regionID, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+          }
         }
       }
     
@@ -1169,6 +1220,118 @@ var USAPresidentMapType = new MapType(
     const regionIDToLinkPolymarket = {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":["delaware", "-2024"], "DC":"washington-dc", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME-D1":"congressional-district-1st-maine", "ME-D2":"congressional-district-2nd-maine", "ME-AL":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE-D1":"congressional-district-1st-nebraska", "NE-D2":"congressional-district-2nd-nebraska", "NE-D3":"congressional-district-3rd-nebraska", "NE-AL":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":["new-mexico", "-2024"], "NY":["new-york", "-2024"], "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}
     const regionIDToLinkHistorical = {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "DC":"the_District_of_Columbia", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME-D1":"Maine", "ME-D2":"Maine", "ME-AL":"Maine", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE-D1":"Nebraska", "NE-D2":"Nebraska", "NE-D3":"Nebraska", "NE-AL":"Nebraska", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington_(state)", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}
 
+    var countyFormattedRegionName = (regionID) => {
+      if (!regionID.includes(subregionSeparator)) { return regionID }
+      
+      let state = regionID.split(subregionSeparator)[0]
+      let county = regionID.split(subregionSeparator)[1].replace(/_s$/, "'s").replaceAll("_", " ")
+      
+      return county + ", " + state
+    }
+    
+    var getCNNCountyData = async (mapDateData, zoomRegion, isZoomCheck, date) => {
+      if (isZoomCheck) return true
+      if (!zoomRegion) return
+      
+      if (zoomRegion == "DC")
+      {
+        const stateID = "DC"
+        const countyName = "District_of_Columbia"
+        
+        const countyData = cloneObject(mapDateData[zoomRegion])
+        countyData.region = `${stateID}${subregionSeparator}${countyName}`
+        countyData.state = stateID
+        countyData.county = countyName
+        countyData.voteWorth = 1
+        
+        return {[countyData.region]: countyData}
+      }
+      
+      addLoader(LoaderType.standard)
+      
+      const countyLink = `https://politics.api.cnn.io/results/county-races/2024-PG-${zoomRegion}.json`
+      const countyZoomData = await $.getJSON(countyLink)
+      
+      removeLoader(LoaderType.standard)
+      
+      const { mapData } = CNNResults2024MapSource.executeFilter(countyZoomData, [date], undefined, true)
+      let countyDateData = Object.values(mapData)[0]
+      
+      if (countyToCityMap[zoomRegion])
+      {
+        const cityDateData = cloneObject(countyDateData)
+        countyDateData = {}
+        for (const city in cityDateData)
+        {
+          const plaintextCity = city.split(subregionSeparator)[1].replace(/_/g, " ")
+          const countyName = Object.keys(countyToCityMap[zoomRegion]).find(county => countyToCityMap[zoomRegion][county].includes(plaintextCity))?.replace(/ /g, "_")
+          if (!countyName)
+          {
+            console.log("Missing county!", city, plaintextCity, cityDateData[city])
+            continue
+          }
+          const countyID = `${zoomRegion}${subregionSeparator}${countyName}`
+          
+          if (!countyDateData[countyID])
+          {
+            countyDateData[countyID] = cloneObject(cityDateData[city])
+            countyDateData[countyID].region = countyID
+          }
+          else
+          {
+            countyDateData[countyID].partyVotesharePercentages.forEach(candidateData => {
+              const cityCandidateData = cityDateData[city].partyVotesharePercentages.find(candidateData2 => candidateData2.candidate == candidateData.candidate)
+              if (!cityCandidateData) return
+              
+              candidateData.votes += cityCandidateData.votes
+            })
+            countyDateData[countyID].totalVotes += cityDateData[city].totalVotes
+          }
+        }
+        
+        for (const countyID in countyDateData)
+        {
+          const voteshareSortedCandidateData = countyDateData[countyID].partyVotesharePercentages
+          const countyTotalVotes = countyDateData[countyID].totalVotes
+          voteshareSortedCandidateData.forEach(candidateData => {
+            candidateData.voteshare = countyTotalVotes > 0 ? candidateData.votes/countyDateData[countyID].totalVotes*100 : 0
+          })
+          voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          
+          let greatestMarginPartyID
+          let greatestMarginCandidateName
+          let topTwoMargin
+          
+          if (voteshareSortedCandidateData[0].voteshare != 0)
+          {
+            greatestMarginPartyID = voteshareSortedCandidateData[0].partyID
+            greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
+            topTwoMargin = voteshareSortedCandidateData[0].voteshare - (voteshareSortedCandidateData[1] ? voteshareSortedCandidateData[1].voteshare : 0)
+          }
+          else
+          {
+            greatestMarginPartyID = TossupParty.getID()
+            greatestMarginCandidateName = null
+            topTwoMargin = 0
+          }
+          
+          countyDateData[countyID].margin = topTwoMargin
+          countyDateData[countyID].partyID = greatestMarginPartyID
+          countyDateData[countyID].candidateName = greatestMarginCandidateName
+        }
+      }
+      
+      let popularVoteRegionIDToUse = zoomRegion
+      if (popularVoteRegionIDToUse == "NE" || popularVoteRegionIDToUse == "ME")
+      {
+        popularVoteRegionIDToUse += "-AL"
+      }
+      countyDateData[nationalPopularVoteID] = cloneObject(mapDateData[popularVoteRegionIDToUse])
+      
+      Object.keys(countyDateData).forEach(regionID => countyDateData[regionID].voteWorth = 1)
+      return countyDateData
+    }
+
     var CNNResults2024MapSource = new MapSource(
       "CNN-2024-Presidential-Results", // id
       "CNN Results", // name
@@ -1179,6 +1342,7 @@ var USAPresidentMapType = new MapType(
         date: "extractedAt",
         raceKey: "ecKey",
         region: "stateAbbreviation",
+        county: "countyName",
         special: "raceType",
         totalVotes: "totalVote",
         reportingPercent: "percentReporting",
@@ -1197,10 +1361,10 @@ var USAPresidentMapType = new MapType(
       true, // addDecimalPadding
       jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
-      null, // zoomingDataFunction
+      getCNNCountyData, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      countyFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -1222,9 +1386,17 @@ var USAPresidentMapType = new MapType(
       null, // isCustomMap
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
-      0.0 // voteshareCutoffMargin
+      0.0, // voteshareCutoffMargin
+      () => {
+        if (currentViewingState == ViewingState.viewing)
+        {
+          return "svg-sources/usa-presidential-map.svg" 
+        }
+    
+        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+      } // overrideSVGPath
     )
-
+    
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
       "538-2020-Presidential-PollAvg", // id
       "538 Poll Avg", // name
@@ -1414,14 +1586,6 @@ var USAPresidentMapType = new MapType(
 
       if (currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
       {
-        if (currentMapZoomRegion.includes("-"))
-        {
-          let stateID = currentMapZoomRegion.split("-")[0]
-          if (stateID == "NE" || stateID == "ME")
-          {
-            currentMapZoomRegion = stateID
-          }
-        }
         if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), currentMapZoomRegion))
         {
           return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
@@ -1654,14 +1818,7 @@ var USAPresidentMapType = new MapType(
       countyZoomingDataFunction, // zoomingDataFunction
       pastElectoralVoteCounts, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: false, showSplitVoteBoxes: false}, // splitVoteDisplayOptions
-      (regionID) => {
-        if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
-
-        let state = regionID.split(subregionSeparator)[0]
-        let county = regionID.split(subregionSeparator)[1].replace(/_s$/, "'s").replaceAll("_", " ")
-
-        return county + ", " + state
-      }, // getFormattedRegionName
+      countyFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage)
       {
         if (mapDate == null) { return }
@@ -1841,7 +1998,7 @@ var USAPresidentMapType = new MapType(
         
         let compareYears = [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
           .map(slider => slider.val()-1)
-          .map(dateIndex => PastElectionResultMapSource.getMapDates()[dateIndex])
+          .map((dateIndex, i) => presidentialMapSources[compareMapSourceIDArray[i]].getMapDates()[dateIndex])
           .map(dateTime => new Date(dateTime).getFullYear())
         
         let compareYearsText = [compareYears[0], "↕️", compareYears[1]]
@@ -1871,23 +2028,23 @@ var USAPresidentMapType = new MapType(
       doubleLineVoteshareFilterFunction, // organizeMapDataFunction
       null, // viewingDataFunction
       async (mapDateData, regionID, isZoomCheck, date) => {
-        const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray[0] == PastElectionResultMapSource.getID() && compareMapSourceIDArray[1] == PastElectionResultMapSource.getID()
+        const allSourcesCanZoom = 
+          showingCompareMap
+          && await presidentialMapSources[compareMapSourceIDArray[0]].canZoom(null, regionID)
+          && await presidentialMapSources[compareMapSourceIDArray[1]].canZoom(null, regionID)
         
         if (isZoomCheck)
         {
-          return isPastElectionCompare
+          return allSourcesCanZoom
         }
-        
-        if (!isZoomCheck && isPastElectionCompare)
+        else if (showingCompareMap)
         {
-          getCompareMajorParties = () => [$("#firstCompareDataMapDateSlider"), $("#secondCompareDataMapDateSlider")]
-            .map(slider => slider.val()-1)
-            .map(dateIndex => PastElectionResultMapSource.getMapData()[PastElectionResultMapSource.getMapDates()[dateIndex]])
-            .map(mapData => mapData?.[nationalPopularVoteID]?.partyVotesharePercentages)
-            .map(popularVoteshares => popularVoteshares?.filter(voteshareData => voteshareData.voteshare >= 5))
-            .map(popularVoteshares => popularVoteshares?.map(voteshareData => voteshareData.partyID))
+          if (!allSourcesCanZoom)
+          {
+            zoomOutMap()
+            return null
+          }
           
-          compareMapSourceIDArray = [CountyElectionResultMapSource.getID(), CountyElectionResultMapSource.getID()]
           compareResultCustomMapSource = CustomCountyMapSource
           shouldSetCompareMapSource = false
           await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
@@ -1896,7 +2053,7 @@ var USAPresidentMapType = new MapType(
         }
         
         let countyZoomingData = await countyZoomingDataFunction(mapDateData, regionID, isZoomCheck, date, CustomCountyMapSource)
-        if (showingCompareMap && compareMapSourceIDArray[0] == CountyElectionResultMapSource.getID() && compareMapSourceIDArray[1] == CountyElectionResultMapSource.getID())
+        if (showingCompareMap)
         {
           delete countyZoomingData[regionID + subregionSeparator + statePopularVoteDistrictID]
         }
