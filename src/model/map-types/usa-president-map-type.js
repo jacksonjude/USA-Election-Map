@@ -1321,7 +1321,13 @@ var USAPresidentMapType = new MapType(
         }
       }
       
-      countyDateData[nationalPopularVoteID] = cloneObject(mapDateData[zoomRegion])
+      let popularVoteRegionIDToUse = zoomRegion
+      if (popularVoteRegionIDToUse == "NE" || popularVoteRegionIDToUse == "ME")
+      {
+        popularVoteRegionIDToUse += "-AL"
+      }
+      countyDateData[nationalPopularVoteID] = cloneObject(mapDateData[popularVoteRegionIDToUse])
+      
       Object.keys(countyDateData).forEach(regionID => countyDateData[regionID].voteWorth = 1)
       return countyDateData
     }
