@@ -369,3 +369,7 @@ body {
 .chart-overlay-shadow-big {
   text-shadow: 0 0 2rem #ffffff, 0 0 9rem #000000;
 }
+
+.svg-pan-zoom_viewport {
+  transition: transform 0.1s ease;
+}

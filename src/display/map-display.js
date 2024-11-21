@@ -1003,6 +1003,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
       fit: true,
       contain: true,
       minZoom: 1,
+      zoomScaleSensitivity: 0.4,
       panEnabled: true,
       dblClickZoomEnabled: false,
       beforePan: () => {
