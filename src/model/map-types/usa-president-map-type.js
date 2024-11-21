@@ -501,12 +501,50 @@ var USAPresidentMapType = new MapType(
       let racesToIgnore = []
       let candidateExceptions = {"None of these candidates": "None"}
       let overrideRegionMap = {"NE": "NE-AL", "ME": "ME-AL"}
+      
+      let overrideRawRegionData = [
+        {[columnMap.region]: "NE-D1", [columnMap.totalVotes]: 317605, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
+          {[columnMap.candidateName]: "Trump", [columnMap.partyID]: RepublicanParty.getID(), [columnMap.candidateVotes]: 177266},
+          {[columnMap.candidateName]: "Harris", [columnMap.partyID]: DemocraticParty.getID(), [columnMap.candidateVotes]: 135869},
+          {[columnMap.candidateName]: "Oliver", [columnMap.partyID]: LibertarianParty.getID(), [columnMap.candidateVotes]: 2412},
+          {[columnMap.candidateName]: "West", [columnMap.partyID]: IndependentGenericParty.getID(), [columnMap.candidateVotes]: 1049},
+          {[columnMap.candidateName]: "Stein", [columnMap.partyID]: GreenParty.getID(), [columnMap.candidateVotes]: 1009},
+        ]},
+        {[columnMap.region]: "NE-D2", [columnMap.totalVotes]: 315939, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
+          {[columnMap.candidateName]: "Harris", [columnMap.partyID]: DemocraticParty.getID(), [columnMap.candidateVotes]: 163214},
+          {[columnMap.candidateName]: "Trump", [columnMap.partyID]: RepublicanParty.getID(), [columnMap.candidateVotes]: 148495},
+          {[columnMap.candidateName]: "Oliver", [columnMap.partyID]: LibertarianParty.getID(), [columnMap.candidateVotes]: 1999},
+          {[columnMap.candidateName]: "West", [columnMap.partyID]: IndependentGenericParty.getID(), [columnMap.candidateVotes]: 1129},
+          {[columnMap.candidateName]: "Stein", [columnMap.partyID]: GreenParty.getID(), [columnMap.candidateVotes]: 1102},
+        ]},
+        {[columnMap.region]: "NE-D3", [columnMap.totalVotes]: 312061, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
+          {[columnMap.candidateName]: "Trump", [columnMap.partyID]: RepublicanParty.getID(), [columnMap.candidateVotes]: 238160},
+          {[columnMap.candidateName]: "Harris", [columnMap.partyID]: DemocraticParty.getID(), [columnMap.candidateVotes]: 70282},
+          {[columnMap.candidateName]: "Oliver", [columnMap.partyID]: LibertarianParty.getID(), [columnMap.candidateVotes]: 1978},
+          {[columnMap.candidateName]: "West", [columnMap.partyID]: IndependentGenericParty.getID(), [columnMap.candidateVotes]: 875},
+          {[columnMap.candidateName]: "Stein", [columnMap.partyID]: GreenParty.getID(), [columnMap.candidateVotes]: 766},
+        ]},
+        {[columnMap.region]: "ME-D1", [columnMap.totalVotes]: 431189, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
+          {[columnMap.candidateName]: "Harris", [columnMap.partyID]: DemocraticParty.getID(), [columnMap.candidateVotes]: 256570},
+          {[columnMap.candidateName]: "Trump", [columnMap.partyID]: RepublicanParty.getID(), [columnMap.candidateVotes]: 165322},
+          {[columnMap.candidateName]: "Stein", [columnMap.partyID]: GreenParty.getID(), [columnMap.candidateVotes]: 4836},
+          {[columnMap.candidateName]: "Oliver", [columnMap.partyID]: LibertarianParty.getID(), [columnMap.candidateVotes]: 2809},
+          {[columnMap.candidateName]: "West", [columnMap.partyID]: IndependentGenericParty.getID(), [columnMap.candidateVotes]: 1652},
+        ]},
+        {[columnMap.region]: "ME-D2", [columnMap.totalVotes]: 393518, [columnMap.reportingPercent]: "--", [columnMap.candidates]: [
+          {[columnMap.candidateName]: "Trump", [columnMap.partyID]: RepublicanParty.getID(), [columnMap.candidateVotes]: 209650},
+          {[columnMap.candidateName]: "Harris", [columnMap.partyID]: DemocraticParty.getID(), [columnMap.candidateVotes]: 174225},
+          {[columnMap.candidateName]: "Oliver", [columnMap.partyID]: LibertarianParty.getID(), [columnMap.candidateVotes]: 4232},
+          {[columnMap.candidateName]: "Stein", [columnMap.partyID]: GreenParty.getID(), [columnMap.candidateVotes]: 4177},
+          {[columnMap.candidateName]: "West", [columnMap.partyID]: IndependentGenericParty.getID(), [columnMap.candidateVotes]: 1234},
+        ]},
+      ]
     
       let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
     
       let mapData = {[mapDate]: {}}
     
-      for (let raceData of rawMapData)
+      for (let raceData of [...rawMapData, ...overrideRawRegionData])
       {
         let raceKey = raceData[columnMap.raceKey]
         if (racesToIgnore.includes(raceKey)) continue
@@ -1184,8 +1222,7 @@ var USAPresidentMapType = new MapType(
       null, // isCustomMap
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
-      0.0, // voteshareCutoffMargin
-      "svg-sources/usa-presidential-map-no-districts.svg" // overrideSVGPath
+      0.0 // voteshareCutoffMargin
     )
 
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
