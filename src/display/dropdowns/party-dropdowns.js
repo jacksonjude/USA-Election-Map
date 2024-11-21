@@ -37,7 +37,7 @@ function createPartyDropdowns()
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
-      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (0.98*partyButtonWidth) + 'rem; padding: 12rem 0rem; margin: 0rem; background-color: transparent; border: 2rem dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: ' + (partyButtonWidth-4) + 'rem; padding: 12rem 0rem; margin: 0rem; background-color: transparent; border: 2rem dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
       continue
     }
