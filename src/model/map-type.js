@@ -284,18 +284,13 @@ var globalMapSettings =
       {id: "hide", title: "Hidden", value: false}
     ],
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
-  {id: "piePopularVote", title: "📊 Popular Vote", type: MapSettingType.optionCycle, options:
+  {id: "pieStyle", title: "📊 Pie Style", type: MapSettingType.optionCycle, options:
     [
-      {id: "show", title: "Shown", value: true},
-      {id: "hide", title: "Hidden", value: false}
+      {id: "margins", title: "Margins", value: 0},
+      {id: "popularVote", title: "Popular Vote", value: 1},
+      {id: "all", title: "All Data", value: 2}
     ],
-  defaultValue: "hide", reloadType: MapSettingReloadType.display},
-  {id: "pieStyle", title: "↕️ Pie Style", type: MapSettingType.optionCycle, options:
-    [
-      {id: "expanded", title: "Less Info", value: 0},
-      {id: "compact", title: "More Info", value: 1}
-    ],
-  defaultValue: "expanded", reloadType: MapSettingReloadType.display},
+  defaultValue: "margins", reloadType: MapSettingReloadType.display},
   {id: "dateFormat", title: "📅 Date Format", type: MapSettingType.optionCycle, options:
     [
       {id: "mdy", title: "MM/DD/YYYY", value: 0},
@@ -303,12 +298,6 @@ var globalMapSettings =
       {id: "ymd", title: "YYYY/MM/DD", value: 2}
     ],
   defaultValue: "mdy", reloadType: MapSettingReloadType.display},
-  {id: "showTooltips", title: "💬 Control Tooltips", type: MapSettingType.optionCycle, options:
-    [
-      {id: "show", title: "Shown", value: true},
-      {id: "hide", title: "Hidden", value: false}
-    ],
-  defaultValue: "show", reloadType: MapSettingReloadType.none}
 ]
 
 var currentGlobalMapSettings = {}

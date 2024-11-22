@@ -96,13 +96,10 @@ async function updateRegionBox(regionID = currentRegionID)
     }
     regionBoxHTML += "</div>"
 
-    if (currentMapType.getMapSettingValue("showTooltips"))
-    {
-      regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
-      regionBoxHTML += "Click to save voteshare"
-      regionBoxHTML += "</div>"
-      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
-    }
+    regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
+    regionBoxHTML += "Click to save voteshare"
+    regionBoxHTML += "</div>"
+    regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
 
     $("#regionbox").html(regionBoxHTML)
 
@@ -291,23 +288,20 @@ async function updateRegionBox(regionID = currentRegionID)
   tooltipsToShow.altClickToFlip[0] = isDiscreteRegion && currentEditingState == EditingState.editing
   tooltipsToShow.altShiftClickToDisable[0] = isDiscreteRegion && currentEditingState == EditingState.editing
 
-  if (currentMapType.getMapSettingValue("showTooltips"))
-  {
-    let isShowingSomeTooltip = false
-    Object.keys(tooltipsToShow).forEach((tooltipID) => {
-      if (tooltipsToShow[tooltipID][0])
-      {
-        regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
-        regionBoxHTML += tooltipsToShow[tooltipID][1]
-        regionBoxHTML += "</div>"
-
-        isShowingSomeTooltip = true
-      }
-    })
-    if (isShowingSomeTooltip)
+  let isShowingSomeTooltip = false
+  Object.keys(tooltipsToShow).forEach((tooltipID) => {
+    if (tooltipsToShow[tooltipID][0])
     {
-      regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
+      regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
+      regionBoxHTML += tooltipsToShow[tooltipID][1]
+      regionBoxHTML += "</div>"
+  
+      isShowingSomeTooltip = true
     }
+  })
+  if (isShowingSomeTooltip)
+  {
+    regionBoxHTML += "<div style='padding-bottom: 3px;'></div>"
   }
 
   $("#regionbox").html(formattedRegionID + "<br>" + "<span style='color: " + politicalParties[regionData.partyID].getMarginColors().lean + ";'>" + regionBoxHTML + "</span>")

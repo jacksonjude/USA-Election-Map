@@ -636,7 +636,8 @@ function updateTotalsPieChart()
   totalsPieChart.data.datasets[1].data = sortedPartyTotalsArray
 
   let popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
-  let showingPopularVote = popularVoteData && (currentMapType.getMapSettingValue("piePopularVote") || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
+  const pieStyle = currentMapType.getMapSettings().pieStyle
+  let showingPopularVote = popularVoteData && (pieStyle == "popularVote" || pieStyle == "all" || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
   if (showingPopularVote)
   {
     let sortedPopularVoteArray = []
@@ -669,7 +670,7 @@ function updateTotalsPieChart()
     nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
   }
 
-  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle == "expanded") || currentViewingState == ViewingState.splitVote)
+  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle != "all") || currentViewingState == ViewingState.splitVote)
   {
     totalsPieChart.data.datasets[0].hidden = true
     totalsPieChart.data.datasets[0].data = []
