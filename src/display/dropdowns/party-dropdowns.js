@@ -388,8 +388,12 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
   if (partyID == editCandidateNamePartyID)
   {
     partyID = null
+    editCandidateNamePartyID = null
   }
-  editCandidateNamePartyID = partyID
+  else if (partyID)
+  {
+    editCandidateNamePartyID = partyID
+  }
 
   displayPartyTotals()
   if (shouldRefreshMap && showingDataMap && !skipReload)
