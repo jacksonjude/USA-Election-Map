@@ -1992,7 +1992,8 @@ var USAPresidentMapType = new MapType(
         const isPastElectionCompare = showingCompareMap && compareMapSourceIDArray.every(sourceID => 
           sourceID == PastElectionResultMapSource.getID() ||
           sourceID == CountyElectionResultMapSource.getID() ||
-          sourceID == HistoricalElectionResultMapSource.getID()
+          sourceID == HistoricalElectionResultMapSource.getID() ||
+          sourceID == CNNResults2024MapSource.getID()
         )
         if (!isPastElectionCompare) { return null }
         
