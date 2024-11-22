@@ -1388,12 +1388,12 @@ var USAPresidentMapType = new MapType(
       true, // shouldShowVoteshare
       0.0, // voteshareCutoffMargin
       () => {
-        if (currentViewingState == ViewingState.viewing)
+        if (currentViewingState == ViewingState.zooming)
         {
-          return "svg-sources/usa-presidential-map.svg" 
+          return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
         }
-    
-        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+        
+        return "svg-sources/usa-presidential-map.svg"
       } // overrideSVGPath
     )
     
