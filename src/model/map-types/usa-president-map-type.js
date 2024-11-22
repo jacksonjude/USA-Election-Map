@@ -1368,6 +1368,11 @@ var USAPresidentMapType = new MapType(
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
+        
+        if (regionID && regionID.includes(subregionSeparator))
+        {
+          regionID = regionID.split(subregionSeparator)[0]
+        }
     
         let linkToOpen = homepageURL
         if (shouldOpenHomepage)
