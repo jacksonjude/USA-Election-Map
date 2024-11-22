@@ -8,6 +8,16 @@
   src: url("./assets/Bree5erif-Mono.ttf");
 }
 
+@font-face {
+  font-family: 'Bree-Regular';
+  src: url("./assets/Bree-Regular.otf");
+}
+
+@font-face {
+  font-family: 'Bree-Mono';
+  src: url("./assets/Bree-Mono.ttf");
+}
+
 html {
   font-size: 0.056vw;
 }
@@ -372,4 +382,19 @@ body {
 
 .svg-pan-zoom_viewport {
   transition: transform 0.1s ease;
+}
+
+.date-display {
+  display: inline-block;
+  padding-left: 20rem;
+  vertical-align: center;
+  min-width: 200rem;
+  height: 20rem;
+  
+  color: white;
+  font-feature-settings: 'tnum' 1;
+  font-size: 18rem;
+  
+  user-select: none;
+  -webkit-user-select: none;
 }

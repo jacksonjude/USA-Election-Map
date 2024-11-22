@@ -269,7 +269,7 @@
     <input type='file' id='uploadFileInput' style='display: none'>
     <div style="display: flex; justify-content: space-between">
       <div style="display: flex">
-        <div style="display: flex; flex-direction: column;">
+        <div id='maptextcontainer' style="display: flex; flex-direction: column; font-family: 'Bree-Regular';">
           <div id="mapcontainer" style="margin-left: 30rem; margin-top: 20rem; margin-bottom: 10rem; width: 1111rem; height: 699rem; overflow: hidden;" oncontextmenu="return false">
           </div>
           <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem;">
@@ -277,7 +277,7 @@
               <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0rem">
               <span id="dataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;"></span>
             </span>
-            <h3 id="dateDisplay" style="display: inline-block; padding-left: 20rem; vertical-align: center; min-width: 200rem; color: white; font-family: 'Bree5erif-Mono'; font-size: 18rem; user-select: none; -webkit-user-select: none;"></h3>
+            <h3 id="dateDisplay" class="date-display"></h3>
           </div>
           <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem; display: none;">
             <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
@@ -285,7 +285,7 @@
               <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;">
               </span>
             </span>
-            <h3 id="firstCompareDateDisplay" style="display: inline-block; padding-left: 20rem; vertical-align: center; min-width: 200rem; color: white; font-family: 'Bree5erif-Mono'; font-size: 18rem; user-select: none; -webkit-user-select: none;"></h3>
+            <h3 id="firstCompareDateDisplay" class="date-display"></h3>
           </div>
           <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem; display: none;">
             <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
@@ -293,7 +293,7 @@
               <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;">
               </span>
             </span>
-            <h3 id="secondCompareDateDisplay" style="display: inline-block; padding-left: 20rem; vertical-align: center; min-width: 200rem; color: white; font-family: 'Bree5erif-Mono'; font-size: 18rem; user-select: none; -webkit-user-select: none;"></h3>
+            <h3 id="secondCompareDateDisplay" class="date-display"></h3>
           </div>
         </div>
         <div id="mapZoomControls" style="display: none; margin-top: 25rem; margin-left: 10rem; width: 50rem; height: 699rem; flex-direction: column; justify-content: space-between">

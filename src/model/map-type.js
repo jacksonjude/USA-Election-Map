@@ -298,6 +298,26 @@ var globalMapSettings =
       {id: "ymd", title: "YYYY/MM/DD", value: 2}
     ],
   defaultValue: "mdy", reloadType: MapSettingReloadType.display},
+  {id: "mapFont", title: "💬 Map Font", type: MapSettingType.optionCycle, options:
+    [
+      {id: "sans-serif", title: "Bree Sans", value: "Bree-Regular"},
+      {id: "serif", title: "Bree 5erif", value: "Bree5erif-Regular"}
+    ],
+  defaultValue: "mdy", reloadType: MapSettingReloadType.custom, customReloadFunction: (value) => {
+    $("#maptextcontainer").css('font-family', value)
+    if (value == "Bree5erif-Regular")
+    {
+      $(".date-display")
+        .css('font-family', "Bree5erif-Mono")
+        .css('line-height', "100%")
+    }
+    else
+    {
+      $(".date-display")
+        .css('font-family', '')
+        .css('line-height', '')
+    }
+  }},
 ]
 
 var currentGlobalMapSettings = {}
