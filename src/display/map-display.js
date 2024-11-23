@@ -1427,6 +1427,13 @@ async function zoomOutMap(displayMap = true)
   {
     currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
   }
+  
+  if (currentMapType.getID() == USAPresidentMapType.getID())
+  {
+    $("#editDoneButton").removeClass('topnavdisable')
+    $("#copyDropdownContent").removeClass('topnavdisable')
+    $("#copyDropdownContent").css("opacity", "")
+  }
 
   displayMap && displayDataMap(null, null, true)
 }

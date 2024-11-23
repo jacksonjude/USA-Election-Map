@@ -738,12 +738,19 @@ async function leftClickRegion(div)
     currentViewingState = ViewingState.zooming
     currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
     
-    if (currentMapType.getID() == USAPresidentMapType.getID() && currentMapZoomRegion.includes("-"))
+    if (currentMapType.getID() == USAPresidentMapType.getID())
     {
-      let stateID = currentMapZoomRegion.split("-")[0]
-      if (stateID == "NE" || stateID == "ME")
+      $("#editDoneButton").addClass('topnavdisable')
+      $("#copyDropdownContent").addClass('topnavdisable')
+      $("#copyDropdownContent").css("opacity", "0%")
+      
+      if (currentMapZoomRegion.includes("-"))
       {
-        currentMapZoomRegion = stateID
+        let stateID = currentMapZoomRegion.split("-")[0]
+        if (stateID == "NE" || stateID == "ME")
+        {
+          currentMapZoomRegion = stateID
+        }
       }
     }
 
