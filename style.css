@@ -174,7 +174,8 @@ body {
 
 #homepageButton {
   font-weight: bold;
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  line-height: 100%;
 }
 
 .dropdown-item {
