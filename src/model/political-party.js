@@ -83,7 +83,7 @@ var DemocraticParty = new PoliticalParty(
   "DEM",
   ["Democratic", "Democrat"],
   "Dem",
-  "Biden",
+  "Democratic",
   cloneObject(PoliticalPartyColors.blue),
   defaultMarginNames
 )
@@ -92,7 +92,7 @@ var RepublicanParty = new PoliticalParty(
   "REP",
   ["Republican"],
   "Rep",
-  "Trump",
+  "Republican",
   cloneObject(PoliticalPartyColors.red),
   defaultMarginNames
 )
@@ -112,7 +112,7 @@ var WhigParty = new PoliticalParty(
   "WIG",
   ["Whig"],
   "Whig",
-  "Harrison",
+  "Whig",
   cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
@@ -121,7 +121,7 @@ var NationalRepublicanParty = new PoliticalParty(
   "NRP",
   ["National Republican"],
   "NRP",
-  "Clay",
+  "National Republican",
   cloneObject(PoliticalPartyColors.orange),
   defaultMarginNames
 )
@@ -130,7 +130,7 @@ var DemocraticRepublicanParty = new PoliticalParty(
   "DRP",
   ["Democratic Republican", "Democratic-Republican"],
   "DRP",
-  "Monroe",
+  "Democratic Republican",
   cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
@@ -139,7 +139,7 @@ var FederalistParty = new PoliticalParty(
   "FED",
   ["Federalist"],
   "FED",
-  "Adams",
+  "Federalist",
   cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
@@ -150,7 +150,7 @@ var LibertarianParty = new PoliticalParty(
   "LIB",
   ["Libertarian"],
   "Lib",
-  "Jorgensen",
+  "Libertarian",
   cloneObject(PoliticalPartyColors.yellow),
   defaultMarginNames
 )
@@ -159,7 +159,7 @@ var GreenParty = new PoliticalParty(
   "GRN",
   ["Green"],
   "Grn",
-  "Hawkins",
+  "Green",
   cloneObject(PoliticalPartyColors.green),
   defaultMarginNames
 )
@@ -168,7 +168,7 @@ var ReformParty = new PoliticalParty(
   "REF",
   ["Reform", "Reform Party"],
   "Ref",
-  "Perot",
+  "Reform",
   cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
@@ -179,7 +179,7 @@ var FreeSoilParty = new PoliticalParty(
   "FS",
   ["Free Soil"],
   "FS",
-  "Van Buren",
+  "Free Soil",
   cloneObject(PoliticalPartyColors.purple),
   defaultMarginNames
 )
@@ -568,7 +568,7 @@ var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
   "Ind",
-  "Other",
+  "Independent",
   cloneObject(PoliticalPartyColors.gray),
   defaultMarginNames
 )
