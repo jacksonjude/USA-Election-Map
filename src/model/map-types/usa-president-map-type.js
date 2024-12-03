@@ -1255,7 +1255,7 @@ var USAPresidentMapType = new MapType(
       
       removeLoader(LoaderType.standard)
       
-      const { mapData } = CNNResults2024MapSource.executeFilter(countyZoomData, [date], undefined, true)
+      const { mapData } = await CNNResults2024MapSource.executeFilter(countyZoomData, [date], undefined, true)
       let countyDateData = Object.values(mapData)[0]
       
       if (countyToCityMap[zoomRegion])
@@ -1811,8 +1811,13 @@ var USAPresidentMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, ___, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare) => {
-        CountyElectionResultMapSource.loadMap()
+      async (rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, ___, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare) => {
+        if (currentViewingState == ViewingState.zooming) {
+          await CountyElectionResultMapSource.loadMap()
+        } else {
+          CountyElectionResultMapSource.loadMap()
+        }
+        
         return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, __, ___, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
       }, // organizeMapDataFunction
       null, // viewingDataFunction
