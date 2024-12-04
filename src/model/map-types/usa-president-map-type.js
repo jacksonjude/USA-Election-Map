@@ -662,6 +662,40 @@ var USAPresidentMapType = new MapType(
       
       if (!useCountyIDs)
       {
+        if (!mapData[mapDate][nationalPopularVoteID])
+        {
+          let npvCandidates = {}
+          let totalVotes = 0
+          
+          for (let regionID in mapData[mapDate])
+          {
+            if (/-D\d+$/.test(regionID)) continue
+            
+            for (let candidateData of mapData[mapDate][regionID].partyVotesharePercentages)
+            {
+              if (!npvCandidates[candidateData.candidate])
+              {
+                npvCandidates[candidateData.candidate] = {candidate: candidateData.candidate, partyID: candidateData.partyID, votes: 0}
+              }
+              npvCandidates[candidateData.candidate].votes += candidateData.votes
+            }
+            
+            totalVotes += mapData[mapDate][regionID].totalVotes
+          }
+          
+          let npvCandidateData = Object.values(npvCandidates)
+          npvCandidateData.forEach(c => c.voteshare = c.votes/totalVotes*100)
+          npvCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          
+          let npvData = {}
+          npvData.partyVotesharePercentages = npvCandidateData
+          npvData.partyID = npvCandidateData[0].partyID
+          npvData.candidateName = npvCandidateData[0].candidate
+          npvData.margin = npvCandidateData[0].voteshare - (npvCandidateData[1] ? npvCandidateData[1].voteshare : 0)
+          
+          mapData[mapDate][nationalPopularVoteID] = npvData
+        }
+        
         for (let regionID of Object.values(regionNameToID))
         {
           if (regionID == nationalPopularVoteID) continue
