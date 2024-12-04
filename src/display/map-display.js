@@ -1013,6 +1013,15 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
         }
       }
     })
+    
+    if (fadeForNewSVG)
+    {
+      $('.svg-pan-zoom_viewport').css('transition', 'transform 0.1s ease')
+    }
+    else
+    {
+      setTimeout(() => $('.svg-pan-zoom_viewport').css('transition', 'transform 0.1s ease'), 1)
+    }
   }
 
   if (shouldReloadSVG)
