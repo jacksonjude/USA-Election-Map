@@ -574,7 +574,7 @@ var USAPresidentMapType = new MapType(
     
       let mapData = {[mapDate]: {}}
     
-      for (let raceData of [...rawMapData, ...overrideRawRegionData])
+      for (let raceData of useCountyIDs ? rawMapData : [...rawMapData, ...overrideRawRegionData])
       {
         let raceKey = raceData[columnMap.raceKey]
         if (racesToIgnore.includes(raceKey)) continue
