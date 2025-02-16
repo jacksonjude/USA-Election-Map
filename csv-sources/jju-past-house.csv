@@ -34,7 +34,7 @@ date,region,candidate,party,offyear,voteshare
 1/20/2025,West,Suom,jju-liberal,TRUE,21.4
 1/11/2025,North,Cob,jju-progressive,FALSE,33
 1/11/2025,North,Virt,jju-liberal,FALSE,33.01
-1/11/2025,North,Geo,jju-alliance,FALSE,20
+1/11/2025,North,Geodore Roosevelt,jju-alliance,FALSE,20
 1/11/2025,North,Medikit,jju-alliance,FALSE,14
 1/11/2025,East,GMV,jju-liberal,FALSE,46
 1/11/2025,East,Ross Perot,jju-labour,FALSE,27
@@ -47,6 +47,14 @@ date,region,candidate,party,offyear,voteshare
 1/11/2025,South,Thatpotatoguy,jju-labour,FALSE,13
 1/11/2025,South,Type,jju-alliance,FALSE,13
 1/11/2025,South,Meiscool,jju-alliance,FALSE,13
+1/11/2025,List Seat 1,How do i type,jju-alliance,FALSE,100
+1/11/2025,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+1/11/2025,List Seat 3,Geodore Roosevelt,jju-alliance,FALSE,100
+1/11/2025,List Seat 4,Medikit,jju-alliance,FALSE,100
+1/11/2025,List Seat 5,Skillyoshi,jju-alliance,FALSE,100
+1/11/2025,List Seat 6,alex,jju-liberal,FALSE,100
+1/11/2025,List Seat 7,Charlemagne,jju-liberal,FALSE,100
+1/11/2025,List Seat 8,Sonia Gandhi,jju-labour,FALSE,100
 12/15/2024,West,Suom,jju-liberal,FALSE,53
 12/15/2024,West,BlockyBeach,jju-alliance,FALSE,33
 12/15/2024,West,Others,independent,FALSE,14
@@ -56,6 +64,14 @@ date,region,candidate,party,offyear,voteshare
 12/15/2024,South,Meiscool,jju-alliance,FALSE,40
 12/15/2024,East,bfdifann,jju-labour,FALSE,63.3
 12/15/2024,East,GMV,jju-liberal,FALSE,36.4
+12/15/2024,List Seat 1,How do i type,jju-alliance,FALSE,100
+12/15/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+12/15/2024,List Seat 3,Geodore Roosevelt,jju-alliance,FALSE,100
+12/15/2024,List Seat 4,Meiscool,jju-alliance,FALSE,100
+12/15/2024,List Seat 5,Virt,jju-liberal,FALSE,100
+12/15/2024,List Seat 6,Nath,jju-liberal,FALSE,100
+12/15/2024,List Seat 7,Sonia Gandhi,jju-labour,FALSE,100
+12/15/2024,List Seat 8,Dannyunown0,jju-labour,FALSE,100
 11/24/2024,South,Dannyunown0,jju-labour,FALSE,57.1
 11/24/2024,South,Meiscool,jju-alliance,FALSE,42.9
 11/24/2024,East,Copperhead,jju-alliance,FALSE,75
@@ -66,6 +82,14 @@ date,region,candidate,party,offyear,voteshare
 11/24/2024,North,Geodore Roosevelt,jju-alliance,FALSE,12.5
 11/24/2024,West,Nath,jju-liberal,FALSE,60
 11/24/2024,West,BlockyBeach,jju-alliance,FALSE,40
+11/24/2024,List Seat 1,How do i type,jju-alliance,FALSE,100
+11/24/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+11/24/2024,List Seat 3,Geodore Roosevelt,jju-alliance,FALSE,100
+11/24/2024,List Seat 4,Virt,jju-liberal,FALSE,100
+11/24/2024,List Seat 5,Charlemagne,jju-liberal,FALSE,100
+11/24/2024,List Seat 6,Sonia Gandhi,jju-labour,FALSE,100
+11/24/2024,List Seat 7,Ok,jju-labour,FALSE,100
+11/24/2024,List Seat 8,Ash,jju-labour,FALSE,100
 10/20/2024,East,Copperhead,jju-alliance,FALSE,60
 10/20/2024,East,THE RETURN OF toilet paper!!!,jju-labour,FALSE,40
 10/20/2024,South,Dannyunown0,jju-labour,FALSE,62.5
@@ -74,7 +98,15 @@ date,region,candidate,party,offyear,voteshare
 10/20/2024,West,BlockyBeach,jju-alliance,FALSE,36.4
 10/20/2024,North,Charlemagne,jju-liberal,FALSE,55.6
 10/20/2024,North,alex,jju-alliance,FALSE,44.4
-9/21/2024,North,John McCain Fan,jju-liberal,FALSE,62.5
+10/20/2024,List Seat 1,How do i type,jju-alliance,FALSE,100
+10/20/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+10/20/2024,List Seat 3,Virt,jju-liberal,FALSE,100
+10/20/2024,List Seat 4,GMV,jju-liberal,FALSE,100
+10/20/2024,List Seat 5,Strxya,jju-liberal,FALSE,100
+10/20/2024,List Seat 6,Cob,jju-labour,FALSE,100
+10/20/2024,List Seat 7,Ash,jju-labour,FALSE,100
+10/20/2024,List Seat 8,Libtard,jju-labour,FALSE,100
+9/21/2024,North,Josh Shapiro Fan,jju-liberal,FALSE,62.5
 9/21/2024,North,Virt,jju-liberal,FALSE,12.5
 9/21/2024,North,Cob,jju-labour,FALSE,12.5
 9/21/2024,North,Geodore Roosevelt,independent,FALSE,12.5
@@ -84,13 +116,33 @@ date,region,candidate,party,offyear,voteshare
 9/21/2024,East,GMV,jju-liberal,FALSE,49.99
 9/21/2024,South,Ok,jju-labour,FALSE,83.3
 9/21/2024,South,How do i type,jju-alliance,FALSE,16.7
+9/21/2024,List Seat 1,How do i type,jju-alliance,FALSE,100
+9/21/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+9/21/2024,List Seat 3,Deet0722,jju-alliance,FALSE,100
+9/21/2024,List Seat 4,Virt,jju-liberal,FALSE,100
+9/21/2024,List Seat 5,GMV,jju-liberal,FALSE,100
+9/21/2024,List Seat 6,Charlemagne,jju-liberal,FALSE,100
+9/21/2024,List Seat 7,Cob,jju-labour,FALSE,100
+9/21/2024,List Seat 8,Ash,jju-labour,FALSE,100
+9/21/2024,List Seat 9,Dannyunown0,jju-labour,FALSE,100
 8/21/2024,North,Virt,jju-liberal,FALSE,43
-8/21/2024,North,Armstrong,jju-labour,FALSE,28
+8/21/2024,North,Armstrong,independent,FALSE,28
 8/21/2024,North,Cob,jju-labour,FALSE,14
-8/21/2024,North,Geo,independent,FALSE,14
+8/21/2024,North,Geodore Roosevelt,independent,FALSE,14
 8/21/2024,East,GMV,jju-liberal,FALSE,63
 8/21/2024,East,Copperhead,jju-alliance,FALSE,37
 8/21/2024,South,Ok,jju-labour,FALSE,60
 8/21/2024,South,Deet0722,jju-alliance,FALSE,40
-8/21/2024,West,Nath,jju-liberal,FALSE,60
-8/21/2024,West,Spakian,jju-alliance,FALSE,40
+8/21/2024,West,Nath,jju-liberal,FALSE,36.1
+8/21/2024,West,Spakian,jju-alliance,FALSE,36
+8/21/2024,West,Plxto,jju-labour,FALSE,18
+8/21/2024,West,June,independent,FALSE,9
+8/21/2024,List Seat 1,How do i type,jju-alliance,FALSE,100
+8/21/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,100
+8/21/2024,List Seat 3,Deet0722,jju-alliance,FALSE,100
+8/21/2024,List Seat 4,Copperhead,jju-alliance,FALSE,100
+8/21/2024,List Seat 5,Charlemagne,jju-liberal,FALSE,100
+8/21/2024,List Seat 6,Cob,jju-labour,FALSE,100
+8/21/2024,List Seat 7,KingsCastle,jju-labour,FALSE,100
+8/21/2024,List Seat 8,Plxto,jju-labour,FALSE,100
+8/21/2024,List Seat 9,Ash,jju-labour,FALSE,100

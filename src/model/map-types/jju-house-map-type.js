@@ -14,7 +14,7 @@ var JJUHouseMapType = new MapType(
   true,
   true,
   true,
-  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8"},
+  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9"},
   [/.+-S/],
   [
 	{id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
@@ -46,7 +46,7 @@ var JJUHouseMapType = new MapType(
 	defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ],
   () => {
-	const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "National Popular Vote": nationalPopularVoteID}
+	const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "National Popular Vote": nationalPopularVoteID}
 
 	let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
 	{
@@ -54,6 +54,14 @@ var JJUHouseMapType = new MapType(
 	  let partyNameData = {}
 
 	  let regionNames = Object.keys(regionNameToID)
+    
+    const regionRetireExceptions = {
+      "L9": new Date(2024, 9-1, 21+1).getTime(),
+      "N": new Date(2025, 1-1, 20+1).getTime(),
+      "S": new Date(2025, 1-1, 20+1).getTime(),
+      "E": new Date(2025, 1-1, 20+1).getTime(),
+      "W": new Date(2025, 1-1, 20+1).getTime()
+    }
 
 	  for (let dateNum in mapDates)
 	  {
@@ -223,12 +231,6 @@ var JJUHouseMapType = new MapType(
       
       let previousDateRegionIDs = Object.keys(fullFilteredMapData[previousMapDate] ?? {})
 		  let currentRegionIDs = Object.keys(filteredDateData)
-      
-      if (currentRegionIDs.length > previousDateRegionIDs.length)
-      {
-        previousMapDate = mapDate
-        continue
-      }
   
 		  let isOffyear = Object.values(filteredDateData)[0].offYear
 		  let isRunoff = Object.values(filteredDateData)[0].isRunoff
@@ -236,6 +238,7 @@ var JJUHouseMapType = new MapType(
 		  for (let regionID of previousDateRegionIDs)
 		  {
 		    if (regionID == nationalPopularVoteID) { continue }
+        if (mapDate > regionRetireExceptions[regionID]) { continue }
   
 		    if (!currentRegionIDs.includes(regionID))
 		    {
