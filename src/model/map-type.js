@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
   {
     this.id = id
     this.name = name
@@ -13,6 +13,7 @@ class MapType
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
+    this.shouldReorderOutlines = shouldReorderOutlines
 
     this.regionIDToName = regionIDToName
     this.regionsToHideOnDisable = regionsToHideOnDisable
@@ -32,7 +33,7 @@ class MapType
     this.mapSourceIDs = mapSourceIDs
     this.mapCycles = mapCycles
     this.currentCycle = getCookie(this.id + currentMapCycleSettingIDSuffix)
-    if (this.currentCycle == null || this.currentCycle.length == 0) this.currentCycle = mapCycles[0]
+    if (this.currentCycle == null || this.currentCycle.length == 0) this.currentCycle = mapCycles[0] ?? allYearsCycle
     this.defaultCompareSourceIDs = defaultCompareSourceIDs
     this.customSourceID = customSourceID
   }
@@ -129,6 +130,11 @@ class MapType
   getCompareMapEnabled()
   {
     return this.compareMapEnabled
+  }
+  
+  getShouldReorderOutlines()
+  {
+    return this.shouldReorderOutlines
   }
 
   getMapSources(selfArg)
@@ -352,13 +358,3 @@ const regionEVArray = {
 
 var mapTypes = {}
 var mapTypeIDs = []
-
-function setMapTypes()
-{
-  mapTypes[USAPresidentMapType.getID()] = USAPresidentMapType
-  mapTypes[USASenateMapType.getID()] = USASenateMapType
-  mapTypes[USAGovernorMapType.getID()] = USAGovernorMapType
-  mapTypes[USAHouseMapType.getID()] = USAHouseMapType
-
-  mapTypeIDs = [USAPresidentMapType.getID(), USASenateMapType.getID(), USAHouseMapType.getID(), USAGovernorMapType.getID()]
-}

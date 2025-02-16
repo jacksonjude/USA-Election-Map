@@ -36,7 +36,7 @@ function cycleMapType(buttonDiv)
 function setMapType(newMapTypeID, buttonDiv)
 {
   currentMapType = mapTypes[newMapTypeID]
-  setCookie("currentMapType", currentMapType.getID())
+  setCookie(`${currentMapCountry.getID()}-currentMapType`, currentMapType.getID())
 
   $(buttonDiv || "#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
 

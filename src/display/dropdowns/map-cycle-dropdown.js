@@ -9,7 +9,7 @@ function createMapCycleDropdownItems()
   
   $("#mapCyclesDropdownContainer").html("")
 
-  const dropdownMapCycleIDs = [...cloneObject(currentMapType.getMapCycles()), allYearsCycle]
+  const dropdownMapCycleIDs = [...(cloneObject(currentMapType.getMapCycles()) ?? []), allYearsCycle]
 
   for (let cycleIndex in dropdownMapCycleIDs)
   {
@@ -36,5 +36,5 @@ function cycleMapCycle()
     newMapCycleIndex = 0
   }
 
-  setMapCycle(cycles[newMapCycleIndex])
+  setMapCycle(cycles[newMapCycleIndex] ?? allYearsCycle)
 }

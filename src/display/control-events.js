@@ -554,9 +554,9 @@ function mouseEnteredRegion(div)
   }
 
   var svgPathData = currentMapType.getSVGPath()
-  var usedFallbackMap = svgPathData[2] || false
+  var usedFallbackMap = (svgPathData instanceof Array) && (svgPathData[2] ?? false)
 
-  if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts")) && !usedFallbackMap)
+  if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts") || currentMapType.getShouldReorderOutlines()) && !usedFallbackMap)
   {
     var regionPath = document.getElementById(regionID)
     var parent = regionPath.parentNode

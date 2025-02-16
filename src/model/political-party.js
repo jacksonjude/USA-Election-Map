@@ -564,6 +564,42 @@ var IndependentGWParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJULabourParty = new PoliticalParty(
+  "JJULAB",
+  ["Labour", "JJU-Labour"],
+  "Lab",
+  "Labour",
+  cloneObject(PoliticalPartyColors.red),
+  defaultMarginNames
+)
+
+var JJULiberalParty = new PoliticalParty(
+  "JJULIB",
+  ["Liberal", "JJU-Liberal"],
+  "Lib",
+  "Liberal",
+  cloneObject(PoliticalPartyColors.yellow),
+  defaultMarginNames
+)
+
+var JJUAllianceParty = new PoliticalParty(
+  "JJUALL",
+  ["Alliance", "JJU-Alliance", "JJU-Conservative"],
+  "All",
+  "Alliance",
+  cloneObject(PoliticalPartyColors.blue),
+  defaultMarginNames
+)
+
+var JJUProgressiveParty = new PoliticalParty(
+  "JJUPRO",
+  ["Progressive", "JJU-Progressive"],
+  "Pro",
+  "Progressive",
+  cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
@@ -632,10 +668,31 @@ politicalParties[Independent1820JAParty.getID()] = Independent1820JAParty
 politicalParties[Independent1808GCParty.getID()] = Independent1808GCParty
 politicalParties[IndependentGWParty.getID()] = IndependentGWParty
 
+politicalParties[JJULabourParty.getID()] = JJULabourParty
+politicalParties[JJULiberalParty.getID()] = JJULiberalParty
+politicalParties[JJUAllianceParty.getID()] = JJUAllianceParty
+politicalParties[JJUProgressiveParty.getID()] = JJUProgressiveParty
+
 politicalParties[IndependentGenericParty.getID()] = IndependentGenericParty
 
 var defaultDropdownPoliticalPartyIDs = [DemocraticParty.getID(), RepublicanParty.getID()]
-var mainPoliticalPartyIDs = [TossupParty.getID(), DemocraticParty.getID(), RepublicanParty.getID(), LibertarianParty.getID(), GreenParty.getID(), WhigParty.getID(), FreeSoilParty.getID(), NationalRepublicanParty.getID(), DemocraticRepublicanParty.getID(), FederalistParty.getID(), IndependentGenericParty.getID()]
+var mainPoliticalPartyIDs = [
+  TossupParty.getID(),
+  DemocraticParty.getID(),
+  RepublicanParty.getID(),
+  LibertarianParty.getID(),
+  GreenParty.getID(),
+  WhigParty.getID(),
+  FreeSoilParty.getID(),
+  NationalRepublicanParty.getID(),
+  DemocraticRepublicanParty.getID(),
+  FederalistParty.getID(),
+  JJULabourParty.getID(),
+  JJULiberalParty.getID(),
+  JJUAllianceParty.getID(),
+  JJUProgressiveParty.getID(),
+  IndependentGenericParty.getID()
+]
 var majorThirdPartyCandidates = [
   Independent2024RFKParty.getID(),
   Independent2016EMParty.getID(),

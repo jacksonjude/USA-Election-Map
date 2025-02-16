@@ -1,5 +1,6 @@
 const currentAppVersion = "5"
 
+var currentMapCountry
 var currentMapType
 
 var mapSources
@@ -148,14 +149,16 @@ const helpBoxPages = [
 ]
 
 $(async function() {
-  setMapTypes()
-
-  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
-  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+  setMapCountries()
+  
+  currentMapCountry = mapCountries[getCookie("currentMapCountry") ?? mapCountryIDs[0]] ?? mapCountries[mapCountryIDs[0]]
+  $("#cycleMapCountryButton").find("img").attr('src', currentMapCountry.getIconURL())
+  
+  console.log(getCookie("currentMapCountry"))
 
   await initializeDatabases()
 
-  reloadForNewMapType(true)
+  reloadForNewMapCountry(true)
 
   preloadAssets([
     "assets/icon-download-none.png",
@@ -188,6 +191,17 @@ $(async function() {
 
   $.ajaxSetup({cache: false})
 })
+
+async function reloadForNewMapCountry(initialLoad)
+{
+  mapTypes = currentMapCountry.getMapTypes()
+  mapTypeIDs = currentMapCountry.getMapTypeIDs()
+  
+  currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? mapTypeIDs[0]] ?? mapTypes[mapTypeIDs[0]]
+  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+  
+  reloadForNewMapType(initialLoad)
+}
 
 async function reloadForNewMapType(initialLoad)
 {
@@ -235,7 +249,8 @@ async function reloadForNewMapType(initialLoad)
   currentMapZoomRegion = null
 
   resetCompareVariables()
-
+  
+  createMapCountryDropdownItems()
   createMapTypeDropdownItems()
   createMapCycleDropdownItems()
   createComparePresetDropdownItems()

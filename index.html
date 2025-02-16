@@ -17,6 +17,7 @@
     <script src="./lib/progressbar-1.0.1.min.js"></script>
     <script src="./src/misc-lib.js"></script>
     <script src="./src/model/files-database.js"></script>
+    <script src="./src/model/map-country.js"></script>
     <script src="./src/model/map-type.js"></script>
     <script src="./src/model/political-party.js"></script>
     <script src="./src/model/map-source.js"></script>
@@ -24,6 +25,8 @@
     <script src="./src/model/map-types/usa-senate-map-type.js"></script>
     <script src="./src/model/map-types/usa-governor-map-type.js"></script>
     <script src="./src/model/map-types/usa-house-map-type.js"></script>
+    <script src="./src/model/map-types/jju-house-map-type.js"></script>
+    <script src="./src/display/dropdowns/map-country-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-type-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-cycle-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-source-dropdown.js"></script>
@@ -48,16 +51,16 @@
 
       gtag('config', 'UA-107565763-1');
     </script>
-    <title>USA Election Map</title>
+    <title>JJ Election Map</title>
     <link rel="SHORTCUT ICON" type="image/x-icon" href="./assets/favicon.ico"/>
     <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="description" content="Interactive USA map for election results and projections. President, senate, house, and governor races included.">
+    <meta name="description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
     <meta name="darkreader-lock">
-    <meta property="og:title" content="JacksonJude's USA Election Map" />
+    <meta property="og:title" content="JacksonJude's Election Map" />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="Interactive USA map for election results and projections. President, senate, house, and governor races included.">
+    <meta property="og:description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
     <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon-background.png" />
   </head>
   <body style="background-color: black; margin: 0rem;" onresize="updateSVGViewbox()">
@@ -67,6 +70,13 @@
       </a>
       <div style="display: inline-block;">
         <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="cycleMapCountryButton" onclick="cycleMapCountry(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-flag.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
+          <div id="mapCountryDropdownContent" class="dropdown-content" style="min-width: 45rem;">
+            <div id="mapCountryDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            </div>
+          </div>
+        </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-pres.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
           <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 45rem;">
@@ -94,7 +104,7 @@
       <div style="border-left: 25rem solid; display: inline-block;"></div>
       <div style="display: inline-block;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="homepageButton" href="https://jacksonjude.com" target="_blank" style="min-width: 250rem; height: 23rem; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
+          <a id="homepageButton" href="https://jacksonjude.com" target="_blank" style="min-width: 200rem; height: 23rem; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
           <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 275rem">
             <div id="homepageDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
               <p style="margin: 0; text-align: left;">
