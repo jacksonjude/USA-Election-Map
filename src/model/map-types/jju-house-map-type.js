@@ -463,7 +463,7 @@ var JJUHouseMapType = new MapType(
   }
 
 	var PastElectionResultMapSource = new MapSource(
-	  "Past-House-Elections", // id
+	  "JJU-Past-House-Elections", // id
 	  "Past Elections", // name
 	  "./csv-sources/jju-past-house.csv", // dataURL
 	  "https://docs.google.com/spreadsheets/d", // homepageURL
@@ -551,7 +551,7 @@ var JJUHouseMapType = new MapType(
 	}
 
 	var CustomMapSource = new MapSource(
-	  "Custom-House", // id
+	  "JJU-Custom-House", // id
 	  "Custom", // name
 	  null, // dataURL
 	  null, // homepageURL
