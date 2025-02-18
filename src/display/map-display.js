@@ -153,8 +153,6 @@ $(async function() {
   
   currentMapCountry = mapCountries[getCookie("currentMapCountry") ?? mapCountryIDs[0]] ?? mapCountries[mapCountryIDs[0]]
   $("#cycleMapCountryButton").find("img").attr('src', currentMapCountry.getIconURL())
-  
-  console.log(getCookie("currentMapCountry"))
 
   await initializeDatabases()
 
@@ -175,7 +173,6 @@ $(async function() {
 
   createMarginEditDropdownItems()
   createCountdownDropdownItems()
-  createPartyDropdowns()
   updateSelectedEditMode()
 
   addDivEventListeners()
@@ -196,6 +193,14 @@ async function reloadForNewMapCountry(initialLoad)
 {
   mapTypes = currentMapCountry.getMapTypes()
   mapTypeIDs = currentMapCountry.getMapTypeIDs()
+  
+  let { parties, dropdownIDs, mainIDs, majorThirdPartyCandidates } = currentMapCountry.getPoliticalPartyData()
+  politicalParties = parties
+  mainPoliticalPartyIDs = mainIDs
+  majorThirdPartyCandidates = majorThirdPartyCandidates
+  
+  dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs = dropdownIDs
+  createPartyDropdowns()
   
   currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? mapTypeIDs[0]] ?? mapTypes[mapTypeIDs[0]]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
