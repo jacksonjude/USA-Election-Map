@@ -17,24 +17,15 @@ var JJUHouseMapType = new MapType(
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
   [
-	  {id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
-	    [
-		    {id: "show", title: "Shown", value: true},
-		    {id: "hide", title: "Hidden", value: false}
-	    ],
-	    shouldShowActive: (value) => {
-		    return value
-	    },
-	  defaultValue: "hide", reloadType: MapSettingReloadType.display},
-	  {id: "pieCurrentSeats", title: "🥧 Pie Held Seats", type: MapSettingType.optionCycle, options:
-	    [
-		    {id: "show", title: "Shown", value: true},
-		    {id: "hide", title: "Hidden", value: false}
-	    ],
-	    shouldShowActive: (value) => {
-		    return !value
-	    },
-	  defaultValue: "show", reloadType: MapSettingReloadType.display},
+    {id: "coalitions", title: "🤝 Coalitions", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+      shouldShowActive: (value) => {
+        return value
+      },
+    defaultValue: "hide", reloadType: MapSettingReloadType.data},
 	  {id: "offYear", title: "🔄 Off Cycle Elections", type: MapSettingType.optionCycle, options:
 	    [
 		    {id: "show", title: "Shown", value: true},
@@ -43,7 +34,25 @@ var JJUHouseMapType = new MapType(
 	    shouldShowActive: (value) => {
 		    return value
 	    },
-	  defaultValue: "hide", reloadType: MapSettingReloadType.data}
+	  defaultValue: "hide", reloadType: MapSettingReloadType.data},
+    {id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+      shouldShowActive: (value) => {
+        return value
+      },
+    defaultValue: "hide", reloadType: MapSettingReloadType.display},
+    {id: "pieCurrentSeats", title: "🥧 Pie Held Seats", type: MapSettingType.optionCycle, options:
+      [
+        {id: "show", title: "Shown", value: true},
+        {id: "hide", title: "Hidden", value: false}
+      ],
+      shouldShowActive: (value) => {
+        return !value
+      },
+    defaultValue: "show", reloadType: MapSettingReloadType.display},
   ],
   () => {
 	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
@@ -71,10 +80,14 @@ var JJUHouseMapType = new MapType(
         "W-2": new Date(2025, 1-1, 22+1).getTime(),
       }
       
-      const processMapDataRows = (mapDataRows, currentMapDate, regionID, currentDatePartyNameArray) => {
+      const coalitionRegionID = "Coalition"
+      
+      const processMapDataRows = (mapDataRows, currentMapDate, regionID, currentDatePartyNameArray, coalitionPartyMap) => {
         let isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
         let isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
-        let isOffyear = mapDataRows[0][columnMap.isOffYear] == "TRUE"
+        let isOffyear = mapDataRows[0][columnMap.isOffyear] == "TRUE"
+        
+        console.log(currentMapDate, isOffyear, mapDataRows[0], columnMap.isOffyear)
         
         let candidateData = {}
         
@@ -87,12 +100,14 @@ var JJUHouseMapType = new MapType(
           let currentVoteshare = parseFloat(row[columnMap.voteshare])
         
           let currentPartyName = row[columnMap.partyID]
+          if (currentMapType.getMapSettingValue("coalitions") && coalitionPartyMap[currentPartyName])
+          {
+            currentPartyName = coalitionPartyMap[currentPartyName]
+            if (regionID == nationalPopularVoteID) candidateName = currentPartyName
+          }
+          
           let foundParty = Object.values(politicalParties).find(party => {
-            let partyNames = cloneObject(party.getNames())
-            for (let nameNum in partyNames)
-            {
-              partyNames[nameNum] = partyNames[nameNum].toLowerCase()
-            }
+            let partyNames = cloneObject(party.getNames()).map(partyName => partyName.toLowerCase())
             return partyNames.includes(currentPartyName)
           })
         
@@ -201,6 +216,15 @@ var JJUHouseMapType = new MapType(
     
 		    let currentMapDate = new Date(mapDates[dateNum])
 		    let currentDatePartyNameArray = {}
+        
+        let coalitionDataRows = rawDateData.filter(row => {
+          return row[columnMap.region] == coalitionRegionID
+        })
+        let coalitionPartyMap = {}
+        for (let coalitionPartyMapping of coalitionDataRows)
+        {
+          coalitionPartyMap[coalitionPartyMapping[columnMap.candidateName]] = coalitionPartyMapping[columnMap.partyID]
+        }
     
 		    for (let regionNum in regionNames)
 		    {
@@ -227,17 +251,17 @@ var JJUHouseMapType = new MapType(
           
           if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
           {
-            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
             originalMapData.altText = "first round"
             
-            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
             runoffMapData.altData = originalMapData
             
             filteredDateData[regionNameToID[regionToFind]] = runoffMapData
           }
           else
           {
-            filteredDateData[regionNameToID[regionToFind]] = processMapDataRows(mapDataRows, currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            filteredDateData[regionNameToID[regionToFind]] = processMapDataRows(mapDataRows, currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
           }
 	      }
     

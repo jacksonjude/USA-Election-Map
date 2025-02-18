@@ -600,6 +600,24 @@ var JJUProgressiveParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUCoalitionPartyBloc = new PoliticalParty(
+  "JJUCOA",
+  ["Coalition"],
+  "Coa",
+  "Coalition",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var JJUCitrusPartyBloc = new PoliticalParty(
+  "JJUCIT",
+  ["Citrus"],
+  "Cit",
+  "Citrus",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],

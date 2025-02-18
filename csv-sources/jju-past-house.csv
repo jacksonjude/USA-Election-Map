@@ -213,10 +213,6 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/20/2025,West 2nd,Suom,liberal,TRUE,FALSE,21.4
 1/20/2025,West 2nd,BlockyBeach,alliance,TRUE,TRUE,57.1
 1/20/2025,West 2nd,June_3rd,progressive,TRUE,TRUE,42.9
-2/9/2025,Coalition,labour,coalition,FALSE,FALSE,0
-2/9/2025,Coalition,alliance,coalition,FALSE,FALSE,0
-2/9/2025,Coalition,liberal,citrus,FALSE,FALSE,0
-2/9/2025,Coalition,progressive,citrus,FALSE,FALSE,0
 2/9/2025,Dentone,BlockyBeach,alliance,FALSE,FALSE,71.43
 2/9/2025,Dentone,Ash,liberal,FALSE,FALSE,14.29
 2/9/2025,Dentone,Joris,progressive,FALSE,FALSE,14.29

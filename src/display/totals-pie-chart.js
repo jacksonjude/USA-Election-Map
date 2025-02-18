@@ -9,6 +9,7 @@ const PieChartDirection = {
 
 var partyOrdering = [
   {partyID: JJUProgressiveParty.getID(), direction: PieChartDirection.clockwise},
+  {partyID: JJUCitrusPartyBloc.getID(), direction: PieChartDirection.clockwise},
   {partyID: JJULabourParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: FederalistParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: PieChartDirection.clockwise},
@@ -64,6 +65,7 @@ var partyOrdering = [
   {partyID: NationalRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: DemocraticRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJULiberalParty.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: JJUCoalitionPartyBloc.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJUAllianceParty.getID(), direction: PieChartDirection.counterclockwise},
 ]
 
