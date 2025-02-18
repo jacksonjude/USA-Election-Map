@@ -393,7 +393,7 @@ class MapSource
       linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
     }
     
-    !isCheck && window.open(linkToOpen)
+    !isCheck && linkToOpen && window.open(linkToOpen)
     return linkToOpen != null
   }
 
@@ -410,7 +410,7 @@ class MapSource
       linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, null, null, modelDate, true, this.mapData)
     }
     
-    !isCheck && window.open(linkToOpen)
+    !isCheck && linkToOpen && window.open(linkToOpen)
     return linkToOpen != null
   }
 
