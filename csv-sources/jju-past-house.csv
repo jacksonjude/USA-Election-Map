@@ -135,45 +135,45 @@ date,region,candidate,party,offyear,runoff,voteshare
 12/29/2024,East,Perot,independent,TRUE,FALSE,11.1
 12/30/2024,East,Skillyoshi,jju-alliance,TRUE,TRUE,55.6
 12/30/2024,East,GMV,jju-liberal,TRUE,TRUE,44.4
-1/11/2025,North,Cob,jju-progressive,FALSE,FALSE,26.67
-1/11/2025,North,Virt,jju-liberal,FALSE,FALSE,33.33
-1/11/2025,North,Geodore Roosevelt,jju-alliance,FALSE,FALSE,20.00
-1/11/2025,North,Medikit,jju-alliance,FALSE,FALSE,13.33
-1/11/2025,North,Charlemagne,jju-liberal,FALSE,FALSE,6.67
-1/11/2025,North 2,Cob,jju-progressive,FALSE,FALSE,50.00
-1/11/2025,North 2,Geodore Roosevelt,jju-alliance,FALSE,FALSE,30.00
-1/11/2025,North 2,Medikit,jju-alliance,FALSE,FALSE,20.00
-1/11/2025,East,GMV,jju-liberal,FALSE,FALSE,30.00
-1/11/2025,East,Perot,jju-labour,FALSE,FALSE,20.00
-1/11/2025,East,Skillyoshi,jju-alliance,FALSE,FALSE,20.00
-1/11/2025,East,Copperhead,jju-alliance,FALSE,FALSE,10.00
-1/11/2025,East,bfdifann,jju-progressive,FALSE,FALSE,20.00
-1/12/2025,East,Skillyoshi,jju-alliance,FALSE,TRUE,27.27
-1/12/2025,East,Perot,jju-labour,FALSE,TRUE,27.27
-1/12/2025,East,GMV,jju-liberal,FALSE,TRUE,45.45
-1/11/2025,East 2,Skillyoshi,jju-alliance,FALSE,FALSE,40.93
-1/11/2025,East 2,Perot,jju-labour,FALSE,FALSE,59.07
-1/11/2025,West,Ash,jju-progressive,FALSE,FALSE,22.22
-1/11/2025,West,Suom,jju-liberal,FALSE,FALSE,27.78
-1/11/2025,West,BlockyBeach,jju-alliance,FALSE,FALSE,27.78
-1/11/2025,West,June_3rd,jju-progressive,FALSE,FALSE,16.67
-1/11/2025,West,Srawyer,jju-alliance,FALSE,FALSE,5.56
-1/12/2025,West,Ash,jju-progressive,FALSE,TRUE,41.18
-1/12/2025,West,Suom,jju-liberal,FALSE,TRUE,29.41
-1/12/2025,West,BlockyBeach,jju-alliance,FALSE,TRUE,29.41
-1/11/2025,West 2,Suom,jju-liberal,FALSE,FALSE,53.03
-1/11/2025,West 2,BlockyBeach,jju-alliance,FALSE,FALSE,46.97
-1/11/2025,South,Dannyunown0,jju-labour,FALSE,FALSE,33.33
-1/11/2025,South,Qwert,jju-progressive,FALSE,FALSE,26.67
-1/11/2025,South,Thatpotatoguy,jju-labour,FALSE,FALSE,13.33
-1/11/2025,South,How do i type,jju-alliance,FALSE,FALSE,13.33
-1/11/2025,South,Meiscool,jju-alliance,FALSE,FALSE,13.33
-1/11/2025,South 2,Qwert,jju-progressive,FALSE,FALSE,40.00
-1/11/2025,South 2,Thatpotatoguy,jju-labour,FALSE,FALSE,20.00
-1/11/2025,South 2,How do i type,jju-alliance,FALSE,FALSE,20.00
-1/11/2025,South 2,Meiscool,jju-alliance,FALSE,FALSE,20.00
-1/12/2025,South 2,Qwert,jju-progressive,FALSE,TRUE,50.01
-1/12/2025,South 2,How do i type,jju-alliance,FALSE,TRUE,49.99
+1/11/2025,North 1st,Cob,jju-progressive,FALSE,FALSE,26.67
+1/11/2025,North 1st,Virt,jju-liberal,FALSE,FALSE,33.33
+1/11/2025,North 1st,Geodore Roosevelt,jju-alliance,FALSE,FALSE,20.00
+1/11/2025,North 1st,Medikit,jju-alliance,FALSE,FALSE,13.33
+1/11/2025,North 1st,Charlemagne,jju-liberal,FALSE,FALSE,6.67
+1/11/2025,North 2nd,Cob,jju-progressive,FALSE,FALSE,50.00
+1/11/2025,North 2nd,Geodore Roosevelt,jju-alliance,FALSE,FALSE,30.00
+1/11/2025,North 2nd,Medikit,jju-alliance,FALSE,FALSE,20.00
+1/11/2025,East 1st,GMV,jju-liberal,FALSE,FALSE,30.00
+1/11/2025,East 1st,Perot,jju-labour,FALSE,FALSE,20.00
+1/11/2025,East 1st,Skillyoshi,jju-alliance,FALSE,FALSE,20.00
+1/11/2025,East 1st,Copperhead,jju-alliance,FALSE,FALSE,10.00
+1/11/2025,East 1st,bfdifann,jju-progressive,FALSE,FALSE,20.00
+1/12/2025,East 1st,Skillyoshi,jju-alliance,FALSE,TRUE,27.27
+1/12/2025,East 1st,Perot,jju-labour,FALSE,TRUE,27.27
+1/12/2025,East 1st,GMV,jju-liberal,FALSE,TRUE,45.45
+1/11/2025,East 2nd,Skillyoshi,jju-alliance,FALSE,FALSE,40.93
+1/11/2025,East 2nd,Perot,jju-labour,FALSE,FALSE,59.07
+1/11/2025,West 1st,Ash,jju-progressive,FALSE,FALSE,22.22
+1/11/2025,West 1st,Suom,jju-liberal,FALSE,FALSE,27.78
+1/11/2025,West 1st,BlockyBeach,jju-alliance,FALSE,FALSE,27.78
+1/11/2025,West 1st,June_3rd,jju-progressive,FALSE,FALSE,16.67
+1/11/2025,West 1st,Srawyer,jju-alliance,FALSE,FALSE,5.56
+1/12/2025,West 1st,Ash,jju-progressive,FALSE,TRUE,41.18
+1/12/2025,West 1st,Suom,jju-liberal,FALSE,TRUE,29.41
+1/12/2025,West 1st,BlockyBeach,jju-alliance,FALSE,TRUE,29.41
+1/11/2025,West 2nd,Suom,jju-liberal,FALSE,FALSE,53.03
+1/11/2025,West 2nd,BlockyBeach,jju-alliance,FALSE,FALSE,46.97
+1/11/2025,South 1st,Dannyunown0,jju-labour,FALSE,FALSE,33.33
+1/11/2025,South 1st,Qwert,jju-progressive,FALSE,FALSE,26.67
+1/11/2025,South 1st,Thatpotatoguy,jju-labour,FALSE,FALSE,13.33
+1/11/2025,South 1st,How do i type,jju-alliance,FALSE,FALSE,13.33
+1/11/2025,South 1st,Meiscool,jju-alliance,FALSE,FALSE,13.33
+1/11/2025,South 2nd,Qwert,jju-progressive,FALSE,FALSE,40.00
+1/11/2025,South 2nd,Thatpotatoguy,jju-labour,FALSE,FALSE,20.00
+1/11/2025,South 2nd,How do i type,jju-alliance,FALSE,FALSE,20.00
+1/11/2025,South 2nd,Meiscool,jju-alliance,FALSE,FALSE,20.00
+1/12/2025,South 2nd,Qwert,jju-progressive,FALSE,TRUE,50.01
+1/12/2025,South 2nd,How do i type,jju-alliance,FALSE,TRUE,49.99
 1/11/2025,List Seat 1,How do i type,jju-alliance,FALSE,FALSE,100
 1/11/2025,List Seat 2,BlockyBeach,jju-alliance,FALSE,FALSE,100
 1/11/2025,List Seat 3,Geodore Roosevelt,jju-alliance,FALSE,FALSE,100
@@ -186,11 +186,11 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/11/2025,National Popular Vote,Labour,jju-labour,FALSE,FALSE,20.34
 1/11/2025,National Popular Vote,Liberal,jju-liberal,FALSE,FALSE,27.12
 1/11/2025,National Popular Vote,Alliance,jju-alliance,FALSE,FALSE,32.20
-1/20/2025,West,BlockyBeach,jju-alliance,TRUE,FALSE,50.0
-1/20/2025,West,June_3rd,jju-progressive,TRUE,FALSE,28.6
-1/20/2025,West,Suom,jju-liberal,TRUE,FALSE,21.4
-1/21/2025,West,BlockyBeach,jju-alliance,TRUE,TRUE,57.1
-1/21/2025,West,June_3rd,jju-progressive,TRUE,TRUE,42.9
+1/20/2025,West 2nd,BlockyBeach,jju-alliance,TRUE,FALSE,50.0
+1/20/2025,West 2nd,June_3rd,jju-progressive,TRUE,FALSE,28.6
+1/20/2025,West 2nd,Suom,jju-liberal,TRUE,FALSE,21.4
+1/21/2025,West 2nd,BlockyBeach,jju-alliance,TRUE,TRUE,57.1
+1/21/2025,West 2nd,June_3rd,jju-progressive,TRUE,TRUE,42.9
 2/9/2025,Dentone,BlockyBeach,jju-alliance,FALSE,FALSE,71.43
 2/9/2025,Dentone,Ash,jju-liberal,FALSE,FALSE,14.29
 2/9/2025,Dentone,Joris,jju-progressive,FALSE,FALSE,14.29

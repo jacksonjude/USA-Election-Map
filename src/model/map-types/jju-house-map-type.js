@@ -14,7 +14,7 @@ var JJUHouseMapType = new MapType(
   true,
   true,
   true,
-  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-2": "North 2", "S-2": "South 2", "E-2": "East 2", "W-2": "West 2"},
+  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
   [
 	{id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
@@ -46,7 +46,7 @@ var JJUHouseMapType = new MapType(
 	defaultValue: "hide", reloadType: MapSettingReloadType.data}
   ],
   () => {
-	const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "North 2": "N-2", "South 2": "S-2", "East 2": "E-2", "West 2": "W-2", "National Popular Vote": nationalPopularVoteID}
+	const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
 
 	let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
 	{
@@ -57,10 +57,14 @@ var JJUHouseMapType = new MapType(
     
     const regionRetireExceptions = {
       "L9": new Date(2024, 9-1, 21+1).getTime(),
-      "N": new Date(2025, 1-1, 22+1).getTime(),
-      "S": new Date(2025, 1-1, 22+1).getTime(),
-      "E": new Date(2025, 1-1, 22+1).getTime(),
-      "W": new Date(2025, 1-1, 22+1).getTime(),
+      "N": new Date(2025, 1-1, 1).getTime(),
+      "S": new Date(2025, 1-1, 1).getTime(),
+      "E": new Date(2025, 1-1, 1).getTime(),
+      "W": new Date(2025, 1-1, 1).getTime(),
+      "N-1": new Date(2025, 1-1, 22+1).getTime(),
+      "S-1": new Date(2025, 1-1, 22+1).getTime(),
+      "E-1": new Date(2025, 1-1, 22+1).getTime(),
+      "W-1": new Date(2025, 1-1, 22+1).getTime(),
       "N-2": new Date(2025, 1-1, 22+1).getTime(),
       "S-2": new Date(2025, 1-1, 22+1).getTime(),
       "E-2": new Date(2025, 1-1, 22+1).getTime(),
@@ -399,15 +403,6 @@ var JJUHouseMapType = new MapType(
         "S": "370122789",
         "E": "1011441980",
         "W": "402739737"
-      }
-    },
-    1732435200000: {
-      id: "",
-      regions: {
-        "N": "",
-        "S": "",
-        "E": "",
-        "W": ""
       }
     },
     1734249600000: {
