@@ -3,8 +3,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 8/21/2024,North,Armstrong,independent,FALSE,FALSE,28.57
 8/21/2024,North,Cob,jju-labour,FALSE,FALSE,14.29
 8/21/2024,North,Geodore Roosevelt,independent,FALSE,FALSE,14.29
-8/21/2024,North,Virt,jju-liberal,FALSE,TRUE,57.14
-8/21/2024,North,Armstrong,independent,FALSE,TRUE,42.86
+8/22/2024,North,Virt,jju-liberal,FALSE,TRUE,57.14
+8/22/2024,North,Armstrong,independent,FALSE,TRUE,42.86
 8/21/2024,East,GMV,jju-liberal,FALSE,FALSE,62.50
 8/21/2024,East,Copperhead,jju-alliance,FALSE,FALSE,37.50
 8/21/2024,South,Ok,jju-labour,FALSE,FALSE,60.00
@@ -13,8 +13,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 8/21/2024,West,Spakian,jju-alliance,FALSE,FALSE,36.36
 8/21/2024,West,Plxto,jju-labour,FALSE,FALSE,18.18
 8/21/2024,West,June_3rd,independent,FALSE,FALSE,9.09
-8/21/2024,West,Nath,jju-liberal,FALSE,TRUE,60.00
-8/21/2024,West,Spakian,jju-alliance,FALSE,TRUE,40.00
+8/22/2024,West,Nath,jju-liberal,FALSE,TRUE,60.00
+8/22/2024,West,Spakian,jju-alliance,FALSE,TRUE,40.00
 8/21/2024,List Seat 1,How do i type,jju-alliance,FALSE,FALSE,100
 8/21/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,FALSE,100
 8/21/2024,List Seat 3,Deet0722,jju-alliance,FALSE,FALSE,100
@@ -80,16 +80,23 @@ date,region,candidate,party,offyear,runoff,voteshare
 10/20/2024,National Popular Vote,Labour,jju-labour,FALSE,FALSE,30.30
 10/20/2024,National Popular Vote,Liberal,jju-liberal,FALSE,FALSE,42.42
 10/20/2024,National Popular Vote,Alliance,jju-alliance,FALSE,FALSE,27.27
-11/24/2024,South,Dannyunown0,jju-labour,FALSE,FALSE,57.1
-11/24/2024,South,Meiscool,jju-alliance,FALSE,FALSE,42.9
-11/24/2024,East,Copperhead,jju-alliance,FALSE,FALSE,75
-11/24/2024,East,GMV,jju-liberal,FALSE,FALSE,25
-11/24/2024,North,alex,jju-liberal,FALSE,FALSE,50
-11/24/2024,North,Virt,jju-liberal,FALSE,FALSE,25
-11/24/2024,North,Charlemagne,jju-liberal,FALSE,FALSE,12.5
+11/24/2024,South,Dannyunown0,jju-labour,FALSE,FALSE,57.14
+11/24/2024,South,Meiscool,jju-alliance,FALSE,FALSE,42.86
+11/24/2024,East,Copperhead,jju-alliance,FALSE,FALSE,75.00
+11/24/2024,East,GMV,jju-liberal,FALSE,FALSE,25.00
+11/24/2024,North,alex,jju-liberal,FALSE,FALSE,50.00
+11/24/2024,North,Virt,jju-liberal,FALSE,FALSE,25.00
+11/24/2024,North,Charlemagne,jju-liberal,FALSE,FALSE,12.50
+11/24/2024,North,Geodore Roosevelt,jju-alliance,FALSE,FALSE,12.50
+11/25/2024,North,alex,jju-liberal,FALSE,TRUE,62.50
+11/25/2024,North,Virt,jju-liberal,FALSE,TRUE,25.00
+11/25/2024,North,Charlemagne,jju-liberal,FALSE,TRUE,12.50
 11/24/2024,North,Geodore Roosevelt,jju-alliance,FALSE,FALSE,12.5
-11/24/2024,West,Nath,jju-liberal,FALSE,FALSE,60
-11/24/2024,West,BlockyBeach,jju-alliance,FALSE,FALSE,40
+11/24/2024,West,Nath,jju-liberal,FALSE,FALSE,40.00
+11/24/2024,West,BlockyBeach,jju-alliance,FALSE,FALSE,40.00
+11/24/2024,West,Ash,jju-labour,FALSE,FALSE,20.00
+11/25/2024,West,Nath,jju-liberal,FALSE,TRUE,60.00
+11/25/2024,West,BlockyBeach,jju-alliance,FALSE,TRUE,40.00
 11/24/2024,List Seat 1,How do i type,jju-alliance,FALSE,FALSE,100
 11/24/2024,List Seat 2,BlockyBeach,jju-alliance,FALSE,FALSE,100
 11/24/2024,List Seat 3,Geodore Roosevelt,jju-alliance,FALSE,FALSE,100
@@ -98,6 +105,9 @@ date,region,candidate,party,offyear,runoff,voteshare
 11/24/2024,List Seat 6,Sonia Gandhi,jju-labour,FALSE,FALSE,100
 11/24/2024,List Seat 7,Ok,jju-labour,FALSE,FALSE,100
 11/24/2024,List Seat 8,Ash,jju-labour,FALSE,FALSE,100
+11/24/2024,National Popular Vote,Labour,jju-labour,FALSE,FALSE,35.48
+11/24/2024,National Popular Vote,Liberal,jju-liberal,FALSE,FALSE,32.26
+11/24/2024,National Popular Vote,Alliance,jju-alliance,FALSE,FALSE,32.26
 12/15/2024,West,Suom,jju-liberal,FALSE,FALSE,53.33
 12/15/2024,West,BlockyBeach,jju-alliance,FALSE,FALSE,33.33
 12/15/2024,West,Skillyoshi,independent,FALSE,FALSE,6.67
