@@ -70,6 +70,129 @@ var JJUHouseMapType = new MapType(
         "E-2": new Date(2025, 1-1, 22+1).getTime(),
         "W-2": new Date(2025, 1-1, 22+1).getTime(),
       }
+      
+      const processMapDataRows = (mapDataRows, currentMapDate, regionID, currentDatePartyNameArray) => {
+        let isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
+        let isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
+        let isOffyear = mapDataRows[0][columnMap.isOffYear] == "TRUE"
+        
+        let candidateData = {}
+        
+        for (let rowNum in mapDataRows)
+        {
+          let row = mapDataRows[rowNum]
+        
+          let candidateName = row[columnMap.candidateName]
+          let candidateVotes = row[columnMap.candidateVotes] ? Math.round(parseFloat(row[columnMap.candidateVotes])) : null
+          let currentVoteshare = parseFloat(row[columnMap.voteshare])
+        
+          let currentPartyName = row[columnMap.partyID]
+          let foundParty = Object.values(politicalParties).find(party => {
+            let partyNames = cloneObject(party.getNames())
+            for (let nameNum in partyNames)
+            {
+              partyNames[nameNum] = partyNames[nameNum].toLowerCase()
+            }
+            return partyNames.includes(currentPartyName)
+          })
+        
+          if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
+          {
+            foundParty = politicalParties[currentPartyName]
+          }
+        
+          var currentPartyID
+          if (foundParty)
+          {
+            currentPartyID = foundParty.getID()
+          }
+          else
+          {
+            currentPartyID = IndependentGenericParty.getID()
+          }
+        
+          if (Object.keys(candidateData).includes(candidateName))
+          {
+            if (currentVoteshare > candidateData[candidateName].voteshare)
+            {
+              candidateData[candidateName].partyID = currentPartyID
+            }
+        
+            candidateData[candidateName].voteshare += currentVoteshare
+            if (candidateData[candidateName].votes && candidateVotes)
+            {
+              candidateData[candidateName].votes += candidateVotes
+            }
+          }
+          else
+          {
+            candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes}
+          }
+        }
+        
+        let voteshareSortedCandidateData = Object.values(candidateData)
+        voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
+        voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        if (!isCustomMap && voteshareCutoffMargin != null)
+        {
+          voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
+        }
+        
+        if (voteshareSortedCandidateData.length == 0)
+        {
+          console.log("No candidate data!", currentMapDate.getFullYear().toString(), regionID)
+          return
+        }
+        
+        let greatestMarginPartyID
+        let greatestMarginCandidateName
+        let topTwoMargin
+        
+        if (voteshareSortedCandidateData[0].voteshare != 0)
+        {
+          let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          if (topCandidateData.length == 0)
+          {
+            topCandidateData = [voteshareSortedCandidateData[0]]
+            if (voteshareSortedCandidateData[1])
+            {
+              topCandidateData.push(voteshareSortedCandidateData[1])
+            }
+          }
+        
+          greatestMarginPartyID = topCandidateData[0].partyID
+          greatestMarginCandidateName = topCandidateData[0].candidate
+          topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
+        }
+        else
+        {
+          greatestMarginPartyID = TossupParty.getID()
+          greatestMarginCandidateName = null
+          topTwoMargin = 0
+        }
+        
+        for (let candidateDataNum in voteshareSortedCandidateData)
+        {
+          let mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
+          if (mainPartyID.startsWith(customPartyIDPrefix))
+          {
+            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getCandidateName()
+          }
+          else
+          {
+            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+          }
+        }
+        
+        let partyIDToCandidateNames = {}
+        for (let partyCandidateName in candidateData)
+        {
+          partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
+        }
+        
+        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID, isRunoffElection)
+        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+      }
   
 	    for (let dateNum in mapDates)
 	    {
@@ -78,8 +201,6 @@ var JJUHouseMapType = new MapType(
     
 		    let currentMapDate = new Date(mapDates[dateNum])
 		    let currentDatePartyNameArray = {}
-    
-		    let isOffyear = rawDateData[0][columnMap.isOffyear] == "TRUE"
     
 		    for (let regionNum in regionNames)
 		    {
@@ -103,126 +224,21 @@ var JJUHouseMapType = new MapType(
 			      }
 			      continue
 			    }
-    
-			    let isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
-			    let isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
-    
-			    let candidateData = {}
-    
-			    for (let rowNum in mapDataRows)
-			    {
-			      let row = mapDataRows[rowNum]
-    
-			      let candidateName = row[columnMap.candidateName]
-			      let candidateVotes = row[columnMap.candidateVotes] ? Math.round(parseFloat(row[columnMap.candidateVotes])) : null
-			      let currentVoteshare = parseFloat(row[columnMap.voteshare])
-    
-			      let currentPartyName = row[columnMap.partyID]
-			      let foundParty = Object.values(politicalParties).find(party => {
-				      let partyNames = cloneObject(party.getNames())
-				      for (let nameNum in partyNames)
-				      {
-				        partyNames[nameNum] = partyNames[nameNum].toLowerCase()
-				      }
-				      return partyNames.includes(currentPartyName)
-			      })
-    
-			      if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
-			      {
-				      foundParty = politicalParties[currentPartyName]
-			      }
-    
-			      var currentPartyID
-			      if (foundParty)
-			      {
-				      currentPartyID = foundParty.getID()
-			      }
-			      else
-			      {
-				      currentPartyID = IndependentGenericParty.getID()
-			      }
-    
-			      if (Object.keys(candidateData).includes(candidateName))
-			      {
-				      if (currentVoteshare > candidateData[candidateName].voteshare)
-				      {
-				        candidateData[candidateName].partyID = currentPartyID
-				      }
-      
-				      candidateData[candidateName].voteshare += currentVoteshare
-				      if (candidateData[candidateName].votes && candidateVotes)
-				      {
-				        candidateData[candidateName].votes += candidateVotes
-				      }
-			      }
-			      else
-			      {
-				      candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes}
-			      }
-			    }
-    
-			    let voteshareSortedCandidateData = Object.values(candidateData)
-			    voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
-			    voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-			    if (!isCustomMap && voteshareCutoffMargin != null)
-			    {
-			      voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
-			    }
-    
-			    if (voteshareSortedCandidateData.length == 0)
-			    {
-			      console.log("No candidate data!", currentMapDate.getFullYear().toString(), regionToFind)
-			      continue
-			    }
-    
-			    let greatestMarginPartyID
-			    let greatestMarginCandidateName
-			    let topTwoMargin
-    
-			    if (voteshareSortedCandidateData[0].voteshare != 0)
-			    {
-			      let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
-			      if (topCandidateData.length == 0)
-			      {
-				      topCandidateData = [voteshareSortedCandidateData[0]]
-				      if (voteshareSortedCandidateData[1])
-				      {
-				        topCandidateData.push(voteshareSortedCandidateData[1])
-				      }
-			      }
-    
-			      greatestMarginPartyID = topCandidateData[0].partyID
-			      greatestMarginCandidateName = topCandidateData[0].candidate
-			      topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
-			    }
-			    else
-			    {
-			      greatestMarginPartyID = TossupParty.getID()
-			      greatestMarginCandidateName = null
-			      topTwoMargin = 0
-			    }
-    
-			    for (let candidateDataNum in voteshareSortedCandidateData)
-			    {
-			      let mainPartyID = voteshareSortedCandidateData[candidateDataNum].partyID
-			      if (mainPartyID.startsWith(customPartyIDPrefix))
-			      {
-				      currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getCandidateName()
-			      }
-			      else
-			      {
-				      currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
-			      }
-			    }
-    
-			    let partyIDToCandidateNames = {}
-			    for (let partyCandidateName in candidateData)
-			    {
-			      partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
-			    }
-    
-			    let mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind]] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], isRunoffElection)
-			    filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+          
+          if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
+          {
+            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            originalMapData.altText = "first round"
+            
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            runoffMapData.altData = originalMapData
+            
+            filteredDateData[regionNameToID[regionToFind]] = runoffMapData
+          }
+          else
+          {
+            filteredDateData[regionNameToID[regionToFind]] = processMapDataRows(mapDataRows, currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+          }
 	      }
     
 		    filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -268,25 +284,7 @@ var JJUHouseMapType = new MapType(
         let offYear = Object.values(fullFilteredMapData[mapDate])[0].offYear
         if (offYear && !offYearEnabled) { continue }
         
-        let runoff = Object.values(fullFilteredMapData[mapDate])[0].runoff
-      
-        if (!runoff)
-        {
-          filteredMapDates.push(parseInt(mapDate))
-        }
-        if (runoff)
-        {
-          for (let regionID in fullFilteredMapData[mapDate])
-          {
-            if (fullFilteredMapData[mapDate][regionID].runoff)
-            {
-              let originalMapData = cloneObject(fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID])
-              originalMapData.altText = "first round"
-              fullFilteredMapData[mapDate][regionID].altData = originalMapData
-              fullFilteredMapData[filteredMapDates[filteredMapDates.length-1]][regionID] = fullFilteredMapData[mapDate][regionID]
-            }
-          }
-        }
+        filteredMapDates.push(parseInt(mapDate))
       }
       
       mapDates = filteredMapDates
