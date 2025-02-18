@@ -5,7 +5,7 @@
    id="svgdata"
    style="overflow: visible"
    version="1.1"
-   sodipodi:docname="jju-regions-list-map.svg"
+   sodipodi:docname="jju-regions-list-9-map.svg"
    inkscape:version="1.2.2 (b0a8486, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,9 +21,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      showgrid="false"
-     inkscape:zoom="0.65699702"
-     inkscape:cx="444.44646"
-     inkscape:cy="409.43869"
+     inkscape:zoom="1.4987441"
+     inkscape:cx="805.34096"
+     inkscape:cy="405.67299"
      inkscape:window-width="1703"
      inkscape:window-height="980"
      inkscape:window-x="0"
@@ -115,6 +115,15 @@
        id="L8"
        x="901.05084"
        y="481.05087"
+       width="99.015305"
+       height="37.364265"
+       rx="5.60464"
+       ry="5.60464"
+       style="overflow:visible;stroke:#181922;stroke-width:2.10174px" />
+    <rect
+       id="L9"
+       x="901.05084"
+       y="531.05084"
        width="99.015305"
        height="37.364265"
        rx="5.60464"
@@ -212,6 +221,17 @@
          x="949.87994"
          y="507.20709"
          style="stroke-width:2.10174px">L8</tspan></text>
+    <text
+       id="L9-text"
+       x="949.87988"
+       y="556.83362"
+       xml:space="preserve"
+       text-anchor="middle"
+       style="font-weight:bold;font-size:22.4186px;text-align:center;overflow:visible;fill:#ffffff;stroke-width:2.10174px;-webkit-user-select:none"><tspan
+         id="tspan8988-2-59-0-9-3-3"
+         x="949.87988"
+         y="556.83362"
+         style="stroke-width:2.10174px">L9</tspan></text>
     <text
        id="W-text"
        x="548.73859"
