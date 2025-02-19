@@ -205,7 +205,7 @@ var JJUHouseMapType = new MapType(
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
         
-        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID, isRunoffElection)
+        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID)
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
@@ -316,36 +316,18 @@ var JJUHouseMapType = new MapType(
 	    return {mapData: fullFilteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
 	  }
   
-	  function mostRecentWinner(mapData, dateToStart, regionID, isRunoffElection)
+	  function mostRecentWinner(mapData, dateToStart, regionID)
 	  {
-	    var reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
+	    let reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
   
-	    var startYear = (new Date(parseInt(dateToStart))).getFullYear()
-  
-	    var shouldSkipNext = isRunoffElection || false // Skip first result if runoff (which should be primary)
-  
-	    for (var dateNum in reversedMapDates)
+	    for (let dateNum in reversedMapDates)
 	    {
 		    if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
     
-		    var currentYear = (new Date(parseInt(reversedMapDates[dateNum]))).getFullYear()
-    
-		    if (startYear-currentYear > 7) // Need to include runoffs, which may take place as late as January
-		    {
-		      return TossupParty.getID()
-		    }
-    
-		    var mapDataFromDate = mapData[reversedMapDates[dateNum]]
+		    let mapDataFromDate = mapData[reversedMapDates[dateNum]]
 		    if (regionID in mapDataFromDate)
 		    {
-          if (shouldSkipNext)
-          {
-            shouldSkipNext = false
-          }
-          else
-          {
-            return mapDataFromDate[regionID].partyID
-          }
+          return mapDataFromDate[regionID].partyID
 		    }
 	    }
   
