@@ -10,9 +10,9 @@ var JJUHouseMapType = new MapType(
     return 1
   },
   false,
-  3,
-  true,
-  true,
+  2,
+  false,
+  false,
   true,
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
@@ -86,8 +86,6 @@ var JJUHouseMapType = new MapType(
         let isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
         let isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
         let isOffyear = mapDataRows[0][columnMap.isOffyear] == "TRUE"
-        
-        console.log(currentMapDate, isOffyear, mapDataRows[0], columnMap.isOffyear)
         
         let candidateData = {}
         
@@ -339,45 +337,45 @@ var JJUHouseMapType = new MapType(
 	    let voteshareData
 	    switch (columnKey)
 	    {
-		  case "date":
-		  return mapDateString
-  
-		  case "candidateName":
-		  return candidateName
-  
-		  case "voteshare":
-		  voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
-		  if (voteshareData)
-		  {
-		    return voteshareData.voteshare/100.0
-		  }
-		  else if (regionData.partyID == partyID)
-		  {
-		    return regionData.margin/100.0
-		  }
-		  return 0
-  
-		  case "region":
-		  var trimmedRegionID = regionID.replace("-S", "")
-		  return getKeyByValue(regionNameToID, trimmedRegionID)
-  
-		  case "partyID":
-		  return partyID
-  
-		  case "isSpecial":
-		  return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
-  
-		  case "isRunoff":
-		  return (regionData.runoff ?? false).toString().toUpperCase()
-  
-		  case "isOffyear":
-		  return (regionData.offYear ?? false).toString().toUpperCase()
-  
-		  case "isDisabled":
-		  return (regionData.disabled ?? false).toString().toUpperCase()
-		  
-		  case "flip":
-		  return (regionData.flip ?? false).toString().toUpperCase()
+		    case "date":
+		    return mapDateString
+    
+		    case "candidateName":
+		    return candidateName
+    
+		    case "voteshare":
+		    voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+		    if (voteshareData)
+		    {
+		      return voteshareData.voteshare/100.0
+		    }
+		    else if (regionData.partyID == partyID)
+		    {
+		      return regionData.margin/100.0
+		    }
+		    return 0
+    
+		    case "region":
+		    var trimmedRegionID = regionID.replace("-S", "")
+		    return getKeyByValue(regionNameToID, trimmedRegionID)
+    
+		    case "partyID":
+		    return partyID
+    
+		    case "isSpecial":
+		    return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
+    
+		    case "isRunoff":
+		    return (regionData.runoff ?? false).toString().toUpperCase()
+    
+		    case "isOffyear":
+		    return (regionData.offYear ?? false).toString().toUpperCase()
+    
+		    case "isDisabled":
+		    return (regionData.disabled ?? false).toString().toUpperCase()
+		    
+		    case "flip":
+		    return (regionData.flip ?? false).toString().toUpperCase()
 	    }
 	  }
     
@@ -478,7 +476,6 @@ var JJUHouseMapType = new MapType(
 	    {
 		    date: "date",
 		    region: "region",
-		    seatClass: "class",
 		    isSpecial: "special",
 		    isRunoff: "runoff",
 		    isOffyear: "offyear",
@@ -563,7 +560,6 @@ var JJUHouseMapType = new MapType(
 	    {
 		    date: "date",
 		    region: "region",
-		    seatClass: "class",
 		    isSpecial: "special",
 		    isRunoff: "runoff",
 		    isOffyear: "offyear",
@@ -604,7 +600,7 @@ var JJUHouseMapType = new MapType(
 	  houseMapSources[CustomMapSource.getID()] = CustomMapSource
   
 	  const houseMapSourceIDs = {
-	    [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
+	    [allYearsCycle]: [PastElectionResultMapSource.getID()]
 	  }
 	  
 	  const kPastElectionsVsPastElections = 1
