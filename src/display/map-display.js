@@ -225,10 +225,14 @@ async function reloadForNewMapType(initialLoad)
   if (currentMapType.getCustomMapEnabled())
   {
     $("#editDoneButton").removeClass('topnavdisable')
+    $("#copyDropdownContent").removeClass('topnavdisable')
+    $("#copyDropdownContent").css("opacity", "100%")
   }
   else
   {
     $("#editDoneButton").addClass('topnavdisable')
+    $("#copyDropdownContent").addClass('topnavdisable')
+    $("#copyDropdownContent").css("opacity", "0%")
   }
 
   if (currentMapType.getCompareMapEnabled())
