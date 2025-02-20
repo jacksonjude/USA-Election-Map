@@ -43,16 +43,7 @@ var JJUHouseMapType = new MapType(
       shouldShowActive: (value) => {
         return value
       },
-    defaultValue: "hide", reloadType: MapSettingReloadType.display},
-    {id: "pieCurrentSeats", title: "🥧 Pie Held Seats", type: MapSettingType.optionCycle, options:
-      [
-        {id: "show", title: "Shown", value: true},
-        {id: "hide", title: "Hidden", value: false}
-      ],
-      shouldShowActive: (value) => {
-        return !value
-      },
-    defaultValue: "show", reloadType: MapSettingReloadType.display},
+    defaultValue: "hide", reloadType: MapSettingReloadType.display}
   ],
   () => {
 	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
