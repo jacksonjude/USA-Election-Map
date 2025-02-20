@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplayOnZoom, customDefaultMargins, customVotesharePrefix, customVoteshareSuffix)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplay, customDefaultMargins, customVotesharePrefix, customVoteshareSuffix)
   {
     this.id = id
     this.name = name
@@ -36,7 +36,7 @@ class MapSource
     this.overrideSVGPath = overrideSVGPath
     this.shouldSetDisabledWorthToZero = shouldSetDisabledWorthToZero == null ? false : true
     this.shouldUseOriginalMapDataForTotalsPieChart = shouldUseOriginalMapDataForTotalsPieChart == null ? false : shouldUseOriginalMapDataForTotalsPieChart
-    this.shouldForcePopularVoteDisplayOnZoom = shouldForcePopularVoteDisplayOnZoom == null ? false : shouldForcePopularVoteDisplayOnZoom
+    this.shouldForcePopularVoteDisplay = shouldForcePopularVoteDisplay == null ? false : shouldForcePopularVoteDisplay
     this.customDefaultMargins = customDefaultMargins
     this.customVoteshareSuffix = customVoteshareSuffix
     this.customVotesharePrefix = customVotesharePrefix
@@ -72,7 +72,7 @@ class MapSource
   // overrideSVGPath,
   // shouldSetDisabledWorthToZero
   // shouldUseOriginalMapDataForTotalsPieChart
-  // shouldForcePopularVoteDisplayOnZoom
+  // shouldForcePopularVoteDisplay
   // customDefaultMargins
   // customVotesharePrefix
   // customVoteshareSuffix
@@ -524,9 +524,9 @@ class MapSource
     return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
   }
 
-  getShouldForcePopularVoteDisplayOnZoom()
+  getShouldForcePopularVoteDisplay()
   {
-    return this.shouldForcePopularVoteDisplayOnZoom
+    return this.shouldForcePopularVoteDisplay
   }
   
   getCustomDefaultMargins()

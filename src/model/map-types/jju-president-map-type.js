@@ -404,7 +404,7 @@ var JJUPresidentMapType = new MapType(
       null, // overrideSVGPath,
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      null, // shouldForcePopularVoteDisplayOnZoom
+      true, // shouldForcePopularVoteDisplay
       {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
     )
   

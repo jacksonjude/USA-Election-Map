@@ -810,7 +810,7 @@ var USAGovernorMapType = new MapType(
       null, // overrideSVGPath,
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      null, // shouldForcePopularVoteDisplayOnZoom
+      null, // shouldForcePopularVoteDisplay
       {safe: 90, likely: 75, lean: 55, tilt: Number.MIN_VALUE}, // customDefaultMargins
       '', // customVotesharePrefix
       '¢', // customVoteshareSuffix

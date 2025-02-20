@@ -1430,7 +1430,10 @@ var USAPresidentMapType = new MapType(
         }
         
         return "svg-sources/usa-presidential-map.svg"
-      } // overrideSVGPath
+      }, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      ViewingState.zooming, // shouldForcePopularVoteDisplay
     )
     
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
@@ -1610,7 +1613,7 @@ var USAPresidentMapType = new MapType(
       null, // overrideSVGPath,
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      null, // shouldForcePopularVoteDisplayOnZoom
+      null, // shouldForcePopularVoteDisplay
       {safe: 90, likely: 75, lean: 55, tilt: Number.MIN_VALUE}, // customDefaultMargins
       '', // customVotesharePrefix
       '¢', // customVoteshareSuffix
@@ -1885,7 +1888,7 @@ var USAPresidentMapType = new MapType(
       getPresidentialSVGFromDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      true // shouldForcePopularVoteDisplayOnZoom
+      ViewingState.zooming // shouldForcePopularVoteDisplay
     )
 
     var HistoricalElectionResultMapSource = new MapSource(

@@ -643,7 +643,7 @@ function updateTotalsPieChart()
 
   let popularVoteData = getPopularVotePartyVoteshareData(regionDataArray, shouldGetOriginalMapData)
   const pieStyle = currentMapType.getMapSettings().pieStyle
-  let showingPopularVote = popularVoteData && (pieStyle == "popularVote" || pieStyle == "all" || (currentViewingState == ViewingState.zooming && currentMapSource.getShouldForcePopularVoteDisplayOnZoom()))
+  let showingPopularVote = popularVoteData && (pieStyle == "popularVote" || pieStyle == "all" || (currentMapSource.getShouldForcePopularVoteDisplay() === true || currentMapSource.getShouldForcePopularVoteDisplay() === currentViewingState))
   if (showingPopularVote)
   {
     let sortedPopularVoteArray = []

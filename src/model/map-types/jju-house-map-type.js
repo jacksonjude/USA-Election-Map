@@ -528,7 +528,7 @@ var JJUHouseMapType = new MapType(
       }, // overrideSVGPath,
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      null, // shouldForcePopularVoteDisplayOnZoom
+      null, // shouldForcePopularVoteDisplay
       {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
 	  )
   
