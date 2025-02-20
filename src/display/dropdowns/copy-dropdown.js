@@ -1,7 +1,3 @@
-const EditingMode = {
-  margin: 0,
-  voteshare: 1
-}
 var currentEditingMode = EditingMode.margin
 
 function selectEditMode(newEditingMode)

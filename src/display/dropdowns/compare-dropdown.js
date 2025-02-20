@@ -108,11 +108,6 @@ async function loadComparePreset(comparePresetNum)
   }
 }
 
-const CompareSortMode = {
-  voteshare: 0,
-  shiftMargin: 1
-}
-
 var compareSortMode = CompareSortMode.voteshare
 
 function toggleCompareSortMode(div)

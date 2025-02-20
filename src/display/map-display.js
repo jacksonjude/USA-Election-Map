@@ -76,25 +76,10 @@ var lastIndicatorCircleProgress
 const downloadIndicatorColor = '#3498db'
 const csvParseIndicatorColor = '#3ac635'
 
-const LoaderType = {
-  hidden: 0,
-  standard: 1,
-  progress: 2
-}
-
 var loaderStack = [LoaderType.hidden]
 
-const ViewingState = {
-  viewing: 0,
-  zooming: 1,
-  splitVote: 2
-}
 var currentViewingState
 
-const EditingState = {
-  viewing: 2,
-  editing: 3
-}
 var currentEditingState
 
 var currentMapZoomRegion
