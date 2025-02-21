@@ -11,8 +11,8 @@ var JJUPresidentMapType = new MapType(
   },
   false,
   2,
-  false,
-  false,
+  true,
+  true,
   true,
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor"},
   [/.+-S/],
@@ -157,20 +157,20 @@ var JJUPresidentMapType = new MapType(
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
-      for (let dateNum in mapDates)
+      for (let mapDateTime of cloneObject(mapDates))
       {
-        let rawDateData = rawMapData[mapDates[dateNum]]
-        let filteredDateData = filteredMapData[mapDates[dateNum]] ?? {}
+        let rawDateData = rawMapData[mapDateTime]
+        let filteredDateData = filteredMapData[mapDateTime] ?? {}
     
-        let currentMapDate = new Date(mapDates[dateNum])
+        let currentMapDate = new Date(mapDateTime)
         let currentDatePartyNameArray = {}
     
-        for (let regionNum in regionNames)
+        for (let regionName of regionNames)
         {
-          let regionToFind = regionNames[regionNum]
+          let regionID = regionNameToID[regionName]
           
           let mapDataRows = rawDateData.filter(row => {
-            return row[columnMap.region] == regionToFind
+            return row[columnMap.region] == regionName
           })
     
           if (mapDataRows.length == 0)
@@ -183,35 +183,35 @@ var JJUPresidentMapType = new MapType(
                 partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
               }
         
-              filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+              filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
             }
             continue
           }
           
           if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
           {
-            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
             // originalMapData.altText = "first round"
             originalMapData.isFirstRound = true
-            filteredDateData[regionNameToID[regionToFind]] = originalMapData
+            filteredDateData[regionID] = originalMapData
             
-            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
             // runoffMapData.altData = originalMapData
             
-            let instantRunoffDate = mapDates[dateNum]+1
+            let instantRunoffDate = mapDateTime+1
             if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
-            filteredMapData[instantRunoffDate][regionNameToID[regionToFind]] = runoffMapData
+            filteredMapData[instantRunoffDate][regionID] = runoffMapData
             
             if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
           }
           else
           {
-            filteredDateData[regionNameToID[regionToFind]] = processMapDataRows(mapDataRows, currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray)
+            filteredDateData[regionID] = processMapDataRows(mapDataRows, currentMapDate, regionID, currentDatePartyNameArray)
           }
         }
     
-        filteredMapData[mapDates[dateNum]] = filteredDateData
-        partyNameData[mapDates[dateNum]] = currentDatePartyNameArray
+        filteredMapData[mapDateTime] = filteredDateData
+        partyNameData[mapDateTime] = currentDatePartyNameArray
       }
       
       let firstRoundEnabled = currentMapType.getMapSettingValue("firstRound")
@@ -263,17 +263,16 @@ var JJUPresidentMapType = new MapType(
         voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
         if (voteshareData)
         {
-          return voteshareData.voteshare/100.0
+          return voteshareData.voteshare
         }
         else if (regionData.partyID == partyID)
         {
-          return regionData.margin/100.0
+          return regionData.margin
         }
         return 0
     
         case "region":
-        var trimmedRegionID = regionID.replace("-S", "")
-        return getKeyByValue(regionNameToID, trimmedRegionID)
+        return getKeyByValue(regionNameToID, regionID)
     
         case "partyID":
         return partyID
@@ -453,7 +452,13 @@ var JJUPresidentMapType = new MapType(
       customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
       true, // isCustomMap
       false, // shouldClearDisabled
-      null // shouldShowVoteshare
+      null, // shouldShowVoteshare
+      null, // voteshareCutoffMargin
+      null, // overrideSVGPath,
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      true, // shouldForcePopularVoteDisplay
+      {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
     )
   
     var todayDate = new Date()

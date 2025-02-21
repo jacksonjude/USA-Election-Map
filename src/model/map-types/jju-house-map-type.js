@@ -11,7 +11,7 @@ var JJUHouseMapType = new MapType(
   },
   false,
   2,
-  false,
+  true,
   false,
   true,
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
@@ -198,12 +198,12 @@ var JJUHouseMapType = new MapType(
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
-	    for (let dateNum in mapDates)
+	    for (let mapDateTime of mapDates)
 	    {
-		    let rawDateData = rawMapData[mapDates[dateNum]]
+		    let rawDateData = rawMapData[mapDateTime]
 		    let filteredDateData = {}
     
-		    let currentMapDate = new Date(mapDates[dateNum])
+		    let currentMapDate = new Date(mapDateTime)
 		    let currentDatePartyNameArray = {}
         
         let coalitionDataRows = rawDateData.filter(row => {
@@ -215,17 +215,17 @@ var JJUHouseMapType = new MapType(
           coalitionPartyMap[coalitionPartyMapping[columnMap.candidateName]] = coalitionPartyMapping[columnMap.partyID]
         }
     
-		    for (let regionNum in regionNames)
+		    for (let regionName of regionNames)
 		    {
-		      let regionToFind = regionNames[regionNum]
+          let regionID = regionNameToID[regionName]
 		      
 			    let mapDataRows = rawDateData.filter(row => {
-			      return row[columnMap.region] == regionToFind
+			      return row[columnMap.region] == regionName
 			    })
     
 			    if (mapDataRows.length == 0)
 			    {
-			      if (isCustomMap)
+			      if (isCustomMap && (!regionRetireExceptions[regionID] || currentMapDate <= regionRetireExceptions[regionID]))
 			      {
 			        let partyIDToCandidateNames = {}
 			        for (let partyCandidateName in candidateNameToPartyIDMap)
@@ -233,29 +233,29 @@ var JJUHouseMapType = new MapType(
 			          partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
 			        }
         
-			        filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+			        filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
 			      }
 			      continue
 			    }
           
           if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
           {
-            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
+            let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionID, currentDatePartyNameArray, coalitionPartyMap)
             originalMapData.altText = "first round"
             
-            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionID, currentDatePartyNameArray, coalitionPartyMap)
             runoffMapData.altData = originalMapData
             
-            filteredDateData[regionNameToID[regionToFind]] = runoffMapData
+            filteredDateData[regionID] = runoffMapData
           }
           else
           {
-            filteredDateData[regionNameToID[regionToFind]] = processMapDataRows(mapDataRows, currentMapDate, regionNameToID[regionToFind], currentDatePartyNameArray, coalitionPartyMap)
+            filteredDateData[regionID] = processMapDataRows(mapDataRows, currentMapDate, regionID, currentDatePartyNameArray, coalitionPartyMap)
           }
 	      }
     
-		    filteredMapData[mapDates[dateNum]] = filteredDateData
-		    partyNameData[mapDates[dateNum]] = currentDatePartyNameArray
+		    filteredMapData[mapDateTime] = filteredDateData
+		    partyNameData[mapDateTime] = currentDatePartyNameArray
 	    }
   
 	    let fullFilteredMapData = cloneObject(filteredMapData)
@@ -338,23 +338,19 @@ var JJUHouseMapType = new MapType(
 		    voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
 		    if (voteshareData)
 		    {
-		      return voteshareData.voteshare/100.0
+		      return voteshareData.voteshare
 		    }
 		    else if (regionData.partyID == partyID)
 		    {
-		      return regionData.margin/100.0
+		      return regionData.margin
 		    }
 		    return 0
     
 		    case "region":
-		    var trimmedRegionID = regionID.replace("-S", "")
-		    return getKeyByValue(regionNameToID, trimmedRegionID)
+		    return getKeyByValue(regionNameToID, regionID)
     
 		    case "partyID":
 		    return partyID
-    
-		    case "isSpecial":
-		    return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
     
 		    case "isRunoff":
 		    return (regionData.runoff ?? false).toString().toUpperCase()
@@ -369,6 +365,28 @@ var JJUHouseMapType = new MapType(
 		    return (regionData.flip ?? false).toString().toUpperCase()
 	    }
 	  }
+    
+    function getHouseSVGByDate(dateTime)
+    {
+      let mapDate = new Date(dateTime)
+      
+      if (mapDate < new Date(2024, 10-1, 1))
+      {
+        return "svg-sources/jju-regions-list-9-map.svg"
+      }
+      else if (mapDate < new Date(2025, 1-1, 1))
+      {
+        return "svg-sources/jju-regions-list-map.svg"
+      }
+      else if (mapDate < new Date(2025, 2-1, 1))
+      {
+        return "svg-sources/jju-regions-list-stv-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-districts-list-map.svg"
+      }
+    }
     
     var electionDateToSpreadsheetData = {
       1724223600000: {
@@ -505,27 +523,7 @@ var JJUHouseMapType = new MapType(
 	    null, // shouldClearDisabled
 	    true, // shouldShowVoteshare
 	    1.0, // voteshareCutoffMargin
-      async function(dateTime)
-      {
-        let mapDate = new Date(dateTime)
-        
-        if (mapDate < new Date(2024, 10-1, 1))
-        {
-          return "svg-sources/jju-regions-list-9-map.svg"
-        }
-        else if (mapDate < new Date(2025, 1-1, 1))
-        {
-          return "svg-sources/jju-regions-list-map.svg"
-        }
-        else if (mapDate < new Date(2025, 2-1, 1))
-        {
-          return "svg-sources/jju-regions-list-stv-map.svg"
-        }
-        else
-        {
-          return "svg-sources/jju-districts-list-map.svg"
-        }
-      }, // overrideSVGPath,
+      getHouseSVGByDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
       null, // shouldForcePopularVoteDisplay
@@ -580,7 +578,13 @@ var JJUHouseMapType = new MapType(
 	    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
 	    true, // isCustomMap
 	    false, // shouldClearDisabled
-	    null // shouldShowVoteshare
+	    null, // shouldShowVoteshare
+      null, // voteshareCutoffMargin
+      getHouseSVGByDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      null, // shouldForcePopularVoteDisplay
+      {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
 	  )
   
 	  var todayDate = new Date()
@@ -591,7 +595,7 @@ var JJUHouseMapType = new MapType(
 	  houseMapSources[CustomMapSource.getID()] = CustomMapSource
   
 	  const houseMapSourceIDs = {
-	    [allYearsCycle]: [PastElectionResultMapSource.getID()]
+	    [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
 	  }
 	  
 	  const kPastElectionsVsPastElections = 1
