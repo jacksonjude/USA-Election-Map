@@ -345,6 +345,12 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
   {
     generateFlipPatternsFromPartyMap(politicalParties)
   }
+  
+  let shadowFilter = document.createElement('filter')
+  document.getElementById("svgdefinitions").appendChild(shadowFilter)
+  shadowFilter.outerHTML = '<filter id="text-shadow"><feDropShadow dx="0.1" dy="0.2" stdDeviation="0.1" /></filter>'
+
+  setTimeout(() => $("#text").css('filter', 'url(#text-shadow)'), 0)
 
   removeLoader(LoaderType.standard)
 
