@@ -623,6 +623,8 @@ class MapSource
       let mapDateString = (mapDateObject.getMonth()+1) + "/" + mapDateObject.getDate() + "/" + mapDateObject.getFullYear()
       for (let regionID in mapData[mapDate])
       {
+        if (regionID == nationalPopularVoteID && this.editingMode == EditingMode.margin) { continue }
+        
         let regionData = mapData[mapDate][regionID]
 
         let candidatesToAdd = regionData.partyVotesharePercentages && this.editingMode == EditingMode.voteshare ? regionData.partyVotesharePercentages.reduce((candidateMap, partyPercentage) =>
