@@ -341,7 +341,7 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
   document.getElementById("svgdefinitions").appendChild(shadowFilter)
   shadowFilter.outerHTML = '<filter id="text-shadow"><feDropShadow dx="0.1" dy="0.2" stdDeviation="0.1" /></filter>'
   
-  setTimeout(() => $("#text text").css('filter', 'url(#text-shadow)'), 0)
+  setTimeout(() => $("#text text tspan").css('filter', 'url(#text-shadow)'), 0)
 
   removeLoader(LoaderType.standard)
 
