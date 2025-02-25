@@ -3126,3 +3126,6 @@ date,region,state_po,special,runoff,offyear,candidate,party,writein,voteshare,ca
 11/05/2024,Washington,WA,FALSE,FALSE,FALSE,Reichert,republican,FALSE,0.4437413610451195,1709818,3853186,JJCooley
 11/05/2024,West Virginia,WV,FALSE,FALSE,FALSE,Williams,democratic,FALSE,0.3157877688520342,233976,740928,JJCooley
 11/05/2024,West Virginia,WV,FALSE,FALSE,FALSE,Morrisey,republican,FALSE,0.6198982897123607,459300,740928,JJCooley
+11/05/2024,National Popular Vote,NPV,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4580193472,9242906,20180165,JJCooley
+11/05/2024,National Popular Vote,NPV,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4971206628,10031977,20180165,JJCooley
+11/05/2024,National Popular Vote,NPV,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.02184650126,440866,20180165,JJCooley

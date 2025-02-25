@@ -4927,12 +4927,12 @@ date,region,state_po,candidate,party,voteshare,candidatevotes,totalvotes,ev,vers
 11/5/2024,Wyoming,WY,Harris,democratic,25.84185721506943,69527,269048,,JJCooley
 11/5/2024,Wyoming,WY,Oliver,libertarian,1.5584579703249979,4193,269048,,JJCooley
 11/5/2024,Wyoming,WY,Trump,republican,71.59800481698433,192633,269048,,JJCooley
-11/5/2024,National Popular Vote,NPV,Harris,democratic,0.4832707716557531,75017613,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Stein,green,0.005041076520347716,782521,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Sonski,independent,0.000004522352393461768,702,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Terry,independent,0.000005230983110385977,812,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,None,independent,0.00012642616199670542,19625,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,West,independent,0.0004631223839971033,71890,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Kennedy,independent,0.004872757398785937,756393,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Oliver,libertarian,0.004131175353524752,641278,155238302,,JJCooley
-11/5/2024,National Popular Vote,NPV,Trump,republican,0.49799075168628176,77302580,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Harris,democratic,48.3270771656,75017613,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Stein,green,0.504107652,782521,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Sonski,independent,0.0004522352393,702,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Terry,independent,0.000523098311,812,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,None,independent,0.0126426162,19625,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,West,independent,0.0463122384,71890,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Kennedy,independent,0.4872757399,756393,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Oliver,libertarian,0.4131175354,641278,155238302,,JJCooley
+11/5/2024,National Popular Vote,NPV,Trump,republican,49.7990751686,77302580,155238302,,JJCooley

@@ -4293,3 +4293,5 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/5/2024,West Virginia,WV,1,FALSE,FALSE,FALSE,Justice,republican,FALSE,0.6875453054826656,514079,747702,JJCooley
 11/5/2024,Wyoming,WY,1,FALSE,FALSE,FALSE,Morrow,democratic,FALSE,0.24124211657997743,63727,264162,JJCooley
 11/5/2024,Wyoming,WY,1,FALSE,FALSE,FALSE,Barrasso,republican,FALSE,0.7511224173045328,198418,264162,JJCooley
+11/5/2024,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.490662057,55934581,113998179,JJCooley
+11/5/2024,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4772204651,54402264,113998179,JJCooley

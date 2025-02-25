@@ -33173,3 +33173,5 @@ date,region,district,candidate,party,voteshare,candidatevotes,totalvotes
 11/5/2024,WV,PV,republican,republican,68.68678347692610,496681,723110
 11/5/2024,WY,0,Cameron,democratic,23.37228842922130,60778,260043
 11/5/2024,WY,0,Hageman,republican,71.0190237768369,184680,260043
+11/5/2024,NPV,0,Democrat,democrat,47.8339509495,70786229,147983237
+11/5/2024,NPV,0,Republican,republican,50.5644102109,74826851,147983237
