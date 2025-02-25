@@ -24,6 +24,7 @@ var USAPresidentMapType = new MapType(
   5,
   true,
   true,
+  false,
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","DC":"District of Columbia","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME-D1":"ME-1","ME-D2":"ME-2","ME-AL":"Maine","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE-D1":"NE-1","NE-D2":"NE-2","NE-D3":"NE-3","NE-AL":"Nebraska","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
@@ -367,6 +368,7 @@ var USAPresidentMapType = new MapType(
             var candidateName = row[columnMap.candidateName]
             var currentPartyName = row[columnMap.partyID]
             var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
+            var currentCandidateVotes = row[columnMap.candidateVotes] ? parseInt(row[columnMap.candidateVotes]) : null
             var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : null
             var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
@@ -415,6 +417,11 @@ var USAPresidentMapType = new MapType(
               }
 
               candidateData[candidateName].voteshare += currentVoteshare
+              if (currentCandidateVotes != null)
+              {
+                if (!candidateData[candidateName].votes) candidateData[candidateName].votes = 0
+                candidateData[candidateName].votes += currentCandidateVotes
+              }
               if (candidateData[candidateName].electoralVotes != null)
               {
                 candidateData[candidateName].electoralVotes += currentElectoralVotes ? currentElectoralVotes : 0
@@ -422,12 +429,12 @@ var USAPresidentMapType = new MapType(
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, electoralVotes: currentElectoralVotes, order: currentOrder}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: currentCandidateVotes, electoralVotes: currentElectoralVotes, order: currentOrder}
             }
           }
 
           var voteshareSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
-            return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare, order: singleCandidateData.order}
+            return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare, votes: singleCandidateData.votes, order: singleCandidateData.order}
           })
           voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
           voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -1832,6 +1839,7 @@ var USAPresidentMapType = new MapType(
         date: "date",
         region: "region",
         percentAdjusted: "voteshare",
+        candidateVotes: "candidatevotes",
         electoralVotes: "ev",
         partyID: "party",
         partyCandidateName: "candidate",
@@ -2201,17 +2209,15 @@ var USAPresidentMapType = new MapType(
 
     const presidentialMapCycles = [2024, 2020]
     const presidentialMapSourceIDs = {
-      2024: [CNNResults2024MapSource.getID(), FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
+      2024: [FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
       2020: [FiveThirtyEightPollAverage2020MapSource.getID(), FiveThirtyEightProjection2020MapSource.getID(), CookProjection2020MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
-    const kCNNVs538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const kPastElectionsVs538Projection = 3
+    const kPastElectionsVsPastElections = 1
+    const kPastElectionsVs538Projection = 2
 
     var defaultPresidentialCompareSourceIDs = {}
-    defaultPresidentialCompareSourceIDs[kCNNVs538Projection] = [CNNResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjection2024MapSource.getID()]
 

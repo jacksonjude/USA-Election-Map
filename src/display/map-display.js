@@ -974,6 +974,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
     regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
     regionData.reportingPercent = currentMapDataForDate[regionNum].reportingPercent
+    regionData.totalVotes = currentMapDataForDate[regionNum].totalVotes
     regionData.altData = currentMapDataForDate[regionNum].altData
 
     updateRegionFillColors(regionsToFill, regionData, false)
