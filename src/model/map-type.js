@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldListProjectionsFirst, shouldReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldListProjectionsFirst, shouldAlwaysReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
   {
     this.id = id
     this.name = name
@@ -14,7 +14,7 @@ class MapType
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
     this.shouldListProjectionsFirst = shouldListProjectionsFirst
-    this.shouldReorderOutlines = shouldReorderOutlines
+    this.shouldAlwaysReorderOutlines = shouldAlwaysReorderOutlines
 
     this.regionIDToName = regionIDToName
     this.regionsToHideOnDisable = regionsToHideOnDisable
@@ -133,9 +133,9 @@ class MapType
     return this.compareMapEnabled
   }
   
-  getShouldReorderOutlines()
+  getShouldAlwaysReorderOutlines()
   {
-    return this.shouldReorderOutlines
+    return this.shouldAlwaysReorderOutlines
   }
 
   getMapSources(selfArg)

@@ -13,6 +13,7 @@ var JJUPresidentMapType = new MapType(
   2,
   true,
   true,
+  false,
   true,
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor"},
   [/.+-S/],
