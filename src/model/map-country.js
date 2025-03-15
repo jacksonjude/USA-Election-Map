@@ -2,30 +2,30 @@ class MapCountry
 {
   constructor(id, name, shortName, iconURL)
   {
-	this.id = id
-	this.name = name
-	this.shortName = shortName
-	this.iconURL = iconURL
+    this.id = id
+    this.name = name
+    this.shortName = shortName
+    this.iconURL = iconURL
   }
 
   getID()
   {
-	return this.id
+    return this.id
   }
 
   getName()
   {
-	return this.name
+    return this.name
   }
 
   getShortName()
   {
-	return this.shortName
+    return this.shortName
   }
 
   getIconURL()
   {
-	return this.iconURL
+    return this.iconURL
   }
   
   setMapTypes(mapTypes)
