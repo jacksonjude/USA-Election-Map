@@ -1,0 +1,11 @@
+date,region,candidate,party,offyear,runoff,voteshare
+3/9/2025,North,Dave Attempt,progressive,FALSE,FALSE,52.38
+3/9/2025,North,Alex,independent,FALSE,FALSE,47.62
+3/9/2025,East,Josephist,alliance,FALSE,FALSE,45.45
+3/9/2025,East,Ross Perot,independent,FALSE,FALSE,36.36
+3/9/2025,East,Copperhead,alliance,FALSE,FALSE,18.18
+3/9/2025,East,Josephist,alliance,FALSE,TRUE,54.55
+3/9/2025,East,Ross Perot,independent,FALSE,TRUE,45.45
+3/9/2025,West,Nath,liberal,FALSE,FALSE,57.14
+3/9/2025,West,Srawyer02,alliance,FALSE,FALSE,42.86
+3/9/2025,South,Nuss,labour,FALSE,FALSE,100
