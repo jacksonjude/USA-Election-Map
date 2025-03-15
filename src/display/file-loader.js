@@ -79,7 +79,7 @@ function jsonFileLoaded(e)
 
   if (jsonMapData.customParties)
   {
-    for (partyNum in jsonMapData.customParties)
+    for (let partyNum in jsonMapData.customParties)
     {
       var currentParty = jsonMapData.customParties[partyNum]
       politicalParties[currentParty.id] = new PoliticalParty(
