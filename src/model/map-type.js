@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldListProjectionsFirst, shouldReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
   {
     this.id = id
     this.name = name
@@ -13,6 +13,7 @@ class MapType
     this.secondarySliderIncrement = secondarySliderIncrement
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
+    this.shouldListProjectionsFirst = shouldListProjectionsFirst
     this.shouldReorderOutlines = shouldReorderOutlines
 
     this.regionIDToName = regionIDToName
@@ -153,9 +154,18 @@ class MapType
         return parseInt(pair2[0])-parseInt(pair1[0])
       }).flatMap(pair => pair[1])
     }
-    else
+    else if (this.shouldPutProjectionsFirst)
     {
       return this.mapSourceIDs[cycle].concat(this.mapSourceIDs[allYearsCycle])
+    }
+    else
+    {
+      let sourceIDs = [
+        ...(this.mapSourceIDs[allYearsCycle].filter(sourceID => sourceID != this.customSourceID)),
+        ...this.mapSourceIDs[cycle]
+      ]
+      if (this.customMapEnabled) sourceIDs.push(this.customSourceID)
+      return sourceIDs
     }
   }
 

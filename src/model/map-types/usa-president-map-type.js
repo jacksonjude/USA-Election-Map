@@ -368,6 +368,7 @@ var USAPresidentMapType = new MapType(
             var candidateName = row[columnMap.candidateName]
             var currentPartyName = row[columnMap.partyID]
             var currentVoteshare = parseFloat(row[columnMap.percentAdjusted])
+            var currentCandidateVotes = row[columnMap.candidateVotes] ? parseInt(row[columnMap.candidateVotes]) : null
             var currentElectoralVotes = row[columnMap.electoralVotes] ? parseInt(row[columnMap.electoralVotes]) : null
             var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
@@ -416,6 +417,11 @@ var USAPresidentMapType = new MapType(
               }
 
               candidateData[candidateName].voteshare += currentVoteshare
+              if (currentCandidateVotes != null)
+              {
+                if (!candidateData[candidateName].votes) candidateData[candidateName].votes = 0
+                candidateData[candidateName].votes += currentCandidateVotes
+              }
               if (candidateData[candidateName].electoralVotes != null)
               {
                 candidateData[candidateName].electoralVotes += currentElectoralVotes ? currentElectoralVotes : 0
@@ -423,12 +429,12 @@ var USAPresidentMapType = new MapType(
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, electoralVotes: currentElectoralVotes, order: currentOrder}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: currentCandidateVotes, electoralVotes: currentElectoralVotes, order: currentOrder}
             }
           }
 
           var voteshareSortedCandidateData = Object.values(candidateData).map(singleCandidateData => {
-            return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare, order: singleCandidateData.order}
+            return {candidate: singleCandidateData.candidate, partyID: singleCandidateData.partyID, voteshare: singleCandidateData.voteshare, votes: singleCandidateData.votes, order: singleCandidateData.order}
           })
           voteshareSortedCandidateData = voteshareSortedCandidateData.filter((candData) => !isNaN(candData.voteshare))
           voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -1439,8 +1445,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
       "538-2020-Presidential-PollAvg", // id
       "538 Poll Avg", // name
-      "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv", // dataURL
-      "https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
+      "./csv-sources/538/2020_presidential_poll_averages.csv", // dataURL
+      "https://web.archive.org/web/20250307184126/https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "modeldate",
@@ -1469,8 +1475,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightProjection2020MapSource = new MapSource(
       "538-2020-Presidential-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
+      "./csv-sources/538/2020_presidential_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250305142028/https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "modeldate",
@@ -1500,8 +1506,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightProjection2024MapSource = new MapSource(
       "538-2024-Presidential-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/", // homepageURL
+      {url: "./csv-sources/538/2024_pres_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250306102133/https://projects.fivethirtyeight.com/2024-election-forecast/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",
@@ -1836,6 +1842,7 @@ var USAPresidentMapType = new MapType(
         date: "date",
         region: "region",
         percentAdjusted: "voteshare",
+        candidateVotes: "candidatevotes",
         electoralVotes: "ev",
         partyID: "party",
         partyCandidateName: "candidate",
@@ -2205,17 +2212,15 @@ var USAPresidentMapType = new MapType(
 
     const presidentialMapCycles = [2024, 2020]
     const presidentialMapSourceIDs = {
-      2024: [CNNResults2024MapSource.getID(), FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
+      2024: [FiveThirtyEightProjection2024MapSource.getID(), PolymarketPrices2024MapSource.getID()],
       2020: [FiveThirtyEightPollAverage2020MapSource.getID(), FiveThirtyEightProjection2020MapSource.getID(), CookProjection2020MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), HistoricalElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
-    const kCNNVs538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const kPastElectionsVs538Projection = 3
+    const kPastElectionsVsPastElections = 1
+    const kPastElectionsVs538Projection = 2
 
     var defaultPresidentialCompareSourceIDs = {}
-    defaultPresidentialCompareSourceIDs[kCNNVs538Projection] = [CNNResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultPresidentialCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightProjection2024MapSource.getID()]
 

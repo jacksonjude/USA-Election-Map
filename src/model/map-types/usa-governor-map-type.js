@@ -138,7 +138,7 @@ var USAGovernorMapType = new MapType(
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
 
-        mapData[mapDate][regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent}
+        mapData[mapDate][regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
       for (let regionID of Object.values(regionNameToID))
@@ -401,6 +401,7 @@ var USAGovernorMapType = new MapType(
             var candidateName = row[columnMap.candidateName]
             var currentVoteshare = parseFloat(row[columnMap.voteshare])*100
             var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
+            var candidateVotes = parseInt(row[columnMap.candidateVotes])
 
             var currentPartyName = row[columnMap.partyID]
             var foundParty = Object.values(politicalParties).find(party => {
@@ -435,10 +436,11 @@ var USAGovernorMapType = new MapType(
               }
 
               candidateData[candidateName].voteshare += currentVoteshare
+              candidateData[candidateName].votes += candidateVotes
             }
             else
             {
-              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, order: currentOrder}
+              candidateData[candidateName] = {candidate: candidateName, partyID: currentPartyID, voteshare: currentVoteshare, votes: candidateVotes, order: currentOrder}
             }
           }
 
@@ -819,8 +821,8 @@ var USAGovernorMapType = new MapType(
     var FiveThirtyEightGovernorProjection2022MapSource = new MapSource(
       "538-2022-Governor-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/governor_state_toplines_2022.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/governor/", // homepageURL
+      "./csv-sources/538/2022_governor_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/governor/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",
@@ -1004,7 +1006,8 @@ var USAGovernorMapType = new MapType(
         isOffyear: "offyear",
         candidateName: "candidate",
         partyID: "party",
-        voteshare: "voteshare"
+        voteshare: "voteshare",
+        candidateVotes: "candidatevotes"
       }, // columnMap
       null, // cycleYear
       null, // candidateNameToPartyIDMap
@@ -1115,7 +1118,7 @@ var USAGovernorMapType = new MapType(
     
     const governorMapCycles = [2024, 2022]
     const governorMapSourceIDs = {
-      2024: [CNNGovernorResults2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      2024: [PolymarketSenate2024MapSource.getID()],
       2022: [FiveThirtyEightGovernorProjection2022MapSource.getID(), LTEGovernorProjection2022MapSource.getID(), CookGovernorProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }

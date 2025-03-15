@@ -146,7 +146,7 @@ var USAHouseMapType = new MapType(
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
 
-        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent}
+        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
       for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
@@ -682,7 +682,8 @@ var USAHouseMapType = new MapType(
 
         const districtBoxesPerLine = 6
 
-        var boundingBox = $("#svgdata")[0].getBBox()
+        let boundingBoxParts = $("#svgdata")[0].getAttribute("data-viewBox").split(" ").map(s => parseFloat(s))
+        let boundingBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
 
         var districtCount = Object.keys(mapDateData).length - (Object.keys(mapDateData).some(regionID => regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) ? 1 : 0)
 
@@ -924,8 +925,8 @@ var USAHouseMapType = new MapType(
     var FiveThirtyEightHouseProjection2022MapSource = new MapSource(
       "538-2022-House-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/house_district_toplines_2022.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
+      "./csv-sources/538/2022_house_district_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",
@@ -974,8 +975,8 @@ var USAHouseMapType = new MapType(
     var FiveThirtyEightHouseProjection2024MapSource = new MapSource(
       "538-2024-House-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/house/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/house/", // homepageURL
+      {url: "./csv-sources/538/2024_house_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250306070753/https://projects.fivethirtyeight.com/2024-election-forecast/house/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",
@@ -1175,12 +1176,10 @@ var USAHouseMapType = new MapType(
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
-    const kCNNVs538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const k538ProjectionVsPastElections = 3
+    const kPastElectionsVsPastElections = 1
+    const k538ProjectionVsPastElections = 2
 
     var defaultHouseCompareSourceIDs = {}
-    defaultHouseCompareSourceIDs[kCNNVs538Projection] = [CNNHouseResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjection2024MapSource.getID(), PastElectionResultMapSource.getID()]
 

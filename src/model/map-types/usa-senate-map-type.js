@@ -169,7 +169,7 @@ var USASenateMapType = new MapType(
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
 
-        mapData[mapDate][fullRegionID] = {region: fullRegionID, seatClass: regionClass, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID + "-" + regionClass] != greatestMarginPartyID, reportingPercent: reportingPercent}
+        mapData[mapDate][fullRegionID] = {region: fullRegionID, seatClass: regionClass, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID + "-" + regionClass] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
       for (let regionID of Object.values(regionNameToID))
@@ -1000,8 +1000,8 @@ var USASenateMapType = new MapType(
     var FiveThirtyEightSenateProjection2022MapSource = new MapSource(
       "538-2022-Senate-Projection", // id
       "538 Projection", // name
-      "./csv-sources/538-2022-senate-toplines.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
+      "./csv-sources/538/2022_senate_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",
@@ -1051,8 +1051,8 @@ var USASenateMapType = new MapType(
     var FiveThirtyEightSenateProjection2024MapSource = new MapSource(
       "538-2024-Senate-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/senate/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/senate/", // homepageURL
+      {url: "./csv-sources/538/2024_senate_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250305231030/https://projects.fivethirtyeight.com/2024-election-forecast/senate/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",
@@ -1548,12 +1548,10 @@ var USASenateMapType = new MapType(
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
-    const kCNNVs538Projection = 1
-    const kPastElectionsVsPastElections = 2
-    const kPastElectionsVs538Projection = 3
+    const kPastElectionsVsPastElections = 1
+    const kPastElectionsVs538Projection = 2
 
     var defaultSenateCompareSourceIDs = {}
-    defaultSenateCompareSourceIDs[kCNNVs538Projection] = [CNNSenateResults2024MapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID()]
 
