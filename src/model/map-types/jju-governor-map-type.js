@@ -185,7 +185,7 @@ var JJUGovernorMapType = new MapType(
     
 			    if (mapDataRows.length == 0)
 			    {
-			      if (isCustomMap && (!regionRetireExceptions[regionID] || currentMapDate <= regionRetireExceptions[regionID]))
+			      if (isCustomMap)
 			      {
 			        let partyIDToCandidateNames = {}
 			        for (let partyCandidateName in candidateNameToPartyIDMap)
@@ -235,7 +235,6 @@ var JJUGovernorMapType = new MapType(
 		    for (let regionID of previousDateRegionIDs)
 		    {
 		      if (regionID == nationalPopularVoteID) { continue }
-          if (mapDate > regionRetireExceptions[regionID]) { continue }
     
 		      if (!currentRegionIDs.includes(regionID))
 		      {
