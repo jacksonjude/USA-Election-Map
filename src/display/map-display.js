@@ -36,8 +36,8 @@ const regionDeselectColor = "#181922" //#555
 const regionDisabledColor = "#28292F"
 
 const flipPatternBrightnessFactor = 0.8
-const flipPatternHeight = 5
-const flipPatternWidth = 5
+const flipPatternHeight = 7
+const flipPatternWidth = 7
 
 const linkedRegions = [["MD", "MD-button"], ["DE", "DE-button"], ["NJ", "NJ-button"], ["CT", "CT-button"], ["RI", "RI-button"], ["MA", "MA-button", "MA-N"], ["VT", "VT-button"], ["NH", "NH-button"], ["HI", "HI-button"], ["ME-AL", "ME-AL-land", "ME"], ["ME-D1", "ME-D1-land"], ["ME-D2", "ME-D2-land"], ["NE-AL", "NE-AL-land", "NE"], ["NE-D1", "NE-D1-land"], ["NE-D2", "NE-D2-land"], ["NE-D3", "NE-D3-land"]]
 
@@ -1629,9 +1629,12 @@ function generateSVGPattern(patternID, fillColor, strokeColor, scale = 1)
 {
   if ($("#" + patternID).length == 0)
   {
-    let boundingBoxParts = $("#svgdata")[0].getAttribute("data-viewBox").split(" ").map(s => parseFloat(s))
+    let svgDiv = $("#svgdata")
+    let boundingBoxParts = svgDiv[0].getAttribute("data-viewBox").split(" ").map(s => parseFloat(s))
     let svgBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
-    let sizeFactor = ((svgBox.width > svgBox.height ? svgBox.width/797 : svgBox.height/499)**(3/4))*(scale**(3/4))
+    
+    let sizeFactor = Math.max(svgBox.width/svgDiv.width(), svgBox.height/svgDiv.height())*(scale**(3/4))
+    console.log(sizeFactor)
     
     var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" style="fill: ' + fillColor + ';"></rect>'
