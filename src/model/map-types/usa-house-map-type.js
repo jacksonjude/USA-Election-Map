@@ -682,7 +682,8 @@ var USAHouseMapType = new MapType(
 
         const districtBoxesPerLine = 6
 
-        var boundingBox = $("#svgdata")[0].getBBox()
+        let boundingBoxParts = $("#svgdata")[0].getAttribute("data-viewBox").split(" ").map(s => parseFloat(s))
+        let boundingBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
 
         var districtCount = Object.keys(mapDateData).length - (Object.keys(mapDateData).some(regionID => regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) ? 1 : 0)
 
