@@ -393,7 +393,7 @@ class MapSource
       linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
     }
     
-    !isCheck && window.open(linkToOpen)
+    !isCheck && linkToOpen != null && window.open(linkToOpen)
     return linkToOpen != null
   }
 
