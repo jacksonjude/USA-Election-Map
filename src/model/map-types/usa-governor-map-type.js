@@ -821,8 +821,8 @@ var USAGovernorMapType = new MapType(
     var FiveThirtyEightGovernorProjection2022MapSource = new MapSource(
       "538-2022-Governor-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/governor_state_toplines_2022.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/governor/", // homepageURL
+      "./csv-sources/538/2022_governor_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/governor/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",

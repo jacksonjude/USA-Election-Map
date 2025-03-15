@@ -1000,8 +1000,8 @@ var USASenateMapType = new MapType(
     var FiveThirtyEightSenateProjection2022MapSource = new MapSource(
       "538-2022-Senate-Projection", // id
       "538 Projection", // name
-      "./csv-sources/538-2022-senate-toplines.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
+      "./csv-sources/538/2022_senate_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/senate/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",
@@ -1051,8 +1051,8 @@ var USASenateMapType = new MapType(
     var FiveThirtyEightSenateProjection2024MapSource = new MapSource(
       "538-2024-Senate-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/senate/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/senate/", // homepageURL
+      {url: "./csv-sources/538/2024_senate_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250305231030/https://projects.fivethirtyeight.com/2024-election-forecast/senate/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",
@@ -1544,7 +1544,7 @@ var USASenateMapType = new MapType(
     const senateMapCycles = [2024, 2022]
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
-      [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      [2024]: [CNNSenateResults2024MapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     

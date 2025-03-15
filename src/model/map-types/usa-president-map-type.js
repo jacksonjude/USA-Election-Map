@@ -1442,8 +1442,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
       "538-2020-Presidential-PollAvg", // id
       "538 Poll Avg", // name
-      "https://projects.fivethirtyeight.com/2020-general-data/presidential_poll_averages_2020.csv", // dataURL
-      "https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
+      "./csv-sources/538/2020_presidential_poll_averages.csv", // dataURL
+      "https://web.archive.org/web/20250307184126/https://projects.fivethirtyeight.com/polls/president-general/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "modeldate",
@@ -1472,8 +1472,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightProjection2020MapSource = new MapSource(
       "538-2020-Presidential-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2020-general-data/presidential_state_toplines_2020.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
+      "./csv-sources/538/2020_presidential_state_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250305142028/https://projects.fivethirtyeight.com/2020-election-forecast/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "modeldate",
@@ -1503,8 +1503,8 @@ var USAPresidentMapType = new MapType(
     var FiveThirtyEightProjection2024MapSource = new MapSource(
       "538-2024-Presidential-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/", // homepageURL
+      {url: "./csv-sources/538/2024_pres_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250306102133/https://projects.fivethirtyeight.com/2024-election-forecast/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",

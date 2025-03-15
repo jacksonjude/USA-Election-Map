@@ -924,8 +924,8 @@ var USAHouseMapType = new MapType(
     var FiveThirtyEightHouseProjection2022MapSource = new MapSource(
       "538-2022-House-Projection", // id
       "538 Projection", // name
-      "https://projects.fivethirtyeight.com/2022-general-election-forecast-data/house_district_toplines_2022.csv", // dataURL
-      "https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
+      "./csv-sources/538/2022_house_district_toplines.csv", // dataURL
+      "https://web.archive.org/web/20250306183747/https://projects.fivethirtyeight.com/2022-election-forecast/house/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "forecastdate",
@@ -974,8 +974,8 @@ var USAHouseMapType = new MapType(
     var FiveThirtyEightHouseProjection2024MapSource = new MapSource(
       "538-2024-House-Projection", // id
       "538 Projection", // name
-      {url: "https://projects.fivethirtyeight.com/2024-election-forecast/house/states_timeseries.json", type: jsonSourceType}, // dataURL
-      "https://projects.fivethirtyeight.com/2024-election-forecast/house/", // homepageURL
+      {url: "./csv-sources/538/2024_house_states_timeseries.json", type: jsonSourceType}, // dataURL
+      "https://web.archive.org/web/20250306070753/https://projects.fivethirtyeight.com/2024-election-forecast/house/", // homepageURL
       {regular: "./assets/fivethirtyeight-large.png", mini: "./assets/fivethirtyeight.png"}, // iconURL
       {
         date: "date",
@@ -1170,7 +1170,7 @@ var USAHouseMapType = new MapType(
 
     const houseMapCycles = [2024, 2022]
     const houseMapSourceIDs = {
-      2024: [FiveThirtyEightHouseProjection2024MapSource.getID()],
+      2024: [CNNHouseResults2024MapSource.getID(), FiveThirtyEightHouseProjection2024MapSource.getID()],
       2022: [FiveThirtyEightHouseProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
