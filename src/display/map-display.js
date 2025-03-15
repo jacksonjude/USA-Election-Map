@@ -157,7 +157,6 @@ $(async function() {
   ])
 
   createMarginEditDropdownItems()
-  createCountdownDropdownItems()
   updateSelectedEditMode()
 
   addDivEventListeners()
@@ -186,6 +185,9 @@ async function reloadForNewMapCountry(initialLoad)
   
   dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs = dropdownIDs
   createPartyDropdowns()
+  
+  countdownTimes = currentMapCountry.getCountdownTimes()
+  createCountdownDropdownItems()
   
   currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? mapTypeIDs[0]] ?? mapTypes[mapTypeIDs[0]]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())

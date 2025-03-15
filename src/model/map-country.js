@@ -56,6 +56,16 @@ class MapCountry
   {
     return {parties: this.politicalParties, dropdownIDs: this.defaultDropdownPartyIDs, mainIDs: this.mainPoliticalPartyIDs, majorThirdPartyCandidates: this.majorThirdPartyCandidates}
   }
+  
+  setCountdownTimes(countdownTimes)
+  {
+    this.countdownTimes = countdownTimes
+  }
+  
+  getCountdownTimes()
+  {
+    return this.countdownTimes ?? {}
+  }
 }
 
 let mapCountries = {}
@@ -184,6 +194,15 @@ function setMapCountries()
     ]
   )
   
+  USAMapCountry.setCountdownTimes({
+    // "2020 Presidential Election": {time: 1604444400000, url: "https://en.wikipedia.org/wiki/2020_United_States_presidential_election"},
+    // "2021 Inauguration Day": {time: 1611162000000, url: "https://en.wikipedia.org/wiki/Inauguration_of_Joe_Biden"},
+    // "2022 Midterm Elections": {time: 1667948400000, url: "https://en.wikipedia.org/wiki/2022_United_States_elections"},
+    "2024 Presidential Election": {time: 1730847600000, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"},
+    "2025 Inauguration Day": {time: 1737392400000, url: null},
+    "2026 Midterm Elections": {time: 1793746800000, url: "https://en.wikipedia.org/wiki/2026_United_States_elections"},
+  })
+  
   JJUMapCountry.setMapTypes({
     [JJUHouseMapType.getID()]: JJUHouseMapType,
     [JJUPresidentMapType.getID()]: JJUPresidentMapType,
@@ -219,6 +238,12 @@ function setMapCountries()
     ],
     []
   )
+  
+  JJUMapCountry.setCountdownTimes({
+    "Feburary 2025 General Election": {time: 1739149200000, url: null},
+    "March 2025 Midterm Elections": {time: 1741564800000, url: null},
+    "April 2025 General Election": {time: 1743984000000, url: null}
+  })
   
   mapCountries[USAMapCountry.getID()] = USAMapCountry
   mapCountries[JJUMapCountry.getID()] = JJUMapCountry
