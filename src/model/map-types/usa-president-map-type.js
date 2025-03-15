@@ -25,6 +25,7 @@ var USAPresidentMapType = new MapType(
   true,
   true,
   false,
+  false,
   {"AL":"Alabama","AK":"Alaska","AZ":"Arizona","AR":"Arkansas","CA":"California","CO":"Colorado","CT":"Connecticut","DE":"Delaware","DC":"District of Columbia","FL":"Florida","GA":"Georgia","HI":"Hawaii","ID":"Idaho","IL":"Illinois","IN":"Indiana","IA":"Iowa","KS":"Kansas","KY":"Kentucky","LA":"Louisiana","ME-D1":"ME-1","ME-D2":"ME-2","ME-AL":"Maine","ME":"Maine","MD":"Maryland","MA":"Massachusetts","MI":"Michigan","MN":"Minnesota","MS":"Mississippi","MO":"Missouri","MT":"Montana","NE-D1":"NE-1","NE-D2":"NE-2","NE-D3":"NE-3","NE-AL":"Nebraska","NE":"Nebraska","NV":"Nevada","NH":"New Hampshire","NJ":"New Jersey","NM":"New Mexico","NY":"New York","NC":"North Carolina","ND":"North Dakota","OH":"Ohio","OK":"Oklahoma","OR":"Oregon","PA":"Pennsylvania","RI":"Rhode Island","SC":"South Carolina","SD":"South Dakota","TN":"Tennessee","TX":"Texas","UT":"Utah","VT":"Vermont","VA":"Virginia","WA":"Washington","WV":"West Virginia","WI":"Wisconsin","WY":"Wyoming"},
   [],
   [
@@ -1436,7 +1437,10 @@ var USAPresidentMapType = new MapType(
         }
         
         return "svg-sources/usa-presidential-map.svg"
-      } // overrideSVGPath
+      }, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      ViewingState.zooming, // shouldForcePopularVoteDisplay
     )
     
     var FiveThirtyEightPollAverage2020MapSource = new MapSource(
@@ -1616,7 +1620,7 @@ var USAPresidentMapType = new MapType(
       null, // overrideSVGPath,
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      null, // shouldForcePopularVoteDisplayOnZoom
+      null, // shouldForcePopularVoteDisplay
       {safe: 90, likely: 75, lean: 55, tilt: Number.MIN_VALUE}, // customDefaultMargins
       '', // customVotesharePrefix
       '¢', // customVoteshareSuffix
@@ -1892,7 +1896,7 @@ var USAPresidentMapType = new MapType(
       getPresidentialSVGFromDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
-      true // shouldForcePopularVoteDisplayOnZoom
+      ViewingState.zooming // shouldForcePopularVoteDisplay
     )
 
     var HistoricalElectionResultMapSource = new MapSource(

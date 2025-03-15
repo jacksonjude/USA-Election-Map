@@ -1,5 +1,6 @@
 const currentAppVersion = "5"
 
+var currentMapCountry
 var currentMapType
 
 var mapSources
@@ -75,25 +76,10 @@ var lastIndicatorCircleProgress
 const downloadIndicatorColor = '#3498db'
 const csvParseIndicatorColor = '#3ac635'
 
-const LoaderType = {
-  hidden: 0,
-  standard: 1,
-  progress: 2
-}
-
 var loaderStack = [LoaderType.hidden]
 
-const ViewingState = {
-  viewing: 0,
-  zooming: 1,
-  splitVote: 2
-}
 var currentViewingState
 
-const EditingState = {
-  viewing: 2,
-  editing: 3
-}
 var currentEditingState
 
 var currentMapZoomRegion
@@ -148,14 +134,14 @@ const helpBoxPages = [
 ]
 
 $(async function() {
-  setMapTypes()
-
-  currentMapType = mapTypes[getCookie("currentMapType") || mapTypeIDs[0]] || mapTypes[mapTypeIDs[0]]
-  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+  setMapCountries()
+  
+  currentMapCountry = mapCountries[getCookie("currentMapCountry") ?? mapCountryIDs[0]] ?? mapCountries[mapCountryIDs[0]]
+  $("#cycleMapCountryButton").find("img").attr('src', currentMapCountry.getIconURL())
 
   await initializeDatabases()
 
-  reloadForNewMapType(true)
+  reloadForNewMapCountry(true)
 
   preloadAssets([
     "assets/icon-download-none.png",
@@ -171,8 +157,6 @@ $(async function() {
   ])
 
   createMarginEditDropdownItems()
-  createCountdownDropdownItems()
-  createPartyDropdowns()
   updateSelectedEditMode()
 
   addDivEventListeners()
@@ -188,6 +172,28 @@ $(async function() {
 
   $.ajaxSetup({cache: false})
 })
+
+async function reloadForNewMapCountry(initialLoad)
+{
+  mapTypes = currentMapCountry.getMapTypes()
+  mapTypeIDs = currentMapCountry.getMapTypeIDs()
+  
+  let { parties, dropdownIDs, mainIDs, majorThirdPartyCandidates } = currentMapCountry.getPoliticalPartyData()
+  politicalParties = parties
+  mainPoliticalPartyIDs = mainIDs
+  majorThirdPartyCandidates = majorThirdPartyCandidates
+  
+  dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs = dropdownIDs
+  createPartyDropdowns()
+  
+  countdownTimes = currentMapCountry.getCountdownTimes()
+  createCountdownDropdownItems()
+  
+  currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? mapTypeIDs[0]] ?? mapTypes[mapTypeIDs[0]]
+  $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
+  
+  reloadForNewMapType(initialLoad)
+}
 
 async function reloadForNewMapType(initialLoad)
 {
@@ -206,10 +212,14 @@ async function reloadForNewMapType(initialLoad)
   if (currentMapType.getCustomMapEnabled())
   {
     $("#editDoneButton").removeClass('topnavdisable')
+    $("#copyDropdownContent").removeClass('topnavdisable')
+    $("#copyDropdownContent").css("opacity", "100%")
   }
   else
   {
     $("#editDoneButton").addClass('topnavdisable')
+    $("#copyDropdownContent").addClass('topnavdisable')
+    $("#copyDropdownContent").css("opacity", "0%")
   }
 
   if (currentMapType.getCompareMapEnabled())
@@ -235,7 +245,8 @@ async function reloadForNewMapType(initialLoad)
   currentMapZoomRegion = null
 
   resetCompareVariables()
-
+  
+  createMapCountryDropdownItems()
   createMapTypeDropdownItems()
   createMapCycleDropdownItems()
   createComparePresetDropdownItems()
