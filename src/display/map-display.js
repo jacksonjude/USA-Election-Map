@@ -1021,6 +1021,10 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
         {
           pannedDuringClick = true
         }
+      },
+      onZoom: (scale) => {
+        document.getElementById("svgdefinitions").innerHTML = ""
+        generateFlipPatternsFromPartyMap(politicalParties, 1/scale)
       }
     })
     
@@ -1612,13 +1616,17 @@ function getMarginIndexForValue(margin)
   }
 }
 
-function generateSVGPattern(patternID, fillColor, strokeColor)
+function generateSVGPattern(patternID, fillColor, strokeColor, scale = 1)
 {
   if ($("#" + patternID).length == 0)
   {
-    var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
-    patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth + '" height="' + flipPatternHeight + '" style="fill: ' + fillColor + ';"></rect>'
-    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight + '" style="stroke: ' + strokeColor + '; stroke-width: ' + flipPatternWidth + '"></line>'
+    let boundingBoxParts = $("#svgdata")[0].getAttribute("data-viewBox").split(" ").map(s => parseFloat(s))
+    let svgBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
+    let sizeFactor = ((svgBox.width > svgBox.height ? svgBox.width/797 : svgBox.height/499)**(3/4))*(scale**(3/4))
+    
+    var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
+    patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" style="fill: ' + fillColor + ';"></rect>'
+    patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight*sizeFactor + '" style="stroke: ' + strokeColor + '; stroke-width: ' + flipPatternWidth*sizeFactor + '"></line>'
     patternHTML += '</pattern>'
 
     var tempDiv = document.createElement('div')
@@ -1627,22 +1635,22 @@ function generateSVGPattern(patternID, fillColor, strokeColor)
   }
 }
 
-function generateFlipPattern(fillColor)
+function generateFlipPattern(fillColor, scale)
 {
   let patternID = "flip-" + fillColor.slice(1)
 
-  generateSVGPattern(patternID, fillColor, multiplyBrightness(fillColor, flipPatternBrightnessFactor))
+  generateSVGPattern(patternID, fillColor, multiplyBrightness(fillColor, flipPatternBrightnessFactor), scale)
 
   return patternID
 }
 
-function generateFlipPatternsFromPartyMap(partyMap)
+function generateFlipPatternsFromPartyMap(partyMap, scale)
 {
   for (let partyID in partyMap)
   {
     for (let marginIndex in partyMap[partyID].getMarginColors())
     {
-      generateFlipPattern(partyMap[partyID].getMarginColors()[marginIndex])
+      generateFlipPattern(partyMap[partyID].getMarginColors()[marginIndex], scale)
     }
   }
 }
