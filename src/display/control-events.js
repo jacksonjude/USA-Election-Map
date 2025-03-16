@@ -5,6 +5,8 @@ var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
 var shiftKeyDown = false
 var altKeyDown = false
 
+const openLinksWithLeftClick = false
+
 document.addEventListener('keydown', function(e) {
   if (!isEditingTextbox() && showingDataMap)
   {
@@ -759,7 +761,7 @@ async function leftClickRegion(div)
     currentRegionID = null
     updateRegionBox()
   }
-  else if (showingDataMap)
+  else if (openLinksWithLeftClick && showingDataMap)
   {
     currentMapSource.openRegionLink(currentRegionID ?? currentMapZoomRegion, currentSliderDate)
     

@@ -281,8 +281,8 @@ async function updateRegionBox(regionID = currentRegionID)
   tooltipsToShow.altForAlternateData[0] = regionData.altData || showingAltData
   tooltipsToShow.shiftClickToEditEVs[0] = isDiscreteRegion && currentMapType.getID() == USAPresidentMapType.getID() && currentMapSource.isCustom() && currentEditingState == EditingState.viewing && currentViewingState == ViewingState.viewing
   tooltipsToShow.clickToZoom[0] = canZoomCurrently && currentViewingState == ViewingState.viewing
-  tooltipsToShow.clickToOpenLink[0] = canOpenLink && !tooltipsToShow.clickToZoom[0]
-  tooltipsToShow.rightClickToOpenLink[0] = canOpenLink && tooltipsToShow.clickToZoom[0]
+  tooltipsToShow.clickToOpenLink[0] = openLinksWithLeftClick && canOpenLink && !tooltipsToShow.clickToZoom[0]
+  tooltipsToShow.rightClickToOpenLink[0] = canOpenLink && (tooltipsToShow.clickToZoom[0] || !openLinksWithLeftClick)
   tooltipsToShow.clickToEditVoteshare[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.voteshare
   tooltipsToShow.shiftClickToEditMargin[0] = isDiscreteRegion && currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !regionData.disabled
   tooltipsToShow.altClickToFlip[0] = isDiscreteRegion && currentEditingState == EditingState.editing
