@@ -381,6 +381,10 @@ body {
   text-shadow: 0 0 2rem #ffffff, 0 0 9rem #000000;
 }
 
+.regionbox-voteshare {
+  text-shadow: 0 0 1rem #ffffff, 0 0 1.5rem #000000;
+}
+
 .date-display {
   display: inline-block;
   padding-left: 20rem;
