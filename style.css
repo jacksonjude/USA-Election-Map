@@ -381,8 +381,8 @@ body {
   text-shadow: 0 0 2rem #ffffff, 0 0 9rem #000000;
 }
 
-.regionbox-voteshare {
-  text-shadow: 0 0 1rem #ffffff, 0 0 1.5rem #000000;
+.regionbox-text-shadow {
+  text-shadow: 0 0 1.25rem #ffffff, 0 0 1.5rem #000000;
 }
 
 .date-display {
