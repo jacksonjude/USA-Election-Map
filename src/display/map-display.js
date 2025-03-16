@@ -1616,11 +1616,12 @@ function getMarginIndexForValue(margin)
     return "current"
   }
   
-  const roundedMargin = getRoundedMarginValue(margin)
+  // Using real margin for colors now
+  // const roundedMargin = getRoundedMarginValue(margin)
   
   for (var marginName in marginValues)
   {
-    if (Math.abs(roundedMargin) >= marginValues[marginName])
+    if (Math.abs(margin) >= marginValues[marginName])
     {
       return marginName
     }
