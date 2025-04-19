@@ -1462,7 +1462,7 @@ var USASenateMapType = new MapType(
         }
         else
         {
-          linkToOpen += "election"
+          linkToOpen += "elections"
         }
         return linkToOpen
       }, // customOpenRegionLinkFunction
