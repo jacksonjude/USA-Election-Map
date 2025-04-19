@@ -1,8 +1,8 @@
 var isEnteringShiftAmount = false
 
-function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldShiftNPV)
+async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake, shouldShiftNPV = true)
 {
-  if (!marginToAdd) { return }
+  if (!baseMarginToAdd) { return }
   partyToShift = partyToShift || selectedParty
   if (partyToShift.getID() == TossupParty.getID()) { return }
 
@@ -10,6 +10,8 @@ function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldSh
 
   for (var regionID in displayRegionDataArray)
   {
+    let marginToAdd = baseMarginToAdd
+    
     if ((regionID == nationalPopularVoteID && !shouldShiftNPV) || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
     if (displayRegionDataArray[regionID].disabled) { continue }
@@ -18,6 +20,8 @@ function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldSh
 
     if (regionData.partyVotesharePercentages)
     {
+      marginToAdd /= 2
+      
       let candidateDataToIncreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToShift.getID())
       if (!candidateDataToIncreaseMargin)
       {
@@ -87,7 +91,9 @@ function addConstantMarginToMap(marginToAdd, partyToShift, partyToTake, shouldSh
   }
 
   currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false)
-  loadDataMap(null, null, null, null, false)
+  await loadDataMap(null, null, null, null, false)
+  
+  updateShiftDropdownText()
 }
 
 function getTippingPointRegion()
@@ -156,25 +162,25 @@ function toggleEnteringShiftAmount()
   }
 }
 
-function shiftByTippingPoint()
+function getTippingPointShift()
 {
-  let shiftMargin = (currentEditingMode == EditingMode.voteshare ? 1/2 : 1)*getTippingPointRegion().margin
-  addConstantMarginToMap(shiftMargin, politicalParties[dropdownPoliticalPartyIDs[1]], politicalParties[dropdownPoliticalPartyIDs[0]])
+  let shiftMargin = getTippingPointRegion().margin ?? 0
+  return [shiftMargin, politicalParties[dropdownPoliticalPartyIDs[1]], politicalParties[dropdownPoliticalPartyIDs[0]]]
 }
 
-function shiftByNPV()
+function getNPVShift()
 {
   if (!displayRegionDataArray[nationalPopularVoteID]) return
   let npvData = displayRegionDataArray[nationalPopularVoteID]
-
+  
   let npvLeader = politicalParties[npvData.partyID]
   let npvRunnerUp
   let shiftMargin
-
+  
   if (currentEditingMode == EditingMode.voteshare)
   {
-    shiftMargin = npvData.margin/2
-    npvData.partyVotesharePercentages.sort((cand1, cand2) => cand1.voteshare-cand2.voteshare)
+    shiftMargin = npvData.margin
+    npvData.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare-cand1.voteshare)
     npvRunnerUp = politicalParties[npvData.partyVotesharePercentages[1].partyID]
   }
   else
@@ -182,6 +188,17 @@ function shiftByNPV()
     shiftMargin = npvData.margin
     npvRunnerUp = politicalParties[dropdownPoliticalPartyIDs[0] == npvLeader.getID() ? dropdownPoliticalPartyIDs[1] : dropdownPoliticalPartyIDs[0]]
   }
+  
+  return [shiftMargin, npvRunnerUp, npvLeader, true]
+}
 
-  addConstantMarginToMap(shiftMargin, npvRunnerUp, npvLeader, true)
+function updateShiftDropdownText()
+{
+  let shiftTippingPoint = getTippingPointShift()
+  $('#shiftTextTippingPoint').html(`+${decimalPadding(roundValue(shiftTippingPoint[0], 1), 1)}`)
+  $('#shiftTextTippingPoint').css('color', shiftTippingPoint[1].getMarginColors().likely)
+  
+  let npvTippingPoint = getNPVShift()
+  $('#shiftTextNPV').html(`+${decimalPadding(roundValue(npvTippingPoint[0], 1))}`)
+  $('#shiftTextNPV').css('color', npvTippingPoint[1].getMarginColors().likely)
 }

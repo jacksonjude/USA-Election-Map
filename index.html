@@ -174,7 +174,7 @@
             </div>
           </div>
         </div>
-        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+        <div class="dropdown" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
           <a id="shiftButton" style="min-width: 70rem; display: none;">Shift</a>
           <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 126rem">
             <div id="shiftDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
@@ -195,12 +195,12 @@
                 Shift All by other
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="shiftByTippingPoint()" style="display:flex; justify-content:center;">
-                Shift by tipping point
+              <a onclick="addConstantMarginToMap(...getTippingPointShift())" style="display:flex; justify-content:center;">
+                Shift by tipping point&nbsp;<span id="shiftTextTippingPoint">(+xx)</span>
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="shiftByNPV()" style="display:flex; justify-content:center;">
-                Shift by NPV margin
+              <a onclick="addConstantMarginToMap(...getNPVShift())" style="display:flex; justify-content:center;">
+                Shift by NPV margin&nbsp;<span id="shiftTextNPV">(+xx)</span>
               </a>
             </div>
           </div>
