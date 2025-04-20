@@ -9,3 +9,5 @@ date,region,candidate,party,offyear,runoff,voteshare
 3/9/2025,West,Nath,liberal,FALSE,FALSE,57.14
 3/9/2025,West,Srawyer02,alliance,FALSE,FALSE,42.86
 3/9/2025,South,Nuss,labour,FALSE,FALSE,100
+4/13/2025,North,Geodore Roosevelt,alliance,TRUE,FALSE,55.56
+4/13/2025,North,Cob,independent,TRUE,FALSE,44.44
