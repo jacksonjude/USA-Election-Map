@@ -144,7 +144,7 @@ var JJUPresidentMapType = new MapType(
           }
           else
           {
-            currentDatePartyNameArray[mainPartyID] = politicalParties[mainPartyID].getNames()[0]
+            currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
           }
         }
         
@@ -202,6 +202,7 @@ var JJUPresidentMapType = new MapType(
             let instantRunoffDate = mapDateTime+1
             if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
             filteredMapData[instantRunoffDate][regionID] = runoffMapData
+            partyNameData[instantRunoffDate] = currentDatePartyNameArray
             
             if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
           }
