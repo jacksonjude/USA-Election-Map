@@ -495,7 +495,7 @@ function displayPartyTotals(overrideCreateDropdowns)
 {
   let partyTotals = getPartyTotals()
 
-  if (currentMapSource.getID() != NullMapSource.getID() && (currentMapSource.getID() != currentCustomMapSource.getID() || (showingCompareMap && currentEditingState == EditingState.viewing)))
+  if (currentMapSource.getID() != NullMapSource.getID() && (!currentMapSource.isCustom() || (showingCompareMap && currentEditingState == EditingState.viewing)))
   {
     var partyIDs = Object.keys(partyTotals).filter((partyID) => partyTotals[partyID] > 0 && partyID != TossupParty.getID())
 

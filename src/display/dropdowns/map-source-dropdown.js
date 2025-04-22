@@ -30,7 +30,7 @@ function createMapSourceDropdownItems()
     divStringToAppend += "<img style='width: 20rem; height: 20rem' src='" + mapSourceIcon + "' />" + "<span style='margin-left: 8rem'>" + mapSourceName + "</span></span>"
     divStringToAppend += "<span style='display: flex; align-items: center'>"
 
-    if (mapSourceID != currentCustomMapSource.getID())
+    if (!mapSources[mapSourceID].isCustom())
     {
       divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' style='width: 20rem; height: 20rem; margin: 0 8rem 0 0' />"
       divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 24rem; height: 24rem;'/>"

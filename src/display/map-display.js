@@ -1109,7 +1109,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   {
     $("#editDoneButton").html("Done")
   }
-  else if (currentEditingState == EditingState.editing && currentMapSource.getID() != currentCustomMapSource.getID())
+  else if (currentEditingState == EditingState.editing && !currentMapSource.isCustom())
   {
     toggleEditing(EditingState.viewing)
   }
@@ -1126,7 +1126,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
 
   updatePartyDropdownVisibility()
 
-  if (showingCompareMap && currentMapSource.getID() != currentCustomMapSource.getID())
+  if (showingCompareMap && !currentMapSource.isCustom())
   {
     updateCompareMapSlidersVisibility(false)
   }
@@ -1147,7 +1147,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   fullClear = fullClear == null ? false : fullClear
   shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
 
-  if (currentMapSource.getID() != currentCustomMapSource.getID() || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
+  if (!currentMapSource.isCustom() || currentCustomMapSource.getTextMapData().startsWith("date\n") || fullClear)
   {
     updateNavBarForNewSource(true)
     currentMapSource = NullMapSource
@@ -1588,7 +1588,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
     regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
-    if (regionData.disabled == true && (currentMapSource.getID() != currentCustomMapSource.getID() || currentMapType.getMapSettingValue("mapCurrentSeats") === false))
+    if (regionData.disabled == true && (!currentMapSource.isCustom() || currentMapType.getMapSettingValue("mapCurrentSeats") === false))
     {
       regionDiv.css('pointer-events', 'none')
     }
