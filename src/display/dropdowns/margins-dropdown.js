@@ -48,13 +48,14 @@ function toggleMarginEditing(marginID, div)
     }
 
     marginValues[editMarginID] = marginValueToSet
+    if (shouldRefreshMap && currentMapSource.getCustomDefaultMargins() == null)
+    {
+      setCookie(marginsCookieName, JSON.stringify(marginValues))
+      defaultMarginValues = cloneObject(marginValues)
+    }
 
     if (shouldRefreshMap && showingDataMap)
     {
-      if (currentMapSource.getCustomDefaultMargins() == null)
-      {
-        setCookie(marginsCookieName, JSON.stringify(marginValues))
-      }
       displayDataMap()
     }
 
@@ -115,6 +116,11 @@ function addResetMarginsRow()
 function resetMargins()
 {
   marginValues = cloneObject(currentMapSource.getCustomDefaultMargins() ?? standardMarginValues)
+  if (currentMapSource.getCustomDefaultMargins() == null)
+  {
+    setCookie(marginsCookieName, JSON.stringify(marginValues))
+    defaultMarginValues = cloneObject(marginValues)
+  }
   
   if (showingDataMap)
   {
