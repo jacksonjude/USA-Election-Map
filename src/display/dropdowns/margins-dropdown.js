@@ -16,6 +16,8 @@ function createMarginEditDropdownItems(shouldSetDefault)
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
     $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14rem; min-height: 25rem;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
   }
+  
+  addResetMarginsRow()
 }
 
 function toggleMarginEditing(marginID, div)
@@ -75,5 +77,49 @@ function toggleMarginEditing(marginID, div)
   else
   {
     $("#marginEditButton").removeClass('active')
+    
+    addResetMarginsRow()
   }
+}
+
+function addResetMarginsRow()
+{
+  let standardMargins = currentMapSource.getCustomDefaultMargins() ?? standardMarginValues
+  
+  let isEqualToStandard = true
+  for (const marginID in marginValues)
+  {
+    if (standardMargins[marginID] != marginValues[marginID])
+    {
+      isEqualToStandard = false
+      break
+    }
+  }
+  if (isEqualToStandard)
+  {
+    if ($("#reset-margins").length)
+    {
+      createMarginEditDropdownItems(currentMapSource.getCustomDefaultMargins() == null)
+    }
+    return
+  }
+  else if ($("#reset-margins").length)
+  {
+    return
+  }
+  
+  $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
+  $("#marginsDropdownContainer").append("<a id='reset-margins' style='padding-top: 14rem; min-height: 25rem; text-align: center;' onclick='resetMargins()'>Reset</a>")
+}
+
+function resetMargins()
+{
+  marginValues = cloneObject(currentMapSource.getCustomDefaultMargins() ?? standardMarginValues)
+  
+  if (showingDataMap)
+  {
+    displayDataMap()
+  }
+  
+  createMarginEditDropdownItems(currentMapSource.getCustomDefaultMargins() == null)
 }
