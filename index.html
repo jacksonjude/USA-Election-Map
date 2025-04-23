@@ -66,7 +66,7 @@
     <meta property="og:description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
     <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon-background.png" />
   </head>
-  <body style="background-color: black; margin: 0rem;" onresize="updateSVGViewbox()">
+  <body style="background-color: black; margin: 0;" onresize="updateSVGViewbox()">
     <div class="topnav">
       <a href="https://jacksonjude.com" target="_blank" style="padding: 3rem; display: flex; align-items: center;">
         <img src="./assets/favicon.ico" style="position: relative; width: 45rem; height: 45rem;" />
@@ -280,19 +280,19 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div style="display: flex; justify-content: space-between">
-      <div style="display: flex">
-        <div id='maptextcontainer' style="display: flex; flex-direction: column; font-family: 'Bree-Regular';">
-          <div id="mapcontainer" style="margin-left: 30rem; margin-top: 20rem; margin-bottom: 10rem; width: 1111rem; height: 699rem; overflow: hidden;" oncontextmenu="return false">
+    <div style="display: flex; justify-content: space-between; margin-left: 40rem; margin-right: 40rem; height: 43.6vw; gap: 3vw;">
+      <div style="display: flex; width: 100%;">
+        <div id='maptextcontainer' style="display: flex; flex-direction: column; justify-content: space-between; font-family: 'Bree-Regular'; width: 100%">
+          <div id="mapcontainer" style="margin-top: 20rem; margin-bottom: 20rem; overflow: hidden; height: 100%;" oncontextmenu="return false">
           </div>
-          <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem;">
+          <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative;">
             <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none; display: none;">
               <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0rem">
               <span id="dataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;"></span>
             </span>
             <h3 id="dateDisplay" class="date-display"></h3>
           </div>
-          <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem; display: none;">
+          <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; display: none;">
             <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
               <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="addToCompareMapQueue(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0rem">
               <span id="firstCompareDataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;">
@@ -300,7 +300,7 @@
             </span>
             <h3 id="firstCompareDateDisplay" class="date-display"></h3>
           </div>
-          <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; left: 45rem; display: none;">
+          <div id="secondCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; display: none;">
             <span class="slidecontainer" id="secondCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
               <input type="range" min="1" max="1" value="1" class="slider" id="secondCompareDataMapDateSlider" oninput="addToCompareMapQueue(1, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null" style="margin-bottom: 0rem">
               <span id="secondCompareDataMapSliderStepList" class="ticks" style="max-height: 0rem; margin-top: -30rem;">
@@ -309,7 +309,7 @@
             <h3 id="secondCompareDateDisplay" class="date-display"></h3>
           </div>
         </div>
-        <div id="mapZoomControls" style="display: none; margin-top: 25rem; margin-left: 10rem; width: 50rem; height: 699rem; flex-direction: column; justify-content: space-between">
+        <div id="mapZoomControls" style="display: none; margin-top: 25rem; margin-left: 10rem; width: 50rem; flex-direction: column; justify-content: space-between">
           <a id="mapCloseButton" onclick="zoomOutMap()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="width: 100%; height: 50rem; text-decoration: none;" /></a>
           <div style="display: flex; flex-direction: column">
             <a id="mapZoomInButton" onclick="svgPanZoomController.zoomIn()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 4rem;"><img id="mapZoomInButtonImage" src="./assets/zoom-in-icon.png" style="width: 100%; height: 50rem; text-decoration: none;" /></a>
@@ -318,7 +318,7 @@
           </div>
         </div>
       </div>
-      <div style="display: flex; flex-direction: column; width: 466rem; margin-right: 50rem">
+      <div style="display: flex; flex-direction: column; min-width: 26vw; max-width: 26vw;">
         <div id="totalsPieChartContainer" style="position: relative; display: inline-block; vertical-align: top; margin-top: 35rem; margin-bottom: 25rem; user-select: none; -webkit-user-select: none; width: 100%">
           <canvas id="totalsPieChart"></canvas>
           <div id="totalsPieChartOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none;">

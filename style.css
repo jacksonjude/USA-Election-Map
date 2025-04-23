@@ -231,7 +231,7 @@ body {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
   height: 30rem; /* Specified height */
-  width: 921rem;
+  width: 100%;
   border-radius: 5rem;
   background: #777; /* Grey background */
   outline: none; /* Remove outline */
@@ -274,8 +274,6 @@ body {
 .ticks {
   display: flex;
   justify-content: space-between;
-  width: 895rem;
-
   padding: 0rem -1rem;
   margin: 0rem 15rem;
   pointer-events: none;
@@ -391,6 +389,8 @@ body {
   vertical-align: center;
   min-width: 200rem;
   height: 20rem;
+  
+  margin: 0;
   
   color: white;
   font-feature-settings: 'tnum' 1;
