@@ -619,8 +619,7 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
 
 async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
-  $("#dataMapDateSliderContainer").hide()
-  $("#dateDisplay").hide()
+  $("#sliderDateDisplayContainer").css('visibility', 'hidden')
 
   if (selectedDropdownDivID != "mapSourcesDropdownContent")
   {
@@ -685,8 +684,7 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
 
   setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
   await displayDataMap(null, reloadPartyDropdowns ?? true)
-  $("#dataMapDateSliderContainer").show()
-  $("#dateDisplay").show()
+  $("#sliderDateDisplayContainer").css('visibility', 'visible')
 
   $("#totalsPieChart").attr('onclick', "!currentMapZoomRegion ? currentMapSource.openHomepageLink(currentSliderDate) : currentMapSource.openRegionLink(currentMapZoomRegion, currentSliderDate)")
 
@@ -1228,8 +1226,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     updateRegionBox()
   }
 
-  $("#dataMapDateSliderContainer").hide()
-  $("#dateDisplay").hide()
+  $("#sliderDateDisplayContainer").css('visibility', 'hidden')
 
   $("#totalsPieChart").css("background-image", "")
 
