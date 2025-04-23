@@ -932,6 +932,15 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   }
   else if (shouldReloadSVG)
   {
+    if (currentViewingState == ViewingState.zooming)
+    {
+      $("#mapZoomControls").trigger('show')
+    }
+    else
+    {
+      $("#mapZoomControls").trigger('hide')
+    }
+    
     if (cachedSVGPathData instanceof Array)
     {
       await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG)
@@ -1044,18 +1053,6 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     else
     {
       setTimeout(() => $('.svg-pan-zoom_viewport').css('transition', 'transform 0.1s ease'), 1)
-    }
-  }
-
-  if (shouldReloadSVG)
-  {
-    if (currentViewingState == ViewingState.zooming)
-    {
-      $("#mapZoomControls").trigger('show')
-    }
-    else
-    {
-      $("#mapZoomControls").trigger('hide')
     }
   }
 
