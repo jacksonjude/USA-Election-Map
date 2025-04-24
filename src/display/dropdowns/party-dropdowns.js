@@ -8,7 +8,7 @@ const largeMaxPartiesToDisplay = 4
 const absoluteLargePartyButtonWidth = 10.4
 const absoluteSmallPartyButtonWidth = 6.9
 const absoluteLargePartyButtonHeight = 2.8
-const absoluteSmallPartyButtonHeight = 2.5
+const absoluteSmallPartyButtonHeight = 2.8
 
 const largePartyButtonWidth = 40
 const smallPartyButtonWidth = largePartyButtonWidth*2/3
