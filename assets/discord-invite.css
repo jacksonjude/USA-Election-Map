@@ -1,20 +1,25 @@
-#discordData,#discordInfo{
+:root {
+  --discord-scale: 1.4;
+}
+
+#discordData{
     display:flex;
-    height:50px
+    justify-content: space-between;
+}
+#discordInfo{
+    display:flex;
 }
 #callToAction,#callToAction-clicked{
     bottom:0;
     cursor:pointer;
-    height:40px;
+    height:min(calc(40rem * var(--discord-scale)), 40px);
     left:0;
-    min-height:32px;
-    min-width:73px;
     position:relative;
     right:0;
     top:0;
     align-self:center;
     margin:0 0 0 10px;
-    padding:2px 16px
+    padding:2px min(calc(16rem * var(--discord-scale)), 16px);
 }
 #buttonText,#introText,#serverNameBox,#status{
     text-overflow:ellipsis;
@@ -91,13 +96,13 @@
     background-position:50% 50%;
     bottom:0;
     cursor:pointer;
-    height:50px;
     left:0;
     position:relative;
     right:0;
     top:0;
-    width:50px;
-    border-radius:15px;
+    width:min(calc(50rem * var(--discord-scale)), 50px);
+    height:min(calc(50rem * var(--discord-scale)), 50px);
+    border-radius:min(calc(15rem * var(--discord-scale)), 15px);
     flex:0 0 auto;
     margin:0 10px 0 0
 }
@@ -231,7 +236,7 @@
     height:20px;
     text-align:center;
     font:normal normal 500 normal 14px/20px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin:0 8.83px
+    margin:0 min(calc(8.83rem * var(--discord-scale)), 8.83px);
 }
 .loadHidden{
     display:none

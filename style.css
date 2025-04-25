@@ -398,3 +398,9 @@ body {
   user-select: none;
   -webkit-user-select: none;
 }
+
+@media screen and (max-width: 1100px) {
+  #discordInfo {
+    display: none !important;
+  }
+}
