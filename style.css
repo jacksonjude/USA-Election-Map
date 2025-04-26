@@ -26,6 +26,12 @@ body {
   font-family: 'Bree5erif-Regular';
 }
 
+:root {
+  --slider-tick-width: 4rem;
+  --slider-thumb-width: 30rem;
+  --slider-height: 30rem;
+}
+
 .background {
   position: relative;
   left: 0;
@@ -226,14 +232,15 @@ body {
 
 .slidecontainer {
   width: 100%; /* Width of the outside container */
-  height: 30rem;
+  height: var(--slider-height);
+  position: relative;
 }
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  height: 30rem; /* Specified height */
+  height: var(--slider-height); /* Specified height */
   width: 100%;
   border-radius: 5rem;
   background: #777; /* Grey background */
@@ -241,6 +248,10 @@ body {
   opacity: 0.85; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
+  
+  margin: 0;
+  padding: 0;
+  position: absolute;
 }
 
 /* Mouse-over effects */
@@ -252,16 +263,16 @@ body {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  width: 30rem; /* Set a specific slider handle width */
-  height: 30rem; /* Slider handle height */
+  width: var(--slider-thumb-width); /* Set a specific slider handle width */
+  height: var(--slider-height); /* Slider handle height */
   border-radius: 5rem;
   background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-  width: 30rem; /* Set a specific slider handle width */
-  height: 30rem; /* Slider handle height */
+  width: var(--slider-thumb-width); /* Set a specific slider handle width */
+  height: var(--slider-height); /* Slider handle height */
   border-radius: 5rem;
   background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
@@ -277,21 +288,21 @@ body {
 .ticks {
   display: flex;
   justify-content: space-between;
-  padding: 0rem -1rem;
-  margin: 0rem 15rem;
+  margin: 0rem calc(calc(var(--slider-thumb-width) / 2) - calc(var(--slider-tick-width) / 2));
   pointer-events: none;
+  width: calc(100% - var(--slider-thumb-width) + var(--slider-tick-width));
+  
+  position: absolute;
 }
 
 .tick {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 4rem;
+  width: var(--slider-tick-width);
   background: rgb(217, 217, 217);
 
-  height: 29.5rem;
-  line-height: 49.5rem;
-  margin-bottom: 20rem;
+  height: var(--slider-height);
 }
 
 .boxcontainer {
