@@ -144,6 +144,10 @@ body {
   display: block;
 }
 
+.dropdown-container {
+  border-radius: 4rem;
+}
+
 .dropdown-separator {
   border-top: 1rem solid gray;
   height: 0rem;
