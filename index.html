@@ -69,30 +69,30 @@
   <body style="background-color: black; margin: 0;" onresize="updateSVGViewbox()">
     <div class="topnav">
       <div style="display: flex; justify-content: space-between; gap: 4px;">
-        <a href="https://jacksonjude.com" target="_blank" style="display: flex; align-items: center; padding: 0;">
-          <img src="./assets/favicon.ico" style="position: relative; width: 45rem; height: 45rem; padding: 3rem;" />
+        <a href="https://jacksonjude.com" target="_blank" class="topnavbutton" style="display: flex; align-items: center; padding: 0;">
+          <img src="./assets/favicon.ico" style="position: relative; width: 43px; height: 43px; padding: 3px;" />
         </a>
         <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapCountryButton" onclick="cycleMapCountry(this)" style="padding: 0;">
-            <img src="./assets/usa-flag.png" style="width: 45rem; height: 45rem; padding: 3rem;"/>
+          <a id="cycleMapCountryButton" class="topnavbutton" onclick="cycleMapCountry(this)" style="padding: 0;">
+            <img src="./assets/usa-flag.png" style="width: 43px; height: 43px; padding: 3px;"/>
           </a>
-          <div id="mapCountryDropdownContent" class="dropdown-content" style="min-width: 45rem;">
+          <div id="mapCountryDropdownContent" class="dropdown-content" style="min-width: 43px;">
             <div id="mapCountryDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0;">
-            <img src="./assets/usa-pres.png" style="width: 45rem; height: 45rem; padding: 3rem;"/>
+          <a id="cycleMapTypeButton" class="topnavbutton" onclick="cycleMapType(this)" style="padding: 0;">
+            <img src="./assets/usa-pres.png" style="width: 43px; height: 43px; padding: 3rem;"/>
           </a>
-          <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 45rem;">
+          <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 43px;">
             <div id="mapTypesDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapCycleButton" onclick="cycleMapCycle()" style="min-width: 45rem; font-size: 25rem; padding: 0 3rem;">
+          <a id="cycleMapCycleButton" class="topnavbutton" onclick="cycleMapCycle()" style="min-width: 43px; font-size: 24px; padding: 0 3rem;">
             <span>'24</span>
           </a>
           <div id="mapCyclesDropdownContent" class="dropdown-content">
@@ -100,9 +100,9 @@
             </div>
           </div>
         </div>
-        <div class="dropdown" style="min-width: 242rem;" onmouseenter="deselectDropdownButton()">
-          <a id="sourceToggleButton">Select Source</a>
-          <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 242rem;">
+        <div class="dropdown" style="min-width: 230px;" onmouseenter="deselectDropdownButton()">
+          <a id="sourceToggleButton" class="topnavbutton">Select Source</a>
+          <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 230px;">
             <div id="mapSourcesDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
@@ -110,8 +110,8 @@
       </div>
       <div style="display: flex;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="homepageButton" href="https://jacksonjude.com" target="_blank" style="min-width: 200rem; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
-          <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 275rem">
+          <a id="homepageButton" class="topnavbutton" href="https://jacksonjude.com" target="_blank" style="min-width: 190px; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
+          <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 261px">
             <div id="homepageDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <p style="margin: 0; text-align: left;">
                 <div class='dropdown-separator'></div>
@@ -170,15 +170,15 @@
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="marginEditButton">Margins</a>
-          <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 126rem">
+          <a id="marginEditButton" class="topnavbutton">Margins</a>
+          <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 120px">
             <div id="marginsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" id="shiftContainer" style="display: none;" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
-          <a id="shiftButton">Shift</a>
-          <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 126rem">
+          <a id="shiftButton" class="topnavbutton">Shift</a>
+          <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 120px">
             <div id="shiftDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(1)" style="display:flex; justify-content:center;">
@@ -208,8 +208,8 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="settingsButton">Settings</a>
-          <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 275rem">
+          <a id="settingsButton" class="topnavbutton">Settings</a>
+          <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 261px">
             <div id="settingsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
@@ -217,19 +217,19 @@
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="compareButton" onclick="applyCompareToCustomMap()">Compare</a>
-          <div id="compareDropdownContent" class="dropdown-content" style="min-width: 305rem">
+          <a id="compareButton" class="topnavbutton" onclick="applyCompareToCustomMap()">Compare</a>
+          <div id="compareDropdownContent" class="dropdown-content" style="min-width: 290px">
             <div id="compareArrayDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
               <a onclick="loadCompareItemMapSource(0)" style="display:flex; justify-content:center;">
-                <img id="compareItemImage-0" src="" class="compareitemimage" style="width: 23rem; height: 23rem; display: none; padding-right: 10rem;" />
+                <img id="compareItemImage-0" src="" class="compareitemimage" style="width: 22px; height: 22px; display: none; padding-right: 10px;" />
                 <span id="compareItem-0" class="compareitemtext">
                   &lt;Empty&gt;
                 </span>
               </a>
               <div class='dropdown-separator'></div>
               <a onclick="loadCompareItemMapSource(1)" style="display:flex; justify-content:center;">
-                <img id="compareItemImage-1" src="" class="compareitemimage" style="width: 23rem; height: 23rem; display: none; padding-right: 10rem;" />
+                <img id="compareItemImage-1" src="" class="compareitemimage" style="width: 22px; height: 22px; display: none; padding-right: 10px;" />
                 <span id="compareItem-1" class="compareitemtext">
                   &lt;Empty&gt;
                 </span>
@@ -252,8 +252,8 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39rem">Copy</a>
-          <div id="copyDropdownContent" class="dropdown-content" style="min-width: 160rem">
+          <a id="editDoneButton" class="topnavbutton" onclick="toggleEditing()" style="min-width: 37px">Copy</a>
+          <div id="copyDropdownContent" class="dropdown-content" style="min-width: 152px">
             <div id="copyDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)" style="text-align: center;">
@@ -268,14 +268,14 @@
         </div>
         <a id="clearMapButton">Clear</a>
       </div>
-      <div style="display: flex; min-width: 50rem;">
+      <div style="display: flex; min-width: 48px;">
         <div class="loader" id="loader"></div>
         <div class="progress-loader" id="loader-circle-container" style="display: none;"></div>
       </div>
       <div style="display: flex;">
-        <div id="countdownsDropdownContent" class="dropdown" style="min-width: 336rem;">
-          <a href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="font-size: 25rem; font-family: 'Bree5erif-Mono';"></a>
-          <div class="dropdown-content" style="min-width: 336rem">
+        <div id="countdownsDropdownContent" class="dropdown" style="min-width: 319px;">
+          <a class="topnavbutton" href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="font-size: 25rem; font-family: 'Bree5erif-Mono';"></a>
+          <div class="dropdown-content" style="min-width: 319px">
             <div id="countdownsDropdownContainer" class="dropdown-container" style="overflow: hidden">
             </div>
           </div>

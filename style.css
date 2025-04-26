@@ -58,10 +58,13 @@ body {
   -webkit-user-select: none;
   overflow: hidden;
   background-color: #333;
-  padding: 4rem;
+  padding: 4px;
   
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  gap: 4px;
 }
 
 .topnav a {
@@ -70,15 +73,15 @@ body {
   align-items: center;
   height: 100%;
   
-  padding: 0 15rem;
+  padding: 0 14px;
   
   cursor: pointer;
   color: #f2f2f2;
   background-color: #444;
   text-align: center;
   text-decoration: none;
-  font-size: 17rem;
-  border-radius: 4rem;
+  font-size: 16px;
+  border-radius: 4px;
   transition: background-color .1s;
 }
 
@@ -88,6 +91,10 @@ body {
 
 .topnav a.active, .dropdown-content a.active {
   background-color: #6a6a6a;
+}
+
+.topnavbutton {
+  height: 49px !important;
 }
 
 .topnavdisable {
@@ -232,6 +239,10 @@ body {
 
 .deletebutton:hover {
   background-color: #C50000 !important;
+}
+
+#countdownDisplay {
+  font-size: 24px !important;
 }
 
 .slidecontainer {
@@ -410,7 +421,7 @@ body {
   
   color: white;
   font-feature-settings: 'tnum' 1;
-  font-size: 18rem;
+  font-size: 20rem;
   
   user-select: none;
   -webkit-user-select: none;
