@@ -479,7 +479,7 @@ var JJUPresidentMapType = new MapType(
     presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
   
     const presidentialMapSourceIDs = {
-      [allYearsCycle]: [PastElectionResultMapSource.getID()]
+      [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
     const kPastElectionsVsPastElections = 1
