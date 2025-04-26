@@ -62,8 +62,8 @@ function createPartyDropdowns()
       || (shouldUseSmallButtons && dropdownPoliticalPartyIDs.length > maxPartiesToDisplay/2 && partyIDNum < maxPartiesToDisplay/2)
     )
     var shouldAlignToTrailing = shouldAlignPartyDropdownsToLeadingTrailing && shouldUseSmallButtons
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + absoluteLargePartyButtonWidth + '%; ' + (shouldAlignToTrailing ? 'margin-left: -' + (absoluteLargePartyButtonWidth - absoluteSmallPartyButtonWidth) + '%;' : '') + '; margin-top: ' + (shouldUseSmallButtons ? absoluteSmallPartyButtonHeight : absoluteLargePartyButtonHeight) + '%;">'
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" style="border-radius: 4rem; margin-left: 0; overflow: hidden;">'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContent" class="dropdown-content" style="width: ' + absoluteLargePartyButtonWidth + '%; ' + (shouldAlignToTrailing ? 'margin-left: -' + (absoluteLargePartyButtonWidth - absoluteSmallPartyButtonWidth) + '%;' : '') + ';" >'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'DropdownContainer" class="dropdown-container" style="margin-left: 0; overflow: hidden;">'
 
     if (!shouldReverseOrder)
     {
@@ -113,7 +113,8 @@ function createPartyDropdowns()
 
     if (shouldReverseOrder)
     {
-      $("#" + currentPoliticalParty.getID() + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalParty.getID() + 'DropdownContent').height())
+      const currentPoliticalPartyID = currentPoliticalParty.getID()
+      setTimeout(() => $("#" + currentPoliticalPartyID + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalPartyID + 'DropdownContent').height()-$("#" + currentPoliticalPartyID + 'Dropdown').height()), 0)
     }
 
     $("#" + currentPoliticalParty.getID() + "Dropdown").hover(function() {
