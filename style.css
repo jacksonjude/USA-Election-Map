@@ -416,7 +416,7 @@ body {
   -webkit-user-select: none;
 }
 
-@media screen and (max-width: 1100px) {
+@container discord-invite-box (max-width: 280px) {
   #discordInfo {
     display: none !important;
   }
