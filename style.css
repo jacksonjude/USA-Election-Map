@@ -109,6 +109,19 @@ body {
   pointer-events: none;
 }
 
+.topnav-icon {
+  display: none;
+  
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 32px;
+  
+  width: 43px;
+  height: 43px;
+  padding: 3px;
+}
+
 /* The dropdown container */
 .dropdown {
   /* overflow: hidden; */
@@ -377,7 +390,7 @@ body {
   aspect-ratio: 1/1;
   height: 100%;
   display: inline-block;
-  font-size: 12rem;
+  font-size: 12px;
 }
 
 .progress-loader > svg {
@@ -430,5 +443,68 @@ body {
 @container discord-invite-box (max-width: 280px) {
   #discordInfo {
     display: none !important;
+  }
+}
+
+@media (max-width: 1575px) and (min-width: 1525px) {
+  #countdown-seconds {
+    display: none !important;
+  }
+  
+  #countdownsDropdownContent, #countdownsDropdownContent .dropdown-content {
+    min-width: 275px !important;
+  }
+}
+
+@media (max-width: 1525px) {
+  #countdown-seconds, #countdown-minutes, #countdown-hours {
+    display: none !important;
+  }
+  
+  #countdownsDropdownContent, #countdownsDropdownContent .dropdown-content {
+    min-width: 150px !important;
+    max-width: 150px !important;
+  }
+}
+
+@media (max-width: 1425px) {
+  .topnav-text {
+    display: none;
+  }
+  
+  .topnav-icon {
+    display: flex;
+  }
+  
+  .topnav-iconbutton {
+    padding: 0 !important;
+  }
+  
+  #sourceToggleButton .topnav-text {
+    display: block;
+  }
+  
+  #sourceToggleButton .topnav-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 1250px) {
+  #countdownsContainer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  #sourceToggleButton {
+    min-width: auto !important;
+  }
+  
+  #sourceToggleButton .topnav-text {
+    display: none;
+  }
+  
+  #sourceToggleButton .topnav-icon {
+    display: flex;
   }
 }

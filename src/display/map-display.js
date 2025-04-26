@@ -1105,11 +1105,11 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
-    $("#sourceToggleButton").html("Select Map")
+    $("#sourceToggleButton .topnav-text").html("Select Map")
   }
   else
   {
-    $("#sourceToggleButton").html("Map: " + currentMapSource.getName())
+    $("#sourceToggleButton .topnav-text").html("Map: " + currentMapSource.getName())
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
@@ -1123,12 +1123,12 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   }
   else if (currentEditingState != EditingState.editing && currentMapSource.isCustom())
   {
-    $("#editDoneButton").html("Edit")
+    $("#editDoneButton .topnav-text").html("Edit")
     $("#copyDropdownContainer").hide()
   }
   else
   {
-    $("#editDoneButton").html("Copy")
+    $("#editDoneButton .topnav-text").html("Copy")
     $("#copyDropdownContainer").show()
   }
 
@@ -1409,12 +1409,12 @@ async function toggleEditing(stateToSet)
     case EditingState.viewing:
     if (currentMapSource.isCustom())
     {
-      $("#editDoneButton").html("Edit")
+      $("#editDoneButton .topnav-text").html("Edit")
       $("#copyDropdownContainer").hide()
     }
     else
     {
-      $("#editDoneButton").html("Copy")
+      $("#editDoneButton .topnav-text").html("Copy")
       $("#copyDropdownContainer").show()
     }
     $("#editDoneButton").removeClass('active')

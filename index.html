@@ -100,8 +100,8 @@
             </div>
           </div>
         </div>
-        <div class="dropdown" style="min-width: 230px;" onmouseenter="deselectDropdownButton()">
-          <a id="sourceToggleButton" class="topnavbutton">Select Source</a>
+        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="sourceToggleButton" class="topnavbutton topnav-iconbutton" style="min-width: 230px; padding: 0;"><span class='topnav-text'>Select Source</span><span class='topnav-icon' src="./assets/github.png" >🗺️</span></a>
           <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 230px;">
             <div id="mapSourcesDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
@@ -170,14 +170,14 @@
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="marginEditButton" class="topnavbutton">Margins</a>
+          <a id="marginEditButton" class="topnavbutton topnav-iconbutton"><span class='topnav-text'>Margins</span><span class='topnav-icon'>📊</span></a>
           <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 120px">
             <div id="marginsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" id="shiftContainer" style="display: none;" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
-          <a id="shiftButton" class="topnavbutton">Shift</a>
+          <a id="shiftButton" class="topnavbutton topnav-iconbutton"><span class='topnav-text'>Shift</span><span class='topnav-icon'>↕️</span></a>
           <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 120px">
             <div id="shiftDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
@@ -208,7 +208,7 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="settingsButton" class="topnavbutton">Settings</a>
+          <a id="settingsButton" class="topnavbutton topnav-iconbutton"><span class='topnav-text'>Settings</span><span class='topnav-icon'>⚙️</span></a>
           <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 261px">
             <div id="settingsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
@@ -217,7 +217,7 @@
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="compareButton" class="topnavbutton" onclick="applyCompareToCustomMap()">Compare</a>
+          <a id="compareButton" class="topnavbutton topnav-iconbutton" onclick="applyCompareToCustomMap()"><span class='topnav-text'>Compare</span><span class='topnav-icon'>↔️</span></a>
           <div id="compareDropdownContent" class="dropdown-content" style="min-width: 290px">
             <div id="compareArrayDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
@@ -252,7 +252,7 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="editDoneButton" class="topnavbutton" onclick="toggleEditing()" style="min-width: 37px">Copy</a>
+          <a id="editDoneButton" class="topnavbutton topnav-iconbutton" onclick="toggleEditing()" style="min-width: 37px"><span class='topnav-text'>Copy</span><span class='topnav-icon'>📝</span></a>
           <div id="copyDropdownContent" class="dropdown-content" style="min-width: 152px">
             <div id="copyDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
@@ -266,13 +266,13 @@
             </div>
           </div>
         </div>
-        <a id="clearMapButton">Clear</a>
+        <a id="clearMapButton" class="topnav-iconbutton"><span class='topnav-text'>Clear</span><span class='topnav-icon'>❌</span></a>
       </div>
       <div style="display: flex; min-width: 48px;">
         <div class="loader" id="loader"></div>
         <div class="progress-loader" id="loader-circle-container" style="display: none;"></div>
       </div>
-      <div style="display: flex;">
+      <div id="countdownsContainer" style="display: flex;">
         <div id="countdownsDropdownContent" class="dropdown" style="min-width: 319px;">
           <a class="topnavbutton" href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="font-size: 25rem; font-family: 'Bree5erif-Mono';"></a>
           <div class="dropdown-content" style="min-width: 319px">
