@@ -53,18 +53,25 @@ body {
   overflow: hidden;
   background-color: #333;
   padding: 4rem;
+  
+  display: flex;
+  justify-content: space-between;
 }
 
 .topnav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  padding: 0 15rem;
+  
   cursor: pointer;
-  float: left;
   color: #f2f2f2;
   background-color: #444;
   text-align: center;
-  padding: 14rem 16rem;
   text-decoration: none;
   font-size: 17rem;
-  margin-left: 4rem;
   border-radius: 4rem;
   transition: background-color .1s;
 }
@@ -91,8 +98,7 @@ body {
 
 /* The dropdown container */
 .dropdown {
-  float: left;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* Dropdown button */
@@ -112,21 +118,19 @@ body {
   display: none;
   position: absolute;
   background-color: rgba(0, 0, 0, 0);
-  margin-top: 51rem;
   /* box-shadow: 0rem 8rem 16rem 0rem rgba(0,0,0,0.2); */
   z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  margin-left: 0rem;
-  float: none;
-  padding: 12rem 16rem;
   color: #f2f2f2;
   text-decoration: none;
   display: block;
   text-align: left;
   border-radius: 0rem;
+  
+  padding: 10rem 15rem;
 }
 
 /* Show the dropdown menu on hover */
@@ -175,7 +179,6 @@ body {
 #homepageButton {
   font-weight: bold;
   /* text-decoration: underline; */
-  line-height: 150%;
 }
 
 .dropdown-item {
@@ -321,17 +324,17 @@ body {
 }
 
 .loader {
-  border: 8rem solid #999;
+  --border-size: 8rem;
+  
+  border: var(--border-size) solid #999;
   /* Grey */
-  border-top: 8rem solid #3498db;
+  border-top: var(--border-size) solid #3498db;
   /* Blue */
   border-radius: 50%;
-  width: 35rem;
-  height: 35rem;
+  aspect-ratio: 1/1;
+  height: calc(100% - calc(2 * var(--border-size)));
   animation: spin 0.5s linear infinite;
   display: inline-block;
-  margin-left: 10rem;
-  /* margin-bottom: 5rem; */
 }
 
 @keyframes spin {
@@ -345,10 +348,9 @@ body {
 }
 
 .progress-loader {
-  width: 49rem;
-  height: 49rem;
+  aspect-ratio: 1/1;
+  height: 100%;
   display: inline-block;
-  margin-left: 10rem;
   font-size: 12rem;
 }
 

@@ -1375,7 +1375,7 @@ async function toggleEditing(stateToSet)
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
 
-    $("#shiftButton").show()
+    $("#shiftContainer").show()
     $("#shiftButton").removeClass('topnavdisable')
     $("#shiftDropdownContainer").show()
 
@@ -1423,7 +1423,7 @@ async function toggleEditing(stateToSet)
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
 
-    $("#shiftButton").hide()
+    $("#shiftContainer").hide()
     $("#shiftButton").addClass('topnavdisable')
     $("#shiftDropdownContainer").hide()
 

@@ -68,48 +68,51 @@
   </head>
   <body style="background-color: black; margin: 0;" onresize="updateSVGViewbox()">
     <div class="topnav">
-      <a href="https://jacksonjude.com" target="_blank" style="padding: 3rem; display: flex; align-items: center;">
-        <img src="./assets/favicon.ico" style="position: relative; width: 45rem; height: 45rem;" />
-      </a>
-      <div style="display: inline-block;">
+      <div style="display: flex; justify-content: space-between; gap: 4px;">
+        <a href="https://jacksonjude.com" target="_blank" style="display: flex; align-items: center; padding: 0;">
+          <img src="./assets/favicon.ico" style="position: relative; width: 45rem; height: 45rem; padding: 3rem;" />
+        </a>
         <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapCountryButton" onclick="cycleMapCountry(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-flag.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
+          <a id="cycleMapCountryButton" onclick="cycleMapCountry(this)" style="padding: 0;">
+            <img src="./assets/usa-flag.png" style="width: 45rem; height: 45rem; padding: 3rem;"/>
+          </a>
           <div id="mapCountryDropdownContent" class="dropdown-content" style="min-width: 45rem;">
-            <div id="mapCountryDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="mapCountryDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;"><img src="./assets/usa-pres.png" style="position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;"/></a>
+          <a id="cycleMapTypeButton" onclick="cycleMapType(this)" style="padding: 0;">
+            <img src="./assets/usa-pres.png" style="width: 45rem; height: 45rem; padding: 3rem;"/>
+          </a>
           <div id="mapTypesDropdownContent" class="dropdown-content" style="min-width: 45rem;">
-            <div id="mapTypesDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="mapTypesDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="cycleMapCycleButton" onclick="cycleMapCycle()" style="min-width: 50rem; font-size: 25rem; padding: 0; height: 51rem; display: flex; justify-content: center; align-items: center;">
+          <a id="cycleMapCycleButton" onclick="cycleMapCycle()" style="min-width: 45rem; font-size: 25rem; padding: 0 3rem;">
             <span>'24</span>
           </a>
           <div id="mapCyclesDropdownContent" class="dropdown-content">
-            <div id="mapCyclesDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="mapCyclesDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
-        <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="sourceToggleButton" style="min-width: 206rem">Select Source</a>
+        <div class="dropdown" style="min-width: 242rem;" onmouseenter="deselectDropdownButton()">
+          <a id="sourceToggleButton">Select Source</a>
           <div id="mapSourcesDropdownContent" class="dropdown-content" style="min-width: 242rem;">
-            <div id="mapSourcesDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="mapSourcesDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
       </div>
-      <div style="border-left: 25rem solid; display: inline-block;"></div>
-      <div style="display: inline-block;">
+      <div style="display: flex;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="homepageButton" href="https://jacksonjude.com" target="_blank" style="min-width: 200rem; height: 23rem; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
+          <a id="homepageButton" href="https://jacksonjude.com" target="_blank" style="min-width: 200rem; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
           <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 275rem">
-            <div id="homepageDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="homepageDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
               <p style="margin: 0; text-align: left;">
                 <div class='dropdown-separator'></div>
                 <div class="dropdown-item">
@@ -165,19 +168,18 @@
           </div>
         </div>
       </div>
-      <div style="border-left: 25rem solid; display: inline-block;"></div>
-      <div style="display: inline-block;">
+      <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="marginEditButton" style="min-width: 70rem">Margins</a>
+          <a id="marginEditButton">Margins</a>
           <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 126rem">
-            <div id="marginsDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="marginsDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
-        <div class="dropdown" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
-          <a id="shiftButton" style="min-width: 70rem; display: none;">Shift</a>
+        <div class="dropdown" id="shiftContainer" style="display: none;" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
+          <a id="shiftButton">Shift</a>
           <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 126rem">
-            <div id="shiftDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="shiftDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(1)" style="display:flex; justify-content:center;">
                 Shift All by&nbsp;<span class="partyShiftText">+1</span>
@@ -206,19 +208,18 @@
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="settingsButton" style="min-width: 70rem">Settings</a>
+          <a id="settingsButton">Settings</a>
           <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 275rem">
-            <div id="settingsDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="settingsDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
       </div>
-      <div style="border-left: 25rem solid; display: inline-block;"></div>
-      <div style="display: inline-block;">
+      <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="compareButton" style="min-width: 70rem" onclick="applyCompareToCustomMap()">Compare</a>
+          <a id="compareButton" onclick="applyCompareToCustomMap()">Compare</a>
           <div id="compareDropdownContent" class="dropdown-content" style="min-width: 305rem">
-            <div id="compareArrayDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden; display: none;">
+            <div id="compareArrayDropdownContainer" style="border-radius: 4rem; overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
               <a onclick="loadCompareItemMapSource(0)" style="display:flex; justify-content:center;">
                 <img id="compareItemImage-0" src="" class="compareitemimage" style="width: 23rem; height: 23rem; display: none; padding-right: 10rem;" />
@@ -246,14 +247,14 @@
                 Sort by: voteshare
               </a>
             </div>
-            <div id="comparePresetsDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="comparePresetsDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="editDoneButton" onclick="toggleEditing()" style="min-width: 39rem">Copy</a>
           <div id="copyDropdownContent" class="dropdown-content" style="min-width: 160rem">
-            <div id="copyDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden;">
+            <div id="copyDropdownContainer" style="border-radius: 4rem; overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)" style="text-align: center;">
                 Edit by margin
@@ -267,13 +268,15 @@
         </div>
         <a id="clearMapButton">Clear</a>
       </div>
-      <div class="loader" id="loader"></div>
-      <div class="progress-loader" id="loader-circle-container" style="display: none"></div>
-      <div style="display: inline-block; margin-right: 8rem; float: right;">
-        <div id="countdownsDropdownContent" class="dropdown">
-          <a href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="min-width: 300rem; font-size: 25rem; font-family: 'Bree5erif-Mono'; padding: 8.5rem 16rem;"></a>
+      <div style="display: flex; min-width: 50rem;">
+        <div class="loader" id="loader"></div>
+        <div class="progress-loader" id="loader-circle-container" style="display: none;"></div>
+      </div>
+      <div style="display: flex;">
+        <div id="countdownsDropdownContent" class="dropdown" style="min-width: 336rem;">
+          <a href="https://en.wikipedia.org/wiki/Timeline_of_the_2020_United_States_presidential_election#December_2020" target="_blank" id="countdownDisplay" style="font-size: 25rem; font-family: 'Bree5erif-Mono';"></a>
           <div class="dropdown-content" style="min-width: 336rem">
-            <div id="countdownsDropdownContainer" style="border-radius: 4rem; margin-left: 4rem; overflow: hidden">
+            <div id="countdownsDropdownContainer" style="border-radius: 4rem; overflow: hidden">
             </div>
           </div>
         </div>
