@@ -285,7 +285,7 @@
     <input type='file' id='uploadFileInput' style='display: none'>
     <div style="display: flex; justify-content: space-between; margin-left: 40rem; margin-right: 40rem; height: 43.6vw; max-height: calc(100vh - 50rem - 20rem); gap: 3vw;">
       <div id='maptextcontainer' style="display: flex; flex-direction: column; justify-content: space-between; font-family: 'Bree-Regular'; width: 100%;">
-        <div style="display: flex; height: 0; flex-grow: 1; margin-top: 20rem; margin-bottom: 25rem; gap: 20rem;">
+        <div style="display: flex; height: 0; flex-grow: 1; margin-top: 15rem; margin-bottom: 15rem; gap: 20rem;">
           <div id="mapcontainer" style="overflow: hidden; width: 100%;" oncontextmenu="return false"></div>
           <div id="mapZoomControls" style="display: none; width: 50rem; flex-direction: column; justify-content: space-between;">
             <a id="mapCloseButton" onclick="zoomOutMap()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="width: 100%; height: 50rem; text-decoration: none;" /></a>
@@ -296,14 +296,14 @@
             </div>
           </div>
         </div>
-        <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; visibility: hidden;">
+        <div id="sliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; visibility: hidden; height: 70rem;">
           <span class="slidecontainer" id="dataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
             <input type="range" min="1" max="1" value="1" class="slider" id="dataMapDateSlider" oninput="addToDisplayMapQueue(this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null">
             <span id="dataMapSliderStepList" class="ticks"></span>
           </span>
           <h3 id="dateDisplay" class="date-display"></h3>
         </div>
-        <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; display: none;">
+        <div id="firstCompareSliderDateDisplayContainer" style="display: flex; justify-content: center; align-items: center; position: relative; margin-bottom: 10rem; display: none;">
           <span class="slidecontainer" id="firstCompareDataMapDateSliderContainer" style="user-select: none; -webkit-user-select: none;">
             <input type="range" min="1" max="1" value="1" class="slider" id="firstCompareDataMapDateSlider" oninput="addToCompareMapQueue(0, this.value)" onmousedown="this.style.opacity = '1'" onmouseup="this.style.opacity = null">
             <span id="firstCompareDataMapSliderStepList" class="ticks">
