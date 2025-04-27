@@ -475,19 +475,6 @@ function preloadAssets(assetURLs)
 
 function addDivEventListeners()
 {
-  let windowResizeTriggerCount = 0
-  window.addEventListener("resize", () => {  
-    windowResizeTriggerCount += 1
-    
-    setTimeout(() => {
-      windowResizeTriggerCount -= 1
-      if (windowResizeTriggerCount > 0) return
-      
-      $("#totalsPieChart").css('width', '')
-      $("#totalsPieChart").css('height', '')
-    }, 100)
-  })
-  
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
     clearMap()
 
@@ -1115,7 +1102,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
 
   if (currentEditingState == EditingState.editing && currentMapSource.isCustom())
   {
-    $("#editDoneButton").html("Done")
+    $("#editDoneButton .topnav-text").html("Done")
   }
   else if (currentEditingState == EditingState.editing && !currentMapSource.isCustom())
   {
@@ -1366,7 +1353,7 @@ async function toggleEditing(stateToSet)
   switch (currentEditingState)
   {
     case EditingState.editing:
-    $("#editDoneButton").html("Done")
+    $("#editDoneButton .topnav-text").html("Done")
     $("#editDoneButton").addClass('active')
 
     $("#copyDropdownContainer").hide()

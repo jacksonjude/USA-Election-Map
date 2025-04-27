@@ -283,8 +283,8 @@
       </div>
     </div>
     <input type='file' id='uploadFileInput' style='display: none'>
-    <div style="display: flex; justify-content: space-between; margin-left: 40rem; margin-right: 40rem; height: 43.6vw; max-height: calc(100vh - 50rem - 20rem); gap: 3vw;">
-      <div id='maptextcontainer' style="display: flex; flex-direction: column; justify-content: space-between; font-family: 'Bree-Regular'; width: 100%;">
+    <div id='maincontent'>
+      <div id='maptextcontainer'>
         <div style="display: flex; height: 0; flex-grow: 1; margin-top: 15rem; margin-bottom: 15rem; gap: 20rem;">
           <div id="mapcontainer" style="overflow: hidden; width: 100%;" oncontextmenu="return false"></div>
           <div id="mapZoomControls" style="display: none; width: 50rem; flex-direction: column; justify-content: space-between;">
@@ -320,28 +320,30 @@
           <h3 id="secondCompareDateDisplay" class="date-display"></h3>
         </div>
       </div>
-      <div style="display: flex; flex-direction: column; min-width: min(26vw, calc(0.60 * calc(100vh - 50rem - 20rem))); max-width: min(26vw, calc(0.60 * calc(100vh - 50rem - 20rem)));">
-        <div id="totalsPieChartContainer" style="position: relative; display: inline-block; vertical-align: top; margin-top: 15rem; margin-bottom: 15rem; user-select: none; -webkit-user-select: none; width: 100%">
+      <div id='infosidebar'>
+        <div id="totalsPieChartContainer">
           <canvas id="totalsPieChart"></canvas>
           <div id="totalsPieChartOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none;">
             <span id="totalsPieChartOverlayText" class="chart-overlay-text"></span>
           </div>
         </div>
-        <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10rem; width: 100%; height: 17%;">
-          <div id="partyDropdownsContainer" class="box topnav" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; height: 100%; padding: 0;">
+        <div id="secondarySidebarContainer">
+          <div id="partyDropdownsBoxContainer" class="boxcontainer textbox" style="display: inline-block; margin-top: 10rem; width: 100%; height: 50%;">
+            <div id="partyDropdownsContainer" class="box topnav" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; height: 100%; padding: 0;">
+            </div>
           </div>
-        </div>
-        <div id="discordInviteContainer" style="display: inline-block; padding-top: 10rem; user-select: none; -webkit-user-select: none; width: 100%;">
-          <div id="discordInviteBox" style="background-color: transparent; width: 100%; height: 100%; container-name: discord-invite-box; container-type: inline-size;"></div>
-          <script>
-          discordInvite.init({
-            inviteCode: '44HMc8AY3G',
-            title: 'jacksonjude.com',
-            introText: "Join the Discord Server",
-            width: 466
-          })
-          discordInvite.render()
-          </script>
+          <div id="discordInviteContainer" style="display: inline-block; padding-top: 10rem; user-select: none; -webkit-user-select: none; width: 100%;">
+            <div id="discordInviteBox" style="background-color: transparent; width: 100%; height: 100%; container-name: discord-invite-box; container-type: inline-size;"></div>
+            <script>
+            discordInvite.init({
+              inviteCode: '44HMc8AY3G',
+              title: 'jacksonjude.com',
+              introText: "Join the Discord Server",
+              width: 466
+            })
+            discordInvite.render()
+            </script>
+          </div>
         </div>
         <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; margin-top: 40rem; user-select: none; -webkit-user-select: none;">
           <div id="helpbox" class="box" style='min-height: 740rem; display: flex; flex-direction: column; justify-content: space-between'>
