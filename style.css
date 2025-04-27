@@ -412,7 +412,7 @@ body {
 }
 
 .loader {
-  --border-size: 8rem;
+  --border-size: 8px;
   
   border: var(--border-size) solid #999;
   /* Grey */
@@ -565,7 +565,7 @@ body {
 
 @media (max-aspect-ratio: 1/1) {
   #maincontent {
-    height: calc(100vh - 70px);
+    flex-grow: 1;
     
     flex-direction: column;
   }
@@ -576,7 +576,6 @@ body {
   
   #infosidebar {
     flex-direction: row;
-    /* flex-grow: 1; */
     
     min-width: initial;
     max-width: initial;
@@ -585,11 +584,11 @@ body {
   }
   
   #totalsPieChartContainer {
-    width: 50%;
+    width: 40%;
   }
   
   #secondarySidebarContainer {
-    width: 50%;
+    width: 60%;
   }
   
   #partyDropdownsBoxContainer {
@@ -599,6 +598,7 @@ body {
 
 @media (pointer:none), (pointer:coarse) {
   #maincontent {
+    flex-grow: 0;
     height: calc(80vh - 70px);
   }
 }

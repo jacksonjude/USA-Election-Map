@@ -66,7 +66,7 @@
     <meta property="og:description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
     <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon-background.png" />
   </head>
-  <body style="background-color: black; margin: 0;" onresize="updateSVGViewbox()">
+  <body style="background-color: black; margin: 0; display: flex; flex-direction: column; height: 100vh;" onresize="updateSVGViewbox()">
     <div class="topnav">
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <a href="https://jacksonjude.com" target="_blank" class="topnavbutton" style="display: flex; align-items: center; padding: 0;">
@@ -268,7 +268,7 @@
         </div>
         <a id="clearMapButton" class="topnav-iconbutton"><span class='topnav-text'>Clear</span><span class='topnav-icon'>❌</span></a>
       </div>
-      <div style="display: flex; min-width: 48px;">
+      <div style="display: flex; min-width: 48px; min-height: 48px;">
         <div class="loader" id="loader"></div>
         <div class="progress-loader" id="loader-circle-container" style="display: none;"></div>
       </div>
