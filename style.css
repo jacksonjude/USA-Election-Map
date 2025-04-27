@@ -576,6 +576,7 @@ body {
   
   #infosidebar {
     flex-direction: row;
+    justify-content: space-between;
     
     min-width: initial;
     max-width: initial;
@@ -588,7 +589,7 @@ body {
   }
   
   #secondarySidebarContainer {
-    width: 60%;
+    width: 40%;
   }
   
   #partyDropdownsBoxContainer {
