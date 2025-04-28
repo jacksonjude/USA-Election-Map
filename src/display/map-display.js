@@ -326,7 +326,7 @@ function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
   return loadSVGFilePromise
 }
 
-function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = false)
+function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = false, zoomControlsVisibility = null)
 {
   if (fadeForNewSVG)
   {
@@ -358,13 +358,14 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
 
   if (fadeForNewSVG)
   {
+    if (zoomControlsVisibility != null) $("#mapZoomControls").trigger(zoomControlsVisibility ? 'show' : 'hide')
     $("#svgdata").css('opacity', "1")
   }
 
   resolve()
 }
 
-async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
+async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG, zoomControlsVisibility)
 {
   var handleSVGZoomingPromise = new Promise((innerResolve) => {
     var stateToShow = svgPath[1]
@@ -386,7 +387,7 @@ async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
       handleNewSVG(() => {
         innerResolve()
         resolve()
-      }, svgPath, fadeForNewSVG, true)
+      }, svgPath, fadeForNewSVG, true, zoomControlsVisibility)
     }, 0)
   })
 
@@ -935,23 +936,14 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     return
   }
   else if (shouldReloadSVG)
-  {
-    if (currentViewingState == ViewingState.zooming)
-    {
-      $("#mapZoomControls").trigger('show')
-    }
-    else
-    {
-      $("#mapZoomControls").trigger('hide')
-    }
-    
+  {    
     if (cachedSVGPathData instanceof Array)
     {
-      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG)
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG, currentViewingState == ViewingState.zooming)
     }
     else
     {
-      handleNewSVGFields(() => {}, null, fadeForNewSVG)
+      handleNewSVGFields(() => {}, null, fadeForNewSVG, false, currentViewingState == ViewingState.zooming)
     }
   }
 
