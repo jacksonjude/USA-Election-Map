@@ -12,8 +12,8 @@ function createMapCountryDropdownItems()
 
 	let mapCountry = mapCountries[country]
 
-	let divStringToAppend = "<a onclick='setMapCountry(\"" + country + "\")' style='padding: 0; padding-left: 3rem; padding-right: 3rem; margin-top: 0rem;'>"
-	divStringToAppend += "<img src='" + mapCountry.getIconURL() + "' style='position: relative; top: 2rem; padding-top: 1rem; width: 45rem; height: 45rem;'/>"
+	let divStringToAppend = "<a onclick='setMapCountry(\"" + country + "\")' style='display: flex; padding: 0; margin-top: 0;'>"
+	divStringToAppend += "<img src='" + mapCountry.getIconURL() + "' style='width: 43px; height: 43px; padding: 3px;'/>"
 	divStringToAppend += "</a>"
 
 	$("#mapCountryDropdownContainer").append(divStringToAppend)

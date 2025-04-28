@@ -475,6 +475,10 @@ function preloadAssets(assetURLs)
 
 function addDivEventListeners()
 {
+  window.addEventListener("resize", () => {  
+    displayPartyTotals()
+  })
+  
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
     clearMap()
 

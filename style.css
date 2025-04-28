@@ -156,7 +156,7 @@ body {
   text-align: left;
   border-radius: 0rem;
   
-  padding: 10rem 15rem;
+  padding: 9px 14px;
 }
 
 /* Show the dropdown menu on hover */
@@ -181,12 +181,12 @@ body {
 }
 
 .textInput {
-  max-width: 32rem;
+  max-width: 30px;
   background-color: #444;
   color: #fff;
   outline: 2rem solid #666;
   text-align: right;
-  font-size: 17rem;
+  font-size: 16px;
   font-family: 'Bree5erif-Mono';
 
   position: relative;
@@ -489,9 +489,15 @@ body {
   -webkit-user-select: none;
 }
 
+.party-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .party-votes {
   font-weight: bold;
-  font-size: 17rem;
+  font-size: 17px;
 }
 
 @container discord-invite-box (max-width: 280px) {

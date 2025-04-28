@@ -45,7 +45,7 @@ function createPartyDropdowns()
 
     if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
     {
-      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: calc(' + partyButtonWidth + '% - 4rem); height: auto; padding: 2.4% 0; margin: 0; background-color: transparent; border: 2rem dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
+      dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: calc(' + partyButtonWidth + '% - 4px); height: calc(35% - 4px); padding: 0; margin: 0; background-color: transparent; border: 2px dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
       continue
     }
@@ -53,8 +53,8 @@ function createPartyDropdowns()
     var currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
     var marginColors = currentPoliticalParty.getMarginColors()
 
-    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" style="width: ' + partyButtonWidth + '%" onmouseenter="deselectDropdownButton()">'
-    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 100%; display: flex; align-items: center; justify-content: ' + (shouldStackText ? 'center' : 'center') + '; flex-direction: ' + (shouldStackText ? 'column' : 'row') + '; gap: ' + (shouldStackText ? '0' : '10rem') + '; padding: ' + (shouldUseSmallButtons ? smallPartyButtonVerticalPadding : largePartyButtonVerticalPadding) + '% 0; margin: 0; background-color: ' + marginColors.safe + ';"><span id="' + currentPoliticalParty.getID() + '-name">' + currentPoliticalParty.getID() + '</span><span id="' + currentPoliticalParty.getID() + '-votes" class="party-votes">0</span></a>'
+    dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" style="width: ' + partyButtonWidth + '%; height: 35%;" onmouseenter="deselectDropdownButton()">'
+    dropdownDiv += '<a id="' + currentPoliticalParty.getID() + '" class="partyDropdownButton active" onclick="selectParty(this)" style="width: 100%; display: flex; align-items: center; justify-content: ' + (shouldStackText ? 'center' : 'center') + '; flex-direction: ' + (shouldStackText ? 'column' : 'row') + '; gap: ' + (shouldStackText ? '0' : '10rem') + '; margin: 0; padding: 0; background-color: ' + marginColors.safe + ';"><span id="' + currentPoliticalParty.getID() + '-name" class="party-name" style="' + (shouldUseSmallButtons ? "max-width: 100%; " : "") + '">' + currentPoliticalParty.getID() + '</span><span id="' + currentPoliticalParty.getID() + '-votes" class="party-votes" style="' + (shouldUseSmallButtons ? "height: 50%; line-height: 100%; " : "") + '">0</span></a>'
     dropdownDiv += '<div class="partyDropdownContainer">'
 
     var shouldReverseOrder = shouldReversePartyDropdownsIfNeeded && (
@@ -114,7 +114,7 @@ function createPartyDropdowns()
     if (shouldReverseOrder)
     {
       const currentPoliticalPartyID = currentPoliticalParty.getID()
-      setTimeout(() => $("#" + currentPoliticalPartyID + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalPartyID + 'DropdownContent').height()-$("#" + currentPoliticalPartyID + 'Dropdown').height()), 0)
+      setTimeout(() => $("#" + currentPoliticalPartyID + 'DropdownContent').css('margin-top', -$("#" + currentPoliticalPartyID + 'DropdownContent').height()-$("#" + currentPoliticalPartyID + 'Dropdown').height()), 2)
     }
 
     $("#" + currentPoliticalParty.getID() + "Dropdown").hover(function() {
@@ -545,14 +545,47 @@ function displayPartyTotals(overrideCreateDropdowns)
       createPartyDropdowns()
     }
   }
+  
+  const possibleFontSizes = ["18px", "17px", "16px", "15px", "14px", "13px", "12px", "11px", "10px", "9px"]
 
   for (var partyID of dropdownPoliticalPartyIDs)
   {
     if (politicalParties[partyID] == null) { continue }
     $("#" + partyID + "-name").html(politicalParties[partyID].getCandidateName())
     $("#" + partyID + "-votes").html(partyTotals[partyID] ?? 0)
-    $("#" + partyID + "-name").css('font-size', getMaxFontSize(politicalParties[partyID].getCandidateName(), ["18rem", "17rem", "16rem", "15rem", "14rem", "13rem"], absoluteLargePartyButtonWidth*$(window).width()*0.65))
+    
+    let nameFontSize = getMaxFontSize(politicalParties[partyID].getCandidateName(), possibleFontSizes, $("#" + partyID).width()*0.65)
+    // if (shouldUseSmallButtons)
+    // {
+    //   nameFontSize = Math.min(parseInt(nameFontSize), buttonHeight*0.35) + "px"
+    // }
+    $("#" + partyID + "-name").css('font-size', nameFontSize)
+    
+    let votesFontSize = getMaxFontSize((partyTotals[partyID] ?? 0).toString(), possibleFontSizes, $("#" + partyID).width()*0.15)
+    // if (shouldUseSmallButtons)
+    // {
+    //   votesFontSize = Math.min(parseInt(votesFontSize), buttonHeight*0.35) + "px"
+    // }
+    $("#" + partyID + "-votes").css('font-size', votesFontSize)
+    // console.log(shouldUseSmallButtons, buttonHeight*0.35, $("#" + partyID + "-votes").css('font-size'), parseInt(votesFontSize), Math.min(parseInt(votesFontSize), buttonHeight*0.35))
   }
+  
+  const shouldUseSmallButtons = dropdownPoliticalPartyIDs.length > largeMaxPartiesToDisplay
+  
+  const buttonHeight = $("#partyDropdownsContainer").height()*0.35//$("#" + partyID).height()
+  console.log($("#partyDropdownsContainer").height())
+  
+  if (shouldUseSmallButtons)
+  {
+    for (var partyID of dropdownPoliticalPartyIDs)
+    {
+      $("#" + partyID + "-name").css('font-size', Math.min(parseInt($("#" + partyID + "-name").css('font-size')), buttonHeight*0.35) + "px")
+      $("#" + partyID + "-votes").css('font-size', Math.min(parseInt($("#" + partyID + "-votes").css('font-size')), buttonHeight*0.35) + "px")
+    }
+  }
+  
+  
+  console.log($("#partyDropdownsContainer").height())
 }
 
 function getNonEVDropdownCandidates(partyIDs)
