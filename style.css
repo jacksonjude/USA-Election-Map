@@ -221,7 +221,7 @@ body {
   text-align: left;
   cursor: pointer;
   background-color: #444;
-  font-size: 17rem;
+  font-size: 16px;
   transition: background-color .1s;
 }
 
@@ -236,7 +236,7 @@ body {
   text-align: left !important;
   padding: 0 !important;
   text-decoration: underline !important;
-  font-size: 17rem !important;
+  font-size: 16px !important;
   margin-left: 0rem !important;
 }
 
@@ -305,6 +305,13 @@ body {
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.credits-icon {
+  position: relative;
+  top: 5rem;
+  width: 19px;
+  height: 19px;
 }
 
 .slidecontainer {
@@ -570,7 +577,7 @@ body {
   }
 }
 
-@media (max-aspect-ratio: 1/1) {
+@media (max-aspect-ratio: 1.1/1) {
   #maincontent {
     flex-grow: 1;
     
