@@ -464,6 +464,8 @@ document.addEventListener('keypress', async function(e) {
       removeActiveClassFromDropdownButton()
       selectedDropdownDivID = null
     }
+    
+    updateDropdownFlip($("#" + contentDivIDToToggle))
   }
   else if (e.key == "t" && !isEditingTextbox())
   {

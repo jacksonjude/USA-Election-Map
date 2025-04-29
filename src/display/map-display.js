@@ -478,6 +478,19 @@ function addDivEventListeners()
 {
   window.addEventListener("resize", () => {  
     displayPartyTotals()
+    
+    $('.dropdown').each(function () {
+      const dropdown = $(this).children('.dropdown-content')
+      
+      if (dropdown.length > 0 && dropdown.css('display') != 'none')
+      {
+        updateDropdownFlip(dropdown)
+      }
+    })
+  })
+  
+  $('.dropdown').each(function () {
+    this.addEventListener('mouseenter', (e) => updateDropdownFlip($(e.target).children('.dropdown-content')))
   })
   
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
@@ -580,6 +593,19 @@ function addDivEventListeners()
     overlayShadowClass = 'chart-overlay-shadow-small'
   }
   $('#totalsPieChartOverlayText').addClass(overlayShadowClass)
+}
+
+function updateDropdownFlip(dropdown)
+{
+  dropdown.removeClass('dropdown-content-flipped')
+  
+  const rect = dropdown[0].getBoundingClientRect()
+  const over = rect.right - window.innerWidth
+
+  if (over > 0)
+  {
+    dropdown.addClass('dropdown-content-flipped')
+  }
 }
 
 function addTextBoxSpacingCSS()
