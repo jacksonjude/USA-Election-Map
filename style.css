@@ -263,6 +263,10 @@ body {
   background-color: #C50000 !important;
 }
 
+#shiftButton {
+  min-width: 60px;
+}
+
 #countdownDisplay {
   font-size: 24px !important;
 }
@@ -563,6 +567,10 @@ body {
   
   #sourceToggleButton .topnav-icon {
     display: none;
+  }
+  
+  #shiftButton {
+    min-width: auto;
   }
 }
 

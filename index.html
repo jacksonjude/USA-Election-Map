@@ -168,17 +168,17 @@
           </div>
         </div>
       </div>
-      <div style="display: flex; justify-content: space-between; gap: 4px;">
+      <div style="display: flex; justify-content: space-between;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
-          <a id="marginEditButton" class="topnavbutton topnav-iconbutton"><span class='topnav-text'>Margins</span><span class='topnav-icon'>📊</span></a>
-          <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 120px">
+          <a id="marginEditButton" class="topnavbutton topnav-iconbutton" style="margin-right: 4px;"><span class='topnav-text'>Margins</span><span class='topnav-icon'>📊</span></a>
+          <div id="marginsDropdownContent" class="dropdown-content" style="min-width: 120px;">
             <div id="marginsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>
         </div>
         <div class="dropdown" id="shiftContainer" style="display: none;" onmouseenter="deselectDropdownButton(); updateShiftDropdownText()">
-          <a id="shiftButton" class="topnavbutton topnav-iconbutton" style="min-width: 60px;"><span class='topnav-text'>Shift</span><span class='topnav-icon'>↕️</span></a>
-          <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 120px">
+          <a id="shiftButton" class="topnavbutton topnav-iconbutton" style="margin-right: 4px;"><span class='topnav-text'>Shift</span><span class='topnav-icon'>↕️</span></a>
+          <div id="shiftDropdownContent" class="dropdown-content" style="min-width: 240px;">
             <div id="shiftDropdownContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
               <a class="partyShiftConstantButton" onclick="addConstantMarginToMap(1)" style="display:flex; justify-content:center;">
