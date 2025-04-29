@@ -498,6 +498,7 @@ body {
 .party-votes {
   font-weight: bold;
   font-size: 17px;
+  line-height: 100%;
 }
 
 @container discord-invite-box (max-width: 280px) {
