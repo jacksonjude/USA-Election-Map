@@ -355,10 +355,10 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
   setTimeout(() => $("#text text").css('filter', 'url(#text-shadow)'), 0)
 
   removeLoader(LoaderType.standard)
-
+  
+  if (zoomControlsVisibility != null) $("#mapZoomControls").trigger(zoomControlsVisibility ? 'show' : 'hide')
   if (fadeForNewSVG)
   {
-    if (zoomControlsVisibility != null) $("#mapZoomControls").trigger(zoomControlsVisibility ? 'show' : 'hide')
     $("#svgdata").css('opacity', "1")
   }
 
@@ -1653,7 +1653,6 @@ function generateSVGPattern(patternID, fillColor, strokeColor, scale = 1)
     let svgBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
     
     let sizeFactor = Math.max(svgBox.width/svgDiv.width(), svgBox.height/svgDiv.height())*(scale**(3/4))
-    console.log(sizeFactor)
     
     var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" style="fill: ' + fillColor + ';"></rect>'
