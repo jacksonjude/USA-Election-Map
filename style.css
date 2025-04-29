@@ -27,9 +27,9 @@ body {
 }
 
 :root {
-  --slider-tick-width: 4rem;
-  --slider-thumb-width: 30rem;
-  --slider-height: 30rem;
+  --slider-tick-width: calc(4rem * var(--slider-date-scale));
+  --slider-thumb-width: calc(30rem * var(--slider-date-scale));
+  --slider-height: calc(30rem * var(--slider-date-scale));
 }
 
 .background {
@@ -327,6 +327,16 @@ body {
   height: 19px;
 }
 
+#sliderDateDisplayContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  visibility: hidden;
+  
+  height: calc(calc(2 * var(--slider-height)) + 10rem);
+}
+
 .slidecontainer {
   width: 100%; /* Width of the outside container */
   height: var(--slider-height);
@@ -497,7 +507,6 @@ body {
   display: inline-block;
   padding-left: 20rem;
   vertical-align: center;
-  height: 20rem;
   
   margin: 0;
   
@@ -626,11 +635,23 @@ body {
   #partyDropdownsBoxContainer {
     height: 30% !important;
   }
+  
+  :root {
+    --slider-date-scale: 1.75;
+  }
+  
+  .date-display {
+    font-size: 35rem;
+  }
 }
 
 @media (pointer:none), (pointer:coarse) {
   #maincontent {
     flex-grow: 0;
     height: calc(80vh - 70px);
+  }
+  
+  :root {
+    --slider-date-scale: 3;
   }
 }
