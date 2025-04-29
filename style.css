@@ -27,6 +27,8 @@ body {
 }
 
 :root {
+  --slider-date-scale: 1;
+  
   --slider-tick-width: calc(4rem * var(--slider-date-scale));
   --slider-thumb-width: calc(30rem * var(--slider-date-scale));
   --slider-height: calc(30rem * var(--slider-date-scale));
@@ -512,7 +514,7 @@ body {
   
   color: white;
   font-feature-settings: 'tnum' 1;
-  font-size: 20rem;
+  font-size: calc(20rem * var(--slider-date-scale));
   
   user-select: none;
   -webkit-user-select: none;
@@ -638,10 +640,6 @@ body {
   
   :root {
     --slider-date-scale: 1.75;
-  }
-  
-  .date-display {
-    font-size: 35rem;
   }
 }
 
