@@ -207,14 +207,14 @@ function setupTotalsPieChart()
             case 1:
             return {
               family: "Bree5erif-Mono",
-              size: Math.round(fontFactor*24*$(window).width()/1800),
+              size: Math.round(fontFactor*24*$("#totalsPieChart").width()/450),
               weight: "bold"
             }
 
             case 2:
             return {
               family: "Bree5erif-Mono",
-              size: Math.round(fontFactor*20*$(window).width()/1800),
+              size: Math.round(fontFactor*20*$("#totalsPieChart").width()/450),
               weight: "bold"
             }
           }
