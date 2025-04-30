@@ -623,6 +623,10 @@ body {
     flex-direction: column;
   }
   
+  #toggleHelpBoxButton {
+    display: none;
+  }
+  
   #maptextcontainer {
     flex-grow: 1;
   }
@@ -676,13 +680,5 @@ body {
   
   #credits-container {
     display: none !important;
-  }
-  
-  html, body {
-    overflow-y: hidden;
-  }
-  
-  body {
-    position: relative;
   }
 }
