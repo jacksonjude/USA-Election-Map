@@ -65,6 +65,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
     <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon-background.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body style="background-color: black; margin: 0; display: flex; flex-direction: column; height: 100vh;" onresize="updateSVGViewbox()">
     <div class="topnav">
@@ -108,7 +109,7 @@
           </div>
         </div>
       </div>
-      <div style="display: flex;">
+      <div id="credits-container" style="display: flex;">
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="homepageButton" class="topnavbutton" href="https://jacksonjude.com" target="_blank" style="min-width: 190px; font-family: 'Bree-Regular';">map.jacksonjude.com</a>
           <div id="homepageDropdownContent" class="dropdown-content" style="min-width: 390px">
@@ -323,7 +324,7 @@
       <div id='infosidebar'>
         <div id="totalsPieChartContainer">
           <canvas id="totalsPieChart"></canvas>
-          <div id="totalsPieChartOverlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; pointer-events: none;">
+          <div id="totalsPieChartOverlay" style="position: absolute; top: 0; left: 0; width: 100%; aspect-ratio: 1/1; display: flex; justify-content: center; align-items: center; pointer-events: none;">
             <span id="totalsPieChartOverlayText" class="chart-overlay-text"></span>
           </div>
         </div>
@@ -332,7 +333,7 @@
             <div id="partyDropdownsContainer" class="box topnav" style="display: flex; justify-content: space-evenly; flex-wrap: wrap; align-items: center; height: 100%; padding: 0;">
             </div>
           </div>
-          <div id="discordInviteContainer" style="display: inline-block; padding-top: 10rem; user-select: none; -webkit-user-select: none; width: 100%;">
+          <div id="discordInviteContainer">
             <div id="discordInviteBox" style="background-color: transparent; width: 100%; height: 100%; container-name: discord-invite-box; container-type: inline-size;"></div>
             <script>
             discordInvite.init({

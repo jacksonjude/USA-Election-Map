@@ -324,7 +324,10 @@ async function updateRegionBox(regionID = currentRegionID)
 
 function updateRegionBoxPosition(mouseX, mouseY)
 {
-  $("#regionboxcontainer").css("left", mouseX+5)
+  let newRegionBoxXPos = mouseX+5
+  newRegionBoxXPos = correctOverflow(newRegionBoxXPos, $("#regionboxcontainer").width(), $(document).width())
+  
+  $("#regionboxcontainer").css("left", newRegionBoxXPos)
   updateRegionBoxYPosition(mouseY)
 }
 

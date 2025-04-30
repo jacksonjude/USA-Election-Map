@@ -5,6 +5,8 @@
 #discordData{
     display:flex;
     justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
 }
 #discordInfo{
     display:flex;
@@ -60,7 +62,8 @@
 }
 #discordInviteBox{
     background-color:#37393e;
-    display:inline-block
+    display:inline-block;
+    height: 100%;
 }
 #discordInvite{
     text-align:left;
@@ -68,17 +71,17 @@
     color:#fff;
     background:rgba(47,49,54,.6);
     border:1px solid rgba(47,49,54,.9);
-    border-radius:8px;
     font:normal normal 400 normal 16px/16px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
     margin:0;
-    padding:10px 15px 10px 10px;
-    display:inline-block;
-    border-radius: 5rem;
+    padding: 4%;
+    display:flex;
+    flex-direction: column;
     border: 1rem solid gray;
+    border-radius: 5rem;
 }
 #offlineInd,#onlineInd{
     height:8px;
-    width:8px;
+    min-width:8px;
     border-radius:50%;
     margin:0 4px 0 0;
     display:block
@@ -88,9 +91,8 @@
     height:16px;
     letter-spacing:.5px;
     text-transform:uppercase;
-    flex:1 1 0%;
     font:normal normal 600 normal 12px/16px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin:0 0 8px
+    margin:0 0 2%
 }
 #serverImg{
     background-position:50% 50%;
@@ -100,11 +102,12 @@
     position:relative;
     right:0;
     top:0;
-    width:min(calc(50rem * var(--discord-scale)), 50px);
-    height:min(calc(50rem * var(--discord-scale)), 50px);
     border-radius:min(calc(15rem * var(--discord-scale)), 15px);
     flex:0 0 auto;
-    margin:0 10px 0 0
+    margin:0 10px 0 0;
+    
+    height: 100%;
+    aspect-ratio: 1/1;
 }
 #discordInviteError{
     background-color:red;
@@ -169,7 +172,11 @@
     background:#43b581;
     border-radius:3px;
     font:normal normal 500 normal 14px/20px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    transition:background-color .17s ease 0s
+    transition:background-color .17s ease 0s;
+    
+    height: 60%;
+    min-height: 22px;
+    aspect-ratio: 2/1;
 }
 #callToAction:hover{
     background-color:#3ca374

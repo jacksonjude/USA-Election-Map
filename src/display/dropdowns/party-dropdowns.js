@@ -561,14 +561,12 @@ function displayPartyTotals(overrideCreateDropdowns)
   }
   
   const buttonHeight = $("#partyDropdownsContainer").height()*0.35
+  const buttonHeightFactor = shouldUseSmallButtons ? 0.35 : 0.60
   
-  if (shouldUseSmallButtons)
+  for (var partyID of dropdownPoliticalPartyIDs)
   {
-    for (var partyID of dropdownPoliticalPartyIDs)
-    {
-      $("#" + partyID + "-name").css('font-size', Math.min(parseInt($("#" + partyID + "-name").css('font-size')), buttonHeight*0.35) + "px")
-      $("#" + partyID + "-votes").css('font-size', Math.min(parseInt($("#" + partyID + "-votes").css('font-size')), buttonHeight*0.35) + "px")
-    }
+    $("#" + partyID + "-name").css('font-size', Math.min(parseInt($("#" + partyID + "-name").css('font-size')), buttonHeight*buttonHeightFactor) + "px")
+    $("#" + partyID + "-votes").css('font-size', Math.min(parseInt($("#" + partyID + "-votes").css('font-size')), buttonHeight*buttonHeightFactor) + "px")
   }
 }
 

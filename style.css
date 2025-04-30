@@ -322,6 +322,17 @@ body {
   height: 100%;
 }
 
+#discordInviteContainer {
+  display: inline-block;
+  padding-top: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  
+  width: 100%;
+  height: 50%;
+  max-height: 110px;
+}
+
 .credits-icon {
   position: relative;
   top: 5rem;
@@ -631,15 +642,25 @@ body {
   }
   
   #secondarySidebarContainer {
-    width: 40%;
+    width: 49%;
   }
   
   #partyDropdownsBoxContainer {
-    height: 30% !important;
+    height: 40% !important;
   }
   
   :root {
     --slider-date-scale: 1.75;
+  }
+  
+  @container discord-invite-box (max-width: 310px) {
+    #discordInfo {
+      display: none !important;
+    }
+  }
+  
+  #discordInviteContainer {
+    height: 40%;
   }
 }
 
@@ -651,5 +672,17 @@ body {
   
   :root {
     --slider-date-scale: 3;
+  }
+  
+  #credits-container {
+    display: none !important;
+  }
+  
+  html, body {
+    overflow-y: hidden;
+  }
+  
+  body {
+    position: relative;
   }
 }

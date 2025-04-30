@@ -606,6 +606,12 @@ function updateDropdownFlip(dropdown)
   {
     dropdown.addClass('dropdown-content-flipped')
   }
+  
+  const newRect = dropdown[0].getBoundingClientRect()
+  if (newRect.left < 0)
+  {
+    dropdown.removeClass('dropdown-content-flipped')
+  }
 }
 
 function addTextBoxSpacingCSS()
