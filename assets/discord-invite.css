@@ -193,7 +193,10 @@
     border:1px solid rgba(114,118,126,.298);
     border-radius:3px;
     font:normal normal 500 normal 14px/20px Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    transition:color .17s ease 0s,background-color .17s ease 0s,border-color .17s ease 0s
+    transition:color .17s ease 0s,background-color .17s ease 0s,border-color .17s ease 0s;
+    
+    min-height: 22px;
+    aspect-ratio: 2/1;
 }
 #discordPoly,#gDiscord{
     white-space:nowrap;
