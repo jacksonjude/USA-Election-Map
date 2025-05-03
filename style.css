@@ -675,10 +675,16 @@ body {
   }
   
   :root {
-    --slider-date-scale: 3;
+    --slider-date-scale: 1.75;
   }
   
   #credits-container {
     display: none !important;
+  }
+  
+  @media (max-aspect-ratio: 1.1/1) {
+    :root {
+      --slider-date-scale: 3;
+    }
   }
 }
