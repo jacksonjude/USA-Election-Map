@@ -423,7 +423,7 @@ document.addEventListener('keypress', async function(e) {
   else if (shiftNumberKeycodes.includes(e.key) && shiftNumberKeycodes.indexOf(e.key) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
     var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.key)]
-    toggleCompareMapSourceCheckbox(mapSourceIDToCompare, false)
+    addCompareMapSource(mapSourceIDToCompare)
   }
   else if ((e.key == "c" || e.key == "m" || e.key == "s") && !isEditingTextbox())
   {

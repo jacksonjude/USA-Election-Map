@@ -217,7 +217,7 @@
         </div>
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
-        <div class="dropdown" onmouseenter="deselectDropdownButton()">
+        <div class="dropdown" onmouseenter="hoveredCompareDropdownButton()">
           <a id="compareButton" class="topnavbutton topnav-iconbutton" onclick="applyCompareToCustomMap()"><span class='topnav-text'>Compare</span><span class='topnav-icon'>↔️</span></a>
           <div id="compareDropdownContent" class="dropdown-content" style="min-width: 290px">
             <div id="compareArrayDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
@@ -237,18 +237,44 @@
               </a>
               <div class='dropdown-separator'></div>
               <a id="clearCompareButton" onclick="clearMap()" style="text-align: center;">
-                Clear Compare Sources
+                <span style="margin-right: 8px;">❌</span>Clear Maps
               </a>
               <div class='dropdown-separator'></div>
               <a id="swapCompareButton" onclick="swapCompareMapSources(); updateCompareMapSources([true, true], true, true)" style="text-align: center;">
-                Swap Compare Sources
+                <span style="margin-right: 8px;">🔀</span>Swap Maps
               </a>
               <div class='dropdown-separator'></div>
               <a id="compareSortModeButton" onclick="toggleCompareSortMode(this); applyCompareToCustomMap()" style="text-align: center;">
-                Sort by: voteshare
+                <span style="margin-right: 8px;">🔼</span>Sort by: voteshare
               </a>
             </div>
             <div id="comparePresetsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
+            </div>
+            <div id="compareCustomDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
+              <div class='dropdown-separator'></div>
+              <a onclick="listCustomCompareMapSources(0)" style="display:flex; justify-content:center;">
+                <img id="compareCustomItemImage-0" src="" class="compareitemimage" style="width: 22px; height: 22px; display: none; padding-right: 10px;" />
+                <span id="compareCustomItem-0" class="compareitemtext" style="display: flex; align-items: center; gap: 8px;">
+                  Select Map
+                </span>
+              </a>
+              <div class='dropdown-separator'></div>
+              <a onclick="listCustomCompareMapSources(1)" style="display:flex; justify-content:center;">
+                <img id="compareCustomItemImage-1" src="" class="compareitemimage" style="width: 22px; height: 22px; display: none; padding-right: 10px;" />
+                <span id="compareCustomItem-1" class="compareitemtext" style="display: flex; align-items: center; gap: 8px;">
+                  Select Map
+                </span>
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="applyCustomCompareButton" onclick="hideCustomCompareSelection(false)" style="text-align: center;">
+                <span style="margin-right: 8px;">✅</span>Apply Maps
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="clearCustomCompareButton" onclick="hideCustomCompareSelection(true)" style="text-align: center;">
+                <span style="margin-right: 8px;">❌</span>Clear Maps
+              </a>
+            </div>
+            <div id="compareCustomListDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
             </div>
           </div>
         </div>

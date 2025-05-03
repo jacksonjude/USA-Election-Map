@@ -8,7 +8,8 @@ var compareMapSourceIDArray
 var compareMapDataArray
 var selectedCompareSlider
 
-var showingCompareCheckboxes = parseInt(getCookie('compare-checkboxes')) ? true : false
+var showingCustomCompare
+var customCompareSourceToSet
 
 var shouldCombineMinorThirdParties = true
 var getCompareMajorParties
@@ -27,6 +28,9 @@ function resetCompareVariables()
   getCompareMajorParties = null
   compareResultCustomMapSource = null
   shouldSetCompareMapSource = true
+  
+  showingCustomCompare = false
+  customCompareSourceToSet = 0
 }
 
 function createComparePresetDropdownItems()
@@ -37,27 +41,111 @@ function createComparePresetDropdownItems()
     var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
 
     $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'>(" + comparePresetNum + ")&nbsp;&nbsp;" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
+    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'><span style='margin-right: 8px'>" + getEmojiForComparePresetNum(comparePresetNum) + "</span>" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
   }
   
   $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-  $("#comparePresetsDropdownContainer").append("<a style='' onclick='toggleCompareCheckboxes()'><span class='comparecheckboxtoggleicon'>☑️</span> Custom Checkboxes Enabled</a>")
+  $("#comparePresetsDropdownContainer").append("<a style='' onclick='showCustomCompareSelection()'><span style='margin-right: 8px'>#️⃣</span>Other vs Other</a>")
 }
 
-function toggleCompareCheckboxes(value)
+function getEmojiForComparePresetNum(comparePresetNum)
 {
-  showingCompareCheckboxes = value ?? !showingCompareCheckboxes
-  setCookie('compare-checkboxes', showingCompareCheckboxes ? 1 : 0)
-  
-  if (showingCompareCheckboxes)
+  comparePresetNum = parseInt(comparePresetNum)
+  switch (comparePresetNum)
   {
-    $(".comparesourcecheckbox").show()
-    $(".comparecheckboxtoggleicon").html('✅')
+    case 1: return '1️⃣'
+    case 2: return '2️⃣'
+    case 3: return '3️⃣'
+    case 4: return '4️⃣'
+    case 5: return '5️⃣'
+    case 6: return '6️⃣'
+    case 7: return '7️⃣'
+    case 8: return '8️⃣'
+    case 9: return '9️⃣'
+  }
+}
+
+function showCustomCompareSelection()
+{
+  showingCustomCompare = true
+  $("#compareDropdownContent").css('display', "block")
+  selectedDropdownDivID = "compareDropdownContent"
+  
+  for (let compareArrayIndex in compareMapSourceIDArray)
+  {
+    const mapSourceName = mapSources[compareMapSourceIDArray[compareArrayIndex]]?.getName()
+    const mapSourceIcon = mapSources[compareMapSourceIDArray[compareArrayIndex]]?.getIconURL(true) ?? "./assets/edit-icon.png"
+    
+    $(`#compareCustomItem-${compareArrayIndex}`).html(mapSourceName ? `<img style='width: 19px; height: 19px' src='${mapSourceIcon}' /> ${mapSourceName} (Edit)` : "<span style='color: #888'>Select Map</span>")
+  }
+  
+  if (compareMapSourceIDArray[0] != null && compareMapSourceIDArray[1] != null)
+  {
+    
+  }
+  
+  $("#comparePresetsDropdownContainer").hide()
+  $("#compareCustomDropdownContainer").show()
+  $("#compareButton").addClass('active')
+}
+
+function listCustomCompareMapSources(sourceIndex)
+{
+  customCompareSourceToSet = sourceIndex
+  
+  $("#compareCustomListDropdownContainer").html("")
+  
+  for (let mapSourceID of mapSourceIDs)
+  {
+    $("#compareCustomListDropdownContainer").append("<div class='dropdown-separator'></div>")
+    
+    const mapSourceName = mapSources[mapSourceID].getName()
+    const mapSourceIcon = mapSources[mapSourceID].getIconURL(true) ?? "./assets/edit-icon.png"
+    
+    let mapSourceDiv = "<a id='" + mapSourceID.replace(/\s/g, '') + "' onclick='selectCustomCompareMapSource(\"" + mapSourceID + "\")'>"
+    mapSourceDiv += "<span style='display: flex; align-items: center'>"
+    mapSourceDiv += "<img style='width: 19px; height: 19px' src='" + mapSourceIcon + "' />"
+    mapSourceDiv += "<span style='margin-left: 8px'>" + mapSourceName + "</span>"
+    mapSourceDiv += "<span style='flex-grow: 1'></span>"
+    if (compareMapSourceIDArray.includes(mapSourceID)) mapSourceDiv += "<span>✅</span>"
+    mapSourceDiv += "</span>"
+    mapSourceDiv += "</a>"
+    $("#compareCustomListDropdownContainer").append(mapSourceDiv)
+  }
+  
+  $("#compareCustomDropdownContainer").hide()
+  $("#compareCustomListDropdownContainer").show()
+}
+
+function selectCustomCompareMapSource(sourceID)
+{
+  compareMapSourceIDArray[customCompareSourceToSet] = sourceID
+  $("#compareCustomListDropdownContainer").hide()
+  showCustomCompareSelection()
+}
+
+async function hideCustomCompareSelection(shouldReset)
+{
+  $("#compareCustomDropdownContainer").hide()
+  
+  if (shouldReset)
+  {
+    resetCompareVariables()
+    $("#compareButton").removeClass('active')
+    $("#comparePresetsDropdownContainer").show()
   }
   else
   {
-    $(".comparesourcecheckbox").hide()
-    $(".comparecheckboxtoggleicon").html('❌')
+    showingCompareMap = true
+    showingCustomCompare = false
+    deselectDropdownButton()
+    
+    await updateCompareMapSources([true, true], false)
+    
+    toggleMapSettingDisable("seatArrangement", true)
+    updateCompareMapSlidersVisibility()
+    
+    setCompareSliderDates()
   }
 }
 
@@ -92,19 +180,22 @@ async function loadCompareItemMapSource(compareItemNum)
 async function loadComparePreset(comparePresetNum)
 {
   var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
-
-  await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][0], true)
+  
+  await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][0])
   if (defaultCompareSourceIDs[comparePresetNum][0] != defaultCompareSourceIDs[comparePresetNum][1])
   {
-    await toggleCompareMapSourceCheckbox(defaultCompareSourceIDs[comparePresetNum][1], true)
+    await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][1])
   }
 
-  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+  setCompareSliderDates()
+}
 
-  if (defaultCompareSourceIDs[comparePresetNum][0] == defaultCompareSourceIDs[comparePresetNum][1])
+function setCompareSliderDates()
+{
+  if (compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
   {
-    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
-    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0)-1-(latestSliderTickEnabled ? 1 : 0))
+    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length-1)
+    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length-1)
   }
 }
 
@@ -112,16 +203,18 @@ var compareSortMode = CompareSortMode.voteshare
 
 function toggleCompareSortMode(div)
 {
+  const emojiPrefix = '<span style="margin-right: 8px;">🔼</span>'
+  
   switch (compareSortMode)
   {
     case CompareSortMode.voteshare:
     compareSortMode = CompareSortMode.shiftMargin
-    div.innerHTML = "Sort by: shift"
+    div.innerHTML = emojiPrefix + "Sort by: shift"
     break
 
     case CompareSortMode.shiftMargin:
     compareSortMode = CompareSortMode.voteshare
-    div.innerHTML = "Sort by: voteshare"
+    div.innerHTML = emojiPrefix + "Sort by: voteshare"
     break
   }
 }
@@ -138,51 +231,24 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
     await zoomOutMap()
   }
 
-  var checkboxID = mapSourceID.replace(/\s/g, '') + "-compare"
-  var checkboxChecked = $("#" + checkboxID).prop('checked')
-
   var compareSourcesUpdated
-  var mapSourceToUncheck
-  if (checkboxChecked && compareMapSourceIDArray[0] == null && compareMapSourceIDArray[1] == null)
+  if (compareMapSourceIDArray[0] == null && compareMapSourceIDArray[1] == null)
   {
     compareSourcesUpdated = [true, true]
     compareMapSourceIDArray[0] = mapSourceID
     compareMapSourceIDArray[1] = mapSourceID
   }
-  else if (checkboxChecked && compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
+  else if (compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
   {
     compareSourcesUpdated = [false, true]
     compareMapSourceIDArray[1] = mapSourceID
   }
-  else if (checkboxChecked)
+  else
   {
     compareSourcesUpdated = [true, true]
-    mapSourceToUncheck = shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) ? compareMapSourceIDArray[0] : compareMapSourceIDArray[1]
-    compareMapSourceIDArray[0] = compareMapSourceIDArray[0] == mapSourceToUncheck ? mapSourceID : compareMapSourceIDArray[0]
-    compareMapSourceIDArray[1] = compareMapSourceIDArray[1] == mapSourceToUncheck ? mapSourceID : compareMapSourceIDArray[1]
-  }
-  else if (!checkboxChecked && compareMapSourceIDArray[0] != compareMapSourceIDArray[1])
-  {
-    if (compareMapSourceIDArray[0] == mapSourceID)
-    {
-      compareSourcesUpdated = [true, false]
-      compareMapSourceIDArray[0] = compareMapSourceIDArray[1]
-    }
-    else if (compareMapSourceIDArray[1] == mapSourceID)
-    {
-      compareSourcesUpdated = [false, true]
-      compareMapSourceIDArray[1] = compareMapSourceIDArray[0]
-    }
-  }
-  else if (!checkboxChecked && compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
-  {
-    clearMap()
-    return
-  }
-
-  if (mapSourceToUncheck)
-  {
-    $("#" + mapSourceToUncheck.replace(/\s/g, '') + "-compare").prop('checked', false)
+    const shouldSwap = mapSourceToUncheck = shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) ? compareMapSourceIDArray[0] : compareMapSourceIDArray[1]
+    compareMapSourceIDArray[0] = compareMapSourceIDArray[0] == shouldSwap ? mapSourceID : compareMapSourceIDArray[0]
+    compareMapSourceIDArray[1] = compareMapSourceIDArray[1] == shouldSwap ? mapSourceID : compareMapSourceIDArray[1]
   }
 
   showingCompareMap = true
@@ -276,12 +342,30 @@ function updateCompareMapSlidersVisibility(overrideShowHide)
     $("#compareButton").addClass('active')
     $("#compareArrayDropdownContainer").show()
     $("#comparePresetsDropdownContainer").hide()
+    $("#compareCustomDropdownContainer").hide()
+    $("#compareCustomListDropdownContainer").hide()
   }
   else
   {
     $("#compareButton").removeClass('active')
     $("#comparePresetsDropdownContainer").show()
     $("#compareArrayDropdownContainer").hide()
+    $("#compareCustomDropdownContainer").hide()
+    $("#compareCustomListDropdownContainer").hide()
+  }
+}
+
+function hoveredCompareDropdownButton()
+{
+  if (showingCustomCompare)
+  {
+    $("#compareDropdownContent").css('display', "block")
+    selectedDropdownDivID = "compareDropdownContent"
+    $("#compareButton").addClass('active')
+  }
+  else
+  {
+    deselectDropdownButton()
   }
 }
 

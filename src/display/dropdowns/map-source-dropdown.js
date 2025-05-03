@@ -32,7 +32,6 @@ function createMapSourceDropdownItems()
 
     if (!mapSources[mapSourceID].isCustom())
     {
-      divStringToAppend += "<input class='comparesourcecheckbox' type='checkbox' id='" + mapSourceIDNoSpace + "-compare' data-mapsource='" + mapSourceID + "' style='width: 19px; height: 19px; margin: 0 8px 0 0' />"
       divStringToAppend += "<img id='" + mapSourceIDNoSpace + "-icon' data-mapsource='" + mapSourceID + "' class='status' src='./assets/icon-download-none.png' style='width: 23px; height: 23px;'/>"
     }
     else
@@ -55,13 +54,6 @@ function createMapSourceDropdownItems()
           updateMapSource(mapSource, "#sourceToggleButton")
         })
       })
-      $("#" + mapSourceIDNoSpace + "-compare")[0].addEventListener('click', function() {
-        if (!showingCompareCheckboxes) { return }
-        
-        let mapSource = $(this).data("mapsource")
-        let mapSourceNoSpace = mapSource.replace(/\s/g, '')
-        addCompareMapSource(mapSource, mapSourceNoSpace)
-      })
     }
     else
     {
@@ -76,8 +68,6 @@ function createMapSourceDropdownItems()
       })
     }
   }
-  
-  toggleCompareCheckboxes(showingCompareCheckboxes)
 }
 
 function toggleMapSource(buttonDiv)
@@ -101,16 +91,6 @@ function updateMapSource(sourceID, _, forceDownload)
   }
 
   setMapSource(mapSources[sourceID], false, forceDownload)
-}
-
-async function toggleCompareMapSourceCheckbox(mapSourceID, overrideAdd)
-{
-  var checkboxID = mapSourceID.replace(/\s/g, '') + '-compare'
-  if (!$('#' + checkboxID).prop('disabled') || overrideAdd)
-  {
-    $('#' + checkboxID).prop('checked', !$('#' + checkboxID).prop('checked') || overrideAdd)
-    await addCompareMapSource(mapSourceID)
-  }
 }
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
