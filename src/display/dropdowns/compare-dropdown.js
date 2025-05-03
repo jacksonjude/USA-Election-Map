@@ -97,6 +97,8 @@ function listCustomCompareMapSources(sourceIndex)
   
   for (let mapSourceID of mapSourceIDs)
   {
+    if (mapSources[mapSourceID].isCustom()) continue
+    
     $("#compareCustomListDropdownContainer").append("<div class='dropdown-separator'></div>")
     
     const mapSourceName = mapSources[mapSourceID].getName()
