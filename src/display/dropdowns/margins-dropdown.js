@@ -14,7 +14,7 @@ function createMarginEditDropdownItems(shouldSetDefault)
   {
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' style='padding-top: 14rem; min-height: 25rem;' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
+    $("#marginsDropdownContainer").append("<a id='" + marginID + "-edit' onclick='toggleMarginEditing(\"" + marginID + "\", this)'>" + marginNames[marginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[marginID] + "</span></a>")
   }
   
   addResetMarginsRow()

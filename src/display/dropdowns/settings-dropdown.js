@@ -17,7 +17,7 @@ function createSettingsDropdownItems()
     switch (settingLayout.type)
     {
       case MapSettingType.optionCycle:
-      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='padding-top: 14rem; min-height: 25rem; min-width: 270rem; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 15px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, 1)' oncontextmenu='cycleMapSetting(\"" + settingLayout.id + "\", this, -1); return false'></a>")
+      $("#settingsDropdownContainer").append("<a id=" + settingLayout.id + " style='min-width: 270rem; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 15px;' onclick='cycleMapSetting(\"" + settingLayout.id + "\", this, 1)' oncontextmenu='cycleMapSetting(\"" + settingLayout.id + "\", this, -1); return false'></a>")
       cycleMapSetting(settingLayout.id, $("#" + settingLayout.id), 0)
       break
     }

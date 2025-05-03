@@ -326,7 +326,7 @@ function loadMapSVGFile(handleNewSVG, fadeForNewSVG)
   return loadSVGFilePromise
 }
 
-function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = false)
+function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = false, zoomControlsVisibility = null)
 {
   if (fadeForNewSVG)
   {
@@ -355,7 +355,8 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
   setTimeout(() => $("#text text").css('filter', 'url(#text-shadow)'), 0)
 
   removeLoader(LoaderType.standard)
-
+  
+  if (zoomControlsVisibility != null) $("#mapZoomControls").trigger(zoomControlsVisibility ? 'show' : 'hide')
   if (fadeForNewSVG)
   {
     $("#svgdata").css('opacity', "1")
@@ -364,7 +365,7 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
   resolve()
 }
 
-async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
+async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG, zoomControlsVisibility)
 {
   var handleSVGZoomingPromise = new Promise((innerResolve) => {
     var stateToShow = svgPath[1]
@@ -386,7 +387,7 @@ async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG)
       handleNewSVG(() => {
         innerResolve()
         resolve()
-      }, svgPath, fadeForNewSVG, true)
+      }, svgPath, fadeForNewSVG, true, zoomControlsVisibility)
     }, 0)
   })
 
@@ -475,6 +476,23 @@ function preloadAssets(assetURLs)
 
 function addDivEventListeners()
 {
+  window.addEventListener("resize", () => {  
+    displayPartyTotals()
+    
+    $('.dropdown').each(function () {
+      const dropdown = $(this).children('.dropdown-content')
+      
+      if (dropdown.length > 0 && dropdown.css('display') != 'none')
+      {
+        updateDropdownFlip(dropdown)
+      }
+    })
+  })
+  
+  $('.dropdown').each(function () {
+    this.addEventListener('mouseenter', (e) => updateDropdownFlip($(e.target).children('.dropdown-content')))
+  })
+  
   document.getElementById("clearMapButton").addEventListener('click', function(e) {
     clearMap()
 
@@ -577,6 +595,25 @@ function addDivEventListeners()
   $('#totalsPieChartOverlayText').addClass(overlayShadowClass)
 }
 
+function updateDropdownFlip(dropdown)
+{
+  dropdown.removeClass('dropdown-content-flipped')
+  
+  const rect = dropdown[0].getBoundingClientRect()
+  const over = rect.right - window.innerWidth
+
+  if (over > 0)
+  {
+    dropdown.addClass('dropdown-content-flipped')
+  }
+  
+  const newRect = dropdown[0].getBoundingClientRect()
+  if (newRect.left < 0)
+  {
+    dropdown.removeClass('dropdown-content-flipped')
+  }
+}
+
 function addTextBoxSpacingCSS()
 {
   switch (browserName)
@@ -619,8 +656,7 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
 
 async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, resetCandidateNames, reloadPartyDropdowns)
 {
-  $("#dataMapDateSliderContainer").hide()
-  $("#dateDisplay").hide()
+  $("#sliderDateDisplayContainer").css('visibility', 'hidden')
 
   if (selectedDropdownDivID != "mapSourcesDropdownContent")
   {
@@ -685,8 +721,7 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
 
   setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
   await displayDataMap(null, reloadPartyDropdowns ?? true)
-  $("#dataMapDateSliderContainer").show()
-  $("#dateDisplay").show()
+  $("#sliderDateDisplayContainer").css('visibility', 'visible')
 
   $("#totalsPieChart").attr('onclick', "!currentMapZoomRegion ? currentMapSource.openHomepageLink(currentSliderDate) : currentMapSource.openRegionLink(currentMapZoomRegion, currentSliderDate)")
 
@@ -933,14 +968,14 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     return
   }
   else if (shouldReloadSVG)
-  {
+  {    
     if (cachedSVGPathData instanceof Array)
     {
-      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG)
+      await handleSVGZooming(() => {}, cachedSVGPathData, handleNewSVGFields, fadeForNewSVG, currentViewingState == ViewingState.zooming)
     }
     else
     {
-      handleNewSVGFields(() => {}, null, fadeForNewSVG)
+      handleNewSVGFields(() => {}, null, fadeForNewSVG, false, currentViewingState == ViewingState.zooming)
     }
   }
 
@@ -1049,18 +1084,6 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     }
   }
 
-  if (shouldReloadSVG)
-  {
-    if (currentViewingState == ViewingState.zooming)
-    {
-      $("#mapZoomControls").trigger('show')
-    }
-    else
-    {
-      $("#mapZoomControls").trigger('hide')
-    }
-  }
-
   showingDataMap = true
 }
 
@@ -1097,17 +1120,17 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   $("#mapSourcesDropdownContainer .active").removeClass("active")
   if (revertToDefault)
   {
-    $("#sourceToggleButton").html("Select Map")
+    $("#sourceToggleButton .topnav-text").html("Select Map")
   }
   else
   {
-    $("#sourceToggleButton").html("Map: " + currentMapSource.getName())
+    $("#sourceToggleButton .topnav-text").html("Map: " + currentMapSource.getName())
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
   if (currentEditingState == EditingState.editing && currentMapSource.isCustom())
   {
-    $("#editDoneButton").html("Done")
+    $("#editDoneButton .topnav-text").html("Done")
   }
   else if (currentEditingState == EditingState.editing && !currentMapSource.isCustom())
   {
@@ -1115,12 +1138,12 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   }
   else if (currentEditingState != EditingState.editing && currentMapSource.isCustom())
   {
-    $("#editDoneButton").html("Edit")
+    $("#editDoneButton .topnav-text").html("Edit")
     $("#copyDropdownContainer").hide()
   }
   else
   {
-    $("#editDoneButton").html("Copy")
+    $("#editDoneButton .topnav-text").html("Copy")
     $("#copyDropdownContainer").show()
   }
 
@@ -1228,8 +1251,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     updateRegionBox()
   }
 
-  $("#dataMapDateSliderContainer").hide()
-  $("#dateDisplay").hide()
+  $("#sliderDateDisplayContainer").css('visibility', 'hidden')
 
   $("#totalsPieChart").css("background-image", "")
 
@@ -1359,7 +1381,7 @@ async function toggleEditing(stateToSet)
   switch (currentEditingState)
   {
     case EditingState.editing:
-    $("#editDoneButton").html("Done")
+    $("#editDoneButton .topnav-text").html("Done")
     $("#editDoneButton").addClass('active')
 
     $("#copyDropdownContainer").hide()
@@ -1368,7 +1390,7 @@ async function toggleEditing(stateToSet)
     $("#marginEditButton").addClass('topnavdisable')
     $("#marginsDropdownContainer").hide()
 
-    $("#shiftButton").show()
+    $("#shiftContainer").show()
     $("#shiftButton").removeClass('topnavdisable')
     $("#shiftDropdownContainer").show()
 
@@ -1402,12 +1424,12 @@ async function toggleEditing(stateToSet)
     case EditingState.viewing:
     if (currentMapSource.isCustom())
     {
-      $("#editDoneButton").html("Edit")
+      $("#editDoneButton .topnav-text").html("Edit")
       $("#copyDropdownContainer").hide()
     }
     else
     {
-      $("#editDoneButton").html("Copy")
+      $("#editDoneButton .topnav-text").html("Copy")
       $("#copyDropdownContainer").show()
     }
     $("#editDoneButton").removeClass('active')
@@ -1416,7 +1438,7 @@ async function toggleEditing(stateToSet)
     $("#marginEditButton").removeClass('topnavdisable')
     $("#marginsDropdownContainer").show()
 
-    $("#shiftButton").hide()
+    $("#shiftContainer").hide()
     $("#shiftButton").addClass('topnavdisable')
     $("#shiftDropdownContainer").hide()
 
@@ -1637,7 +1659,6 @@ function generateSVGPattern(patternID, fillColor, strokeColor, scale = 1)
     let svgBox = {x: boundingBoxParts[0], y: boundingBoxParts[1], width: boundingBoxParts[2], height: boundingBoxParts[3]}
     
     let sizeFactor = Math.max(svgBox.width/svgDiv.width(), svgBox.height/svgDiv.height())*(scale**(3/4))
-    console.log(sizeFactor)
     
     var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" style="fill: ' + fillColor + ';"></rect>'

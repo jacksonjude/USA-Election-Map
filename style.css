@@ -26,6 +26,14 @@ body {
   font-family: 'Bree5erif-Regular';
 }
 
+:root {
+  --slider-date-scale: 1;
+  
+  --slider-tick-width: calc(4rem * var(--slider-date-scale));
+  --slider-thumb-width: calc(30rem * var(--slider-date-scale));
+  --slider-height: calc(30rem * var(--slider-date-scale));
+}
+
 .background {
   position: relative;
   left: 0;
@@ -50,22 +58,32 @@ body {
 .topnav {
   user-select: none;
   -webkit-user-select: none;
-  overflow: hidden;
+  overflow: visible;
   background-color: #333;
-  padding: 4rem;
+  padding: 4px;
+  
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 4px;
+  gap: 4px;
 }
 
 .topnav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  
+  padding: 0 14px;
+  
   cursor: pointer;
-  float: left;
   color: #f2f2f2;
   background-color: #444;
   text-align: center;
-  padding: 14rem 16rem;
   text-decoration: none;
-  font-size: 17rem;
-  margin-left: 4rem;
-  border-radius: 4rem;
+  font-size: 16px;
+  border-radius: 4px;
   transition: background-color .1s;
 }
 
@@ -75,6 +93,10 @@ body {
 
 .topnav a.active, .dropdown-content a.active {
   background-color: #6a6a6a;
+}
+
+.topnavbutton {
+  height: 49px !important;
 }
 
 .topnavdisable {
@@ -89,10 +111,23 @@ body {
   pointer-events: none;
 }
 
+.topnav-icon {
+  display: none;
+  
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 32px;
+  
+  width: 43px;
+  height: 43px;
+  padding: 3px;
+}
+
 /* The dropdown container */
 .dropdown {
-  float: left;
-  overflow: hidden;
+  /* overflow: hidden; */
+  position: relative;
 }
 
 /* Dropdown button */
@@ -112,21 +147,27 @@ body {
   display: none;
   position: absolute;
   background-color: rgba(0, 0, 0, 0);
-  margin-top: 51rem;
   /* box-shadow: 0rem 8rem 16rem 0rem rgba(0,0,0,0.2); */
   z-index: 1;
+  
+  top: 100%;
+  left: 0;
+}
+
+.dropdown-content-flipped {
+  left: auto;
+  right: 0;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  margin-left: 0rem;
-  float: none;
-  padding: 12rem 16rem;
   color: #f2f2f2;
   text-decoration: none;
   display: block;
   text-align: left;
   border-radius: 0rem;
+  
+  padding: 9px 14px;
 }
 
 /* Show the dropdown menu on hover */
@@ -134,25 +175,29 @@ body {
   display: block;
 }
 
+.dropdown-container {
+  border-radius: 4px;
+}
+
 .dropdown-separator {
-  border-top: 1rem solid gray;
+  border-top: 1px solid #666;
   height: 0rem;
   width: 100%;
 }
 
 .dropdown-separator-big {
-  border-top: 3rem solid gray;
+  border-top: 3px solid #666;
   height: 0rem;
   width: 100%;
 }
 
 .textInput {
-  max-width: 32rem;
+  max-width: 30px;
   background-color: #444;
   color: #fff;
   outline: 2rem solid #666;
   text-align: right;
-  font-size: 17rem;
+  font-size: 16px;
   font-family: 'Bree5erif-Mono';
 
   position: relative;
@@ -175,7 +220,6 @@ body {
 #homepageButton {
   font-weight: bold;
   /* text-decoration: underline; */
-  line-height: 150%;
 }
 
 .dropdown-item {
@@ -188,7 +232,7 @@ body {
   text-align: left;
   cursor: pointer;
   background-color: #444;
-  font-size: 17rem;
+  font-size: 16px;
   transition: background-color .1s;
 }
 
@@ -203,7 +247,7 @@ body {
   text-align: left !important;
   padding: 0 !important;
   text-decoration: underline !important;
-  font-size: 17rem !important;
+  font-size: 16px !important;
   margin-left: 0rem !important;
 }
 
@@ -221,23 +265,113 @@ body {
   background-color: #C50000 !important;
 }
 
+#shiftButton {
+  min-width: 60px;
+}
+
+#countdownDisplay {
+  font-size: 24px !important;
+}
+
+#maincontent {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 40rem;
+  margin-right: 40rem;
+  
+  height: 43.6vw;
+  max-height: calc(100vh - 50rem - 20rem);
+  
+  gap: 3vw;
+}
+
+#maptextcontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Bree-Regular';
+  width: 100%;
+}
+
+#infosidebar {
+  display: flex;
+  flex-direction: column;
+  min-width: min(26vw, calc(0.60 * calc(100vh - 50rem - 20rem))); 
+  max-width: min(26vw, calc(0.60 * calc(100vh - 50rem - 20rem)));
+}
+
+#totalsPieChartContainer {
+  position: relative;
+  display: inline-block;
+  
+  vertical-align: top;
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+  
+  user-select: none;
+  -webkit-user-select: none;
+  
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+#secondarySidebarContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+#discordInviteContainer {
+  display: inline-block;
+  padding-top: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  
+  width: 100%;
+  height: 50%;
+  max-height: 110px;
+}
+
+.credits-icon {
+  position: relative;
+  top: 5rem;
+  width: 19px;
+  height: 19px;
+}
+
+#sliderDateDisplayContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  visibility: hidden;
+  
+  height: calc(calc(2 * var(--slider-height)) + 10rem);
+}
+
 .slidecontainer {
   width: 100%; /* Width of the outside container */
-  height: 30rem;
+  height: var(--slider-height);
+  position: relative;
 }
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  height: 30rem; /* Specified height */
-  width: 921rem;
+  height: var(--slider-height); /* Specified height */
+  width: 100%;
   border-radius: 5rem;
   background: #777; /* Grey background */
   outline: none; /* Remove outline */
   opacity: 0.85; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
+  
+  margin: 0;
+  padding: 0;
+  position: absolute;
 }
 
 /* Mouse-over effects */
@@ -249,16 +383,16 @@ body {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  width: 30rem; /* Set a specific slider handle width */
-  height: 30rem; /* Slider handle height */
+  width: var(--slider-thumb-width); /* Set a specific slider handle width */
+  height: var(--slider-height); /* Slider handle height */
   border-radius: 5rem;
   background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-  width: 30rem; /* Set a specific slider handle width */
-  height: 30rem; /* Slider handle height */
+  width: var(--slider-thumb-width); /* Set a specific slider handle width */
+  height: var(--slider-height); /* Slider handle height */
   border-radius: 5rem;
   background: #fff; /* Grey background */
   cursor: pointer; /* Cursor on hover */
@@ -274,23 +408,21 @@ body {
 .ticks {
   display: flex;
   justify-content: space-between;
-  width: 895rem;
-
-  padding: 0rem -1rem;
-  margin: 0rem 15rem;
+  margin: 0rem calc(calc(var(--slider-thumb-width) / 2) - calc(var(--slider-tick-width) / 2));
   pointer-events: none;
+  width: calc(100% - var(--slider-thumb-width) + var(--slider-tick-width));
+  
+  position: absolute;
 }
 
 .tick {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 4rem;
+  width: var(--slider-tick-width);
   background: rgb(217, 217, 217);
 
-  height: 29.5rem;
-  line-height: 49.5rem;
-  margin-bottom: 20rem;
+  height: var(--slider-height);
 }
 
 .boxcontainer {
@@ -323,17 +455,17 @@ body {
 }
 
 .loader {
-  border: 8rem solid #999;
+  --border-size: 8px;
+  
+  border: var(--border-size) solid #999;
   /* Grey */
-  border-top: 8rem solid #3498db;
+  border-top: var(--border-size) solid #3498db;
   /* Blue */
   border-radius: 50%;
-  width: 35rem;
-  height: 35rem;
+  aspect-ratio: 1/1;
+  height: calc(100% - calc(2 * var(--border-size)));
   animation: spin 0.5s linear infinite;
   display: inline-block;
-  margin-left: 10rem;
-  /* margin-bottom: 5rem; */
 }
 
 @keyframes spin {
@@ -347,11 +479,10 @@ body {
 }
 
 .progress-loader {
-  width: 49rem;
-  height: 49rem;
+  aspect-ratio: 1/1;
+  height: 100%;
   display: inline-block;
-  margin-left: 10rem;
-  font-size: 12rem;
+  font-size: 12px;
 }
 
 .progress-loader > svg {
@@ -389,13 +520,165 @@ body {
   display: inline-block;
   padding-left: 20rem;
   vertical-align: center;
-  min-width: 200rem;
-  height: 20rem;
+  
+  margin: 0;
   
   color: white;
   font-feature-settings: 'tnum' 1;
-  font-size: 18rem;
+  font-size: calc(20rem * var(--slider-date-scale));
   
   user-select: none;
   -webkit-user-select: none;
+}
+
+.party-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.party-votes {
+  font-weight: bold;
+  font-size: 17px;
+  line-height: 100%;
+}
+
+@container discord-invite-box (max-width: 280px) {
+  #discordInfo {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1575px) and (min-width: 1525px) {
+  #countdown-seconds {
+    display: none !important;
+  }
+  
+  #countdownsDropdownContent {
+    min-width: 275px !important;
+  }
+}
+
+@media (max-width: 1525px) {
+  #countdown-seconds, #countdown-minutes, #countdown-hours {
+    display: none !important;
+  }
+  
+  #countdownsDropdownContent {
+    min-width: 150px !important;
+    max-width: 150px !important;
+  }
+}
+
+@media (max-width: 1425px) {
+  .topnav-text {
+    display: none;
+  }
+  
+  .topnav-icon {
+    display: flex;
+  }
+  
+  .topnav-iconbutton {
+    padding: 0 !important;
+  }
+  
+  #sourceToggleButton .topnav-text {
+    display: block;
+  }
+  
+  #sourceToggleButton .topnav-icon {
+    display: none;
+  }
+  
+  #shiftButton {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 1250px) {
+  #countdownsContainer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  #sourceToggleButton {
+    min-width: auto !important;
+  }
+  
+  #sourceToggleButton .topnav-text {
+    display: none;
+  }
+  
+  #sourceToggleButton .topnav-icon {
+    display: flex;
+  }
+}
+
+@media (max-aspect-ratio: 1.1/1) {
+  #maincontent {
+    flex-grow: 1;
+    
+    flex-direction: column;
+  }
+  
+  #toggleHelpBoxButton {
+    display: none;
+  }
+  
+  #maptextcontainer {
+    flex-grow: 1;
+  }
+  
+  #infosidebar {
+    flex-direction: row;
+    justify-content: space-between;
+    
+    min-width: initial;
+    max-width: initial;
+    
+    gap: 50rem;
+  }
+  
+  #totalsPieChartContainer {
+    width: 40%;
+  }
+  
+  #secondarySidebarContainer {
+    width: 49%;
+  }
+  
+  #partyDropdownsBoxContainer {
+    height: 40% !important;
+  }
+  
+  :root {
+    --slider-date-scale: 1.75;
+  }
+  
+  @container discord-invite-box (max-width: 310px) {
+    #discordInfo {
+      display: none !important;
+    }
+  }
+  
+  #discordInviteContainer {
+    height: 40%;
+  }
+}
+
+@media (pointer:none), (pointer:coarse) {
+  #maincontent {
+    flex-grow: 0;
+    height: calc(80vh - 70px);
+  }
+  
+  :root {
+    --slider-date-scale: 3;
+  }
+  
+  #credits-container {
+    display: none !important;
+  }
 }

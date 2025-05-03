@@ -18,7 +18,7 @@ function createMapCycleDropdownItems()
     
     $("#mapCyclesDropdownContainer").append("<div class='dropdown-separator'></div>")
     
-    let divStringToAppend = "<a onclick='setMapCycle(\"" + cycle + "\")' style='min-width: 50rem; font-size: 25rem; padding: 0; height: 51rem; display: flex; justify-content: center; align-items: center;'>"
+    let divStringToAppend = "<a onclick='setMapCycle(\"" + cycle + "\")' style='width: 43px; height: 43px; padding: 0 3px; font-size: 24px; display: flex; justify-content: center; align-items: center;'>"
     divStringToAppend += `<span>${cycleToString(cycle)}</span>`
     divStringToAppend += "</a>"
     
