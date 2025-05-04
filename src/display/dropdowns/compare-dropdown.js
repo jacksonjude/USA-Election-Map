@@ -79,11 +79,6 @@ function showCustomCompareSelection()
     $(`#compareCustomItem-${compareArrayIndex}`).html(mapSourceName ? `<img style='width: 19px; height: 19px' src='${mapSourceIcon}' /> ${mapSourceName} (Edit)` : "<span style='color: #888'>Select Map</span>")
   }
   
-  if (compareMapSourceIDArray[0] != null && compareMapSourceIDArray[1] != null)
-  {
-    
-  }
-  
   $("#comparePresetsDropdownContainer").hide()
   $("#compareCustomDropdownContainer").show()
   $("#compareButton").addClass('active')
@@ -136,7 +131,7 @@ async function hideCustomCompareSelection(shouldReset)
     $("#compareButton").removeClass('active')
     $("#comparePresetsDropdownContainer").show()
   }
-  else
+  else if (compareMapSourceIDArray[0] != null && compareMapSourceIDArray[1] != null)
   {
     showingCompareMap = true
     showingCustomCompare = false
@@ -148,6 +143,10 @@ async function hideCustomCompareSelection(shouldReset)
     updateCompareMapSlidersVisibility()
     
     setCompareSliderDates()
+  }
+  else
+  {
+    $("#compareCustomDropdownContainer").show()
   }
 }
 
