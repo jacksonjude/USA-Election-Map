@@ -258,7 +258,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   updateCompareMapSlidersVisibility()
 }
 
-async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
+async function updateCompareMapSources(compareSourcesToUpdate, _overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
 {
   $('.comparesourcecheckbox').prop('disabled', true)
   if (compareSourcesToUpdate[0])
@@ -271,11 +271,11 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   }
   $('.comparesourcecheckbox').prop('disabled', false)
 
-  if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
-  {
-    swapCompareMapSources()
-    compareSourcesToUpdate = [true, true]
-  }
+  // if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
+  // {
+  //   swapCompareMapSources()
+  //   compareSourcesToUpdate = [true, true]
+  // }
 
   if (swapSliderValues)
   {
