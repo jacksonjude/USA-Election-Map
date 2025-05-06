@@ -2,19 +2,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 50.2,
-          "lower": 40.1,
-          "median": 45.1
-        },
-        "rep": {
-          "upper": 59.9,
-          "lower": 49.8,
-          "median": 54.9
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 50.5,
@@ -1505,19 +1492,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 41.2,
-          "lower": 31,
-          "median": 36.1
-        },
-        "rep": {
-          "upper": 69,
-          "lower": 58.8,
-          "median": 63.9
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -3010,19 +2984,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 40.8,
-          "lower": 30.6,
-          "median": 35.7
-        },
-        "rep": {
-          "upper": 69.4,
-          "lower": 59.2,
-          "median": 64.3
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 40.9,
@@ -4513,19 +4474,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 54,
-          "lower": 44,
-          "median": 49
-        },
-        "rep": {
-          "upper": 56,
-          "lower": 46,
-          "median": 51
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -6018,19 +5966,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 67.7,
-          "lower": 57.7,
-          "median": 62.7
-        },
-        "rep": {
-          "upper": 42.3,
-          "lower": 32.3,
-          "median": 37.3
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 67.9,
@@ -7521,19 +7456,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 61.2,
-          "lower": 51.1,
-          "median": 56.2
-        },
-        "rep": {
-          "upper": 48.9,
-          "lower": 38.8,
-          "median": 43.8
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -9026,19 +8948,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 63.8,
-          "lower": 53.6,
-          "median": 58.7
-        },
-        "rep": {
-          "upper": 46.4,
-          "lower": 36.2,
-          "median": 41.3
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 63.9,
@@ -10529,19 +10438,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 97.3,
-          "lower": 87.5,
-          "median": 92.4
-        },
-        "rep": {
-          "upper": 12.5,
-          "lower": 2.7,
-          "median": 7.6
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -12034,19 +11930,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 63.1,
-          "lower": 53,
-          "median": 58.1
-        },
-        "rep": {
-          "upper": 47,
-          "lower": 36.9,
-          "median": 41.9
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 63.3,
@@ -13537,19 +13420,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 52,
-          "lower": 41.9,
-          "median": 46.9
-        },
-        "rep": {
-          "upper": 58.1,
-          "lower": 48,
-          "median": 53
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -15042,19 +14912,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 54.5,
-          "lower": 44.4,
-          "median": 49.4
-        },
-        "rep": {
-          "upper": 55.6,
-          "lower": 45.5,
-          "median": 50.6
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 54.6,
@@ -16545,19 +16402,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 68.7,
-          "lower": 58.6,
-          "median": 63.7
-        },
-        "rep": {
-          "upper": 41.4,
-          "lower": 31.3,
-          "median": 36.3
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -18050,19 +17894,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 51.4,
-          "lower": 41.3,
-          "median": 46.4
-        },
-        "rep": {
-          "upper": 58.7,
-          "lower": 48.6,
-          "median": 53.6
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 51.5,
@@ -19553,19 +19384,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 38.3,
-          "lower": 28.2,
-          "median": 33.2
-        },
-        "rep": {
-          "upper": 71.8,
-          "lower": 61.7,
-          "median": 66.8
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -21058,19 +20876,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 62.4,
-          "lower": 52.2,
-          "median": 57.4
-        },
-        "rep": {
-          "upper": 47.8,
-          "lower": 37.6,
-          "median": 42.6
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 62.6,
@@ -22561,19 +22366,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 46.5,
-          "lower": 36.4,
-          "median": 41.4
-        },
-        "rep": {
-          "upper": 63.6,
-          "lower": 53.5,
-          "median": 58.6
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -24066,19 +23858,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 46.9,
-          "lower": 36.8,
-          "median": 41.9
-        },
-        "rep": {
-          "upper": 63.2,
-          "lower": 53.1,
-          "median": 58.1
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 47.1,
@@ -25569,19 +25348,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 41.1,
-          "lower": 31,
-          "median": 36
-        },
-        "rep": {
-          "upper": 69,
-          "lower": 58.9,
-          "median": 64
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -27074,19 +26840,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 44.6,
-          "lower": 34.5,
-          "median": 39.6
-        },
-        "rep": {
-          "upper": 65.5,
-          "lower": 55.4,
-          "median": 60.4
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 44.8,
@@ -28577,19 +28330,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 69,
-          "lower": 59,
-          "median": 64
-        },
-        "rep": {
-          "upper": 41,
-          "lower": 31,
-          "median": 36
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -30082,19 +29822,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 69.3,
-          "lower": 59.2,
-          "median": 64.2
-        },
-        "rep": {
-          "upper": 40.8,
-          "lower": 30.7,
-          "median": 35.8
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 69.5,
@@ -31585,19 +31312,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 59.4,
-          "lower": 49.3,
-          "median": 54.3
-        },
-        "rep": {
-          "upper": 50.7,
-          "lower": 40.6,
-          "median": 45.7
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -33090,19 +32804,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 66.2,
-          "lower": 56.1,
-          "median": 61.2
-        },
-        "rep": {
-          "upper": 43.9,
-          "lower": 33.8,
-          "median": 38.8
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 66.4,
@@ -34593,19 +34294,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 51.9,
-          "lower": 41.8,
-          "median": 46.9
-        },
-        "rep": {
-          "upper": 58.2,
-          "lower": 48.1,
-          "median": 53.1
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -36098,19 +35786,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 55.6,
-          "lower": 45.6,
-          "median": 50.6
-        },
-        "rep": {
-          "upper": 54.4,
-          "lower": 44.4,
-          "median": 49.4
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 55.8,
@@ -37601,19 +37276,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 57.9,
-          "lower": 47.8,
-          "median": 52.9
-        },
-        "rep": {
-          "upper": 52.2,
-          "lower": 42.1,
-          "median": 47.1
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -39106,19 +38768,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 47.9,
-          "lower": 37.8,
-          "median": 42.9
-        },
-        "rep": {
-          "upper": 62.2,
-          "lower": 52.1,
-          "median": 57.1
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 48,
@@ -40609,19 +40258,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 45.6,
-          "lower": 35.5,
-          "median": 40.5
-        },
-        "rep": {
-          "upper": 64.5,
-          "lower": 54.4,
-          "median": 59.5
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -42114,19 +41750,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 46,
-          "lower": 36,
-          "median": 41
-        },
-        "rep": {
-          "upper": 64,
-          "lower": 54,
-          "median": 59
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 46.1,
@@ -43617,19 +43240,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 54.5,
-          "lower": 44.5,
-          "median": 49.4
-        },
-        "rep": {
-          "upper": 55.5,
-          "lower": 45.5,
-          "median": 50.6
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -45122,19 +44732,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 38.3,
-          "lower": 28.2,
-          "median": 33.3
-        },
-        "rep": {
-          "upper": 71.8,
-          "lower": 61.7,
-          "median": 66.7
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 38.4,
@@ -46625,19 +46222,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 46.3,
-          "lower": 36.3,
-          "median": 41.3
-        },
-        "rep": {
-          "upper": 63.7,
-          "lower": 53.7,
-          "median": 58.7
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -48130,19 +47714,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 46.7,
-          "lower": 36.5,
-          "median": 41.6
-        },
-        "rep": {
-          "upper": 63.4,
-          "lower": 53.3,
-          "median": 58.4
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 46.7,
@@ -49633,19 +49204,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 58.6,
-          "lower": 48.4,
-          "median": 53.5
-        },
-        "rep": {
-          "upper": 51.5,
-          "lower": 41.4,
-          "median": 46.5
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -51138,19 +50696,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 27.6,
-          "lower": 17.7,
-          "median": 22.6
-        },
-        "rep": {
-          "upper": 82.3,
-          "lower": 72.4,
-          "median": 77.4
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 27.8,
@@ -52641,19 +52186,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 58,
-          "lower": 47.9,
-          "median": 53
-        },
-        "rep": {
-          "upper": 52.1,
-          "lower": 42,
-          "median": 47
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -54146,19 +53678,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 61.9,
-          "lower": 51.8,
-          "median": 56.9
-        },
-        "rep": {
-          "upper": 48.2,
-          "lower": 38.1,
-          "median": 43.1
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 62,
@@ -55649,19 +55168,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 58.7,
-          "lower": 48.7,
-          "median": 53.7
-        },
-        "rep": {
-          "upper": 51.3,
-          "lower": 41.3,
-          "median": 46.3
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -57154,19 +56660,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 55,
-          "lower": 45,
-          "median": 50
-        },
-        "rep": {
-          "upper": 55,
-          "lower": 45,
-          "median": 50
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 55.1,
@@ -58657,19 +58150,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 63.7,
-          "lower": 53.6,
-          "median": 58.5
-        },
-        "rep": {
-          "upper": 46.4,
-          "lower": 36.3,
-          "median": 41.5
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -60162,19 +59642,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 50.9,
-          "lower": 40.8,
-          "median": 45.8
-        },
-        "rep": {
-          "upper": 59.2,
-          "lower": 49.1,
-          "median": 54.2
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 50.9,
@@ -61665,19 +61132,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 38.2,
-          "lower": 28.1,
-          "median": 33.2
-        },
-        "rep": {
-          "upper": 71.9,
-          "lower": 61.8,
-          "median": 66.8
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -63170,19 +62624,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 61.5,
-          "lower": 51.5,
-          "median": 56.5
-        },
-        "rep": {
-          "upper": 48.5,
-          "lower": 38.5,
-          "median": 43.5
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 61.7,
@@ -64673,19 +64114,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 55,
-          "lower": 45,
-          "median": 50
-        },
-        "rep": {
-          "upper": 55,
-          "lower": 45,
-          "median": 50
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -66178,19 +65606,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 63.4,
-          "lower": 53.3,
-          "median": 58.4
-        },
-        "rep": {
-          "upper": 46.7,
-          "lower": 36.6,
-          "median": 41.6
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 63.6,
@@ -67681,19 +67096,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 48.7,
-          "lower": 38.6,
-          "median": 43.7
-        },
-        "rep": {
-          "upper": 61.4,
-          "lower": 51.3,
-          "median": 56.3
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -69186,19 +68588,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 41.1,
-          "lower": 31,
-          "median": 36
-        },
-        "rep": {
-          "upper": 69,
-          "lower": 58.9,
-          "median": 64
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 41.3,
@@ -70689,19 +70078,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 43.2,
-          "lower": 33.1,
-          "median": 38.1
-        },
-        "rep": {
-          "upper": 66.9,
-          "lower": 56.8,
-          "median": 61.9
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -72194,19 +71570,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 51.3,
-          "lower": 41.3,
-          "median": 46.3
-        },
-        "rep": {
-          "upper": 58.7,
-          "lower": 48.7,
-          "median": 53.7
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 51.5,
@@ -73697,19 +73060,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 44,
-          "lower": 33.8,
-          "median": 38.9
-        },
-        "rep": {
-          "upper": 66.2,
-          "lower": 56,
-          "median": 61.1
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -75202,19 +74552,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 58.5,
-          "lower": 48.4,
-          "median": 53.4
-        },
-        "rep": {
-          "upper": 51.6,
-          "lower": 41.5,
-          "median": 46.6
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 58.6,
@@ -76705,19 +76042,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 71.5,
-          "lower": 61.5,
-          "median": 66.5
-        },
-        "rep": {
-          "upper": 38.5,
-          "lower": 28.5,
-          "median": 33.5
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -78210,19 +77534,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 64,
-          "lower": 53.9,
-          "median": 58.9
-        },
-        "rep": {
-          "upper": 46.1,
-          "lower": 36,
-          "median": 41.1
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 64.1,
@@ -79713,19 +79024,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 55.5,
-          "lower": 45.5,
-          "median": 50.5
-        },
-        "rep": {
-          "upper": 54.5,
-          "lower": 44.5,
-          "median": 49.5
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
@@ -81218,19 +80516,6 @@
   {
     "timeseries": [
       {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 34.8,
-          "lower": 24.8,
-          "median": 29.8
-        },
-        "rep": {
-          "upper": 75.2,
-          "lower": 65.2,
-          "median": 70.2
-        }
-      },
-      {
         "date": "2024-11-04",
         "dem": {
           "upper": 35,
@@ -82721,19 +82006,6 @@
   },
   {
     "timeseries": [
-      {
-        "date": "2024-11-05",
-        "dem": {
-          "upper": 32.4,
-          "lower": 22.4,
-          "median": 27.4
-        },
-        "rep": {
-          "upper": 77.6,
-          "lower": 67.6,
-          "median": 72.6
-        }
-      },
       {
         "date": "2024-11-04",
         "dem": {
