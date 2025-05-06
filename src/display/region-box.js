@@ -61,7 +61,7 @@ async function updateRegionBox(regionID = currentRegionID)
     return
   }
   
-  const shouldShowVotes = !(showingCompareMap && currentMapSource.isCustom())
+  const shouldShowVotes = !(showingCompareMap && currentMapSource.isCompare())
   let voteshareSortedData = regionData.partyVotesharePercentages ? cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare) : []
   var roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes != null)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)

@@ -1782,7 +1782,7 @@ var USAPresidentMapType = new MapType(
       }
       let organizedCountyData = mapSource.getMapData()[date ?? currentSliderDate.getTime()]
 
-      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCustom()) }
+      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCompare()) }
 
       let previousMapDateIndex = mapSource.getMapDates().findIndex(mapDate => mapDate == date ?? currentSliderDate.getTime())-1
       let previousMapDateData
@@ -2083,6 +2083,8 @@ var USAPresidentMapType = new MapType(
       async (mapDateData, regionID, isZoomCheck, date) => {
         const allSourcesCanZoom = 
           showingCompareMap
+          && compareMapSourceIDArray[0] != "Custom-Presidential"
+          && compareMapSourceIDArray[1] != "Custom-Presidential"
           && await presidentialMapSources[compareMapSourceIDArray[0]].canZoom(null, regionID)
           && await presidentialMapSources[compareMapSourceIDArray[1]].canZoom(null, regionID)
         

@@ -498,6 +498,11 @@ class MapSource
   {
     return this.isCustomMap
   }
+  
+  isCompare()
+  {
+    return this.isCompareMap
+  }
 
   getShouldShowVoteshare()
   {
