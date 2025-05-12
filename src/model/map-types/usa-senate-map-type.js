@@ -1545,7 +1545,7 @@ var USASenateMapType = new MapType(
     const senateMapCycles = [2024, 2022]
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
-      [2024]: [CNNSenateResults2024MapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
