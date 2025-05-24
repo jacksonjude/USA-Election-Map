@@ -115,8 +115,10 @@ function getTippingPointRegion()
   while (greatestEVCount >= majorityEVCount)
   {
     var nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
-      return (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
+      return (!state.disabled && min.disabled) || (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
     })
+    if (nextClosestState.disabled) return nextClosestState
+    
     tippingPointRegion = nextClosestState
     greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region, displayRegionDataArray[nextClosestState.region], currentMapSource.getShouldSetDisabledWorthToZero(), currentMapSource.isCustom())
     checkedStates.push(nextClosestState.region)
