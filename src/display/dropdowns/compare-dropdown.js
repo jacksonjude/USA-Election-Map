@@ -79,11 +79,6 @@ function showCustomCompareSelection()
     $(`#compareCustomItem-${compareArrayIndex}`).html(mapSourceName ? `<img style='width: 19px; height: 19px' src='${mapSourceIcon}' /> ${mapSourceName} (Edit)` : "<span style='color: #888'>Select Map</span>")
   }
   
-  if (compareMapSourceIDArray[0] != null && compareMapSourceIDArray[1] != null)
-  {
-    
-  }
-  
   $("#comparePresetsDropdownContainer").hide()
   $("#compareCustomDropdownContainer").show()
   $("#compareButton").addClass('active')
@@ -97,8 +92,6 @@ function listCustomCompareMapSources(sourceIndex)
   
   for (let mapSourceID of mapSourceIDs)
   {
-    if (mapSources[mapSourceID].isCustom()) continue
-    
     $("#compareCustomListDropdownContainer").append("<div class='dropdown-separator'></div>")
     
     const mapSourceName = mapSources[mapSourceID].getName()
@@ -136,7 +129,7 @@ async function hideCustomCompareSelection(shouldReset)
     $("#compareButton").removeClass('active')
     $("#comparePresetsDropdownContainer").show()
   }
-  else
+  else if (compareMapSourceIDArray[0] != null && compareMapSourceIDArray[1] != null)
   {
     showingCompareMap = true
     showingCustomCompare = false
@@ -148,6 +141,10 @@ async function hideCustomCompareSelection(shouldReset)
     updateCompareMapSlidersVisibility()
     
     setCompareSliderDates()
+  }
+  else
+  {
+    $("#compareCustomDropdownContainer").show()
   }
 }
 
@@ -228,7 +225,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
     ignoreMapUpdateClickArray.push(clickDivIDToIgnore)
   }
   
-  if (currentViewingState == ViewingState.zooming && showingCompareMap && currentMapSource.isCustom() && !mapSources[mapSourceID].zoomingDataFunction)
+  if (currentViewingState == ViewingState.zooming && showingCompareMap && currentMapSource.isCompare() && !mapSources[mapSourceID].zoomingDataFunction)
   {
     await zoomOutMap()
   }
@@ -261,7 +258,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   updateCompareMapSlidersVisibility()
 }
 
-async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
+async function updateCompareMapSources(compareSourcesToUpdate, _overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
 {
   $('.comparesourcecheckbox').prop('disabled', true)
   if (compareSourcesToUpdate[0])
@@ -274,11 +271,11 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
   }
   $('.comparesourcecheckbox').prop('disabled', false)
 
-  if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
-  {
-    swapCompareMapSources()
-    compareSourcesToUpdate = [true, true]
-  }
+  // if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
+  // {
+  //   swapCompareMapSources()
+  //   compareSourcesToUpdate = [true, true]
+  // }
 
   if (swapSliderValues)
   {
@@ -286,23 +283,21 @@ async function updateCompareMapSources(compareSourcesToUpdate, overrideSwapSourc
     overrideDateValues[1] = $("#firstCompareDataMapDateSlider").val()
   }
 
-  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
-
   if (compareSourcesToUpdate[0])
   {
     setDataMapDateSliderRange(true, "firstCompareDataMapDateSlider", "firstCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[0]].getMapDates())
-    $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-    await setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0), !compareSourcesToUpdate[1])
+    $("#firstCompareDataMapDateSlider").val(overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length)
+    await setCompareSourceDate(0, overrideDateValues[0] || mapSources[compareMapSourceIDArray[0]].getMapDates().length, !compareSourcesToUpdate[1])
     $("#compareItemImage-0").css('display', "block")
-    $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL())
+    $("#compareItemImage-0").prop('src', mapSources[compareMapSourceIDArray[0]].getIconURL() ?? "./assets/edit-icon.png")
   }
   if (compareSourcesToUpdate[1])
   {
     setDataMapDateSliderRange(true, "secondCompareDataMapDateSlider", "secondCompareDataMapSliderStepList", mapSources[compareMapSourceIDArray[1]].getMapDates())
-    $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
-    await setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length+(latestSliderTickEnabled ? 1 : 0))
+    $("#secondCompareDataMapDateSlider").val(overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length)
+    await setCompareSourceDate(1, overrideDateValues[1] || mapSources[compareMapSourceIDArray[1]].getMapDates().length)
     $("#compareItemImage-1").css('display', "block")
-    $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL())
+    $("#compareItemImage-1").prop('src', mapSources[compareMapSourceIDArray[1]].getIconURL() ?? "./assets/edit-icon.png")
   }
 }
 
@@ -450,7 +445,7 @@ async function applyCompareToCustomMap()
     var compareRegionData0 = compareMapDataArray[0][regionID]
     var compareRegionData1 = compareMapDataArray[1][regionID]
 
-    if (currentMapType.getMapSettings().seatArrangement == "election-type" && compareRegionData0.seatClass != compareRegionData1.seatClass)
+    if (currentMapType.getMapSettings().seatArrangement == "election-type" && compareRegionData0?.seatClass != compareRegionData1?.seatClass)
     {
       if (regionID.endsWith("-S"))
       {
@@ -605,10 +600,10 @@ async function applyCompareToCustomMap()
     }
   }
 
-  (compareResultCustomMapSource ?? currentCustomMapSource).updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
+  (compareResultCustomMapSource ?? currentCompareMapSource ?? currentCustomMapSource).updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
 
   if (shouldSetCompareMapSource)
   {
-    await setMapSource(currentCustomMapSource)
+    await setMapSource(currentCompareMapSource ?? currentCustomMapSource)
   }
 }

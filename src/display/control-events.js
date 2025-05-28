@@ -81,7 +81,7 @@ function arrowKeyCycle(keyString)
     incrementSlider(keyString)
     var mapDatesLength = currentMapSource.getMapDates().length
 
-    if (showingCompareMap && currentMapSource.isCustom())
+    if (showingCompareMap && currentMapSource.isCompare())
     {
       switch (selectedCompareSlider)
       {
@@ -107,7 +107,7 @@ function incrementSlider(keyString)
 {
   var sliderDiv = $("#dataMapDateSlider")[0]
 
-  if (showingCompareMap && currentMapSource.isCustom())
+  if (showingCompareMap && currentMapSource.isCompare())
   {
     switch (selectedCompareSlider)
     {
@@ -144,7 +144,7 @@ function incrementSlider(keyString)
     break
 
     case "down":
-    if (showingCompareMap && currentMapSource.isCustom())
+    if (showingCompareMap && currentMapSource.isCompare())
     {
       switch (selectedCompareSlider)
       {
@@ -218,7 +218,7 @@ function incrementSlider(keyString)
     break
   }
 
-  if (showingCompareMap && currentMapSource.isCustom())
+  if (showingCompareMap && currentMapSource.isCompare())
   {
     switch (selectedCompareSlider)
     {

@@ -29,7 +29,7 @@ class MapType
       this.currentMapSettings[this.mapSettingsLayout[settingNum].id] = getCookie((isGlobal ? "" : (this.id + "-")) + this.mapSettingsLayout[settingNum].id) || this.mapSettingsLayout[settingNum].defaultValue
     }
 
-    var {mapSources, mapSourceIDs, mapCycles, defaultCompareSourceIDs, customSourceID} = createMapSources()
+    var {mapSources, mapSourceIDs, mapCycles, defaultCompareSourceIDs, customSourceID, compareSourceID} = createMapSources()
     this.mapSources = mapSources
     this.mapSourceIDs = mapSourceIDs
     this.mapCycles = mapCycles
@@ -37,6 +37,21 @@ class MapType
     if (this.currentCycle == null || this.currentCycle.length == 0) this.currentCycle = mapCycles[0] ?? allYearsCycle
     this.defaultCompareSourceIDs = defaultCompareSourceIDs
     this.customSourceID = customSourceID
+    
+    if (compareSourceID)
+    {
+      this.compareSourceID = compareSourceID
+    }
+    else if (mapSources[customSourceID])
+    {
+      const CompareSource = Object.create(mapSources[customSourceID])
+      CompareSource.id = `Custom-${this.id}-Compare`
+      CompareSource.name = "Compare"
+      CompareSource.isCompareMap = true
+      
+      this.mapSources[CompareSource.id] = CompareSource
+      this.compareSourceID = CompareSource.id
+    }
   }
 
   getID()
@@ -204,6 +219,11 @@ class MapType
   getCustomMapSource()
   {
     return this.getMapSources(this)[this.customSourceID]
+  }
+  
+  getCompareMapSource()
+  {
+    return this.compareSourceID ? this.getMapSources(this)[this.compareSourceID] : null
   }
 
   getRegionIDToName()

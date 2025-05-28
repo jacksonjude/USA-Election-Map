@@ -1187,7 +1187,7 @@ var USAPresidentMapType = new MapType(
       1824: {"Adams":DemocraticRepublicanParty.getID(), "Jackson":Independent1824AJParty.getID(), "Crawford":Independent1824WCParty.getID(), "Clay":Independent1824HCParty.getID(), "Other":IndependentGenericParty.getID()},
       1828: {"Jackson":DemocraticParty.getID(), "Adams":NationalRepublicanParty.getID(), "Other":IndependentGenericParty.getID()},
       1832: {"Jackson":DemocraticParty.getID(), "Clay":NationalRepublicanParty.getID(), "Wirt":Independent1832WWParty.getID(), "Floyd":Independent1832JFParty.getID(), "Other":IndependentGenericParty.getID()},
-      1836: {"Van Buren":DemocraticParty.getID(), "Harrison":WhigParty.getID(), "White":Independent1836HWParty.getID(), "Webster":Independent1836DWParty.getID(), "Magnum":Independent1836WMParty.getID(), "Other":IndependentGenericParty.getID()},
+      1836: {"Van Buren":DemocraticParty.getID(), "Harrison":WhigParty.getID(), "White":Independent1836HWParty.getID(), "Webster":Independent1836DWParty.getID(), "Mangum":Independent1836WMParty.getID(), "Other":IndependentGenericParty.getID()},
       1840: {"Van Buren":DemocraticParty.getID(), "Harrison":WhigParty.getID(), "Other":IndependentGenericParty.getID()},
       1844: {"Polk":DemocraticParty.getID(), "Clay":WhigParty.getID(), "Birney":Independent1844JBParty.getID(), "Other":IndependentGenericParty.getID()},
       1848: {"Cass":DemocraticParty.getID(), "Taylor":WhigParty.getID(), "Van Buren":FreeSoilParty.getID(), "Other":IndependentGenericParty.getID()},
@@ -1782,7 +1782,7 @@ var USAPresidentMapType = new MapType(
       }
       let organizedCountyData = mapSource.getMapData()[date ?? currentSliderDate.getTime()]
 
-      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCustom()) }
+      if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCompare()) }
 
       let previousMapDateIndex = mapSource.getMapDates().findIndex(mapDate => mapDate == date ?? currentSliderDate.getTime())-1
       let previousMapDateData
@@ -2083,6 +2083,8 @@ var USAPresidentMapType = new MapType(
       async (mapDateData, regionID, isZoomCheck, date) => {
         const allSourcesCanZoom = 
           showingCompareMap
+          && compareMapSourceIDArray[0] != "Custom-Presidential"
+          && compareMapSourceIDArray[1] != "Custom-Presidential"
           && await presidentialMapSources[compareMapSourceIDArray[0]].canZoom(null, regionID)
           && await presidentialMapSources[compareMapSourceIDArray[1]].canZoom(null, regionID)
         

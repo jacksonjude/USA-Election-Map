@@ -115,8 +115,10 @@ function getTippingPointRegion()
   while (greatestEVCount >= majorityEVCount)
   {
     var nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
-      return (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
+      return (!state.disabled && min.disabled) || (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
     })
+    if (nextClosestState.disabled) return nextClosestState
+    
     tippingPointRegion = nextClosestState
     greatestEVCount -= currentMapType.getEV(getCurrentDecade(), nextClosestState.region, displayRegionDataArray[nextClosestState.region], currentMapSource.getShouldSetDisabledWorthToZero(), currentMapSource.isCustom())
     checkedStates.push(nextClosestState.region)
@@ -162,10 +164,20 @@ function toggleEnteringShiftAmount()
   }
 }
 
+function getSortedPoliticalPartyIDs()
+{
+  const partyTotals = getPartyTotals()
+  const sortedParties = Object.keys(partyTotals)
+  sortedParties.sort((p1, p2) => partyTotals[p2] - partyTotals[p1])
+  return sortedParties
+}
+
 function getTippingPointShift()
 {
   let shiftMargin = getTippingPointRegion().margin ?? 0
-  return [shiftMargin, politicalParties[dropdownPoliticalPartyIDs[1]], politicalParties[dropdownPoliticalPartyIDs[0]]]
+  const sortedParties = getSortedPoliticalPartyIDs()
+  
+  return [shiftMargin, politicalParties[sortedParties[1]], politicalParties[sortedParties[0]]]
 }
 
 function getNPVShift()
@@ -186,7 +198,8 @@ function getNPVShift()
   else
   {
     shiftMargin = npvData.margin
-    npvRunnerUp = politicalParties[dropdownPoliticalPartyIDs[0] == npvLeader.getID() ? dropdownPoliticalPartyIDs[1] : dropdownPoliticalPartyIDs[0]]
+    const sortedParties = getSortedPoliticalPartyIDs()
+    npvRunnerUp = politicalParties[sortedParties[0] == npvLeader.getID() ? sortedParties[1] : sortedParties[0]]
   }
   
   return [shiftMargin, npvRunnerUp, npvLeader, true]

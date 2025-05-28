@@ -6,6 +6,7 @@ var currentMapType
 var mapSources
 var mapSourceIDs
 var currentCustomMapSource
+var currentCompareMapSource
 
 var mapRegionIDToName
 
@@ -207,6 +208,7 @@ async function reloadForNewMapType(initialLoad)
   mapSources = currentMapType.getMapSources()
   mapSourceIDs = currentMapType.getMapSourceIDs()
   currentCustomMapSource = currentMapType.getCustomMapSource()
+  currentCompareMapSource = currentMapType.getCompareMapSource()
   mapRegionIDToName = currentMapType.getRegionIDToName()
 
   if (currentMapType.getCustomMapEnabled())
@@ -916,7 +918,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   var shouldReloadSVG = false
   var currentSVGPath = currentMapType.getSVGPath()
-  var newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(showingCompareMap && currentMapSource.isCustom() ? currentCompareSliderDate : dateToDisplay)
+  var newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(showingCompareMap && currentMapSource.isCompare() ? currentCompareSliderDate : dateToDisplay)
 
   if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {
@@ -1146,14 +1148,24 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
     $("#editDoneButton .topnav-text").html("Copy")
     $("#copyDropdownContainer").show()
   }
+  
+  if (currentMapSource.isCompare())
+  {
+    $("#editDoneButton").addClass('topnavdisable')
+    $("#copyDropdownContainer").hide()
+  }
+  else if (currentMapType.getCustomMapEnabled())
+  {
+    $("#editDoneButton").removeClass('topnavdisable')
+  }
 
   updatePartyDropdownVisibility()
 
-  if (showingCompareMap && !currentMapSource.isCustom())
+  if (showingCompareMap && !currentMapSource.isCompare())
   {
     updateCompareMapSlidersVisibility(false)
   }
-  else if (showingCompareMap && currentMapSource.isCustom())
+  else if (showingCompareMap && currentMapSource.isCompare())
   {
     updateCompareMapSlidersVisibility(true)
   }
@@ -1165,7 +1177,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
   }
 }
 
-function clearMap(fullClear, shouldResetCurrentMapSource)
+async function clearMap(fullClear, shouldResetCurrentMapSource)
 {
   fullClear = fullClear == null ? false : fullClear
   shouldResetCurrentMapSource = shouldResetCurrentMapSource != null ? shouldResetCurrentMapSource : true
@@ -1185,7 +1197,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
       currentViewingState = ViewingState.viewing
       currentMapZoomRegion = null
       currentMapType.resetOverrideSVGPath()
-      loadMapSVGFile()
+      await loadMapSVGFile()
     }
 
     currentSliderDate = null
@@ -1195,14 +1207,18 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
       currentCustomMapSource.clearMapData(true)
     }
   }
-  else
+  else if (currentMapSource.isCustom())
   {
-    currentCustomMapSource.clearMapData()
-    loadDataMap(false, true)
+    currentMapSource.clearMapData()
+    await loadDataMap(false, true)
   }
+  
+  let sourceToSet = null 
 
   if (showingCompareMap)
   {
+    sourceToSet = compareMapSourceIDArray[0] ? mapSources[compareMapSourceIDArray[0]] : null
+    
     resetCompareVariables()
     
     $(".comparesourcecheckbox").prop('checked', false)
@@ -1217,7 +1233,7 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
     
     if (currentViewingState == ViewingState.zooming)
     {
-      zoomOutMap(false)
+      await zoomOutMap(false)
     }
   }
 
@@ -1256,6 +1272,8 @@ function clearMap(fullClear, shouldResetCurrentMapSource)
   $("#totalsPieChart").css("background-image", "")
 
   showingDataMap = false
+  
+  sourceToSet && await setMapSource(sourceToSet)
 }
 
 function toggleHelpBox()
@@ -1474,7 +1492,7 @@ async function zoomOutMap(displayMap = true)
   {
     compareResultCustomMapSource = null
     getCompareMajorParties = null
-    shouldSetCompareMapSource = currentMapSource.isCustom()
+    shouldSetCompareMapSource = currentMapSource.isCompare()
     
     await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
     shouldSetCompareMapSource = true
@@ -1796,7 +1814,7 @@ function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopula
 function getCurrentDecade()
 {
   var dateForDecade
-  if (currentMapSource.isCustom() && showingCompareMap)
+  if (currentMapSource.isCompare() && showingCompareMap)
   {
     var compareDate = mapSources[compareMapSourceIDArray[0]].getMapDates()[$("#firstCompareDataMapDateSlider")[0].value-1]
     if (compareDate != null)
