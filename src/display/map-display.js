@@ -1053,6 +1053,8 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   {
     updateRegionBox()
   }
+  
+  updateShiftDropdownVisibility()
 
   if (currentViewingState == ViewingState.zooming)
   {
@@ -1409,8 +1411,7 @@ async function toggleEditing(stateToSet)
     $("#marginsDropdownContainer").hide()
 
     $("#shiftContainer").show()
-    $("#shiftButton").removeClass('topnavdisable')
-    $("#shiftDropdownContainer").show()
+    updateShiftDropdownVisibility()
 
     $("#fillDropdownContainer").css('display', "block")
 
@@ -1481,6 +1482,20 @@ async function toggleEditing(stateToSet)
   }
 
   updatePartyDropdownVisibility()
+}
+
+function updateShiftDropdownVisibility()
+{
+  if (currentEditingState == EditingState.editing && viewingDiscreteRegions())
+  {
+    $("#shiftButton").removeClass('topnavdisable')
+    $("#shiftDropdownContainer").show()
+  }
+  else
+  {
+    $("#shiftButton").addClass('topnavdisable')
+    $("#shiftDropdownContainer").hide()
+  }
 }
 
 async function zoomOutMap(displayMap = true)
