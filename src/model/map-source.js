@@ -526,7 +526,7 @@ class MapSource
 
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
-    return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
+    return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals")) && !currentMapType.getMapSettingValue("showAllDistricts")
   }
 
   getShouldForcePopularVoteDisplay()
