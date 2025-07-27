@@ -109,7 +109,6 @@ var JJUPresidentMapType = new MapType(
         }
         
         let greatestMarginPartyID
-        let greatestMarginCandidateName
         let topTwoMargin
         
         if (voteshareSortedCandidateData[0].voteshare != 0)
@@ -125,13 +124,11 @@ var JJUPresidentMapType = new MapType(
           }
         
           greatestMarginPartyID = topCandidateData[0].partyID
-          greatestMarginCandidateName = topCandidateData[0].candidate
           topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
         }
         else
         {
           greatestMarginPartyID = TossupParty.getID()
-          greatestMarginCandidateName = null
           topTwoMargin = 0
         }
         
@@ -148,14 +145,8 @@ var JJUPresidentMapType = new MapType(
           }
         }
         
-        let partyIDToCandidateNames = {}
-        for (let partyCandidateName in candidateData)
-        {
-          partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
-        }
-        
         let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID)
-        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
       for (let mapDateTime of cloneObject(mapDates))
@@ -178,13 +169,7 @@ var JJUPresidentMapType = new MapType(
           {
             if (isCustomMap)
             {
-              let partyIDToCandidateNames = {}
-              for (let partyCandidateName in candidateNameToPartyIDMap)
-              {
-                partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
-              }
-        
-              filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+              filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID()}
             }
             continue
           }
@@ -262,7 +247,7 @@ var JJUPresidentMapType = new MapType(
         return candidateName
     
         case "voteshare":
-        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
         if (voteshareData)
         {
           return voteshareData.voteshare

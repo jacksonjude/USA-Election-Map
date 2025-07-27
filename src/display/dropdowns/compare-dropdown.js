@@ -546,7 +546,7 @@ async function applyCompareToCustomMap()
           }
           else if (partiesToRemove.has(candidateData0.partyID))
           {
-            candidatesToKeep.add(candidateData0.candidate)
+            candidatesToKeep.add(getRegionCandidateName(candidateData0.partyID, compareRegionData0, candidateData0))
           }
           partiesChecked.add(candidateData0.partyID)
         }
@@ -560,11 +560,11 @@ async function applyCompareToCustomMap()
           }
           else if (partiesToRemove.has(candidateData1.partyID))
           {
-            candidatesToKeep.add(candidateData1.candidate)
+            candidatesToKeep.add(getRegionCandidateName(candidateData1.partyID, compareRegionData1, candidateData1))
           }
         }
-        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
-        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(candidateData.candidate)).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(getRegionCandidateName(candidateData.partyID, compareRegionData0, candidateData))).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(getRegionCandidateName(candidateData.partyID, compareRegionData1, candidateData))).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
 
         let candidateOn = 0
 
@@ -600,7 +600,7 @@ async function applyCompareToCustomMap()
     }
   }
 
-  (compareResultCustomMapSource ?? currentCompareMapSource ?? currentCustomMapSource).updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, null, EditingMode.voteshare)
+  (compareResultCustomMapSource ?? currentCompareMapSource ?? currentCustomMapSource).updateMapData(resultMapArray, (new Date(getTodayString("/", false, "mdy"))).getTime(), true, mapSources[compareMapSourceIDArray[0]].getCandidateNames(currentCompareSliderDate.getTime()), EditingMode.voteshare)
 
   if (shouldSetCompareMapSource)
   {

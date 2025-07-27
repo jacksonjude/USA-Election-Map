@@ -25,18 +25,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       let candidateDataToIncreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToShift.getID())
       if (!candidateDataToIncreaseMargin)
       {
-        let candidateNames = currentMapSource.getCandidateNames(currentSliderDate.getTime())
-        let candidateNameToUse
-        if (candidateNames)
-        {
-          candidateNameToUse = candidateNames[partyToShift.getID()]
-        }
-        else
-        {
-          candidateNameToUse = partyToShift.getNames()[0]
-        }
-
-        candidateDataToIncreaseMargin = {candidate: candidateNameToUse, partyID: partyToShift.getID(), voteshare: 0}
+        candidateDataToIncreaseMargin = {partyID: partyToShift.getID(), voteshare: 0}
 
         regionData.partyVotesharePercentages.push(candidateDataToIncreaseMargin)
       }
@@ -53,7 +42,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       {
         for (let candidateData of regionData.partyVotesharePercentages)
         {
-          if (candidateData.candidate == candidateDataToIncreaseMargin.candidate) { continue }
+          if (getRegionCandidateName(candidateData.partyID, regionData, candidateData) == getRegionCandidateName(candidateDataToIncreaseMargin.partyID, regionData, candidateDataToIncreaseMargin)) { continue }
 
           candidateData.voteshare -= marginToAdd*candidateData.voteshare/(100.0-candidateDataToIncreaseMargin.voteshare)
           if (candidateData.voteshare < 0)

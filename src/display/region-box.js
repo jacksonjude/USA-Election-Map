@@ -67,7 +67,7 @@ async function updateRegionBox(regionID = currentRegionID)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
   : getRoundedMarginValue(regionData.margin)
   
-  var regionMarginString = (regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]) + " " + currentMapSource.getVotesharePrefix()
+  var regionMarginString = getRegionCandidateName(regionData.partyID, regionData) + " " + currentMapSource.getVotesharePrefix()
 
   if (editingRegionMarginValue)
   {
@@ -81,7 +81,7 @@ async function updateRegionBox(regionID = currentRegionID)
     let candidateDataToSelect = (selectedParty == null || selectedParty == TossupParty.getID()) ? regionData.partyVotesharePercentages[0] : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID())
     if (!candidateDataToSelect && selectedParty)
     {
-      regionData.partyVotesharePercentages.push({partyID: selectedParty.id, candidate: selectedParty.getCandidateName(), voteshare: 0.0})
+      regionData.partyVotesharePercentages.push({partyID: selectedParty.id, voteshare: 0.0})
       candidateDataToSelect = regionData.partyVotesharePercentages[regionData.partyVotesharePercentages.length-1]
     }
 
@@ -90,8 +90,9 @@ async function updateRegionBox(regionID = currentRegionID)
     for (let candidateOn in regionData.partyVotesharePercentages)
     {
       let candidateData = regionData.partyVotesharePercentages[candidateOn]
-      regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateData.candidate + "</span>"
-      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateData.candidate + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px; font-size: 17px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateData.candidate + "'>" + currentMapSource.getVoteshareSuffix() + "</span>"
+      let candidateName = getRegionCandidateName(candidateData.partyID, regionData, candidateData)
+      regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateName + "</span>"
+      regionBoxHTML += "<span><input id='regionVoteshare-" + candidateName.replaceAll(/[\s\.]/g, "_") + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px; font-size: 17px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateName + "'>" + currentMapSource.getVoteshareSuffix() + "</span>"
       regionBoxHTML += "</div>"
     }
     regionBoxHTML += "</div>"
@@ -105,7 +106,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
     if (candidateDataToSelect)
     {
-      $("#regionVoteshare-" + candidateDataToSelect.candidate).select()
+      $("#regionVoteshare-" + getRegionCandidateName(candidateDataToSelect.partyID, regionData).replaceAll(/[\s\.]/g, "_")).select()
     }
 
     return
@@ -211,7 +212,9 @@ async function updateRegionBox(regionID = currentRegionID)
       const roundedVoteshare = Math.round(voteData.voteshare*100)/100
       if (roundedVoteshare <= 0 && !currentMapSource.isCustom() && regionData.reportingPercent == null) { return }
       
-      regionBoxHTML += "<span class='regionbox-text-shadow' id='voteshare-" + (voteData.partyID + "-" + voteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + voteData.candidate + "</span><span style='float: right;'>"
+      const candidateName = getRegionCandidateName(voteData.partyID, regionData, voteData)
+      
+      regionBoxHTML += "<span class='regionbox-text-shadow' id='voteshare-" + (voteData.partyID + "-" + candidateName.replaceAll(/[\s\.]/g, "_")) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + candidateName + "</span><span style='float: right;'>"
       regionBoxHTML += shiftKeyDown && shouldShowVotes && voteData.votes != null ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix()
       regionBoxHTML += "</span></span><br>"
 
@@ -235,7 +238,9 @@ async function updateRegionBox(regionID = currentRegionID)
     const totalVotes = voteSplitDataToDisplay.reduce((agg, curr) => agg+curr.votes, 0)
     
     voteSplitDataToDisplay.forEach((candidateSplitVoteData, i) => {
-      regionBoxHTML += "<span class='regionbox-text-shadow' id='votesplit-" + (candidateSplitVoteData.partyID + "-" + candidateSplitVoteData.candidate) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == voteSplitDataToDisplay.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[candidateSplitVoteData.partyID].getMarginColors().safe, politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean, candidateSplitVoteData.votes/totalVotes*100) + "; " + " width: 100%'><span style='float: left;'>" + candidateSplitVoteData.candidate + "</span><span style='float: right;'>"
+      const candidateName = getRegionCandidateName(candidateSplitVoteData.partyID, regionData, candidateSplitVoteData)
+      
+      regionBoxHTML += "<span class='regionbox-text-shadow' id='votesplit-" + (candidateSplitVoteData.partyID + "-" + candidateName.replaceAll(/[\s\.]/g, "_")) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == voteSplitDataToDisplay.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[candidateSplitVoteData.partyID].getMarginColors().safe, politicalParties[candidateSplitVoteData.partyID].getMarginColors().lean, candidateSplitVoteData.votes/totalVotes*100) + "; " + " width: 100%'><span style='float: left;'>" + candidateName + "</span><span style='float: right;'>"
       regionBoxHTML += candidateSplitVoteData.votes
       regionBoxHTML += "</span></span><br>"
     })
@@ -442,7 +447,7 @@ function toggleRegionVoteshareEditing(regionID, regionData)
 
   if (regionData && (!regionData.partyVotesharePercentages || regionData.partyVotesharePercentages.length == 0))
   {
-    regionData.partyVotesharePercentages = [{partyID: IndependentGenericParty.getID(), candidate: IndependentGenericParty.getCandidateName(), voteshare: 0.0}]
+    regionData.partyVotesharePercentages = [{partyID: IndependentGenericParty.getID(), voteshare: 0.0}]
   }
   regionData && regionData.partyVotesharePercentages.sort((voteshareData1, voteshareData2) => voteshareData2.voteshare-voteshareData1.voteshare)
 
@@ -454,7 +459,7 @@ function toggleRegionVoteshareEditing(regionID, regionData)
       {
         if (!regionData.partyVotesharePercentages.some(cand => cand.partyID == partyID))
         {
-          regionData.partyVotesharePercentages.push({partyID: partyID, candidate: politicalParties[partyID].getCandidateName(), voteshare: 0.0})
+          regionData.partyVotesharePercentages.push({partyID: partyID, voteshare: 0.0})
         }
       }
     }
@@ -479,7 +484,7 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
   let newVoteshare = newVoteshareString != "" ? parseFloat(newVoteshareString) : 0
   let newVoteshareIsValid = /^\d+\.?\d*e?[+-]?\d*$/.test(newVoteshareString) && !isNaN(newVoteshare) && newVoteshare >= 0 && newVoteshare <= 100
 
-  let currentVoteshareData = regionData.partyVotesharePercentages.find(voteshareData => voteshareData.candidate == $(textBoxDiv).data("candidate"))
+  let currentVoteshareData = regionData.partyVotesharePercentages.find(voteshareData => getRegionCandidateName(voteshareData.partyID, regionData, voteshareData) == $(textBoxDiv).data("candidate"))
   if (newVoteshareIsValid && newVoteshare != currentVoteshareData.voteshare)
   {
     currentVoteshareData.voteshare = newVoteshare
@@ -505,7 +510,7 @@ function applyRegionVotesharePercentage(textBoxDiv, regionID)
 function cycleSelectedRegionVoteshare(directionToCycle)
 {
   let regionData = getRegionData(voteshareEditRegion).regionData
-  let voteshareIndex = regionData.partyVotesharePercentages.findIndex(voteshareData => voteshareData.candidate == selectedVoteshareCandidate)
+  let voteshareIndex = regionData.partyVotesharePercentages.findIndex(voteshareData => getRegionCandidateName(voteshareData.partyID, regionData, voteshareData) == selectedVoteshareCandidate)
 
   voteshareIndex += directionToCycle
   if (voteshareIndex < 0)
@@ -516,8 +521,11 @@ function cycleSelectedRegionVoteshare(directionToCycle)
   {
     voteshareIndex = 0
   }
+  
+  const selectedVoteshareData = regionData.partyVotesharePercentages[voteshareIndex]
+  const selectedVoteshareDataCandidate = getRegionCandidateName(selectedVoteshareData.partyID, regionData, selectedVoteshareData)
 
-  $("#regionVoteshare-" + regionData.partyVotesharePercentages[voteshareIndex].candidate).select()
+  $("#regionVoteshare-" + selectedVoteshareDataCandidate.replaceAll(/[\s\.]/g, "_")).select()
 }
 
 function closeRegionVoteshareEditing(regionID)
@@ -525,4 +533,23 @@ function closeRegionVoteshareEditing(regionID)
   if (!regionID) { return }
   let previousRegionData = getRegionData(regionID).regionData
   previousRegionData.partyVotesharePercentages = previousRegionData.partyVotesharePercentages.filter(candidateData => candidateData.voteshare > 0.0)
+}
+
+function getRegionCandidateName(partyID, regionData, voteshareData, partyIDToCandidateNames)
+{
+  // national races are always one-to-one with candidate & party (for major candidates)
+  // non-national races could have multiple candidates per party
+  //   however, margin (editing) requires only one candidate per party
+  
+  // regionData.candidateName: only for winners + non-national
+  // voteshareData.candidate: only for non-national + voteshare
+  // regionData.candidateMap: only for margin
+  // MapSource.getCandidateNames: only for national (but could be used by non-national)
+  // PoliticalParty.getNames: fallback for non-national
+  
+  return (voteshareData != null ? voteshareData.candidate : (regionData.partyID == partyID ? regionData.candidateName : null))
+    ?? regionData.candidateMap?.[partyID]
+    ?? partyIDToCandidateNames?.[partyID]
+    ?? currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID]
+    ?? politicalParties[partyID].getNames()[0]
 }

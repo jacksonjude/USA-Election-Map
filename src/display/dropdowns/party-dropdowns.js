@@ -630,8 +630,7 @@ function togglePartyPopularVoteEditing(partyID)
       let candidateData = partyVotesharePercentages.find(candidateData => candidateData.partyID == editPartyPopularVote)
       if (!candidateData)
       {
-        let candidateName = currentMapSource.getCandidateNames(currentSliderDate.getTime())[editPartyPopularVote] ?? politicalParties[editPartyPopularVote].getNames[0]
-        candidateData = {partyID: editPartyPopularVote, candidate: candidateName}
+        candidateData = {partyID: editPartyPopularVote}
         partyVotesharePercentages.push(candidateData)
       }
       candidateData.voteshare = popularVoteToSet
