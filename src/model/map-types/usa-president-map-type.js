@@ -873,7 +873,6 @@ var USAPresidentMapType = new MapType(
     var countyFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID)
     {
       var filteredMapData = {}
-      var partyNameData = {}
 
       var regionIDs = Object.keys(regionNameToID)
 
@@ -881,8 +880,6 @@ var USAPresidentMapType = new MapType(
       {
         let rawDateData = rawMapData[currentMapDate]
         let filteredDateData = {}
-
-        let currentDatePartyNameArray = {}
 
         for (let regionID of regionIDs)
         {
@@ -911,15 +908,15 @@ var USAPresidentMapType = new MapType(
         }
 
         filteredMapData[currentMapDate] = filteredDateData
-        partyNameData[currentMapDate] = currentDatePartyNameArray
       }
 
-      return {mapData: filteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
+      return {mapData: filteredMapData, mapDates: mapDates}
     }
 
     var stateCountyVoteshareFilterFunction = function(stateID, stateCountyRows, currentMapDate, previousMapDateData, columnMap, isCustomMap, voteshareCutoffMargin)
     {
       let filteredStateData = {}
+      let candidateNameData = {}
 
       for (let stateCounty in stateCountyRows)
       {
@@ -1028,6 +1025,10 @@ var USAPresidentMapType = new MapType(
         
         for (let singleCandidateData of voteshareSortedCandidateData)
         {
+          if (!Object.keys(candidateNameData).includes(singleCandidateData.partyID) && singleCandidateData.partyID != IndependentGenericParty.getID())
+          {
+            candidateNameData[singleCandidateData.partyID] = singleCandidateData.candidate
+          }
           if (singleCandidateData.partyID != IndependentGenericParty.getID())
           {
             delete singleCandidateData.candidate
@@ -1038,7 +1039,7 @@ var USAPresidentMapType = new MapType(
         filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, disabled: countyRows[0][columnMap.disabled] == "TRUE", flip: countyRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != null && mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
 
-      return filteredStateData
+      return {mapDateData: filteredStateData, candidateNameData: candidateNameData}
     }
 
     function mostRecentWinner(mapData, dateToStart, regionID)
@@ -1694,7 +1695,7 @@ var USAPresidentMapType = new MapType(
 
       for (let state in organizedCountyData)
       {
-        let mapDateData = stateCountyVoteshareFilterFunction(state, organizedCountyData[state], null, null, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin)
+        let {mapDateData, candidateNameData} = stateCountyVoteshareFilterFunction(state, organizedCountyData[state], null, null, CountyElectionResultMapSource.columnMap, false, CountyElectionResultMapSource.voteshareCutoffMargin)
         
         stateCandidateData[state] = {}
         stateTotalVotes[state] = 0
@@ -1704,7 +1705,7 @@ var USAPresidentMapType = new MapType(
           stateTotalVotes[state] += regionData.totalVotes
           
           regionData.partyVotesharePercentages.forEach(candidateData => {
-            const candidateName = getRegionCandidateName(candidateData.partyID, regionData, candidateData)
+            const candidateName = getRegionCandidateName(candidateData.partyID, regionData, candidateData, candidateNameData)
             if (!stateCandidateData[state][candidateName])
             {
               stateCandidateData[state][candidateName] = {...candidateData}
@@ -1782,10 +1783,11 @@ var USAPresidentMapType = new MapType(
       {
         let previousDate = mapSource.getMapDates()[previousMapDateIndex]
         let previousOrganizedCountyData = mapSource.getMapData()[previousDate]
-        previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin)
+        previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin).mapDateData
       }
 
-      let mapDateData = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
+      let {mapDateData, candidateNameData} = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
+      mapSource.setCandidateNames(candidateNameData, date)
 
       let countyZoomData = {}
 

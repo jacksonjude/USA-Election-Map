@@ -550,6 +550,6 @@ function getRegionCandidateName(partyID, regionData, voteshareData, partyIDToCan
   return (voteshareData != null ? voteshareData.candidate : (regionData.partyID == partyID ? regionData.candidateName : null))
     ?? regionData.candidateMap?.[partyID]
     ?? partyIDToCandidateNames?.[partyID]
-    ?? currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID]
+    ?? (compareResultCustomMapSource ?? currentMapSource).getCandidateNames(getCurrentDateOrToday())[partyID]
     ?? politicalParties[partyID].getNames()[0]
 }

@@ -1851,7 +1851,7 @@ function getCurrentDecade()
 function getCurrentDateOrToday()
 {
   var dateToUse = new Date(getTodayString("/", false, "mdy")).getTime()
-  if (currentSliderDate)
+  if (currentSliderDate && !showingCompareMap)
   {
     dateToUse = currentSliderDate.getTime()
   }
