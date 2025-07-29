@@ -644,13 +644,13 @@ var USAPresidentMapType = new MapType(
           topTwoMargin = 0
         }
     
-        for (let candidateData of voteshareSortedCandidateData)
-        {
-          if (candidateData.partyID != IndependentGenericParty.getID())
-          {
-            delete candidateData.candidate
-          }
-        }
+        // for (let candidateData of voteshareSortedCandidateData)
+        // {
+        //   if (candidateData.partyID != IndependentGenericParty.getID())
+        //   {
+        //     delete candidateData.candidate
+        //   }
+        // }
     
         mapData[mapDate][regionID] = {region: regionID, state: useCountyIDs ? stateID : null, county: useCountyIDs ? countyName : null, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: !useCountyIDs && heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
@@ -1134,7 +1134,7 @@ var USAPresidentMapType = new MapType(
         return partyID || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
     
         case "candidateVotes":
-        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
         if (voteshareData)
         {
           return voteshareData.voteshare*100
@@ -1149,7 +1149,7 @@ var USAPresidentMapType = new MapType(
         return 100*100
         
         case "order":
-        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
         if (voteshareData)
         {
           return voteshareData.order
@@ -1704,13 +1704,14 @@ var USAPresidentMapType = new MapType(
           stateTotalVotes[state] += regionData.totalVotes
           
           regionData.partyVotesharePercentages.forEach(candidateData => {
-            if (!stateCandidateData[state][candidateData.candidate])
+            const candidateName = getRegionCandidateName(candidateData.partyID, regionData, candidateData)
+            if (!stateCandidateData[state][candidateName])
             {
-              stateCandidateData[state][candidateData.candidate] = {...candidateData}
+              stateCandidateData[state][candidateName] = {...candidateData}
             }
             else
             {
-              stateCandidateData[state][candidateData.candidate].votes += candidateData.votes
+              stateCandidateData[state][candidateName].votes += candidateData.votes
             }
           })
         }

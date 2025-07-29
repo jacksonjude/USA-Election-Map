@@ -31,7 +31,7 @@ var JJUPresidentMapType = new MapType(
   () => {
     const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "National Popular Vote": nationalPopularVoteID}
   
-    let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
+    let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
     {
       let filteredMapData = {}
       let partyNameData = {}
@@ -142,6 +142,11 @@ var JJUPresidentMapType = new MapType(
           else
           {
             currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
+          }
+          
+          if (voteshareSortedCandidateData[candidateDataNum].partyID != IndependentGenericParty.getID())
+          {
+            delete voteshareSortedCandidateData[candidateDataNum].candidate
           }
         }
         
