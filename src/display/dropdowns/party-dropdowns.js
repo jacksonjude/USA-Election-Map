@@ -365,7 +365,7 @@ function selectParty(div)
       $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
     }
   }
-  else if (currentEditingState == EditingState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled() && !showingCompareMap)
+  else if (currentEditingState == EditingState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled() && !(showingCompareMap && currentMapSource.isCompare()))
   {
     toggleCandidateNameEditing(partyID, div)
   }
@@ -592,7 +592,7 @@ function getNonEVDropdownCandidates(partyIDs)
 
 function updatePoliticalPartyCandidateNames(mapDate)
 {
-  var candidateNames = (compareResultCustomMapSource ?? currentMapSource).getCandidateNames(mapDate)
+  var candidateNames = (compareResultCustomMapSource != null && currentMapSource.isCompare() ? compareResultCustomMapSource : currentMapSource).getCandidateNames(mapDate)
 
   if (!candidateNames)
   {
