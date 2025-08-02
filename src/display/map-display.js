@@ -1132,15 +1132,15 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
     $("#" + currentMapSource.getID().replace(/\s/g, '')).addClass("active")
   }
 
-  if (currentEditingState == EditingState.editing && currentMapSource.isCustom())
+  if (currentEditingState == EditingState.editing && currentMapSource.isCustom() && !currentMapSource.isCompare())
   {
     $("#editDoneButton .topnav-text").html("Done")
   }
-  else if (currentEditingState == EditingState.editing && !currentMapSource.isCustom())
+  else if (currentEditingState == EditingState.editing && !currentMapSource.isCustom() && !currentMapSource.isCompare())
   {
     toggleEditing(EditingState.viewing)
   }
-  else if (currentEditingState != EditingState.editing && currentMapSource.isCustom())
+  else if (currentEditingState != EditingState.editing && currentMapSource.isCustom() && !currentMapSource.isCompare())
   {
     $("#editDoneButton .topnav-text").html("Edit")
     $("#copyDropdownContainer").hide()
