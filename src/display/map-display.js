@@ -1151,12 +1151,7 @@ function updateNavBarForNewSource(revertToDefault, resetViewingState)
     $("#copyDropdownContainer").show()
   }
   
-  if (currentMapSource.isCompare())
-  {
-    $("#editDoneButton").addClass('topnavdisable')
-    $("#copyDropdownContainer").hide()
-  }
-  else if (currentMapType.getCustomMapEnabled())
+  if (currentMapType.getCustomMapEnabled())
   {
     $("#editDoneButton").removeClass('topnavdisable')
   }
@@ -1417,7 +1412,7 @@ async function toggleEditing(stateToSet)
 
     $("#regionboxcontainer").css('pointer-events', "")
 
-    var currentMapIsCustom = (currentMapSource.isCustom())
+    var currentMapIsCustom = currentMapSource.isCustom() && !currentMapSource.isCompare()
     var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
     currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()), !currentMapIsCustom ? currentEditingMode : null)
 
