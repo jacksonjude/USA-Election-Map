@@ -177,7 +177,7 @@ var USASenateMapType = new MapType(
       {
         if (regionID == nationalPopularVoteID) continue
 
-        let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+        let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true, disabled: true}
 
         let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
 
@@ -286,7 +286,7 @@ var USASenateMapType = new MapType(
         {
           if (regionID == nationalPopularVoteID) continue
         
-          let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+          let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true, disabled: true}
         
           let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
         
@@ -401,7 +401,7 @@ var USASenateMapType = new MapType(
         {
           if (regionID == nationalPopularVoteID) continue
           
-          let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+          let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true, disabled: true}
           
           let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
           
@@ -500,7 +500,7 @@ var USASenateMapType = new MapType(
         {
           if (regionID == nationalPopularVoteID) continue
 
-          let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+          let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true, disabled: true}
 
           let seatClassesToUse = [stateClasses[regionID][0] != onCycleClass ? stateClasses[regionID][0] : stateClasses[regionID][1], stateClasses[regionID][1] != onCycleClass ? stateClasses[regionID][1] : stateClasses[regionID][0]]
 
@@ -687,7 +687,7 @@ var USASenateMapType = new MapType(
               partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
             }
 
-            var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection)
+            var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection).partyID
             filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
           }
         }
@@ -724,7 +724,7 @@ var USASenateMapType = new MapType(
               var seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
               seatIndexToUse = Math.abs(seatIndex-1)
             }
-            filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
+            filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], ...mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
           }
           if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum] + "-S"))
           {
@@ -739,7 +739,7 @@ var USASenateMapType = new MapType(
               let seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
               seatIndexToUse = Math.abs(seatIndex-1)
             }
-            filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
+            filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", ...mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
           }
         }
 
@@ -797,7 +797,7 @@ var USASenateMapType = new MapType(
 
         if (startYear-currentYear > 7) // Need to include runoffs, which may take place as late as January
         {
-          return TossupParty.getID()
+          return {margin: 0, partyID: TossupParty.getID()}
         }
 
         var mapDataFromDate = mapData[reversedMapDates[dateNum]]
@@ -809,7 +809,7 @@ var USASenateMapType = new MapType(
           }
           else
           {
-            return mapDataFromDate[regionID].partyID
+            return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum]), isSpecial: mapDataFromDate[regionID].isSpecial}
           }
         }
         else if ((regionID + "-S") in mapDataFromDate && mapDataFromDate[regionID + "-S"].seatClass == seatClass)
@@ -820,12 +820,12 @@ var USASenateMapType = new MapType(
           }
           else
           {
-            return mapDataFromDate[regionID + "-S"].partyID
+            return {margin: mapDataFromDate[regionID + "-S"].margin, partyID: mapDataFromDate[regionID + "-S"].partyID, candidateName: mapDataFromDate[regionID + "-S"].candidateName, candidateMap: mapDataFromDate[regionID + "-S"].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID + "-S"].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum]), isSpecial: mapDataFromDate[regionID + "-S"].isSpecial}
           }
         }
       }
 
-      return TossupParty.getID()
+      return {margin: 0, partyID: TossupParty.getID()}
     }
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -885,6 +885,28 @@ var USASenateMapType = new MapType(
         return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
+    
+    function getFormattedRegionName(regionName, regionData)
+    {
+      if (!regionData) return regionName
+      
+      if (!regionData.isSpecial && regionName.endsWith(" Special"))
+      {
+        regionName = regionName.replace(/ Special$/, "")
+      }
+      else if (regionData.isSpecial && !regionName.endsWith(" Special"))
+      {
+        regionName += " Special"
+      }
+      
+      if (regionData && regionData.isHold && regionData.electionDate)
+      {
+        const electionDate = new Date(regionData.electionDate)
+        regionName += ` (${electionDate.getFullYear()})`
+      }
+      
+      return regionName
+    }
 
     var CNNSenateResults2022MapSource = new MapSource(
       "CNN-2022-Senate-Results", // id
@@ -917,7 +939,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -973,7 +995,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -1022,7 +1044,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
       {
         if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
@@ -1074,7 +1096,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
       {
         if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
@@ -1124,7 +1146,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage)
       {
         var linkToOpen = homepageURL
@@ -1221,7 +1243,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, _, __, mapDate, ___, ____)
       {
         if (mapDate == null) { return }
@@ -1283,7 +1305,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, _, __, mapDate, ___, ____)
       {
         if (mapDate == null) { return }
@@ -1346,7 +1368,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, _, __, mapDate, ____)
       {
         if (mapDate == null) { return }
@@ -1390,7 +1412,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       null, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1434,15 +1456,21 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
       {
         if (mapDate == null) { return }
+        
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
 
         var isSpecial = false
         if (regionID != null && mapDate != null)
         {
-          isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
+          isSpecial = regionData.isSpecial
         }
 
         var linkToOpen = homepageURL + mapDate.getFullYear() + "_United_States_Senate_"
@@ -1517,7 +1545,7 @@ var USASenateMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       null, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction

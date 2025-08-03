@@ -1,71 +1,71 @@
 date,region,state_po,class,special,runoff,offyear,candidate,party,writein,voteshare,candidatevotes,totalvotes,version
-11/1/1960,Alabama,AL,3,TRUE,FALSE,TRUE,Hill,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Alaska,AK,3,TRUE,FALSE,TRUE,Gruening,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Arizona,AZ,1,FALSE,FALSE,TRUE,Goldwater,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Arizona,AZ,3,TRUE,FALSE,TRUE,Hayden,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Arkansas,AR,3,TRUE,FALSE,TRUE,Fulbright,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,California,CA,1,FALSE,FALSE,TRUE,Engle,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,California,CA,3,TRUE,FALSE,TRUE,Kuchel,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Colorado,CO,3,TRUE,FALSE,TRUE,Carroll,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Connecticut,CT,1,FALSE,FALSE,TRUE,Dodd,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Connecticut,CT,3,TRUE,FALSE,TRUE,Bush,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Delaware,DE,1,FALSE,FALSE,TRUE,Williams,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Florida,FL,1,FALSE,FALSE,TRUE,Holland,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Florida,FL,3,TRUE,FALSE,TRUE,Smathers,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Georgia,GA,3,TRUE,FALSE,TRUE,Talmadge,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Hawaii,HI,1,FALSE,FALSE,TRUE,Fong,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Hawaii,HI,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Idaho,ID,3,TRUE,FALSE,TRUE,Church,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Illinois,IL,3,TRUE,FALSE,TRUE,Dirksen,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Indiana,IN,1,FALSE,FALSE,TRUE,Hartke,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Indiana,IN,3,TRUE,FALSE,TRUE,Capehart,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Iowa,IA,3,TRUE,FALSE,TRUE,Hickenlooper,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Kansas,KS,3,TRUE,FALSE,TRUE,Carlson,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Kentucky,KY,3,TRUE,FALSE,TRUE,Morton,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Louisiana,LA,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Maine,ME,1,FALSE,FALSE,TRUE,Muskie,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Maryland,MD,1,FALSE,FALSE,TRUE,Beall,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Maryland,MD,3,TRUE,FALSE,TRUE,Butler,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Massachusetts,MA,1,FALSE,FALSE,TRUE,Smith,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Michigan,MI,1,FALSE,FALSE,TRUE,Hart,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Minnesota,MN,1,FALSE,FALSE,TRUE,McCarthy,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Mississippi,MS,1,FALSE,FALSE,TRUE,Stennis,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Missouri,MO,1,FALSE,FALSE,TRUE,Symington,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Missouri,MO,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Montana,MT,1,FALSE,FALSE,TRUE,Mansfield,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Nebraska,NE,1,FALSE,FALSE,TRUE,Hruska,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Nevada,NV,1,FALSE,FALSE,TRUE,Cannon,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Nevada,NV,3,TRUE,FALSE,TRUE,Bible,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,New Hampshire,NH,3,TRUE,FALSE,TRUE,Cotton,republican,FALSE,1.01,,,JJCooley
-11/1/1960,New Jersey,NJ,1,FALSE,FALSE,TRUE,Williams,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,New Mexico,NM,1,FALSE,FALSE,TRUE,Chavez,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,New York,NY,1,FALSE,FALSE,TRUE,Keating,republican,FALSE,1.01,,,JJCooley
-11/1/1960,New York,NY,3,TRUE,FALSE,TRUE,Javits,republican,FALSE,1.01,,,JJCooley
-11/1/1960,North Carolina,NC,3,TRUE,FALSE,TRUE,Ervin,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,North Dakota,ND,1,FALSE,FALSE,TRUE,Burdick,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,North Dakota,ND,3,TRUE,FALSE,TRUE,Young,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Ohio,OH,1,FALSE,FALSE,TRUE,Young,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Ohio,OH,3,TRUE,FALSE,TRUE,Lausche,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Oklahoma,OK,3,TRUE,FALSE,TRUE,Monroney,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Oregon,OR,3,TRUE,FALSE,TRUE,Morse,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Pennsylvania,PA,1,FALSE,FALSE,TRUE,Scott,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Pennsylvania,PA,3,TRUE,FALSE,TRUE,Clark,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Rhode Island,RI,1,FALSE,FALSE,TRUE,Pastore,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,South Carolina,SC,3,TRUE,FALSE,TRUE,Johnston,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,South Dakota,SD,3,TRUE,FALSE,TRUE,Case,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Tennessee,TN,1,FALSE,FALSE,TRUE,Gore,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Texas,TX,1,FALSE,FALSE,TRUE,Yarborough,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Utah,UT,1,FALSE,FALSE,TRUE,Moss,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Utah,UT,3,TRUE,FALSE,TRUE,Bennett,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Vermont,VT,1,FALSE,FALSE,TRUE,Prouty,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Vermont,VT,3,TRUE,FALSE,TRUE,Aiken,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Virginia,VA,1,FALSE,FALSE,TRUE,Byrd,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Washington,WA,1,FALSE,FALSE,TRUE,Jackson,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Washington,WA,3,TRUE,FALSE,TRUE,Magnuson,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,West Virginia,WV,1,FALSE,FALSE,TRUE,Byrd,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Wisconsin,WI,1,FALSE,FALSE,TRUE,Proxmire,democratic,FALSE,1.01,,,JJCooley
-11/1/1960,Wisconsin,WI,3,TRUE,FALSE,TRUE,Wiley,republican,FALSE,1.01,,,JJCooley
-11/1/1960,Wyoming,WY,1,FALSE,FALSE,TRUE,McGee,democratic,FALSE,1.01,,,JJCooley
+11/1/1960,Alabama,AL,3,TRUE,FALSE,TRUE,Hill,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Alaska,AK,3,TRUE,FALSE,TRUE,Gruening,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Arizona,AZ,1,FALSE,FALSE,TRUE,Goldwater,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Arizona,AZ,3,TRUE,FALSE,TRUE,Hayden,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Arkansas,AR,3,TRUE,FALSE,TRUE,Fulbright,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,California,CA,1,FALSE,FALSE,TRUE,Engle,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,California,CA,3,TRUE,FALSE,TRUE,Kuchel,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Colorado,CO,3,TRUE,FALSE,TRUE,Carroll,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Connecticut,CT,1,FALSE,FALSE,TRUE,Dodd,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Connecticut,CT,3,TRUE,FALSE,TRUE,Bush,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Delaware,DE,1,FALSE,FALSE,TRUE,Williams,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Florida,FL,1,FALSE,FALSE,TRUE,Holland,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Florida,FL,3,TRUE,FALSE,TRUE,Smathers,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Georgia,GA,3,TRUE,FALSE,TRUE,Talmadge,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Hawaii,HI,1,FALSE,FALSE,TRUE,Fong,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Hawaii,HI,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Idaho,ID,3,TRUE,FALSE,TRUE,Church,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Illinois,IL,3,TRUE,FALSE,TRUE,Dirksen,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Indiana,IN,1,FALSE,FALSE,TRUE,Hartke,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Indiana,IN,3,TRUE,FALSE,TRUE,Capehart,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Iowa,IA,3,TRUE,FALSE,TRUE,Hickenlooper,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Kansas,KS,3,TRUE,FALSE,TRUE,Carlson,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Kentucky,KY,3,TRUE,FALSE,TRUE,Morton,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Louisiana,LA,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Maine,ME,1,FALSE,FALSE,TRUE,Muskie,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Maryland,MD,1,FALSE,FALSE,TRUE,Beall,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Maryland,MD,3,TRUE,FALSE,TRUE,Butler,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Massachusetts,MA,1,FALSE,FALSE,TRUE,Smith,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Michigan,MI,1,FALSE,FALSE,TRUE,Hart,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Minnesota,MN,1,FALSE,FALSE,TRUE,McCarthy,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Mississippi,MS,1,FALSE,FALSE,TRUE,Stennis,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Missouri,MO,1,FALSE,FALSE,TRUE,Symington,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Missouri,MO,3,TRUE,FALSE,TRUE,Long,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Montana,MT,1,FALSE,FALSE,TRUE,Mansfield,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Nebraska,NE,1,FALSE,FALSE,TRUE,Hruska,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Nevada,NV,1,FALSE,FALSE,TRUE,Cannon,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Nevada,NV,3,TRUE,FALSE,TRUE,Bible,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,New Hampshire,NH,3,TRUE,FALSE,TRUE,Cotton,republican,FALSE,1.00,,,JJCooley
+11/1/1960,New Jersey,NJ,1,FALSE,FALSE,TRUE,Williams,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,New Mexico,NM,1,FALSE,FALSE,TRUE,Chavez,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,New York,NY,1,FALSE,FALSE,TRUE,Keating,republican,FALSE,1.00,,,JJCooley
+11/1/1960,New York,NY,3,TRUE,FALSE,TRUE,Javits,republican,FALSE,1.00,,,JJCooley
+11/1/1960,North Carolina,NC,3,TRUE,FALSE,TRUE,Ervin,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,North Dakota,ND,1,FALSE,FALSE,TRUE,Burdick,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,North Dakota,ND,3,TRUE,FALSE,TRUE,Young,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Ohio,OH,1,FALSE,FALSE,TRUE,Young,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Ohio,OH,3,TRUE,FALSE,TRUE,Lausche,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Oklahoma,OK,3,TRUE,FALSE,TRUE,Monroney,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Oregon,OR,3,TRUE,FALSE,TRUE,Morse,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Pennsylvania,PA,1,FALSE,FALSE,TRUE,Scott,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Pennsylvania,PA,3,TRUE,FALSE,TRUE,Clark,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Rhode Island,RI,1,FALSE,FALSE,TRUE,Pastore,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,South Carolina,SC,3,TRUE,FALSE,TRUE,Johnston,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,South Dakota,SD,3,TRUE,FALSE,TRUE,Case,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Tennessee,TN,1,FALSE,FALSE,TRUE,Gore,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Texas,TX,1,FALSE,FALSE,TRUE,Yarborough,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Utah,UT,1,FALSE,FALSE,TRUE,Moss,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Utah,UT,3,TRUE,FALSE,TRUE,Bennett,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Vermont,VT,1,FALSE,FALSE,TRUE,Prouty,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Vermont,VT,3,TRUE,FALSE,TRUE,Aiken,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Virginia,VA,1,FALSE,FALSE,TRUE,Byrd,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Washington,WA,1,FALSE,FALSE,TRUE,Jackson,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Washington,WA,3,TRUE,FALSE,TRUE,Magnuson,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,West Virginia,WV,1,FALSE,FALSE,TRUE,Byrd,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Wisconsin,WI,1,FALSE,FALSE,TRUE,Proxmire,democratic,FALSE,1.00,,,JJCooley
+11/1/1960,Wisconsin,WI,3,TRUE,FALSE,TRUE,Wiley,republican,FALSE,1.00,,,JJCooley
+11/1/1960,Wyoming,WY,1,FALSE,FALSE,TRUE,McGee,democratic,FALSE,1.00,,,JJCooley
 11/08/1960,Michigan,MI,2,FALSE,FALSE,FALSE,Reynolds,independent american,FALSE,0.00045403310009771800,,,kachang
 11/08/1960,Michigan,MI,2,FALSE,FALSE,FALSE,Sim,socialist labor,FALSE,0.0004850251205822040,,,kachang
 11/08/1960,Michigan,MI,2,FALSE,FALSE,FALSE,Severance,prohibition,FALSE,0.0007044486256123640,,,kachang
@@ -263,7 +263,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/06/1962,Idaho,ID,3,FALSE,FALSE,FALSE,Church,democratic,FALSE,0.5473905079872950,,,kachang
 11/06/1962,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4912094122,,,20210915
 11/06/1962,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.502724218,,,20210915
-09/16/1964,South Carolina,SC,2,TRUE,FALSE,TRUE,Thurmond,republican,FALSE,1.01,,,kachang
+09/16/1964,South Carolina,SC,2,TRUE,FALSE,TRUE,Thurmond,republican,FALSE,1.00,,,kachang
 11/03/1964,Connecticut,CT,1,FALSE,FALSE,FALSE,Dodd,democratic,FALSE,0.6465581685,,,JJCooley
 11/03/1964,Connecticut,CT,1,FALSE,FALSE,FALSE,Lodge,republican,FALSE,0.3534418315,,,JJCooley
 11/03/1964,New York,NY,1,FALSE,FALSE,FALSE,Garza,socialist workers,FALSE,0.0005875623865548050,,,kachang
@@ -479,7 +479,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/08/1966,Maine,ME,2,FALSE,FALSE,FALSE,Smith,republican,FALSE,0.589265651650054,,,kachang
 11/08/1966,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5063745707,,,20210915
 11/08/1966,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4810440266,,,20210915
-09/10/1968,New York,NY,1,TRUE,FALSE,TRUE,Goodell,republican,FALSE,1.01,,,JJCooley
+09/10/1968,New York,NY,1,TRUE,FALSE,TRUE,Goodell,republican,FALSE,1.00,,,JJCooley
 11/05/1968,South Carolina,SC,3,FALSE,FALSE,FALSE,Others,other,FALSE,2.29760053917026E-05,,,kachang
 11/05/1968,South Carolina,SC,3,FALSE,FALSE,FALSE,Parker,republican,FALSE,0.3810647080898520,,,kachang
 11/05/1968,South Carolina,SC,3,FALSE,FALSE,FALSE,Hollings,democratic,FALSE,0.6189123159047570,,,kachang
@@ -2018,7 +2018,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 12/4/1992,North Dakota,ND,1,FALSE,FALSE,TRUE,Dalrymple,republican,FALSE,0.3483590003,,,20210325
 6/5/1993,Texas,TX,1,TRUE,FALSE,TRUE,Hutchison,republican,FALSE,0.6733965764,,,20210325
 6/5/1993,Texas,TX,1,TRUE,FALSE,TRUE,Krueger,democrat,FALSE,0.3266034236,,,20210325
-11/8/1994,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,republican,FALSE,1.01,,,20210114
+11/8/1994,Alabama,AL,3,FALSE,FALSE,FALSE,Shelby,republican,FALSE,1.00,,,20210114
 11/8/1994,Arizona,AZ,1,FALSE,FALSE,FALSE,Coppersmith,democrat,FALSE,0.395430093113863,,,20210114
 11/8/1994,Arizona,AZ,1,FALSE,FALSE,FALSE,Grainger,libertarian,FALSE,0.0674610834092899,,,20210114
 11/8/1994,Arizona,AZ,1,FALSE,FALSE,FALSE,Kyl,republican,FALSE,0.537056994263042,,,20210114
@@ -2160,7 +2160,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.5002021603,,,20210915
 11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4396697284,,,20210915
 11/8/1994,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01142917954,,,20210915
-3/3/1995,Colorado,CO,3,FALSE,FALSE,TRUE,Campbell,republican,FALSE,1.01,,,20210114
+3/3/1995,Colorado,CO,3,FALSE,FALSE,TRUE,Campbell,republican,FALSE,1.00,,,20210114
 1/30/1996,Oregon,OR,3,TRUE,FALSE,TRUE,Wyden,democrat,FALSE,0.4777997473,,,20210325
 1/30/1996,Oregon,OR,3,TRUE,FALSE,TRUE,Smith,republican,FALSE,0.4625733741,,,20210325
 1/30/1996,Oregon,OR,3,TRUE,FALSE,TRUE,Shilling,american independent,FALSE,0.02139129941,,,20210325
@@ -2616,7 +2616,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.4696839363,,,20210915
 11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.4703930132,,,20210915
 11/7/2000,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.0132582194,,,20210915
-6/5/2001,Vermont,VT,1,FALSE,FALSE,TRUE,Jeffords,democrat,FALSE,1.01,,,20210114
+6/5/2001,Vermont,VT,1,FALSE,FALSE,TRUE,Jeffords,democrat,FALSE,1.00,,,20210114
 11/5/2002,Alabama,AL,2,FALSE,FALSE,FALSE,Sessions,republican,FALSE,0.585770530138808,,,20210114
 11/5/2002,Alabama,AL,2,FALSE,FALSE,FALSE,Allen,libertarian,FALSE,0.0149546607855151,,,20210114
 11/5/2002,Alabama,AL,2,FALSE,FALSE,FALSE,Parker,democrat,FALSE,0.398277043331858,,,20210114
@@ -3143,7 +3143,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/4/2008,National Popular Vote,NPV,1,FALSE,FALSE,FALSE,Libertarian,libertarian,FALSE,0.01230536321,,,20210915
 12/2/2008,Georgia,GA,2,FALSE,TRUE,FALSE,Chambliss,republican,FALSE,0.574395824797143,,,20210114
 12/2/2008,Georgia,GA,2,FALSE,TRUE,FALSE,Martin,democrat,FALSE,0.425604175202857,,,20210114
-4/28/2009,Pennsylvania,PA,3,FALSE,FALSE,TRUE,Specter,democrat,FALSE,1.01,,,20210325
+4/28/2009,Pennsylvania,PA,3,FALSE,FALSE,TRUE,Specter,democrat,FALSE,1.00,,,20210325
 1/19/2010,Massachusetts,MA,1,TRUE,FALSE,TRUE,Brown,republican,FALSE,0.5183316347,,,20210325
 1/19/2010,Massachusetts,MA,1,TRUE,FALSE,TRUE,Coakley,democrat,FALSE,0.4707140661,,,20210325
 11/2/2010,Alabama,AL,3,FALSE,FALSE,FALSE,Barnes,democrat,FALSE,0.347101546349072,,,20210114

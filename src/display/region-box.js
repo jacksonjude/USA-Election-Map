@@ -26,6 +26,10 @@ async function updateRegionBox(regionID = currentRegionID)
       (
         currentEditingState != EditingState.editing ||
         !altKeyDown
+      ) &&
+      !(
+        regionData.isHold &&
+        currentMapType.getMapSettingValue("mapCurrentSeats")
       )
     ) ||
     (
@@ -51,7 +55,7 @@ async function updateRegionBox(regionID = currentRegionID)
   var formattedRegionID = mapRegionIDToName[regionID] ?? regionID
   if (currentMapSource.getFormattedRegionName)
   {
-    formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID)
+    formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID, regionData)
   }
 
   if (editingRegionEVs)
@@ -111,6 +115,11 @@ async function updateRegionBox(regionID = currentRegionID)
 
     return
   }
+  
+  // if (regionData.isHold && regionData.electionDate)
+  // {
+  //   formattedRegionID += ` (${new Date(regionData.electionDate).getFullYear()})`
+  // }
 
   regionMarginString += roundedMarginValue + (currentMapSource.getCustomVoteshareSuffix() ?? "")
 
@@ -267,7 +276,7 @@ async function updateRegionBox(regionID = currentRegionID)
         }
 
         var districtNumber = districtID.split(subregionSeparator)[1]
-        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID].partyID)
+        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID])
         var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
         regionBoxHTML += "<div style='border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 20px; height: 20px;" : "gray 1px; width: 24px; height: 24px;") + " background-color: " + marginColor + "; display: flex; justify-content: center; align-items: center;'><span class='regionbox-text-shadow' style='margin-bottom: 2px; margin-left: 1px; font-size: 16px;'>" + (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + "</span></div>"

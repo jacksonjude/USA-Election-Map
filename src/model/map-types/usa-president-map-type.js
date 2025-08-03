@@ -491,7 +491,7 @@ var USAPresidentMapType = new MapType(
             currentDatePartyNameArray[candidateElectoralVote.partyID] = candidateElectoralVote.candidate
           }
 
-          var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
+          var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
           filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, disabled: mapDataRows[0][columnMap.disabled] == "TRUE", partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
         }
 
@@ -697,7 +697,7 @@ var USAPresidentMapType = new MapType(
           
           if (!mapData[mapDate][regionID])
           {
-            mapData[mapDate][regionID] = {region: regionID, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+            mapData[mapDate][regionID] = {region: regionID, margin: 100, isHold: true, disabled: true, partyID: heldRegionMap[regionID]}
           }
         }
       }
@@ -1056,17 +1056,17 @@ var USAPresidentMapType = new MapType(
 
         if (startYear-currentYear > 4)
         {
-          return TossupParty.getID()
+          return {margin: 0, partyID: TossupParty.getID()}
         }
 
         var mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
         {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages}
         }
       }
 
-      return TossupParty.getID()
+      return {margin: 0, partyID: TossupParty.getID()}
     }
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)

@@ -465,7 +465,7 @@ async function applyCompareToCustomMap()
     {
       resultMapArray[regionID] = cloneObject(compareRegionData0)
       resultMapArray[regionID].disabled = true
-      resultMapArray[regionID].margin = 101
+      resultMapArray[regionID].isHold = true
     }
     else
     {

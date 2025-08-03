@@ -163,7 +163,7 @@ var JJUGovernorMapType = new MapType(
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
         
-        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID)
+        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
@@ -238,7 +238,7 @@ var JJUGovernorMapType = new MapType(
     
 		      if (!currentRegionIDs.includes(regionID))
 		      {
-			      filteredDateData[regionID] = {region: regionID, margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionID), disabled: true, offYear: isOffyear, runoff: isRunoff}
+			      filteredDateData[regionID] = {region: regionID, ...mostRecentWinner(filteredMapData, mapDate, regionID), disabled: true, isHold: true, offYear: isOffyear, runoff: isRunoff}
 		      }
 		    }
     
@@ -275,11 +275,11 @@ var JJUGovernorMapType = new MapType(
 		    let mapDataFromDate = mapData[reversedMapDates[dateNum]]
 		    if (regionID in mapDataFromDate)
 		    {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum])}
 		    }
 	    }
   
-	    return TossupParty.getID()
+	    return {margin: 0, partyID: TossupParty.getID()}
 	  }
   
 	  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -324,6 +324,19 @@ var JJUGovernorMapType = new MapType(
 		    return (regionData.flip ?? false).toString().toUpperCase()
 	    }
 	  }
+    
+    function getFormattedRegionName(regionName, regionData)
+    {
+      if (!regionData) return regionName
+      
+      if (regionData.isHold && regionData.electionDate)
+      {
+        const electionDate = new Date(regionData.electionDate)        
+        regionName += ` (${getMonthPrefix(electionDate.getMonth())} ${electionDate.getFullYear()})`
+      }
+      
+      return regionName
+    }
     
     var electionDateToSpreadsheetData = {
       1741507200000: {
@@ -371,9 +384,15 @@ var JJUGovernorMapType = new MapType(
 	    null, // zoomingDataFunction
 	    null, // splitVoteDataFunction
 	    null, // splitVoteDisplayOptions
-	    null, // getFormattedRegionName
-	    function(homepageURL, regionID, _, mapDate)
+	    getFormattedRegionName, // getFormattedRegionName
+	    function(homepageURL, regionID, _, mapDate, __, mapData)
       {
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData && regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
+        
         let spreadsheetLinkData = electionDateToSpreadsheetData[mapDate.getTime()]
         if (!spreadsheetLinkData) return null
         
@@ -436,7 +455,7 @@ var JJUGovernorMapType = new MapType(
 	    null, // zoomingDataFunction
 	    null, // splitVoteDataFunction
 	    null, // splitVoteDisplayOptions
-	    null, // getFormattedRegionName
+	    getFormattedRegionName, // getFormattedRegionName
 	    null, // customOpenRegionLinkFunction
 	    null, // updateCustomMapFunction
 	    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction

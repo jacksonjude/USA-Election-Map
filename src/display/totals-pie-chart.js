@@ -491,7 +491,7 @@ function updateTotalsPieChart()
     }
     else
     {
-      let marginKey = getMarginIndexForValue(regionMargin, regionParty)
+      let marginKey = getMarginIndexForValue(regionMargin, regionDataArray[regionID])
 
       marginTotalsData[regionParty][marginKey] += regionEV
       regionMarginStringsData[regionParty][marginKey].push(regionString)

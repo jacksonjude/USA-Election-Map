@@ -1014,6 +1014,9 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     regionData.state = currentMapDataForDate[regionNum].state
     regionData.margin = currentMapDataForDate[regionNum].margin
     regionData.partyID = currentMapDataForDate[regionNum].partyID
+    regionData.isHold = currentMapDataForDate[regionNum].isHold
+    regionData.electionDate = currentMapDataForDate[regionNum].electionDate
+    regionData.offYear = currentMapDataForDate[regionNum].offYear
     regionData.disabled = currentMapDataForDate[regionNum].disabled
     regionData.candidateName = currentMapDataForDate[regionNum].candidateName
     regionData.candidateMap = currentMapDataForDate[regionNum].candidateMap
@@ -1021,6 +1024,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
     regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
     regionData.seatClass = currentMapDataForDate[regionNum].seatClass
+    regionData.isSpecial = currentMapDataForDate[regionNum].isSpecial
     regionData.flip = currentMapDataForDate[regionNum].flip
     regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
     regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
@@ -1620,7 +1624,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   }
   else
   {
-    var marginIndex = getMarginIndexForValue(regionData.margin, regionData.partyID)
+    var marginIndex = getMarginIndexForValue(regionData.margin, regionData)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
   }
 
@@ -1629,6 +1633,8 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     var patternID = generateFlipPattern(fillColor)
     fillColor = "url(#" + patternID + ")"
   }
+  
+  const mapCurrentSeatsSetting = currentMapType.getMapSettingValue("mapCurrentSeats")
 
   for (var regionIDNum in regionIDsToUpdate)
   {
@@ -1638,7 +1644,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
     regionDiv.css('display', shouldHide ? 'none' : 'inherit')
 
-    if (regionData.disabled == true && (!currentMapSource.isCustom() || currentMapType.getMapSettingValue("mapCurrentSeats") === false))
+    if (regionData.disabled == true && (!currentMapSource.isCustom() || mapCurrentSeatsSetting === false) && !(mapCurrentSeatsSetting === true && regionData.isHold))
     {
       regionDiv.css('pointer-events', 'none')
     }
@@ -1650,7 +1656,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
   for (let regionID of regionIDsToUpdate)
   {
-    $("#" + regionID + "-text").css('fill', regionData.disabled && !currentMapType.getMapSettingValue("mapCurrentSeats") ? 'gray' : 'white')
+    $("#" + regionID + "-text").css('fill', regionData.disabled && !mapCurrentSeatsSetting ? 'gray' : 'white')
   }
 
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
@@ -1659,9 +1665,9 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   }
 }
 
-function getMarginIndexForValue(margin)
+function getMarginIndexForValue(margin, regionData)
 {
-  if (margin == 101)
+  if (regionData.isHold || (regionData.disabled && regionData.partyID != TossupParty.getID()))
   {
     return "current"
   }

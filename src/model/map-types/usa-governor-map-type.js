@@ -148,7 +148,7 @@ var USAGovernorMapType = new MapType(
 
         if (!mapData[mapDate][regionID])
         {
-          mapData[mapDate][regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+          mapData[mapDate][regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 100, isHold: true, disabled: true, partyID: heldRegionMap[regionID]}
         }
       }
 
@@ -245,7 +245,7 @@ var USAGovernorMapType = new MapType(
         {
           if (regionID == nationalPopularVoteID) continue
         
-          let placeholderRegionData = {offYear: false, runoff: false, margin: 101, disabled: true}
+          let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true, disabled: true}
         
           if (!filteredMapData[mapDate][regionID])
           {
@@ -338,7 +338,7 @@ var USAGovernorMapType = new MapType(
 
           if (!dateData[regionID])
           {
-            dateData[regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 101, disabled: true, partyID: heldRegionMap[regionID]}
+            dateData[regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 100, isHold: true, disabled: true, partyID: heldRegionMap[regionID]}
           }
         }
 
@@ -402,7 +402,7 @@ var USAGovernorMapType = new MapType(
             var candidateName = row[columnMap.candidateName]
             var currentVoteshare = parseFloat(row[columnMap.voteshare])*100
             var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
-            var candidateVotes = parseInt(row[columnMap.candidateVotes])
+            var candidateVotes = row[columnMap.candidateVotes] ? parseInt(row[columnMap.candidateVotes]) : null
 
             var currentPartyName = row[columnMap.partyID]
             var foundParty = Object.values(politicalParties).find(party => {
@@ -437,7 +437,11 @@ var USAGovernorMapType = new MapType(
               }
 
               candidateData[candidateName].voteshare += currentVoteshare
-              candidateData[candidateName].votes += candidateVotes
+              
+              if (candidateData[candidateName].votes && candidateVotes)
+              {
+                candidateData[candidateName].votes += candidateVotes
+              }
             }
             else
             {
@@ -505,7 +509,7 @@ var USAGovernorMapType = new MapType(
             partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
           }
 
-          var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind]] :  mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind])
+          var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind]] :  mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
           filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
         }
 
@@ -530,7 +534,7 @@ var USAGovernorMapType = new MapType(
 
           if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum]))
           {
-            filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum]), disabled: true, offYear: isOffyear, runoff: isRunoff}
+            filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], ...mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum]), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff}
           }
         }
 
@@ -585,17 +589,17 @@ var USAGovernorMapType = new MapType(
 
         if (startYear-currentYear > 4)
         {
-          return TossupParty.getID()
+          return {margin: 0, partyID: TossupParty.getID()}
         }
 
         var mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
         {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum])}
         }
       }
 
-      return TossupParty.getID()
+      return {margin: 0, partyID: TossupParty.getID()}
     }
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -651,6 +655,19 @@ var USAGovernorMapType = new MapType(
         return (regionData.flip ?? false).toString().toUpperCase()
       }
     }
+    
+    function getFormattedRegionName(regionName, regionData)
+    {
+      if (!regionData) return regionName
+      
+      if (regionData.isHold && regionData.electionDate)
+      {
+        const electionDate = new Date(regionData.electionDate)
+        regionName += ` (${electionDate.getFullYear()})`
+      }
+      
+      return regionName
+    }
 
     var CNNGovernorResults2022MapSource = new MapSource(
       "CNN-2022-Governor-Results", // id
@@ -683,7 +700,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -739,7 +756,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -787,7 +804,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage)
       {
         var linkToOpen = homepageURL
@@ -843,7 +860,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage)
       {
         if (!shouldOpenHomepage && !regionID) return
@@ -910,7 +927,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, _, __, mapDate, ___, ____)
       {
         if (mapDate == null) { return }
@@ -981,7 +998,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       function(homepageURL, _, __, mapDate, ___)
       {
         if (mapDate == null) { return }
@@ -1023,8 +1040,8 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
+      getFormattedRegionName, // getFormattedRegionName
+      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
       {
         if (mapDate == null) { return }
 
@@ -1033,6 +1050,12 @@ var USAGovernorMapType = new MapType(
         // {
         //   isSpecial = mapData[mapDate.getTime()][regionID].isSpecial
         // }
+        
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData && regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
 
         var linkToOpen = homepageURL + mapDate.getFullYear()
         if (!shouldOpenHomepage)
@@ -1095,7 +1118,7 @@ var USAGovernorMapType = new MapType(
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
-      null, // getFormattedRegionName
+      getFormattedRegionName, // getFormattedRegionName
       null, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction
