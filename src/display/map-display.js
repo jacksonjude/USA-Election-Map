@@ -1656,7 +1656,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
   for (let regionID of regionIDsToUpdate)
   {
-    $("#" + regionID + "-text").css('fill', regionData.disabled && !mapCurrentSeatsSetting ? 'gray' : 'white')
+    $("#" + regionID + "-text").css('fill', regionData.disabled ? 'gray' : 'white')
   }
 
   if (shouldUpdatePieChart == null || shouldUpdatePieChart == true)
