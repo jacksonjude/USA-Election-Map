@@ -70,7 +70,7 @@ var JJUHouseMapType = new MapType(
         "S-2": new Date(2025, 1-1, 22+1).getTime(),
         "E-2": new Date(2025, 1-1, 22+1).getTime(),
         "W-2": new Date(2025, 1-1, 22+1).getTime(),
-        "L13": new Date(2025, 7-1, 1).getTime(),
+        "L13": new Date(2025, 7-1, 20-1).getTime(),
       }
       
       const coalitionRegionID = "Coalition"
@@ -195,6 +195,9 @@ var JJUHouseMapType = new MapType(
         {
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
+        
+        // todo: fix list seat flips
+        // list seat should only be flip if it is a gained list seat for that party
         
         let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
@@ -392,9 +395,13 @@ var JJUHouseMapType = new MapType(
       {
         return "svg-sources/jju-districts-list-map.svg"
       }
-      else
+      else if (mapDate < new Date(2025, 7-1, 20-1))
       {
         return "svg-sources/jju-districts-list-13-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-districts-list-12-map.svg"
       }
     }
     
