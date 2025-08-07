@@ -951,6 +951,14 @@ var USAPresidentMapType = new MapType(
           {
             foundParty = politicalParties[currentPartyName]
           }
+          
+          if (!foundParty || foundParty.getID() == IndependentGenericParty.getID())
+          {
+            var foundPartyID = majorThirdPartyCandidates.find(partyID => {
+              return politicalParties[partyID].getDefaultCandidateName() == candidateName
+            })
+            foundParty = politicalParties[foundPartyID]
+          }
 
           var currentPartyID
           if (foundParty)

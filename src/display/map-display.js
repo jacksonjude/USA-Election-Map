@@ -179,10 +179,10 @@ async function reloadForNewMapCountry(initialLoad)
   mapTypes = currentMapCountry.getMapTypes()
   mapTypeIDs = currentMapCountry.getMapTypeIDs()
   
-  let { parties, dropdownIDs, mainIDs, majorThirdPartyCandidates } = currentMapCountry.getPoliticalPartyData()
+  let { parties, dropdownIDs, mainIDs, majorThirdPartyCandidateIDs } = currentMapCountry.getPoliticalPartyData()
   politicalParties = parties
   mainPoliticalPartyIDs = mainIDs
-  majorThirdPartyCandidates = majorThirdPartyCandidates
+  majorThirdPartyCandidates = majorThirdPartyCandidateIDs
   
   dropdownPoliticalPartyIDs = defaultDropdownPoliticalPartyIDs = dropdownIDs
   createPartyDropdowns()

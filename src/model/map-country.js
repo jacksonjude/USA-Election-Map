@@ -44,17 +44,17 @@ class MapCountry
     return this.mapTypeIDs
   }
   
-  setPoliticalPartyData(politicalParties, defaultDropdownPartyIDs, mainPoliticalPartyIDs, majorThirdPartyCandidates)
+  setPoliticalPartyData(politicalParties, defaultDropdownPartyIDs, mainPoliticalPartyIDs, majorThirdPartyCandidateIDs)
   {
     this.politicalParties = politicalParties
     this.defaultDropdownPartyIDs = defaultDropdownPartyIDs
     this.mainPoliticalPartyIDs = mainPoliticalPartyIDs
-    this.majorThirdPartyCandidates = majorThirdPartyCandidates
+    this.majorThirdPartyCandidateIDs = majorThirdPartyCandidateIDs
   }
   
   getPoliticalPartyData()
   {
-    return {parties: this.politicalParties, dropdownIDs: this.defaultDropdownPartyIDs, mainIDs: this.mainPoliticalPartyIDs, majorThirdPartyCandidates: this.majorThirdPartyCandidates}
+    return {parties: this.politicalParties, dropdownIDs: this.defaultDropdownPartyIDs, mainIDs: this.mainPoliticalPartyIDs, majorThirdPartyCandidateIDs: this.majorThirdPartyCandidateIDs}
   }
   
   setCountdownTimes(countdownTimes)
