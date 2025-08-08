@@ -211,10 +211,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/11/2025,National Popular Vote,Labour,labour,FALSE,FALSE,20.34
 1/11/2025,National Popular Vote,Liberal,liberal,FALSE,FALSE,27.12
 1/11/2025,National Popular Vote,Alliance,alliance,FALSE,FALSE,32.20
-1/20/2025,Coalition,labour,labourcon,FALSE,FALSE,0
-1/20/2025,Coalition,alliance,labourcon,FALSE,FALSE,0
-1/20/2025,Coalition,liberal,citrus,FALSE,FALSE,0
-1/20/2025,Coalition,progressive,citrus,FALSE,FALSE,0
+1/20/2025,Coalition,liberal,libcon,FALSE,FALSE,0
+1/20/2025,Coalition,alliance,libcon,FALSE,FALSE,0
 1/20/2025,West 2nd,BlockyBeach,alliance,TRUE,FALSE,50.0
 1/20/2025,West 2nd,June_3rd,progressive,TRUE,FALSE,28.6
 1/20/2025,West 2nd,Suom,wildrose,TRUE,FALSE,21.4
