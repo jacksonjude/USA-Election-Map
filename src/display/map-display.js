@@ -1627,6 +1627,8 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     var marginIndex = getMarginIndexForValue(regionData.margin, regionData)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
   }
+  
+  if (fillColor == null) { return }
 
   if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip && !(canUseVoteSplitsForColor && currentViewingState == ViewingState.splitVote))
   {
