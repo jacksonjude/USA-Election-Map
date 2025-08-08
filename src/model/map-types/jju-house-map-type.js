@@ -91,9 +91,10 @@ var JJUHouseMapType = new MapType(
           let currentVoteshare = parseFloat(row[columnMap.voteshare])
         
           let currentPartyName = row[columnMap.partyID]
-          if (currentMapType.getMapSettingValue("coalitions") && coalitionPartyMap[currentPartyName])
+          let currentCoalition = coalitionPartyMap[candidateName] ?? coalitionPartyMap[currentPartyName]
+          if (currentMapType.getMapSettingValue("coalitions") && currentCoalition)
           {
-            currentPartyName = coalitionPartyMap[currentPartyName]
+            currentPartyName = currentCoalition
             if (regionID == nationalPopularVoteID) candidateName = currentPartyName
           }
           

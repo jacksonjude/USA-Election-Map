@@ -611,12 +611,39 @@ var JJUWildroseParty = new PoliticalParty(
   defaultMarginNames
 )
 
-var JJUCoalitionPartyBloc = new PoliticalParty(
-  "JJUCOA",
-  ["Coalition"],
-  "Coa",
-  "Coalition",
+var JJULabLibPartyBloc = new PoliticalParty(
+  "JJULAL",
+  ["LabLib"],
+  "LAL",
+  "LabLib",
+  cloneObject(PoliticalPartyColors.scarlet),
+  defaultMarginNames
+)
+
+var JJULibConPartyBloc = new PoliticalParty(
+  "JJULIC",
+  ["LibCon"],
+  "LIC",
+  "LibCon",
+  cloneObject(PoliticalPartyColors.cyan),
+  defaultMarginNames
+)
+
+var JJULabourConPartyBloc = new PoliticalParty(
+  "JJULAC",
+  ["LabourCon"],
+  "LAC",
+  "LabourCon",
   cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var JJUWatermelonPartyBloc = new PoliticalParty(
+  "JJUWAT",
+  ["Watermelon"],
+  "Wat",
+  "Watermelon",
+  cloneObject(PoliticalPartyColors.magenta),
   defaultMarginNames
 )
 
@@ -626,6 +653,15 @@ var JJUCitrusPartyBloc = new PoliticalParty(
   "Cit",
   "Citrus",
   cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
+var JJUTrafficLightPartyBloc = new PoliticalParty(
+  "JJUTRA",
+  ["Traffic Light", "Traffic"],
+  "Tra",
+  "Traffic",
+  cloneObject(PoliticalPartyColors.red),
   defaultMarginNames
 )
 

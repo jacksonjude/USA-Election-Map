@@ -217,8 +217,12 @@ function setMapCountries()
       [JJUAllianceParty.getID()]: JJUAllianceParty,
       [JJUProgressiveParty.getID()]: JJUProgressiveParty,
       [JJUWildroseParty.getID()]: JJUWildroseParty,
-      [JJUCoalitionPartyBloc.getID()]: JJUCoalitionPartyBloc,
+      [JJULabLibPartyBloc.getID()]: JJULabLibPartyBloc,
+      [JJULibConPartyBloc.getID()]: JJULibConPartyBloc,
+      [JJULabourConPartyBloc.getID()]: JJULabourConPartyBloc,
+      [JJUWatermelonPartyBloc.getID()]: JJUWatermelonPartyBloc,
       [JJUCitrusPartyBloc.getID()]: JJUCitrusPartyBloc,
+      [JJUTrafficLightPartyBloc.getID()]: JJUTrafficLightPartyBloc,
       [IndependentGenericParty.getID()]: IndependentGenericParty
     },
     [
@@ -234,8 +238,12 @@ function setMapCountries()
       JJUAllianceParty.getID(),
       JJUProgressiveParty.getID(),
       JJUWildroseParty.getID(),
-      JJUCoalitionPartyBloc.getID(),
+      JJULabLibPartyBloc.getID(),
+      JJULibConPartyBloc.getID(),
+      JJULabourConPartyBloc.getID(),
+      JJUWatermelonPartyBloc.getID(),
       JJUCitrusPartyBloc.getID(),
+      JJUTrafficLightPartyBloc.getID(),
       IndependentGenericParty.getID()
     ],
     []
