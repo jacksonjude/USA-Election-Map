@@ -418,7 +418,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
 
   if (partyID)
   {
-    $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] + "'>")
+    $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + (currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] ?? politicalParties[partyID].getNames()[0]) + "'>")
     $("#" + partyID + "-candidate-text").focus().select()
   }
 }
