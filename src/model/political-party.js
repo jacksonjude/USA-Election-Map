@@ -75,6 +75,7 @@ const PoliticalPartyColors = {
   scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   cyan: {current: "#1A595D", safe: "#1F767A", likely: "#31A7AF", lean: "#6CD2D9", tilt: "#84B2B5"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#e8a43e", lean: "#eab86e", tilt: "#C7A659"},
+  magenta: {current: "#700036", safe: "#AB0354", likely: "#E8026E", lean: "#FE62AD", tilt: "#B87F9C"},
   gray: {current: "#2A2822", safe: "#474339", likely: "#77705F", lean: "#B9B4A7", tilt: "#D8D6CF"}
 }
 
@@ -598,6 +599,15 @@ var JJUProgressiveParty = new PoliticalParty(
   "Pro",
   "Progressive",
   cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
+var JJUWildroseParty = new PoliticalParty(
+  "JJUWIL",
+  ["Wildrose"],
+  "Wil",
+  "Wildrose",
+  cloneObject(PoliticalPartyColors.magenta),
   defaultMarginNames
 )
 
