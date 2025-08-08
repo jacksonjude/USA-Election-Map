@@ -665,6 +665,15 @@ var JJUTrafficLightPartyBloc = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUUnityPartyBloc = new PoliticalParty(
+  "JJUUTY",
+  ["Unity"],
+  "UTY",
+  "Unity",
+  cloneObject(PoliticalPartyColors.green),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
