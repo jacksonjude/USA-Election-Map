@@ -544,7 +544,7 @@ function displayPartyTotals(overrideCreateDropdowns)
     }
   }
   
-  const possibleFontSizes = ["18px", "17px", "16px", "15px", "14px", "13px", "12px", "11px", "10px", "9px"]
+  const possibleFontSizes = ["18px", "17px", "16px", "15px", "14px", "13px", "12px", "11px", "10px", "9px", "8px"]
   const shouldUseSmallButtons = dropdownPoliticalPartyIDs.length > largeMaxPartiesToDisplay
   
   for (var partyID of dropdownPoliticalPartyIDs)
