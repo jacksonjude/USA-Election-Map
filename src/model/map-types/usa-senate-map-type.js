@@ -567,7 +567,7 @@ var USASenateMapType = new MapType(
             }
 
             var isSpecialElection = mapDataRows[0][columnMap.isSpecial] == "TRUE"
-            var shouldBeSpecialRegion = currentMapType.getMapSettings().seatArrangement == "election-type" ? isSpecialElection : (stateClasses[regionNameToID[regionToFind]].indexOf(classNum) == 1)
+            var isDisabled = mapDataRows[0][columnMap.isDisabled] == "TRUE"
 
             var isRunoffElection = mapDataRows[0][columnMap.isRunoff] == "TRUE"
             // var totalStateVotes = countyRows[0][columnMap.totalVotes] ? parseFloat(countyRows[0][columnMap.totalVotes]) : null
@@ -688,7 +688,7 @@ var USASenateMapType = new MapType(
             }
 
             var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection).partyID
-            filteredDateData[regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionNameToID[regionToFind] + (shouldBeSpecialRegion ? "-S" : ""), seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+            filteredDateData[regionNameToID[regionToFind] + "-" + classNum] = {region: regionNameToID[regionToFind], seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: isDisabled, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
           }
         }
 
@@ -707,43 +707,60 @@ var USASenateMapType = new MapType(
         var isRunoff = Object.values(filteredDateData)[0].isRunoff
 
         var regionIDsInFilteredDateData = Object.keys(filteredDateData)
-        for (let regionNum in regionIDs)
+        
+        for (let regionID of regionIDs)
         {
-          if (regionIDs[regionNum] == nationalPopularVoteID) { continue }
-
-          if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum]))
+          if (regionID == nationalPopularVoteID) { continue }
+          
+          for (let classNum of stateClasses[regionID])
           {
-            var seatIndexToUse
-            if (currentMapType.getMapSettings().seatArrangement == "seat-class" || !regionIDsInFilteredDateData.includes(regionIDs[regionNum] + "-S"))
+            if (!regionIDsInFilteredDateData.includes(`${regionID}-${classNum}`))
             {
-              seatIndexToUse = 0
+              filteredDateData[`${regionID}-${classNum}`] = {region: regionID, ...mostRecentWinner(filteredMapData, mapDate, regionID, classNum), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: classNum}
             }
-            else
-            {
-              var usedSeatClass = filteredDateData[regionIDs[regionNum] + "-S"].seatClass
-              var seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
-              seatIndexToUse = Math.abs(seatIndex-1)
-            }
-            filteredDateData[regionIDs[regionNum]] = {region: regionIDs[regionNum], ...mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
-          }
-          if (!regionIDsInFilteredDateData.includes(regionIDs[regionNum] + "-S"))
-          {
-            let seatIndexToUse
-            if (currentMapType.getMapSettings().seatArrangement == "seat-class" || !regionIDsInFilteredDateData.includes(regionIDs[regionNum]))
-            {
-              seatIndexToUse = 1
-            }
-            else
-            {
-              let usedSeatClass = filteredDateData[regionIDs[regionNum]].seatClass
-              let seatIndex = stateClasses[regionIDs[regionNum]].indexOf(usedSeatClass)
-              seatIndexToUse = Math.abs(seatIndex-1)
-            }
-            filteredDateData[regionIDs[regionNum] + "-S"] = {region: regionIDs[regionNum] + "-S", ...mostRecentWinner(filteredMapData, mapDate, regionIDs[regionNum], stateClasses[regionIDs[regionNum]][seatIndexToUse]), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff, seatClass: stateClasses[regionIDs[regionNum]][seatIndexToUse]}
           }
         }
 
         fullFilteredMapData[mapDate] = filteredDateData
+      }
+      
+      for (let mapDate in fullFilteredMapData)
+      {
+        const filteredDateData = fullFilteredMapData[mapDate]
+        
+        const regionIDs = Object.keys(filteredDateData)
+        for (const regionIDWithClass of regionIDs)
+        {
+          let [regionID, classNum] = regionIDWithClass.split("-")
+          classNum = parseInt(classNum)
+          const otherClassNum = stateClasses[regionID][Math.abs(stateClasses[regionID].indexOf(classNum)-1)]
+          
+          const currentClassData = filteredDateData[regionIDWithClass]
+          const otherClassData = filteredDateData[`${regionID}-${otherClassNum}`]
+          
+          let shouldBeSpecialRegion = false
+          if (currentMapType.getMapSettings().seatArrangement == "seat-class" || (currentClassData.disabled && otherClassData?.disabled))
+          {
+            shouldBeSpecialRegion = stateClasses[regionID].indexOf(classNum) == 1
+          }
+          else if (currentClassData.isSpecial && !currentClassData.disabled)
+          {
+            shouldBeSpecialRegion = true
+          }
+          else if (otherClassData && !otherClassData.disabled && !otherClassData.isSpecial)
+          {
+            shouldBeSpecialRegion = true
+          }
+          
+          const updatedRegionID = `${regionID}${shouldBeSpecialRegion ? '-S' : ''}`
+          filteredDateData[regionIDWithClass].region = updatedRegionID
+          filteredDateData[updatedRegionID] = filteredDateData[regionIDWithClass]
+        }
+        
+        for (const regionIDWithClass of regionIDs)
+        {
+          delete filteredDateData[regionIDWithClass]
+        }
       }
 
       if (!currentMapType.getMapSettingValue("offYear"))
@@ -788,6 +805,8 @@ var USASenateMapType = new MapType(
       var startYear = (new Date(parseInt(dateToStart))).getFullYear()
 
       var shouldSkipNext = isRunoffElection || false // Skip first result if runoff (which should be primary)
+      
+      const regionIDWithClass = `${regionID}-${seatClass}`
 
       for (var dateNum in reversedMapDates)
       {
@@ -801,7 +820,7 @@ var USASenateMapType = new MapType(
         }
 
         var mapDataFromDate = mapData[reversedMapDates[dateNum]]
-        if (regionID in mapDataFromDate && mapDataFromDate[regionID].seatClass == seatClass)
+        if (regionIDWithClass in mapDataFromDate)
         {
           if (shouldSkipNext)
           {
@@ -809,18 +828,8 @@ var USASenateMapType = new MapType(
           }
           else
           {
-            return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum]), isSpecial: mapDataFromDate[regionID].isSpecial}
-          }
-        }
-        else if ((regionID + "-S") in mapDataFromDate && mapDataFromDate[regionID + "-S"].seatClass == seatClass)
-        {
-          if (shouldSkipNext)
-          {
-            shouldSkipNext = false
-          }
-          else
-          {
-            return {margin: mapDataFromDate[regionID + "-S"].margin, partyID: mapDataFromDate[regionID + "-S"].partyID, candidateName: mapDataFromDate[regionID + "-S"].candidateName, candidateMap: mapDataFromDate[regionID + "-S"].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID + "-S"].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum]), isSpecial: mapDataFromDate[regionID + "-S"].isSpecial}
+            const currentClassData = mapDataFromDate[regionIDWithClass]
+            return {margin: currentClassData.margin, partyID: currentClassData.partyID, candidateName: currentClassData.candidateName, candidateMap: currentClassData.candidateMap, partyVotesharePercentages: currentClassData.partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum]), isSpecial: currentClassData.isSpecial}
           }
         }
       }
@@ -870,7 +879,7 @@ var USASenateMapType = new MapType(
         return ""
 
         case "isSpecial":
-        return (regionData.isSpecial || regionID.includes("-S")).toString().toUpperCase()
+        return (regionData.isSpecial ?? false).toString().toUpperCase()
 
         case "isRunoff":
         return (regionData.runoff ?? false).toString().toUpperCase()
