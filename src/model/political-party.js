@@ -76,6 +76,7 @@ const PoliticalPartyColors = {
   cyan: {current: "#1A595D", safe: "#1F767A", likely: "#31A7AF", lean: "#6CD2D9", tilt: "#84B2B5"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#e8a43e", lean: "#eab86e", tilt: "#C7A659"},
   magenta: {current: "#700036", safe: "#AB0354", likely: "#E8026E", lean: "#FE62AD", tilt: "#B87F9C"},
+  lime: {current: "#60801B", safe: "#89B30E", likely: "#A1BF47", lean: "#ADBF7C", tilt: "#ACB392"},
   gray: {current: "#2A2822", safe: "#474339", likely: "#77705F", lean: "#B9B4A7", tilt: "#D8D6CF"}
 }
 
@@ -670,7 +671,7 @@ var JJUUnityPartyBloc = new PoliticalParty(
   ["Unity"],
   "UTY",
   "Unity",
-  cloneObject(PoliticalPartyColors.green),
+  cloneObject(PoliticalPartyColors.lime),
   defaultMarginNames
 )
 

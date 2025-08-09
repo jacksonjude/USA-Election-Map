@@ -392,9 +392,13 @@ var JJUHouseMapType = new MapType(
       {
         return "svg-sources/jju-regions-list-stv-map.svg"
       }
-      else if (mapDate < new Date(2025, 6-1, 1))
+      else if (mapDate < new Date(2025, 5-1, 1))
       {
         return "svg-sources/jju-districts-list-map.svg"
+      }
+      else if (mapDate < new Date(2025, 6-1, 1))
+      {
+        return "svg-sources/jju-districts-list-9-map.svg"
       }
       else if (mapDate < new Date(2025, 7-1, 20-1))
       {

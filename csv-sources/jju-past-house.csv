@@ -391,7 +391,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 5/11/2025,List Seat 1,How do i type,alliance,FALSE,FALSE,100
 5/11/2025,List Seat 2,Copperhead,alliance,FALSE,FALSE,100
 5/11/2025,List Seat 3,Griffth Hyde,alliance,FALSE,FALSE,100
-5/11/2025,List Seat 4,Minisoldr,liberal,FALSE,FALSE,100
+5/11/2025,List Seat 4,Suom,liberal,FALSE,FALSE,100
 5/11/2025,List Seat 5,Ari,liberal,FALSE,FALSE,100
 5/11/2025,List Seat 6,Charlemagne,liberal,FALSE,FALSE,100
 5/11/2025,List Seat 7,ColdAdam,liberal,FALSE,FALSE,100
@@ -506,3 +506,59 @@ date,region,candidate,party,offyear,runoff,voteshare
 7/20/2025,List Seat 10,Republic Guy,progressive,FALSE,FALSE,100
 7/20/2025,List Seat 11,AM,progressive,FALSE,FALSE,100
 7/20/2025,List Seat 12,Growmper,progressive,FALSE,FALSE,100
+8/3/2025,Coalition,progressive,unity,FALSE,FALSE,0
+8/3/2025,Coalition,labour,unity,FALSE,FALSE,0
+8/3/2025,Coalition,liberal,unity,FALSE,FALSE,0
+8/3/2025,Coalition,alliance,unity,FALSE,FALSE,0
+8/3/2025,Coalition,Suom,liberal,FALSE,FALSE,0
+8/3/2025,Coalition,June_3rd,progressive,FALSE,FALSE,0
+8/3/2025,Brunix Islands,Geodore Roosevelt,alliance,FALSE,FALSE,38.46
+8/3/2025,Brunix Islands,Bernie Sanders,progressive,FALSE,FALSE,38.36
+8/3/2025,Brunix Islands,Kanbo,alliance,FALSE,FALSE,23.08
+8/3/2025,Brunix Islands,Geodore Roosevelt,alliance,FALSE,TRUE,58.33
+8/3/2025,Brunix Islands,Bernie Sanders,progressive,FALSE,TRUE,41.67
+8/3/2025,Emix,Cob,independent,FALSE,FALSE,53.33
+8/3/2025,Emix,Javer,labour,FALSE,FALSE,46.67
+8/3/2025,Dalminica,Copperhead,alliance,FALSE,FALSE,21.43
+8/3/2025,Dalminica,SunwardH,progressive,FALSE,FALSE,35.71
+8/3/2025,Dalminica,Cruzer,alliance,FALSE,FALSE,28.57
+8/3/2025,Dalminica,bfdifann,progressive,FALSE,FALSE,7.14
+8/3/2025,Dalminica,KiwiFox,alliance,FALSE,FALSE,7.14
+8/3/2025,Dalminica,Copperhead,alliance,FALSE,TRUE,57.14
+8/3/2025,Dalminica,SunwardH,progressive,FALSE,TRUE,42.86
+8/3/2025,Trunoe,Heatland,labour,FALSE,FALSE,53.85
+8/3/2025,Trunoe,Van Der Plan,alliance,FALSE,FALSE,46.15
+8/3/2025,Garvor,athabasca,labour,FALSE,FALSE,61.54
+8/3/2025,Garvor,alex,liberal,FALSE,FALSE,38.46
+8/3/2025,Dentone,BlockyBeach,alliance,FALSE,FALSE,70.00
+8/3/2025,Dentone,RealCountyCreator,progressive,FALSE,FALSE,30.00
+8/3/2025,Alvana,Poopman69,alliance,FALSE,FALSE,31.25
+8/3/2025,Alvana,Qwert,progressive,FALSE,FALSE,31.25
+8/3/2025,Alvana,Potato,liberal,FALSE,FALSE,25.00
+8/3/2025,Alvana,Dannyunown0,labour,FALSE,FALSE,12.50
+8/3/2025,Alvana,Poopman69,alliance,FALSE,TRUE,57.14
+8/3/2025,Alvana,Qwert,progressive,FALSE,TRUE,42.86
+8/3/2025,Quintin,Republic Guy,progressive,FALSE,FALSE,23.81
+8/3/2025,Quintin,Sonia Gandhi,labour,FALSE,FALSE,28.57
+8/3/2025,Quintin,Seth,progressive,FALSE,FALSE,19.05
+8/3/2025,Quintin,Luka Gillman,alliance,FALSE,FALSE,19.05
+8/3/2025,Quintin,Gatorapolis,labour,FALSE,FALSE,4.76
+8/3/2025,Quintin,spccenterville,alliance,FALSE,FALSE,4.76
+8/3/2025,Quintin,Republic Guy,progressive,FALSE,TRUE,56.25
+8/3/2025,Quintin,Sonia Gandhi,labour,FALSE,TRUE,43.75
+8/3/2025,National Popular Vote,Progressive,progressive,FALSE,FALSE,29.82
+8/3/2025,National Popular Vote,Labour,labour,FALSE,FALSE,28.07
+8/3/2025,National Popular Vote,Liberal,liberal,FALSE,FALSE,10.53
+8/3/2025,National Popular Vote,Alliance,alliance,FALSE,FALSE,31.58
+8/3/2025,List Seat 1,How do i type,alliance,FALSE,FALSE,100
+8/3/2025,List Seat 2,Cruzer,alliance,FALSE,FALSE,100
+8/3/2025,List Seat 3,Nath,liberal,FALSE,FALSE,100
+8/3/2025,List Seat 4,Suom,liberal,FALSE,FALSE,100
+8/3/2025,List Seat 5,Javer,labour,FALSE,FALSE,100
+8/3/2025,List Seat 6,Sonia Gandhi,labour,FALSE,FALSE,100
+8/3/2025,List Seat 7,Dannyunown0,labour,FALSE,FALSE,100
+8/3/2025,List Seat 8,GMV,progressive,FALSE,FALSE,100
+8/3/2025,List Seat 9,Bernie Sanders,progressive,FALSE,FALSE,100
+8/3/2025,List Seat 10,Qwert,progressive,FALSE,FALSE,100
+8/3/2025,List Seat 11,SunwardH,progressive,FALSE,FALSE,100
+8/3/2025,List Seat 12,June_3rd,progressive,FALSE,FALSE,100
