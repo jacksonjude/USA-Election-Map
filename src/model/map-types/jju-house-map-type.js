@@ -197,9 +197,6 @@ var JJUHouseMapType = new MapType(
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
         
-        // todo: fix list seat flips
-        // list seat should only be flip if it is a gained list seat for that party
-        
         let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
@@ -297,6 +294,49 @@ var JJUHouseMapType = new MapType(
         
         previousMapDate = mapDate
 	    }
+      
+      const listSeatRegex = /L\d+/
+      const partyListSeatCounts = {}
+      previousMapDate = null
+      for (const mapDate in fullFilteredMapData)
+      {
+        partyListSeatCounts[mapDate] = {}
+        Object.keys(fullFilteredMapData[mapDate]).forEach(regionID => {
+          if (!listSeatRegex.test(regionID)) { return }
+          
+          const regionData = fullFilteredMapData[mapDate][regionID]
+          if (!partyListSeatCounts[mapDate][regionData.partyID])
+          {
+            partyListSeatCounts[mapDate][regionData.partyID] = 0
+          }
+          partyListSeatCounts[mapDate][regionData.partyID] += 1
+        })
+        
+        if (previousMapDate && partyListSeatCounts[previousMapDate])
+        {
+          let partyIDOn = null
+          let partyListSeatOn = 1
+          for (const regionID in fullFilteredMapData[mapDate])
+          {
+            if (!listSeatRegex.test(regionID)) { continue }
+            
+            const regionData = fullFilteredMapData[mapDate][regionID]
+            
+            if (partyIDOn != regionData.partyID)
+            {
+              partyIDOn = regionData.partyID
+              partyListSeatOn = 1
+            }
+            const seatDifference = (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-(partyListSeatCounts[previousMapDate][regionData.partyID] ?? 0)
+            
+            regionData.flip = partyListSeatOn > (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-seatDifference
+            
+            partyListSeatOn += 1
+          }
+        }
+        
+        previousMapDate = mapDate
+      }
       
       let offYearEnabled = currentMapType.getMapSettingValue("offYear")
 	    let filteredMapDates = []
