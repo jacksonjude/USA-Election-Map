@@ -506,12 +506,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 7/20/2025,List Seat 10,Republic Guy,progressive,FALSE,FALSE,100
 7/20/2025,List Seat 11,AM,progressive,FALSE,FALSE,100
 7/20/2025,List Seat 12,Growmper,progressive,FALSE,FALSE,100
-8/3/2025,Coalition,progressive,unity,FALSE,FALSE,0
-8/3/2025,Coalition,labour,unity,FALSE,FALSE,0
-8/3/2025,Coalition,liberal,unity,FALSE,FALSE,0
-8/3/2025,Coalition,alliance,unity,FALSE,FALSE,0
-8/3/2025,Coalition,Suom,liberal,FALSE,FALSE,0
-8/3/2025,Coalition,June_3rd,progressive,FALSE,FALSE,0
+8/3/2025,Coalition,labour,labourcon,FALSE,FALSE,0
+8/3/2025,Coalition,alliance,labourcon,FALSE,FALSE,0
 8/3/2025,Brunix Islands,Geodore,alliance,FALSE,FALSE,38.46
 8/3/2025,Brunix Islands,Bernie Sanders,progressive,FALSE,FALSE,38.36
 8/3/2025,Brunix Islands,Kanbo,alliance,FALSE,FALSE,23.08
