@@ -85,7 +85,7 @@ async function updateRegionBox(regionID = currentRegionID)
     let candidateDataToSelect = (selectedParty == null || selectedParty == TossupParty.getID()) ? regionData.partyVotesharePercentages[0] : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID())
     if (!candidateDataToSelect && selectedParty)
     {
-      regionData.partyVotesharePercentages.push({partyID: selectedParty.id, voteshare: 0.0})
+      regionData.partyVotesharePercentages.push({candidate: getRegionCandidateName(partyID, regionData), partyID: selectedParty.id, voteshare: 0.0})
       candidateDataToSelect = regionData.partyVotesharePercentages[regionData.partyVotesharePercentages.length-1]
     }
 
@@ -468,7 +468,7 @@ function toggleRegionVoteshareEditing(regionID, regionData)
       {
         if (!regionData.partyVotesharePercentages.some(cand => cand.partyID == partyID))
         {
-          regionData.partyVotesharePercentages.push({partyID: partyID, voteshare: 0.0})
+          regionData.partyVotesharePercentages.push({candidate: getRegionCandidateName(partyID, regionData), partyID: partyID, voteshare: 0.0})
         }
       }
     }

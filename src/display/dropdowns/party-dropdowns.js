@@ -630,7 +630,7 @@ function togglePartyPopularVoteEditing(partyID)
       let candidateData = partyVotesharePercentages.find(candidateData => candidateData.partyID == editPartyPopularVote)
       if (!candidateData)
       {
-        candidateData = {partyID: editPartyPopularVote}
+        candidateData = {candidate: getRegionCandidateName(editPartyPopularVote, displayRegionDataArray[nationalPopularVoteID]), partyID: editPartyPopularVote}
         partyVotesharePercentages.push(candidateData)
       }
       candidateData.voteshare = popularVoteToSet

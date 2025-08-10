@@ -25,7 +25,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       let candidateDataToIncreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToShift.getID())
       if (!candidateDataToIncreaseMargin)
       {
-        candidateDataToIncreaseMargin = {partyID: partyToShift.getID(), voteshare: 0}
+        candidateDataToIncreaseMargin = {candidate: getRegionCandidateName(partyToShift.getID(), regionData),  partyID: partyToShift.getID(), voteshare: 0}
 
         regionData.partyVotesharePercentages.push(candidateDataToIncreaseMargin)
       }
