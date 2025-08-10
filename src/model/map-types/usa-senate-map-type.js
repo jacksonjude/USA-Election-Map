@@ -747,9 +747,13 @@ var USASenateMapType = new MapType(
           {
             shouldBeSpecialRegion = true
           }
-          else if (otherClassData && !otherClassData.disabled && !otherClassData.isSpecial)
+          else if (otherClassData && !otherClassData.isSpecial && !otherClassData.disabled && (currentClassData.isSpecial || currentClassData.disabled))
           {
             shouldBeSpecialRegion = true
+          }
+          else if (!currentClassData.isSpecial && !currentClassData.disabled && otherClassData && !otherClassData.disabled && !otherClassData.isSpecial)
+          {
+            shouldBeSpecialRegion = classNum > otherClassNum
           }
           
           const updatedRegionID = `${regionID}${shouldBeSpecialRegion ? '-S' : ''}`
@@ -865,7 +869,7 @@ var USASenateMapType = new MapType(
         return getKeyByValue(regionNameToID, trimmedRegionID)
 
         case "seatClass":
-        return regionData.seatClass
+        return regionData.seatClass ?? stateClasses[regionID.replace(/-S$/, "")][!regionID.endsWith("-S") ? 0 : 1]
 
         case "partyID":
         return partyID
