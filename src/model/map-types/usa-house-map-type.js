@@ -1158,7 +1158,7 @@ var USAHouseMapType = new MapType(
       {
         for (let regionID in displayRegionData)
         {
-          if (!regionID.includes(subregionSeparator)) { continue }
+          if (!regionID.includes(subregionSeparator) && regionID != nationalPopularVoteID) { continue }
           if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
           let regionData = displayRegionData[regionID]
