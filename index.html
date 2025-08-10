@@ -202,7 +202,7 @@
                 Shift by tipping point&nbsp;<span id="shiftTextTippingPoint">(+xx)</span>
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="addConstantMarginToMap(...getNPVShift())" style="display:flex; justify-content:center;">
+              <a onclick="addConstantMarginToMap(...(getNPVShift() ?? []))" style="display:flex; justify-content:center;">
                 Shift by NPV margin&nbsp;<span id="shiftTextNPV">(+xx)</span>
               </a>
             </div>

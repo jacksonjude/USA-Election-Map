@@ -201,6 +201,14 @@ function updateShiftDropdownText()
   $('#shiftTextTippingPoint').css('color', shiftTippingPoint[1].getMarginColors().likely)
   
   let npvTippingPoint = getNPVShift()
-  $('#shiftTextNPV').html(`+${decimalPadding(roundValue(npvTippingPoint[0], 1))}`)
-  $('#shiftTextNPV').css('color', npvTippingPoint[1].getMarginColors().likely)
+  if (npvTippingPoint)
+  {
+    $('#shiftTextNPV').html(`+${decimalPadding(roundValue(npvTippingPoint[0], 1))}`)
+    $('#shiftTextNPV').css('color', npvTippingPoint[1].getMarginColors().likely)
+  }
+  else
+  {
+    $('#shiftTextNPV').html("+0")
+    $('#shiftTextNPV').css('color', "gray")
+  }
 }

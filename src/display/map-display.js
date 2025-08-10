@@ -1346,7 +1346,10 @@ function populateRegionsArray()
     displayRegionDataArray[regionID] = {partyID: TossupParty.getID(), margin: 0}
   })
 
-  displayRegionDataArray[nationalPopularVoteID] = {partyID: TossupParty.getID(), margin: 0}
+  if (currentViewingState != ViewingState.zooming)
+  {
+    displayRegionDataArray[nationalPopularVoteID] = {partyID: TossupParty.getID(), margin: 0}
+  }
 }
 
 async function toggleEditing(stateToSet)
