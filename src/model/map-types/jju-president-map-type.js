@@ -350,6 +350,14 @@ var JJUPresidentMapType = new MapType(
         id: "1YI8gO_ajh3b9Et7wAH5A6kBLdPHM8LAz5XYhUpe9DRc",
         gid: "129029341"
       },
+      1749970800000: {
+        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
+        gid: "129029341"
+      },
+      1749970800001: {
+        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
+        gid: "129029341"
+      },
     }
   
     var PastElectionResultMapSource = new MapSource(
