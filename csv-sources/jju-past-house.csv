@@ -282,7 +282,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 3/9/2025,Dalminica,GMV,liberal,FALSE,TRUE,57.14
 3/9/2025,Dalminica,bfdifann,labour,FALSE,TRUE,42.86
 3/9/2025,Trunoe,Rocket Dino,labour,FALSE,FALSE,75.00
-3/9/2025,Trunoe,Ross Perot,independent,FALSE,FALSE,25.00
+3/9/2025,Trunoe,Perot,independent,FALSE,FALSE,25.00
 3/9/2025,Brunix Islands,Charlemagne,liberal,FALSE,FALSE,38.46
 3/9/2025,Brunix Islands,ᏁᎥፈᏦᏖᏂᏋፈᎧᎧᏝ,alliance,FALSE,FALSE,30.77
 3/9/2025,Brunix Islands,Goop,alliance,FALSE,FALSE,15.38
@@ -324,7 +324,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 4/6/2025,Dalminica,KiwiFox,labour,FALSE,FALSE,10.00
 4/6/2025,Dalminica,Copperhead,alliance,FALSE,TRUE,50.01
 4/6/2025,Dalminica,GMV,liberal,FALSE,TRUE,49.99
-4/6/2025,Trunoe,Ross Perot,labour,FALSE,FALSE,54.55
+4/6/2025,Trunoe,Perot,labour,FALSE,FALSE,54.55
 4/6/2025,Trunoe,TBS387,alliance,FALSE,FALSE,45.45
 4/6/2025,Brunix Islands,Charlemagne,liberal,FALSE,FALSE,63.64
 4/6/2025,Brunix Islands,Geodore Roosevelt,alliance,FALSE,FALSE,36.36
@@ -416,7 +416,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 6/15/2025,Dalminica,SunwardH,progressive,FALSE,TRUE,61.54
 6/15/2025,Dalminica,Cruzer,alliance,FALSE,TRUE,38.46
 6/15/2025,Trunoe,Growmper,progressive,FALSE,FALSE,71.43
-6/15/2025,Trunoe,Ross Perot,labour,FALSE,FALSE,28.57
+6/15/2025,Trunoe,Perot,labour,FALSE,FALSE,28.57
 6/15/2025,Garvor,Strxya,progressive,FALSE,FALSE,76.92
 6/15/2025,Garvor,athabasca,labour,FALSE,FALSE,23.08
 6/15/2025,Dentone,BlockyBeach,alliance,FALSE,FALSE,71.43

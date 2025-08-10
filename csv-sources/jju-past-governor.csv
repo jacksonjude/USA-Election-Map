@@ -1,13 +1,69 @@
 date,region,candidate,party,offyear,runoff,voteshare
 3/9/2025,North,Dave Attempt,progressive,FALSE,FALSE,52.38
-3/9/2025,North,Alex,independent,FALSE,FALSE,47.62
+3/9/2025,North,alex,independent,FALSE,FALSE,47.62
 3/9/2025,East,Josephist,alliance,FALSE,FALSE,45.45
-3/9/2025,East,Ross Perot,independent,FALSE,FALSE,36.36
+3/9/2025,East,Perot,independent,FALSE,FALSE,36.36
 3/9/2025,East,Copperhead,alliance,FALSE,FALSE,18.18
 3/9/2025,East,Josephist,alliance,FALSE,TRUE,54.55
-3/9/2025,East,Ross Perot,independent,FALSE,TRUE,45.45
+3/9/2025,East,Perot,independent,FALSE,TRUE,45.45
 3/9/2025,West,Nath,liberal,FALSE,FALSE,57.14
 3/9/2025,West,Srawyer02,alliance,FALSE,FALSE,42.86
 3/9/2025,South,Nuss,labour,FALSE,FALSE,100
 4/13/2025,North,Geodore Roosevelt,alliance,TRUE,FALSE,55.56
 4/13/2025,North,Cob,independent,TRUE,FALSE,44.44
+5/11/2025,North,Pete Wilson,liberal,FALSE,FALSE,100
+5/11/2025,East,ash,progressive,FALSE,FALSE,33.33
+5/11/2025,East,Skillyoshi,alliance,FALSE,FALSE,25.00
+5/11/2025,East,bfdifann,labour,FALSE,FALSE,16.67
+5/11/2025,East,Growmper,progressive,FALSE,FALSE,8.33
+5/11/2025,East,British Guy,alliance,FALSE,FALSE,8.33
+5/11/2025,East,Perot,labour,FALSE,FALSE,8.33
+5/11/2025,East,ash,progressive,FALSE,TRUE,54.55
+5/11/2025,East,Skillyoshi,alliance,FALSE,TRUE,45.45
+5/11/2025,West,alex,liberal,FALSE,FALSE,43.48
+5/11/2025,West,Joris,progressive,FALSE,FALSE,30.43
+5/11/2025,West,athabasca,labour,FALSE,FALSE,26.09
+5/11/2025,West,alex,liberal,FALSE,TRUE,56.52
+5/11/2025,West,Joris,progressive,FALSE,TRUE,43.48
+5/11/2025,South,Meiscool,alliance,FALSE,FALSE,56.00
+5/11/2025,South,Beary,progressive,FALSE,FALSE,44.00
+5/26/2025,East,Skillyoshi,alliance,TRUE,FALSE,31.58
+5/26/2025,East,Growmper,progressive,TRUE,FALSE,36.84
+5/26/2025,East,KiwiFox,labour,TRUE,FALSE,15.79
+5/26/2025,East,bfdifann,labour,TRUE,FALSE,15.79
+5/26/2025,East,Skillyoshi,alliance,TRUE,TRUE,55.56
+5/26/2025,East,Growmper,progressive,TRUE,TRUE,44.44
+5/26/2025,North,Doc,liberal,TRUE,FALSE,40.00
+5/26/2025,North,Cob,independent,TRUE,FALSE,30.00
+5/26/2025,North,Goop,alliance,TRUE,FALSE,30.00
+5/26/2025,North,Doc,liberal,TRUE,TRUE,64.71
+5/26/2025,North,Cob,independent,TRUE,TRUE,35.29
+6/19/2025,East,Van Der Plan,labour,TRUE,FALSE,17.65
+6/19/2025,East,Copperhead,alliance,TRUE,FALSE,23.53
+6/19/2025,East,ash,progressive,TRUE,FALSE,17.65
+6/19/2025,East,Cruzer,alliance,TRUE,FALSE,17.65
+6/19/2025,East,Perot,labour,TRUE,FALSE,17.65
+6/19/2025,East,British Guy,alliance,TRUE,FALSE,5.88
+6/19/2025,East,Van Der Plan,labour,TRUE,TRUE,53.33
+6/19/2025,East,Copperhead,alliance,TRUE,TRUE,46.67
+7/20/2025,North,Cob,independent,FALSE,FALSE,48.28
+7/20/2025,North,Connor,labour,FALSE,FALSE,27.59
+7/20/2025,North,Doc,liberal,FALSE,FALSE,24.14
+7/20/2025,North,Cob,independent,FALSE,TRUE,69.23
+7/20/2025,North,Connor,labour,FALSE,TRUE,30.77
+7/20/2025,East,bfdifann,labour,FALSE,FALSE,54.55
+7/20/2025,East,Cruzer,alliance,FALSE,FALSE,21.21
+7/20/2025,East,British Guy,alliance,FALSE,FALSE,18.18
+7/20/2025,East,Perot,labour,FALSE,FALSE,6.06
+7/20/2025,West,Joris,progressive,FALSE,FALSE,42.31
+7/20/2025,West,athabasca,labour,FALSE,FALSE,34.62
+7/20/2025,West,Frank,independent,FALSE,FALSE,23.08
+7/20/2025,West,Joris,progressive,FALSE,TRUE,56.52
+7/20/2025,West,athabasca,labour,FALSE,TRUE,43.48
+7/20/2025,South,Beary,progressive,FALSE,FALSE,60.00
+7/20/2025,South,SaiDev,alliance,FALSE,FALSE,17.50
+7/20/2025,South,Tim Inkle,independent,FALSE,FALSE,15.00
+7/20/2025,South,spccenterville,alliance,FALSE,FALSE,7.50
+7/27/2025,North,Connor,labour,TRUE,FALSE,52.63
+7/27/2025,North,Kanbo,alliance,TRUE,FALSE,31.58
+7/27/2025,North,Virtecek,liberal,TRUE,FALSE,15.79
