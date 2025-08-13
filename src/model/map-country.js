@@ -252,9 +252,10 @@ function setMapCountries()
   )
   
   JJUMapCountry.setCountdownTimes({
-    "Feburary 2025 General Election": {time: 1739149200000, url: null},
-    "March 2025 Midterm Elections": {time: 1741564800000, url: null},
-    "April 2025 General Election": {time: 1743984000000, url: null}
+    "June 2025 General Election": {time: 1750032000000, url: null},
+    "July 2025 Midterm Elections": {time: 1753056000000, url: null},
+    "August 2025 Snap Elections": {time: 1754265600000, url: null},
+    "September 2025 General Election": {time: 1757289600000, url: null}
   })
   
   mapCountries[USAMapCountry.getID()] = USAMapCountry
