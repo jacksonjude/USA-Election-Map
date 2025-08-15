@@ -1475,7 +1475,7 @@ var USASenateMapType = new MapType(
         if (mapDate == null) { return }
         
         const regionData = mapData[mapDate.getTime()][regionID]
-        if (regionData.isHold && regionData.electionDate)
+        if (regionData && regionData.isHold && regionData.electionDate)
         {
           mapDate = new Date(regionData.electionDate)
         }
