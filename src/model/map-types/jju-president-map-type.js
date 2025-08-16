@@ -181,20 +181,21 @@ var JJUPresidentMapType = new MapType(
           
           if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
           {
+            let instantRunoffDate = mapDateTime+1
+            if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
+            
+            if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
+            
             let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
             // originalMapData.altText = "first round"
             originalMapData.isFirstRound = true
             filteredDateData[regionID] = originalMapData
             
-            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), new Date(instantRunoffDate), regionID, currentDatePartyNameArray)
             // runoffMapData.altData = originalMapData
             
-            let instantRunoffDate = mapDateTime+1
-            if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
             filteredMapData[instantRunoffDate][regionID] = runoffMapData
             partyNameData[instantRunoffDate] = currentDatePartyNameArray
-            
-            if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
           }
           else
           {
@@ -224,11 +225,16 @@ var JJUPresidentMapType = new MapType(
   
     function mostRecentWinner(mapData, dateToStart, regionID)
     {
-      let reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
+      let reversedMapDates = cloneObject(Object.keys(mapData)).map(s => parseInt(s)).sort().reverse()
+      const isFirstRound = parseInt(dateToStart)%10 == 0
   
       for (let dateNum in reversedMapDates)
       {
         if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
+        // first round always compares to first round
+        if (isFirstRound && reversedMapDates[dateNum]%10 != 0) { continue }
+        // final round never compares to first round of the same election
+        if (!isFirstRound && parseInt(dateToStart)-reversedMapDates[dateNum] == 1) { continue }
     
         let mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
