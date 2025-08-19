@@ -1805,8 +1805,11 @@ var USAPresidentMapType = new MapType(
         previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin).mapDateData
       }
 
-      let {mapDateData, candidateNameData} = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
-      mapSource.setCandidateNames(candidateNameData, date)
+      let {mapDateData, candidateNameData} = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : {mapDateData: null, candidateNameData: null}
+      if (candidateNameData != null)
+      {
+        mapSource.setCandidateNames(candidateNameData, date)
+      }
 
       let countyZoomData = {}
 
