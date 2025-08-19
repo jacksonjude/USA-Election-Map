@@ -75,7 +75,9 @@ const PoliticalPartyColors = {
   scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
   cyan: {current: "#1A595D", safe: "#1F767A", likely: "#31A7AF", lean: "#6CD2D9", tilt: "#84B2B5"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#e8a43e", lean: "#eab86e", tilt: "#C7A659"},
-  gray: {current: "#262626", safe: "#404040", likely: "#6C6C6C", lean: "#B0B0B0", tilt: "#D4D4D4"}
+  magenta: {current: "#700036", safe: "#AB0354", likely: "#E8026E", lean: "#FE62AD", tilt: "#B87F9C"},
+  lime: {current: "#60801B", safe: "#89B30E", likely: "#A1BF47", lean: "#ADBF7C", tilt: "#ACB392"},
+  gray: {current: "#2A2822", safe: "#474339", likely: "#77705F", lean: "#B9B4A7", tilt: "#D8D6CF"}
 }
 
 // Main Parties
@@ -601,12 +603,48 @@ var JJUProgressiveParty = new PoliticalParty(
   defaultMarginNames
 )
 
-var JJUCoalitionPartyBloc = new PoliticalParty(
-  "JJUCOA",
-  ["Coalition"],
-  "Coa",
-  "Coalition",
+var JJUWildroseParty = new PoliticalParty(
+  "JJUWIL",
+  ["Wildrose"],
+  "Wil",
+  "Wildrose",
+  cloneObject(PoliticalPartyColors.magenta),
+  defaultMarginNames
+)
+
+var JJULabLibPartyBloc = new PoliticalParty(
+  "JJULAL",
+  ["LabLib"],
+  "LAL",
+  "LabLib",
+  cloneObject(PoliticalPartyColors.scarlet),
+  defaultMarginNames
+)
+
+var JJULibConPartyBloc = new PoliticalParty(
+  "JJULIC",
+  ["LibCon"],
+  "LIC",
+  "LibCon",
+  cloneObject(PoliticalPartyColors.cyan),
+  defaultMarginNames
+)
+
+var JJULabourConPartyBloc = new PoliticalParty(
+  "JJULAC",
+  ["LabourCon"],
+  "LAC",
+  "LabourCon",
   cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var JJUWatermelonPartyBloc = new PoliticalParty(
+  "JJUWAT",
+  ["Watermelon"],
+  "Wat",
+  "Watermelon",
+  cloneObject(PoliticalPartyColors.magenta),
   defaultMarginNames
 )
 
@@ -616,6 +654,24 @@ var JJUCitrusPartyBloc = new PoliticalParty(
   "Cit",
   "Citrus",
   cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
+var JJUTrafficLightPartyBloc = new PoliticalParty(
+  "JJUTRA",
+  ["Traffic Light", "Traffic"],
+  "Tra",
+  "Traffic",
+  cloneObject(PoliticalPartyColors.red),
+  defaultMarginNames
+)
+
+var JJUUnityPartyBloc = new PoliticalParty(
+  "JJUUTY",
+  ["Unity"],
+  "UTY",
+  "Unity",
+  cloneObject(PoliticalPartyColors.lime),
   defaultMarginNames
 )
 

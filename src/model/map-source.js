@@ -526,7 +526,7 @@ class MapSource
 
   getShouldUseOriginalMapDataForTotalsPieChart()
   {
-    return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals"))
+    return this.shouldUseOriginalMapDataForTotalsPieChart && !(currentViewingState == ViewingState.zooming && currentMapType.getMapSettingValue("zoomSeatTotals")) && !currentMapType.getMapSettingValue("showAllDistricts")
   }
 
   getShouldForcePopularVoteDisplay()
@@ -621,6 +621,8 @@ class MapSource
       }
     }
     csvText += "\n"
+    
+    const partyIDToCandidateNames = invertObject(candidateNameToPartyIDs)
 
     for (let mapDate in mapData)
     {
@@ -632,12 +634,12 @@ class MapSource
 
         let candidatesToAdd = regionData.partyVotesharePercentages && this.editingMode == EditingMode.voteshare ? regionData.partyVotesharePercentages.reduce((candidateMap, partyPercentage) =>
         {
-          return {...candidateMap, [partyPercentage.candidate]: partyPercentage.partyID}
+          return {...candidateMap, [getRegionCandidateName(partyPercentage.partyID, regionData, partyPercentage, partyIDToCandidateNames)]: partyPercentage.partyID}
         }, {}) : cloneObject(candidateNameToPartyIDs)
 
         if (regionData.partyID && regionData.partyID != TossupParty.getID() && !getKeyByValue(candidatesToAdd, regionData.partyID))
         {
-          candidatesToAdd[regionData.candidateName || politicalParties[regionData.partyID].getNames()[0]] = regionData.partyID
+          candidatesToAdd[getRegionCandidateName(regionData.partyID, regionData, null, partyIDToCandidateNames)] = regionData.partyID
         }
 
         if (regionData.margin == 0 && regionData.partyID == TossupParty.getID())

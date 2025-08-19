@@ -64,7 +64,7 @@
     <meta property="og:title" content="JacksonJude's Election Map" />
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Interactive map for US election results and projections. President, senate, house, and governor races included.">
-    <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon-background.png" />
+    <meta property="og:image" content="https://map.jacksonjude.com/assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body style="background-color: black; margin: 0; display: flex; flex-direction: column; height: 100vh;" onresize="updateSVGViewbox()">
@@ -202,7 +202,7 @@
                 Shift by tipping point&nbsp;<span id="shiftTextTippingPoint">(+xx)</span>
               </a>
               <div class='dropdown-separator'></div>
-              <a onclick="addConstantMarginToMap(...getNPVShift())" style="display:flex; justify-content:center;">
+              <a onclick="addConstantMarginToMap(...(getNPVShift() ?? []))" style="display:flex; justify-content:center;">
                 Shift by NPV margin&nbsp;<span id="shiftTextNPV">(+xx)</span>
               </a>
             </div>
@@ -210,7 +210,7 @@
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="settingsButton" class="topnavbutton topnav-iconbutton"><span class='topnav-text'>Settings</span><span class='topnav-icon'>⚙️</span></a>
-          <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 261px">
+          <div id="settingsDropdownContent" class="dropdown-content" style="min-width: 280px">
             <div id="settingsDropdownContainer" class="dropdown-container" style="overflow: hidden;">
             </div>
           </div>

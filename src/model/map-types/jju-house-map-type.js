@@ -15,7 +15,7 @@ var JJUHouseMapType = new MapType(
   true,
   false,
   true,
-  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
+  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "L10": "List Seat 10", "L11": "List Seat 11", "L12": "List Seat 12", "L13": "List Seat 13", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
   [
     {id: "coalitions", title: "🤝 Coalitions", type: MapSettingType.optionCycle, options:
@@ -47,7 +47,7 @@ var JJUHouseMapType = new MapType(
     defaultValue: "hide", reloadType: MapSettingReloadType.display}
   ],
   () => {
-	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
+	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "List Seat 10": "L10", "List Seat 11": "L11", "List Seat 12": "L12", "List Seat 13": "L13", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
   
 	  let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
 	  {
@@ -57,7 +57,7 @@ var JJUHouseMapType = new MapType(
 	    let regionNames = Object.keys(regionNameToID)
       
       const regionRetireExceptions = {
-        "L9": new Date(2024, 9-1, 21+1).getTime(),
+        "L9": [new Date(2024, 9-1, 21+1).getTime(), new Date(2025, 6-1, 1).getTime()],
         "N": new Date(2025, 1-1, 1).getTime(),
         "S": new Date(2025, 1-1, 1).getTime(),
         "E": new Date(2025, 1-1, 1).getTime(),
@@ -70,6 +70,7 @@ var JJUHouseMapType = new MapType(
         "S-2": new Date(2025, 1-1, 22+1).getTime(),
         "E-2": new Date(2025, 1-1, 22+1).getTime(),
         "W-2": new Date(2025, 1-1, 22+1).getTime(),
+        "L13": new Date(2025, 7-1, 20-1).getTime(),
       }
       
       const coalitionRegionID = "Coalition"
@@ -90,9 +91,10 @@ var JJUHouseMapType = new MapType(
           let currentVoteshare = parseFloat(row[columnMap.voteshare])
         
           let currentPartyName = row[columnMap.partyID]
-          if (currentMapType.getMapSettingValue("coalitions") && coalitionPartyMap[currentPartyName])
+          let currentCoalition = coalitionPartyMap[candidateName] ?? coalitionPartyMap[currentPartyName]
+          if (currentMapType.getMapSettingValue("coalitions") && currentCoalition)
           {
-            currentPartyName = coalitionPartyMap[currentPartyName]
+            currentPartyName = currentCoalition
             if (regionID == nationalPopularVoteID) candidateName = currentPartyName
           }
           
@@ -195,7 +197,7 @@ var JJUHouseMapType = new MapType(
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
         
-        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID)
+        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
         return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
@@ -226,7 +228,9 @@ var JJUHouseMapType = new MapType(
     
 			    if (mapDataRows.length == 0)
 			    {
-			      if (isCustomMap && (!regionRetireExceptions[regionID] || currentMapDate <= regionRetireExceptions[regionID]))
+			      if (isCustomMap && !(regionRetireExceptions[regionID] && regionRetireExceptions[regionID] instanceof Array
+              ? currentMapDate > regionRetireExceptions[regionID][0] && currentMapDate < regionRetireExceptions[regionID][1]
+              : currentMapDate > regionRetireExceptions[regionID]))
 			      {
 			        let partyIDToCandidateNames = {}
 			        for (let partyCandidateName in candidateNameToPartyIDMap)
@@ -276,11 +280,13 @@ var JJUHouseMapType = new MapType(
 		    for (let regionID of previousDateRegionIDs)
 		    {
 		      if (regionID == nationalPopularVoteID) { continue }
-          if (mapDate > regionRetireExceptions[regionID]) { continue }
+          if (regionRetireExceptions[regionID] instanceof Array
+            ? mapDate > regionRetireExceptions[regionID][0] && mapDate < regionRetireExceptions[regionID][1]
+            : mapDate > regionRetireExceptions[regionID]) { continue }
     
 		      if (!currentRegionIDs.includes(regionID))
 		      {
-			      filteredDateData[regionID] = {region: regionID, margin: 101, partyID: mostRecentWinner(filteredMapData, mapDate, regionID), disabled: true, offYear: isOffyear, runoff: isRunoff}
+			      filteredDateData[regionID] = {region: regionID, ...mostRecentWinner(filteredMapData, mapDate, regionID), isHold: true, disabled: true, offYear: isOffyear, runoff: isRunoff}
 		      }
 		    }
     
@@ -288,6 +294,49 @@ var JJUHouseMapType = new MapType(
         
         previousMapDate = mapDate
 	    }
+      
+      const listSeatRegex = /L\d+/
+      const partyListSeatCounts = {}
+      previousMapDate = null
+      for (const mapDate in fullFilteredMapData)
+      {
+        partyListSeatCounts[mapDate] = {}
+        Object.keys(fullFilteredMapData[mapDate]).forEach(regionID => {
+          if (!listSeatRegex.test(regionID)) { return }
+          
+          const regionData = fullFilteredMapData[mapDate][regionID]
+          if (!partyListSeatCounts[mapDate][regionData.partyID])
+          {
+            partyListSeatCounts[mapDate][regionData.partyID] = 0
+          }
+          partyListSeatCounts[mapDate][regionData.partyID] += 1
+        })
+        
+        if (previousMapDate && partyListSeatCounts[previousMapDate])
+        {
+          let partyIDOn = null
+          let partyListSeatOn = 1
+          for (const regionID in fullFilteredMapData[mapDate])
+          {
+            if (!listSeatRegex.test(regionID)) { continue }
+            
+            const regionData = fullFilteredMapData[mapDate][regionID]
+            
+            if (partyIDOn != regionData.partyID)
+            {
+              partyIDOn = regionData.partyID
+              partyListSeatOn = 1
+            }
+            const seatDifference = (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-(partyListSeatCounts[previousMapDate][regionData.partyID] ?? 0)
+            
+            regionData.flip = partyListSeatOn > (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-seatDifference
+            
+            partyListSeatOn += 1
+          }
+        }
+        
+        previousMapDate = mapDate
+      }
       
       let offYearEnabled = currentMapType.getMapSettingValue("offYear")
 	    let filteredMapDates = []
@@ -317,11 +366,11 @@ var JJUHouseMapType = new MapType(
 		    let mapDataFromDate = mapData[reversedMapDates[dateNum]]
 		    if (regionID in mapDataFromDate)
 		    {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum])}
 		    }
 	    }
   
-	    return TossupParty.getID()
+	    return {margin: 0, partyID: TossupParty.getID()}
 	  }
   
 	  function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -383,10 +432,35 @@ var JJUHouseMapType = new MapType(
       {
         return "svg-sources/jju-regions-list-stv-map.svg"
       }
-      else
+      else if (mapDate < new Date(2025, 5-1, 1))
       {
         return "svg-sources/jju-districts-list-map.svg"
       }
+      else if (mapDate < new Date(2025, 6-1, 1))
+      {
+        return "svg-sources/jju-districts-list-9-map.svg"
+      }
+      else if (mapDate < new Date(2025, 7-1, 20-1))
+      {
+        return "svg-sources/jju-districts-list-13-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-districts-list-12-map.svg"
+      }
+    }
+    
+    function getFormattedRegionName(regionName, regionData)
+    {
+      if (!regionData) return regionName
+      
+      if (regionData.isHold && regionData.electionDate)
+      {
+        const electionDate = new Date(regionData.electionDate)
+        regionName += ` (${getMonthPrefix(electionDate.getMonth())} ${electionDate.getFullYear()})`
+      }
+      
+      return regionName
     }
     
     var electionDateToSpreadsheetData = {
@@ -513,7 +587,104 @@ var JJUHouseMapType = new MapType(
           "DT": "1482060989",
           "GV": "1482060989"
         }
-      }
+      },
+      1746946800000: {
+        id: "1OR3INfqexRBxjpFRJpMCICZNZDaXbnkvDM23rgYAwOs",
+        regions: {
+          "L1": "441625624",
+          "L2": "441625624",
+          "L3": "441625624",
+          "L4": "441625624",
+          "L5": "441625624",
+          "L6": "441625624",
+          "L7": "441625624",
+          "L8": "441625624",
+          "BI": "419628180",
+          "EX": "419628180",
+          "QU": "1586359503",
+          "AV": "1586359503",
+          "DM": "486563209",
+          "TR": "486563209",
+          "DT": "1482060989",
+          "GV": "1482060989"
+        }
+      },
+      1749970800000: {
+        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
+        regions: {
+          "L1": "441625624",
+          "L2": "441625624",
+          "L3": "441625624",
+          "L4": "441625624",
+          "L5": "441625624",
+          "L6": "441625624",
+          "L7": "441625624",
+          "L8": "441625624",
+          "L9": "441625624",
+          "L10": "441625624",
+          "L11": "441625624",
+          "L12": "441625624",
+          "L13": "441625624",
+          "BI": "419628180",
+          "EX": "419628180",
+          "QU": "1586359503",
+          "AV": "1586359503",
+          "DM": "486563209",
+          "TR": "486563209",
+          "DT": "1482060989",
+          "GV": "1482060989"
+        }
+      },
+      1752994800000: {
+        id: "1ILe_QCqSePlhiQcd0lTEFEFBhZaIj8j20GB-vE4mSSE",
+        regions: {
+          "L1": "441625624",
+          "L2": "441625624",
+          "L3": "441625624",
+          "L4": "441625624",
+          "L5": "441625624",
+          "L6": "441625624",
+          "L7": "441625624",
+          "L8": "441625624",
+          "L9": "441625624",
+          "L10": "441625624",
+          "L11": "441625624",
+          "L12": "441625624",
+          "BI": "419628180",
+          "EX": "419628180",
+          "QU": "1586359503",
+          "AV": "1586359503",
+          "DM": "486563209",
+          "TR": "486563209",
+          "DT": "1482060989",
+          "GV": "1482060989"
+        }
+      },
+      1754204400000: {
+        id: "1FFWXjj8y9GMNnKD5ZoCvCmFxwzWppQ1qpEOxhZKIZvI",
+        regions: {
+          "L1": "441625624",
+          "L2": "441625624",
+          "L3": "441625624",
+          "L4": "441625624",
+          "L5": "441625624",
+          "L6": "441625624",
+          "L7": "441625624",
+          "L8": "441625624",
+          "L9": "441625624",
+          "L10": "441625624",
+          "L11": "441625624",
+          "L12": "441625624",
+          "BI": "419628180",
+          "EX": "419628180",
+          "QU": "1586359503",
+          "AV": "1586359503",
+          "DM": "486563209",
+          "TR": "486563209",
+          "DT": "1482060989",
+          "GV": "1482060989"
+        }
+       }
     }
   
 	  var PastElectionResultMapSource = new MapSource(
@@ -550,9 +721,15 @@ var JJUHouseMapType = new MapType(
 	    null, // zoomingDataFunction
 	    null, // splitVoteDataFunction
 	    null, // splitVoteDisplayOptions
-	    null, // getFormattedRegionName
-	    function(homepageURL, regionID, _, mapDate)
+	    getFormattedRegionName, // getFormattedRegionName
+	    function(homepageURL, regionID, _, mapDate, __, mapData)
       {
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData && regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
+        
         let spreadsheetLinkData = electionDateToSpreadsheetData[mapDate.getTime()]
         if (!spreadsheetLinkData) return null
         
@@ -615,7 +792,7 @@ var JJUHouseMapType = new MapType(
 	    null, // zoomingDataFunction
 	    null, // splitVoteDataFunction
 	    null, // splitVoteDisplayOptions
-	    null, // getFormattedRegionName
+	    getFormattedRegionName, // getFormattedRegionName
 	    null, // customOpenRegionLinkFunction
 	    null, // updateCustomMapFunction
 	    customMapConvertMapDataToCSVFunction, // convertMapDataRowToCSVFunction

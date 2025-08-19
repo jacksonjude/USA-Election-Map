@@ -31,7 +31,7 @@ var JJUPresidentMapType = new MapType(
   () => {
     const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "National Popular Vote": nationalPopularVoteID}
   
-    let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
+    let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, __, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
     {
       let filteredMapData = {}
       let partyNameData = {}
@@ -109,7 +109,6 @@ var JJUPresidentMapType = new MapType(
         }
         
         let greatestMarginPartyID
-        let greatestMarginCandidateName
         let topTwoMargin
         
         if (voteshareSortedCandidateData[0].voteshare != 0)
@@ -125,13 +124,11 @@ var JJUPresidentMapType = new MapType(
           }
         
           greatestMarginPartyID = topCandidateData[0].partyID
-          greatestMarginCandidateName = topCandidateData[0].candidate
           topTwoMargin = topCandidateData[0].voteshare - (topCandidateData[1] ? topCandidateData[1].voteshare : 0)
         }
         else
         {
           greatestMarginPartyID = TossupParty.getID()
-          greatestMarginCandidateName = null
           topTwoMargin = 0
         }
         
@@ -146,16 +143,15 @@ var JJUPresidentMapType = new MapType(
           {
             currentDatePartyNameArray[mainPartyID] = voteshareSortedCandidateData[candidateDataNum].candidate
           }
+          
+          if (voteshareSortedCandidateData[candidateDataNum].partyID != IndependentGenericParty.getID())
+          {
+            delete voteshareSortedCandidateData[candidateDataNum].candidate
+          }
         }
         
-        let partyIDToCandidateNames = {}
-        for (let partyCandidateName in candidateData)
-        {
-          partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
-        }
-        
-        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID)
-        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
+        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
       }
   
       for (let mapDateTime of cloneObject(mapDates))
@@ -178,33 +174,28 @@ var JJUPresidentMapType = new MapType(
           {
             if (isCustomMap)
             {
-              let partyIDToCandidateNames = {}
-              for (let partyCandidateName in candidateNameToPartyIDMap)
-              {
-                partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
-              }
-        
-              filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+              filteredDateData[regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: false, margin: 0, partyID: TossupParty.getID()}
             }
             continue
           }
           
           if (mapDataRows.find(row => row[columnMap.isRunoff] == "TRUE") && mapDataRows.find(row => row[columnMap.isRunoff] != "TRUE"))
           {
+            let instantRunoffDate = mapDateTime+1
+            if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
+            
+            if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
+            
             let originalMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] != "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
             // originalMapData.altText = "first round"
             originalMapData.isFirstRound = true
             filteredDateData[regionID] = originalMapData
             
-            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), currentMapDate, regionID, currentDatePartyNameArray)
+            let runoffMapData = processMapDataRows(mapDataRows.filter(row => row[columnMap.isRunoff] == "TRUE"), new Date(instantRunoffDate), regionID, currentDatePartyNameArray)
             // runoffMapData.altData = originalMapData
             
-            let instantRunoffDate = mapDateTime+1
-            if (!filteredMapData[instantRunoffDate]) filteredMapData[instantRunoffDate] = {}
             filteredMapData[instantRunoffDate][regionID] = runoffMapData
             partyNameData[instantRunoffDate] = currentDatePartyNameArray
-            
-            if (!mapDates.includes(instantRunoffDate)) mapDates.push(instantRunoffDate)
           }
           else
           {
@@ -234,20 +225,25 @@ var JJUPresidentMapType = new MapType(
   
     function mostRecentWinner(mapData, dateToStart, regionID)
     {
-      let reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
+      let reversedMapDates = cloneObject(Object.keys(mapData)).map(s => parseInt(s)).sort().reverse()
+      const isFirstRound = parseInt(dateToStart)%10 == 0
   
       for (let dateNum in reversedMapDates)
       {
         if (reversedMapDates[dateNum] >= parseInt(dateToStart)) { continue }
+        // first round always compares to first round
+        if (isFirstRound && reversedMapDates[dateNum]%10 != 0) { continue }
+        // final round never compares to first round of the same election
+        if (!isFirstRound && parseInt(dateToStart)-reversedMapDates[dateNum] == 1) { continue }
     
         let mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
         {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages}
         }
       }
   
-      return TossupParty.getID()
+      return {margin: 0, partyID: TossupParty.getID()}
     }
   
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -262,7 +258,7 @@ var JJUPresidentMapType = new MapType(
         return candidateName
     
         case "voteshare":
-        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => candidateName == partyVoteshare.candidate) : null
+        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
         if (voteshareData)
         {
           return voteshareData.voteshare
@@ -358,6 +354,14 @@ var JJUPresidentMapType = new MapType(
       },
       1743922800001: {
         id: "1YI8gO_ajh3b9Et7wAH5A6kBLdPHM8LAz5XYhUpe9DRc",
+        gid: "129029341"
+      },
+      1749970800000: {
+        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
+        gid: "129029341"
+      },
+      1749970800001: {
+        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
         gid: "129029341"
       },
     }

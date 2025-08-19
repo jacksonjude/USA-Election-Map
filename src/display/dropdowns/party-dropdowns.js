@@ -365,7 +365,7 @@ function selectParty(div)
       $(".partyShiftText").css('color', selectedParty.getMarginColors().likely)
     }
   }
-  else if (currentEditingState == EditingState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled())
+  else if (currentEditingState == EditingState.viewing && currentMapSource.isCustom() && currentMapType.getCustomMapEnabled() && !(showingCompareMap && currentMapSource.isCompare()))
   {
     toggleCandidateNameEditing(partyID, div)
   }
@@ -418,7 +418,7 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
 
   if (partyID)
   {
-    $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] + "'>")
+    $(div).html("<input class='textInput' style='float: none; position: inherit; max-width: 90%; text-align: center' type='text' id='" + partyID + "-candidate-text' value='" + (currentMapSource.getCandidateNames(getCurrentDateOrToday())[partyID] ?? politicalParties[partyID].getNames()[0]) + "'>")
     $("#" + partyID + "-candidate-text").focus().select()
   }
 }
@@ -544,7 +544,7 @@ function displayPartyTotals(overrideCreateDropdowns)
     }
   }
   
-  const possibleFontSizes = ["18px", "17px", "16px", "15px", "14px", "13px", "12px", "11px", "10px", "9px"]
+  const possibleFontSizes = ["18px", "17px", "16px", "15px", "14px", "13px", "12px", "11px", "10px", "9px", "8px"]
   const shouldUseSmallButtons = dropdownPoliticalPartyIDs.length > largeMaxPartiesToDisplay
   
   for (var partyID of dropdownPoliticalPartyIDs)
@@ -592,7 +592,7 @@ function getNonEVDropdownCandidates(partyIDs)
 
 function updatePoliticalPartyCandidateNames(mapDate)
 {
-  var candidateNames = currentMapSource.getCandidateNames(mapDate)
+  var candidateNames = (compareResultCustomMapSource != null && currentMapSource.isCompare() ? compareResultCustomMapSource : currentMapSource).getCandidateNames(mapDate)
 
   if (!candidateNames)
   {
@@ -630,8 +630,7 @@ function togglePartyPopularVoteEditing(partyID)
       let candidateData = partyVotesharePercentages.find(candidateData => candidateData.partyID == editPartyPopularVote)
       if (!candidateData)
       {
-        let candidateName = currentMapSource.getCandidateNames(currentSliderDate.getTime())[editPartyPopularVote] ?? politicalParties[editPartyPopularVote].getNames[0]
-        candidateData = {partyID: editPartyPopularVote, candidate: candidateName}
+        candidateData = {candidate: getRegionCandidateName(editPartyPopularVote, displayRegionDataArray[nationalPopularVoteID]), partyID: editPartyPopularVote}
         partyVotesharePercentages.push(candidateData)
       }
       candidateData.voteshare = popularVoteToSet

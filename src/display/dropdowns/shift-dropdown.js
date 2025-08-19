@@ -25,18 +25,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       let candidateDataToIncreaseMargin = regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == partyToShift.getID())
       if (!candidateDataToIncreaseMargin)
       {
-        let candidateNames = currentMapSource.getCandidateNames(currentSliderDate.getTime())
-        let candidateNameToUse
-        if (candidateNames)
-        {
-          candidateNameToUse = candidateNames[partyToShift.getID()]
-        }
-        else
-        {
-          candidateNameToUse = partyToShift.getNames()[0]
-        }
-
-        candidateDataToIncreaseMargin = {candidate: candidateNameToUse, partyID: partyToShift.getID(), voteshare: 0}
+        candidateDataToIncreaseMargin = {candidate: getRegionCandidateName(partyToShift.getID(), regionData),  partyID: partyToShift.getID(), voteshare: 0}
 
         regionData.partyVotesharePercentages.push(candidateDataToIncreaseMargin)
       }
@@ -53,7 +42,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       {
         for (let candidateData of regionData.partyVotesharePercentages)
         {
-          if (candidateData.candidate == candidateDataToIncreaseMargin.candidate) { continue }
+          if (getRegionCandidateName(candidateData.partyID, regionData, candidateData) == getRegionCandidateName(candidateDataToIncreaseMargin.partyID, regionData, candidateDataToIncreaseMargin)) { continue }
 
           candidateData.voteshare -= marginToAdd*candidateData.voteshare/(100.0-candidateDataToIncreaseMargin.voteshare)
           if (candidateData.voteshare < 0)
@@ -98,24 +87,24 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
 
 function getTippingPointRegion()
 {
-  var partyTotals = getPartyTotals()
+  let partyTotals = getPartyTotals()
   partyTotals[TossupParty.getID()] = 0
 
-  var greatestEVCount = Math.max.apply(null, Object.values(partyTotals))
-  var majorityEVCount = Math.floor(getCurrentTotalEV()/2)+1
+  let greatestEVCount = Math.max.apply(null, Object.values(partyTotals))
+  let majorityEVCount = Math.floor(getCurrentTotalEV()/2)+1
 
   if (Math.max.apply(null, Object.values(partyTotals)) < majorityEVCount) // If candidate with most EVs is less than 1/2 +1 of total, return 0
   {
     return 0
   }
 
-  var winnerPartyID = getKeyByValue(partyTotals, greatestEVCount)
-  var tippingPointRegion
-  var checkedStates = [nationalPopularVoteID]
+  let [winnerPartyID, runnerUpPartyID] = getSortedPoliticalPartyIDs()
+  let tippingPointRegion
+  let checkedStates = [nationalPopularVoteID]
   while (greatestEVCount >= majorityEVCount)
   {
-    var nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
-      return (!state.disabled && min.disabled) || (state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region)) ? state : min
+    let nextClosestState = Object.values(displayRegionDataArray).reduce((min, state) => {
+      return !state.disabled && state.margin < min.margin && state.partyID == winnerPartyID && !checkedStates.includes(state.region) && (!state.partyVotesharePercentages || state.partyVotesharePercentages.length <= 1 || state.partyVotesharePercentages[1].partyID == runnerUpPartyID) ? state : min
     })
     if (nextClosestState.disabled) return nextClosestState
     
@@ -212,6 +201,14 @@ function updateShiftDropdownText()
   $('#shiftTextTippingPoint').css('color', shiftTippingPoint[1].getMarginColors().likely)
   
   let npvTippingPoint = getNPVShift()
-  $('#shiftTextNPV').html(`+${decimalPadding(roundValue(npvTippingPoint[0], 1))}`)
-  $('#shiftTextNPV').css('color', npvTippingPoint[1].getMarginColors().likely)
+  if (npvTippingPoint)
+  {
+    $('#shiftTextNPV').html(`+${decimalPadding(roundValue(npvTippingPoint[0], 1))}`)
+    $('#shiftTextNPV').css('color', npvTippingPoint[1].getMarginColors().likely)
+  }
+  else
+  {
+    $('#shiftTextNPV').html("+0")
+    $('#shiftTextNPV').css('color', "gray")
+  }
 }

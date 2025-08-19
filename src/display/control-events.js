@@ -693,7 +693,6 @@ async function leftClickRegion(div)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
-      regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
@@ -796,7 +795,6 @@ function rightClickRegion(div)
     {
       regionData.partyID = (selectedParty || TossupParty).getID()
       regionData.candidateName = regionData.candidateMap ? regionData.candidateMap[regionData.partyID] : null
-      regionData.margin = 101
     }
     else if (selectedParty != null && regionData.partyID != selectedParty.getID())
     {
@@ -913,12 +911,12 @@ function altShiftClickRegion(div)
     if (regionData.disabled)
     {
       regionData.disabled = false
-      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 100
+      regionData.isHold = false
     }
     else
     {
       regionData.disabled = true
-      regionData.margin = regionData.partyID == TossupParty.getID() ? 0 : 101
+      regionData.isHold = true
     }
 
     updateRegionFillColors(regionIDsToFill, regionData)

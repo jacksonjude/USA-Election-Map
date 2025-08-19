@@ -103,10 +103,8 @@ var USAHouseMapType = new MapType(
           {
             partyID = IndependentGenericParty.getID()
           }
-          
-          const shouldSetHold = reportingPercent <= 0 && unopposedRaceDefaults[regionID] == partyID
 
-          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : (shouldSetHold ? 101 : 0), votes: candidateVotes})
+          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : (shouldSetHold ? 100 : 0), votes: candidateVotes})
         }
 
         let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -146,8 +144,10 @@ var USAHouseMapType = new MapType(
           let mainPartyID = candidateData.partyID
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
+        
+        const isHold = reportingPercent <= 0 && unopposedRaceDefaults[regionID] != null
 
-        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
+        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
       for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
@@ -230,6 +230,7 @@ var USAHouseMapType = new MapType(
           let greatestMarginPartyID
           let greatestMarginCandidateName
           let topTwoMargin
+          let isHold = false
 
           if (districtsToUsePartyForMargin.includes(regionID))
           {
@@ -244,7 +245,8 @@ var USAHouseMapType = new MapType(
             greatestMarginCandidateName = voteshareSortedCandidateData[0].candidate
             if (candidateArray.length == 1)
             {
-              topTwoMargin = 101
+              topTwoMargin = 100
+              isHold = true
             }
             else
             {
@@ -265,7 +267,7 @@ var USAHouseMapType = new MapType(
             partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
           }
 
-          dateData[regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: false}
+          dateData[regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: false}
         }
 
         for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
@@ -420,6 +422,7 @@ var USAHouseMapType = new MapType(
             var greatestMarginPartyID
             var greatestMarginCandidateName
             var topTwoMargin
+            var isHold = false
 
             if (voteshareSortedCandidateData[0].voteshare != 0)
             {
@@ -437,7 +440,8 @@ var USAHouseMapType = new MapType(
               greatestMarginCandidateName = topCandidateData[0].candidate
               if (!isCustomMap && Object.keys(candidateData).length == 1)
               {
-                topTwoMargin = 101
+                topTwoMargin = 100
+                isHold = true
               }
               else
               {
@@ -471,8 +475,8 @@ var USAHouseMapType = new MapType(
               partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
             }
 
-            var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName)
-            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: districtRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+            var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName).partyID
+            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: districtRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
           }
         }
 
@@ -586,17 +590,17 @@ var USAHouseMapType = new MapType(
 
         if (startYear-currentYear > 2)
         {
-          return TossupParty.getID()
+          return {margin: 0, partyID: TossupParty.getID()}
         }
 
         var mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
         {
-          return mapDataFromDate[regionID].partyID
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, candidateName: mapDataFromDate[regionID].candidateName, candidateMap: mapDataFromDate[regionID].candidateMap, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum])}
         }
       }
 
-      return TossupParty.getID()
+      return {margin: 0, partyID: TossupParty.getID()}
     }
 
     function customMapConvertMapDataToCSVFunction(columnKey, mapDateString, regionID, _, candidateName, partyID, regionData, shouldUseVoteshare)
@@ -783,7 +787,7 @@ var USAHouseMapType = new MapType(
       return stateMapData
     }
 
-    var houseFormattedRegionName = (regionID) => {
+    var houseFormattedRegionName = (regionID, regionData) => {
       if (!regionID || !regionID.includes(subregionSeparator)) { return regionID }
 
       let state = regionID.split(subregionSeparator)[0]
@@ -793,8 +797,16 @@ var USAHouseMapType = new MapType(
       {
         districtNumber = "AL"
       }
+      
+      let regionName = state + "-" + districtNumber
+      
+      if (regionData && regionData.isHold && regionData.electionDate)
+      {
+        const electionDate = new Date(regionData.electionDate)
+        regionName += ` (${electionDate.getFullYear()})`
+      }
 
-      return state + "-" + districtNumber
+      return regionName
     }
 
     var CNNHouseResults2022MapSource = new MapSource(
@@ -1055,9 +1067,15 @@ var USAHouseMapType = new MapType(
       null, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
       houseFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, _)
+      function(homepageURL, regionID, regionIDToLinkMap, mapDate, shouldOpenHomepage, mapData)
       {
         if (mapDate == null) { return }
+        
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData && regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
 
         var districtNumber
         if (regionID != null && regionID.includes(subregionSeparator))
@@ -1140,7 +1158,7 @@ var USAHouseMapType = new MapType(
       {
         for (let regionID in displayRegionData)
         {
-          if (!regionID.includes(subregionSeparator)) { continue }
+          if (!regionID.includes(subregionSeparator) && regionID != nationalPopularVoteID) { continue }
           if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
           let regionData = displayRegionData[regionID]

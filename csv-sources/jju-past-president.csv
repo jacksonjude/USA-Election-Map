@@ -125,59 +125,59 @@ date,region,candidate,party,runoff,voteshare
 12/15/2024,National Popular Vote,Deet,alliance,FALSE,57.45
 12/15/2024,National Popular Vote,Virt,liberal,FALSE,38.30
 12/15/2024,National Popular Vote,Allric,independent,FALSE,4.26
-2/9/2025,Alvana,Geodore Roosevelt,alliance,FALSE,28.57
+2/9/2025,Alvana,Geodore,alliance,FALSE,28.57
 2/9/2025,Alvana,Sonia Gandhi,labour,FALSE,42.86
 2/9/2025,Alvana,Suom,liberal,FALSE,28.57
 2/9/2025,Alvana,Borgor,independent,FALSE,0.00
-2/9/2025,Brunix Islands,Geodore Roosevelt,alliance,FALSE,50.00
+2/9/2025,Brunix Islands,Geodore,alliance,FALSE,50.00
 2/9/2025,Brunix Islands,Sonia Gandhi,labour,FALSE,8.33
 2/9/2025,Brunix Islands,Suom,liberal,FALSE,33.33
 2/9/2025,Brunix Islands,Borgor,independent,FALSE,8.33
-2/9/2025,Dalminica,Geodore Roosevelt,alliance,FALSE,42.86
+2/9/2025,Dalminica,Geodore,alliance,FALSE,42.86
 2/9/2025,Dalminica,Sonia Gandhi,labour,FALSE,28.57
 2/9/2025,Dalminica,Suom,liberal,FALSE,28.57
 2/9/2025,Dalminica,Borgor,independent,FALSE,0.00
-2/9/2025,Dentone,Geodore Roosevelt,alliance,FALSE,50.00
+2/9/2025,Dentone,Geodore,alliance,FALSE,50.00
 2/9/2025,Dentone,Sonia Gandhi,labour,FALSE,37.50
 2/9/2025,Dentone,Suom,liberal,FALSE,12.50
 2/9/2025,Dentone,Borgor,independent,FALSE,0.00
-2/9/2025,Emix,Geodore Roosevelt,alliance,FALSE,16.67
+2/9/2025,Emix,Geodore,alliance,FALSE,16.67
 2/9/2025,Emix,Sonia Gandhi,labour,FALSE,33.33
 2/9/2025,Emix,Suom,liberal,FALSE,50.00
 2/9/2025,Emix,Borgor,independent,FALSE,0.00
-2/9/2025,Garvor,Geodore Roosevelt,alliance,FALSE,27.27
+2/9/2025,Garvor,Geodore,alliance,FALSE,27.27
 2/9/2025,Garvor,Sonia Gandhi,labour,FALSE,18.18
 2/9/2025,Garvor,Suom,liberal,FALSE,54.55
 2/9/2025,Garvor,Borgor,independent,FALSE,0.00
-2/9/2025,Quintin,Geodore Roosevelt,alliance,FALSE,28.57
+2/9/2025,Quintin,Geodore,alliance,FALSE,28.57
 2/9/2025,Quintin,Sonia Gandhi,labour,FALSE,71.43
 2/9/2025,Quintin,Suom,liberal,FALSE,0.00
 2/9/2025,Quintin,Borgor,independent,FALSE,0.00
-2/9/2025,Trunoe,Geodore Roosevelt,alliance,FALSE,0.00
+2/9/2025,Trunoe,Geodore,alliance,FALSE,0.00
 2/9/2025,Trunoe,Sonia Gandhi,labour,FALSE,80.00
 2/9/2025,Trunoe,Suom,liberal,FALSE,0.00
 2/9/2025,Trunoe,Borgor,independent,FALSE,20.00
-2/9/2025,National Popular Vote,Geodore Roosevelt,alliance,FALSE,31.58
+2/9/2025,National Popular Vote,Geodore,alliance,FALSE,31.58
 2/9/2025,National Popular Vote,Sonia Gandhi,labour,FALSE,35.53
 2/9/2025,National Popular Vote,Suom,liberal,FALSE,30.26
 2/9/2025,National Popular Vote,Borgor,independent,FALSE,2.63
-2/9/2025,Alvana,Geodore Roosevelt,alliance,TRUE,50.01
+2/9/2025,Alvana,Geodore,alliance,TRUE,50.01
 2/9/2025,Alvana,Sonia Gandhi,labour,TRUE,49.99
-2/9/2025,Brunix Islands,Geodore Roosevelt,alliance,TRUE,81.82
+2/9/2025,Brunix Islands,Geodore,alliance,TRUE,81.82
 2/9/2025,Brunix Islands,Sonia Gandhi,labour,TRUE,18.18
-2/9/2025,Dalminica,Geodore Roosevelt,alliance,TRUE,57.14
+2/9/2025,Dalminica,Geodore,alliance,TRUE,57.14
 2/9/2025,Dalminica,Sonia Gandhi,labour,TRUE,42.86
-2/9/2025,Dentone,Geodore Roosevelt,alliance,TRUE,62.50
+2/9/2025,Dentone,Geodore,alliance,TRUE,62.50
 2/9/2025,Dentone,Sonia Gandhi,labour,TRUE,37.50
-2/9/2025,Emix,Geodore Roosevelt,alliance,TRUE,50.01
+2/9/2025,Emix,Geodore,alliance,TRUE,50.01
 2/9/2025,Emix,Sonia Gandhi,labour,TRUE,49.99
-2/9/2025,Garvor,Geodore Roosevelt,alliance,TRUE,70.00
+2/9/2025,Garvor,Geodore,alliance,TRUE,70.00
 2/9/2025,Garvor,Sonia Gandhi,labour,TRUE,30.00
-2/9/2025,Quintin,Geodore Roosevelt,alliance,TRUE,28.57
+2/9/2025,Quintin,Geodore,alliance,TRUE,28.57
 2/9/2025,Quintin,Sonia Gandhi,labour,TRUE,71.43
-2/9/2025,Trunoe,Geodore Roosevelt,alliance,TRUE,20.00
+2/9/2025,Trunoe,Geodore,alliance,TRUE,20.00
 2/9/2025,Trunoe,Sonia Gandhi,labour,TRUE,80.00
-2/9/2025,National Popular Vote,Geodore Roosevelt,alliance,TRUE,55.56
+2/9/2025,National Popular Vote,Geodore,alliance,TRUE,55.56
 2/9/2025,National Popular Vote,Sonia Gandhi,labour,TRUE,44.44
 4/6/2025,Alvana,Virt,liberal,FALSE,30.02
 4/6/2025,Alvana,Plxto,independent,FALSE,29.99
@@ -242,3 +242,54 @@ date,region,candidate,party,runoff,voteshare
 4/6/2025,National Popular Vote,Virt,liberal,TRUE,51.72
 4/6/2025,National Popular Vote,Plxto,independent,TRUE,22.99
 4/6/2025,National Popular Vote,bfdifann,labour,TRUE,25.29
+6/15/2025,Alvana,Virtecek,liberal,FALSE,33.33
+6/15/2025,Alvana,Javer,labour,FALSE,41.67
+6/15/2025,Alvana,Goop,alliance,FALSE,16.67
+6/15/2025,Alvana,KiwiFox,independent,FALSE,8.33
+6/15/2025,Brunix Islands,Virtecek,liberal,FALSE,35.72
+6/15/2025,Brunix Islands,Javer,labour,FALSE,21.43
+6/15/2025,Brunix Islands,Goop,alliance,FALSE,35.70
+6/15/2025,Brunix Islands,KiwiFox,independent,FALSE,7.14
+6/15/2025,Dalminica,Virtecek,liberal,FALSE,33.34
+6/15/2025,Dalminica,Javer,labour,FALSE,8.33
+6/15/2025,Dalminica,Goop,alliance,FALSE,25
+6/15/2025,Dalminica,KiwiFox,independent,FALSE,33.32
+6/15/2025,Dentone,Virtecek,liberal,FALSE,42.87
+6/15/2025,Dentone,Javer,labour,FALSE,14.29
+6/15/2025,Dentone,Goop,alliance,FALSE,42.85
+6/15/2025,Emix,Virtecek,liberal,FALSE,35.72
+6/15/2025,Emix,Javer,labour,FALSE,35.70
+6/15/2025,Emix,Goop,alliance,FALSE,21.43
+6/15/2025,Emix,KiwiFox,independent,FALSE,7.14
+6/15/2025,Garvor,Virtecek,liberal,FALSE,71.43
+6/15/2025,Garvor,Javer,labour,FALSE,21.43
+6/15/2025,Garvor,KiwiFox,independent,FALSE,7.14
+6/15/2025,Quintin,Virtecek,liberal,FALSE,42.86
+6/15/2025,Quintin,Javer,labour,FALSE,35.71
+6/15/2025,Quintin,Goop,alliance,FALSE,21.43
+6/15/2025,Trunoe,Virtecek,liberal,FALSE,12.5
+6/15/2025,Trunoe,Javer,labour,FALSE,37.5
+6/15/2025,Trunoe,Goop,alliance,FALSE,25
+6/15/2025,Trunoe,KiwiFox,independent,FALSE,25
+6/15/2025,National Popular Vote,Virtecek,liberal,FALSE,40
+6/15/2025,National Popular Vote,Javer,labour,FALSE,27.37
+6/15/2025,National Popular Vote,Goop,alliance,FALSE,22.11
+6/15/2025,National Popular Vote,KiwiFox,independent,FALSE,10.53
+6/15/2025,Alvana,Virtecek,liberal,TRUE,50.01
+6/15/2025,Alvana,Javer,labour,TRUE,49.99
+6/15/2025,Brunix Islands,Virtecek,liberal,TRUE,64.29
+6/15/2025,Brunix Islands,Javer,labour,TRUE,35.71
+6/15/2025,Dalminica,Virtecek,liberal,TRUE,66.67
+6/15/2025,Dalminica,Javer,labour,TRUE,33.33
+6/15/2025,Dentone,Virtecek,liberal,TRUE,50.01
+6/15/2025,Dentone,Javer,labour,TRUE,49.99
+6/15/2025,Emix,Virtecek,liberal,TRUE,50.01
+6/15/2025,Emix,Javer,labour,TRUE,49.99
+6/15/2025,Garvor,Virtecek,liberal,TRUE,78.57
+6/15/2025,Garvor,Javer,labour,TRUE,21.43
+6/15/2025,Quintin,Virtecek,liberal,TRUE,58.33
+6/15/2025,Quintin,Javer,labour,TRUE,41.67
+6/15/2025,Trunoe,Virtecek,liberal,TRUE,50.01
+6/15/2025,Trunoe,Javer,labour,TRUE,49.99
+6/15/2025,National Popular Vote,Virtecek,liberal,TRUE,59.78
+6/15/2025,National Popular Vote,Javer,labour,TRUE,40.22
