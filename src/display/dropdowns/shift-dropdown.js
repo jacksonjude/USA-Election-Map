@@ -53,6 +53,10 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
       }
 
       candidateDataToIncreaseMargin.voteshare += marginToAdd
+      if (candidateDataToIncreaseMargin.voteshare > 100)
+      {
+        candidateDataToIncreaseMargin.voteshare = 100
+      }
     }
     else
     {
