@@ -452,3 +452,20 @@ function isString(object)
 {
   return typeof object === 'string' || object instanceof String || object === null || object === undefined
 }
+
+function isPointInDiv(divElement, e)
+{
+  return isPointInDivHorizontally(divElement, e) && isPointInDivVertically(divElement, e)
+}
+
+function isPointInDivHorizontally(divElement, e)
+{
+  const rect = divElement.getBoundingClientRect()
+  return e.pageX >= rect.left && e.pageX <= rect.right
+}
+
+function isPointInDivVertically(divElement, e)
+{
+  const rect = divElement.getBoundingClientRect()
+  return e.pageY >= rect.top && e.pageY <= rect.bottom
+}

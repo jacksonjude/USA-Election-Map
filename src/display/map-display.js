@@ -70,6 +70,8 @@ const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 60
 
+var currentRound
+
 var progressCircleDiv
 const progressCircleDuration = 100
 var lastIndicatorCircleProgress
@@ -652,6 +654,7 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
   currentMapSource.cancelDownload()
 
   currentMapSource = mapSource
+  currentRound = null
   updateNavBarForNewSource(false, false)
   await loadDataMap(...loadDataMapArgs)
 }
@@ -893,6 +896,7 @@ async function executeDisplayMapQueue()
   if (isRunningDisplayMapQueue) { return }
 
   isRunningDisplayMapQueue = true
+  currentRound = null
 
   while (displayMapQueue.length > 0)
   {
@@ -997,10 +1001,61 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
+  
+  let roundsForDate = []
+  for (let regionID in currentMapDataForDate)
+  {
+    const round = currentMapDataForDate[regionID].round
+    if (round && !roundsForDate.includes(round))
+    {
+      roundsForDate.push(round)
+    }
+  }
+  roundsForDate.sort()
+  
+  if (roundsForDate.length > 0)
+  {
+    if (!currentRound)
+    {
+      currentRound = roundsForDate[roundsForDate.length-1]
+    }
+    
+    if (currentRound && !roundsForDate.includes(currentRound))
+    {
+      let foundValidRound = false
+      for (let round of roundsForDate)
+      {
+        if (currentRound > round) continue
+        
+        currentRound = round
+        foundValidRound = true
+      }
+      
+      if (!foundValidRound)
+      {
+        currentRound = roundsForDate[0]
+      }
+    }
+    
+    updateRoundControls(roundsForDate)
+    
+    $("#mapRoundControls").css('display', 'flex')
+  }
+  else
+  {
+    currentRound = null
+    $("#mapRoundControls").css('display', 'none')
+  }
 
   for (let regionNum in currentMapDataForDate)
   {
-    var regionDataCallback = getRegionData(currentMapDataForDate[regionNum].region)
+    const currentRegionData = currentMapDataForDate[regionNum]
+    if (currentRound && currentRound != currentRegionData.round)
+    {
+      continue
+    }
+    
+    var regionDataCallback = getRegionData(currentRegionData.region)
     var regionData = regionDataCallback.regionData
     var regionsToFill = regionDataCallback.linkedRegionIDs
 
@@ -1010,27 +1065,27 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
       regionData = displayRegionDataArray[regionNum]
     }
 
-    regionData.region = currentMapDataForDate[regionNum].region
-    regionData.state = currentMapDataForDate[regionNum].state
-    regionData.margin = currentMapDataForDate[regionNum].margin
-    regionData.partyID = currentMapDataForDate[regionNum].partyID
-    regionData.isHold = currentMapDataForDate[regionNum].isHold
-    regionData.electionDate = currentMapDataForDate[regionNum].electionDate
-    regionData.offYear = currentMapDataForDate[regionNum].offYear
-    regionData.disabled = currentMapDataForDate[regionNum].disabled
-    regionData.candidateName = currentMapDataForDate[regionNum].candidateName
-    regionData.candidateMap = currentMapDataForDate[regionNum].candidateMap
-    regionData.chanceIncumbent = currentMapDataForDate[regionNum].chanceIncumbent
-    regionData.chanceChallenger = currentMapDataForDate[regionNum].chanceChallenger
-    regionData.partyVotesharePercentages = currentMapDataForDate[regionNum].partyVotesharePercentages
-    regionData.seatClass = currentMapDataForDate[regionNum].seatClass
-    regionData.isSpecial = currentMapDataForDate[regionNum].isSpecial
-    regionData.flip = currentMapDataForDate[regionNum].flip
-    regionData.voteSplits = currentMapDataForDate[regionNum].voteSplits
-    regionData.voteWorth = currentMapDataForDate[regionNum].voteWorth
-    regionData.reportingPercent = currentMapDataForDate[regionNum].reportingPercent
-    regionData.totalVotes = currentMapDataForDate[regionNum].totalVotes
-    regionData.altData = currentMapDataForDate[regionNum].altData
+    regionData.region = currentRegionData.region
+    regionData.state = currentRegionData.state
+    regionData.margin = currentRegionData.margin
+    regionData.partyID = currentRegionData.partyID
+    regionData.isHold = currentRegionData.isHold
+    regionData.electionDate = currentRegionData.electionDate
+    regionData.offYear = currentRegionData.offYear
+    regionData.disabled = currentRegionData.disabled
+    regionData.candidateName = currentRegionData.candidateName
+    regionData.candidateMap = currentRegionData.candidateMap
+    regionData.chanceIncumbent = currentRegionData.chanceIncumbent
+    regionData.chanceChallenger = currentRegionData.chanceChallenger
+    regionData.partyVotesharePercentages = currentRegionData.partyVotesharePercentages
+    regionData.seatClass = currentRegionData.seatClass
+    regionData.isSpecial = currentRegionData.isSpecial
+    regionData.flip = currentRegionData.flip
+    regionData.voteSplits = currentRegionData.voteSplits
+    regionData.voteWorth = currentRegionData.voteWorth
+    regionData.reportingPercent = currentRegionData.reportingPercent
+    regionData.totalVotes = currentRegionData.totalVotes
+    regionData.altData = currentRegionData.altData
 
     updateRegionFillColors(regionsToFill, regionData, false)
   }
@@ -1352,6 +1407,29 @@ function populateRegionsArray()
   }
 }
 
+function updateRoundControls(roundsForDate)
+{
+  $("#mapRoundControls").empty()
+  
+  for (const roundIndex in roundsForDate)
+  {
+    if (roundIndex > 0)
+    {
+      $("#mapRoundControls").append('<div class="dropdown-separator"></div>')
+    }
+    
+    const round = roundsForDate[roundIndex]
+    
+    $("#mapRoundControls").append(`<a onclick="selectRound(${round})" data-round="${round}" class="${currentRound == round ? 'round-selected' : 'round'}" style="display: flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; aspect-ratio: 1/1; font-size: 30rem; border-radius: ${roundIndex == 0 ? '25rem 25rem' : '0 0'} ${roundIndex == roundsForDate.length-1 ? '25rem 25rem' : '0 0'};">R${round}</a>`)
+  }
+}
+
+function selectRound(round)
+{
+  currentRound = round
+  displayDataMap()
+}
+
 async function toggleEditing(stateToSet)
 {
   if (editMarginID)
@@ -1420,7 +1498,19 @@ async function toggleEditing(stateToSet)
     $("#regionboxcontainer").css('pointer-events', "")
 
     var currentMapIsCustom = currentMapSource.isCustom() && !currentMapSource.isCompare()
-    var currentMapDataForDate = currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+    var currentMapDataForDate = cloneObject(currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray)
+    
+    if (currentRound)
+    {
+      for (let regionID in currentMapDataForDate)
+      {
+        if (currentMapDataForDate[regionID].round != currentRound)
+        {
+          delete currentMapDataForDate[regionID]
+        }
+      }
+    }
+    
     currentCustomMapSource.updateMapData(currentMapDataForDate, getCurrentDateOrToday(), !currentMapIsCustom, currentMapSource.getCandidateNames(getCurrentDateOrToday()), !currentMapIsCustom ? currentEditingMode : null)
 
     if (!currentMapIsCustom)

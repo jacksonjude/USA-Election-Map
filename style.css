@@ -543,6 +543,20 @@ body {
   line-height: 100%;
 }
 
+.round-selected {
+  background-color: #CCC;
+  color: black;
+}
+
+.round {
+  background-color: #444;
+  color: white;
+}
+
+.round:hover {
+  background-color: #666;
+}
+
 @container discord-invite-box (max-width: 280px) {
   #discordInfo {
     display: none !important;

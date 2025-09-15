@@ -316,14 +316,15 @@
     <input type='file' id='uploadFileInput' style='display: none'>
     <div id='maincontent'>
       <div id='maptextcontainer'>
-        <div style="display: flex; height: 0; flex-grow: 1; margin-top: 15rem; margin-bottom: 15rem; gap: 20rem;">
-          <div id="mapcontainer" style="overflow: hidden; width: 100%;" oncontextmenu="return false"></div>
-          <div id="mapZoomControls" style="display: none; width: 50px; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; height: 0; flex-grow: 1; margin-top: 15rem; margin-bottom: 15rem; gap: 10rem;">
+          <div id="mapRoundControls" style="display: none; width: 65rem; flex-direction: column; margin-top: 15rem; margin-bottom: 15rem;"></div>
+          <div id="mapcontainer" style="overflow: hidden; display: flex; flex-grow: 1;" oncontextmenu="return false"></div>
+          <div id="mapZoomControls" style="display: none; width: 65rem; flex-direction: column; justify-content: space-between; margin-top: 15rem; margin-bottom: 15rem;">
             <a id="mapCloseButton" onclick="zoomOutMap()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="mapCloseButtonImage" src="./assets/close-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
             <div style="display: flex; flex-direction: column">
-              <a id="mapZoomInButton" onclick="svgPanZoomController.zoomIn()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 4rem;"><img id="mapZoomInButtonImage" src="./assets/zoom-in-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
-              <a id="mapResetZoomButton" onclick="svgPanZoomController.reset()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 4rem;"><img id="mapResetZoomButtonImage" src="./assets/reset-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
-              <a id="mapZoomOutButton" onclick="svgPanZoomController.zoomOut()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 4rem;"><img id="mapZoomOutButtonImage" src="./assets/zoom-out-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
+              <a id="mapZoomInButton" onclick="svgPanZoomController.zoomIn()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 5rem;"><img id="mapZoomInButtonImage" src="./assets/zoom-in-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
+              <a id="mapResetZoomButton" onclick="svgPanZoomController.reset()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 5rem;"><img id="mapResetZoomButtonImage" src="./assets/reset-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
+              <a id="mapZoomOutButton" onclick="svgPanZoomController.zoomOut()" style="display: block; cursor: pointer; user-select: none; -webkit-user-select: none; margin-bottom: 5rem;"><img id="mapZoomOutButtonImage" src="./assets/zoom-out-icon.png" style="width: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
             </div>
           </div>
         </div>

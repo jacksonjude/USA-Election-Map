@@ -475,6 +475,11 @@ document.addEventListener('keypress', async function(e) {
   {
     zoomOutMap()
   }
+  else if (e.key == "r" && currentRound)
+  {
+    currentRound += 1
+    displayDataMap()
+  }
 })
 
 var mouseIsDown = false
@@ -485,10 +490,12 @@ var currentRegionID
 var ignoreNextClick = false
 var clickUsedToZoom = false
 
+var isDraggingInsideRoundControls = false
+
 var currentMouseX
 var currentMouseY
 
-document.addEventListener('mousedown', async function() {
+document.addEventListener('mousedown', async function(e) {
   mouseIsDown = true
   
   if (!editingRegionVotesharePercentages)
@@ -508,6 +515,11 @@ document.addEventListener('mousedown', async function() {
     {
       clickUsedToZoom = true
     }
+  }
+  
+  if (isPointInDiv($("#mapRoundControls")[0], e))
+  {
+    isDraggingInsideRoundControls = true
   }
 })
 
@@ -619,6 +631,17 @@ document.addEventListener('mousemove', function(e) {
   {
     updateRegionBoxPosition(e.pageX, e.pageY)
   }
+  
+  if (isDraggingInsideRoundControls)
+  {
+    $("#mapRoundControls a").each(function () {
+      const round = $(this).data('round')
+      if (isPointInDivVertically($(this)[0], e) && round != currentRound)
+      {
+        selectRound(round)
+      }
+    })
+  }
 
   currentMouseX = e.pageX
   currentMouseY = e.pageY
@@ -636,6 +659,7 @@ document.addEventListener('mouseup', function() {
   }
 
   mouseIsDown = false
+  isDraggingInsideRoundControls = false
   
   if (!editingRegionVotesharePercentages)
   {
