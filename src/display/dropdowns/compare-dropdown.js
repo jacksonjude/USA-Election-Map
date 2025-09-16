@@ -471,7 +471,7 @@ async function applyCompareToCustomMap(shouldResetRound = false)
     }
   }
   
-  if (currentRound > Math.max(...compareRoundsForDates[0], ...compareRoundsForDates[1]))
+  if (currentRound && currentRound > Math.max(...compareRoundsForDates[0], ...compareRoundsForDates[1]))
   {
     currentRound = Math.min(...compareRoundsForDates[0], ...compareRoundsForDates[1])
   }
