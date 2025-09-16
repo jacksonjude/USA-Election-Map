@@ -222,7 +222,7 @@
       </div>
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <div class="dropdown" onmouseenter="hoveredCompareDropdownButton()">
-          <a id="compareButton" class="topnavbutton topnav-iconbutton" onclick="applyCompareToCustomMap()"><span class='topnav-text'>Compare</span><span class='topnav-icon'>↔️</span></a>
+          <a id="compareButton" class="topnavbutton topnav-iconbutton" onclick="applyCompareToCustomMap(true)"><span class='topnav-text'>Compare</span><span class='topnav-icon'>↔️</span></a>
           <div id="compareDropdownContent" class="dropdown-content" style="min-width: 290px">
             <div id="compareArrayDropdownContainer" class="dropdown-container" style="overflow: hidden; display: none;">
               <div class='dropdown-separator'></div>
@@ -248,7 +248,7 @@
                 <span style="margin-right: 8px;">🔀</span>Swap Maps
               </a>
               <div class='dropdown-separator'></div>
-              <a id="compareSortModeButton" onclick="toggleCompareSortMode(this); applyCompareToCustomMap()" style="text-align: center;">
+              <a id="compareSortModeButton" onclick="toggleCompareSortMode(this); applyCompareToCustomMap(true)" style="text-align: center;">
                 <span style="margin-right: 8px;">🔼</span>Sort by: voteshare
               </a>
             </div>

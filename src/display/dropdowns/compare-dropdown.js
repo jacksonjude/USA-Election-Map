@@ -437,6 +437,19 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
   
   if (shouldApply)
   {
+    await applyCompareToCustomMap(true)
+  }
+}
+
+async function applyCompareToCustomMap(shouldResetRound = false)
+{
+  if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
+
+  let voteshareCutoffMargin0 = mapSources[compareMapSourceIDArray[0]].voteshareCutoffMargin
+  let voteshareCutoffMargin1 = mapSources[compareMapSourceIDArray[1]].voteshareCutoffMargin
+  
+  if (shouldResetRound)
+  {
     currentRound = null
     
     compareRoundsForDates = [0, 1].map(i => {
@@ -456,17 +469,7 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
     {
       currentRound = null
     }
-    
-    await applyCompareToCustomMap()
   }
-}
-
-async function applyCompareToCustomMap()
-{
-  if (compareMapDataArray.length < 2 || compareMapDataArray[0] == null || compareMapDataArray[1] == null) { return }
-
-  let voteshareCutoffMargin0 = mapSources[compareMapSourceIDArray[0]].voteshareCutoffMargin
-  let voteshareCutoffMargin1 = mapSources[compareMapSourceIDArray[1]].voteshareCutoffMargin
   
   const currentRoundForDates = [0, 1].map(i => {
     if (!currentRound)
