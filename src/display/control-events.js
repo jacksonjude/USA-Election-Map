@@ -478,7 +478,14 @@ document.addEventListener('keypress', async function(e) {
   else if (e.key == "r" && currentRound)
   {
     currentRound += 1
-    displayDataMap()
+    if (currentMapSource.isCompare())
+    {
+      applyCompareToCustomMap()
+    }
+    else
+    {
+      displayDataMap()
+    }
   }
 })
 

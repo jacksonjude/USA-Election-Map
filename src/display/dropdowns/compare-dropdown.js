@@ -471,6 +471,11 @@ async function applyCompareToCustomMap(shouldResetRound = false)
     }
   }
   
+  if (currentRound > Math.max(...compareRoundsForDates[0], ...compareRoundsForDates[1]))
+  {
+    currentRound = Math.min(...compareRoundsForDates[0], ...compareRoundsForDates[1])
+  }
+  
   const currentRoundForDates = [0, 1].map(i => {
     if (!currentRound)
     {
