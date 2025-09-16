@@ -654,7 +654,12 @@ async function setMapSource(mapSource, ...loadDataMapArgs)
   currentMapSource.cancelDownload()
 
   currentMapSource = mapSource
-  currentRound = null
+  
+  if (!mapSource.isCompare())
+  {
+    currentRound = null
+  }
+  
   updateNavBarForNewSource(false, false)
   await loadDataMap(...loadDataMapArgs)
 }
@@ -1003,12 +1008,19 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   })
   
   let roundsForDate = []
-  for (let regionID in currentMapDataForDate)
+  if (currentMapSource.isCompare())
   {
-    const round = currentMapDataForDate[regionID].round
-    if (round && !roundsForDate.includes(round))
+    roundsForDate = [...new Set([...compareRoundsForDates[0], ...compareRoundsForDates[1]])]
+  }
+  else
+  {
+    for (let regionID in currentMapDataForDate)
     {
-      roundsForDate.push(round)
+      const round = currentMapDataForDate[regionID].round
+      if (round && !roundsForDate.includes(round))
+      {
+        roundsForDate.push(round)
+      }
     }
   }
   roundsForDate.sort()
@@ -1050,7 +1062,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   for (let regionNum in currentMapDataForDate)
   {
     const currentRegionData = currentMapDataForDate[regionNum]
-    if (currentRound && currentRound != currentRegionData.round)
+    if (!currentMapSource.isCompare() && currentRound && currentRound != currentRegionData.round)
     {
       continue
     }
@@ -1427,7 +1439,14 @@ function updateRoundControls(roundsForDate)
 function selectRound(round)
 {
   currentRound = round
-  displayDataMap()
+  if (currentMapSource.isCompare())
+  {
+    applyCompareToCustomMap()
+  }
+  else
+  {
+    displayDataMap()
+  }
 }
 
 async function toggleEditing(stateToSet)

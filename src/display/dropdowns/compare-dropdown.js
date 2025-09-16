@@ -17,6 +17,8 @@ var getCompareMajorParties
 var compareResultCustomMapSource
 var shouldSetCompareMapSource
 
+var compareRoundsForDates
+
 function resetCompareVariables()
 {
   showingCompareMap = false
@@ -31,6 +33,8 @@ function resetCompareVariables()
   
   showingCustomCompare = false
   customCompareSourceToSet = 0
+  
+  compareRoundsForDates = [[], []]
 }
 
 function createComparePresetDropdownItems()
@@ -170,6 +174,8 @@ async function loadCompareItemMapSource(compareItemNum)
     dateIndexToSet = $("#secondCompareDataMapDateSlider")[0].value
     break
   }
+  
+  currentRound = null
 
   $("#dataMapDateSlider").val(dateIndexToSet)
   await displayDataMap(dateIndexToSet)
@@ -428,8 +434,31 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
     currentCustomMapSource.setCandidateNames(candidateNames, dateToDisplay.getTime())
     currentCompareSliderDate = dateToDisplay
   }
-
-  shouldApply && await applyCompareToCustomMap()
+  
+  if (shouldApply)
+  {
+    currentRound = null
+    
+    compareRoundsForDates = [0, 1].map(i => {
+      let roundsForDate = Object.keys(compareMapDataArray[i])
+        .map(regionID => compareMapDataArray[i][regionID].round)
+        .filter(r => r != null)
+      roundsForDate = [...new Set(roundsForDate)]
+      roundsForDate.sort()
+      return roundsForDate
+    })
+    
+    if (compareRoundsForDates[0].length > 0 || compareRoundsForDates[1].length > 0)
+    {
+      currentRound = Math.max(compareRoundsForDates[0][compareRoundsForDates[0].length-1], compareRoundsForDates[1][compareRoundsForDates[1].length-1])
+    }
+    else
+    {
+      currentRound = null
+    }
+    
+    await applyCompareToCustomMap()
+  }
 }
 
 async function applyCompareToCustomMap()
@@ -438,13 +467,54 @@ async function applyCompareToCustomMap()
 
   let voteshareCutoffMargin0 = mapSources[compareMapSourceIDArray[0]].voteshareCutoffMargin
   let voteshareCutoffMargin1 = mapSources[compareMapSourceIDArray[1]].voteshareCutoffMargin
+  
+  const currentRoundForDates = [0, 1].map(i => {
+    if (!currentRound)
+    {
+      return null
+    }
+    
+    if (compareRoundsForDates[i].includes(currentRound))
+    {
+      return currentRound
+    }
+    
+    // if roundsForDate has a later round than roundToUse, set that
+    let roundToUse = null
+    for (const round of compareRoundsForDates[i])
+    {
+      if (currentRound > round) continue
+      
+      roundToUse = round
+    }
+    
+    // otherwise, set to last round in roundsForDate
+    if (!roundToUse)
+    {
+      roundToUse = compareRoundsForDates[i][compareRoundsForDates[i].length-1]
+    }
+    
+    return roundToUse
+  })
 
-  var resultMapArray = {}
-  for (var regionID in compareMapDataArray[0])
+  let resultMapArray = {}
+  for (let regionID in compareMapDataArray[0])
   {
-    var compareRegionData0 = compareMapDataArray[0][regionID]
-    var compareRegionData1 = compareMapDataArray[1][regionID]
-
+    if (currentRound && compareMapDataArray[0][regionID].round != compareRoundsForDates[0][0])
+    {
+      continue
+    }
+    
+    let compareRegionData0 = compareMapDataArray[0][regionID]
+    let compareRegionData1 = compareMapDataArray[1][regionID]
+    
+    if (currentRound)
+    {
+      regionID = `${regionID.split('-')[0]}-${currentRoundForDates[0]}`
+      compareRegionData0 = compareMapDataArray[0][regionID]
+      compareRegionData1 = compareMapDataArray[1][`${regionID.split('-')[0]}-${currentRoundForDates[1]}`]
+    }
+    
     if (currentMapType.getMapSettings().seatArrangement == "election-type" && compareRegionData0?.seatClass != compareRegionData1?.seatClass)
     {
       if (regionID.endsWith("-S"))
