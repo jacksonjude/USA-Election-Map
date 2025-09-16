@@ -1432,7 +1432,7 @@ function updateRoundControls(roundsForDate)
     
     const round = roundsForDate[roundIndex]
     
-    $("#mapRoundControls").append(`<a onclick="selectRound(${round})" data-round="${round}" class="${currentRound == round ? 'round-selected' : 'round'}" style="display: flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; aspect-ratio: 1/1; font-size: 30rem; border-radius: ${roundIndex == 0 ? '25rem 25rem' : '0 0'} ${roundIndex == roundsForDate.length-1 ? '25rem 25rem' : '0 0'};">R${round}</a>`)
+    $("#mapRoundControls").append(`<a onclick="selectRound(${round})" data-round="${round}" class="${currentRound == round ? 'round-selected' : 'round'}" style="display: flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; aspect-ratio: 1/1; font-size: 25rem; border-radius: ${roundIndex == 0 ? '20rem 20rem' : '0 0'} ${roundIndex == roundsForDate.length-1 ? '20rem 20rem' : '0 0'};">R${round}</a>`)
   }
 }
 
