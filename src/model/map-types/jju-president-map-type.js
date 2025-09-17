@@ -17,17 +17,7 @@ var JJUPresidentMapType = new MapType(
   true,
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor"},
   [/.+-S/],
-  [
-    {id: "firstRound", title: "☝️ First Rounds", type: MapSettingType.optionCycle, options:
-      [
-        {id: "show", title: "Shown", value: true},
-        {id: "hide", title: "Hidden", value: false}
-      ],
-      shouldShowActive: (value) => {
-        return value
-      },
-    defaultValue: "hide", reloadType: MapSettingReloadType.data},
-  ],
+  [],
   () => {
     const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "National Popular Vote": nationalPopularVoteID}
   
@@ -314,33 +304,7 @@ var JJUPresidentMapType = new MapType(
           "GV": "402739737"
         }
       },
-      1724223600001: {
-        id: "1fFJ8Y_KS2iy6qOupil1F-qC8wrKDjpJECRHIVjWHUzY",
-        regions: {
-          "BI": "1501672328",
-          "EX": "1501672328",
-          "QU": "370122789",
-          "AV": "370122789",
-          "DM": "1011441980",
-          "TR": "1011441980",
-          "DT": "402739737",
-          "GV": "402739737"
-        }
-      },
       1729407600000: {
-        id: "18T8S_JLndBFFlCOoUxoqDFIxlEczNq4YFK2BNXpGRVc",
-        regions: {
-          "BI": "1501672328",
-          "EX": "1501672328",
-          "QU": "370122789",
-          "AV": "370122789",
-          "DM": "1011441980",
-          "TR": "1011441980",
-          "DT": "402739737",
-          "GV": "402739737"
-        }
-      },
-      1729407600001: {
         id: "18T8S_JLndBFFlCOoUxoqDFIxlEczNq4YFK2BNXpGRVc",
         regions: {
           "BI": "1501672328",
@@ -361,15 +325,7 @@ var JJUPresidentMapType = new MapType(
         id: "1WNpCjaDoAUzKZ0dESvw8rL3wIMSiXYmEphFwwxV2R8U",
         gid: "129029341"
       },
-      1739088000001: {
-        id: "1WNpCjaDoAUzKZ0dESvw8rL3wIMSiXYmEphFwwxV2R8U",
-        gid: "129029341"
-      },
       1743922800000: {
-        id: "1YI8gO_ajh3b9Et7wAH5A6kBLdPHM8LAz5XYhUpe9DRc",
-        gid: "129029341"
-      },
-      1743922800001: {
         id: "1YI8gO_ajh3b9Et7wAH5A6kBLdPHM8LAz5XYhUpe9DRc",
         gid: "129029341"
       },
@@ -377,10 +333,10 @@ var JJUPresidentMapType = new MapType(
         id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
         gid: "129029341"
       },
-      1749970800001: {
-        id: "1nI_EfYD42esRP0z-gS5GwMlDdY6RLelvBSFkKewM7pE",
+      1757142000000: {
+        id: "14G13c38FwtqjLNZ7WmoCA-0tvEPfZeOmk8MSMx5FPpE",
         gid: "129029341"
-      },
+      }
     }
   
     var PastElectionResultMapSource = new MapSource(

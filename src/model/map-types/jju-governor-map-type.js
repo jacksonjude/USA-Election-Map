@@ -365,6 +365,15 @@ var JJUGovernorMapType = new MapType(
           "E": "554482009",
           "W": "554482009"
         }
+      },
+      1757142000000: {
+        id: "14G13c38FwtqjLNZ7WmoCA-0tvEPfZeOmk8MSMx5FPpE",
+        regions: {
+          "N": "603625947",
+          "S": "603625947",
+          "E": "603625947",
+          "W": "603625947"
+        }
       }
     }
   
