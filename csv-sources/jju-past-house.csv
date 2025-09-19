@@ -558,6 +558,13 @@ date,region,candidate,party,offyear,runoff,voteshare
 8/3/2025,List Seat 10,Qwert,progressive,FALSE,FALSE,100
 8/3/2025,List Seat 11,SunwardH,progressive,FALSE,FALSE,100
 8/3/2025,List Seat 12,June_3rd,progressive,FALSE,FALSE,100
+8/23/2025,Emix,Cob,liberal,TRUE,FALSE,33.34
+8/23/2025,Emix,Javer,labour,TRUE,FALSE,33.32
+8/23/2025,Emix,Lee,liberal,TRUE,FALSE,25.00
+8/23/2025,Emix,Danlyo,labour,TRUE,FALSE,8.33
+8/23/2025,Emix,Treptichnus,progressive,TRUE,FALSE,0
+8/23/2025,Emix,Cob,liberal,TRUE,TRUE,54.55
+8/23/2025,Emix,Javer,labour,TRUE,TRUE,45.45
 9/6/2025,Coalition,alliance,peacock,FALSE,FALSE,0
 9/6/2025,Coalition,progressive,peacock,FALSE,FALSE,0
 9/6/2025,Alvana,Poopman69,alliance,FALSE,FALSE,25
