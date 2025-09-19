@@ -12,6 +12,7 @@ var partyOrdering = [
   {partyID: JJUCitrusPartyBloc.getID(), direction: PieChartDirection.clockwise},
   {partyID: JJULabourParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: JJULabLibPartyBloc.getID(), direction: PieChartDirection.clockwise},
+  {partyID: JJUPeacockPartyBloc.getID(), direction: PieChartDirection.clockwise},
   {partyID: FederalistParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: Independent1860JohnBreckenridgeParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: DemocraticParty.getID(), direction: PieChartDirection.clockwise},

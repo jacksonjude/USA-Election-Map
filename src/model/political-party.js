@@ -675,6 +675,15 @@ var JJUUnityPartyBloc = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUPeacockPartyBloc = new PoliticalParty(
+  "JJUPEA",
+  ["Peacock"],
+  "PEA",
+  "Peacock",
+  cloneObject(PoliticalPartyColors.cyan),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
