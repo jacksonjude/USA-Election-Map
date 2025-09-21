@@ -12,7 +12,7 @@ var JJUGovernorMapType = new MapType(
   false,
   2,
   true,
-  false,
+  true,
   false,
   true,
   {"N": "North", "S": "South", "E": "East", "W": "West"},
