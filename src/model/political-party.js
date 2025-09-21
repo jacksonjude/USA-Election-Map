@@ -612,6 +612,15 @@ var JJUWildroseParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUReformParty = new PoliticalParty(
+  "JJUREF",
+  ["Reform"],
+  "Ref",
+  "Reform",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
 var JJULabLibPartyBloc = new PoliticalParty(
   "JJULAL",
   ["LabLib"],

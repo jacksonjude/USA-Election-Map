@@ -82,3 +82,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 9/6/2025,South,Tim Inkle,labour,FALSE,FALSE,66.67
 9/6/2025,West,Border,alliance,FALSE,FALSE,32.26
 9/6/2025,West,Nath,independent,FALSE,FALSE,67.74
+9/19/2025,East,Ash,reform,TRUE,FALSE,8.33
+9/19/2025,East,Recall,independent,TRUE,FALSE,91.67
+9/19/2025,East,Cruzer,alliance,TRUE,TRUE,88.46
+9/19/2025,East,Leon,progressive,TRUE,TRUE,11.54
