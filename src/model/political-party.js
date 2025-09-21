@@ -617,7 +617,7 @@ var JJUReformParty = new PoliticalParty(
   ["Reform"],
   "Ref",
   "Reform",
-  cloneObject(PoliticalPartyColors.orange),
+  cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
 
