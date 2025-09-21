@@ -56,22 +56,63 @@ var JJUHouseMapType = new MapType(
   
 	    let regionNames = Object.keys(regionNameToID)
       
-      const regionRetireExceptions = {
-        "L9": [new Date(2024, 9-1, 21+1).getTime(), new Date(2025, 6-1, 1).getTime()],
-        "N": new Date(2025, 1-1, 1).getTime(),
-        "S": new Date(2025, 1-1, 1).getTime(),
-        "E": new Date(2025, 1-1, 1).getTime(),
-        "W": new Date(2025, 1-1, 1).getTime(),
-        "N-1": new Date(2025, 1-1, 22+1).getTime(),
-        "S-1": new Date(2025, 1-1, 22+1).getTime(),
-        "E-1": new Date(2025, 1-1, 22+1).getTime(),
-        "W-1": new Date(2025, 1-1, 22+1).getTime(),
-        "N-2": new Date(2025, 1-1, 22+1).getTime(),
-        "S-2": new Date(2025, 1-1, 22+1).getTime(),
-        "E-2": new Date(2025, 1-1, 22+1).getTime(),
-        "W-2": new Date(2025, 1-1, 22+1).getTime(),
-        "L13": new Date(2025, 7-1, 20-1).getTime(),
-      }
+      const getListRegions = (count) => Array.from({length: count}, (_, i) => `L${i+1}`)
+      const getNSEWRegions = () => ['N', 'S', 'E', 'W']
+      const getDistricts8 = () => ['BI', 'EX', 'DM', 'TR', 'AV', 'QU', 'DT', 'GV']
+      
+      // probably should just load past election results for this
+      const regionDateRanges = [
+        {
+          start: new Date(2024, 8-1, 1).getTime(),
+          regions: [
+            ...getNSEWRegions(),
+            ...getListRegions(9)
+          ]
+        },
+        {
+          start: new Date(2024, 10-1, 20-1).getTime(),
+          regions: [
+            ...getNSEWRegions(),
+            ...getListRegions(8)
+          ]
+        },
+        {
+          start: new Date(2025, 1-1, 11-1).getTime(),
+          regions: [
+            ...getNSEWRegions().map(r => `${r}-1`),
+            ...getNSEWRegions().map(r => `${r}-2`),
+            ...getListRegions(8)
+          ]
+        },
+        {
+          start: new Date(2025, 2-1, 9-1).getTime(),
+          regions: [
+            ...getDistricts8(),
+            ...getListRegions(8)
+          ]
+        },
+        {
+          start: new Date(2025, 5-1, 11-1).getTime(),
+          regions: [
+            ...getDistricts8(),
+            ...getListRegions(9)
+          ]
+        },
+        {
+          start: new Date(2025, 6-1, 15-1).getTime(),
+          regions: [
+            ...getDistricts8(),
+            ...getListRegions(13)
+          ]
+        },
+        {
+          start: new Date(2025, 7-1, 20-1).getTime(),
+          regions: [
+            ...getDistricts8(),
+            ...getListRegions(12)
+          ]
+        }
+      ]
       
       const coalitionRegionID = "Coalition"
       
@@ -217,6 +258,8 @@ var JJUHouseMapType = new MapType(
         {
           coalitionPartyMap[coalitionPartyMapping[columnMap.candidateName]] = coalitionPartyMapping[columnMap.partyID]
         }
+        
+        const regionsForDate = [...regionDateRanges].reverse().find(r => r.start <= mapDateTime).regions
     
 		    for (let regionName of regionNames)
 		    {
@@ -228,9 +271,7 @@ var JJUHouseMapType = new MapType(
     
 			    if (mapDataRows.length == 0)
 			    {
-			      if (isCustomMap && !(regionRetireExceptions[regionID] && regionRetireExceptions[regionID] instanceof Array
-              ? currentMapDate > regionRetireExceptions[regionID][0] && currentMapDate < regionRetireExceptions[regionID][1]
-              : currentMapDate > regionRetireExceptions[regionID]))
+			      if (isCustomMap && regionsForDate.includes(regionID))
 			      {
 			        let partyIDToCandidateNames = {}
 			        for (let partyCandidateName in candidateNameToPartyIDMap)
@@ -276,13 +317,13 @@ var JJUHouseMapType = new MapType(
     
 		    let isOffyear = Object.values(filteredDateData)[0].offYear
 		    let isRunoff = Object.values(filteredDateData)[0].isRunoff
+        
+        const regionsForDate = [...regionDateRanges].reverse().find(r => r.start <= mapDate).regions
     
 		    for (let regionID of previousDateRegionIDs)
 		    {
 		      if (regionID == nationalPopularVoteID) { continue }
-          if (regionRetireExceptions[regionID] instanceof Array
-            ? mapDate > regionRetireExceptions[regionID][0] && mapDate < regionRetireExceptions[regionID][1]
-            : mapDate > regionRetireExceptions[regionID]) { continue }
+          if (!regionsForDate.includes(regionID)) { continue }
     
 		      if (!currentRegionIDs.includes(regionID))
 		      {
