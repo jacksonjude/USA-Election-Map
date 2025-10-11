@@ -3,8 +3,8 @@ var JJUHouseMapType = new MapType(
   "House",
   "H",
   "assets/usa-house.png",
-  "svg-sources/jju-districts-list-map.svg",
-  8,
+  "svg-sources/jju-districts-10-list-12-map.svg",
+  22,
   function()
   {
     return 1
@@ -15,7 +15,7 @@ var JJUHouseMapType = new MapType(
   true,
   false,
   true,
-  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "L10": "List Seat 10", "L11": "List Seat 11", "L12": "List Seat 12", "L13": "List Seat 13", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
+  {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "KI": "Kilden", "NM": "Newmasi", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "L10": "List Seat 10", "L11": "List Seat 11", "L12": "List Seat 12", "L13": "List Seat 13", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
   [
     {id: "coalitions", title: "🤝 Coalitions", type: MapSettingType.optionCycle, options:
@@ -47,7 +47,7 @@ var JJUHouseMapType = new MapType(
     defaultValue: "hide", reloadType: MapSettingReloadType.display}
   ],
   () => {
-	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "List Seat 10": "L10", "List Seat 11": "L11", "List Seat 12": "L12", "List Seat 13": "L13", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
+	  const regionNameToID = {"Brunix Islands": "BI", "Emix": "EX", "Dalminica": "DM", "Trunoe": "TR", "Alvana": "AV", "Quintin": "QU", "Dentone": "DT", "Garvor": "GV", "Kilden": "KI", "Newmasi": "NM", "North": "N", "South": "S", "East": "E", "West": "W", "List Seat 1": "L1", "List Seat 2": "L2", "List Seat 3": "L3", "List Seat 4": "L4", "List Seat 5": "L5", "List Seat 6": "L6", "List Seat 7": "L7", "List Seat 8": "L8", "List Seat 9": "L9", "List Seat 10": "L10", "List Seat 11": "L11", "List Seat 12": "L12", "List Seat 13": "L13", "North 1st": "N-1", "South 1st": "S-1", "East 1st": "E-1", "West 1st": "W-1", "North 2nd": "N-2", "South 2nd": "S-2", "East 2nd": "E-2", "West 2nd": "W-2", "National Popular Vote": nationalPopularVoteID}
   
 	  let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
 	  {
@@ -485,9 +485,13 @@ var JJUHouseMapType = new MapType(
       {
         return "svg-sources/jju-districts-list-13-map.svg"
       }
-      else
+      else if (mapDate < new Date(2025, 10-1, 1))
       {
         return "svg-sources/jju-districts-list-12-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-districts-10-list-12-map.svg"
       }
     }
     

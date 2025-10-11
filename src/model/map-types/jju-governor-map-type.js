@@ -3,8 +3,8 @@ var JJUGovernorMapType = new MapType(
   "Governor",
   "G",
   "assets/usa-governor.png",
-  "svg-sources/jju-regions-map.svg",
-  4,
+  "svg-sources/jju-regions-5-map.svg",
+  5,
   function()
   {
     return 1
@@ -15,7 +15,7 @@ var JJUGovernorMapType = new MapType(
   true,
   false,
   true,
-  {"N": "North", "S": "South", "E": "East", "W": "West"},
+  {"N": "North", "S": "South", "E": "East", "W": "West", "C": "Center"},
   [],
   [
 	  {id: "offYear", title: "🔄 Off Cycle Elections", type: MapSettingType.optionCycle, options:
@@ -38,7 +38,7 @@ var JJUGovernorMapType = new MapType(
     defaultValue: "hide", reloadType: MapSettingReloadType.display}
   ],
   () => {
-	  const regionNameToID = {"North": "N", "South": "S", "East": "E", "West": "W", "National Popular Vote": nationalPopularVoteID}
+	  const regionNameToID = {"North": "N", "South": "S", "East": "E", "West": "W", "Center": "C", "National Popular Vote": nationalPopularVoteID}
   
 	  let doubleLineVoteshareFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, ____, isCustomMap, voteshareCutoffMargin)
 	  {
@@ -325,6 +325,20 @@ var JJUGovernorMapType = new MapType(
 	    }
 	  }
     
+    function getGovernorSVGByDate(dateTime)
+    {
+      let mapDate = new Date(dateTime)
+      
+      if (mapDate < new Date(2025, 10-1, 1))
+      {
+        return "svg-sources/jju-regions-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-regions-5-map.svg"
+      }
+    }
+    
     function getFormattedRegionName(regionName, regionData)
     {
       if (!regionData) return regionName
@@ -433,7 +447,7 @@ var JJUGovernorMapType = new MapType(
 	    null, // shouldClearDisabled
 	    true, // shouldShowVoteshare
 	    1.0, // voteshareCutoffMargin
-      null, // overrideSVGPath
+      getGovernorSVGByDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
       null, // shouldForcePopularVoteDisplay
@@ -490,7 +504,7 @@ var JJUGovernorMapType = new MapType(
 	    false, // shouldClearDisabled
 	    null, // shouldShowVoteshare
       null, // voteshareCutoffMargin
-      null, // overrideSVGPath
+      getGovernorSVGByDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
       null, // shouldForcePopularVoteDisplay
