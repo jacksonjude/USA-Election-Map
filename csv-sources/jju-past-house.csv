@@ -612,6 +612,9 @@ date,region,candidate,party,offyear,runoff,voteshare
 9/6/2025,List Seat 10,Chillicote,labour,FALSE,FALSE,100
 9/6/2025,List Seat 11,Strxya,progressive,FALSE,FALSE,100
 9/6/2025,List Seat 12,SunwardH,progressive,FALSE,FALSE,100
+10/11/2025,Coalition,labour,burger,FALSE,FALSE,0
+10/11/2025,Coalition,progressive,burger,FALSE,FALSE,0
+10/11/2025,Coalition,renewal,burger,FALSE,FALSE,0
 10/11/2025,Alvana,Potato,renewal,FALSE,FALSE,50.01
 10/11/2025,Alvana,Dannyunown0,labour,FALSE,FALSE,49.99
 10/11/2025,Brunix Islands,Geodore Roosevelt,alliance,FALSE,FALSE,90.91

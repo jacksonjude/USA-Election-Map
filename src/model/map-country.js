@@ -225,6 +225,7 @@ function setMapCountries()
       [JJUCitrusPartyBloc.getID()]: JJUCitrusPartyBloc,
       [JJUTrafficLightPartyBloc.getID()]: JJUTrafficLightPartyBloc,
       [JJUPeacockPartyBloc.getID()]: JJUPeacockPartyBloc,
+      [JJUBurgerPartyBloc.getID()]: JJUBurgerPartyBloc,
       [JJUUnityPartyBloc.getID()]: JJUUnityPartyBloc,
       [IndependentGenericParty.getID()]: IndependentGenericParty
     },
@@ -249,6 +250,7 @@ function setMapCountries()
       JJUCitrusPartyBloc.getID(),
       JJUTrafficLightPartyBloc.getID(),
       JJUPeacockPartyBloc.getID(),
+      JJUBurgerPartyBloc.getID(),
       JJUUnityPartyBloc.getID(),
       IndependentGenericParty.getID()
     ],

@@ -693,6 +693,15 @@ var JJUPeacockPartyBloc = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUBurgerPartyBloc = new PoliticalParty(
+  "JJUBUR",
+  ["Burger"],
+  "Bur",
+  "Burger",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],
