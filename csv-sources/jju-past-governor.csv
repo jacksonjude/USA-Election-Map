@@ -86,3 +86,14 @@ date,region,candidate,party,offyear,runoff,voteshare
 9/19/2025,East,Recall,independent,TRUE,FALSE,91.67
 9/19/2025,East,Cruzer,alliance,TRUE,TRUE,88.46
 9/19/2025,East,Leon,progressive,TRUE,TRUE,11.54
+10/11/2025,North,RealCountryCreator,progressive,FALSE,FALSE,75.86
+10/11/2025,North,Lee,renewal,FALSE,FALSE,24.14
+10/11/2025,South,Sonia Gandhi,labour,FALSE,FALSE,61.29
+10/11/2025,South,Timothy Pickering,alliance,FALSE,FALSE,38.71
+10/11/2025,East,Tim Inkle,labour,FALSE,FALSE,65.63
+10/11/2025,East,Growmper,renewal,FALSE,FALSE,28.13
+10/11/2025,East,Heatland,renewal,FALSE,FALSE,6.25
+10/11/2025,West,athabasca,renewal,FALSE,FALSE,51.72
+10/11/2025,West,niven_oakes,progressive,FALSE,FALSE,48.28
+10/11/2025,Center,Cruzer,alliance,FALSE,FALSE,44.44
+10/11/2025,Center,Izemoji,labour,FALSE,FALSE,55.56

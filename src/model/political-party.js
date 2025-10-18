@@ -72,7 +72,7 @@ const PoliticalPartyColors = {
   green: {current: "#32811C", safe: "#499A21", likely: "#7DBF5C", lean: "#ACD896", tilt: "#A8BF9C"},
   orange: {current: "#A36323", safe: "#E57C13", likely: "#E69D54", lean: "#E5BD95", tilt: "#BFAD9C"},
   purple: {current: "#461C81", safe: "#8A38FF", likely: "#B47BFF", lean: "#D3B2FF", tilt: "#B09CBF"},
-  scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFA685", tilt: "#BF8977"},
+  scarlet: {current: "#A82D00", safe: "#DE3B00", likely: "#FF6B36", lean: "#FFAE85", tilt: "#C39A74"},
   cyan: {current: "#1A595D", safe: "#1F767A", likely: "#31A7AF", lean: "#6CD2D9", tilt: "#84B2B5"},
   yellow: {current: "#B86E00", safe: "#FE9800", likely: "#e8a43e", lean: "#eab86e", tilt: "#C7A659"},
   magenta: {current: "#700036", safe: "#AB0354", likely: "#E8026E", lean: "#FE62AD", tilt: "#B87F9C"},
@@ -614,9 +614,9 @@ var JJUWildroseParty = new PoliticalParty(
 
 var JJUReformParty = new PoliticalParty(
   "JJUREF",
-  ["Reform"],
-  "Ref",
-  "Reform",
+  ["Renewal", "Reform"],
+  "Ren",
+  "Renewal",
   cloneObject(PoliticalPartyColors.scarlet),
   defaultMarginNames
 )
