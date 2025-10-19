@@ -919,6 +919,13 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
   var mapDates = currentMapSource.getMapDates()
+  
+  if (mapDates.length == 0)
+  {
+    clearMap()
+    return
+  }
+  
   var dateToDisplay = new Date(mapDates[dateIndex-1])
 
   currentDisplayDate = dateToDisplay
