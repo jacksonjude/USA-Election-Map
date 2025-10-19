@@ -281,5 +281,5 @@ let JJUMapCountry = new MapCountry(
   "JJU",
   "Jacksonia",
   "JJU",
-  "assets/jju-flag.png"
+  "assets/jju-flag-10.png"
 )
