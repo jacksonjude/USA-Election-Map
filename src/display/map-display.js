@@ -555,7 +555,7 @@ function addDivEventListeners()
     $(this).css('opacity', "0")
 
     setTimeout(function() {
-      if ($("#regionboxcontainer").css('opacity') == "0" && !currentRegionID) { $("#regionboxcontainer").hide() }
+      if ($("#regionboxcontainer").css('opacity') == "0") { $("#regionboxcontainer").hide() }
     }, 200)
   })
 

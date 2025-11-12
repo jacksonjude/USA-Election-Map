@@ -929,16 +929,6 @@ function altShiftClickRegion(div)
     var regionData = regionDataCallback.regionData
     var regionIDsToFill = regionDataCallback.linkedRegionIDs
 
-    if (currentEditingMode == EditingMode.margin)
-    {
-      regionData.partyID = (selectedParty || TossupParty).getID()
-    }
-    else if (currentEditingMode == EditingMode.voteshare)
-    {
-      regionData.partyID = TossupParty.getID()
-      regionData.partyVotesharePercentages = []
-    }
-
     if (regionData.disabled)
     {
       regionData.disabled = false

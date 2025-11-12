@@ -28,7 +28,7 @@ async function updateRegionBox(regionID = currentRegionID)
         !altKeyDown
       ) &&
       !(
-        regionData.isHold &&
+        (regionData.isHold || currentMapSource.isCustom()) &&
         currentMapType.getMapSettingValue("mapCurrentSeats")
       )
     ) ||
@@ -132,7 +132,7 @@ async function updateRegionBox(regionID = currentRegionID)
     clickToZoom: [false, "<span class='clicktext'>Click</span> to expand"],
     clickToOpenLink: [false, "<span class='clicktext'>Click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
     rightClickToOpenLink: [false, "<span class=''>Right-click</span> to open<img style='position: relative; left: 5px; top: 3px; height: 16px; width: 16px;' src='" + currentMapSource.getIconURL(true) + "'>"],
-    clickToEditVoteshare: [false, "<span class='clicktext>Click</span> to edit voteshare"],
+    clickToEditVoteshare: [false, "<span class='clicktext'>Click</span> to edit voteshare"],
     shiftClickToEditMargin: [false, "<span class='shifttext'>Shift</span> <span class='clicktext'>click</span> to edit margin"],
     altClickToFlip: [false, "<span class='alttext'>Alt</span> <span class='clicktext'>click</span> to flip"],
     altShiftClickToDisable: [false, "<span class='alttext'>Alt</span>+<span class='shifttext'>shift</span> <span class='clicktext'>click</span> to disable"]
