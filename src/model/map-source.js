@@ -386,7 +386,7 @@ class MapSource
     if (this.customOpenRegionLinkFunction == undefined)
     {
       if (!this.homepageURL) { return false }
-      linkToOpen = this.homepageURL + this.regionIDToLinkMap[regionID]
+      linkToOpen = this.homepageURL + (this.regionIDToLinkMap?.[regionID] ?? "")
     }
     else
     {
