@@ -542,6 +542,9 @@ document.oncontextmenu = function() {
   mouseMovedDuringClick = false
 }
 
+const uaSplit = navigator.userAgent.match(/Chrom(?:e|ium)\/([0-9.]+)/)
+const isChromeWithSVGBug = uaSplit?.length == 2 && parseInt(uaSplit[1].split(".")[0]) >= 144
+
 function mouseEnteredRegion(div)
 {
   var regionID = getBaseRegionID($(div).attr('id')).baseID
@@ -581,9 +584,19 @@ function mouseEnteredRegion(div)
 
   if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts") || currentMapType.getShouldAlwaysReorderOutlines()) && !usedFallbackMap)
   {
-    // var regionPath = document.getElementById(regionID)
-    // var parent = regionPath.parentNode
-    // parent.insertBefore(regionPath, parent.lastChild.nextSibling)
+    var regionPath = document.getElementById(regionID)
+    var parent = regionPath.parentNode
+    if (parent.lastChild.id == regionPath.id)
+    {
+      // don't reorder if regionPath is already on top
+      return;
+    }
+    
+    if (isChromeWithSVGBug)
+    {
+      resetStrokeColor(div)
+    }
+    parent.insertBefore(regionPath, parent.lastChild.nextSibling)
   }
 }
 
@@ -600,6 +613,13 @@ function mouseLeftRegion(div)
     updateRegionBox()
   }
 
+  resetStrokeColor(div)
+}
+
+function resetStrokeColor(div)
+{
+  var regionID = getBaseRegionID($(div).attr('id')).baseID
+  
   if ($(div).css('stroke') != regionDeselectColor)
   {
     $(div).css('stroke', regionDeselectColor)
