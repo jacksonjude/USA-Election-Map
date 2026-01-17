@@ -581,9 +581,9 @@ function mouseEnteredRegion(div)
 
   if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts") || currentMapType.getShouldAlwaysReorderOutlines()) && !usedFallbackMap)
   {
-    var regionPath = document.getElementById(regionID)
-    var parent = regionPath.parentNode
-    parent.insertBefore(regionPath, parent.lastChild.nextSibling)
+    // var regionPath = document.getElementById(regionID)
+    // var parent = regionPath.parentNode
+    // parent.insertBefore(regionPath, parent.lastChild.nextSibling)
   }
 }
 
