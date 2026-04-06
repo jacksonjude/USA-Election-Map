@@ -699,7 +699,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 11/16/2025,Quintin,Beary,progressive,FALSE,TRUE,39.6
 11/16/2025,Trunoe,Medikit,pwp,FALSE,FALSE,30.44
 11/16/2025,Trunoe,Eden,alliance,FALSE,FALSE,30.78
-11/16/2025,Trunoe,Van der plan,labour,FALSE,FALSE,17.35
+11/16/2025,Trunoe,Van Der Plan,labour,FALSE,FALSE,17.35
 11/16/2025,Trunoe,Forsh,renewal,FALSE,FALSE,16.93
 11/16/2025,Trunoe,Borger,independent,FALSE,FALSE,4.51
 11/16/2025,Trunoe,Heatland,renewal,FALSE,FALSE,0
@@ -716,7 +716,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 11/16/2025,List Seat 4,Odin,alliance,FALSE,FALSE,100
 11/16/2025,List Seat 5,Okazaki Fox,labour,FALSE,FALSE,100
 11/16/2025,List Seat 6,Dannyunown0,labour,FALSE,FALSE,100
-11/16/2025,List Seat 7,Van der plan,labour,FALSE,FALSE,100
+11/16/2025,List Seat 7,Van Der Plan,labour,FALSE,FALSE,100
 11/16/2025,List Seat 8,Danylo,labour,FALSE,FALSE,100
 11/16/2025,List Seat 9,Beary,progressive,FALSE,FALSE,100
 11/16/2025,List Seat 10,GMV,progressive,FALSE,FALSE,100
@@ -825,7 +825,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/26/2026,National Popular Vote,PWP,pwp,FALSE,FALSE,3.4
 1/26/2026,List Seat 1,Athabasca,jnp,FALSE,FALSE,100
 1/26/2026,List Seat 2,Burley,jnp,FALSE,FALSE,100
-1/26/2026,List Seat 3,Van der plan,jnp,FALSE,FALSE,100
+1/26/2026,List Seat 3,Van Der Plan,jnp,FALSE,FALSE,100
 1/26/2026,List Seat 4,Eevee,jnp,FALSE,FALSE,100
 1/26/2026,List Seat 5,Jack Ciatarelli,jnp,FALSE,FALSE,100
 1/26/2026,List Seat 6,Nebular Space,alliance,FALSE,FALSE,100
@@ -921,12 +921,12 @@ date,region,candidate,party,offyear,runoff,voteshare
 2/28/2026,List Seat 15,JAMden,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 16,Niven,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 17,Beary,proglab,FALSE,FALSE,100
-2/28/2026,List Seat 18,Van der plan,proglab,FALSE,FALSE,100
+2/28/2026,List Seat 18,Van Der Plan,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 19,Cob,pwp,FALSE,FALSE,100
 2/28/2026,List Seat 20,Tommy,pwp,FALSE,FALSE,100
-3/27/2026,Trunoe,Van der plan,green,TRUE,FALSE,60.79
+3/27/2026,Trunoe,Van Der Plan,green,TRUE,FALSE,60.79
 3/27/2026,Trunoe,Northpoletyrant,sdp,TRUE,FALSE,24.19
 3/27/2026,Trunoe,Medikit,pwp,TRUE,FALSE,14.44
 3/27/2026,Trunoe,Heatland,sdp,TRUE,FALSE,0.58
-3/27/2026,Trunoe,Van der plan,green,TRUE,TRUE,66.77
+3/27/2026,Trunoe,Van Der Plan,green,TRUE,TRUE,66.77
 3/27/2026,Trunoe,Northpoletyrant,sdp,TRUE,TRUE,33.23
