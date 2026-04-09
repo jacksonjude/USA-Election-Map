@@ -536,7 +536,8 @@ class MapSource
   
   getCustomDefaultMargins()
   {
-    return this.customDefaultMargins
+    const isFunction = (typeof this.customDefaultMargins === 'function')
+    return isFunction ? this.customDefaultMargins() : this.customDefaultMargins
   }
   
   getVotesharePrefix()

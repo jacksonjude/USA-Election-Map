@@ -1002,6 +1002,12 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     populateSVGBoxesFunction(currentMapDataForDate)
     setOutlineDivProperties()
   }
+  
+  if (currentMapSource.getCustomDefaultMargins() != null && !$("#reset-margins").length)
+  {
+    marginValues = currentMapSource.getCustomDefaultMargins()
+    createMarginEditDropdownItems()
+  }
 
   displayRegionDataArray = {}
   populateRegionsArray()
