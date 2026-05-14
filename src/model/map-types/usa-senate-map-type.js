@@ -74,6 +74,8 @@ var USASenateMapType = new MapType(
     const heldSeatPartyIDs2022 = {"AK-2": republicanPartyID, "HI-1": democraticPartyID, "AL-2": republicanPartyID, "AR-2": republicanPartyID, "AZ-1": democraticPartyID, "CA-1": democraticPartyID, "CO-2": democraticPartyID, "CT-1": democraticPartyID, "DE-2": democraticPartyID, "FL-1": republicanPartyID, "GA-2": democraticPartyID, "IA-2": republicanPartyID, "ID-2": republicanPartyID, "IL-2": democraticPartyID, "IN-1": republicanPartyID, "KS-2": republicanPartyID, "KY-2": republicanPartyID, "LA-2": republicanPartyID, "MA-2": democraticPartyID, "MD-1": democraticPartyID, "ME-2": republicanPartyID, "MI-2": democraticPartyID, "MN-2": democraticPartyID, "MO-1": republicanPartyID, "MS-2": republicanPartyID, "MT-2": republicanPartyID, "NC-2": republicanPartyID, "ND-1": republicanPartyID, "NH-2": democraticPartyID, "NJ-2": democraticPartyID, "NM-2": democraticPartyID, "NV-1": democraticPartyID, "NY-1": democraticPartyID, "OH-1": democraticPartyID, "OK-2": republicanPartyID, "OR-2": democraticPartyID, "PA-1": democraticPartyID, "RI-2": democraticPartyID, "SC-2": republicanPartyID, "SD-2": republicanPartyID, "TN-2": republicanPartyID, "TX-2": republicanPartyID, "UT-1": republicanPartyID, "VA-2": democraticPartyID, "VT-1": democraticPartyID, "WA-1": democraticPartyID, "WI-1": democraticPartyID, "WV-2": republicanPartyID, "WY-2": republicanPartyID, "NE-2": republicanPartyID, "WA-3": democraticPartyID, "OR-3": democraticPartyID, "CA-3": democraticPartyID, "NV-3": democraticPartyID, "UT-3": republicanPartyID, "AZ-3": democraticPartyID, "NM-1": democraticPartyID, "AK-3": republicanPartyID, "HI-3": democraticPartyID, "TX-1": republicanPartyID, "OK-3": republicanPartyID, "KS-3": republicanPartyID, "CO-3": democraticPartyID, "NE-1": republicanPartyID, "WY-1": republicanPartyID, "MT-1": democraticPartyID, "ID-3": republicanPartyID, "ND-3": republicanPartyID, "SD-3": republicanPartyID, "MN-1": democraticPartyID, "WI-3": republicanPartyID, "IA-3": republicanPartyID, "IL-3": democraticPartyID, "MO-3": republicanPartyID, "AR-3": republicanPartyID, "LA-3": republicanPartyID, "MS-1": republicanPartyID, "AL-3": republicanPartyID, "GA-3": democraticPartyID, "FL-3": republicanPartyID, "SC-3": republicanPartyID, "NC-3": republicanPartyID, "TN-1": republicanPartyID, "KY-3": republicanPartyID, "WV-1": democraticPartyID, "VA-1": democraticPartyID, "OH-3": republicanPartyID, "IN-3": republicanPartyID, "MI-1": democraticPartyID, "PA-3": republicanPartyID, "NY-3": democraticPartyID, "ME-1": democraticPartyID, "NH-3": democraticPartyID, "VT-3": democraticPartyID, "MA-1": democraticPartyID, "RI-1": democraticPartyID, "CT-3": democraticPartyID, "NJ-1": democraticPartyID, "DE-1": democraticPartyID, "MD-3": democraticPartyID, "NPV-1": republicanPartyID}
     
     const heldSeatPartyIDs2024 = {"AK-2": republicanPartyID, "HI-1": democraticPartyID, "AL-2": republicanPartyID, "AR-2": republicanPartyID, "AZ-1": democraticPartyID, "CA-1": democraticPartyID, "CO-2": democraticPartyID, "CT-1": democraticPartyID, "DE-2": democraticPartyID, "FL-1": republicanPartyID, "GA-2": democraticPartyID, "IA-2": republicanPartyID, "ID-2": republicanPartyID, "IL-2": democraticPartyID, "IN-1": republicanPartyID, "KS-2": republicanPartyID, "KY-2": republicanPartyID, "LA-2": republicanPartyID, "MA-2": democraticPartyID, "MD-1": democraticPartyID, "ME-2": republicanPartyID, "MI-2": democraticPartyID, "MN-2": democraticPartyID, "MO-1": republicanPartyID, "MS-2": republicanPartyID, "MT-2": republicanPartyID, "NC-2": republicanPartyID, "ND-1": republicanPartyID, "NH-2": democraticPartyID, "NJ-2": democraticPartyID, "NM-2": democraticPartyID, "NV-1": democraticPartyID, "NY-1": democraticPartyID, "OH-1": democraticPartyID, "OK-2": republicanPartyID, "OR-2": democraticPartyID, "PA-1": democraticPartyID, "RI-2": democraticPartyID, "SC-2": republicanPartyID, "SD-2": republicanPartyID, "TN-2": republicanPartyID, "TX-2": republicanPartyID, "UT-1": republicanPartyID, "VA-2": democraticPartyID, "VT-1": democraticPartyID, "WA-1": democraticPartyID, "WI-1": democraticPartyID, "WV-2": republicanPartyID, "WY-2": republicanPartyID, "NE-2": republicanPartyID, "WA-3": democraticPartyID, "OR-3": democraticPartyID, "CA-3": democraticPartyID, "NV-3": democraticPartyID, "UT-3": republicanPartyID, "AZ-3": democraticPartyID, "NM-1": democraticPartyID, "AK-3": republicanPartyID, "HI-3": democraticPartyID, "TX-1": republicanPartyID, "OK-3": republicanPartyID, "KS-3": republicanPartyID, "CO-3": democraticPartyID, "NE-1": republicanPartyID, "WY-1": republicanPartyID, "MT-1": democraticPartyID, "ID-3": republicanPartyID, "ND-3": republicanPartyID, "SD-3": republicanPartyID, "MN-1": democraticPartyID, "WI-3": republicanPartyID, "IA-3": republicanPartyID, "IL-3": democraticPartyID, "MO-3": republicanPartyID, "AR-3": republicanPartyID, "LA-3": republicanPartyID, "MS-1": republicanPartyID, "AL-3": republicanPartyID, "GA-3": democraticPartyID, "FL-3": republicanPartyID, "SC-3": republicanPartyID, "NC-3": republicanPartyID, "TN-1": republicanPartyID, "KY-3": republicanPartyID, "WV-1": democraticPartyID, "VA-1": democraticPartyID, "OH-3": republicanPartyID, "IN-3": republicanPartyID, "MI-1": democraticPartyID, "PA-3": democraticPartyID, "NY-3": democraticPartyID, "ME-1": democraticPartyID, "NH-3": democraticPartyID, "VT-3": democraticPartyID, "MA-1": democraticPartyID, "RI-1": democraticPartyID, "CT-3": democraticPartyID, "NJ-1": democraticPartyID, "DE-1": democraticPartyID, "MD-3": democraticPartyID, "NPV-1": republicanPartyID}
+    
+    const heldSeatPartyIDs2026 = {"AK-2": republicanPartyID, "HI-1": democraticPartyID, "AL-2": republicanPartyID, "AR-2": republicanPartyID, "AZ-1": democraticPartyID, "CA-1": democraticPartyID, "CO-2": democraticPartyID, "CT-1": democraticPartyID, "DE-1": democraticPartyID, "FL-1": republicanPartyID, "GA-2": democraticPartyID, "IA-2": republicanPartyID, "ID-2": republicanPartyID, "IL-2": democraticPartyID, "IN-1": republicanPartyID, "KS-2": republicanPartyID, "KY-2": republicanPartyID, "LA-2": republicanPartyID, "MA-1": democraticPartyID, "MD-1": democraticPartyID, "ME-1": democraticPartyID, "MI-1": democraticPartyID, "MN-1": democraticPartyID, "MO-1": republicanPartyID, "MS-1": republicanPartyID, "MT-1": republicanPartyID, "NC-2": republicanPartyID, "ND-1": republicanPartyID, "NH-2": democraticPartyID, "NJ-1": democraticPartyID, "NM-1": democraticPartyID, "NV-1": democraticPartyID, "NY-1": democraticPartyID, "OH-1": republicanPartyID, "OK-2": republicanPartyID, "OR-2": democraticPartyID, "PA-1": republicanPartyID, "RI-1": democraticPartyID, "SC-2": republicanPartyID, "SD-2": republicanPartyID, "TN-1": republicanPartyID, "TX-1": republicanPartyID, "UT-1": republicanPartyID, "VA-1": democraticPartyID, "VT-1": democraticPartyID, "WA-1": democraticPartyID, "WI-1": democraticPartyID, "WV-1": republicanPartyID, "WY-1": republicanPartyID, "NE-1": republicanPartyID, "WA-3": democraticPartyID, "OR-3": democraticPartyID, "CA-3": democraticPartyID, "NV-3": democraticPartyID, "UT-3": republicanPartyID, "AZ-3": democraticPartyID, "NM-2": democraticPartyID, "AK-3": republicanPartyID, "HI-3": democraticPartyID, "TX-2": republicanPartyID, "OK-3": republicanPartyID, "KS-3": republicanPartyID, "CO-3": democraticPartyID, "NE-2": republicanPartyID, "WY-2": republicanPartyID, "MT-2": republicanPartyID, "ID-3": republicanPartyID, "ND-3": republicanPartyID, "SD-3": republicanPartyID, "MN-2": democraticPartyID, "WI-3": republicanPartyID, "IA-3": republicanPartyID, "IL-3": democraticPartyID, "MO-3": republicanPartyID, "AR-3": republicanPartyID, "LA-3": republicanPartyID, "MS-2": republicanPartyID, "AL-3": republicanPartyID, "GA-3": democraticPartyID, "FL-3": republicanPartyID, "SC-3": republicanPartyID, "NC-3": republicanPartyID, "TN-2": republicanPartyID, "KY-3": republicanPartyID, "WV-2": republicanPartyID, "VA-2": democraticPartyID, "OH-3": republicanPartyID, "IN-3": republicanPartyID, "MI-2": democraticPartyID, "PA-3": democraticPartyID, "NY-3": democraticPartyID, "ME-2": republicanPartyID, "NH-3": democraticPartyID, "VT-3": democraticPartyID, "MA-2": democraticPartyID, "RI-2": democraticPartyID, "CT-3": democraticPartyID, "NJ-2": democraticPartyID, "DE-2": democraticPartyID, "MD-3": democraticPartyID, "NPV-1": democraticPartyID}
 
     var jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
     {
@@ -1271,6 +1273,70 @@ var USASenateMapType = new MapType(
       null, // shouldClearDisabled
       false // shouldShowVoteshare
     )
+    
+    const LTE2026SenateYouTubeIDs = {
+      1739836800000: "Entn12L5VZU",
+      1743638400000: "C4xVOlu-UeU",
+      1749513600000: "kKzl8sQI7PE",
+      1751500800000: "zWhFQfvFpXY",
+      1754092800000: "DSRedjtmF2w",
+      1756684800000: "FXgCmfs8hZ8",
+      1759276800000: "3yQi5bzqGrk",
+      1761955200000: "XeKA5VL7Rvs",
+      1765238400000: "B9g_-v1p9tY",
+      1767225600000: "eYjHhj3wgZw",
+      1769904000000: "AbWIE1OtusU",
+      1772841600000: "Y-8Ymopk5pg",
+      1775001600000: "GTSLvUZMhDI",
+      1777593600000: "OIdwNMOCyFM",
+    }
+    
+    var LTESenateProjection2026MapSource = new MapSource(
+      "LTE-2026-Senate-Projection", // id
+      "LTE Projection", // name
+      "./csv-sources/lte-2026-senate.csv", // dataURL
+      "https://www.youtube.com/watch?v=", // homepageURL
+      {regular: "./assets/lte-large.png", mini: "./assets/lte.png"}, // iconURL
+      {
+        date: "date",
+        region: "region",
+        seatClass: "class",
+        isSpecial: "special",
+        isRunoff: "runoff",
+        isOffyear: "offyear",
+        isDisabled: "disabled",
+        candidateName: "candidate",
+        partyID: "party",
+        voteshare: "voteshare"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      heldSeatPartyIDs2026, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      false, // addDecimalPadding
+      doubleLineClassSeparatedFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      function(homepageURL, _, __, mapDate, ___, ____)
+      {
+        if (mapDate == null) { return }
+    
+        var linkToOpen = homepageURL
+        linkToOpen += LTE2026SenateYouTubeIDs[mapDate.getUTCAdjustedTime()]
+        return linkToOpen
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      false // shouldShowVoteshare
+    )
 
     const PA2022SenateYouTubeIDs = {
       1614211200000: "Tbsy6XZ_e-Q",
@@ -1577,16 +1643,18 @@ var USASenateMapType = new MapType(
     senateMapSources[FiveThirtyEightSenateProjection2024MapSource.getID()] = FiveThirtyEightSenateProjection2024MapSource
     senateMapSources[PolymarketSenate2024MapSource.getID()] = PolymarketSenate2024MapSource
     senateMapSources[LTESenateProjection2022MapSource.getID()] = LTESenateProjection2022MapSource
+    senateMapSources[LTESenateProjection2026MapSource.getID()] = LTESenateProjection2026MapSource
     senateMapSources[PASenateProjection2022MapSource.getID()] = PASenateProjection2022MapSource
     senateMapSources[CookSenateProjection2022MapSource.getID()] = CookSenateProjection2022MapSource
     senateMapSources[SCBSenateProjection2022MapSource.getID()] = SCBSenateProjection2022MapSource
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
 
-    const senateMapCycles = [2024, 2022]
+    const senateMapCycles = [2026, 2024, 2022]
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
       [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
+      [2026]: [LTESenateProjection2026MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
