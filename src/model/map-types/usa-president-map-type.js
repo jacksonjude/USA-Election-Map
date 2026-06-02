@@ -1638,13 +1638,13 @@ var USAPresidentMapType = new MapType(
       '¢', // customVoteshareSuffix
     )
 
-    var getPresidentialSVGFromDate = async function(dateTime)
+    var getPresidentialSVGFromDate = async function(dateTime, overrideMapSource = undefined)
     {
       var dateYear = (new Date(dateTime)).getFullYear()
 
       if (currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts"))
       {
-        if (await PastElectionResultMapSource.canZoom(PastElectionResultMapSource.getMapData(), currentMapZoomRegion))
+        if (await (overrideMapSource ?? PastElectionResultMapSource).canZoom((overrideMapSource ?? PastElectionResultMapSource).getMapData(), currentMapZoomRegion))
         {
           return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
         }
@@ -1805,8 +1805,15 @@ var USAPresidentMapType = new MapType(
         previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin).mapDateData
       }
 
-      let {mapDateData, candidateNameData} = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
-      mapSource.setCandidateNames(candidateNameData, date)
+      const countyMapDataStruct = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
+      
+      const mapDateData = countyMapDataStruct?.mapDateData
+      const candidateNameData = countyMapDataStruct?.candidateNameData
+      
+      if (candidateNameData != null)
+      {
+        mapSource.setCandidateNames(candidateNameData, date)
+      }
 
       let countyZoomData = {}
 
@@ -1996,7 +2003,7 @@ var USAPresidentMapType = new MapType(
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
       1.0, // voteshareCutoffMargin
-      getPresidentialSVGFromDate, // overrideSVGPath
+      (mapDate) => getPresidentialSVGFromDate(mapDate, HistoricalElectionResultMapSource), // overrideSVGPath
       true, // shouldSetDisabledWorthToZero
       null, // shouldUseOriginalMapDataForTotalsPieChart
       ViewingState.zooming // shouldForcePopularVoteDisplay
