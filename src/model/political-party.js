@@ -615,7 +615,7 @@ var JJUWildroseParty = new PoliticalParty(
 
 var JJUReformParty = new PoliticalParty(
   "JJUREF",
-  ["Renewal", "Reform"],
+  ["Renewal"],
   "Ren",
   "Renewal",
   cloneObject(PoliticalPartyColors.scarlet),
@@ -624,7 +624,16 @@ var JJUReformParty = new PoliticalParty(
 
 var JJUPWPParty = new PoliticalParty(
   "JJUPWP",
-  ["UCP", "PWP"],
+  ["PWP"],
+  "PWP",
+  "PWP",
+  cloneObject(PoliticalPartyColors.purple),
+  defaultMarginNames
+)
+
+var JJUUCPParty = new PoliticalParty(
+  "JJUUCP",
+  ["UCP"],
   "UCP",
   "UCP",
   cloneObject(PoliticalPartyColors.purple),
@@ -633,9 +642,9 @@ var JJUPWPParty = new PoliticalParty(
 
 var JJUNationalParty = new PoliticalParty(
   "JJUNAT",
-  ["Nationals", "JNP"],
+  ["National", "JNP", "Coalition", "National Coalition", "Jacksonian National Party"],
   "Nat",
-  "Nationals",
+  "National",
   cloneObject(PoliticalPartyColors.brown),
   defaultMarginNames
 )
@@ -649,12 +658,21 @@ var JJUSolidarityParty = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUFDPParty = new PoliticalParty(
+  "JJUFDP",
+  ["FDP"],
+  "FDP",
+  "FDP",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
 var JJUProgressiveLabourParty = new PoliticalParty(
   "JJUPLU",
-  ["SDP", "ProgLab"],
-  "SDP",
-  "SDP",
-  cloneObject(PoliticalPartyColors.red),
+  ["ProgLab"],
+  "PLU",
+  "ProgLab",
+  {current: "#54081F", safe: "#A81039", likely: "#FF2667", lean: "#D35084", tilt: "#FFB2C9"},
   defaultMarginNames
 )
 
