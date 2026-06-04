@@ -143,8 +143,6 @@ class MapSource
                 && !politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID])
               )
             )
-          
-          console.log(mapDate, regionData, currentPartyID, previousPartyID, previousPartyID != null ? politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID]) : null)
         }
       }
     }
