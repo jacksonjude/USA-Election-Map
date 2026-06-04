@@ -1,6 +1,6 @@
 class PoliticalParty
 {
-  constructor(id, names, shortName, defaultCandidateName, marginColors, marginNames)
+  constructor(id, names, shortName, defaultCandidateName, marginColors, marginNames, ancestorParties)
   {
     this.id = id
     this.names = names
@@ -9,6 +9,7 @@ class PoliticalParty
     this.candidateName = defaultCandidateName
     this.marginColors = marginColors
     this.marginNames = marginNames
+    this.ancestorParties = ancestorParties
   }
 
   getID()
@@ -61,6 +62,16 @@ class PoliticalParty
   getMarginNames()
   {
     return this.marginNames
+  }
+  
+  getAncestors()
+  {
+    return this.ancestorParties ?? []
+  }
+  
+  isDescendant(otherParty)
+  {
+    return this.getAncestors().some(p => p.getID() == otherParty.getID()) ?? false
   }
 }
 
@@ -637,7 +648,8 @@ var JJUUCPParty = new PoliticalParty(
   "UCP",
   "UCP",
   cloneObject(PoliticalPartyColors.purple),
-  defaultMarginNames
+  defaultMarginNames,
+  [JJUPWPParty]
 )
 
 var JJUNationalParty = new PoliticalParty(
@@ -664,7 +676,8 @@ var JJUFDPParty = new PoliticalParty(
   "FDP",
   "FDP",
   cloneObject(PoliticalPartyColors.orange),
-  defaultMarginNames
+  defaultMarginNames,
+  [JJUSolidarityParty, JJUNationalParty]
 )
 
 var JJUProgressiveLabourParty = new PoliticalParty(
@@ -673,7 +686,8 @@ var JJUProgressiveLabourParty = new PoliticalParty(
   "PLU",
   "ProgLab",
   {current: "#54081F", safe: "#A81039", likely: "#FF2667", lean: "#D35084", tilt: "#FFB2C9"},
-  defaultMarginNames
+  defaultMarginNames,
+  [JJULabourParty, JJUProgressiveParty]
 )
 
 var JJUGreenParty = new PoliticalParty(
@@ -691,7 +705,8 @@ var JJUSDPParty = new PoliticalParty(
   "SDP",
   "SDP",
   cloneObject(PoliticalPartyColors.red),
-  defaultMarginNames
+  defaultMarginNames,
+  [JJUProgressiveLabourParty]
 )
 
 var JJULabLibPartyBloc = new PoliticalParty(

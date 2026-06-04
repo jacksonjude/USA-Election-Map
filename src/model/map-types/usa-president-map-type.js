@@ -491,8 +491,8 @@ var USAPresidentMapType = new MapType(
             currentDatePartyNameArray[candidateElectoralVote.partyID] = candidateElectoralVote.candidate
           }
 
-          var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
-          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, disabled: mapDataRows[0][columnMap.disabled] == "TRUE", partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+          const mostRecentPartyID = mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
+          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], margin: topTwoMargin, partyID: greatestMarginPartyID, disabled: mapDataRows[0][columnMap.disabled] == "TRUE", partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, voteSplits: electoralVoteSortedCandidateData, flipOverride: mapDataRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
         }
 
         filteredMapData[mapDates[dateNum]] = filteredDateData
@@ -1043,8 +1043,8 @@ var USAPresidentMapType = new MapType(
           }
         }
 
-        var mostRecentParty = previousMapDateData?.[fullRegionName]?.partyID
-        filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, disabled: countyRows[0][columnMap.disabled] == "TRUE", flip: countyRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != null && mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+        const mostRecentPartyID = previousMapDateData?.[fullRegionName]?.partyID
+        filteredStateData[fullRegionName] = {region: fullRegionName, state: stateID, county: stateCounty, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, totalVotes: totalCountyVotes, disabled: countyRows[0][columnMap.disabled] == "TRUE", flipOverride: countyRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
       }
 
       return {mapDateData: filteredStateData, candidateNameData: candidateNameData}

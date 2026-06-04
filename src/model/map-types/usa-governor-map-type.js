@@ -509,8 +509,8 @@ var USAGovernorMapType = new MapType(
             partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
           }
 
-          var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind]] :  mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
-          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+          const mostRecentPartyID = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind]] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind]).partyID
+          filteredDateData[regionNameToID[regionToFind]] = {region: regionNameToID[regionToFind], offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flipOverride: mapDataRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
         }
 
         filteredMapData[mapDates[dateNum]] = filteredDateData

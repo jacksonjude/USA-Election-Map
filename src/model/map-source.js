@@ -122,6 +122,32 @@ class MapSource
 
     let filterMapDataCallback = await self.executeFilter(self.rawMapData, self.mapDates, self)
     self.mapData = filterMapDataCallback.mapData
+    
+    if (self.mapData)
+    {
+      for (const mapDate in self.mapData)
+      {
+        for (const regionID in self.mapData[mapDate])
+        {
+          const regionData = self.mapData[mapDate][regionID]
+          
+          const currentPartyID = regionData.partyID
+          const previousPartyID = regionData.previousPartyID
+          regionData.flip = regionData.flip 
+            ?? (
+              regionData.flipOverride
+              || (
+                previousPartyID != null
+                && previousPartyID != TossupParty.getID()
+                && currentPartyID != previousPartyID
+                && !politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID])
+              )
+            )
+          
+          console.log(mapDate, regionData, currentPartyID, previousPartyID, previousPartyID != null ? politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID]) : null)
+        }
+      }
+    }
 
     if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
     {

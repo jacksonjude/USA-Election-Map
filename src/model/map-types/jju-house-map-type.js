@@ -253,8 +253,8 @@ var JJUHouseMapType = new MapType(
           partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
         }
         
-        let mostRecentParty = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
-        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+        const mostRecentPartyID = heldRegionMap ? heldRegionMap[regionID] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionID).partyID
+        return {region: regionID, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: mapDataRows[0][columnMap.isDisabled] == "TRUE", margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flipOverride: mapDataRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
       }
   
 	    for (let mapDateTime of mapDates)
@@ -353,6 +353,7 @@ var JJUHouseMapType = new MapType(
       
       const listSeatRegex = /L\d+/
       const partyListSeatCounts = {}
+      const getPartyListSeatCount = (date, party) => partyListSeatCounts[date][party] ?? 0
       previousMapDate = null
       for (const mapDate in fullFilteredMapData)
       {
@@ -383,9 +384,10 @@ var JJUHouseMapType = new MapType(
               partyIDOn = regionData.partyID
               partyListSeatOn = 1
             }
-            const seatDifference = (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-(partyListSeatCounts[previousMapDate][regionData.partyID] ?? 0)
-            
-            regionData.flip = partyListSeatOn > (partyListSeatCounts[mapDate][regionData.partyID] ?? 0)-seatDifference
+            const currentDateSeats = getPartyListSeatCount(mapDate, regionData.partyID)
+            const previousDateSeats = getPartyListSeatCount(previousMapDate, regionData.partyID)
+            const seatDifference = currentDateSeats-(previousDateSeats + politicalParties[regionData.partyID].getAncestors().reduce((sum, p) => sum + getPartyListSeatCount(previousMapDate, p.getID()), 0));
+            regionData.flip = partyListSeatOn > currentDateSeats-seatDifference
             
             partyListSeatOn += 1
           }

@@ -475,8 +475,8 @@ var USAHouseMapType = new MapType(
               partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
             }
 
-            var mostRecentParty = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName).partyID
-            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: districtRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+            const mostRecentPartyID = mostRecentWinner(filteredMapData, currentMapDate.getTime(), fullRegionName).partyID
+            filteredDateData[fullRegionName] = {region: fullRegionName, state: regionToFind, district: stateDistrict, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flipOverride: districtRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
           }
         }
 
