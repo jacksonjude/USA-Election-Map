@@ -97,3 +97,14 @@ date,region,candidate,party,offyear,runoff,voteshare
 10/11/2025,West,niven_oakes,progressive,FALSE,FALSE,48.28
 10/11/2025,Center,Cruzer,alliance,FALSE,FALSE,44.44
 10/11/2025,Center,Izemoji,labour,FALSE,FALSE,55.56
+12/14/2025,West,niven_oakes,progressive,FALSE,FALSE,44.76
+12/14/2025,West,Marco,alliance,FALSE,FALSE,44.31
+12/14/2025,West,Burley,jnp,FALSE,FALSE,10.93
+12/14/2025,West,niven_oakes,progressive,FALSE,TRUE,47.33
+12/14/2025,West,Marco,alliance,FALSE,TRUE,52.67
+12/14/2025,Center,Izemoji,labour,FALSE,FALSE,69.22
+12/14/2025,Center,Obi Dervan,jnp,FALSE,FALSE,30.78
+12/14/2025,East,Van Der Plan,labour,FALSE,FALSE,68.2
+12/14/2025,East,Forsh,independent,FALSE,FALSE,31.8
+12/14/2025,North,ItzTinonTime,labour,FALSE,FALSE,100
+12/14/2025,South,RepublicGuyYeah,progressive,FALSE,FALSE,100
