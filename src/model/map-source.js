@@ -127,23 +127,7 @@ class MapSource
     {
       for (const mapDate in self.mapData)
       {
-        for (const regionID in self.mapData[mapDate])
-        {
-          const regionData = self.mapData[mapDate][regionID]
-          
-          const currentPartyID = regionData.partyID
-          const previousPartyID = regionData.previousPartyID
-          regionData.flip = regionData.flip 
-            ?? (
-              regionData.flipOverride
-              || (
-                previousPartyID != null
-                && previousPartyID != TossupParty.getID()
-                && currentPartyID != previousPartyID
-                && !politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID])
-              )
-            )
-        }
+        self.setFlipData(self.mapData[mapDate])
       }
     }
 
@@ -176,6 +160,33 @@ class MapSource
     }
 
     return true
+  }
+  
+  setFlipData(mapDateData)
+  {
+    for (const regionID in mapDateData)
+    {
+      const regionData = mapDateData[regionID]
+      
+      const currentPartyID = regionData.partyID
+      const previousPartyID = regionData.previousPartyID
+      
+      if (!currentPartyID)
+      {
+        continue
+      }
+      
+      regionData.flip = regionData.flip
+        ?? (
+          regionData.flipOverride
+          || (
+            previousPartyID != null
+            && previousPartyID != TossupParty.getID()
+            && currentPartyID != previousPartyID
+            && !politicalParties[currentPartyID].isDescendant(politicalParties[previousPartyID])
+          )
+        )
+    }
   }
   
   async executeFilter(rawData, mapDates, self = this, ...args)
@@ -374,19 +385,25 @@ class MapSource
     return this.mapData[modelDate][regionID]
   }
 
-  getViewingData(mapDateData)
+  async getViewingData(mapDateData)
   {
-    return this.viewingDataFunction(mapDateData)
+    const viewingData = await this.viewingDataFunction(mapDateData)
+    this.setFlipData(viewingData)
+    return viewingData
   }
 
-  getZoomingData(mapDateData, zoomRegion, date)
+  async getZoomingData(mapDateData, zoomRegion, date)
   {
-    return this.zoomingDataFunction(mapDateData, zoomRegion, false, date)
+    const zoomingData = await this.zoomingDataFunction(mapDateData, zoomRegion, false, date)
+    this.setFlipData(zoomingData)
+    return zoomingData
   }
 
-  getSplitVoteData(mapDateData)
+  async getSplitVoteData(mapDateData)
   {
-    return this.splitVoteDataFunction(mapDateData)
+    const splitVoteData = await this.splitVoteDataFunction(mapDateData)
+    this.setFlipData(splitVoteData)
+    return splitVoteData
   }
 
   async canZoom(mapDateData, regionID)
