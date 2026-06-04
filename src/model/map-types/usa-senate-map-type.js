@@ -689,8 +689,8 @@ var USASenateMapType = new MapType(
               partyIDToCandidateNames[candidateData[partyCandidateName].partyID] = partyCandidateName
             }
 
-            var mostRecentParty = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection).partyID
-            filteredDateData[regionNameToID[regionToFind] + "-" + classNum] = {region: regionNameToID[regionToFind], seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: isDisabled, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flip: mapDataRows[0][columnMap.flip] == "TRUE" || (mostRecentParty != greatestMarginPartyID && mostRecentParty != TossupParty.getID())}
+            const mostRecentPartyID = heldRegionMap ? heldRegionMap[regionNameToID[regionToFind] + "-" + classNum] : mostRecentWinner(filteredMapData, currentMapDate.getTime(), regionNameToID[regionToFind], classNum, isRunoffElection).partyID
+            filteredDateData[regionNameToID[regionToFind] + "-" + classNum] = {region: regionNameToID[regionToFind], seatClass: classNum, offYear: isOffyear, runoff: isRunoffElection, isSpecial: isSpecialElection, disabled: isDisabled, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: shouldIncludeVoteshare ? voteshareSortedCandidateData : null, flipOverride: mapDataRows[0][columnMap.flip] == "TRUE", previousPartyID: mostRecentPartyID}
           }
         }
 
