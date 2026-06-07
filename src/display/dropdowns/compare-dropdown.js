@@ -554,9 +554,50 @@ async function applyCompareToCustomMap(shouldResetRound = false)
     {
       resultMapArray[regionID] = {}
 
-      if (compareRegionData0.partyID == compareRegionData1.partyID)
+      let compareRegionData1RemappedVoteshares = compareRegionData1.partyVotesharePercentages
+      if (compareRegionData0.partyVotesharePercentages && compareRegionData1RemappedVoteshares)
       {
-        resultMapArray[regionID].margin = compareRegionData0.margin-compareRegionData1.margin
+        const ancestorIDsToRemove = new Set()
+        const entriesToAdd = []
+
+        for (const candidateData0 of compareRegionData0.partyVotesharePercentages)
+        {
+          const ancestors = politicalParties[candidateData0.partyID]?.getAncestors() ?? []
+          if (ancestors.length == 0) { continue }
+          if (compareRegionData1RemappedVoteshares.some(cd => cd.partyID == candidateData0.partyID)) { continue }
+
+          const ancestorEntries = compareRegionData1RemappedVoteshares.filter(cd => ancestors.some(p => p.getID() == cd.partyID))
+          if (ancestorEntries.length == 0) { continue }
+
+          const mergedVoteshare = ancestorEntries.reduce((sum, cd) => sum + (cd.voteshare ?? 0), 0)
+          entriesToAdd.push({ ...ancestorEntries[0], partyID: candidateData0.partyID, voteshare: mergedVoteshare })
+          for (const entry of ancestorEntries) { ancestorIDsToRemove.add(entry.partyID) }
+        }
+
+        if (ancestorIDsToRemove.size > 0)
+        {
+          compareRegionData1RemappedVoteshares = [
+            ...compareRegionData1RemappedVoteshares.filter(cd => !ancestorIDsToRemove.has(cd.partyID)),
+            ...entriesToAdd
+          ].sort((a, b) => a.voteshare - b.voteshare)
+        }
+      }
+
+      const sameLineage = compareRegionData0.partyID == compareRegionData1.partyID || politicalParties[compareRegionData0.partyID]?.isDescendant(politicalParties[compareRegionData1.partyID])
+
+      let previousMargin = compareRegionData1.margin
+      const remappedDescendantEntry = compareRegionData1RemappedVoteshares?.find(cd => cd.partyID == compareRegionData0.partyID)
+      if (sameLineage && remappedDescendantEntry)
+      {
+        const highestOpponentVoteshare = compareRegionData1RemappedVoteshares
+          .filter(cd => cd.partyID != compareRegionData0.partyID)
+          .reduce((max, cd) => Math.max(max, cd.voteshare ?? 0), 0)
+        previousMargin = remappedDescendantEntry.voteshare - highestOpponentVoteshare
+      }
+
+      if (sameLineage)
+      {
+        resultMapArray[regionID].margin = compareRegionData0.margin-previousMargin
       }
       else
       {
@@ -587,42 +628,31 @@ async function applyCompareToCustomMap(shouldResetRound = false)
         resultMapArray[regionID].seatClass = compareRegionData0.seatClass
       }
 
-      if (compareRegionData0.partyVotesharePercentages && compareRegionData1.partyVotesharePercentages)
+      if (compareRegionData0.partyVotesharePercentages && compareRegionData1RemappedVoteshares)
       {
         const compareMajorParties = getCompareMajorParties?.()
         if (shouldCombineMinorThirdParties && compareMajorParties?.length == 2)
         {
-          [[compareRegionData0, compareMajorParties[0]], [compareRegionData1, compareMajorParties[1]]].forEach(compareData => {
-            let compareRegionData = compareData[0]
-            let majorPartyIDs = compareData[1]
-            
-            let minorPartyData = compareRegionData.partyVotesharePercentages
-              .filter(voteshareData => !majorPartyIDs.includes(voteshareData.partyID))
-              
-            compareRegionData.partyVotesharePercentages = compareRegionData.partyVotesharePercentages
-              .filter(voteshareData => majorPartyIDs.includes(voteshareData.partyID))
-            
-            let totalMinorPartyVoteshare = minorPartyData.reduce((otherVoteshare, voteshareData) => {
-              return otherVoteshare + voteshareData.voteshare
-            }, 0)
-            
-            compareRegionData.partyVotesharePercentages.push({
-              candidate: "Other",
-              partyID: IndependentGenericParty.getID(),
-              voteshare: totalMinorPartyVoteshare
-            })
-          })
+          const combineMinorParties = (voteshares, majorPartyIDs) => {
+            const minorPartyData = voteshares.filter(vd => !majorPartyIDs.includes(vd.partyID))
+            const filtered = voteshares.filter(vd => majorPartyIDs.includes(vd.partyID))
+            const totalMinorPartyVoteshare = minorPartyData.reduce((sum, vd) => sum + vd.voteshare, 0)
+            filtered.push({ candidate: "Other", partyID: IndependentGenericParty.getID(), voteshare: totalMinorPartyVoteshare })
+            return filtered
+          }
+          compareRegionData0.partyVotesharePercentages = combineMinorParties(compareRegionData0.partyVotesharePercentages, compareMajorParties[0])
+          compareRegionData1RemappedVoteshares = combineMinorParties(compareRegionData1RemappedVoteshares, compareMajorParties[1])
         }
         
         compareRegionData0.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
-        compareRegionData1.partyVotesharePercentages.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
+        compareRegionData1RemappedVoteshares.sort((candidateData0, candidateData1) => candidateData0.voteshare-candidateData1.voteshare)
 
         let partiesChecked = new Set()
         let partiesToRemove = new Set([IndependentGenericParty.getID()])
         let candidatesToKeep = new Set()
         for (let candidateData0 of compareRegionData0.partyVotesharePercentages)
         {
-          let candidateData1 = compareRegionData1.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData0.partyID)
+          let candidateData1 = compareRegionData1RemappedVoteshares.find(candidateData => candidateData.partyID == candidateData0.partyID)
           if (candidateData0.voteshare < voteshareCutoffMargin0 && (!candidateData1 || candidateData1.voteshare < voteshareCutoffMargin1))
           {
             partiesToRemove.add(candidateData0.partyID)
@@ -633,7 +663,7 @@ async function applyCompareToCustomMap(shouldResetRound = false)
           }
           partiesChecked.add(candidateData0.partyID)
         }
-        for (let candidateData1 of compareRegionData1.partyVotesharePercentages)
+        for (let candidateData1 of compareRegionData1RemappedVoteshares)
         {
           if (partiesChecked.has(candidateData1.partyID)) { continue }
           let candidateData0 = compareRegionData0.partyVotesharePercentages.find(candidateData => candidateData.partyID == candidateData1.partyID)
@@ -647,7 +677,7 @@ async function applyCompareToCustomMap(shouldResetRound = false)
           }
         }
         let filteredVoteshares0 = compareRegionData0.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(getRegionCandidateName(candidateData.partyID, compareRegionData0, candidateData))).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
-        let filteredVoteshares1 = compareRegionData1.partyVotesharePercentages.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(getRegionCandidateName(candidateData.partyID, compareRegionData1, candidateData))).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
+        let filteredVoteshares1 = compareRegionData1RemappedVoteshares.filter(candidateData => !partiesToRemove.has(candidateData.partyID) || candidatesToKeep.has(getRegionCandidateName(candidateData.partyID, compareRegionData1, candidateData))).sort((candidateData1, candidateData2) => candidateData2.voteshare-candidateData1.voteshare)
 
         let candidateOn = 0
 
