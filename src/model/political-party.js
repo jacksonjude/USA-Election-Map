@@ -66,7 +66,8 @@ class PoliticalParty
   
   getAncestors()
   {
-    return this.ancestorParties ?? []
+    const direct = this.ancestorParties ?? []
+    return [...new Set([...direct, ...direct.flatMap(p => p.getAncestors())])]
   }
   
   isDescendant(otherParty)
