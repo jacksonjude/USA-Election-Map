@@ -809,6 +809,24 @@ var JJUBOBBloc = new PoliticalParty(
   defaultMarginNames
 )
 
+var JJUSunMoonBloc = new PoliticalParty(
+  "JJUSunMoon",
+  ["Sun & Moon", "SunMoon"],
+  "Sun & Moon",
+  "Sun & Moon",
+  cloneObject(PoliticalPartyColors.brown),
+  defaultMarginNames
+)
+
+var JJUSunsetBloc = new PoliticalParty(
+  "JJUSunset",
+  ["Sunset"],
+  "Sunset",
+  "Sunset",
+  cloneObject(PoliticalPartyColors.orange),
+  defaultMarginNames
+)
+
 var IndependentGenericParty = new PoliticalParty(
   "INDGEN",
   ["Independent"],

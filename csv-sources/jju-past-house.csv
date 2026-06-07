@@ -924,6 +924,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 3/26/2026,Trunoe,Heatland,sdp,TRUE,FALSE,0.58
 3/26/2026,Trunoe,Van der plan,green,TRUE,TRUE,66.77
 3/26/2026,Trunoe,Northpoletyrant,sdp,TRUE,TRUE,33.23
+4/18/2026,Coalition,alliance,sunmoon,FALSE,FALSE,0
+4/18/2026,Coalition,solidarity,sunmoon,FALSE,FALSE,0
 4/18/2026,Emix,Jerry,alliance,FALSE,FALSE,33.83
 4/18/2026,Emix,Trey,green,FALSE,FALSE,32.17
 4/18/2026,Emix,Javer,sdp,FALSE,FALSE,23.61
@@ -998,6 +1000,12 @@ date,region,candidate,party,offyear,runoff,voteshare
 4/18/2026,List Seat 18,Tommy,ucp,FALSE,FALSE,100
 4/18/2026,List Seat 19,Danylo Isaacson-Lebid',ucp,FALSE,FALSE,100
 4/18/2026,List Seat 20,Robert M. LaFollette Sr.,ucp,FALSE,FALSE,100
+5/30/2026,Coalition,alliance,sunset,FALSE,FALSE,0
+5/30/2026,Coalition,fdp,sunset,FALSE,FALSE,0
+5/30/2026,Coalition,Danylo Isaacson-Lebid',sunset,FALSE,FALSE,0
+5/30/2026,Coalition,Tommy,sunset,FALSE,FALSE,0
+5/30/2026,Coalition,Van der Plan,sunset,FALSE,FALSE,0
+5/30/2026,Coalition,JAMden,sunset,FALSE,FALSE,0
 5/30/2026,Alvana,Dannyunown0,sdp,FALSE,FALSE,37.03
 5/30/2026,Alvana,Poopman69,alliance,FALSE,FALSE,32.14
 5/30/2026,Alvana,Tommy,ucp,FALSE,FALSE,20

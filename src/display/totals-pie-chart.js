@@ -76,6 +76,8 @@ var partyOrdering = [
   {partyID: NationalRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: DemocraticRepublicanParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJUUnityPartyBloc.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: JJUSunsetBloc.getID(), direction: PieChartDirection.counterclockwise},
+  {partyID: JJUSunMoonBloc.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJUReformParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJULiberalParty.getID(), direction: PieChartDirection.counterclockwise},
   {partyID: JJUBOBBloc.getID(), direction: PieChartDirection.counterclockwise},
