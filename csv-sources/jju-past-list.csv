@@ -1,0 +1,723 @@
+date,region,candidate,party,voteshare
+01/11/2025,Alvana,Alliance,alliance,0
+01/11/2025,Alvana,Liberal,liberal,0
+01/11/2025,Alvana,Labour,labour,0
+01/11/2025,Alvana,Progressive,progressive,0
+01/11/2025,Brunix Islands,Alliance,alliance,0
+01/11/2025,Brunix Islands,Liberal,liberal,0
+01/11/2025,Brunix Islands,Labour,labour,0
+01/11/2025,Brunix Islands,Progressive,progressive,0
+01/11/2025,Dalminica,Alliance,alliance,0
+01/11/2025,Dalminica,Liberal,liberal,0
+01/11/2025,Dalminica,Labour,labour,0
+01/11/2025,Dalminica,Progressive,progressive,0
+01/11/2025,Dentone,Alliance,alliance,0
+01/11/2025,Dentone,Liberal,liberal,0
+01/11/2025,Dentone,Labour,labour,0
+01/11/2025,Dentone,Progressive,progressive,0
+01/11/2025,Emix,Alliance,alliance,0
+01/11/2025,Emix,Liberal,liberal,0
+01/11/2025,Emix,Labour,labour,0
+01/11/2025,Emix,Progressive,progressive,0
+01/11/2025,Garvor,Alliance,alliance,0
+01/11/2025,Garvor,Liberal,liberal,0
+01/11/2025,Garvor,Labour,labour,0
+01/11/2025,Garvor,Progressive,progressive,0
+01/11/2025,Quintin,Alliance,alliance,0
+01/11/2025,Quintin,Liberal,liberal,0
+01/11/2025,Quintin,Labour,labour,0
+01/11/2025,Quintin,Progressive,progressive,0
+01/11/2025,Trunoe,Alliance,alliance,0
+01/11/2025,Trunoe,Liberal,liberal,0
+01/11/2025,Trunoe,Labour,labour,0
+01/11/2025,Trunoe,Progressive,progressive,0
+01/11/2025,National Popular Vote,Alliance,alliance,32.2
+01/11/2025,National Popular Vote,Liberal,liberal,27.12
+01/11/2025,National Popular Vote,Labour,labour,20.34
+01/11/2025,National Popular Vote,Progressive,progressive,20.34
+02/10/2025,Alvana,Alliance,alliance,5
+02/10/2025,Alvana,Liberal,liberal,25
+02/10/2025,Alvana,Labour,labour,33.33
+02/10/2025,Alvana,Progressive,progressive,16.67
+02/10/2025,Brunix Islands,Alliance,alliance,36.36
+02/10/2025,Brunix Islands,Liberal,liberal,45.45
+02/10/2025,Brunix Islands,Labour,labour,0
+02/10/2025,Brunix Islands,Progressive,progressive,18.18
+02/10/2025,Dalminica,Alliance,alliance,42.86
+02/10/2025,Dalminica,Liberal,liberal,28.57
+02/10/2025,Dalminica,Labour,labour,14.29
+02/10/2025,Dalminica,Progressive,progressive,14.29
+02/10/2025,Dentone,Alliance,alliance,57.14
+02/10/2025,Dentone,Liberal,liberal,14.29
+02/10/2025,Dentone,Labour,labour,14.29
+02/10/2025,Dentone,Progressive,progressive,14.29
+02/10/2025,Emix,Alliance,alliance,25
+02/10/2025,Emix,Liberal,liberal,33.331
+02/10/2025,Emix,Labour,labour,33.33
+02/10/2025,Emix,Progressive,progressive,8.33
+02/10/2025,Garvor,Alliance,alliance,20
+02/10/2025,Garvor,Liberal,liberal,60
+02/10/2025,Garvor,Labour,labour,10
+02/10/2025,Garvor,Progressive,progressive,10
+02/10/2025,Quintin,Alliance,alliance,28.57
+02/10/2025,Quintin,Liberal,liberal,0
+02/10/2025,Quintin,Labour,labour,57.14
+02/10/2025,Quintin,Progressive,progressive,14.29
+02/10/2025,Trunoe,Alliance,alliance,20
+02/10/2025,Trunoe,Liberal,liberal,0
+02/10/2025,Trunoe,Labour,labour,80
+02/10/2025,Trunoe,Progressive,progressive,0
+02/10/2025,National Popular Vote,Alliance,alliance,30.99
+02/10/2025,National Popular Vote,Liberal,liberal,29.58
+02/10/2025,National Popular Vote,Labour,labour,26.76
+02/10/2025,National Popular Vote,Progressive,progressive,12.68
+03/10/2025,Alvana,Alliance,alliance,27.27
+03/10/2025,Alvana,Liberal,liberal,18.18
+03/10/2025,Alvana,Labour,labour,36.36
+03/10/2025,Alvana,Progressive,progressive,18.18
+03/10/2025,Brunix Islands,Alliance,alliance,38.46
+03/10/2025,Brunix Islands,Liberal,liberal,30.77
+03/10/2025,Brunix Islands,Labour,labour,15.38
+03/10/2025,Brunix Islands,Progressive,progressive,15.38
+03/10/2025,Dalminica,Alliance,alliance,42.86
+03/10/2025,Dalminica,Liberal,liberal,28.57
+03/10/2025,Dalminica,Labour,labour,28.57
+03/10/2025,Dalminica,Progressive,progressive,0
+03/10/2025,Dentone,Alliance,alliance,80
+03/10/2025,Dentone,Liberal,liberal,0
+03/10/2025,Dentone,Labour,labour,20
+03/10/2025,Dentone,Progressive,progressive,0
+03/10/2025,Emix,Alliance,alliance,20
+03/10/2025,Emix,Liberal,liberal,20
+03/10/2025,Emix,Labour,labour,50
+03/10/2025,Emix,Progressive,progressive,10
+03/10/2025,Garvor,Alliance,alliance,11.11
+03/10/2025,Garvor,Liberal,liberal,55.56
+03/10/2025,Garvor,Labour,labour,11.11
+03/10/2025,Garvor,Progressive,progressive,22.22
+03/10/2025,Quintin,Alliance,alliance,33.33
+03/10/2025,Quintin,Liberal,liberal,0
+03/10/2025,Quintin,Labour,labour,50
+03/10/2025,Quintin,Progressive,progressive,16.67
+03/10/2025,Trunoe,Alliance,alliance,25
+03/10/2025,Trunoe,Liberal,liberal,0
+03/10/2025,Trunoe,Labour,labour,75
+03/10/2025,Trunoe,Progressive,progressive,0
+03/10/2025,National Popular Vote,Alliance,alliance,32.31
+03/10/2025,National Popular Vote,Liberal,liberal,23.08
+03/10/2025,National Popular Vote,Labour,labour,32.31
+03/10/2025,National Popular Vote,Progressive,progressive,12.31
+04/13/2025,Alvana,Alliance,alliance,0
+04/13/2025,Alvana,Liberal,liberal,0
+04/13/2025,Alvana,Labour,labour,0
+04/13/2025,Alvana,Progressive,progressive,0
+04/13/2025,Brunix Islands,Alliance,alliance,0
+04/13/2025,Brunix Islands,Liberal,liberal,0
+04/13/2025,Brunix Islands,Labour,labour,0
+04/13/2025,Brunix Islands,Progressive,progressive,0
+04/13/2025,Dalminica,Alliance,alliance,0
+04/13/2025,Dalminica,Liberal,liberal,0
+04/13/2025,Dalminica,Labour,labour,0
+04/13/2025,Dalminica,Progressive,progressive,0
+04/13/2025,Dentone,Alliance,alliance,0
+04/13/2025,Dentone,Liberal,liberal,0
+04/13/2025,Dentone,Labour,labour,0
+04/13/2025,Dentone,Progressive,progressive,0
+04/13/2025,Emix,Alliance,alliance,0
+04/13/2025,Emix,Liberal,liberal,0
+04/13/2025,Emix,Labour,labour,0
+04/13/2025,Emix,Progressive,progressive,0
+04/13/2025,Garvor,Alliance,alliance,0
+04/13/2025,Garvor,Liberal,liberal,0
+04/13/2025,Garvor,Labour,labour,0
+04/13/2025,Garvor,Progressive,progressive,0
+04/13/2025,Quintin,Alliance,alliance,0
+04/13/2025,Quintin,Liberal,liberal,0
+04/13/2025,Quintin,Labour,labour,0
+04/13/2025,Quintin,Progressive,progressive,0
+04/13/2025,Trunoe,Alliance,alliance,0
+04/13/2025,Trunoe,Liberal,liberal,0
+04/13/2025,Trunoe,Labour,labour,0
+04/13/2025,Trunoe,Progressive,progressive,0
+04/13/2025,National Popular Vote,Alliance,alliance,25.29
+04/13/2025,National Popular Vote,Liberal,liberal,28.74
+04/13/2025,National Popular Vote,Labour,labour,22.99
+04/13/2025,National Popular Vote,Progressive,progressive,22.99
+05/11/2025,Alvana,Alliance,alliance,33.33
+05/11/2025,Alvana,Liberal,liberal,25
+05/11/2025,Alvana,Labour,labour,25
+05/11/2025,Alvana,Progressive,progressive,16.67
+05/11/2025,Brunix Islands,Alliance,alliance,54.55
+05/11/2025,Brunix Islands,Liberal,liberal,45.45
+05/11/2025,Brunix Islands,Labour,labour,0
+05/11/2025,Brunix Islands,Progressive,progressive,0
+05/11/2025,Dalminica,Alliance,alliance,36.36
+05/11/2025,Dalminica,Liberal,liberal,18.18
+05/11/2025,Dalminica,Labour,labour,18.18
+05/11/2025,Dalminica,Progressive,progressive,27.27
+05/11/2025,Dentone,Alliance,alliance,75
+05/11/2025,Dentone,Liberal,liberal,0
+05/11/2025,Dentone,Labour,labour,12.5
+05/11/2025,Dentone,Progressive,progressive,12.5
+05/11/2025,Emix,Alliance,alliance,23.08
+05/11/2025,Emix,Liberal,liberal,23.08
+05/11/2025,Emix,Labour,labour,38.46
+05/11/2025,Emix,Progressive,progressive,15.38
+05/11/2025,Garvor,Alliance,alliance,6.67
+05/11/2025,Garvor,Liberal,liberal,46.67
+05/11/2025,Garvor,Labour,labour,20
+05/11/2025,Garvor,Progressive,progressive,26.67
+05/11/2025,Quintin,Alliance,alliance,30.77
+05/11/2025,Quintin,Liberal,liberal,0
+05/11/2025,Quintin,Labour,labour,30.77
+05/11/2025,Quintin,Progressive,progressive,38.46
+05/11/2025,Trunoe,Alliance,alliance,23.08
+05/11/2025,Trunoe,Liberal,liberal,15.38
+05/11/2025,Trunoe,Labour,labour,30.771
+05/11/2025,Trunoe,Progressive,progressive,30.77
+05/11/2025,National Popular Vote,Alliance,alliance,32.29
+05/11/2025,National Popular Vote,Liberal,liberal,22.92
+05/11/2025,National Popular Vote,Labour,labour,22.92
+05/11/2025,National Popular Vote,Progressive,progressive,21.88
+06/15/2025,Alvana,Alliance,alliance,5
+06/15/2025,Alvana,Liberal,liberal,16.67
+06/15/2025,Alvana,Labour,labour,25
+06/15/2025,Alvana,Progressive,progressive,33.33
+06/15/2025,Brunix Islands,Alliance,alliance,57.14
+06/15/2025,Brunix Islands,Liberal,liberal,28.57
+06/15/2025,Brunix Islands,Labour,labour,0
+06/15/2025,Brunix Islands,Progressive,progressive,14.29
+06/15/2025,Dalminica,Alliance,alliance,46.15
+06/15/2025,Dalminica,Liberal,liberal,15.38
+06/15/2025,Dalminica,Labour,labour,15.38
+06/15/2025,Dalminica,Progressive,progressive,23.08
+06/15/2025,Dentone,Alliance,alliance,71.43
+06/15/2025,Dentone,Liberal,liberal,0
+06/15/2025,Dentone,Labour,labour,14.29
+06/15/2025,Dentone,Progressive,progressive,14.29
+06/15/2025,Emix,Alliance,alliance,23.08
+06/15/2025,Emix,Liberal,liberal,23.08
+06/15/2025,Emix,Labour,labour,46.15
+06/15/2025,Emix,Progressive,progressive,7.69
+06/15/2025,Garvor,Alliance,alliance,0
+06/15/2025,Garvor,Liberal,liberal,50
+06/15/2025,Garvor,Labour,labour,21.43
+06/15/2025,Garvor,Progressive,progressive,28.57
+06/15/2025,Quintin,Alliance,alliance,28.57
+06/15/2025,Quintin,Liberal,liberal,7.14
+06/15/2025,Quintin,Labour,labour,28.57
+06/15/2025,Quintin,Progressive,progressive,35.71
+06/15/2025,Trunoe,Alliance,alliance,22.22
+06/15/2025,Trunoe,Liberal,liberal,33.331
+06/15/2025,Trunoe,Labour,labour,33.33
+06/15/2025,Trunoe,Progressive,progressive,11.11
+06/15/2025,National Popular Vote,Alliance,alliance,32.29
+06/15/2025,National Popular Vote,Liberal,liberal,22.92
+06/15/2025,National Popular Vote,Labour,labour,22.92
+06/15/2025,National Popular Vote,Progressive,progressive,21.88
+07/20/2025,Alvana,Alliance,alliance,15.79
+07/20/2025,Alvana,Liberal,liberal,5.26
+07/20/2025,Alvana,Labour,labour,47.37
+07/20/2025,Alvana,Progressive,progressive,31.58
+07/20/2025,Brunix Islands,Alliance,alliance,57.14
+07/20/2025,Brunix Islands,Liberal,liberal,14.29
+07/20/2025,Brunix Islands,Labour,labour,14.29
+07/20/2025,Brunix Islands,Progressive,progressive,14.29
+07/20/2025,Dalminica,Alliance,alliance,52.63
+07/20/2025,Dalminica,Liberal,liberal,5.26
+07/20/2025,Dalminica,Labour,labour,31.58
+07/20/2025,Dalminica,Progressive,progressive,10.53
+07/20/2025,Dentone,Alliance,alliance,50
+07/20/2025,Dentone,Liberal,liberal,0
+07/20/2025,Dentone,Labour,labour,33.33
+07/20/2025,Dentone,Progressive,progressive,16.67
+07/20/2025,Emix,Alliance,alliance,18.75
+07/20/2025,Emix,Liberal,liberal,25
+07/20/2025,Emix,Labour,labour,37.5
+07/20/2025,Emix,Progressive,progressive,18.75
+07/20/2025,Garvor,Alliance,alliance,25.001
+07/20/2025,Garvor,Liberal,liberal,25
+07/20/2025,Garvor,Labour,labour,25
+07/20/2025,Garvor,Progressive,progressive,25
+07/20/2025,Quintin,Alliance,alliance,27.27
+07/20/2025,Quintin,Liberal,liberal,0
+07/20/2025,Quintin,Labour,labour,36.361
+07/20/2025,Quintin,Progressive,progressive,36.36
+07/20/2025,Trunoe,Alliance,alliance,41.181
+07/20/2025,Trunoe,Liberal,liberal,5.88
+07/20/2025,Trunoe,Labour,labour,41.18
+07/20/2025,Trunoe,Progressive,progressive,11.76
+07/20/2025,National Popular Vote,Alliance,alliance,35.11
+07/20/2025,National Popular Vote,Liberal,liberal,9.16
+07/20/2025,National Popular Vote,Labour,labour,34.35
+07/20/2025,National Popular Vote,Progressive,progressive,21.37
+08/03/2025,Alvana,Alliance,alliance,20
+08/03/2025,Alvana,Liberal,liberal,13.33
+08/03/2025,Alvana,Labour,labour,33.33
+08/03/2025,Alvana,Progressive,progressive,33.331
+08/03/2025,Brunix Islands,Alliance,alliance,46.15
+08/03/2025,Brunix Islands,Liberal,liberal,23.08
+08/03/2025,Brunix Islands,Labour,labour,0
+08/03/2025,Brunix Islands,Progressive,progressive,30.77
+08/03/2025,Dalminica,Alliance,alliance,53.33
+08/03/2025,Dalminica,Liberal,liberal,6.67
+08/03/2025,Dalminica,Labour,labour,13.33
+08/03/2025,Dalminica,Progressive,progressive,26.67
+08/03/2025,Dentone,Alliance,alliance,54.55
+08/03/2025,Dentone,Liberal,liberal,0
+08/03/2025,Dentone,Labour,labour,27.27
+08/03/2025,Dentone,Progressive,progressive,18.18
+08/03/2025,Emix,Alliance,alliance,14.29
+08/03/2025,Emix,Liberal,liberal,14.29
+08/03/2025,Emix,Labour,labour,42.86
+08/03/2025,Emix,Progressive,progressive,28.57
+08/03/2025,Garvor,Alliance,alliance,7.69
+08/03/2025,Garvor,Liberal,liberal,30.77
+08/03/2025,Garvor,Labour,labour,38.46
+08/03/2025,Garvor,Progressive,progressive,23.08
+08/03/2025,Quintin,Alliance,alliance,23.81
+08/03/2025,Quintin,Liberal,liberal,0
+08/03/2025,Quintin,Labour,labour,28.57
+08/03/2025,Quintin,Progressive,progressive,47.62
+08/03/2025,Trunoe,Alliance,alliance,41.671
+08/03/2025,Trunoe,Liberal,liberal,0
+08/03/2025,Trunoe,Labour,labour,41.67
+08/03/2025,Trunoe,Progressive,progressive,16.67
+08/03/2025,National Popular Vote,Alliance,alliance,31.58
+08/03/2025,National Popular Vote,Liberal,liberal,10.53
+08/03/2025,National Popular Vote,Labour,labour,28.07
+08/03/2025,National Popular Vote,Progressive,progressive,29.82
+09/06/2025,Alvana,Alliance,alliance,25
+09/06/2025,Alvana,Labour,labour,45
+09/06/2025,Alvana,Progressive,progressive,30
+09/06/2025,Brunix Islands,Alliance,alliance,57.14
+09/06/2025,Brunix Islands,Labour,labour,14.29
+09/06/2025,Brunix Islands,Progressive,progressive,28.57
+09/06/2025,Dalminica,Alliance,alliance,37.5
+09/06/2025,Dalminica,Labour,labour,31.25
+09/06/2025,Dalminica,Progressive,progressive,31.25
+09/06/2025,Dentone,Alliance,alliance,46.15
+09/06/2025,Dentone,Labour,labour,38.46
+09/06/2025,Dentone,Progressive,progressive,15.38
+09/06/2025,Emix,Alliance,alliance,14.29
+09/06/2025,Emix,Labour,labour,33.33
+09/06/2025,Emix,Progressive,progressive,52.38
+09/06/2025,Garvor,Alliance,alliance,26.32
+09/06/2025,Garvor,Labour,labour,47.37
+09/06/2025,Garvor,Progressive,progressive,26.32
+09/06/2025,Quintin,Alliance,alliance,25
+09/06/2025,Quintin,Labour,labour,33.33
+09/06/2025,Quintin,Progressive,progressive,41.67
+09/06/2025,Trunoe,Alliance,alliance,25
+09/06/2025,Trunoe,Labour,labour,50
+09/06/2025,Trunoe,Progressive,progressive,25
+09/06/2025,National Popular Vote,Alliance,alliance,29.93
+09/06/2025,National Popular Vote,Labour,labour,37.41
+09/06/2025,National Popular Vote,Progressive,progressive,32.65
+10/11/2025,Alvana,Alliance,alliance,18.75
+10/11/2025,Alvana,Renewal,renewal,12.5
+10/11/2025,Alvana,Labour,labour,43.75
+10/11/2025,Alvana,Progressive,progressive,25
+10/11/2025,Brunix Islands,Alliance,alliance,54.55
+10/11/2025,Brunix Islands,Renewal,renewal,9.09
+10/11/2025,Brunix Islands,Labour,labour,9.09
+10/11/2025,Brunix Islands,Progressive,progressive,27.27
+10/11/2025,Dalminica,Alliance,alliance,14.29
+10/11/2025,Dalminica,Renewal,renewal,7.14
+10/11/2025,Dalminica,Labour,labour,50
+10/11/2025,Dalminica,Progressive,progressive,28.57
+10/11/2025,Dentone,Alliance,alliance,47.06
+10/11/2025,Dentone,Renewal,renewal,5.88
+10/11/2025,Dentone,Labour,labour,23.53
+10/11/2025,Dentone,Progressive,progressive,23.53
+10/11/2025,Emix,Alliance,alliance,18.75
+10/11/2025,Emix,Renewal,renewal,25
+10/11/2025,Emix,Labour,labour,37.5
+10/11/2025,Emix,Progressive,progressive,18.75
+10/11/2025,Garvor,Alliance,alliance,15
+10/11/2025,Garvor,Renewal,renewal,5
+10/11/2025,Garvor,Labour,labour,40.001
+10/11/2025,Garvor,Progressive,progressive,40
+10/11/2025,Kilden,Alliance,alliance,9.09
+10/11/2025,Kilden,Renewal,renewal,18.18
+10/11/2025,Kilden,Labour,labour,36.361
+10/11/2025,Kilden,Progressive,progressive,36.36
+10/11/2025,Newmasi,Alliance,alliance,30.77
+10/11/2025,Newmasi,Renewal,renewal,0
+10/11/2025,Newmasi,Labour,labour,38.46
+10/11/2025,Newmasi,Progressive,progressive,30.77
+10/11/2025,Quintin,Alliance,alliance,26.67
+10/11/2025,Quintin,Renewal,renewal,6.67
+10/11/2025,Quintin,Labour,labour,46.67
+10/11/2025,Quintin,Progressive,progressive,20
+10/11/2025,Trunoe,Alliance,alliance,43.75
+10/11/2025,Trunoe,Renewal,renewal,12.5
+10/11/2025,Trunoe,Labour,labour,25
+10/11/2025,Trunoe,Progressive,progressive,18.75
+10/11/2025,National Popular Vote,Alliance,alliance,27.52
+10/11/2025,National Popular Vote,Renewal,renewal,10.07
+10/11/2025,National Popular Vote,Labour,labour,35.57
+10/11/2025,National Popular Vote,Progressive,progressive,26.85
+11/15/2025,Alvana,Alliance,alliance,33.84
+11/15/2025,Alvana,Renewal,renewal,2.06
+11/15/2025,Alvana,Labour,labour,28.78
+11/15/2025,Alvana,Progressive,progressive,26.31
+11/15/2025,Alvana,PWP,pwp,9.02
+11/15/2025,Brunix Islands,Alliance,alliance,36.98
+11/15/2025,Brunix Islands,Renewal,renewal,5.5
+11/15/2025,Brunix Islands,Labour,labour,19.41
+11/15/2025,Brunix Islands,Progressive,progressive,25.03
+11/15/2025,Brunix Islands,PWP,pwp,13.08
+11/15/2025,Dalminica,Alliance,alliance,32.67
+11/15/2025,Dalminica,Renewal,renewal,2.32
+11/15/2025,Dalminica,Labour,labour,36.69
+11/15/2025,Dalminica,Progressive,progressive,25.65
+11/15/2025,Dalminica,PWP,pwp,2.68
+11/15/2025,Dentone,Alliance,alliance,46.28
+11/15/2025,Dentone,Renewal,renewal,5.29
+11/15/2025,Dentone,Labour,labour,22.05
+11/15/2025,Dentone,Progressive,progressive,23.92
+11/15/2025,Dentone,PWP,pwp,2.46
+11/15/2025,Emix,Alliance,alliance,23.89
+11/15/2025,Emix,Renewal,renewal,8.89
+11/15/2025,Emix,Labour,labour,40.35
+11/15/2025,Emix,Progressive,progressive,24.33
+11/15/2025,Emix,PWP,pwp,2.54
+11/15/2025,Garvor,Alliance,alliance,27.17
+11/15/2025,Garvor,Renewal,renewal,9.44
+11/15/2025,Garvor,Labour,labour,26.15
+11/15/2025,Garvor,Progressive,progressive,32.43
+11/15/2025,Garvor,PWP,pwp,4.8
+11/15/2025,Kilden,Alliance,alliance,22.07
+11/15/2025,Kilden,Renewal,renewal,11.5
+11/15/2025,Kilden,Labour,labour,28.42
+11/15/2025,Kilden,Progressive,progressive,21.26
+11/15/2025,Kilden,PWP,pwp,16.74
+11/15/2025,Newmasi,Alliance,alliance,35.21
+11/15/2025,Newmasi,Renewal,renewal,4.97
+11/15/2025,Newmasi,Labour,labour,26.29
+11/15/2025,Newmasi,Progressive,progressive,24.62
+11/15/2025,Newmasi,PWP,pwp,8.91
+11/15/2025,Quintin,Alliance,alliance,32.89
+11/15/2025,Quintin,Renewal,renewal,6.08
+11/15/2025,Quintin,Labour,labour,38.81
+11/15/2025,Quintin,Progressive,progressive,19.73
+11/15/2025,Quintin,PWP,pwp,2.49
+11/15/2025,Trunoe,Alliance,alliance,34.79
+11/15/2025,Trunoe,Renewal,renewal,4.84
+11/15/2025,Trunoe,Labour,labour,29.79
+11/15/2025,Trunoe,Progressive,progressive,24.27
+11/15/2025,Trunoe,PWP,pwp,8.91
+11/15/2025,National Popular Vote,Alliance,alliance,32.56
+11/15/2025,National Popular Vote,Renewal,renewal,6.09
+11/15/2025,National Popular Vote,Labour,labour,29.68
+11/15/2025,National Popular Vote,Progressive,progressive,24.76
+11/15/2025,National Popular Vote,PWP,pwp,6.91
+12/13/2025,Alvana,JNP,jnp,16.88
+12/13/2025,Alvana,Alliance,alliance,28.36
+12/13/2025,Alvana,Renewal,renewal,0.4
+12/13/2025,Alvana,Labour,labour,25.39
+12/13/2025,Alvana,Progressive,progressive,18.26
+12/13/2025,Alvana,PWP,pwp,10.7
+12/13/2025,Brunix Islands,JNP,jnp,12.93
+12/13/2025,Brunix Islands,Alliance,alliance,35.41
+12/13/2025,Brunix Islands,Renewal,renewal,0.56
+12/13/2025,Brunix Islands,Labour,labour,9.15
+12/13/2025,Brunix Islands,Progressive,progressive,28.54
+12/13/2025,Brunix Islands,PWP,pwp,13.41
+12/13/2025,Dalminica,JNP,jnp,20.96
+12/13/2025,Dalminica,Alliance,alliance,27.29
+12/13/2025,Dalminica,Renewal,renewal,3.51
+12/13/2025,Dalminica,Labour,labour,27.94
+12/13/2025,Dalminica,Progressive,progressive,18.39
+12/13/2025,Dalminica,PWP,pwp,1.91
+12/13/2025,Dentone,JNP,jnp,16.28
+12/13/2025,Dentone,Alliance,alliance,37.45
+12/13/2025,Dentone,Renewal,renewal,3.99
+12/13/2025,Dentone,Labour,labour,16.53
+12/13/2025,Dentone,Progressive,progressive,23.84
+12/13/2025,Dentone,PWP,pwp,1.92
+12/13/2025,Emix,JNP,jnp,9.59
+12/13/2025,Emix,Alliance,alliance,18.4
+12/13/2025,Emix,Renewal,renewal,0.41
+12/13/2025,Emix,Labour,labour,40.65
+12/13/2025,Emix,Progressive,progressive,22.46
+12/13/2025,Emix,PWP,pwp,8.5
+12/13/2025,Garvor,JNP,jnp,20.91
+12/13/2025,Garvor,Alliance,alliance,27.12
+12/13/2025,Garvor,Renewal,renewal,0.7
+12/13/2025,Garvor,Labour,labour,28.69
+12/13/2025,Garvor,Progressive,progressive,18.46
+12/13/2025,Garvor,PWP,pwp,4.12
+12/13/2025,Kilden,JNP,jnp,14.31
+12/13/2025,Kilden,Alliance,alliance,20.07
+12/13/2025,Kilden,Renewal,renewal,0.99
+12/13/2025,Kilden,Labour,labour,25.95
+12/13/2025,Kilden,Progressive,progressive,16.11
+12/13/2025,Kilden,PWP,pwp,22.56
+12/13/2025,Newmasi,JNP,jnp,14.69
+12/13/2025,Newmasi,Alliance,alliance,34.13
+12/13/2025,Newmasi,Renewal,renewal,3.31
+12/13/2025,Newmasi,Labour,labour,21.93
+12/13/2025,Newmasi,Progressive,progressive,21.21
+12/13/2025,Newmasi,PWP,pwp,4.72
+12/13/2025,Quintin,Coalition,jnp,8.52
+12/13/2025,Quintin,Alliance,alliance,30.97
+12/13/2025,Quintin,Renewal,renewal,0.42
+12/13/2025,Quintin,Labour,labour,38.79
+12/13/2025,Quintin,Progressive,progressive,19.3
+12/13/2025,Quintin,PWP,pwp,1.99
+12/13/2025,Trunoe,JNP,jnp,12.84
+12/13/2025,Trunoe,Alliance,alliance,35.2
+12/13/2025,Trunoe,Renewal,renewal,0.36
+12/13/2025,Trunoe,Labour,labour,24.5
+12/13/2025,Trunoe,Progressive,progressive,20.79
+12/13/2025,Trunoe,PWP,pwp,6.31
+12/13/2025,National Popular Vote,JNP,jnp,14.79
+12/13/2025,National Popular Vote,Alliance,alliance,29.44
+12/13/2025,National Popular Vote,Renewal,renewal,1.46
+12/13/2025,National Popular Vote,Labour,labour,25.95
+12/13/2025,National Popular Vote,Progressive,progressive,20.74
+12/13/2025,National Popular Vote,PWP,pwp,7.61
+01/25/2026,Alvana,Coalition,national,17.04
+01/25/2026,Alvana,Alliance,alliance,53.58
+01/25/2026,Alvana,Solidarity,solidarity,6.51
+01/25/2026,Alvana,Labour,labour,10.12
+01/25/2026,Alvana,Progressive,progressive,5.16
+01/25/2026,Alvana,PWP,pwp,7.6
+01/25/2026,Brunix Islands,Coalition,national,18.99
+01/25/2026,Brunix Islands,Alliance,alliance,66.82
+01/25/2026,Brunix Islands,Solidarity,solidarity,6.84
+01/25/2026,Brunix Islands,Labour,labour,0.1
+01/25/2026,Brunix Islands,Progressive,progressive,3
+01/25/2026,Brunix Islands,PWP,pwp,4.26
+01/25/2026,Dalminica,Coalition,national,27.67
+01/25/2026,Dalminica,Alliance,alliance,50.11
+01/25/2026,Dalminica,Solidarity,solidarity,6.65
+01/25/2026,Dalminica,Labour,labour,9.81
+01/25/2026,Dalminica,Progressive,progressive,5.11
+01/25/2026,Dalminica,PWP,pwp,0.65
+01/25/2026,Dentone,Coalition,national,19.29
+01/25/2026,Dentone,Alliance,alliance,61.03
+01/25/2026,Dentone,Solidarity,solidarity,5.68
+01/25/2026,Dentone,Labour,labour,6.18
+01/25/2026,Dentone,Progressive,progressive,5.32
+01/25/2026,Dentone,PWP,pwp,2.49
+01/25/2026,Emix,Coalition,national,21.64
+01/25/2026,Emix,Alliance,alliance,49.44
+01/25/2026,Emix,Solidarity,solidarity,7.88
+01/25/2026,Emix,Labour,labour,10.3
+01/25/2026,Emix,Progressive,progressive,7.21
+01/25/2026,Emix,PWP,pwp,3.52
+01/25/2026,Garvor,Coalition,national,24.17
+01/25/2026,Garvor,Alliance,alliance,50.35
+01/25/2026,Garvor,Solidarity,solidarity,5.02
+01/25/2026,Garvor,Labour,labour,12.63
+01/25/2026,Garvor,Progressive,progressive,7.46
+01/25/2026,Garvor,PWP,pwp,0.37
+01/25/2026,Kilden,Coalition,national,14.35
+01/25/2026,Kilden,Alliance,alliance,43.69
+01/25/2026,Kilden,Solidarity,solidarity,6.93
+01/25/2026,Kilden,Labour,labour,15.88
+01/25/2026,Kilden,Progressive,progressive,11.24
+01/25/2026,Kilden,PWP,pwp,7.91
+01/25/2026,Newmasi,Coalition,national,27.13
+01/25/2026,Newmasi,Alliance,alliance,49.65
+01/25/2026,Newmasi,Solidarity,solidarity,8.06
+01/25/2026,Newmasi,Labour,labour,7.61
+01/25/2026,Newmasi,Progressive,progressive,4.5
+01/25/2026,Newmasi,PWP,pwp,3.05
+01/25/2026,Quintin,Coalition,national,18.49
+01/25/2026,Quintin,Alliance,alliance,46.63
+01/25/2026,Quintin,Solidarity,solidarity,3.71
+01/25/2026,Quintin,Labour,labour,22.92
+01/25/2026,Quintin,Progressive,progressive,7.91
+01/25/2026,Quintin,PWP,pwp,0.34
+01/25/2026,Trunoe,Coalition,national,22.21
+01/25/2026,Trunoe,Alliance,alliance,61.4
+01/25/2026,Trunoe,Solidarity,solidarity,6.63
+01/25/2026,Trunoe,Labour,labour,2.03
+01/25/2026,Trunoe,Progressive,progressive,3.95
+01/25/2026,Trunoe,PWP,pwp,3.79
+01/25/2026,National Popular Vote,Coalition,national,21.1
+01/25/2026,National Popular Vote,Alliance,alliance,53.27
+01/25/2026,National Popular Vote,Solidarity,solidarity,6.39
+01/25/2026,National Popular Vote,Labour,labour,9.76
+01/25/2026,National Popular Vote,Progressive,progressive,6.08
+01/25/2026,National Popular Vote,PWP,pwp,3.4
+03/01/2026,Alvana,Nationals,national,10.13
+03/01/2026,Alvana,Alliance,alliance,42.28
+03/01/2026,Alvana,Solidarity,solidarity,14.39
+03/01/2026,Alvana,Progressive Labour,proglab,18.6
+03/01/2026,Alvana,UCP,pwp,14.6
+03/01/2026,Brunix Islands,Nationals,national,11.28
+03/01/2026,Brunix Islands,Alliance,alliance,54.7
+03/01/2026,Brunix Islands,Solidarity,solidarity,10.99
+03/01/2026,Brunix Islands,Progressive Labour,proglab,14.26
+03/01/2026,Brunix Islands,UCP,pwp,8.77
+03/01/2026,Dalminica,Nationals,national,7.92
+03/01/2026,Dalminica,Alliance,alliance,41.2
+03/01/2026,Dalminica,Solidarity,solidarity,12.86
+03/01/2026,Dalminica,Progressive Labour,proglab,32.62
+03/01/2026,Dalminica,UCP,pwp,5.4
+03/01/2026,Dentone,Nationals,national,7.92
+03/01/2026,Dentone,Alliance,alliance,52.34
+03/01/2026,Dentone,Solidarity,solidarity,7.76
+03/01/2026,Dentone,Progressive Labour,proglab,22.78
+03/01/2026,Dentone,UCP,pwp,9.2
+03/01/2026,Emix,Nationals,national,7.95
+03/01/2026,Emix,Alliance,alliance,38.57
+03/01/2026,Emix,Solidarity,solidarity,12.78
+03/01/2026,Emix,Progressive Labour,proglab,32.64
+03/01/2026,Emix,UCP,pwp,8.06
+03/01/2026,Garvor,Nationals,national,14.19
+03/01/2026,Garvor,Alliance,alliance,40.27
+03/01/2026,Garvor,Solidarity,solidarity,9.24
+03/01/2026,Garvor,Progressive Labour,proglab,27.68
+03/01/2026,Garvor,UCP,pwp,8.62
+03/01/2026,Kilden,Nationals,national,7.92
+03/01/2026,Kilden,Alliance,alliance,33.34
+03/01/2026,Kilden,Solidarity,solidarity,12.85
+03/01/2026,Kilden,Progressive Labour,proglab,32.76
+03/01/2026,Kilden,UCP,pwp,13.13
+03/01/2026,Newmasi,Nationals,national,7.94
+03/01/2026,Newmasi,Alliance,alliance,43.92
+03/01/2026,Newmasi,Solidarity,solidarity,13.31
+03/01/2026,Newmasi,Progressive Labour,proglab,25.81
+03/01/2026,Newmasi,UCP,pwp,9.02
+03/01/2026,Quintin,Nationals,national,7.92
+03/01/2026,Quintin,Alliance,alliance,39.06
+03/01/2026,Quintin,Solidarity,solidarity,7.76
+03/01/2026,Quintin,Progressive Labour,proglab,39.85
+03/01/2026,Quintin,UCP,pwp,5.41
+03/01/2026,Trunoe,Nationals,national,7.91
+03/01/2026,Trunoe,Alliance,alliance,49.77
+03/01/2026,Trunoe,Solidarity,solidarity,10.57
+03/01/2026,Trunoe,Progressive Labour,proglab,23.67
+03/01/2026,Trunoe,UCP,pwp,8.08
+03/01/2026,National Popular Vote,Nationals,national,9.11
+03/01/2026,National Popular Vote,Alliance,alliance,43.55
+03/01/2026,National Popular Vote,Solidarity,solidarity,11.25
+03/01/2026,National Popular Vote,Progressive Labour,proglab,27.07
+03/01/2026,National Popular Vote,UCP,pwp,9.02
+04/18/2026,Emix,Nationals,national,0.7
+04/18/2026,Emix,Alliance,alliance,40.09
+04/18/2026,Emix,Solidarity,solidarity,9.65
+04/18/2026,Emix,SDP,sdp,13.41
+04/18/2026,Emix,Green,green,25.42
+04/18/2026,Emix,UCP,ucp,10.73
+04/18/2026,Kilden,Nationals,national,0.72
+04/18/2026,Kilden,Alliance,alliance,38.38
+04/18/2026,Kilden,Solidarity,solidarity,11.72
+04/18/2026,Kilden,SDP,sdp,15.86
+04/18/2026,Kilden,Green,green,16.61
+04/18/2026,Kilden,UCP,ucp,16.72
+04/18/2026,Brunix Islands,Nationals,national,3.86
+04/18/2026,Brunix Islands,Alliance,alliance,58
+04/18/2026,Brunix Islands,Solidarity,solidarity,5.5
+04/18/2026,Brunix Islands,SDP,sdp,2.97
+04/18/2026,Brunix Islands,Green,green,16.35
+04/18/2026,Brunix Islands,UCP,ucp,13.32
+04/18/2026,Garvor,Nationals,national,6.6
+04/18/2026,Garvor,Alliance,alliance,40.31
+04/18/2026,Garvor,Solidarity,solidarity,9.82
+04/18/2026,Garvor,SDP,sdp,13.39
+04/18/2026,Garvor,Green,green,18.54
+04/18/2026,Garvor,UCP,ucp,11.35
+04/18/2026,Dalminica,Nationals,national,2.42
+04/18/2026,Dalminica,Alliance,alliance,43.15
+04/18/2026,Dalminica,Solidarity,solidarity,9.21
+04/18/2026,Dalminica,SDP,sdp,18.09
+04/18/2026,Dalminica,Green,green,17.31
+04/18/2026,Dalminica,UCP,ucp,9.82
+04/18/2026,Newmasi,Nationals,national,5.14
+04/18/2026,Newmasi,Alliance,alliance,43.53
+04/18/2026,Newmasi,Solidarity,solidarity,12.47
+04/18/2026,Newmasi,SDP,sdp,9.56
+04/18/2026,Newmasi,Green,green,16.77
+04/18/2026,Newmasi,UCP,ucp,12.54
+04/18/2026,Trunoe,Nationals,national,0.72
+04/18/2026,Trunoe,Alliance,alliance,49.36
+04/18/2026,Trunoe,Solidarity,solidarity,5.53
+04/18/2026,Trunoe,SDP,sdp,10.53
+04/18/2026,Trunoe,Green,green,23.81
+04/18/2026,Trunoe,UCP,ucp,10.05
+04/18/2026,Alvana,Nationals,national,2.55
+04/18/2026,Alvana,Alliance,alliance,45.41
+04/18/2026,Alvana,Solidarity,solidarity,7.19
+04/18/2026,Alvana,SDP,sdp,13.01
+04/18/2026,Alvana,Green,green,15.84
+04/18/2026,Alvana,UCP,ucp,16
+04/18/2026,Dentone,Nationals,national,2.66
+04/18/2026,Dentone,Alliance,alliance,52.72
+04/18/2026,Dentone,Solidarity,solidarity,5.4
+04/18/2026,Dentone,SDP,sdp,5.54
+04/18/2026,Dentone,Green,green,15.87
+04/18/2026,Dentone,UCP,ucp,17.81
+04/18/2026,Quintin,Nationals,national,0.68
+04/18/2026,Quintin,Alliance,alliance,39.92
+04/18/2026,Quintin,Solidarity,solidarity,5.43
+04/18/2026,Quintin,SDP,sdp,25.93
+04/18/2026,Quintin,Green,green,17.89
+04/18/2026,Quintin,UCP,ucp,10.15
+04/18/2026,National Popular Vote,Nationals,jnp,2.6
+04/18/2026,National Popular Vote,Alliance,alliance,45.09
+04/18/2026,National Popular Vote,Solidarity,solidarity,8.19
+04/18/2026,National Popular Vote,SDP,sdp,12.83
+04/18/2026,National Popular Vote,Green,green,18.44
+04/18/2026,National Popular Vote,UCP,pwp,12.85
+05/31/2026,Emix,Alliance,alliance,34.02
+05/31/2026,Emix,FDP,fdp,9.95
+05/31/2026,Emix,SDP,sdp,20.91
+05/31/2026,Emix,Green,green,21.79
+05/31/2026,Emix,UCP,ucp,13.34
+05/31/2026,Kilden,Alliance,alliance,29.1
+05/31/2026,Kilden,FDP,fdp,10.64
+05/31/2026,Kilden,SDP,sdp,22.7
+05/31/2026,Kilden,Green,green,19.33
+05/31/2026,Kilden,UCP,ucp,18.23
+05/31/2026,Brunix Islands,Alliance,alliance,48.93
+05/31/2026,Brunix Islands,FDP,fdp,11.02
+05/31/2026,Brunix Islands,SDP,sdp,14.52
+05/31/2026,Brunix Islands,Green,green,16.35
+05/31/2026,Brunix Islands,UCP,ucp,9.18
+05/31/2026,Garvor,Alliance,alliance,38.03
+05/31/2026,Garvor,FDP,fdp,12.52
+05/31/2026,Garvor,SDP,sdp,20.39
+05/31/2026,Garvor,Green,green,17.17
+05/31/2026,Garvor,UCP,ucp,11.88
+05/31/2026,Dalminica,Alliance,alliance,35.81
+05/31/2026,Dalminica,FDP,fdp,15.29
+05/31/2026,Dalminica,SDP,sdp,20.93
+05/31/2026,Dalminica,Green,green,19.2
+05/31/2026,Dalminica,UCP,ucp,8.76
+05/31/2026,Newmasi,Alliance,alliance,30.74
+05/31/2026,Newmasi,FDP,fdp,16.83
+05/31/2026,Newmasi,SDP,sdp,23.79
+05/31/2026,Newmasi,Green,green,18.17
+05/31/2026,Newmasi,UCP,ucp,10.47
+05/31/2026,Trunoe,Alliance,alliance,40.3
+05/31/2026,Trunoe,FDP,fdp,7.82
+05/31/2026,Trunoe,SDP,sdp,10.82
+05/31/2026,Trunoe,Green,green,26.71
+05/31/2026,Trunoe,UCP,ucp,14.35
+05/31/2026,Alvana,Alliance,alliance,34.53
+05/31/2026,Alvana,FDP,fdp,11.77
+05/31/2026,Alvana,SDP,sdp,18.93
+05/31/2026,Alvana,Green,green,18.69
+05/31/2026,Alvana,UCP,ucp,16.08
+05/31/2026,Dentone,Alliance,alliance,42.21
+05/31/2026,Dentone,FDP,fdp,10.2
+05/31/2026,Dentone,SDP,sdp,14.71
+05/31/2026,Dentone,Green,green,21.61
+05/31/2026,Dentone,UCP,ucp,11.27
+05/31/2026,Quintin,Alliance,alliance,31.98
+05/31/2026,Quintin,FDP,fdp,10.26
+05/31/2026,Quintin,SDP,sdp,26.85
+05/31/2026,Quintin,Green,green,21.77
+05/31/2026,Quintin,UCP,ucp,9.13
+05/31/2026,National Popular Vote,Alliance,alliance,36.56
+05/31/2026,National Popular Vote,FDP,fdp,11.63
+05/31/2026,National Popular Vote,SDP,sdp,19.46
+05/31/2026,National Popular Vote,Green,green,20.08
+05/31/2026,National Popular Vote,UCP,pwp,12.27

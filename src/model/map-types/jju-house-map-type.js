@@ -201,17 +201,11 @@ var JJUHouseMapType = new MapType(
           voteshareSortedCandidateData = voteshareSortedCandidateData.filter(candData => candData.voteshare >= voteshareCutoffMargin)
         }
         
-        if (voteshareSortedCandidateData.length == 0)
-        {
-          console.log("No candidate data!", currentMapDate.getFullYear().toString(), regionID)
-          return
-        }
-        
         let greatestMarginPartyID
         let greatestMarginCandidateName
         let topTwoMargin
         
-        if (voteshareSortedCandidateData[0].voteshare != 0)
+        if (voteshareSortedCandidateData.length > 0 && voteshareSortedCandidateData[0].voteshare != 0)
         {
           let topCandidateData = voteshareSortedCandidateData.filter(candidateData => candidateData.order == 0 || candidateData.order == 1).sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
           if (topCandidateData.length == 0)
@@ -513,6 +507,20 @@ var JJUHouseMapType = new MapType(
       else
       {
         return "svg-sources/jju-districts-10-list-20-map.svg"
+      }
+    }
+    
+    function getDistrictSVGByDate(dateTime)
+    {
+      let mapDate = new Date(dateTime)
+      
+      if (mapDate < new Date(2025, 10-1, 1))
+      {
+        return "svg-sources/jju-districts-map.svg"
+      }
+      else
+      {
+        return "svg-sources/jju-districts-10-map.svg"
       }
     }
     
@@ -872,6 +880,76 @@ var JJUHouseMapType = new MapType(
           : {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}
       }, // customDefaultMargins
 	  )
+    
+    var PastListElectionResultMapSource = new MapSource(
+      "JJU-Past-List-House-Elections", // id
+      "Past List Elections", // name
+      "./csv-sources/jju-past-list.csv", // dataURL
+      "https://docs.google.com/spreadsheets/d", // homepageURL
+      {regular: "./assets/wikipedia-large.png", mini: "./assets/wikipedia-large.png", getOverlayText: () => {
+        let currentYear = currentSliderDate.getFullYear()
+        return currentYear
+      }}, // iconURL
+      {
+        date: "date",
+        region: "region",
+        isSpecial: "special",
+        isRunoff: "runoff",
+        isOffyear: "offyear",
+        candidateName: "candidate",
+        partyID: "party",
+        voteshare: "voteshare",
+        candidateVotes: "candidatevotes",
+        totalVotes: "totalvotes"
+      }, // columnMap
+      null, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToID, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      doubleLineVoteshareFilterFunction, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      function(homepageURL, regionID, _, mapDate, __, mapData)
+      {
+        console.log(mapData, mapDate)
+        
+        const regionData = mapData[mapDate.getTime()][regionID]
+        if (regionData && regionData.isHold && regionData.electionDate)
+        {
+          mapDate = new Date(regionData.electionDate)
+        }
+        
+        let spreadsheetLinkData = electionDateToSpreadsheetData[mapDate.getTime()]
+        if (!spreadsheetLinkData) return null
+        
+        let linkToOpen = `${homepageURL}/${spreadsheetLinkData.id}/edit?gid=${spreadsheetLinkData.regions[regionID] ?? 0}`
+      
+        return linkToOpen
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0, // voteshareCutoffMargin
+      getDistrictSVGByDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      null, // shouldForcePopularVoteDisplay
+      () => {
+        const isSimulated = currentSliderDate > new Date(2025, 12-1, 1)
+        return isSimulated || showingCompareMap
+          ? {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
+          : {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}
+      }, // customDefaultMargins
+    )
   
 	  var idsToPartyNames = {}
 	  var partyNamesToIDs = {}
@@ -935,16 +1013,19 @@ var JJUHouseMapType = new MapType(
   
 	  var houseMapSources = {}
 	  houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
+    houseMapSources[PastListElectionResultMapSource.getID()] = PastListElectionResultMapSource
 	  houseMapSources[CustomMapSource.getID()] = CustomMapSource
   
 	  const houseMapSourceIDs = {
-	    [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
+	    [allYearsCycle]: [PastElectionResultMapSource.getID(), PastListElectionResultMapSource.getID(), CustomMapSource.getID()]
 	  }
 	  
 	  const kPastElectionsVsPastElections = 1
+    const kPastListElectionsVsPastListElections = 2
   
 	  var defaultHouseCompareSourceIDs = {}
 	  defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[kPastListElectionsVsPastListElections] = [PastListElectionResultMapSource.getID(), PastListElectionResultMapSource.getID()]
   
 	  return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, mapCycles: [], defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
