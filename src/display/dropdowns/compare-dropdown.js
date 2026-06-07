@@ -40,16 +40,19 @@ function resetCompareVariables()
 function createComparePresetDropdownItems()
 {
   $("#comparePresetsDropdownContainer").html("")
-  for (var comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
+  for (const comparePresetNum in currentMapType.getDefaultCompareSourceIDs())
   {
-    var compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
-
+    const compareIDPair = currentMapType.getDefaultCompareSourceIDs()[comparePresetNum]
+    
+    const compareName0 = mapSources[compareIDPair[0]].getName()
+    const compareName1 = mapSources[compareIDPair[1]].getName()
+    
     $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'><span style='margin-right: 8px'>" + getEmojiForComparePresetNum(comparePresetNum) + "</span>" + mapSources[compareIDPair[0]].getName() + " vs " + mapSources[compareIDPair[1]].getName() + "</a>")
+    $("#comparePresetsDropdownContainer").append("<a style='' onclick='loadComparePreset(\"" + comparePresetNum + "\")'><span style='margin-right: 8px'>" + getEmojiForComparePresetNum(comparePresetNum) + "</span>" + compareName0 + (compareName0 != compareName1 ? " vs " + compareName1 : "") + "</a>")
   }
   
   $("#comparePresetsDropdownContainer").append("<div class='dropdown-separator'></div>")
-  $("#comparePresetsDropdownContainer").append("<a style='' onclick='showCustomCompareSelection()'><span style='margin-right: 8px'>#️⃣</span>Other vs Other</a>")
+  $("#comparePresetsDropdownContainer").append("<a style='' onclick='showCustomCompareSelection()'><span style='margin-right: 8px'>#️⃣</span>Other</a>")
 }
 
 function getEmojiForComparePresetNum(comparePresetNum)
@@ -106,7 +109,7 @@ function listCustomCompareMapSources(sourceIndex)
     mapSourceDiv += "<img style='width: 19px; height: 19px' src='" + mapSourceIcon + "' />"
     mapSourceDiv += "<span style='margin-left: 8px'>" + mapSourceName + "</span>"
     mapSourceDiv += "<span style='flex-grow: 1'></span>"
-    if (compareMapSourceIDArray.includes(mapSourceID)) mapSourceDiv += "<span>✅</span>"
+    if (compareMapSourceIDArray.includes(mapSourceID)) mapSourceDiv += "<span style='margin-left: 8px'>✅</span>"
     mapSourceDiv += "</span>"
     mapSourceDiv += "</a>"
     $("#compareCustomListDropdownContainer").append(mapSourceDiv)
