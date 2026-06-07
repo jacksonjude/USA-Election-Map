@@ -516,8 +516,8 @@ async function applyCompareToCustomMap(shouldResetRound = false)
       continue
     }
     
-    let compareRegionData0 = compareMapDataArray[0][regionID]
-    let compareRegionData1 = compareMapDataArray[1][regionID]
+    let compareRegionData0 = compareMapDataArray[0][regionID]?.altData ?? compareMapDataArray[0][regionID]
+    let compareRegionData1 = compareMapDataArray[1][regionID]?.altData ?? compareMapDataArray[1][regionID]
     
     if (currentRound)
     {
@@ -531,10 +531,12 @@ async function applyCompareToCustomMap(shouldResetRound = false)
       if (regionID.endsWith("-S"))
       {
         compareRegionData1 = compareMapDataArray[1][regionID.replace("-S", "")]
+        compareRegionData1 = compareRegionData1?.altData ?? compareRegionData1
       }
       else
       {
         compareRegionData1 = compareMapDataArray[1][regionID + "-S"]
+        compareRegionData1 = compareRegionData1?.altData ?? compareRegionData1
       }
     }
 
