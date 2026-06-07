@@ -87,8 +87,7 @@ function jsonFileLoaded(e)
         currentParty.names,
         currentParty.shortName,
         currentParty.candidateName,
-        currentParty.marginColors,
-        currentParty.marginNames
+        currentParty.marginColors
       )
     }
   }
