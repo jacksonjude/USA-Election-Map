@@ -665,7 +665,9 @@ async function applyCompareToCustomMap(shouldResetRound = false)
         resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.concat(filteredVoteshares1.filter(candidateData => {
           return resultMapArray[regionID].partyVotesharePercentages.every(existingCandidateData => existingCandidateData.partyID != candidateData.partyID)
         }).map(candidateData => {
-          let newCandidateData = {...candidateData, voteshare: -candidateData.voteshare, order: candidateOn}
+          const candidateNameAlreadyUsed = resultMapArray[regionID].partyVotesharePercentages.some(existing => existing.candidate == candidateData.candidate)
+          const candidate = candidateNameAlreadyUsed ? (politicalParties[candidateData.partyID]?.getNames()[0] ?? candidateData.candidate) : candidateData.candidate
+          let newCandidateData = {...candidateData, candidate, voteshare: -candidateData.voteshare, order: candidateOn}
           candidateOn += 1
           return newCandidateData
         }))
