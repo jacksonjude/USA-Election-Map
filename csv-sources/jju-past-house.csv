@@ -372,7 +372,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 5/11/2025,Dalminica,Copperhead,alliance,FALSE,TRUE,45.45
 5/11/2025,Trunoe,Ash,progressive,FALSE,FALSE,50
 5/11/2025,Trunoe,BugsBunny,alliance,FALSE,FALSE,33.33
-5/11/2025,Trunoe,Van Der Plan,labour,FALSE,FALSE,8.33
+5/11/2025,Trunoe,Van der Plan,labour,FALSE,FALSE,8.33
 5/11/2025,Trunoe,Perot,labour,FALSE,FALSE,8.33
 5/11/2025,Trunoe,Ash,progressive,FALSE,TRUE,58.33
 5/11/2025,Trunoe,BugsBunny,alliance,FALSE,TRUE,41.67
@@ -453,7 +453,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 7/9/2025,Coalition,Cob,labourcon,FALSE,FALSE,0
 7/9/2025,Trunoe,TBS387,alliance,TRUE,FALSE,50
 7/9/2025,Trunoe,Growmper,progressive,TRUE,FALSE,30
-7/9/2025,Trunoe,Van Der Plan,labour,TRUE,FALSE,20
+7/9/2025,Trunoe,Van der Plan,labour,TRUE,FALSE,20
 7/9/2025,Trunoe,TBS387,alliance,TRUE,TRUE,60
 7/9/2025,Trunoe,Growmper,progressive,TRUE,TRUE,40
 7/20/2025,Coalition,labour,watermelon,FALSE,FALSE,0
@@ -471,7 +471,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 7/20/2025,Dalminica,KiwiFox,alliance,FALSE,FALSE,17.65
 7/20/2025,Dalminica,Copperhead,alliance,FALSE,TRUE,58.82
 7/20/2025,Dalminica,SunwardH,progressive,FALSE,TRUE,41.18
-7/20/2025,Trunoe,Van Der Plan,labour,FALSE,FALSE,56.25
+7/20/2025,Trunoe,Van der Plan,labour,FALSE,FALSE,56.25
 7/20/2025,Trunoe,TBS387,alliance,FALSE,FALSE,43.75
 7/20/2025,Garvor,Nath,independent,FALSE,FALSE,53.85
 7/20/2025,Garvor,athabasca,labour,FALSE,FALSE,46.15
@@ -522,7 +522,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 8/3/2025,Dalminica,Copperhead,alliance,FALSE,TRUE,57.14
 8/3/2025,Dalminica,SunwardH,progressive,FALSE,TRUE,42.86
 8/3/2025,Trunoe,Heatland,labour,FALSE,FALSE,53.85
-8/3/2025,Trunoe,Van Der Plan,alliance,FALSE,FALSE,46.15
+8/3/2025,Trunoe,Van der Plan,alliance,FALSE,FALSE,46.15
 8/3/2025,Garvor,athabasca,labour,FALSE,FALSE,61.54
 8/3/2025,Garvor,alex,liberal,FALSE,FALSE,38.46
 8/3/2025,Dentone,BlockyBeach,alliance,FALSE,FALSE,70
@@ -595,7 +595,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 9/6/2025,Quintin,Sonia Gandhi,labour,FALSE,TRUE,43.48
 9/6/2025,Quintin,Beary,progressive,FALSE,TRUE,56.52
 9/6/2025,Trunoe,TBS387,alliance,FALSE,FALSE,27.27
-9/6/2025,Trunoe,Van Der Plan,labour,FALSE,FALSE,72.73
+9/6/2025,Trunoe,Van der Plan,labour,FALSE,FALSE,72.73
 9/6/2025,National Popular Vote,Alliance,alliance,FALSE,FALSE,29.93
 9/6/2025,National Popular Vote,Progressive,progressive,FALSE,FALSE,32.65
 9/6/2025,National Popular Vote,Labour,labour,FALSE,FALSE,37.41
@@ -632,7 +632,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 10/11/2025,Garvor,strxya,progressive,FALSE,TRUE,55
 10/11/2025,Garvor,IAMVERYSWELL,labour,FALSE,TRUE,45
 10/11/2025,Kilden,Cob,independent,FALSE,FALSE,66.67
-10/11/2025,Kilden,Bfdifan,progressive,FALSE,FALSE,33.33
+10/11/2025,Kilden,bfdifann,progressive,FALSE,FALSE,33.33
 10/11/2025,Newmasi,Griffith Hyde,alliance,FALSE,FALSE,58.33
 10/11/2025,Newmasi,GMV,progressive,FALSE,FALSE,41.67
 10/11/2025,Quintin,Sonia Gandhi,labour,FALSE,FALSE,42.86
@@ -640,7 +640,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 10/11/2025,Quintin,Seth,progressive,FALSE,FALSE,21.43
 10/11/2025,Quintin,Sonia Gandhi,labour,FALSE,TRUE,42.86
 10/11/2025,Quintin,Beary,progressive,FALSE,TRUE,57.14
-10/11/2025,Trunoe,Van Der Plan,labour,FALSE,FALSE,49.99
+10/11/2025,Trunoe,Van der Plan,labour,FALSE,FALSE,49.99
 10/11/2025,Trunoe,Medikit,independent,FALSE,FALSE,50.01
 10/11/2025,National Popular Vote,Alliance,alliance,FALSE,FALSE,27.52
 10/11/2025,National Popular Vote,Labour,labour,FALSE,FALSE,35.57
@@ -651,7 +651,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 10/11/2025,List Seat 3,alex,alliance,FALSE,FALSE,100
 10/11/2025,List Seat 4,Sonia Gandhi,labour,FALSE,FALSE,100
 10/11/2025,List Seat 5,Javer,labour,FALSE,FALSE,100
-10/11/2025,List Seat 6,Van Der Plan,labour,FALSE,FALSE,100
+10/11/2025,List Seat 6,Van der Plan,labour,FALSE,FALSE,100
 10/11/2025,List Seat 7,Dannyunown0,labour,FALSE,FALSE,100
 10/11/2025,List Seat 8,Chillicote,labour,FALSE,FALSE,100
 10/11/2025,List Seat 9,Flor,labour,FALSE,FALSE,100
@@ -698,7 +698,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 11/16/2025,Quintin,Beary,progressive,FALSE,TRUE,39.6
 11/16/2025,Trunoe,Medikit,pwp,FALSE,FALSE,30.44
 11/16/2025,Trunoe,Eden,alliance,FALSE,FALSE,30.78
-11/16/2025,Trunoe,Van der plan,labour,FALSE,FALSE,17.35
+11/16/2025,Trunoe,Van der Plan,labour,FALSE,FALSE,17.35
 11/16/2025,Trunoe,Forsh,renewal,FALSE,FALSE,16.93
 11/16/2025,Trunoe,Borger,independent,FALSE,FALSE,4.51
 11/16/2025,Trunoe,Heatland,renewal,FALSE,FALSE,0
@@ -715,8 +715,8 @@ date,region,candidate,party,offyear,runoff,voteshare
 11/16/2025,List Seat 4,Odin,alliance,FALSE,FALSE,100
 11/16/2025,List Seat 5,Okazaki Fox,labour,FALSE,FALSE,100
 11/16/2025,List Seat 6,Dannyunown0,labour,FALSE,FALSE,100
-11/16/2025,List Seat 7,Van der plan,labour,FALSE,FALSE,100
-11/16/2025,List Seat 8,Danylo,labour,FALSE,FALSE,100
+11/16/2025,List Seat 7,Van der Plan,labour,FALSE,FALSE,100
+11/16/2025,List Seat 8,Danylo Isaacson-Lebid',labour,FALSE,FALSE,100
 11/16/2025,List Seat 9,Beary,progressive,FALSE,FALSE,100
 11/16/2025,List Seat 10,GMV,progressive,FALSE,FALSE,100
 11/16/2025,List Seat 11,Bernie Sanders,progressive,FALSE,FALSE,100
@@ -784,7 +784,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/25/2026,Brunix Islands,Nick12,alliance,FALSE,FALSE,60.3
 1/25/2026,Brunix Islands,Jack Ciattarelli,coalition,FALSE,FALSE,18.31
 1/25/2026,Brunix Islands,Capybara,pwp,FALSE,FALSE,15
-1/25/2026,Brunix Islands,usgball,independent,FALSE,FALSE,7.81
+1/25/2026,Brunix Islands,Usgball,independent,FALSE,FALSE,7.81
 1/25/2026,Dalminica,Okazaki Fox,coalition,FALSE,FALSE,42.55
 1/25/2026,Dalminica,British Guy,alliance,FALSE,FALSE,31.92
 1/25/2026,Dalminica,SunwardH,solidarity,FALSE,FALSE,13.45
@@ -809,7 +809,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/25/2026,Newmasi,Caughtquick,alliance,FALSE,FALSE,48.62
 1/25/2026,Newmasi,Odin,solidarity,FALSE,FALSE,24.81
 1/25/2026,Newmasi,Obi Dervan,coalition,FALSE,FALSE,13.98
-1/25/2026,Newmasi,Jamden18,progressive,FALSE,FALSE,12.6
+1/25/2026,Newmasi,JAMden,progressive,FALSE,FALSE,12.6
 1/25/2026,Newmasi,Caughtquick,alliance,FALSE,TRUE,62.07
 1/25/2026,Newmasi,Odin,solidarity,FALSE,TRUE,37.93
 1/25/2026,Quintin,Sonia Gandhi,labour,FALSE,FALSE,50.59
@@ -824,11 +824,11 @@ date,region,candidate,party,offyear,runoff,voteshare
 1/25/2026,National Popular Vote,PWP,pwp,FALSE,FALSE,3.4
 1/25/2026,List Seat 1,Athabasca,coalition,FALSE,FALSE,100
 1/25/2026,List Seat 2,Burley,coalition,FALSE,FALSE,100
-1/25/2026,List Seat 3,Van der plan,coalition,FALSE,FALSE,100
+1/25/2026,List Seat 3,Van der Plan,coalition,FALSE,FALSE,100
 1/25/2026,List Seat 4,Eevee,coalition,FALSE,FALSE,100
 1/25/2026,List Seat 5,Jack Ciatarelli,coalition,FALSE,FALSE,100
 1/25/2026,List Seat 6,Nebular Space,alliance,FALSE,FALSE,100
-1/25/2026,List Seat 7,Usgball2,alliance,FALSE,FALSE,100
+1/25/2026,List Seat 7,Usgball,alliance,FALSE,FALSE,100
 1/25/2026,List Seat 8,Geodore Roosevelt,alliance,FALSE,FALSE,100
 1/25/2026,List Seat 9,Cruzer,alliance,FALSE,FALSE,100
 1/25/2026,List Seat 10,Griffith Hyde,alliance,FALSE,FALSE,100
@@ -915,14 +915,14 @@ date,region,candidate,party,offyear,runoff,voteshare
 2/28/2026,List Seat 15,JAMden,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 16,Niven,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 17,Beary,proglab,FALSE,FALSE,100
-2/28/2026,List Seat 18,Van der plan,proglab,FALSE,FALSE,100
+2/28/2026,List Seat 18,Van der Plan,proglab,FALSE,FALSE,100
 2/28/2026,List Seat 19,Cob,pwp,FALSE,FALSE,100
 2/28/2026,List Seat 20,Tommy,pwp,FALSE,FALSE,100
-3/26/2026,Trunoe,Van der plan,green,FALSE,FALSE,60.79
+3/26/2026,Trunoe,Van der Plan,green,FALSE,FALSE,60.79
 3/26/2026,Trunoe,Northpoletyrant,sdp,TRUE,FALSE,24.19
 3/26/2026,Trunoe,Medikit,pwp,TRUE,FALSE,14.44
 3/26/2026,Trunoe,Heatland,sdp,TRUE,FALSE,0.58
-3/26/2026,Trunoe,Van der plan,green,TRUE,TRUE,66.77
+3/26/2026,Trunoe,Van der Plan,green,TRUE,TRUE,66.77
 3/26/2026,Trunoe,Northpoletyrant,sdp,TRUE,TRUE,33.23
 4/18/2026,Coalition,alliance,sunmoon,FALSE,FALSE,0
 4/18/2026,Coalition,solidarity,sunmoon,FALSE,FALSE,0
@@ -986,7 +986,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 4/18/2026,List Seat 4,Jerry,alliance,FALSE,FALSE,100
 4/18/2026,List Seat 5,Spakian,alliance,FALSE,FALSE,100
 4/18/2026,List Seat 6,Timothy Pickering,alliance,FALSE,FALSE,100
-4/18/2026,List Seat 7,USGball,alliance,FALSE,FALSE,100
+4/18/2026,List Seat 7,Usgball,alliance,FALSE,FALSE,100
 4/18/2026,List Seat 8,Caughtquick,alliance,FALSE,FALSE,100
 4/18/2026,List Seat 9,Eden,alliance,FALSE,FALSE,100
 4/18/2026,List Seat 10,Mokaeo,solidarity,FALSE,FALSE,100
@@ -1034,7 +1034,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 5/30/2026,Garvor,Jkuma,alliance,FALSE,TRUE,49.25
 5/30/2026,Garvor,Katherine Monroe,sdp,FALSE,TRUE,50.75
 5/30/2026,Kilden,Cob,ucp,FALSE,FALSE,55.01
-5/30/2026,Kilden,Bfdifan,green,FALSE,FALSE,44.99
+5/30/2026,Kilden,bfdifann,green,FALSE,FALSE,44.99
 5/30/2026,Newmasi,JAMden,green,FALSE,FALSE,38.7
 5/30/2026,Newmasi,Caughtquick,alliance,FALSE,FALSE,25.87
 5/30/2026,Newmasi,Mokaeo,fdp,FALSE,FALSE,23.45
@@ -1066,7 +1066,7 @@ date,region,candidate,party,offyear,runoff,voteshare
 5/30/2026,List Seat 14,Strxya,green,FALSE,FALSE,100
 5/30/2026,List Seat 15,JAMden,green,FALSE,FALSE,100
 5/30/2026,List Seat 16,Friezzer,green,FALSE,FALSE,100
-5/30/2026,List Seat 17,Bfdifan,green,FALSE,FALSE,100
+5/30/2026,List Seat 17,bfdifann,green,FALSE,FALSE,100
 5/30/2026,List Seat 18,Tommy,ucp,FALSE,FALSE,100
 5/30/2026,List Seat 19,Robert M. LaFollette Sr.,ucp,FALSE,FALSE,100
 5/30/2026,List Seat 20,Danylo Isaacson-Lebid',ucp,FALSE,FALSE,100
