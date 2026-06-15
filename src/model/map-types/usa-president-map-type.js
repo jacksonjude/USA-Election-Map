@@ -1445,7 +1445,14 @@ var USAPresidentMapType = new MapType(
       () => {
         if (currentViewingState == ViewingState.zooming)
         {
-          return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+          if (dateYear < 2019)
+          {
+            return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+          }
+          else
+          {
+            return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
+          }
         }
         
         return "svg-sources/usa-presidential-map.svg"
@@ -1646,7 +1653,14 @@ var USAPresidentMapType = new MapType(
       {
         if (await (overrideMapSource ?? PastElectionResultMapSource).canZoom((overrideMapSource ?? PastElectionResultMapSource).getMapData(), currentMapZoomRegion))
         {
-          return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+          if (dateYear < 2019)
+          {
+            return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+          }
+          else
+          {
+            return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
+          }
         }
         else
         {
@@ -2055,7 +2069,14 @@ var USAPresidentMapType = new MapType(
           return "svg-sources/usa-governor-map.svg"
         }
 
-        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+        if (dateYear < 2019)
+        {
+          return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+        }
+        else
+        {
+          return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
+        }
       } // overrideSVGPath
     )
     
@@ -2277,7 +2298,14 @@ var USAPresidentMapType = new MapType(
           return "svg-sources/usa-governor-map.svg"
         }
     
-        return ["svg-sources/usa-counties-map.svg", currentMapZoomRegion]
+        if (dateYear < 2019)
+        {
+          return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+        }
+        else
+        {
+          return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
+        }
       }, // overrideSVGPath
       true // shouldSetDisabledWorthToZero
     )
