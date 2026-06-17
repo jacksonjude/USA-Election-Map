@@ -5,11 +5,7 @@ An interactive USA presidential, senate, house, and governor election map. Creat
 ## Features
 
 * Interactive and detailed map sources
-  * Projection data for the 2024 presidential election from [FiveThirtyEight](https://projects.fivethirtyeight.com/2024-election-forecast/) and [Polymarket](https://polymarket.com/elections)
-  * Projection data for the 2024 senate elections from [Polymarket](https://polymarket.com/elections)
-  <!-- * Displays projection data for the 2024 governor elections from [FiveThirtyEight](https://projects.fivethirtyeight.com/2024-election-forecast/governor/) -->
-  <!-- * Displays projection data for the 2024 house elections from [FiveThirtyEight](https://projects.fivethirtyeight.com/2024-election-forecast/house/) -->
-  * Past results for presidential (1788-2020, counties for 1992-2020), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) elections, with victory margin and voteshare breakdowns for each state & district
+  * Past results for presidential (1788-2024, counties for 1892-2024), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) elections, with victory margin and voteshare breakdowns for each state & district
   * Pie chart for electoral vote counts by party and margin, national popular vote totals for past elections
   * Flip states and counties between election cycles
   * Fully editable custom maps that can be downloaded and uploaded as JSON or CSV files
