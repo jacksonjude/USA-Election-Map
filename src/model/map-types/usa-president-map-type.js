@@ -1445,9 +1445,13 @@ var USAPresidentMapType = new MapType(
       () => {
         if (currentViewingState == ViewingState.zooming)
         {
-          if (dateYear < 2019)
+          if (dateYear < 2015)
           {
             return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+          }
+          else if (dateYear < 2019)
+          {
+            return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
           }
           else
           {
@@ -1653,9 +1657,13 @@ var USAPresidentMapType = new MapType(
       {
         if (await (overrideMapSource ?? PastElectionResultMapSource).canZoom((overrideMapSource ?? PastElectionResultMapSource).getMapData(), currentMapZoomRegion))
         {
-          if (dateYear < 2019)
+          if (dateYear < 2015)
           {
             return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+          }
+          else if (dateYear < 2019)
+          {
+            return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
           }
           else
           {
@@ -2069,9 +2077,13 @@ var USAPresidentMapType = new MapType(
           return "svg-sources/usa-governor-map.svg"
         }
 
-        if (dateYear < 2019)
+        if (dateYear < 2015)
         {
           return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+        }
+        else if (dateYear < 2019)
+        {
+          return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
         }
         else
         {
@@ -2298,9 +2310,13 @@ var USAPresidentMapType = new MapType(
           return "svg-sources/usa-governor-map.svg"
         }
     
-        if (dateYear < 2019)
+        if (dateYear < 2015)
         {
           return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+        }
+        else if (dateYear < 2019)
+        {
+          return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
         }
         else
         {
