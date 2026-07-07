@@ -5,7 +5,7 @@ An interactive USA presidential, senate, house, and governor election map. Creat
 ## Features
 
 * Interactive and detailed map sources
-  * Past results for presidential (1788-2024, counties for 1892-2024), senatorial (1960-2020), house (1976-2020), and gubernatorial (1980-2020) elections, with victory margin and voteshare breakdowns for each state & district
+  * Past results for presidential (1788-2024, counties for 1892-2024), senatorial (1960-2024), house (1976-2024), and gubernatorial (1980-2024) elections, with victory margin and voteshare breakdowns for each state & district
   * Pie chart for electoral vote counts by party and margin, national popular vote totals for past elections
   * Flip states and counties between election cycles
   * Fully editable custom maps that can be downloaded and uploaded as JSON or CSV files
