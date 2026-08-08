@@ -683,7 +683,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1970,New York,NY,1,FALSE,FALSE,FALSE,Johnson,communist,FALSE,0.0006938488781224050,,,kachang
 11/03/1970,New York,NY,1,FALSE,FALSE,FALSE,Goodell,republican,FALSE,0.24293551083671000,,,kachang
 11/03/1970,New York,NY,1,FALSE,FALSE,FALSE,Ottinger,democratic,FALSE,0.36770976015217600,,,kachang
-11/03/1970,New York,NY,1,FALSE,FALSE,FALSE,Buckley,conservative,FALSE,0.3875172234393230,,,kachang
+11/03/1970,New York,NY,1,FALSE,FALSE,FALSE,Buckley,republican,FALSE,0.3875172234393230,,,kachang
 11/03/1970,Connecticut,CT,1,FALSE,FALSE,FALSE,Dodd,dodd independent,FALSE,0.24464326204480000,,,kachang
 11/03/1970,Connecticut,CT,1,FALSE,FALSE,FALSE,Duffey,democratic,FALSE,0.3379245388675050,,,kachang
 11/03/1970,Connecticut,CT,1,FALSE,FALSE,FALSE,Weicker,republican,FALSE,0.41743219908769500,,,kachang
