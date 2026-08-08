@@ -39517,10 +39517,10 @@ date,state,county,candidate,party,candidatevotes,totalvotes
 11/5/1968,VA,Bedford,Nixon,republican,2807,10220
 11/5/1968,VA,Bedford,Wallace,independent,3316,10220
 11/5/1968,VA,Bedford,Other,other,143,10220
-11/5/1968,VA,Bedford_City,Humphrey,democrat,569,10220
-11/5/1968,VA,Bedford_City,Nixon,republican,1047,10220
-11/5/1968,VA,Bedford_City,Wallace,independent,679,10220
-11/5/1968,VA,Bedford_City,Other,other,85,10220
+11/5/1968,VA,Bedford_City,Humphrey,democrat,569,2380
+11/5/1968,VA,Bedford_City,Nixon,republican,1047,2380
+11/5/1968,VA,Bedford_City,Wallace,independent,679,2380
+11/5/1968,VA,Bedford_City,Other,other,85,2380
 11/5/1968,VA,Bland,Humphrey,democrat,560,1862
 11/5/1968,VA,Bland,Nixon,republican,938,1862
 11/5/1968,VA,Bland,Wallace,independent,361,1862
