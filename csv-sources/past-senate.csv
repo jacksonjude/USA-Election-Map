@@ -663,7 +663,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/03/1970,Virginia,VA,1,FALSE,FALSE,FALSE,Others,other,FALSE,3.17254186168987E-05,,,kachang
 11/03/1970,Virginia,VA,1,FALSE,FALSE,FALSE,Garland,republican,FALSE,0.15309100753584400,,,kachang
 11/03/1970,Virginia,VA,1,FALSE,FALSE,FALSE,Rawlings,democratic,FALSE,0.3115245755667750,,,kachang
-11/03/1970,Virginia,VA,1,FALSE,FALSE,FALSE,Byrd,independent,FALSE,0.5353526914787640,,,kachang
+11/03/1970,Virginia,VA,1,FALSE,FALSE,FALSE,Byrd,democratic,FALSE,0.5353526914787640,,,kachang
 11/03/1970,Maryland,MD,1,FALSE,FALSE,FALSE,Wilder,american,FALSE,0.01148927716260440,,,kachang
 11/03/1970,Maryland,MD,1,FALSE,FALSE,FALSE,Tydings,democratic,FALSE,0.4814266444995140,,,kachang
 11/03/1970,Maryland,MD,1,FALSE,FALSE,FALSE,Beall,republican,FALSE,0.5070840783378820,,,kachang
@@ -1072,7 +1072,7 @@ date,region,state_po,class,special,runoff,offyear,candidate,party,writein,votesh
 11/2/1976,Vermont,VT,1,FALSE,FALSE,FALSE,Kaufman,liberty union,FALSE,0.0465513593568179,,,20210114
 11/2/1976,Virginia,VA,1,FALSE,FALSE,FALSE,Perper,independent,FALSE,0.0453027287319422,,,20210114
 11/2/1976,Virginia,VA,1,FALSE,FALSE,FALSE,Zumwalt,democrat,FALSE,0.382670304975923,,,20210114
-11/2/1976,Virginia,VA,1,FALSE,FALSE,FALSE,Byrd,independent,FALSE,0.57192808988764,,,20210114
+11/2/1976,Virginia,VA,1,FALSE,FALSE,FALSE,Byrd,democratic,FALSE,0.57192808988764,,,20210114
 11/2/1976,Washington,WA,1,FALSE,FALSE,FALSE,Wertz,labor,FALSE,0.00227280195773487,,,20210114
 11/2/1976,Washington,WA,1,FALSE,FALSE,FALSE,Smith,independent,FALSE,0.0189000014083459,,,20210114
 11/2/1976,Washington,WA,1,FALSE,FALSE,FALSE,Bermann,socialist workers,FALSE,0.00496408382742801,,,20210114
