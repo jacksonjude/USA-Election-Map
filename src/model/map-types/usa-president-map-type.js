@@ -913,10 +913,16 @@ var USAPresidentMapType = new MapType(
       return {mapData: filteredMapData, mapDates: mapDates}
     }
 
-    var stateCountyVoteshareFilterFunction = function(stateID, stateCountyRows, currentMapDate, previousMapDateData, columnMap, isCustomMap, voteshareCutoffMargin)
+    var stateCountyVoteshareFilterFunction = function(stateID, stateCountyRows, currentMapDate, previousMapDateData, columnMap, isCustomMap, voteshareCutoffMargin, candidateNameToPartyIDMap)
     {
       let filteredStateData = {}
       let candidateNameData = {}
+      
+      let currentCandidateToPartyIDMap = candidateNameToPartyIDMap
+      if (Object.keys(currentCandidateToPartyIDMap).includes(currentMapDate.getFullYear().toString()))
+      {
+        currentCandidateToPartyIDMap = currentCandidateToPartyIDMap[currentMapDate.getFullYear()]
+      }
 
       for (let stateCounty in stateCountyRows)
       {
@@ -938,14 +944,19 @@ var USAPresidentMapType = new MapType(
           var currentOrder = row[columnMap.order] ? parseInt(row[columnMap.order]) : null
 
           var currentPartyName = row[columnMap.partyID]
-          var foundParty = Object.values(politicalParties).find(party => {
-            var partyNames = cloneObject(party.getNames())
-            for (var nameNum in partyNames)
-            {
-              partyNames[nameNum] = partyNames[nameNum].toLowerCase()
-            }
-            return partyNames.includes(currentPartyName)
-          })
+          let foundParty = currentCandidateToPartyIDMap[candidateName] ? politicalParties[currentCandidateToPartyIDMap[candidateName]] : null
+          
+          if (!foundParty)
+          {
+            foundParty = Object.values(politicalParties).find(party => {
+              var partyNames = cloneObject(party.getNames())
+              for (var nameNum in partyNames)
+              {
+                partyNames[nameNum] = partyNames[nameNum].toLowerCase()
+              }
+              return partyNames.includes(currentPartyName)
+            })
+          }
 
           if (!foundParty && Object.keys(politicalParties).includes(currentPartyName))
           {
@@ -1768,7 +1779,7 @@ var USAPresidentMapType = new MapType(
 
       for (let state in organizedCountyData)
       {
-        let {mapDateData, candidateNameData} = stateCountyVoteshareFilterFunction(state, organizedCountyData[state], null, null, countyColumnMap, false, countyVoteshareCutoffMargin)
+        let {mapDateData, candidateNameData} = stateCountyVoteshareFilterFunction(state, organizedCountyData[state], null, null, countyColumnMap, false, countyVoteshareCutoffMargin, electionYearToCandidateData)
         
         stateCandidateData[state] = {}
         stateTotalVotes[state] = 0
@@ -1856,10 +1867,10 @@ var USAPresidentMapType = new MapType(
       {
         let previousDate = mapSource.getMapDates()[previousMapDateIndex]
         let previousOrganizedCountyData = mapSource.getMapData()[previousDate]
-        previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin).mapDateData
+        previousMapDateData = stateCountyVoteshareFilterFunction(currentMapZoomRegion, previousOrganizedCountyData[currentMapZoomRegion], new Date(previousDate), null, mapSource.columnMap, false, mapSource.voteshareCutoffMargin, mapSource.candidateNameToPartyIDMap).mapDateData
       }
 
-      const countyMapDataStruct = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin) : null
+      const countyMapDataStruct = organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ? stateCountyVoteshareFilterFunction(currentMapZoomRegion, organizedCountyData[currentMapZoomRegion], new Date(date) ?? currentSliderDate, previousMapDateData, mapSource.columnMap, false, mapSource.voteshareCutoffMargin, mapSource.candidateNameToPartyIDMap) : null
       
       const mapDateData = countyMapDataStruct?.mapDateData
       const candidateNameData = countyMapDataStruct?.candidateNameData
