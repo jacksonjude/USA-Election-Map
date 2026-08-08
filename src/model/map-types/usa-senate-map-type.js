@@ -429,6 +429,7 @@ var USASenateMapType = new MapType(
             name: rawCandidate.name,
             partyID: overrideCandidateParties[rawCandidate.name] ?? partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
           }
+          candidate.name ??= politicalParties[candidate.partyID].getNames()[0]
           candidateList.push(candidate)
           partyIDToCandidateName[candidate.partyID] = candidate.name
         }

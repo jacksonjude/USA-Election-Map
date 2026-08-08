@@ -604,6 +604,7 @@ var USAHouseMapType = new MapType(
             name: rawCandidate.name,
             partyID: partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
           }
+          candidate.name ??= politicalParties[candidate.partyID].getNames()[0]
           candidateList.push(candidate)
           partyIDToCandidateName[candidate.partyID] = candidate.name
         }
