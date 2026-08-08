@@ -407,6 +407,10 @@ var USASenateMapType = new MapType(
         'I': IndependentGenericParty.getID()
       }
       
+      const overrideCandidateParties = {
+        "Dan Osborn": IndependentGenericParty.getID()
+      }
+      
       for (const regionData of rawMapData)
       {
         const region = regionData[columnMap.region]
@@ -420,7 +424,7 @@ var USASenateMapType = new MapType(
           const candidate = {
             id: rawCandidate.id,
             name: rawCandidate.name,
-            partyID: partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
+            partyID: overrideCandidateParties[rawCandidate.name] ?? partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
           }
           candidateList.push(candidate)
           partyIDToCandidateName[candidate.partyID] = candidate.name
