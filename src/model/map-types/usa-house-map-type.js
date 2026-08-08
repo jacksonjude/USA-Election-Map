@@ -1180,7 +1180,7 @@ var USAHouseMapType = new MapType(
         }
         else
         {
-          linkToOpen += "/senate/"
+          linkToOpen += "/house/"
         }
         
         return linkToOpen
