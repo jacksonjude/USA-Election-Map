@@ -79,18 +79,21 @@ var USASenateMapType = new MapType(
 
     const fillHeldSeats = function(mapData, regionNameToID, heldRegionMap, onCycleClass, shouldDisableOnCycle = true)
     {
-      for (let mapDate in mapData)
+      for (const mapDate in mapData)
       {
-        for (let regionID of Object.values(regionNameToID))
+        for (const regionID of Object.values(regionNameToID))
         {
           if (regionID == nationalPopularVoteID) continue
           
-          let placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true}
+          const placeholderRegionData = {offYear: false, runoff: false, margin: 100, isHold: true}
           
-          let seatClassesToUse = [
-            stateClasses[regionID][stateClasses[regionID][0] == onCycleClass ? 0 : 1],
-            stateClasses[regionID][stateClasses[regionID][0] == onCycleClass ? 1 : 0]
-          ]
+          // lower class => upper class order by default
+          const seatClassesToUse = stateClasses[regionID]
+          // reverse order if opposite seatClass already exists on region
+          if (mapData[mapDate][regionID]?.seatClass == seatClassesToUse[1] || mapData[mapDate][regionID + "-S"]?.seatClass == seatClassesToUse[0])
+          {
+            seatClassesToUse.reverse()
+          }
           
           if (!mapData[mapDate][regionID])
           {
