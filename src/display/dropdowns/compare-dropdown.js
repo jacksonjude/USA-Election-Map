@@ -1,23 +1,23 @@
-var compareMapQueue = []
-var isRunningCompareMapQueue = false
+let compareMapQueue = []
+let isRunningCompareMapQueue = false
 
-var currentCompareSliderDate
+let currentCompareSliderDate
 
-var showingCompareMap
-var compareMapSourceIDArray
-var compareMapDataArray
-var selectedCompareSlider
+let showingCompareMap
+let compareMapSourceIDArray
+let compareMapDataArray
+let selectedCompareSlider
 
-var showingCustomCompare
-var customCompareSourceToSet
+let showingCustomCompare
+let customCompareSourceToSet
 
-var shouldCombineMinorThirdParties = true
-var getCompareMajorParties
+let shouldCombineMinorThirdParties = true
+let getCompareMajorParties
 
-var compareResultCustomMapSource
-var shouldSetCompareMapSource
+let compareResultCustomMapSource
+let shouldSetCompareMapSource
 
-var compareRoundsForDates
+let compareRoundsForDates
 
 function resetCompareVariables()
 {
@@ -157,7 +157,7 @@ async function hideCustomCompareSelection(shouldReset)
 
 function swapCompareMapSources()
 {
-  var tempSourceID = compareMapSourceIDArray[0]
+  let tempSourceID = compareMapSourceIDArray[0]
   compareMapSourceIDArray[0] = compareMapSourceIDArray[1]
   compareMapSourceIDArray[1] = tempSourceID
 }
@@ -166,7 +166,7 @@ async function loadCompareItemMapSource(compareItemNum)
 {
   await setMapSource(mapSources[compareMapSourceIDArray[compareItemNum]])
 
-  var dateIndexToSet
+  let dateIndexToSet
   switch (compareItemNum)
   {
     case 0:
@@ -187,7 +187,7 @@ async function loadCompareItemMapSource(compareItemNum)
 
 async function loadComparePreset(comparePresetNum)
 {
-  var defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
+  let defaultCompareSourceIDs = currentMapType.getDefaultCompareSourceIDs()
   
   await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][0])
   if (defaultCompareSourceIDs[comparePresetNum][0] != defaultCompareSourceIDs[comparePresetNum][1])
@@ -207,7 +207,7 @@ function setCompareSliderDates()
   }
 }
 
-var compareSortMode = CompareSortMode.voteshare
+let compareSortMode = CompareSortMode.voteshare
 
 function toggleCompareSortMode(div)
 {
@@ -239,7 +239,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
     await zoomOutMap()
   }
 
-  var compareSourcesUpdated
+  let compareSourcesUpdated
   if (compareMapSourceIDArray[0] == null && compareMapSourceIDArray[1] == null)
   {
     compareSourcesUpdated = [true, true]
@@ -322,7 +322,7 @@ function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
 
 function updateCompareMapSlidersVisibility(overrideShowHide)
 {
-  var showCompareSliders = overrideShowHide
+  let showCompareSliders = overrideShowHide
   if (showCompareSliders == null)
   {
     showCompareSliders = showingCompareMap
@@ -407,10 +407,10 @@ async function setCompareSourceDate(compareArrayIndex, dateIndex, shouldApply = 
 {
   let mapSource = mapSources[compareMapSourceIDArray[compareArrayIndex]]
   
-  var mapDates = mapSource.getMapDates()
+  let mapDates = mapSource.getMapDates()
 
-  var dateToDisplay
-  var overrideDateString
+  let dateToDisplay
+  let overrideDateString
   if (dateIndex-1 > mapDates.length-1)
   {
     dateToDisplay = new Date(mapDates[dateIndex-1-1])
@@ -608,7 +608,7 @@ async function applyCompareToCustomMap(shouldResetRound = false)
       {
         if (compareRegionData0.partyVotesharePercentages)
         {
-          var sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+          let sortedVoteshareArray = compareRegionData0.partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
           resultMapArray[regionID].partyID = sortedVoteshareArray.length >= 2 ? sortedVoteshareArray[1].partyID : TossupParty.getID()
         }
         else

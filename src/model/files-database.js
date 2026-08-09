@@ -14,7 +14,7 @@ class FilesDatabase
   {
     self = self || this
 
-    var openDatabasePromise = new Promise((resolve) => {
+    let openDatabasePromise = new Promise((resolve) => {
       const request = indexedDB.open(self.databaseName, self.databaseVersion)
 
       request.onerror = function(event) {
@@ -23,13 +23,13 @@ class FilesDatabase
       }
 
       request.onupgradeneeded = function(event) {
-        var db = event.target.result
+        let db = event.target.result
 
         db.createObjectStore(self.storeName)
       }
 
       request.onsuccess = function(event) {
-        var db = event.target.result
+        let db = event.target.result
         resolve(db)
       }
     })
@@ -43,10 +43,10 @@ class FilesDatabase
 
     try
     {
-      var db = await self.openDatabase()
+      let db = await self.openDatabase()
       if (db == null) { return }
-      var transaction = db.transaction(self.storeName, 'readwrite')
-      var store = transaction.objectStore(self.storeName)
+      let transaction = db.transaction(self.storeName, 'readwrite')
+      let store = transaction.objectStore(self.storeName)
 
       store.put({text: fileText, updatedAt: self.sourceUpdatedTimesData ? (self.sourceUpdatedTimesData[sourceID] ? self.sourceUpdatedTimesData[sourceID] : Date.now()) : 0}, sourceID)
 
@@ -64,20 +64,20 @@ class FilesDatabase
   {
     self = self || this
 
-    var db = await self.openDatabase()
+    let db = await self.openDatabase()
     if (db == null) { return null }
 
-    var fetchFilePromise = new Promise((resolve) => {
+    let fetchFilePromise = new Promise((resolve) => {
       try
       {
-        var transaction = db.transaction(self.storeName, 'readonly')
-        var store = transaction.objectStore(self.storeName)
+        let transaction = db.transaction(self.storeName, 'readonly')
+        let store = transaction.objectStore(self.storeName)
 
-        var query = store.get(sourceID)
+        let query = store.get(sourceID)
 
         query.onsuccess = function() {
-          var textResult = query.result ? query.result.text : null
-          var updatedTime = query.result ? query.result.updatedAt : null
+          let textResult = query.result ? query.result.text : null
+          let updatedTime = query.result ? query.result.updatedAt : null
 
           if (!self.sourceUpdatedTimesData || Date.now()-self.lastSourceUpdateCheck >= 1000*60*5)
           {
@@ -131,16 +131,16 @@ class FilesDatabase
   {
     self = self || this
 
-    var db = await self.openDatabase()
+    let db = await self.openDatabase()
     if (db == null) { return false }
 
-    var hasFilePromise = new Promise((resolve) => {
+    let hasFilePromise = new Promise((resolve) => {
       try
       {
-        var transaction = db.transaction(self.storeName, 'readonly')
-        var store = transaction.objectStore(self.storeName)
+        let transaction = db.transaction(self.storeName, 'readonly')
+        let store = transaction.objectStore(self.storeName)
 
-        var query = store.getAllKeys()
+        let query = store.getAllKeys()
 
         query.onsuccess = function() {
           resolve(query.result.includes(sourceID))
@@ -169,7 +169,7 @@ class FilesDatabase
   {
     self = self || this
 
-    var result = await self.fetchFile(sourceID)
+    let result = await self.fetchFile(sourceID)
     return result != null
   }
 }
@@ -179,14 +179,14 @@ const csvDatabaseName = "CSVDatabase"
 const csvDatabaseVersion = 1
 const csvStoreName = "CSVFiles"
 const csvSourceUpdatedTimesURL = "./csv-sources/source-updated-times.json"
-var CSVDatabase = new FilesDatabase()
+const CSVDatabase = new FilesDatabase()
 
 
 const svgDatabaseName = "SVGDatabase"
 const svgDatabaseVersion = 1
 const svgStoreName = "SVGFiles"
 const svgSourceUpdatedTimesURL = "./svg-sources/source-updated-times.json"
-var SVGDatabase = new FilesDatabase()
+const SVGDatabase = new FilesDatabase()
 
 async function initializeDatabases()
 {

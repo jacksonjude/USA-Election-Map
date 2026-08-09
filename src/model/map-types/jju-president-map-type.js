@@ -1,4 +1,4 @@
-var JJUPresidentMapType = new MapType(
+const JJUPresidentMapType = new MapType(
   "JJU-President",
   "President",
   "P",
@@ -55,7 +55,7 @@ var JJUPresidentMapType = new MapType(
             foundParty = politicalParties[currentPartyName]
           }
         
-          var currentPartyID
+          let currentPartyID
           if (foundParty)
           {
             currentPartyID = foundParty.getID()
@@ -290,7 +290,7 @@ var JJUPresidentMapType = new MapType(
       }
     }
     
-    var electionDateToSpreadsheetData = {
+    let electionDateToSpreadsheetData = {
       1724223600000: {
         id: "1fFJ8Y_KS2iy6qOupil1F-qC8wrKDjpJECRHIVjWHUzY",
         regions: {
@@ -339,7 +339,7 @@ var JJUPresidentMapType = new MapType(
       }
     }
   
-    var PastElectionResultMapSource = new MapSource(
+    const PastElectionResultMapSource = new MapSource(
       "JJU-Past-Presidential-Elections", // id
       "Past Elections", // name
       "./csv-sources/jju-past-president.csv", // dataURL
@@ -395,9 +395,9 @@ var JJUPresidentMapType = new MapType(
       {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
     )
   
-    var idsToPartyNames = {}
-    var partyNamesToIDs = {}
-    for (var partyNum in mainPoliticalPartyIDs)
+    let idsToPartyNames = {}
+    let partyNamesToIDs = {}
+    for (let partyNum in mainPoliticalPartyIDs)
     {
       if (mainPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
   
@@ -405,7 +405,7 @@ var JJUPresidentMapType = new MapType(
       idsToPartyNames[mainPoliticalPartyIDs[partyNum]] = politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]
     }
   
-    var CustomMapSource = new MapSource(
+    const CustomMapSource = new MapSource(
       "JJU-Custom-President", // id
       "Custom", // name
       null, // dataURL
@@ -449,10 +449,10 @@ var JJUPresidentMapType = new MapType(
       {safe: 30, likely: 20, lean: 10, tilt: Number.MIN_VALUE}, // customDefaultMargins
     )
   
-    var todayDate = new Date()
+    let todayDate = new Date()
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
   
-    var presidentialMapSources = {}
+    let presidentialMapSources = {}
     presidentialMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     presidentialMapSources[CustomMapSource.getID()] = CustomMapSource
   
@@ -462,7 +462,7 @@ var JJUPresidentMapType = new MapType(
     
     const kPastElectionsVsPastElections = 1
   
-    var defaultPresidentCompareSourceIDs = {}
+    let defaultPresidentCompareSourceIDs = {}
     defaultPresidentCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
   
     return {mapSources: presidentialMapSources, mapSourceIDs: presidentialMapSourceIDs, mapCycles: [], defaultCompareSourceIDs: defaultPresidentCompareSourceIDs, customSourceID: CustomMapSource.getID()}

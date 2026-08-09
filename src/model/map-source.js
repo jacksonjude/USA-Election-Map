@@ -30,6 +30,7 @@ class MapSource
     this.updateCustomMapFunction = updateCustomMapFunction
     this.convertMapDataRowToCSVFunction = convertMapDataRowToCSVFunction
     this.isCustomMap = isCustomMap == null ? false : isCustomMap
+    this.isCompareMap = false
     this.shouldClearDisabled = shouldClearDisabled == null ? true : shouldClearDisabled
     this.shouldShowVoteshare = shouldShowVoteshare == null ? false : shouldShowVoteshare
     this.voteshareCutoffMargin = voteshareCutoffMargin
@@ -79,14 +80,14 @@ class MapSource
 
   async loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
-    var self = this
+    let self = this
     
     reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
     resetCandidateNames = resetCandidateNames != null ? resetCandidateNames : true
 
     if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
     {
-      var textData
+      let textData
       if (self.dataURL)
       {
         textData = await self.loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
@@ -200,7 +201,7 @@ class MapSource
 
     if (!reloadCache)
     {
-      var savedCSVText = await CSVDatabase.fetchFile(this.id)
+      let savedCSVText = await CSVDatabase.fetchFile(this.id)
       if (savedCSVText != null)
       {
         return savedCSVText
@@ -211,7 +212,7 @@ class MapSource
       }
     }
 
-    var fetchMapDataPromise = new Promise((resolve) => {
+    let fetchMapDataPromise = new Promise((resolve) => {
       addLoader(LoaderType.progress, downloadIndicatorColor)
       $.ajax({
         xhr: () => {
@@ -338,11 +339,11 @@ class MapSource
   {
     shouldFullClear = shouldFullClear == null ? false : shouldFullClear
 
-    var mapIsClearExceptDisabled = true
+    let mapIsClearExceptDisabled = true
 
-    for (var mapDate in this.mapData)
+    for (let mapDate in this.mapData)
     {
-      for (var regionID in this.mapData[mapDate])
+      for (let regionID in this.mapData[mapDate])
       {
         if (!this.mapData[mapDate][regionID].disabled && this.mapData[mapDate][regionID].partyID != TossupParty.getID())
         {
@@ -364,7 +365,7 @@ class MapSource
       this.setIconURL("", this)
       if (this.candidateNameData != null)
       {
-        for (var date in this.candidateNameData)
+        for (let date in this.candidateNameData)
         {
           this.candidateNameData[date] = cloneObject(this.shortCandidateNameOverride)
         }
@@ -552,11 +553,11 @@ class MapSource
 
   getOverrideSVGPath(mapDate)
   {
-    var isFunction = (typeof this.overrideSVGPath === 'function')
+    let isFunction = (typeof this.overrideSVGPath === 'function')
     if (this.mapData == null) return isFunction ? null : this.overrideSVGPath
 
-    var mapDates = Object.keys(this.mapData)
-    var mapDateToUse = mapDate || mapDates[mapDates.length-1]
+    let mapDates = Object.keys(this.mapData)
+    let mapDateToUse = mapDate || mapDates[mapDates.length-1]
     return isFunction ? this.overrideSVGPath(mapDateToUse) : this.overrideSVGPath
   }
 
@@ -603,7 +604,7 @@ class MapSource
 
   setDropdownPartyIDs(partyIDs)
   {
-    var dropdownPartyIDs = cloneObject(partyIDs)
+    let dropdownPartyIDs = cloneObject(partyIDs)
     if (dropdownPartyIDs.includes(addButtonPartyID))
     {
       dropdownPartyIDs.splice(dropdownPartyIDs.indexOf(addButtonPartyID), 1)
@@ -712,15 +713,15 @@ class MapSource
 
     csvText = csvText.slice(0, -1)
 
-    var rowCount = csvText.split("\n").length
+    let rowCount = csvText.split("\n").length
     if (rowCount == 1)
     {
-      var mapDates = []
+      let mapDates = []
       if (mapData)
       {
         mapDates = Object.keys(mapData)
       }
-      var dateToUse = new Date()
+      let dateToUse = new Date()
       if (mapDates.length > 0)
       {
         dateToUse = new Date(parseInt(mapDates[0]))
@@ -743,11 +744,11 @@ const statePopularVoteDistrictID = "PV"
 const jsonSourceType = "JSON"
 const csvSourceType = "CSV"
 
-var mainTwoPartyIDsToNames = {}
+let mainTwoPartyIDsToNames = {}
 mainTwoPartyIDsToNames[DemocraticParty.getID()] = DemocraticParty.getNames()[0]
 mainTwoPartyIDsToNames[RepublicanParty.getID()] = RepublicanParty.getNames()[0]
 
-var NullMapSource = new MapSource(
+const NullMapSource = new MapSource(
   "None", // id
   "None", // name
   null, // dataURL

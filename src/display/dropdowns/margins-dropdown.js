@@ -1,4 +1,4 @@
-var editMarginID = null
+let editMarginID = null
 
 const marginsCookieName = "global-margins"
 
@@ -10,7 +10,7 @@ function createMarginEditDropdownItems(shouldSetDefault)
   }
 
   $("#marginsDropdownContainer").html("")
-  for (var marginID in marginNames)
+  for (let marginID in marginNames)
   {
     if (marginID == "tilt") { continue } // Hardcoding tilt to be excluded
     $("#marginsDropdownContainer").append("<div class='dropdown-separator'></div>")
@@ -24,14 +24,14 @@ function toggleMarginEditing(marginID, div)
 {
   if (editMarginID)
   {
-    var marginValueToSet = parseFloat($("#" + editMarginID + "-text").val()) || defaultMarginValues[editMarginID]
+    let marginValueToSet = parseFloat($("#" + editMarginID + "-text").val()) || defaultMarginValues[editMarginID]
     marginValueToSet = Math.round(marginValueToSet*Math.pow(10, 1))/Math.pow(10, 1)
     if (marginValueToSet > 100)
     {
       marginValueToSet = 100
     }
 
-    var marginIDArray = Object.keys(marginNames)
+    let marginIDArray = Object.keys(marginNames)
     if (marginValueToSet < marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]])
     {
       marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)+1]]
@@ -41,7 +41,7 @@ function toggleMarginEditing(marginID, div)
       marginValueToSet = marginValues[marginIDArray[marginIDArray.indexOf(editMarginID)-1]]
     }
 
-    var shouldRefreshMap = false
+    let shouldRefreshMap = false
     if (marginValueToSet != marginValues[editMarginID])
     {
       shouldRefreshMap = true

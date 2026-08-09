@@ -22,7 +22,7 @@ function createMapCountryDropdownItems()
 
 function cycleMapCountry(buttonDiv)
 {
-  var newMapCountryIndex = mapCountryIDs.indexOf(currentMapCountry.getID())+1
+  let newMapCountryIndex = mapCountryIDs.indexOf(currentMapCountry.getID())+1
   if (newMapCountryIndex >= mapCountryIDs.length || newMapCountryIndex < 0)
   {
 	newMapCountryIndex = 0

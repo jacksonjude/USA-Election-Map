@@ -1,31 +1,31 @@
 const currentAppVersion = "5"
 
-var currentMapCountry
-var currentMapType
+let currentMapCountry
+let currentMapType
 
-var mapSources
-var mapSourceIDs
-var currentCustomMapSource
-var currentCompareMapSource
+let mapSources
+let mapSourceIDs
+let currentCustomMapSource
+let currentCompareMapSource
 
-var mapRegionIDToName
+let mapRegionIDToName
 
-var currentMapSource
+let currentMapSource
 
-var currentDisplayDate
-var displayMapQueue = []
-var isRunningDisplayMapQueue = false
+let currentDisplayDate
+let displayMapQueue = []
+let isRunningDisplayMapQueue = false
 
-var svgPanZoomController
-var pannedDuringClick = false
+let svgPanZoomController
+let pannedDuringClick = false
 
-var selectedParty
+let selectedParty
 
 const standardMarginValues = {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}
 const alternateMarginValues = {safe: 5, likely: 3, lean: 1, tilt: Number.MIN_VALUE}
-var defaultMarginValues = JSON.parse(getCookie(marginsCookieName)) || standardMarginValues
-var marginValues = cloneObject(defaultMarginValues)
-var marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
+let defaultMarginValues = JSON.parse(getCookie(marginsCookieName)) || standardMarginValues
+let marginValues = cloneObject(defaultMarginValues)
+let marginNames = {safe: "Safe", likely: "Likely", lean: "Lean", tilt: "Tilt"}
 
 const defaultRegionFillColor = TossupParty.getMarginColors().safe
 const regionFillAnimationDuration = 0.1
@@ -48,49 +48,49 @@ const isDistrictBoxRegionAttribute = "data-isdistrictbox"
 
 const subregionSeparator = "__"
 
-var displayRegionDataArray
+let displayRegionDataArray
 const regionIDsToIgnore = [/.+-button/, /.+-N/, /.+-land/]
 
-var showingDataMap = false
+let showingDataMap = false
 
-var shouldDragSelect = false
+let shouldDragSelect = false
 
-var editingRegionEVs = false
-var overrideRegionEVs = {}
+let editingRegionEVs = false
+let overrideRegionEVs = {}
 
-var editingRegionMarginValue = false
-var editingRegionVotesharePercentages = false
-var voteshareEditRegion
-var selectedVoteshareCandidate
+let editingRegionMarginValue = false
+let editingRegionVotesharePercentages = false
+let voteshareEditRegion
+let selectedVoteshareCandidate
 
-var ignoreMapUpdateClickArray
+let ignoreMapUpdateClickArray
 
-var currentSliderDate
+let currentSliderDate
 const initialKeyPressDelay = 500
 const zoomKeyPressDelayForHalf = 3000
 const maxDateSliderTicks = 60
 
-var currentRound
+let currentRound
 
-var progressCircleDiv
+let progressCircleDiv
 const progressCircleDuration = 100
-var lastIndicatorCircleProgress
+let lastIndicatorCircleProgress
 
 const downloadIndicatorColor = '#3498db'
 const csvParseIndicatorColor = '#3ac635'
 
-var loaderStack = [LoaderType.hidden]
+let loaderStack = [LoaderType.hidden]
 
-var currentViewingState
+let currentViewingState
 
-var currentEditingState
+let currentEditingState
 
-var currentMapZoomRegion
+let currentMapZoomRegion
 
-var selectedDropdownDivID = null
+let selectedDropdownDivID = null
 
-var showingHelpBox = false
-var currentHelpBoxPage = 0
+let showingHelpBox = false
+let currentHelpBoxPage = 0
 const helpBoxPages = [
   {subtitle: "Map Selection", body: `
   [T] Change types with the <span style='text-decoration: underline'>type dropdown</span><br>
@@ -200,7 +200,7 @@ async function reloadForNewMapCountry(initialLoad)
 
 async function reloadForNewMapType(initialLoad)
 {
-  var previousDateOverride
+  let previousDateOverride
   if (!initialLoad)
   {
     previousDateOverride = currentSliderDate ? currentSliderDate.getTime() : null
@@ -371,13 +371,13 @@ function handleNewSVGFields(resolve, _, fadeForNewSVG, updateViewboxOutlines = f
 
 async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG, zoomControlsVisibility)
 {
-  var handleSVGZoomingPromise = new Promise((innerResolve) => {
-    var stateToShow = svgPath[1]
+  let handleSVGZoomingPromise = new Promise((innerResolve) => {
+    let stateToShow = svgPath[1]
     if (stateToShow != null)
     {
       for (let districtPath of $("#mapcontainertmp #outlines")[0].querySelectorAll("*"))
       {
-        var splitArray = districtPath.id.split(subregionSeparator)
+        let splitArray = districtPath.id.split(subregionSeparator)
         if ((stateToShow != splitArray[0] && splitArray[0] != "use") || splitArray[1] == "button")
         {
           districtPath.remove()
@@ -401,7 +401,7 @@ async function handleSVGZooming(resolve, svgPath, handleNewSVG, fadeForNewSVG, z
 function setOutlineDivProperties()
 {
   $('#outlines').children().each(function() {
-    var outlineDiv = $(this)
+    let outlineDiv = $(this)
 
     outlineDiv.css('cursor', "pointer")
 
@@ -428,7 +428,7 @@ function setOutlineDivProperties()
 function updateSVGViewbox(svgDiv = $("#mapcontainer #svgdata"), setOutlines = false)
 {
   if (svgDiv.length == 0) return
-  var svgDataBoundingBox = svgDiv[0].getBBox()
+  let svgDataBoundingBox = svgDiv[0].getBBox()
   setOutlines && svgDiv.children("#outlines").css("stroke-width", ((Math.max(svgDataBoundingBox.width/svgDiv.width(), svgDataBoundingBox.height/svgDiv.height()))) + "rem")
   
   let viewBoxString = (svgDataBoundingBox.x) + " " + (svgDataBoundingBox.y) + " " + (svgDataBoundingBox.width) + " " + (svgDataBoundingBox.height)
@@ -438,12 +438,12 @@ function updateSVGViewbox(svgDiv = $("#mapcontainer #svgdata"), setOutlines = fa
 
 function setSliderTickMarginShift(sliderContainerDivID, sliderDivID, sliderTicksDivID)
 {
-  var shouldHideSlider = $("#" + sliderContainerDivID).is(":hidden")
+  let shouldHideSlider = $("#" + sliderContainerDivID).is(":hidden")
   if (shouldHideSlider)
   {
     $("#" + sliderContainerDivID).show()
   }
-  var marginShift = $("#" + sliderTicksDivID)[0].getBoundingClientRect().y-$("#" + sliderDivID)[0].getBoundingClientRect().y
+  let marginShift = $("#" + sliderTicksDivID)[0].getBoundingClientRect().y-$("#" + sliderDivID)[0].getBoundingClientRect().y
   if (marginShift != 0)
   {
     $("#" + sliderTicksDivID).css("margin-top", "-" + marginShift + "px")
@@ -472,7 +472,7 @@ function setSliderDateDisplayMarginShift(dateDisplayDivID, sliderContainerDivID,
 
 function preloadAssets(assetURLs)
 {
-  for (var urlNum in assetURLs)
+  for (let urlNum in assetURLs)
   {
     (new Image()).src = assetURLs[urlNum]
   }
@@ -502,10 +502,10 @@ function addDivEventListeners()
 
     if (e.altKey)
     {
-      for (var mapSourceID in mapSources)
+      for (let mapSourceID in mapSources)
       {
         mapSources[mapSourceID].resetMapData()
-        var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceID)
+        let divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceID)
         for (let divID in divsToUpdateStatus)
         {
           setStatusImage(divID, divsToUpdateStatus[divID].error)
@@ -703,8 +703,8 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   
   addLoader(LoaderType.standard)
 
-  var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
-  var loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
+  let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
+  let loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
 
   if (!loadedSuccessfully)
   {
@@ -828,10 +828,10 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   mapDates = mapDates || currentMapSource.getMapDates()
   previousDate = previousDate || (currentSliderDate ? currentSliderDate.getTime() : null)
 
-  var endDate = new Date(mapDates[mapDates.length-1])
+  let endDate = new Date(mapDates[mapDates.length-1])
 
-  var latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
-  var previousValueWasLatest = $("#" + sliderDivID).val() != null && $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
+  let latestSliderTickEnabled = currentMapType.getMapSettingValue("latestTick")
+  let previousValueWasLatest = $("#" + sliderDivID).val() != null && $("#" + sliderDivID).val() == $("#" + sliderDivID).attr('max') && latestSliderTickEnabled
 
   $("#" + sliderDivID).attr('max', mapDates.length+(latestSliderTickEnabled ? 1 : 0))
 
@@ -842,8 +842,8 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   }
   else
   {
-    var closestDate = mapDates[0]
-    var closestDateIndex = 0
+    let closestDate = mapDates[0]
+    let closestDateIndex = 0
     for (let dateNum in mapDates)
     {
       if (Math.abs(previousDate-mapDates[dateNum]) < Math.abs(closestDate-previousDate))
@@ -875,7 +875,7 @@ function updateSliderDateDisplay(dateToDisplay, overrideDateString, sliderDateDi
 {
   sliderDateDisplayDivID = sliderDateDisplayDivID || "dateDisplay"
 
-  var dateString
+  let dateString
   if (overrideDateString != null)
   {
     dateString = overrideDateString
@@ -918,7 +918,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
 
   dateIndex = dateIndex || $("#dataMapDateSlider").val()
 
-  var mapDates = currentMapSource.getMapDates()
+  let mapDates = currentMapSource.getMapDates()
   
   if (mapDates.length == 0)
   {
@@ -926,15 +926,15 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     return
   }
   
-  var dateToDisplay = new Date(mapDates[dateIndex-1])
+  let dateToDisplay = new Date(mapDates[dateIndex-1])
 
   currentDisplayDate = dateToDisplay
 
   updateSliderDateDisplay(dateToDisplay)
 
-  var shouldReloadSVG = false
-  var currentSVGPath = currentMapType.getSVGPath()
-  var newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(showingCompareMap && currentMapSource.isCompare() ? currentCompareSliderDate : dateToDisplay)
+  let shouldReloadSVG = false
+  let currentSVGPath = currentMapType.getSVGPath()
+  let newOverrideSVGPath = await currentMapSource.getOverrideSVGPath(showingCompareMap && currentMapSource.isCompare() ? currentCompareSliderDate : dateToDisplay)
 
   if (newOverrideSVGPath != null && JSON.stringify(currentSVGPath) != JSON.stringify(newOverrideSVGPath))
   {
@@ -946,7 +946,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     shouldReloadSVG = currentMapType.resetOverrideSVGPath()
   }
 
-  var cachedSVGPathData
+  let cachedSVGPathData
   if (shouldReloadSVG)
   {
     await loadMapSVGFile((resolve, svgPath) => {
@@ -954,11 +954,11 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
       resolve()
     }, fadeForNewSVG)
   }
-  var svgPathData = currentMapType.getSVGPath()
-  var usedFallbackMap = svgPathData[2] || false
-  var populateSVGBoxesFunction = svgPathData[3]
+  let svgPathData = currentMapType.getSVGPath()
+  let usedFallbackMap = svgPathData[2] || false
+  let populateSVGBoxesFunction = svgPathData[3]
 
-  var currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
+  let currentMapDataForDate = currentMapSource.getMapData()[dateToDisplay.getTime()]
   
   if (currentViewingState == ViewingState.zooming && !currentMapSource.zoomingDataFunction)
   {
@@ -1013,9 +1013,9 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
   populateRegionsArray()
 
   $('#outlines').children().each(function() {
-    var regionDataCallback = getRegionData($(this).attr('id'))
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
-    var regionData = regionDataCallback.regionData
+    let regionDataCallback = getRegionData($(this).attr('id'))
+    let regionIDsToFill = regionDataCallback.linkedRegionIDs
+    let regionData = regionDataCallback.regionData
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
@@ -1080,9 +1080,9 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
       continue
     }
     
-    var regionDataCallback = getRegionData(currentRegionData.region)
-    var regionData = regionDataCallback.regionData
-    var regionsToFill = regionDataCallback.linkedRegionIDs
+    let regionDataCallback = getRegionData(currentRegionData.region)
+    let regionData = regionDataCallback.regionData
+    let regionsToFill = regionDataCallback.linkedRegionIDs
 
     if (regionData == null)
     {
@@ -1179,12 +1179,12 @@ function updateMapElectoralVoteText()
 {
   if (!currentMapType.getShouldDisplayEVOnMap()) { return }
 
-  var regionIDs = Object.keys(mapRegionIDToName)
-  for (var regionNum in regionIDs)
+  let regionIDs = Object.keys(mapRegionIDToName)
+  for (let regionNum in regionIDs)
   {
-    var regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
+    let regionChildren = $("#" + regionIDs[regionNum] + "-text").children()
 
-    var regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}), true)
+    let regionEV = currentMapType.getEV(getCurrentDecade(), regionIDs[regionNum], (displayRegionDataArray[regionIDs[regionNum]] || {}), true)
     if (regionEV == undefined) { continue }
     if (currentViewingState == ViewingState.splitVote && displayRegionDataArray[regionIDs[regionNum]] && displayRegionDataArray[regionIDs[regionNum]].voteSplits && displayRegionDataArray[regionIDs[regionNum]].voteSplits.length > 0)
     {
@@ -1327,16 +1327,16 @@ async function clearMap(fullClear, shouldResetCurrentMapSource)
   displayRegionDataArray = {}
   populateRegionsArray()
 
-  for (var partyNum in dropdownPoliticalPartyIDs)
+  for (let partyNum in dropdownPoliticalPartyIDs)
   {
     if (dropdownPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
     politicalParties[dropdownPoliticalPartyIDs[partyNum]].setCandidateName(politicalParties[dropdownPoliticalPartyIDs[partyNum]].getNames()[0])
   }
 
   $('#outlines').children().each(function() {
-    var regionDataCallback = getRegionData($(this).attr('id'))
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
-    var regionData = regionDataCallback.regionData
+    let regionDataCallback = getRegionData($(this).attr('id'))
+    let regionIDsToFill = regionDataCallback.linkedRegionIDs
+    let regionData = regionDataCallback.regionData
 
     updateRegionFillColors(regionIDsToFill, regionData, false)
   })
@@ -1410,8 +1410,8 @@ function updateHelpBoxPage(increment)
 function populateRegionsArray()
 {
   $('#outlines').children().each(function() {
-    var regionID = $(this).attr('id')
-    for (var regexNum in regionIDsToIgnore)
+    let regionID = $(this).attr('id')
+    for (let regexNum in regionIDsToIgnore)
     {
       if (regionIDsToIgnore[regexNum].test(regionID))
       {
@@ -1529,8 +1529,8 @@ async function toggleEditing(stateToSet)
 
     $("#regionboxcontainer").css('pointer-events', "")
 
-    var currentMapIsCustom = currentMapSource.isCustom() && !currentMapSource.isCompare()
-    var currentMapDataForDate = cloneObject(currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray)
+    let currentMapIsCustom = currentMapSource.isCustom() && !currentMapSource.isCompare()
+    let currentMapDataForDate = cloneObject(currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray)
     
     if (currentRound)
     {
@@ -1653,29 +1653,29 @@ async function zoomOutMap(displayMap = true)
 
 function getRegionData(regionID)
 {
-  var baseRegionIDCallback = getBaseRegionID(regionID)
+  let baseRegionIDCallback = getBaseRegionID(regionID)
   regionID = baseRegionIDCallback.baseID
-  var linkedRegionIDs = baseRegionIDCallback.linkedIDs
+  let linkedRegionIDs = baseRegionIDCallback.linkedIDs
 
-  var regionData = displayRegionDataArray[regionID]
+  let regionData = displayRegionDataArray[regionID]
 
   return {regionData: regionData, linkedRegionIDs: linkedRegionIDs}
 }
 
 function getBaseRegionID(regionID)
 {
-  var linkedRegionIDs = [regionID]
-  var foundRegion = regionID in displayRegionDataArray
+  let linkedRegionIDs = [regionID]
+  let foundRegion = regionID in displayRegionDataArray
 
-  for (var linkedRegionSetNum in linkedRegions)
+  for (let linkedRegionSetNum in linkedRegions)
   {
-    for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+    for (let linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
     {
       if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
       {
-        for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+        for (let linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
         {
-          var linkedRegionToTest = linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]
+          let linkedRegionToTest = linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]
           if (regionID != linkedRegionToTest)
           {
             linkedRegionIDs.push(linkedRegionToTest)
@@ -1697,19 +1697,19 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 {
   if (regionData == null) { return }
 
-  var fillColor
-  var shouldHide = false
+  let fillColor
+  let shouldHide = false
 
-  var isDisabledOrTossup = regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats"))
-  var canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
+  let isDisabledOrTossup = regionData.partyID == null || regionData.partyID == TossupParty.getID() || (regionData.disabled == true && !currentMapType.getMapSettingValue("mapCurrentSeats"))
+  let canUseVoteSplitsForColor = (regionData.margin == 0 || currentViewingState == ViewingState.splitVote) && regionData.voteSplits != null && regionData.voteSplits.length >= 2
   if (isDisabledOrTossup)
   {
     if (regionData.disabled == true)
     {
       fillColor = regionDisabledColor
 
-      var regionsToHide = currentMapType.getRegionsToHideOnDisable()
-      for (var regexNum in regionsToHide)
+      let regionsToHide = currentMapType.getRegionsToHideOnDisable()
+      for (let regexNum in regionsToHide)
       {
         if (regionsToHide[regexNum].test(regionData.region))
         {
@@ -1735,7 +1735,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
     }
     else if (regionData.voteSplits[0].votes == regionData.voteSplits[1].votes)
     {
-      var voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
+      let voteSplitPartyIDs = regionData.voteSplits.map(partyVote => partyVote.partyID).slice(0, 2)
       voteSplitPartyIDs.sort()
       if (voteSplitPartyIDs[0] == DemocraticParty.getID() && voteSplitPartyIDs[1] == RepublicanParty.getID())
       {
@@ -1749,7 +1749,7 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
   }
   else
   {
-    var marginIndex = getMarginIndexForValue(regionData.margin, regionData)
+    let marginIndex = getMarginIndexForValue(regionData.margin, regionData)
     fillColor = politicalParties[regionData.partyID].getMarginColors()[marginIndex]
   }
   
@@ -1757,15 +1757,15 @@ async function updateRegionFillColors(regionIDsToUpdate, regionData, shouldUpdat
 
   if (!isDisabledOrTossup && currentMapType.getMapSettingValue("flipStates") && regionData.flip && !(canUseVoteSplitsForColor && currentViewingState == ViewingState.splitVote))
   {
-    var patternID = generateFlipPattern(fillColor)
+    let patternID = generateFlipPattern(fillColor)
     fillColor = "url(#" + patternID + ")"
   }
   
   const mapCurrentSeatsSetting = currentMapType.getMapSettingValue("mapCurrentSeats")
 
-  for (var regionIDNum in regionIDsToUpdate)
+  for (let regionIDNum in regionIDsToUpdate)
   {
-    var regionDiv = $("#" + regionIDsToUpdate[regionIDNum])
+    let regionDiv = $("#" + regionIDsToUpdate[regionIDNum])
     regionDiv.css('animation-fill-mode', 'forwards')
     regionDiv.css('fill', fillColor)
 
@@ -1802,7 +1802,7 @@ function getMarginIndexForValue(margin, regionData)
   // Using real margin for colors now
   // const roundedMargin = getRoundedMarginValue(margin)
   
-  for (var marginName in marginValues)
+  for (let marginName in marginValues)
   {
     if (Math.abs(margin) >= marginValues[marginName])
     {
@@ -1821,12 +1821,12 @@ function generateSVGPattern(patternID, fillColor, strokeColor, scale = 1)
     
     let sizeFactor = Math.max(svgBox.width/svgDiv.width(), svgBox.height/svgDiv.height())*(scale**(3/4))
     
-    var patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
+    let patternHTML = '<pattern id="' + patternID + '" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">'
     patternHTML += '<rect x1="0" y1="0" width="' + flipPatternWidth*sizeFactor + '" height="' + flipPatternHeight*sizeFactor + '" style="fill: ' + fillColor + ';"></rect>'
     patternHTML += '<line x1="0" y1="0" x2="0" y2="' + flipPatternHeight*sizeFactor + '" style="stroke: ' + strokeColor + '; stroke-width: ' + flipPatternWidth*sizeFactor + '"></line>'
     patternHTML += '</pattern>'
 
-    var tempDiv = document.createElement('div')
+    let tempDiv = document.createElement('div')
     document.getElementById("svgdefinitions").appendChild(tempDiv)
     tempDiv.outerHTML = patternHTML
   }
@@ -1854,27 +1854,27 @@ function generateFlipPatternsFromPartyMap(partyMap, scale)
 
 function getPartyTotals(includeFlipData)
 {
-  var partyTotals = {}
-  var partyFlipTotals = {}
-  var partyFlipData = {}
+  let partyTotals = {}
+  let partyFlipTotals = {}
+  let partyFlipData = {}
 
-  for (var partyIDNum in mainPoliticalPartyIDs)
+  for (let partyIDNum in mainPoliticalPartyIDs)
   {
     partyTotals[mainPoliticalPartyIDs[partyIDNum]] = 0
   }
 
-  var shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
-  var regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
+  let shouldGetOriginalMapData = currentMapSource.getShouldUseOriginalMapDataForTotalsPieChart()
+  let regionDataArray = shouldGetOriginalMapData && currentSliderDate ? currentMapSource.getMapData()[currentSliderDate.getTime()] : displayRegionDataArray
 
-  for (var regionID in regionDataArray)
+  for (let regionID in regionDataArray)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
 
-    var currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
+    let currentRegionEV = currentMapType.getEV(getCurrentDecade(), regionID, regionDataArray[regionID]) ?? regionDataArray[regionID].voteWorth
 
     if (currentViewingState != ViewingState.splitVote)
     {
-      var partyIDToSet = regionDataArray[regionID].partyID
+      let partyIDToSet = regionDataArray[regionID].partyID
       if (regionDataArray[regionID].partyID == null)
       {
         partyIDToSet = TossupParty.getID()
@@ -1956,10 +1956,10 @@ function getPopularVotePartyVoteshareData(regionDataArray, enforceNationalPopula
 
 function getCurrentDecade()
 {
-  var dateForDecade
+  let dateForDecade
   if (currentMapSource.isCompare() && showingCompareMap)
   {
-    var compareDate = mapSources[compareMapSourceIDArray[0]].getMapDates()[$("#firstCompareDataMapDateSlider")[0].value-1]
+    let compareDate = mapSources[compareMapSourceIDArray[0]].getMapDates()[$("#firstCompareDataMapDateSlider")[0].value-1]
     if (compareDate != null)
     {
       dateForDecade = new Date(compareDate)
@@ -1978,7 +1978,7 @@ function getCurrentDecade()
 
 function getCurrentDateOrToday()
 {
-  var dateToUse = new Date(getTodayString("/", false, "mdy")).getTime()
+  let dateToUse = new Date(getTodayString("/", false, "mdy")).getTime()
   if (currentSliderDate && !(showingCompareMap && currentMapSource.isCompare()))
   {
     dateToUse = currentSliderDate.getTime()

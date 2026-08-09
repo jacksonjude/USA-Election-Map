@@ -1,9 +1,9 @@
 const shiftNumberKeycodes = ["!", "@", "#", "$", "%", "^", "&", "*", "("]
 
-var arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
-var arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
-var shiftKeyDown = false
-var altKeyDown = false
+let arrowKeysDown = {left: 0, right: 0, up: 0, down: 0}
+let arrowKeyTimeouts = {left: 0, right: 0, up: 0, down: 0}
+let shiftKeyDown = false
+let altKeyDown = false
 
 const openLinksWithLeftClick = true
 
@@ -79,7 +79,7 @@ function arrowKeyCycle(keyString)
     /* falls through */
     case 2:
     incrementSlider(keyString)
-    var mapDatesLength = currentMapSource.getMapDates().length
+    let mapDatesLength = currentMapSource.getMapDates().length
 
     if (showingCompareMap && currentMapSource.isCompare())
     {
@@ -105,7 +105,7 @@ function arrowKeyCycle(keyString)
 
 function incrementSlider(keyString)
 {
-  var sliderDiv = $("#dataMapDateSlider")[0]
+  let sliderDiv = $("#dataMapDateSlider")[0]
 
   if (showingCompareMap && currentMapSource.isCompare())
   {
@@ -370,7 +370,7 @@ document.addEventListener('keypress', async function(e) {
   }
   else if (currentEditingState == EditingState.editing && !isEditingTextbox() && !isNaN(parseInt(e.key)) && parseInt(e.key) <= dropdownPoliticalPartyIDs.length)
   {
-    var partyToSelect = parseInt(e.key)
+    let partyToSelect = parseInt(e.key)
     if (partyToSelect == 0)
     {
       deselectAllParties()
@@ -422,15 +422,15 @@ document.addEventListener('keypress', async function(e) {
   }
   else if (shiftNumberKeycodes.includes(e.key) && shiftNumberKeycodes.indexOf(e.key) < mapSourceIDs.length-1 && !isEditingTextbox())
   {
-    var mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.key)]
+    let mapSourceIDToCompare = mapSourceIDs[shiftNumberKeycodes.indexOf(e.key)]
     addCompareMapSource(mapSourceIDToCompare)
   }
   else if ((e.key == "c" || e.key == "m" || e.key == "s") && !isEditingTextbox())
   {
     removeActiveClassFromDropdownButton()
 
-    var contentDivIDToToggle = ""
-    var dropdownButtonDivID = ""
+    let contentDivIDToToggle = ""
+    let dropdownButtonDivID = ""
     switch (e.key)
     {
       case "c":
@@ -449,7 +449,7 @@ document.addEventListener('keypress', async function(e) {
       break
     }
 
-    var shouldShowContentDiv = $("#" + contentDivIDToToggle).css('display') != "block"
+    let shouldShowContentDiv = $("#" + contentDivIDToToggle).css('display') != "block"
 
     $(".dropdown-content").css('display', "")
 
@@ -489,18 +489,18 @@ document.addEventListener('keypress', async function(e) {
   }
 })
 
-var mouseIsDown = false
-var regionIDsChanged = []
-var startRegionID
-var mouseMovedDuringClick = false
-var currentRegionID
-var ignoreNextClick = false
-var clickUsedToZoom = false
+let mouseIsDown = false
+let regionIDsChanged = []
+let startRegionID
+let mouseMovedDuringClick = false
+let currentRegionID
+let ignoreNextClick = false
+let clickUsedToZoom = false
 
-var isDraggingInsideRoundControls = false
+let isDraggingInsideRoundControls = false
 
-var currentMouseX
-var currentMouseY
+let currentMouseX
+let currentMouseY
 
 document.addEventListener('mousedown', async function(e) {
   mouseIsDown = true
@@ -517,7 +517,7 @@ document.addEventListener('mousedown', async function(e) {
   {
     startRegionID = currentRegionID
 
-    var currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
+    let currentMapDataForDate = currentMapSource.getMapData()[currentSliderDate.getTime()]
     if (await currentMapSource.canZoom(currentMapDataForDate, startRegionID) && currentViewingState == ViewingState.viewing)
     {
       clickUsedToZoom = true
@@ -547,7 +547,7 @@ const isChromeWithSVGBug = uaSplit?.length == 2 && parseInt(uaSplit[1].split("."
 
 function mouseEnteredRegion(div)
 {
-  var regionID = getBaseRegionID($(div).attr('id')).baseID
+  let regionID = getBaseRegionID($(div).attr('id')).baseID
   currentRegionID = regionID
 
   if (currentEditingState == EditingState.editing && shouldDragSelect && mouseIsDown && !regionIDsChanged.includes(regionID) && !editingRegionVotesharePercentages)
@@ -564,13 +564,13 @@ function mouseEnteredRegion(div)
   if ($(div).attr(noInteractSVGRegionAttribute) === undefined && !((currentMapType.getMapSettingValue("flipStates") || currentViewingState == ViewingState.splitVote) && browserName == "Safari")) // Major lag which is linked to the svg flip pattern + stroke editing on Safari
   {
     $(div).css('stroke', regionSelectColor)
-    for (var linkedRegionSetNum in linkedRegions)
+    for (let linkedRegionSetNum in linkedRegions)
     {
-      for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+      for (let linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
       {
         if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
         {
-          for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+          for (let linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
           {
             $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionSelectColor)
           }
@@ -579,13 +579,13 @@ function mouseEnteredRegion(div)
     }
   }
 
-  var svgPathData = currentMapType.getSVGPath()
-  var usedFallbackMap = (svgPathData instanceof Array) && (svgPathData[2] ?? false)
+  let svgPathData = currentMapType.getSVGPath()
+  let usedFallbackMap = (svgPathData instanceof Array) && (svgPathData[2] ?? false)
 
   if ((currentViewingState == ViewingState.zooming || currentMapType.getMapSettingValue("showAllDistricts") || currentMapType.getShouldAlwaysReorderOutlines()) && !usedFallbackMap)
   {
-    var regionPath = document.getElementById(regionID)
-    var parent = regionPath.parentNode
+    let regionPath = document.getElementById(regionID)
+    let parent = regionPath.parentNode
     if (parent.lastChild.id == regionPath.id)
     {
       // don't reorder if regionPath is already on top
@@ -602,7 +602,7 @@ function mouseEnteredRegion(div)
 
 function mouseLeftRegion(div)
 {
-  var regionID = getBaseRegionID($(div).attr('id')).baseID
+  let regionID = getBaseRegionID($(div).attr('id')).baseID
   if (currentRegionID == regionID)
   {
     currentRegionID = null
@@ -618,18 +618,18 @@ function mouseLeftRegion(div)
 
 function resetStrokeColor(div)
 {
-  var regionID = getBaseRegionID($(div).attr('id')).baseID
+  let regionID = getBaseRegionID($(div).attr('id')).baseID
   
   if ($(div).css('stroke') != regionDeselectColor)
   {
     $(div).css('stroke', regionDeselectColor)
-    for (var linkedRegionSetNum in linkedRegions)
+    for (let linkedRegionSetNum in linkedRegions)
     {
-      for (var linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
+      for (let linkedRegionIDNum in linkedRegions[linkedRegionSetNum])
       {
         if (linkedRegions[linkedRegionSetNum][linkedRegionIDNum] == regionID)
         {
-          for (var linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
+          for (let linkedRegionIDNum2 in linkedRegions[linkedRegionSetNum])
           {
             $("#" + linkedRegions[linkedRegionSetNum][linkedRegionIDNum2]).css('stroke', regionDeselectColor)
           }
@@ -706,16 +706,16 @@ function viewingDiscreteRegions()
 
 async function leftClickRegion(div)
 {
-  var regionID = $(div).attr('id')
+  let regionID = $(div).attr('id')
   
   let currentMapDataForDate = currentSliderDate.getTime() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
-  var regionDataCallback = getRegionData(regionID)
-  var regionData = regionDataCallback.regionData
-  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let regionDataCallback = getRegionData(regionID)
+  let regionData = regionDataCallback.regionData
+  let regionIDsToFill = regionDataCallback.linkedRegionIDs
 
   if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
   {
@@ -753,11 +753,11 @@ async function leftClickRegion(div)
     }
     else if (selectedParty != null)
     {
-      var marginValueArray = Object.values(marginValues)
-      var marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      let marginValueArray = Object.values(marginValues)
+      let marginValueIndex = marginValueArray.indexOf(regionData.margin)
       if (marginValueIndex == -1)
       {
-        for (var marginValueNum in marginValueArray)
+        for (let marginValueNum in marginValueArray)
         {
           if (regionData.margin >= marginValueArray[marginValueNum])
           {
@@ -788,7 +788,7 @@ async function leftClickRegion(div)
   }
   else if (canZoomCurrently && currentViewingState == ViewingState.viewing && showingDataMap)
   {
-    var baseRegionID = getBaseRegionID($(div).attr('id')).baseID
+    let baseRegionID = getBaseRegionID($(div).attr('id')).baseID
     currentViewingState = ViewingState.zooming
     currentMapZoomRegion = regionID.includes(subregionSeparator) ? baseRegionID.split(subregionSeparator)[0] : baseRegionID
     
@@ -827,10 +827,10 @@ function rightClickRegion(div)
 {
   let isDiscreteRegion = viewingDiscreteRegions()
 
-  var regionID = $(div).attr('id')
-  var regionDataCallback = getRegionData(regionID)
-  var regionData = regionDataCallback.regionData
-  var regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let regionID = $(div).attr('id')
+  let regionDataCallback = getRegionData(regionID)
+  let regionData = regionDataCallback.regionData
+  let regionIDsToFill = regionDataCallback.linkedRegionIDs
 
   if (isDiscreteRegion && currentEditingState == EditingState.editing && (currentMapSource.getEditingMode() == EditingMode.voteshare || editingRegionVotesharePercentages))
   {
@@ -855,11 +855,11 @@ function rightClickRegion(div)
     }
     else if (selectedParty != null)
     {
-      var marginValueArray = Object.values(marginValues)
-      var marginValueIndex = marginValueArray.indexOf(regionData.margin)
+      let marginValueArray = Object.values(marginValues)
+      let marginValueIndex = marginValueArray.indexOf(regionData.margin)
       if (marginValueIndex == -1)
       {
-        for (var marginValueNum in marginValueArray)
+        for (let marginValueNum in marginValueArray)
         {
           if (regionData.margin >= marginValueArray[marginValueNum])
           {
@@ -945,9 +945,9 @@ function altShiftClickRegion(div)
 
   if (isDiscreteRegion && currentEditingState == EditingState.editing)
   {
-    var regionDataCallback = getRegionData($(div).attr('id'))
-    var regionData = regionDataCallback.regionData
-    var regionIDsToFill = regionDataCallback.linkedRegionIDs
+    let regionDataCallback = getRegionData($(div).attr('id'))
+    let regionData = regionDataCallback.regionData
+    let regionIDsToFill = regionDataCallback.linkedRegionIDs
 
     if (regionData.disabled)
     {

@@ -1,4 +1,4 @@
-var currentEditingMode = EditingMode.margin
+let currentEditingMode = EditingMode.margin
 
 function selectEditMode(newEditingMode)
 {

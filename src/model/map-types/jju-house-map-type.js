@@ -1,4 +1,4 @@
-var JJUHouseMapType = new MapType(
+const JJUHouseMapType = new MapType(
   "JJU-House",
   "House",
   "H",
@@ -164,7 +164,7 @@ var JJUHouseMapType = new MapType(
             foundParty = politicalParties[currentPartyName]
           }
         
-          var currentPartyID
+          let currentPartyID
           if (foundParty)
           {
             currentPartyID = foundParty.getID()
@@ -537,7 +537,7 @@ var JJUHouseMapType = new MapType(
       return regionName
     }
     
-    var electionDateToSpreadsheetData = {
+    let electionDateToSpreadsheetData = {
       1724223600000: {
         id: "1fFJ8Y_KS2iy6qOupil1F-qC8wrKDjpJECRHIVjWHUzY",
         regions: {
@@ -813,7 +813,7 @@ var JJUHouseMapType = new MapType(
       }
     }
   
-	  var PastElectionResultMapSource = new MapSource(
+	  const PastElectionResultMapSource = new MapSource(
 	    "JJU-Past-House-Elections", // id
 	    "Past Elections", // name
 	    "./csv-sources/jju-past-house.csv", // dataURL
@@ -881,7 +881,7 @@ var JJUHouseMapType = new MapType(
       }, // customDefaultMargins
 	  )
     
-    var PastListElectionResultMapSource = new MapSource(
+    const PastListElectionResultMapSource = new MapSource(
       "JJU-Past-List-House-Elections", // id
       "Past List Elections", // name
       "./csv-sources/jju-past-list.csv", // dataURL
@@ -951,9 +951,9 @@ var JJUHouseMapType = new MapType(
       }, // customDefaultMargins
     )
   
-	  var idsToPartyNames = {}
-	  var partyNamesToIDs = {}
-	  for (var partyNum in mainPoliticalPartyIDs)
+	  let idsToPartyNames = {}
+	  let partyNamesToIDs = {}
+	  for (let partyNum in mainPoliticalPartyIDs)
 	  {
 	    if (mainPoliticalPartyIDs[partyNum] == TossupParty.getID()) { continue }
   
@@ -961,7 +961,7 @@ var JJUHouseMapType = new MapType(
 	    idsToPartyNames[mainPoliticalPartyIDs[partyNum]] = politicalParties[mainPoliticalPartyIDs[partyNum]].getNames()[0]
 	  }
   
-	  var CustomMapSource = new MapSource(
+	  const CustomMapSource = new MapSource(
 	    "JJU-Custom-House", // id
 	    "Custom", // name
 	    null, // dataURL
@@ -1008,10 +1008,10 @@ var JJUHouseMapType = new MapType(
       {safe: 15, likely: 5, lean: 1, tilt: Number.MIN_VALUE}, // customDefaultMargins
 	  )
   
-	  var todayDate = new Date()
+	  let todayDate = new Date()
 	  CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
   
-	  var houseMapSources = {}
+	  let houseMapSources = {}
 	  houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     houseMapSources[PastListElectionResultMapSource.getID()] = PastListElectionResultMapSource
 	  houseMapSources[CustomMapSource.getID()] = CustomMapSource
@@ -1023,7 +1023,7 @@ var JJUHouseMapType = new MapType(
 	  const kPastElectionsVsPastElections = 1
     const kPastListElectionsVsPastListElections = 2
   
-	  var defaultHouseCompareSourceIDs = {}
+	  let defaultHouseCompareSourceIDs = {}
 	  defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultHouseCompareSourceIDs[kPastListElectionsVsPastListElections] = [PastListElectionResultMapSource.getID(), PastListElectionResultMapSource.getID()]
   

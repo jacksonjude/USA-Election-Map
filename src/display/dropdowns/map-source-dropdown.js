@@ -57,7 +57,7 @@ function createMapSourceDropdownItems()
     }
     else
     {
-      var customMapSourceID = mapSourceID
+      let customMapSourceID = mapSourceID
       $("#" + mapSourceIDNoSpace + "-download-icon")[0].addEventListener('click', function(e) {
         ignoreMapUpdateClickArray.push(customMapSourceID)
         downloadMapFile(currentMapSource, e.altKey ? kCSVFileType : kJSONFileType)
@@ -72,7 +72,7 @@ function createMapSourceDropdownItems()
 
 function toggleMapSource(buttonDiv)
 {
-  var mapSourceArrayIndex = mapSourceIDs.indexOf(currentMapSource.getID())
+  let mapSourceArrayIndex = mapSourceIDs.indexOf(currentMapSource.getID())
   mapSourceArrayIndex++
   if (mapSourceArrayIndex > mapSourceIDs.length-1)
   {
@@ -95,9 +95,9 @@ function updateMapSource(sourceID, _, forceDownload)
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
 {
-  var iconDivID = mapSourceID.replace(/\s/g, '') + "-icon"
+  let iconDivID = mapSourceID.replace(/\s/g, '') + "-icon"
 
-  var iconDivDictionary = {}
+  let iconDivDictionary = {}
   iconDivDictionary[iconDivID] = {loading: "./assets/icon-loading.png", error: "./assets/icon-download-none.png", success: "./assets/icon-download-complete.png"}
 
   return iconDivDictionary
@@ -105,10 +105,10 @@ function getIconDivsToUpdateArrayForSourceID(mapSourceID)
 
 async function updateIconsBasedOnLocalCSVData()
 {
-  for (var sourceIDNum in mapSourceIDs)
+  for (let sourceIDNum in mapSourceIDs)
   {
-    var divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
-    var csvIsStored = await CSVDatabase.hasFile(mapSourceIDs[sourceIDNum])
+    let divsToUpdateStatus = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
+    let csvIsStored = await CSVDatabase.hasFile(mapSourceIDs[sourceIDNum])
     if (csvIsStored)
     {
       for (let divID in divsToUpdateStatus)
@@ -143,7 +143,7 @@ async function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDTo
     setStatusImage(divID, divsToUpdateStatus[divID].loading)
   }
 
-  var loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
+  let loadedSuccessfully = await mapSources[mapSourceID].loadMap(forceDownload, onlyAttemptLocalFetch, resetCandidateNames)
 
   if (!loadedSuccessfully)
   {
@@ -173,9 +173,9 @@ async function downloadDataForMapSource(mapSourceID, divsToUpdateStatus, mapIDTo
 
 async function downloadAllMapData()
 {
-  for (var sourceIDNum in mapSourceIDs)
+  for (let sourceIDNum in mapSourceIDs)
   {
-    var iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
+    let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(mapSourceIDs[sourceIDNum])
     downloadDataForMapSource(mapSourceIDs[sourceIDNum], iconDivDictionary, null, true).then(function(loadedSuccessfully) {
       if (showingDataMap && mapSourceIDs[sourceIDNum] == currentMapSource.getID() && loadedSuccessfully)
       {

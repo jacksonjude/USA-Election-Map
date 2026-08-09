@@ -46,9 +46,9 @@ initConsoleCapture() // Begin capturing console output, logs immediately
 
 function downloadConsoleBlob()
 {
-  var consoleBlob = new Blob([JSON.stringify(console.everything)], {type: "application/json"})
+  const consoleBlob = new Blob([JSON.stringify(console.everything)], {type: "application/json"})
 
-  var downloadLinkDiv = document.createElement("a")
+  const downloadLinkDiv = document.createElement("a")
 
   downloadLinkDiv.style.display = "none"
   downloadLinkDiv.setAttribute('href', window.URL.createObjectURL(consoleBlob))

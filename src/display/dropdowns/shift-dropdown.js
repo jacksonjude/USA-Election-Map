@@ -1,4 +1,4 @@
-var isEnteringShiftAmount = false
+let isEnteringShiftAmount = false
 
 async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake, shouldShiftNPV = true)
 {
@@ -8,7 +8,7 @@ async function addConstantMarginToMap(baseMarginToAdd, partyToShift, partyToTake
 
   if (currentEditingState != EditingState.editing || partyToShift == null || partyToShift.getID() == TossupParty.getID()) { return }
 
-  for (var regionID in displayRegionDataArray)
+  for (let regionID in displayRegionDataArray)
   {
     let marginToAdd = baseMarginToAdd
     
@@ -122,8 +122,8 @@ function getTippingPointRegion()
 
 function getCurrentTotalEV()
 {
-  var totalEV = 0
-  for (var regionID in displayRegionDataArray)
+  let totalEV = 0
+  for (let regionID in displayRegionDataArray)
   {
     if (regionID == nationalPopularVoteID || regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
     totalEV += currentMapType.getEV(getCurrentDecade(), regionID, displayRegionDataArray[regionID])
@@ -146,7 +146,7 @@ function toggleEnteringShiftAmount()
   }
   else
   {
-    var amountToShift = parseFloat($("#shift-other-text").val())
+    let amountToShift = parseFloat($("#shift-other-text").val())
     if (amountToShift)
     {
       addConstantMarginToMap(amountToShift)

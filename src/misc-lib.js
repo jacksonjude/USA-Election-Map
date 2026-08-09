@@ -35,7 +35,7 @@ function roundValue(valueToRound, decimalPlaceToRound)
 
 function roundValueToPlace(valueToRound, figuresToInclude)
 {
-  var decimalPlaceToRound = Math.floor(-Math.log(valueToRound)/Math.log(10)+figuresToInclude)
+  let decimalPlaceToRound = Math.floor(-Math.log(valueToRound)/Math.log(10)+figuresToInclude)
   if (decimalPlaceToRound <= 0 || !isFinite(decimalPlaceToRound))
   {
     decimalPlaceToRound = 1
@@ -75,8 +75,8 @@ function getKeyByValue(object, value, shouldStringifyToCompare)
 
 function getKeyForMaxValue(object, returnEvenKeys, minValue)
 {
-  var largestValue = minValue || 0
-  var largestKey = []
+  let largestValue = minValue || 0
+  let largestKey = []
   Object.keys(object).forEach(key => {
     if (object[key] > largestValue)
     {
@@ -94,9 +94,9 @@ function getKeyForMaxValue(object, returnEvenKeys, minValue)
 
 function invertObject(object)
 {
-  var newObject = {}
-  var keys = Object.keys(object)
-  for (var i in keys)
+  let newObject = {}
+  let keys = Object.keys(object)
+  for (let i in keys)
   {
     newObject[object[keys[i]]] = keys[i]
   }
@@ -106,10 +106,10 @@ function invertObject(object)
 
 function multiplyBrightness(hexColorString, brightnessFactor)
 {
-  var rgb = hexToRGB(hexColorString)
+  let rgb = hexToRGB(hexColorString)
   if (!rgb) { return }
 
-  var hsv = RGBtoHSV(rgb)
+  let hsv = RGBtoHSV(rgb)
   hsv.v *= brightnessFactor
 
   return RGBToHex(HSVtoRGB(hsv))
@@ -117,10 +117,10 @@ function multiplyBrightness(hexColorString, brightnessFactor)
 
 function adjustBrightness(hexColorString, minBrightness)
 {
-  var rgb = hexToRGB(hexColorString)
+  let rgb = hexToRGB(hexColorString)
   if (!rgb) { return }
 
-  var hsv = RGBtoHSV(rgb)
+  let hsv = RGBtoHSV(rgb)
   if (hsv.v < minBrightness)
   {
     hsv.v = minBrightness
@@ -131,10 +131,10 @@ function adjustBrightness(hexColorString, minBrightness)
 
 function multiplySaturation(hexColorString, saturationFactor)
 {
-  var rgb = hexToRGB(hexColorString)
+  let rgb = hexToRGB(hexColorString)
   if (!rgb) { return }
 
-  var hsv = RGBtoHSV(rgb)
+  let hsv = RGBtoHSV(rgb)
   hsv.s *= saturationFactor
 
   return RGBToHex(HSVtoRGB(hsv))
@@ -142,7 +142,7 @@ function multiplySaturation(hexColorString, saturationFactor)
 
 function hexToRGB(hex)
 {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result ? {
     r: parseInt(result[1], 16),
     g: parseInt(result[2], 16),
@@ -151,7 +151,7 @@ function hexToRGB(hex)
 }
 
 function componentToHex(c) {
-  var hex = c.toString(16)
+  let hex = c.toString(16)
   return hex.length == 1 ? "0" + hex : hex
 }
 
@@ -165,7 +165,7 @@ function RGBtoHSV(r, g, b) {
     b = r.b
     r = r.r
   }
-  var max = Math.max(r, g, b), min = Math.min(r, g, b),
+  let max = Math.max(r, g, b), min = Math.min(r, g, b),
     d = max - min,
     h,
     s = (max === 0 ? 0 : d / max),
@@ -186,7 +186,7 @@ function RGBtoHSV(r, g, b) {
 }
 
 function HSVtoRGB(h, s, v) {
-  var r, g, b, i, f, p, q, t
+  let r, g, b, i, f, p, q, t
   if (arguments.length === 1) {
     s = h.s
     v = h.v
@@ -256,7 +256,7 @@ function getMaxFontSize(text, sizes, maxWidth)
 }
 
 String.prototype.width = function(font) {
-  var f = font,
+  let f = font,
     o = $('<div></div>')
       .html(this)
       .css({'position': 'absolute', 'float': 'left', 'white-space': 'nowrap', 'visibility': 'hidden', 'font-size': f, 'font-family': 'Bree5erif-Regular'})
@@ -286,17 +286,17 @@ function correctOverflow(pos, divWidth, containerWidth)
 
 function cloneObject(objectToClone)
 {
-  var newObject = JSON.parse(JSON.stringify(objectToClone) || "{}")
+  let newObject = JSON.parse(JSON.stringify(objectToClone) || "{}")
 
   return newObject
 }
 
 function mergeObject(object1, object2)
 {
-  var newObject = cloneObject(object1)
+  let newObject = cloneObject(object1)
   object2 = cloneObject(object2)
 
-  for (var key in object2)
+  for (let key in object2)
   {
     newObject[key] = object2[key]
   }
@@ -308,20 +308,20 @@ function setCookie(cname, cvalue, exdays)
 {
   exdays = exdays || 365*5
 
-  var d = new Date()
+  let d = new Date()
   d.setTime(d.getTime() + (exdays*24*60*60*1000))
-  var expires = "expires="+ d.toUTCString()
+  let expires = "expires="+ d.toUTCString()
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
 }
 
 function getCookie(cname)
 {
-  var name = cname + "="
-  var decodedCookie = decodeURIComponent(document.cookie)
-  var ca = decodedCookie.split(';')
-  for (var i = 0; i < ca.length; i++)
+  let name = cname + "="
+  let decodedCookie = decodeURIComponent(document.cookie)
+  let ca = decodedCookie.split(';')
+  for (let i = 0; i < ca.length; i++)
   {
-    var c = ca[i]
+    let c = ca[i]
     while (c.charAt(0) == ' ')
     {
       c = c.substring(1)
@@ -335,9 +335,9 @@ function getCookie(cname)
 }
 
 String.prototype.hashCode = function() {
-  var hash = 0, i, chr
+  let hash = 0, chr
   if (this.length === 0) return hash
-  for (i = 0; i < this.length; i++) {
+  for (let i = 0; i < this.length; i++) {
     chr   = this.charCodeAt(i)
     hash  = ((hash << 5) - hash) + chr
     hash |= 0 // Convert to 32bit integer
@@ -349,16 +349,16 @@ function moveLastToFirst(array, times)
 {
   if (array.length <= 0) { return }
 
-  for (i=0; i < times; i++)
+  for (let i=0; i < times; i++)
   {
-    var lastElement = array.pop()
+    let lastElement = array.pop()
     array.unshift(lastElement)
   }
 }
 
 function getTodayString(delimiter, includeTime, overrideDateFormat)
 {
-  var currentTimeDate = new Date()
+  let currentTimeDate = new Date()
   return getDateString(currentTimeDate, delimiter, includeTime, false, overrideDateFormat)
 }
 
@@ -366,7 +366,7 @@ function getDateString(date, delimiter, includeTime, useZeroPadding, overrideDat
 {
   delimiter = delimiter || "/"
 
-  var dateString
+  let dateString
   switch (overrideDateFormat || currentMapType.getMapSettings()["dateFormat"])
   {
     case "dmy":

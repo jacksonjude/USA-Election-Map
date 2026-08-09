@@ -3,10 +3,10 @@ function createSettingsDropdownItems()
   $("#settingsButton").removeClass('active')
   $("#settingsDropdownContainer").html("")
 
-  var didBeginGlobalSettings = false
-  for (var settingNum in currentMapType.getMapSettingsLayout())
+  let didBeginGlobalSettings = false
+  for (let settingNum in currentMapType.getMapSettingsLayout())
   {
-    var settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
+    let settingLayout = currentMapType.getMapSettingsLayout()[settingNum]
     if (!didBeginGlobalSettings && globalMapSettings.some(setting => setting.id == settingLayout.id))
     {
       $("#settingsDropdownContainer").append("<div class='dropdown-separator-big'></div>")
@@ -26,13 +26,13 @@ function createSettingsDropdownItems()
 
 function cycleMapSetting(settingID, settingDiv, incrementAmount)
 {
-  var currentMapSettings = currentMapType.getMapSettings()
-  var settingsLayout = currentMapType.getMapSettingLayout(settingID)
-  var settingOptions = currentMapType.getMapSettingOptions(settingID)
-  var currentValueID = currentMapSettings[settingID]
+  let currentMapSettings = currentMapType.getMapSettings()
+  let settingsLayout = currentMapType.getMapSettingLayout(settingID)
+  let settingOptions = currentMapType.getMapSettingOptions(settingID)
+  let currentValueID = currentMapSettings[settingID]
 
-  var optionIndex = 0
-  for (var optionNum in settingOptions)
+  let optionIndex = 0
+  for (let optionNum in settingOptions)
   {
     if (settingOptions[optionNum].id == currentValueID)
     {
@@ -51,13 +51,13 @@ function cycleMapSetting(settingID, settingDiv, incrementAmount)
     optionIndex = settingOptions.length-1
   }
 
-  var newValueID = settingOptions[optionIndex].id
-  var newValueTitle = settingOptions[optionIndex].title
+  let newValueID = settingOptions[optionIndex].id
+  let newValueTitle = settingOptions[optionIndex].title
   $(settingDiv).html("<span>" + settingsLayout.title + "</span><span>" + newValueTitle + "</span>")
 
   if (settingsLayout.shouldShowActive != null)
   {
-    var showActive = settingsLayout.shouldShowActive(settingOptions[optionIndex].value)
+    let showActive = settingsLayout.shouldShowActive(settingOptions[optionIndex].value)
     if (showActive)
     {
       $(settingDiv).addClass("active")

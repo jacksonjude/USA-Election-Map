@@ -2,19 +2,19 @@ function createMapTypeDropdownItems()
 {
   $("#mapTypesDropdownContainer").html("")
 
-  var dropdownMapTypeIDs = cloneObject(mapTypeIDs)
+  let dropdownMapTypeIDs = cloneObject(mapTypeIDs)
   //moveLastToFirst(dropdownMapTypeIDs, mapTypeIDs.length-mapTypeIDs.indexOf(currentMapType.getID()))
 
-  for (var typeIndex in dropdownMapTypeIDs)
+  for (let typeIndex in dropdownMapTypeIDs)
   {
-    var typeID = dropdownMapTypeIDs[typeIndex]
+    let typeID = dropdownMapTypeIDs[typeIndex]
     if (currentMapType.getID() == typeID) { continue }
 
     $("#mapTypesDropdownContainer").append("<div class='dropdown-separator'></div>")
 
-    var mapType = mapTypes[typeID]
+    let mapType = mapTypes[typeID]
 
-    var divStringToAppend = "<a onclick='setMapType(\"" + typeID + "\")' style='display: flex; padding: 0; margin-top: 0;'>"
+    let divStringToAppend = "<a onclick='setMapType(\"" + typeID + "\")' style='display: flex; padding: 0; margin-top: 0;'>"
     divStringToAppend += "<img src='" + mapType.getIconURL() + "' style='width: 43px; height: 43px; padding: 3px;'/>"
     divStringToAppend += "</a>"
 
@@ -24,7 +24,7 @@ function createMapTypeDropdownItems()
 
 function cycleMapType(buttonDiv)
 {
-  var newMapTypeIndex = mapTypeIDs.indexOf(currentMapType.getID())+1
+  let newMapTypeIndex = mapTypeIDs.indexOf(currentMapType.getID())+1
   if (newMapTypeIndex >= mapTypeIDs.length || newMapTypeIndex < 0)
   {
     newMapTypeIndex = 0

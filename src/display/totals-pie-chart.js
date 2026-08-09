@@ -1,13 +1,13 @@
-var totalsPieChart
-var regionMarginStrings = []
-var regionPartyStrings = []
+let totalsPieChart
+let regionMarginStrings = []
+let regionPartyStrings = []
 
 const PieChartDirection = {
   clockwise: 0,
   counterclockwise: 1
 }
 
-var partyOrdering = [
+let partyOrdering = [
   {partyID: JJUPWPParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: JJUUCPParty.getID(), direction: PieChartDirection.clockwise},
   {partyID: JJUProgressiveParty.getID(), direction: PieChartDirection.clockwise},
@@ -152,7 +152,7 @@ function setupTotalsPieChart()
           title: function(tooltipItems) {
             const tooltipItem = tooltipItems[0]
             
-            var label = tooltipItem.dataset.labels[tooltipItem.dataIndex] || ''
+            let label = tooltipItem.dataset.labels[tooltipItem.dataIndex] || ''
             label += ': '
       
             switch (tooltipItem.datasetIndex)
@@ -173,11 +173,11 @@ function setupTotalsPieChart()
             switch (tooltipItem.datasetIndex)
             {
               case 0:
-              var labelArray = regionMarginStrings[tooltipItem.dataIndex].concat()
+              let labelArray = regionMarginStrings[tooltipItem.dataIndex].concat()
               return labelArray
       
               case 1:
-              var regionPartyStringArray = regionPartyStrings[tooltipItem.dataIndex]
+              let regionPartyStringArray = regionPartyStrings[tooltipItem.dataIndex]
               if (regionPartyStringArray) { return regionPartyStringArray.concat() }
               return null
       
@@ -186,8 +186,8 @@ function setupTotalsPieChart()
             }
           },
           labelTextColor: function(tooltipItem) {
-            var backgroundColors = tooltipItem.chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
-            var indexToUse = tooltipItem.dataIndex
+            let backgroundColors = tooltipItem.chart.config.data.datasets[tooltipItem.datasetIndex].backgroundColor
+            let indexToUse = tooltipItem.dataIndex
             if (tooltipItem.datasetIndex == 1 && typeof backgroundColors[indexToUse] !== 'string')
             {
               if (partyOrdering[Math.floor(indexToUse/2)].direction == PieChartDirection.clockwise)
@@ -200,24 +200,24 @@ function setupTotalsPieChart()
               }
             }
       
-            var color = backgroundColors[indexToUse]
+            let color = backgroundColors[indexToUse]
             return adjustBrightness(color, minTotalsPieChartSliceLabelBrightness)
           }
         }
       },
       datalabels: {
         color: function(context) {
-          var value = context.dataset.data[context.dataIndex]
-          var evSum = 0
-          for (var dataNum in context.dataset.data)
+          let value = context.dataset.data[context.dataIndex]
+          let evSum = 0
+          for (let dataNum in context.dataset.data)
           {
             evSum += context.dataset.data[dataNum]
           }
           return (value == 0 || value < Math.floor(minTotalsPieChartSliceLabelPercent*evSum)) ? "rgb(0, 0, 0, 0)" : "#fff"
         },
         font: function(context) {
-          var numberOfShownDatasets = context.chart.config.data.datasets.reduce((shownCount, dataset) => shownCount + (dataset.hidden ? 0 : 1), 0)
-          var fontFactor = 2/numberOfShownDatasets
+          let numberOfShownDatasets = context.chart.config.data.datasets.reduce((shownCount, dataset) => shownCount + (dataset.hidden ? 0 : 1), 0)
+          let fontFactor = 2/numberOfShownDatasets
           fontFactor = fontFactor > 1 ? 1 : fontFactor
 
           switch (context.datasetIndex)
@@ -253,7 +253,7 @@ function setupTotalsPieChart()
     }
   }
 
-  var ctx = document.getElementById('totalsPieChart').getContext('2d')
+  let ctx = document.getElementById('totalsPieChart').getContext('2d')
   totalsPieChart = new Chart(ctx, {
     type: 'doughnut',
     data: data,
@@ -384,7 +384,7 @@ function setupTotalsPieChartDatasets(partyOrderingArg)
   return data
 }
 
-var hashCanvasPatternCache = {}
+let hashCanvasPatternCache = {}
 
 function createHashCanvasPattern(baseColor)
 {
@@ -517,7 +517,7 @@ function updateTotalsPieChart()
     }
   }
 
-  for (partyNum in regionMarginStringsData)
+  for (let partyNum in regionMarginStringsData)
   {
     for (let marginKey in regionMarginStringsData[partyNum])
     {
@@ -530,7 +530,7 @@ function updateTotalsPieChart()
   regionMarginStrings = []
   let marginTotalsArray = []
   let safeMarginTotalsArray = []
-  for (partyNum in fullPartyOrdering)
+  for (let partyNum in fullPartyOrdering)
   {
     let partyID = fullPartyOrdering[partyNum].partyID
     if (partyID != TossupParty.getID())
@@ -667,7 +667,7 @@ function updateTotalsPieChart()
   {
     let sortedPopularVoteArray = []
     let summedPercentage = 0
-    for (partyNum in fullPartyOrdering)
+    for (let partyNum in fullPartyOrdering)
     {
       sortedPopularVoteArray.push((popularVoteData.find(voteshareData => voteshareData.partyID == fullPartyOrdering[partyNum].partyID) || {}).voteshare || 0)
       summedPercentage += sortedPopularVoteArray[partyNum]

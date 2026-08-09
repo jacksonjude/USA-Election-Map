@@ -23,13 +23,13 @@ class MapType
     this.currentMapSourceID = getCookie(this.id + currentMapSourceSettingIDSuffix)
 
     this.currentMapSettings = {}
-    for (var settingNum in this.mapSettingsLayout)
+    for (let settingNum in this.mapSettingsLayout)
     {
-      var isGlobal = globalMapSettings.some(setting => setting.id == this.mapSettingsLayout[settingNum].id)
+      let isGlobal = globalMapSettings.some(setting => setting.id == this.mapSettingsLayout[settingNum].id)
       this.currentMapSettings[this.mapSettingsLayout[settingNum].id] = getCookie((isGlobal ? "" : (this.id + "-")) + this.mapSettingsLayout[settingNum].id) || this.mapSettingsLayout[settingNum].defaultValue
     }
 
-    var {mapSources, mapSourceIDs, mapCycles, defaultCompareSourceIDs, customSourceID, compareSourceID} = createMapSources()
+    let {mapSources, mapSourceIDs, mapCycles, defaultCompareSourceIDs, customSourceID, compareSourceID} = createMapSources()
     this.mapSources = mapSources
     this.mapSourceIDs = mapSourceIDs
     this.mapCycles = mapCycles
@@ -155,7 +155,7 @@ class MapType
 
   getMapSources(selfArg)
   {
-    var self = selfArg || this
+    let self = selfArg || this
     return self.mapSources
   }
 
@@ -250,9 +250,9 @@ class MapType
   {
     this.currentMapSettings = currentMapSettings
 
-    for (var settingID in this.currentMapSettings)
+    for (let settingID in this.currentMapSettings)
     {
-      var isGlobal = globalMapSettings.some(setting => setting.id == settingID)
+      let isGlobal = globalMapSettings.some(setting => setting.id == settingID)
       setCookie((isGlobal ? "" : (this.id + "-")) + settingID, this.currentMapSettings[settingID])
 
       if (isGlobal)
@@ -264,29 +264,29 @@ class MapType
 
   getMapSettingLayout(settingID, selfArg)
   {
-    var self = selfArg || this
+    let self = selfArg || this
     return self.mapSettingsLayout.find(setting => setting.id == settingID)
   }
 
   getMapSettingOptions(settingID, selfArg)
   {
-    var self = selfArg || this
-    var settingLayout = self.getMapSettingLayout(settingID, self)
+    let self = selfArg || this
+    let settingLayout = self.getMapSettingLayout(settingID, self)
     if (settingLayout == null) { return }
     return settingLayout.options
   }
 
   getMapSettingOptionData(settingID, selfArg)
   {
-    var self = selfArg || this
-    var codedValue = self.currentMapSettings[settingID]
+    let self = selfArg || this
+    let codedValue = self.currentMapSettings[settingID]
     if (codedValue == null) { return }
     return self.getMapSettingOptions(settingID, self).find(option => option.id == codedValue)
   }
 
   getMapSettingValue(settingID)
   {
-    var settingOptionData = this.getMapSettingOptionData(settingID, this)
+    let settingOptionData = this.getMapSettingOptionData(settingID, this)
     if (settingOptionData == null) { return }
     return settingOptionData.value
   }
@@ -312,7 +312,7 @@ const MapSettingReloadType =
   custom: 3
 }
 
-var globalMapSettings =
+let globalMapSettings =
 [
   {id: "flipStates", title: "🔺 Flip States", type: MapSettingType.optionCycle, options:
     [
@@ -356,8 +356,8 @@ var globalMapSettings =
   }},
 ]
 
-var currentGlobalMapSettings = {}
-for (var settingNum in globalMapSettings)
+let currentGlobalMapSettings = {}
+for (let settingNum in globalMapSettings)
 {
   currentGlobalMapSettings[globalMapSettings[settingNum].id] = getCookie(globalMapSettings[settingNum].id) || globalMapSettings[settingNum].defaultValue
 }
@@ -386,5 +386,5 @@ const regionEVArray = {
   1820: {"AL":5, "AK":0, "AZ":0, "AR":0, "CA":0, "CO":0, "CT":8, "DE":3, "DC":0, "FL":0, "GA":9, "HI":0, "ID":0, "IL":3, "IN":5, "IA":0, "KS":0, "KY":14, "LA":5, "ME-D1":0, "ME-D2":0, "ME-AL":9, "MD":11, "MA":15, "MI":0, "MN":0, "MS":3, "MO":3, "MT":0, "NE-D1":0, "NE-D2":0, "NE-D3":0, "NE-AL":0, "NV":0, "NH":8, "NJ":8, "NM":0, "NY":36, "NC":15, "ND":0, "OH":16, "OK":0, "OR":0, "PA":28, "RI":4, "SC":11, "SD":0, "TN":11, "TX":0, "UT":0, "VT":7, "VA":24, "WA":0, "WV":0, "WI":0, "WY":0}
 }
 
-var mapTypes = {}
-var mapTypeIDs = []
+let mapTypes = {}
+let mapTypeIDs = []

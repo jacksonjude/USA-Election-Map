@@ -5,7 +5,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
-  var regionData = regionID ? getRegionData(regionID).regionData : null
+  let regionData = regionID ? getRegionData(regionID).regionData : null
 
   if (
     regionID == null ||
@@ -52,7 +52,7 @@ async function updateRegionBox(regionID = currentRegionID)
     showingAltData = true
   }
 
-  var formattedRegionID = mapRegionIDToName[regionID] ?? regionID
+  let formattedRegionID = mapRegionIDToName[regionID] ?? regionID
   if (currentMapSource.getFormattedRegionName)
   {
     formattedRegionID = currentMapSource.getFormattedRegionName(formattedRegionID, regionData)
@@ -67,11 +67,11 @@ async function updateRegionBox(regionID = currentRegionID)
   
   const shouldShowVotes = !(showingCompareMap && currentMapSource.isCompare())
   let voteshareSortedData = regionData.partyVotesharePercentages ? cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare) : []
-  var roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes != null)
+  let roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes != null)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
   : getRoundedMarginValue(regionData.margin)
   
-  var regionMarginString = getRegionCandidateName(regionData.partyID, regionData) + " " + currentMapSource.getVotesharePrefix()
+  let regionMarginString = getRegionCandidateName(regionData.partyID, regionData) + " " + currentMapSource.getVotesharePrefix()
 
   if (editingRegionMarginValue)
   {
@@ -259,7 +259,7 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && splitVoteDisplayOptions.showSplitVoteBoxes && currentSliderDate && currentMapSource.getMapData())
   {
-    var zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+    let zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
     if (zoomingData)
     {
       const districtsPerLine = 4
@@ -271,13 +271,13 @@ async function updateRegionBox(regionID = currentRegionID)
         }
         if (i % districtsPerLine == 0)
         {
-          var isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
+          let isLastDistrictLine = (i+((districtIDs.length-1) % districtsPerLine)) == districtIDs.length-1
           regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 6px" : "margin-bottom: 6px") + "; gap: 6px;'>"
         }
 
-        var districtNumber = districtID.split(subregionSeparator)[1]
-        var marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID])
-        var marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
+        let districtNumber = districtID.split(subregionSeparator)[1]
+        let marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID])
+        let marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 
         regionBoxHTML += "<div style='border-radius: 2px; border: solid " + (zoomingData[districtID].flip ? "gold 3px; width: 20px; height: 20px;" : "gray 1px; width: 24px; height: 24px;") + " background-color: " + marginColor + "; display: flex; justify-content: center; align-items: center;'><span class='regionbox-text-shadow' style='margin-bottom: 2px; margin-left: 1px; font-size: 16px;'>" + (districtNumber == 0 ? "AL" : zeroPadding(districtNumber)) + "</span></div>"
       })
@@ -347,7 +347,7 @@ function updateRegionBoxPosition(mouseX, mouseY)
 
 function updateRegionBoxYPosition(mouseY)
 {
-  var newRegionBoxYPos = (mouseY+5) || (currentMouseY+5)
+  let newRegionBoxYPos = (mouseY+5) || (currentMouseY+5)
   if (!newRegionBoxYPos) { return }
 
   newRegionBoxYPos = correctOverflow(newRegionBoxYPos, $("#regionboxcontainer").height(), $(document).height())
@@ -367,18 +367,18 @@ function getGradientCSS(fillColor, backgroundColor, fillPercentage, backgroundPe
 
 function applyRegionEVEdit(regionID)
 {
-  var regionData = getRegionData(regionID).regionData
+  let regionData = getRegionData(regionID).regionData
 
-  var shouldRefreshEV = false
+  let shouldRefreshEV = false
 
-  var newEV = parseInt($("#regionEV-text").val())
+  let newEV = parseInt($("#regionEV-text").val())
   if ($("#regionEV-text").val() == "")
   {
     delete overrideRegionEVs[regionID]
     shouldRefreshEV = true
   }
 
-  var currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData)
+  let currentEV = currentMapType.getEV(getCurrentDecade(), regionID, regionData)
   if (!isNaN(newEV) && newEV > 0 && newEV != currentEV)
   {
     overrideRegionEVs[regionID] = newEV
@@ -416,19 +416,19 @@ function toggleRegionMarginEditing()
 
 function applyRegionMarginValue(regionID)
 {
-  var regionDataCallback = getRegionData(regionID)
-  var regionIDsToFill = regionDataCallback.linkedRegionIDs
-  var regionData = regionDataCallback.regionData
+  let regionDataCallback = getRegionData(regionID)
+  let regionIDsToFill = regionDataCallback.linkedRegionIDs
+  let regionData = regionDataCallback.regionData
 
-  var newMarginString = $("#regionMargin-text").val()
-  var newMargin = parseFloat(newMarginString)
+  let newMarginString = $("#regionMargin-text").val()
+  let newMargin = parseFloat(newMarginString)
   if (newMarginString == "")
   {
     newMargin = 1
   }
-  var newMarginIsValid = /^\d+\.?\d*e?[+-]?\d*$/.test(newMarginString) && !isNaN(newMargin) && newMargin >= 0
+  let newMarginIsValid = /^\d+\.?\d*e?[+-]?\d*$/.test(newMarginString) && !isNaN(newMargin) && newMargin >= 0
 
-  var currentMargin = getRoundedMarginValue(regionData.margin)
+  let currentMargin = getRoundedMarginValue(regionData.margin)
   if (newMarginIsValid && newMargin != currentMargin)
   {
     regionData.margin = newMargin
