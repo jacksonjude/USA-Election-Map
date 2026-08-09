@@ -169,7 +169,7 @@ class MapType
         return parseInt(pair2[0])-parseInt(pair1[0])
       }).flatMap(pair => pair[1])
     }
-    else if (this.shouldPutProjectionsFirst)
+    else if (this.shouldListProjectionsFirst)
     {
       return this.mapSourceIDs[cycle].concat(this.mapSourceIDs[allYearsCycle])
     }
