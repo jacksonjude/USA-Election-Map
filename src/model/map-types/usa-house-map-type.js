@@ -578,7 +578,7 @@ var USAHouseMapType = new MapType(
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
     
-    const jsonVoteshareVotehubFilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, regionNameToID, heldRegionMap)
+    const jsonVoteshareVotehubFilterFunction = function(rawMapData, _, columnMap, __, ___, ____, heldRegionMap)
     {
       const filteredMapData = {}
       const mapDates = []
