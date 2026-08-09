@@ -112,10 +112,10 @@ function setupTotalsPieChart()
         borderColor: "#ddd"
       }
     },
-    legend: {
-      display: false
-    },
     plugins: {
+      legend: {
+        display: false
+      },
       tooltip: {
         displayColors: false,
         enabled: false,
