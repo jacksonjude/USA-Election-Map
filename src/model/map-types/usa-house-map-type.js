@@ -1177,11 +1177,11 @@ var USAHouseMapType = new MapType(
           let state = regionData.state
           let district = regionData.district
           
-          linkToOpen += `/race/?race_id=H2026${state}${zeroPadding(district)}`
+          linkToOpen += `race/?race_id=H2026${state}${zeroPadding(district)}`
         }
         else
         {
-          linkToOpen += "/house/"
+          linkToOpen += "house/"
         }
         
         return linkToOpen

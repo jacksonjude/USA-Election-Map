@@ -1157,11 +1157,11 @@ var USAGovernorMapType = new MapType(
         let linkToOpen = homepageURL
         if (!shouldOpenHomepage)
         {
-          linkToOpen += `/race/?race_id=G2026${regionID}00`
+          linkToOpen += `race/?race_id=G2026${regionID}00`
         }
         else
         {
-          linkToOpen += "/governor/"
+          linkToOpen += "governor/"
         }
         
         return linkToOpen
@@ -1208,11 +1208,11 @@ var USAGovernorMapType = new MapType(
         let linkToOpen = homepageURL
         if (!shouldOpenHomepage)
         {
-          linkToOpen += `/race/?race_id=G2026${regionID}00`
+          linkToOpen += `race/?race_id=G2026${regionID}00`
         }
         else
         {
-          linkToOpen += "/governor/"
+          linkToOpen += "governor/"
         }
         
         return linkToOpen

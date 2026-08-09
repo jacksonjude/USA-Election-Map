@@ -1629,11 +1629,11 @@ var USASenateMapType = new MapType(
           }
           const state = regionID.replace('-S', '')
           
-          linkToOpen += `/race/?race_id=S2026${state}${zeroPadding(seatClass)}`
+          linkToOpen += `race/?race_id=S2026${state}${zeroPadding(seatClass)}`
         }
         else
         {
-          linkToOpen += "/senate/"
+          linkToOpen += "senate/"
         }
         
         return linkToOpen
@@ -1687,11 +1687,11 @@ var USASenateMapType = new MapType(
           }
           const state = regionID.replace('-S', '')
           
-          linkToOpen += `/race/?race_id=S2026${state}${zeroPadding(seatClass)}`
+          linkToOpen += `race/?race_id=S2026${state}${zeroPadding(seatClass)}`
         }
         else
         {
-          linkToOpen += "/senate/"
+          linkToOpen += "senate/"
         }
         
         return linkToOpen
