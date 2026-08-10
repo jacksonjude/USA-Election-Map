@@ -327,7 +327,7 @@ const JJUHouseMapType = new MapType(
 		    let isOffyear = Object.values(filteredDateData)[0].offYear
 		    let isRunoff = Object.values(filteredDateData)[0].isRunoff
         
-        const regionsForDate = [...regionDateRanges].reverse().find(r => r.start <= mapDate).regions
+        const regionsForDate = [...regionDateRanges].reverse().find(r => r.start <= parseInt(mapDate)).regions
     
 		    for (let regionID of previousDateRegionIDs)
 		    {

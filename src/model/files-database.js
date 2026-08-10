@@ -18,18 +18,19 @@ class FilesDatabase
       const request = indexedDB.open(self.databaseName, self.databaseVersion)
 
       request.onerror = function(event) {
-        console.error(`Database error: ${event.target.errorCode || event.target.error.code}`)
+        const target = /** @type {any} */ (event.target)
+        console.error(`Database error: ${target.errorCode || target.error.code}`)
         resolve(null)
       }
 
       request.onupgradeneeded = function(event) {
-        let db = event.target.result
+        let db = /** @type {IDBOpenDBRequest} */ (event.target).result
 
         db.createObjectStore(self.storeName)
       }
 
       request.onsuccess = function(event) {
-        let db = event.target.result
+        let db = /** @type {IDBOpenDBRequest} */ (event.target).result
         resolve(db)
       }
     })

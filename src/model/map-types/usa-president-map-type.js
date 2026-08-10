@@ -266,6 +266,7 @@ const USAPresidentMapType = new MapType(
           {
             compactPartyVotesharePercentages = []
             partyVotesharePercentages.forEach(voteData => {
+              /** @type {any} */
               let compactVoteDataIndex
               let compactVoteData = compactPartyVotesharePercentages.find((compactVoteData, index) => {
                 if (compactVoteData.candidate == voteData.candidate)
@@ -1153,28 +1154,30 @@ const USAPresidentMapType = new MapType(
         case "partyID":
         return partyID || electionYearToCandidateData[currentCycleYear || 2020][candidateName]
     
-        case "candidateVotes":
-        voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
-        if (voteshareData)
-        {
-          return voteshareData.voteshare*100
+        case "candidateVotes": {
+          const voteshareData = shouldUseVoteshare && regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
+          if (voteshareData)
+          {
+            return voteshareData.voteshare*100
+          }
+          else if (regionData.partyID == partyID)
+          {
+            return regionData.margin
+          }
+          return 0
         }
-        else if (regionData.partyID == partyID)
-        {
-          return regionData.margin
-        }
-        return 0
         
         case "totalVotes":
         return 100*100
         
-        case "order":
-        voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
-        if (voteshareData)
-        {
-          return voteshareData.order
+        case "order": {
+          const voteshareData = regionData.partyVotesharePercentages ? regionData.partyVotesharePercentages.find(partyVoteshare => partyID == partyVoteshare.partyID) : null
+          if (voteshareData)
+          {
+            return voteshareData.order
+          }
+          return ""
         }
-        return ""
     
         case "county":
         return regionID.split(subregionSeparator)[1]
@@ -1456,34 +1459,7 @@ const USAPresidentMapType = new MapType(
       () => {
         if (currentViewingState == ViewingState.zooming)
         {
-          if (dateYear < 2001)
-          {
-            return ["svg-sources/usa-counties-map-1997.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2007)
-          {
-            return ["svg-sources/usa-counties-map-2001.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2008)
-          {
-            return ["svg-sources/usa-counties-map-2007.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2013)
-          {
-            return ["svg-sources/usa-counties-map-2008.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2015)
-          {
-            return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2019)
-          {
-            return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
-          }
-          else
-          {
-            return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
-          }
+          return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
         }
         
         return "svg-sources/usa-presidential-map.svg"
@@ -1684,34 +1660,7 @@ const USAPresidentMapType = new MapType(
       {
         if (await (overrideMapSource ?? PastElectionResultMapSource).canZoom((overrideMapSource ?? PastElectionResultMapSource).getMapData(), currentMapZoomRegion))
         {
-          if (dateYear < 2001)
-          {
-            return ["svg-sources/usa-counties-map-1997.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2007)
-          {
-            return ["svg-sources/usa-counties-map-2001.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2008)
-          {
-            return ["svg-sources/usa-counties-map-2007.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2013)
-          {
-            return ["svg-sources/usa-counties-map-2008.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2015)
-          {
-            return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
-          }
-          else if (dateYear < 2019)
-          {
-            return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
-          }
-          else
-          {
-            return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
-          }
+          return getPresidentialCountySVGFromDate(dateTime)
         }
         else
         {
@@ -1742,6 +1691,45 @@ const USAPresidentMapType = new MapType(
       else
       {
         return "svg-sources/usa-presidential-map.svg"
+      }
+    }
+    
+    const getPresidentialCountySVGFromDate = function(dateTime)
+    {
+      let dateYear = (new Date(dateTime)).getFullYear()
+      
+      if (currentViewingState == ViewingState.viewing)
+      {
+        return "svg-sources/usa-governor-map.svg"
+      }
+      
+      if (dateYear < 2001)
+      {
+        return ["svg-sources/usa-counties-map-1997.svg", currentMapZoomRegion]
+      }
+      else if (dateYear < 2007)
+      {
+        return ["svg-sources/usa-counties-map-2001.svg", currentMapZoomRegion]
+      }
+      else if (dateYear < 2008)
+      {
+        return ["svg-sources/usa-counties-map-2007.svg", currentMapZoomRegion]
+      }
+      else if (dateYear < 2013)
+      {
+        return ["svg-sources/usa-counties-map-2008.svg", currentMapZoomRegion]
+      }
+      else if (dateYear < 2015)
+      {
+        return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
+      }
+      else if (dateYear < 2019)
+      {
+        return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
+      }
+      else
+      {
+        return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
       }
     }
 
@@ -1818,7 +1806,7 @@ const USAPresidentMapType = new MapType(
         
         if (voteshareSortedCandidateData.length == 0)
         {
-          console.log("No candidate data!", currentMapDate?.getFullYear()?.toString(), fullRegionName)
+          console.log("No candidate data!", state)
           continue
         }
         
@@ -1861,7 +1849,7 @@ const USAPresidentMapType = new MapType(
 
       if (isZoomCheck) { return (organizedCountyData != null && (!regionID || organizedCountyData[regionID] != null) ) || (showingCompareMap && currentMapSource.isCompare()) }
 
-      let previousMapDateIndex = mapSource.getMapDates().findIndex(mapDate => mapDate == date ?? currentSliderDate.getTime())-1
+      let previousMapDateIndex = mapSource.getMapDates().findIndex(mapDate => mapDate == (date ?? currentSliderDate.getTime()))-1
       let previousMapDateData
       if (previousMapDateIndex >= 0)
       {
@@ -2112,41 +2100,7 @@ const USAPresidentMapType = new MapType(
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
       1.0, // voteshareCutoffMargin
-      () => {
-        if (currentViewingState == ViewingState.viewing)
-        {
-          return "svg-sources/usa-governor-map.svg"
-        }
-
-        if (dateYear < 2001)
-        {
-          return ["svg-sources/usa-counties-map-1997.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2007)
-        {
-          return ["svg-sources/usa-counties-map-2001.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2008)
-        {
-          return ["svg-sources/usa-counties-map-2007.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2013)
-        {
-          return ["svg-sources/usa-counties-map-2008.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2015)
-        {
-          return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2019)
-        {
-          return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
-        }
-        else
-        {
-          return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
-        }
-      } // overrideSVGPath
+      getPresidentialCountySVGFromDate // overrideSVGPath
     )
     
     const HistoricalCountyElectionResultMapSource = new MapSource(
@@ -2361,41 +2315,7 @@ const USAPresidentMapType = new MapType(
       false, // shouldClearDisabled
       null, // shouldShowVoteshare
       null, // voteshareCutoffMargin
-      () => {
-        if (currentViewingState == ViewingState.viewing)
-        {
-          return "svg-sources/usa-governor-map.svg"
-        }
-    
-        if (dateYear < 2001)
-        {
-          return ["svg-sources/usa-counties-map-1997.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2007)
-        {
-          return ["svg-sources/usa-counties-map-2001.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2008)
-        {
-          return ["svg-sources/usa-counties-map-2007.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2013)
-        {
-          return ["svg-sources/usa-counties-map-2008.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2015)
-        {
-          return ["svg-sources/usa-counties-map-2013.svg", currentMapZoomRegion]
-        }
-        else if (dateYear < 2019)
-        {
-          return ["svg-sources/usa-counties-map-2015.svg", currentMapZoomRegion]
-        }
-        else
-        {
-          return ["svg-sources/usa-counties-map-2019.svg", currentMapZoomRegion]
-        }
-      }, // overrideSVGPath
+      getPresidentialCountySVGFromDate, // overrideSVGPath
       true // shouldSetDisabledWorthToZero
     )
 

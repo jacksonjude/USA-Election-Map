@@ -254,7 +254,7 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
   else
   {
     compareSourcesUpdated = [true, true]
-    const shouldSwap = mapSourceToUncheck = shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) ? compareMapSourceIDArray[0] : compareMapSourceIDArray[1]
+    const shouldSwap = shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) ? compareMapSourceIDArray[0] : compareMapSourceIDArray[1]
     compareMapSourceIDArray[0] = compareMapSourceIDArray[0] == shouldSwap ? mapSourceID : compareMapSourceIDArray[0]
     compareMapSourceIDArray[1] = compareMapSourceIDArray[1] == shouldSwap ? mapSourceID : compareMapSourceIDArray[1]
   }
@@ -705,11 +705,9 @@ async function applyCompareToCustomMap(shouldResetRound = false)
         if (compareSortMode == CompareSortMode.shiftMargin)
         {
           resultMapArray[regionID].partyVotesharePercentages = resultMapArray[regionID].partyVotesharePercentages.sort((cand1, cand2) => cand2.voteshare-cand1.voteshare)
-          for (let candidateOn in resultMapArray[regionID].partyVotesharePercentages)
-          {
-            let candidateData = resultMapArray[regionID].partyVotesharePercentages[candidateOn]
+          resultMapArray[regionID].partyVotesharePercentages.forEach((candidateData, candidateOn) => {
             candidateData.order = candidateOn == 0 ? 0 : candidateOn+1
-          }
+          })
         }
       }
     }

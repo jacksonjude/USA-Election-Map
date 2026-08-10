@@ -1,11 +1,9 @@
 function createMapSourceDropdownItems()
 {
   $("#mapSourcesDropdownContainer").html("")
-  for (let sourceNum in mapSourceIDs)
-  {
+  mapSourceIDs.forEach((mapSourceID, sourceNum) => {
     $("#mapSourcesDropdownContainer").append("<div class='dropdown-separator'></div>")
 
-    const mapSourceID = mapSourceIDs[sourceNum]
     const mapSourceIDNoSpace = mapSourceID.replace(/\s/g, '')
     const mapSourceName = mapSources[mapSourceID].getName()
     const mapSourceIcon = mapSources[mapSourceID].getIconURL(true) ?? "./assets/edit-icon.png"
@@ -67,7 +65,7 @@ function createMapSourceDropdownItems()
         $("#uploadFileInput").click()
       })
     }
-  }
+  })
 }
 
 function toggleMapSource(buttonDiv)

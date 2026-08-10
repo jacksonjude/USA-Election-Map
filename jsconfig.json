@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "lib": ["es2020", "dom"],
+    "target": "es2020",
+    "checkJs": false
+  },
+  "include": ["src/**/*"]
+}

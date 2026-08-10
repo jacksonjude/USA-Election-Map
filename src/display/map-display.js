@@ -844,16 +844,15 @@ function setDataMapDateSliderRange(shouldSetToMax, sliderDivID, sliderTickDivID,
   {
     let closestDate = mapDates[0]
     let closestDateIndex = 0
-    for (let dateNum in mapDates)
-    {
-      if (Math.abs(previousDate-mapDates[dateNum]) < Math.abs(closestDate-previousDate))
+    mapDates.forEach((mapDate, dateNum) => {
+      if (Math.abs(previousDate-mapDate) < Math.abs(closestDate-previousDate))
       {
-        closestDate = mapDates[dateNum]
+        closestDate = mapDate
         closestDateIndex = dateNum
       }
-    }
+    })
 
-    $("#" + sliderDivID).val(parseInt(closestDateIndex)+1)
+    $("#" + sliderDivID).val(closestDateIndex+1)
     currentSliderDate = new Date(closestDate)
   }
 
@@ -946,6 +945,7 @@ async function displayDataMap(dateIndex, reloadPartyDropdowns, fadeForNewSVG)
     shouldReloadSVG = currentMapType.resetOverrideSVGPath()
   }
 
+  /** @type {any} */
   let cachedSVGPathData
   if (shouldReloadSVG)
   {
@@ -1436,17 +1436,14 @@ function updateRoundControls(roundsForDate)
 {
   $("#mapRoundControls").empty()
   
-  for (const roundIndex in roundsForDate)
-  {
+  roundsForDate.forEach((round, roundIndex) => {
     if (roundIndex > 0)
     {
       $("#mapRoundControls").append('<div class="dropdown-separator"></div>')
     }
     
-    const round = roundsForDate[roundIndex]
-    
     $("#mapRoundControls").append(`<a onclick="selectRound(${round})" data-round="${round}" class="${currentRound == round ? 'round-selected' : 'round'}" style="display: flex; justify-content: center; align-items: center; cursor: pointer; user-select: none; -webkit-user-select: none; aspect-ratio: 1/1; font-size: 25rem; border-radius: ${roundIndex == 0 ? '20rem 20rem' : '0 0'} ${roundIndex == roundsForDate.length-1 ? '20rem 20rem' : '0 0'};">R${round}</a>`)
-  }
+  })
 }
 
 function selectRound(round)

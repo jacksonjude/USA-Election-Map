@@ -106,7 +106,7 @@ const USAHouseMapType = new MapType(
             partyID = IndependentGenericParty.getID()
           }
 
-          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : (shouldSetHold ? 100 : 0), votes: candidateVotes})
+          formattedCandidatesArray.push({candidate: candidateName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : 0, votes: candidateVotes})
         }
 
         let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -332,7 +332,7 @@ const USAHouseMapType = new MapType(
               {
                 if (regionHouseSeatCount > 1)
                 {
-                  districtNumber = parseInt(districtNumber)+1
+                  districtNumber = (parseInt(districtNumber)+1).toString()
                 }
                 filteredDateData[regionNameToID[regionToFind] + subregionSeparator + districtNumber] = {region: regionNameToID[regionToFind] + subregionSeparator + districtNumber, state: regionNameToID[regionToFind], margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
               }

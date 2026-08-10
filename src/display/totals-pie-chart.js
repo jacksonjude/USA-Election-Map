@@ -253,7 +253,7 @@ function setupTotalsPieChart()
     }
   }
 
-  let ctx = document.getElementById('totalsPieChart').getContext('2d')
+  let ctx = /** @type {HTMLCanvasElement} */ (document.getElementById('totalsPieChart')).getContext('2d')
   totalsPieChart = new Chart(ctx, {
     type: 'doughnut',
     data: data,
@@ -435,7 +435,7 @@ function createHashCanvasPattern(baseColor)
   patternContext.lineTo(WIDTH, HEIGHT * ((DIVISIONS - 1) / DIVISIONS))
   patternContext.fill()
 
-  let colorPattern = document.getElementById('totalsPieChart').getContext('2d').createPattern(patternCanvas, 'repeat')
+  let colorPattern = /** @type {HTMLCanvasElement} */ (document.getElementById('totalsPieChart')).getContext('2d').createPattern(patternCanvas, 'repeat')
   hashCanvasPatternCache[baseColor] = colorPattern
 
   return colorPattern
@@ -689,11 +689,10 @@ function updateTotalsPieChart()
 
   let nonFlipSortedPartyTotalsArray = []
   let tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
-  for (let totalIndex in sortedPartyTotalsArray)
-  {
-    if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { continue }
-    nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = sortedPartyTotalsArray[totalIndex]
-  }
+  sortedPartyTotalsArray.forEach((partyTotal, totalIndex) => {
+    if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { return }
+    nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = partyTotal
+  })
 
   if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle != "all") || currentViewingState == ViewingState.splitVote)
   {

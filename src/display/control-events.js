@@ -586,7 +586,7 @@ function mouseEnteredRegion(div)
   {
     let regionPath = document.getElementById(regionID)
     let parent = regionPath.parentNode
-    if (parent.lastChild.id == regionPath.id)
+    if (parent.lastElementChild.id == regionPath.id)
     {
       // don't reorder if regionPath is already on top
       return;
@@ -596,7 +596,7 @@ function mouseEnteredRegion(div)
     {
       resetStrokeColor(div)
     }
-    parent.insertBefore(regionPath, parent.lastChild.nextSibling)
+    parent.insertBefore(regionPath, parent.lastElementChild.nextSibling)
   }
 }
 

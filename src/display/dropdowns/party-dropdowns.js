@@ -36,18 +36,17 @@ function createPartyDropdowns()
   const shouldStackText = shouldUseSmallButtons
 
   $("#partyDropdownsContainer").html("")
-  for (let partyIDNum in dropdownPoliticalPartyIDs)
-  {
+  dropdownPoliticalPartyIDs.forEach((partyID, partyIDNum) => {
     let dropdownDiv = ""
 
-    if (dropdownPoliticalPartyIDs[partyIDNum] == addButtonPartyID)
+    if (partyID == addButtonPartyID)
     {
       dropdownDiv += '<a id="' + addButtonPartyID + '" class="partyDropdownButton active" onclick="createNewCustomParty()" style="width: calc(' + partyButtonWidth + '% - 4px); height: calc(35% - 4px); padding: 0; margin: 0; background-color: transparent; border: 2px dashed gray; color: gray; transition: all .1s linear">' + "+" + '</a>'
       $("#partyDropdownsContainer").append(dropdownDiv)
-      continue
+      return
     }
 
-    let currentPoliticalParty = politicalParties[dropdownPoliticalPartyIDs[partyIDNum]]
+    let currentPoliticalParty = politicalParties[partyID]
     let marginColors = currentPoliticalParty.getMarginColors()
 
     dropdownDiv += '<div id="' + currentPoliticalParty.getID() + 'Dropdown" class="dropdown" style="width: ' + partyButtonWidth + '%; height: 35%;" onmouseenter="deselectDropdownButton()">'
@@ -119,7 +118,7 @@ function createPartyDropdowns()
         $(this).find(".dropdown-content").css("display", "block")
       }
     })
-  }
+  })
   $("#partyDropdownsContainer").append("</div>")
 
   for (let partyIDNum in dropdownPoliticalPartyIDs)

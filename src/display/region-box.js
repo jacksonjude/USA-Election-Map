@@ -85,20 +85,18 @@ async function updateRegionBox(regionID = currentRegionID)
     let candidateDataToSelect = (selectedParty == null || selectedParty == TossupParty.getID()) ? regionData.partyVotesharePercentages[0] : regionData.partyVotesharePercentages.find(candidateData => candidateData.partyID == selectedParty.getID())
     if (!candidateDataToSelect && selectedParty)
     {
-      regionData.partyVotesharePercentages.push({candidate: getRegionCandidateName(partyID, regionData), partyID: selectedParty.id, voteshare: 0.0})
+      regionData.partyVotesharePercentages.push({candidate: getRegionCandidateName(selectedParty.getID(), regionData), partyID: selectedParty.getID(), voteshare: 0.0})
       candidateDataToSelect = regionData.partyVotesharePercentages[regionData.partyVotesharePercentages.length-1]
     }
 
     let regionBoxHTML = formattedRegionID
     regionBoxHTML += "<div style='border-radius: 50px; color: white; font-size: 17px; line-height: 100%; margin-top: 5px; margin-bottom: 8px; display: block;'>"
-    for (let candidateOn in regionData.partyVotesharePercentages)
-    {
-      let candidateData = regionData.partyVotesharePercentages[candidateOn]
+    regionData.partyVotesharePercentages.forEach((candidateData, candidateOn) => {
       let candidateName = getRegionCandidateName(candidateData.partyID, regionData, candidateData)
       regionBoxHTML += "<div style='display: flex; justify-content: space-between; align-items: center; padding: 1px 4px; margin: 2px 0px; border-radius: " + (candidateOn == 0 ? "3px 3px" : "0px 0px") + (candidateOn == regionData.partyVotesharePercentages.length-1 ? " 3px 3px" : " 0px 0px") + "; background: " + getGradientCSS(politicalParties[candidateData.partyID].getMarginColors().safe, politicalParties[candidateData.partyID].getMarginColors().lean, candidateData.voteshare) + ";'><span style='margin-right: 5px;'>" + candidateName + "</span>"
       regionBoxHTML += "<span><input id='regionVoteshare-" + candidateName.replaceAll(/[\s\.]/g, "_") + "' class='textInput' style='float: none; position: inherit; min-width: 40px; max-height: 20px; font-size: 17px' type='text' oninput='applyRegionVotesharePercentage(this, \"" + regionID + "\")' onclick='this.select()' onselect='selectedVoteshareCandidate = $(this).data(\"candidate\")' value='" + candidateData.voteshare + "' data-candidate='" + candidateName + "'>" + currentMapSource.getVoteshareSuffix() + "</span>"
       regionBoxHTML += "</div>"
-    }
+    })
     regionBoxHTML += "</div>"
 
     regionBoxHTML += "<div style='color: gray; font-size: 15px; font-style: italic'>"
@@ -275,7 +273,7 @@ async function updateRegionBox(regionID = currentRegionID)
           regionBoxHTML += "<div style='display: flex; justify-content: center; align-items: center; " + (isLastDistrictLine ? "margin-bottom: 6px" : "margin-bottom: 6px") + "; gap: 6px;'>"
         }
 
-        let districtNumber = districtID.split(subregionSeparator)[1]
+        let districtNumber = parseInt(districtID.split(subregionSeparator)[1])
         let marginIndex = getMarginIndexForValue(zoomingData[districtID].margin, zoomingData[districtID])
         let marginColor = politicalParties[zoomingData[districtID].partyID].getMarginColors()[marginIndex]
 

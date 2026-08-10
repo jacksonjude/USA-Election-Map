@@ -531,7 +531,7 @@ const USASenateMapType = new MapType(
         {
           let [_, regionID, regionClass] = /(\w\w)-S(\d)/.exec(mapRow[columnMap.region])
 
-          let shouldBeSpecialRegion = regionClass != onCycleClass
+          let shouldBeSpecialRegion = parseInt(regionClass) != onCycleClass
           let candidateArray = []
 
           for (let partyID in candidateColumns)
@@ -646,8 +646,10 @@ const USASenateMapType = new MapType(
                 {
                   partyIDToCandidateNames[candidateNameToPartyIDMap[partyCandidateName]] = partyCandidateName
                 }
+                
+                const isSpecial = parseInt(classNumIndex) == 1
 
-                filteredDateData[regionNameToID[regionToFind] + (classNumIndex == 1 ? "-S" : "")] = {region: regionNameToID[regionToFind] + (classNumIndex == 1 ? "-S" : ""), seatClass: classNum, offYear: false, runoff: false, isSpecial: classNumIndex == 1, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
+                filteredDateData[regionNameToID[regionToFind] + (isSpecial ? "-S" : "")] = {region: regionNameToID[regionToFind] + (isSpecial ? "-S" : ""), seatClass: classNum, offYear: false, runoff: false, isSpecial: isSpecial, margin: 0, partyID: TossupParty.getID(), candidateMap: partyIDToCandidateNames}
               }
               continue
             }
@@ -817,8 +819,8 @@ const USASenateMapType = new MapType(
         const regionIDs = Object.keys(filteredDateData)
         for (const regionIDWithClass of regionIDs)
         {
-          let [regionID, classNum] = regionIDWithClass.split("-")
-          classNum = parseInt(classNum)
+          let [regionID, classStr] = regionIDWithClass.split("-")
+          const classNum = parseInt(classStr)
           const otherClassNum = stateClasses[regionID][Math.abs(stateClasses[regionID].indexOf(classNum)-1)]
           
           const currentClassData = filteredDateData[regionIDWithClass]

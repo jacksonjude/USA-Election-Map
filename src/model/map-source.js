@@ -80,84 +80,82 @@ class MapSource
 
   async loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
-    let self = this
-    
-    reloadCache = reloadCache ? true : (self.dataURL ? !(await CSVDatabase.isSourceUpdated(self.id)) : false)
+    reloadCache = reloadCache ? true : (this.dataURL ? !(await CSVDatabase.isSourceUpdated(this.id)) : false)
     resetCandidateNames = resetCandidateNames != null ? resetCandidateNames : true
 
-    if ((self.rawMapData == null || reloadCache) && (self.dataURL || self.textMapData))
+    if ((this.rawMapData == null || reloadCache) && (this.dataURL || this.textMapData))
     {
       let textData
-      if (self.dataURL)
+      if (this.dataURL)
       {
-        textData = await self.loadMapCache(self, reloadCache, onlyAttemptLocalFetch)
+        textData = await this.loadMapCache(this, reloadCache, onlyAttemptLocalFetch)
       }
       else
       {
-        textData = self.textMapData
+        textData = this.textMapData
       }
       if (textData == null) { return false }
       
-      if (isString(self.dataURL) || self.dataURL.type == csvSourceType)
+      if (isString(this.dataURL) || this.dataURL.type == csvSourceType)
       {
-        self.rawMapData = await self.convertCSVToArray(self, textData)
+        this.rawMapData = await this.convertCSVToArray(this, textData)
       }
-      else if (self.dataURL.type == jsonSourceType && isString(textData) && !self.isCustomMap)
+      else if (this.dataURL.type == jsonSourceType && isString(textData) && !this.isCustomMap)
       {
-        self.rawMapData = JSON.parse(textData)
+        this.rawMapData = JSON.parse(textData)
       }
       else
       {
-        self.rawMapData = textData
+        this.rawMapData = textData
       }
     }
 
-    if (self.rawMapData == null) { return false }
+    if (this.rawMapData == null) { return false }
 
-    self.mapDates = (isString(self.dataURL) || self.dataURL.type == csvSourceType) ? Object.keys(self.rawMapData) : [Date.now()]
-    for (let dateNum in self.mapDates)
+    this.mapDates = (isString(this.dataURL) || this.dataURL.type == csvSourceType) ? Object.keys(this.rawMapData) : [Date.now()]
+    for (let dateNum in this.mapDates)
     {
-      self.mapDates[dateNum] = parseInt(self.mapDates[dateNum])
+      this.mapDates[dateNum] = parseInt(this.mapDates[dateNum])
     }
-    self.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
+    this.mapDates.sort((mapDate1, mapDate2) => (mapDate1-mapDate2))
 
-    let filterMapDataCallback = await self.executeFilter(self.rawMapData, self.mapDates, self)
-    self.mapData = filterMapDataCallback.mapData
+    let filterMapDataCallback = await this.executeFilter(this.rawMapData, this.mapDates, this)
+    this.mapData = filterMapDataCallback.mapData
     
-    if (self.mapData)
+    if (this.mapData)
     {
-      for (const mapDate in self.mapData)
+      for (const mapDate in this.mapData)
       {
-        self.setFlipData(self.mapData[mapDate])
+        this.setFlipData(this.mapData[mapDate])
       }
     }
 
     if (filterMapDataCallback.candidateNameData != null && resetCandidateNames)
     {
-      if (self.candidateNameData != null)
+      if (this.candidateNameData != null)
       {
         for (let date in filterMapDataCallback.candidateNameData)
         {
-          self.candidateNameData[date] = mergeObject(self.candidateNameData[date], filterMapDataCallback.candidateNameData[date])
+          this.candidateNameData[date] = mergeObject(this.candidateNameData[date], filterMapDataCallback.candidateNameData[date])
         }
       }
       else
       {
-        self.candidateNameData = filterMapDataCallback.candidateNameData
+        this.candidateNameData = filterMapDataCallback.candidateNameData
       }
     }
-    for (let date in self.candidateNameData)
+    for (let date in this.candidateNameData)
     {
-      if (self.candidateNameData[date] == null) { continue }
-      if (Object.keys(self.candidateNameData[date]).length == 0)
+      if (this.candidateNameData[date] == null) { continue }
+      if (Object.keys(this.candidateNameData[date]).length == 0)
       {
-        self.candidateNameData[date] = cloneObject(self.shortCandidateNameOverride)
+        this.candidateNameData[date] = cloneObject(this.shortCandidateNameOverride)
       }
     }
 
     if (filterMapDataCallback.mapDates != null)
     {
-      self.mapDates = filterMapDataCallback.mapDates
+      this.mapDates = filterMapDataCallback.mapDates
     }
 
     return true
@@ -655,14 +653,13 @@ class MapSource
     let csvText = ""
 
     let columnTitles = Object.values(columnMap)
-    for (let titleNum in columnTitles)
-    {
-      csvText += columnTitles[titleNum]
+    columnTitles.forEach((title, titleNum) => {
+      csvText += title
       if (titleNum < columnTitles.length-1)
       {
         csvText += ","
       }
-    }
+    })
     csvText += "\n"
     
     const partyIDToCandidateNames = invertObject(candidateNameToPartyIDs)
@@ -695,16 +692,15 @@ class MapSource
           if (candidatesToAdd[candidateName] != regionData.partyID && regionData.margin != 0 && !regionData.partyVotesharePercentages) { continue }
           if (regionData.margin == 0 && regionData.partyID == TossupParty.getID() && candidatesToAdd[candidateName] != IndependentGenericParty.getID()) { continue }
 
-          for (let columnTitleNum in columnTitles)
-          {
-            let columnKey = getKeyByValue(columnMap, columnTitles[columnTitleNum])
+          columnTitles.forEach((columnTitle, columnTitleNum) => {
+            let columnKey = getKeyByValue(columnMap, columnTitle)
             csvText += convertMapDataRowToCSVFunction(columnKey, mapDateString, regionID, regionNameToID, candidateName, candidatesToAdd[candidateName], regionData, this.editingMode == EditingMode.voteshare)
 
             if (columnTitleNum < columnTitles.length-1)
             {
               csvText += ","
             }
-          }
+          })
 
           csvText += "\n"
         }
