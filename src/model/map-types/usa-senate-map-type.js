@@ -411,7 +411,10 @@ const USASenateMapType = new MapType(
       }
       
       const overrideCandidateParties = {
-        "Dan Osborn": IndependentGenericParty.getID()
+        "Dan Osborn": IndependentGenericParty.getID(),
+        "Seth Bodnar": IndependentGenericParty.getID(),
+        "Todd Achilles": IndependentGenericParty.getID(),
+        "Brian Bengs": IndependentGenericParty.getID()
       }
       
       for (const regionData of rawMapData)
@@ -427,7 +430,7 @@ const USASenateMapType = new MapType(
           const candidate = {
             id: rawCandidate.id,
             name: rawCandidate.name,
-            partyID: overrideCandidateParties[rawCandidate.name] ?? partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
+            partyID: overrideCandidateParties[rawCandidate.name] ?? partyLetterToID[rawCandidate.caucus] ?? IndependentGenericParty.getID()
           }
           candidate.name ??= politicalParties[candidate.partyID].getNames()[0]
           candidateList.push(candidate)
@@ -454,9 +457,10 @@ const USASenateMapType = new MapType(
             const candidateDateData = dateData.candidates.find(c => c.id == candidate.id)
             
             const voteshare = candidateDateData?.[columnMap.voteshare]
+            const margin = columnMap.margin ? candidateDateData?.[columnMap.margin] : undefined
             const rawWinPercentage = candidateDateData?.[columnMap.winprob]
             
-            voteshareSortedCandidateData.push({candidate: candidate.name, partyID: candidate.partyID, voteshare: voteshare, winPercentage: !isNaN(rawWinPercentage) ? 100*rawWinPercentage : undefined})
+            voteshareSortedCandidateData.push({candidate: candidate.name, partyID: candidate.partyID, voteshare: voteshare, margin: margin, winPercentage: !isNaN(rawWinPercentage) ? 100*rawWinPercentage : undefined})
           }
           
           const blankCandidateData = voteshareSortedCandidateData.filter((candData) => isNaN(candData.voteshare))
@@ -464,13 +468,22 @@ const USASenateMapType = new MapType(
           
           if (blankCandidateData.length == 1)
           {
-            blankCandidateData[0].voteshare = isNaN(blankCandidateData[0].voteshare) ? 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.voteshare, 0) : blankCandidateData[0].voteshare
+            if (voteshareSortedCandidateData.length == 1 && voteshareSortedCandidateData[0].margin)
+            {
+              blankCandidateData[0].voteshare = voteshareSortedCandidateData[0].voteshare - voteshareSortedCandidateData[0].margin
+            }
+            else
+            {
+              blankCandidateData[0].voteshare = 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.voteshare, 0)
+            }
+            
             blankCandidateData[0].winPercentage = isNaN(blankCandidateData[0].winPercentage) ? 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.winPercentage, 0) : blankCandidateData[0].winPercentage
             voteshareSortedCandidateData.push(blankCandidateData[0])
           }
           else if (blankCandidateData.length > 1)
           {
             console.log(`Multiple blank candidates for ${region}/${date}!`)
+            continue
           }
           
           voteshareSortedCandidateData.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -1601,6 +1614,7 @@ const USASenateMapType = new MapType(
         seatClass: "number",
         candidates: "candidates",
         voteshare: "voteshare",
+        margin: "margin",
         winprob: "probability"
       }, // columnMap
       2026, // cycleYear

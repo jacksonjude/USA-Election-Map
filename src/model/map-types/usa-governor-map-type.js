@@ -284,7 +284,7 @@ const USAGovernorMapType = new MapType(
           const candidate = {
             id: rawCandidate.id,
             name: rawCandidate.name,
-            partyID: partyLetterToID[rawCandidate.party] ?? IndependentGenericParty.getID()
+            partyID: partyLetterToID[rawCandidate.caucus] ?? IndependentGenericParty.getID()
           }
           candidate.name ??= politicalParties[candidate.partyID].getNames()[0]
           candidateList.push(candidate)
@@ -312,8 +312,9 @@ const USAGovernorMapType = new MapType(
             
             const voteshare = candidateDateData?.[columnMap.voteshare]
             const rawWinPercentage = candidateDateData?.[columnMap.winprob]
+            const margin = columnMap.margin ? candidateDateData?.[columnMap.margin] : undefined
             
-            voteshareSortedCandidateData.push({candidate: candidate.name, partyID: candidate.partyID, voteshare: voteshare, winPercentage: !isNaN(rawWinPercentage) ? 100*rawWinPercentage : undefined})
+            voteshareSortedCandidateData.push({candidate: candidate.name, partyID: candidate.partyID, voteshare: voteshare, winPercentage: !isNaN(rawWinPercentage) ? 100*rawWinPercentage : undefined, margin: margin})
           }
           
           const blankCandidateData = voteshareSortedCandidateData.filter((candData) => isNaN(candData.voteshare))
@@ -321,7 +322,15 @@ const USAGovernorMapType = new MapType(
           
           if (blankCandidateData.length == 1)
           {
-            blankCandidateData[0].voteshare = isNaN(blankCandidateData[0].voteshare) ? 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.voteshare, 0) : blankCandidateData[0].voteshare
+            if (voteshareSortedCandidateData.length == 1 && voteshareSortedCandidateData[0].margin)
+            {
+              blankCandidateData[0].voteshare = voteshareSortedCandidateData[0].voteshare - voteshareSortedCandidateData[0].margin
+            }
+            else
+            {
+              blankCandidateData[0].voteshare = 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.voteshare, 0)
+            }
+            
             blankCandidateData[0].winPercentage = isNaN(blankCandidateData[0].winPercentage) ? 100-voteshareSortedCandidateData.reduce((agg, curr) => agg += curr.winPercentage, 0) : blankCandidateData[0].winPercentage
             voteshareSortedCandidateData.push(blankCandidateData[0])
           }
@@ -1134,6 +1143,7 @@ const USAGovernorMapType = new MapType(
         seatClass: "number",
         candidates: "candidates",
         voteshare: "voteshare",
+        margin: "margin",
         winprob: "probability"
       }, // columnMap
       2026, // cycleYear
