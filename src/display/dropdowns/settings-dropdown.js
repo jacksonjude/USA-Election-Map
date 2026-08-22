@@ -88,7 +88,7 @@ function cycleMapSetting(settingID, settingDiv, incrementAmount)
     case MapSettingReloadType.data:
     if (showingDataMap)
     {
-      loadDataMap()
+      loadDataMap(false)
     }
     break
 

@@ -293,7 +293,7 @@ async function reloadForNewMapType(initialLoad)
   if (currentMapSource.getID() != NullMapSource.getID())
   {
     updateNavBarForNewSource(false, false)
-    loadDataMap(false, false, previousDateOverride)
+    loadDataMap(true, false, previousDateOverride)
   }
   else
   {
@@ -716,18 +716,13 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   {
     marginValues = currentMapSource.getCustomDefaultMargins()
   }
-  // else if (currentMapSource.isCustom() && showingCompareMap)
-  // {
-  //   marginValues = cloneObject(alternateMarginValues)
-  // }
   else
   {
     marginValues = cloneObject(defaultMarginValues)
   }
   createMarginEditDropdownItems()
 
-  // shouldSetToMax = currentMapType.getMapSettingValue("startAtLatest") ? true : shouldSetToMax
-  shouldSetToMax = true
+  shouldSetToMax ??= false
 
   setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
   await displayDataMap(null, reloadPartyDropdowns ?? true)
