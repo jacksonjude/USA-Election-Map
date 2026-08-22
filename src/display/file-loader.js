@@ -99,7 +99,7 @@ function jsonFileLoaded(e)
 
   currentCustomMapSource.setTextMapData(jsonMapData.mapData)
 
-	setMapSource(currentCustomMapSource, false, true)
+	setMapSource(currentCustomMapSource, true, true)
 }
 
 function csvFileLoaded(e)
@@ -109,7 +109,7 @@ function csvFileLoaded(e)
 
   currentCustomMapSource.setTextMapData(textMapData)
 
-	setMapSource(currentCustomMapSource, false, true)
+	setMapSource(currentCustomMapSource, true, true)
 }
 
 function imageFileLoaded(e)

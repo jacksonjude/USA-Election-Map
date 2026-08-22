@@ -722,7 +722,7 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   }
   createMarginEditDropdownItems()
 
-  shouldSetToMax ??= false
+  shouldSetToMax ??= true
 
   setDataMapDateSliderRange(shouldSetToMax, null, null, null, previousDateOverride)
   await displayDataMap(null, reloadPartyDropdowns ?? true)

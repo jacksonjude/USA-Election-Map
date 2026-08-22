@@ -88,7 +88,7 @@ function updateMapSource(sourceID, _, forceDownload)
     return
   }
 
-  setMapSource(mapSources[sourceID], false, forceDownload)
+  setMapSource(mapSources[sourceID], true, forceDownload)
 }
 
 function getIconDivsToUpdateArrayForSourceID(mapSourceID)
