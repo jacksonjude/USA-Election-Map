@@ -327,6 +327,12 @@ let globalMapSettings =
       {id: "all", title: "All Data", value: 2}
     ],
   defaultValue: "margins", reloadType: MapSettingReloadType.display},
+  {id: "partyAffiliations", title: "🎉 Party Affiliations", type: MapSettingType.optionCycle, options:
+    [
+      {id: "caucus", title: "Caucus", value: 0},
+      {id: "ballot", title: "Ballot", value: 1}
+    ],
+  defaultValue: "caucus", reloadType: MapSettingReloadType.data},
   {id: "dateFormat", title: "📅 Date Format", type: MapSettingType.optionCycle, options:
     [
       {id: "mdy", title: "MM/DD/YYYY", value: 0},

@@ -420,21 +420,37 @@ class MapSource
     return this.splitVoteDisplayOptions
   }
 
-  openRegionLink(regionID, modelDate, isCheck = false)
+  getRegionLink(regionID, modelDate)
   {
-    let linkToOpen = null
     if (this.customOpenRegionLinkFunction == undefined)
     {
       if (!this.homepageURL) { return false }
-      linkToOpen = this.homepageURL + (this.regionIDToLinkMap?.[regionID] ?? "")
+      return this.homepageURL + (this.regionIDToLinkMap?.[regionID] ?? "")
     }
     else
     {
-      linkToOpen = this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
+      return this.customOpenRegionLinkFunction(this.homepageURL, regionID, this.regionIDToLinkMap, modelDate, false, this.mapData)
+    }
+  }
+
+  openRegionLink(regionID, modelDate, isCheck = false)
+  {
+    let linkData = this.getRegionLink(regionID, modelDate)
+    
+    let linkToOpen = null
+    let linkIcon = null
+    if (typeof linkData === 'object')
+    {
+      linkToOpen = linkData.link
+      linkIcon = linkData.icon
+    }
+    else
+    {
+      linkToOpen = linkData
     }
     
     !isCheck && linkToOpen && window.open(linkToOpen)
-    return linkToOpen != null
+    return linkToOpen != null ? (isCheck && linkIcon ? linkIcon : true) : false
   }
 
   openHomepageLink(modelDate, isCheck = false)
@@ -544,9 +560,10 @@ class MapSource
     return this.isCompareMap
   }
 
-  getShouldShowVoteshare()
+  getShouldShowVoteshare(regionData)
   {
-    return this.editingMode == EditingMode.voteshare || this.shouldShowVoteshare
+    const isFunction = (typeof this.shouldShowVoteshare === 'function')
+    return this.editingMode == EditingMode.voteshare || (isFunction ? this.shouldShowVoteshare(regionData) : this.shouldShowVoteshare)
   }
 
   getOverrideSVGPath(mapDate)
@@ -580,19 +597,21 @@ class MapSource
     return isFunction ? this.customDefaultMargins() : this.customDefaultMargins
   }
   
-  getVotesharePrefix()
+  getVotesharePrefix(regionData)
   {
-    return this.customVotesharePrefix ?? '+'
+    const isFunction = (typeof this.customVotesharePrefix === 'function')
+    return (isFunction ? this.customVotesharePrefix(regionData) : this.customVotesharePrefix) ?? '+'
   }
   
-  getVoteshareSuffix()
+  getVoteshareSuffix(regionData)
   {
-    return this.customVoteshareSuffix ?? '%'
+    return this.getCustomVoteshareSuffix(regionData) ?? '%'
   }
   
-  getCustomVoteshareSuffix()
+  getCustomVoteshareSuffix(regionData)
   {
-    return this.customVoteshareSuffix
+    const isFunction = (typeof this.customVoteshareSuffix === 'function')
+    return isFunction ? this.customVoteshareSuffix(regionData) : this.customVoteshareSuffix
   }
 
   getDropdownPartyIDs()

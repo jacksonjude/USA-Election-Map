@@ -92,6 +92,7 @@ function setMapCountries()
       [LibertarianParty.getID()]: LibertarianParty,
       [GreenParty.getID()]: GreenParty,
       [ReformParty.getID()]: ReformParty,
+      [ConservativeParty.getID()]: ConservativeParty,
       [FreeSoilParty.getID()]: FreeSoilParty,
       [IndependentRNParty.getID()]: IndependentRNParty,
       [Independent2024RFKParty.getID()]: Independent2024RFKParty,

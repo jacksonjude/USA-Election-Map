@@ -180,6 +180,14 @@ const ReformParty = new PoliticalParty(
   PoliticalPartyColors.purple
 )
 
+const ConservativeParty = new PoliticalParty(
+  "CON",
+  ["Conservative"],
+  "Con",
+  "Conservative",
+  PoliticalPartyColors.scarlet
+)
+
 // Historic Third Parties
 
 const FreeSoilParty = new PoliticalParty(

@@ -145,7 +145,7 @@ const USAPresidentMapType = new MapType(
       return {mapData: filteredMapData}
     }
 
-    const doubleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMap, shouldFilterOutDuplicateRows)
+    const doubleLineMarginFilterFunction = function(rawMapData, mapDates, columnMap, _, candidateNameToPartyIDMap, regionNameToID, heldRegionMapData, shouldFilterOutDuplicateRows)
     {
       let filteredMapData = {}
       let candidateNameData = {}
@@ -185,9 +185,9 @@ const USAPresidentMapType = new MapType(
           }
 
           let marginSum = 0
-          if (mapDataRows.length <= 0 && heldRegionMap)
+          if (mapDataRows.length <= 0 && heldRegionMapData)
           {
-            marginSum = heldRegionMap[regionNameToID[regionToFind]] == incumbentChallengerPartyIDs.challenger ? -100 : 100
+            marginSum = heldRegionMapData[regionNameToID[regionToFind]].partyID == incumbentChallengerPartyIDs.challenger ? -100 : 100
           }
 
           let incumbentWinChance
@@ -706,7 +706,7 @@ const USAPresidentMapType = new MapType(
       return {mapData: mapData, mapDates: [mapDate]}
     }
     
-    const jsonVoteshare538FilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionIDMap, heldRegionMap)
+    const jsonVoteshare538FilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionIDMap, heldRegionMapData)
     {
       let filteredMapData = {}
       let mapDates = []
@@ -773,14 +773,14 @@ const USAPresidentMapType = new MapType(
             }
           }
           
-          filteredMapData[date][region] = {region: region, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[region] != greatestMarginPartyID}
+          filteredMapData[date][region] = {region: region, margin: topTwoMargin, partyID: greatestMarginPartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMapData[region].partyID != greatestMarginPartyID}
         }
       }
       
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
     
-    const jsonPricesFilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionNameToIDMap, heldRegionMap)
+    const jsonPricesFilterFunction = function(rawMapData, _, columnMap, __, candidateNameToPartyIDMap, regionNameToIDMap, heldRegionMapData)
     {
       let filteredMapData = {}
       let mapDates = []
@@ -849,7 +849,7 @@ const USAPresidentMapType = new MapType(
             }
           }
           
-          filteredMapData[date][region] = {region: region, margin: topValue, partyID: greatestValuePartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[region] != greatestValuePartyID}
+          filteredMapData[date][region] = {region: region, margin: topValue, partyID: greatestValuePartyID, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMapData[region].partyID != greatestValuePartyID}
         }
       }
       
@@ -1061,6 +1061,44 @@ const USAPresidentMapType = new MapType(
 
       return {mapDateData: filteredStateData, candidateNameData: candidateNameData}
     }
+    
+    const getPastElectionHeldRegions = async function(cycleYear, regionNameToID)
+    {
+      let heldRegionMapData = null
+      const previousElectionCycleYear = cycleYear-4
+      
+      if (await PastElectionResultMapSource.loadMap())
+      {
+        const pastMapData = PastElectionResultMapSource.getMapData()
+        
+        let cycleDate = PastElectionResultMapSource.getMapDates().find(mapDate => new Date(mapDate).getFullYear() == cycleYear)
+        // use 11/1 as fallback future date if current election cycle has not occurred yet
+        cycleDate ??= new Date(cycleYear, 11-1, 1).getTime()
+        
+        heldRegionMapData = Object.keys(pastMapData[PastElectionResultMapSource.getMapDates().at(-1)])
+          .reduce((compiledMapData, regionID) => {
+            compiledMapData[regionID] = mostRecentWinner(pastMapData, cycleDate, regionID)
+            return compiledMapData
+          }, {})
+      }
+      
+      return heldRegionMapData
+    }
+    
+    const doubleLineMarginFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, shouldFilterOutDuplicateRows) => {
+      const heldRegionMapData = await getPastElectionHeldRegions(cycleYear, regionNameToID)
+      return doubleLineMarginFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldRegionMapData, shouldFilterOutDuplicateRows)
+    }
+    
+    const jsonVoteshare538FilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, shouldFilterOutDuplicateRows) => {
+      const heldRegionMapData = await getPastElectionHeldRegions(cycleYear, regionNameToID)
+      return jsonVoteshare538FilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldRegionMapData)
+    }
+    
+    const jsonPricesFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, shouldFilterOutDuplicateRows) => {
+      const heldRegionMapData = await getPastElectionHeldRegions(cycleYear, regionNameToID)
+      return jsonPricesFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldRegionMapData)
+    }
 
     function mostRecentWinner(mapData, dateToStart, regionID)
     {
@@ -1082,7 +1120,7 @@ const USAPresidentMapType = new MapType(
         let mapDataFromDate = mapData[reversedMapDates[dateNum]]
         if (regionID in mapDataFromDate)
         {
-          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages}
+          return {margin: mapDataFromDate[regionID].margin, partyID: mapDataFromDate[regionID].partyID, partyVotesharePercentages: mapDataFromDate[regionID].partyVotesharePercentages, electionDate: parseInt(reversedMapDates[dateNum])}
         }
       }
 
@@ -1255,18 +1293,6 @@ const USAPresidentMapType = new MapType(
       2020: {"Biden":DemocraticParty.getID(), "Trump":RepublicanParty.getID(), "Jorgensen":LibertarianParty.getID(), "Hawkins":GreenParty.getID()},
       2024: {"Harris":DemocraticParty.getID(), "Trump":RepublicanParty.getID(), "Kennedy":Independent2024RFKParty.getID()}
     }
-    
-    const ev2016Values = {"AL":2, "AK":2, "AZ":2, "AR":2, "CA":1, "CO":1, "CT":1, "DE":1, "DC":1, "FL":2, "GA":2, "HI":1, "ID":2, "IL":1, "IN":2, "IA":2, "KS":2, "KY":2, "LA":2, "ME-D1":1, "ME-D2":2, "ME-AL":1, "MD":1, "MA":1, "MI":2, "MN":1, "MS":2, "MO":2, "MT":2, "NE-D1":2, "NE-D2":2, "NE-D3":2, "NE-AL":2, "NV":1, "NH":1, "NJ":1, "NM":1, "NY":1, "NC":2, "ND":2, "OH":2, "OK":2, "OR":1, "PA":2, "RI":1, "SC":2, "SD":2, "TN":2, "TX":2, "UT":2, "VT":1, "VA":1, "WA":1, "WV":2, "WI":2, "WY":2}
-    const ev2016 = {}
-    Object.keys(ev2016Values).forEach((state) => {
-      ev2016[state] = [DemocraticParty.getID(), RepublicanParty.getID()][ev2016Values[state]-1]
-    })
-    
-    const ev2020Values = {"AL":2, "AK":2, "AZ":1, "AR":2, "CA":1, "CO":1, "CT":1, "DE":1, "DC":1, "FL":2, "GA":1, "HI":1, "ID":2, "IL":1, "IN":2, "IA":2, "KS":2, "KY":2, "LA":2, "ME-D1":1, "ME-D2":2, "ME-AL":1, "MD":1, "MA":1, "MI":1, "MN":1, "MS":2, "MO":2, "MT":2, "NE-D1":2, "NE-D2":1, "NE-D3":2, "NE-AL":2, "NV":1, "NH":1, "NJ":1, "NM":1, "NY":1, "NC":2, "ND":2, "OH":2, "OK":2, "OR":1, "PA":1, "RI":1, "SC":2, "SD":2, "TN":2, "TX":2, "UT":2, "VT":1, "VA":1, "WA":1, "WV":2, "WI":1, "WY":2}
-    const ev2020 = {}
-    Object.keys(ev2020Values).forEach((state) => {
-      ev2020[state] = [DemocraticParty.getID(), RepublicanParty.getID()][ev2020Values[state]-1]
-    })
 
     const regionNameToIDFiveThirtyEight = {"Alabama":"AL", "Alaska":"AK", "Arizona":"AZ", "Arkansas":"AR", "California":"CA", "Colorado":"CO", "Connecticut":"CT", "Delaware":"DE", "District of Columbia":"DC", "Florida":"FL", "Georgia":"GA", "Hawaii":"HI", "Idaho":"ID", "Illinois":"IL", "Indiana":"IN", "Iowa":"IA", "Kansas":"KS", "Kentucky":"KY", "Louisiana":"LA", "ME-1":"ME-D1", "ME-2":"ME-D2", "Maine":"ME-AL", "Maryland":"MD", "Massachusetts":"MA", "Michigan":"MI", "Minnesota":"MN", "Mississippi":"MS", "Missouri":"MO", "Montana":"MT", "NE-1":"NE-D1", "NE-2":"NE-D2", "NE-3":"NE-D3", "Nebraska":"NE-AL", "Nevada":"NV", "New Hampshire":"NH", "New Jersey":"NJ", "New Mexico":"NM", "New York":"NY", "North Carolina":"NC", "North Dakota":"ND", "Ohio":"OH", "Oklahoma":"OK", "Oregon":"OR", "Pennsylvania":"PA", "Rhode Island":"RI", "South Carolina":"SC", "South Dakota":"SD", "Tennessee":"TN", "Texas":"TX", "Utah":"UT", "Vermont":"VT", "Virginia":"VA", "Washington":"WA", "West Virginia":"WV", "Wisconsin":"WI", "Wyoming":"WY"}
     const regionIDToIDFiveThirtyEight = {"AL":"AL", "AK":"AK", "AZ":"AZ", "AR":"AR", "CA":"CA", "CO":"CO", "CT":"CT", "DE":"DE", "DC":"DC", "FL":"FL", "GA":"GA", "HI":"HI", "ID":"ID", "IL":"IL", "IN":"IN", "IA":"IA", "KS":"KS", "KY":"KY", "LA":"LA", "ME-01":"ME-D1", "ME-02":"ME-D2", "ME":"ME-AL", "MD":"MD", "MA":"MA", "MI":"MI", "MN":"MN", "MS":"MS", "MO":"MO", "MT":"MT", "NE-01":"NE-D1", "NE-02":"NE-D2", "NE-03":"NE-D3", "NE":"NE-AL", "NV":"NV", "NH":"NH", "NJ":"NJ", "NM":"NM", "NY":"NY", "NC":"NC", "ND":"ND", "OH":"OH", "OK":"OK", "OR":"OR", "PA":"PA", "RI":"RI", "SC":"SC", "SD":"SD", "TN":"TN", "TX":"TX", "UT":"UT", "VT":"VT", "VA":"VA", "WA":"WA", "WV":"WV", "WI":"WI", "WY":"WY"}
@@ -1420,7 +1446,7 @@ const USAPresidentMapType = new MapType(
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
       regionIDToLinkCNN, // regionIDToLinkMap
-      ev2020, // heldRegionMap
+      null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
       jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
@@ -1486,10 +1512,10 @@ const USAPresidentMapType = new MapType(
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDFiveThirtyEight, // regionNameToIDMap
       regionIDToLinkFiveThirtyEightPolls, // regionIDToLinkMap
-      ev2016, // heldRegionMap
+      null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      doubleLineMarginFilterFunction, // organizeMapDataFunction
+      doubleLineMarginFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
@@ -1517,7 +1543,7 @@ const USAPresidentMapType = new MapType(
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDFiveThirtyEight, // regionNameToIDMap
       regionIDToLinkFiveThirtyEight, // regionIDToLinkMap
-      ev2016, // heldRegionMap
+      null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
       singleLineMarginFilterFunction, // organizeMapDataFunction
@@ -1547,10 +1573,10 @@ const USAPresidentMapType = new MapType(
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionIDToIDFiveThirtyEight, // regionNameToIDMap
       regionIDToLinkFiveThirtyEight, // regionIDToLinkMap
-      ev2020, // heldRegionMap
+      null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshare538FilterFunction, // organizeMapDataFunction
+      jsonVoteshare538FilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
@@ -1612,10 +1638,10 @@ const USAPresidentMapType = new MapType(
       partyIDToCandidateLastNames, // shortCandidateNameOverride
       regionNameToIDPolymarket, // regionNameToIDMap
       regionIDToLinkPolymarket, // regionIDToLinkMap
-      ev2020, // heldRegionMap
+      null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonPricesFilterFunction, // organizeMapDataFunction
+      jsonPricesFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
