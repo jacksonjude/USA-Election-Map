@@ -134,13 +134,11 @@ function incrementSlider(keyString)
   switch (keyString)
   {
     case "left":
-    if (sliderDiv.value == 0) { return }
-    sliderDiv.value -= 1
+    sliderDiv.stepDown(1)
     break
 
     case "right":
-    if (sliderDiv.value == sliderDiv.max) { return }
-    sliderDiv.value -= -1 //WHY DO I HAVE TO DO THIS BS
+    sliderDiv.stepUp(1)
     break
 
     case "down":
@@ -168,16 +166,8 @@ function incrementSlider(keyString)
       }
       return
     }
-
-    if (sliderDiv.value == 0) { return }
-    if (sliderDiv.value < currentMapType.getSecondarySliderIncrement())
-    {
-      sliderDiv.value = 0
-    }
-    else
-    {
-      sliderDiv.value -= currentMapType.getSecondarySliderIncrement()
-    }
+    
+    sliderDiv.stepDown(currentMapType.getSecondarySliderIncrement())
     break
 
     case "up":
@@ -205,16 +195,8 @@ function incrementSlider(keyString)
       }
       return
     }
-
-    if (sliderDiv.value == sliderDiv.max) { return }
-    if (parseInt(sliderDiv.max)-sliderDiv.value < currentMapType.getSecondarySliderIncrement())
-    {
-      sliderDiv.value = sliderDiv.max
-    }
-    else
-    {
-      sliderDiv.value -= -currentMapType.getSecondarySliderIncrement() //WHY DO I HAVE TO DO THIS BS
-    }
+    
+    sliderDiv.stepUp(currentMapType.getSecondarySliderIncrement())
     break
   }
 
