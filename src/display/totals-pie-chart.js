@@ -529,7 +529,7 @@ function updateTotalsPieChart()
 
   regionMarginStrings = []
   let marginTotalsArray = []
-  let safeMarginTotalsArray = []
+  let includesNonSafeMargins = false
   for (let partyNum in fullPartyOrdering)
   {
     let partyID = fullPartyOrdering[partyNum].partyID
@@ -555,15 +555,12 @@ function updateTotalsPieChart()
         if (marginKey == "current" && currentMapType.getMapSettingValue("pieCurrentSeats") === false)
         {
           marginTotalsArray.push(0)
+          includesNonSafeMargins ||= true
         }
         else
         {
           marginTotalsArray.push(marginTotalsData[partyID][marginKey])
-        }
-
-        if (marginKey == "safe")
-        {
-          safeMarginTotalsArray.push(marginTotalsData[partyID][marginKey])
+          includesNonSafeMargins ||= marginKey != "safe" && marginTotalsData[partyID][marginKey] > 0
         }
       }
     }
@@ -571,7 +568,6 @@ function updateTotalsPieChart()
     {
       regionMarginStrings.push(regionMarginStringsData[partyID].safe)
       marginTotalsArray.push(marginTotalsData[partyID].safe || 0)
-      safeMarginTotalsArray.push(marginTotalsData[partyID].safe)
     }
   }
 
@@ -687,14 +683,7 @@ function updateTotalsPieChart()
     totalsPieChart.data.datasets[2].data = []
   }
 
-  let nonFlipSortedPartyTotalsArray = []
-  let tossupIndex = partyOrdering.findIndex((partyOrder) => partyOrder.partyID == TossupParty.getID())*2
-  sortedPartyTotalsArray.forEach((partyTotal, totalIndex) => {
-    if (totalIndex % 2 == (totalIndex <= tossupIndex ? 1 : 0) || totalIndex == tossupIndex+1) { return }
-    nonFlipSortedPartyTotalsArray[totalIndex/2-(totalIndex <= tossupIndex ? 0 : 0.5)] = partyTotal
-  })
-
-  if (safeMarginTotalsArray.toString() == nonFlipSortedPartyTotalsArray.toString() || (showingPopularVote && currentMapType.getMapSettings().pieStyle != "all") || currentViewingState == ViewingState.splitVote)
+  if (!includesNonSafeMargins || (showingPopularVote && currentMapType.getMapSettings().pieStyle != "all") || currentViewingState == ViewingState.splitVote)
   {
     totalsPieChart.data.datasets[0].hidden = true
     totalsPieChart.data.datasets[0].data = []
