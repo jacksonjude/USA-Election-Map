@@ -19,28 +19,13 @@ An interactive USA presidential, senate, house, and governor election map. Creat
 
 Running a fork locally is simple since this code only uses the base HTML/CSS/JS stack. Just clone the repo and open index.html in your browser to run.
 
-Since the site uses svg files in the local `svg-sources` folder, your browser might prevent them from loading over the `file://` protocol due to CORS restrictions (this is a well known issue: see [more info](https://stackoverflow.com/a/8456586/) and [solution](https://stackoverflow.com/a/13262673/)).
-- For Safari: go to Develop > Developer Settings > Disable local file restrictions.
-- For Chrome: open **via command line** to disable CORS:
-  - Mac:
-    ```
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --allow-file-access-from-files
-    ```
-  - Windows:
-    ```
-    "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --allow-file-access-from-files
-    ```
-- For Firefox: go to `about:config` and set the `security.fileuri.strict_origin_policy` flag to `false`
-
-
-Another way to address the CORS issue is to run a local http server. On Mac (via [Homebrew](https://brew.sh)):
+If you run into CORS issues, run a local http server. On Mac (via [Homebrew](https://brew.sh)) you can use:
 ```
 brew install http-server
-cd <local repo path>
+cd USA-Election-Map
 http-server
 ```
-Then open the address provided in the Terminal window (by default, it seems to be http://localhost:8080).
-
+Then, open the address provided in the Terminal window (by default, it seems to be http://localhost:8080).
 
 ## TODO List
 
