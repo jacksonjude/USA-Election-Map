@@ -1528,7 +1528,9 @@ const USASenateMapType = new MapType(
       null, // regionIDToLinkMap
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
-      false, // addDecimalPadding
+      (regionData) => {
+        return regionData?.isHold
+      }, // addDecimalPadding
       doubleLineClassSeparatedFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction

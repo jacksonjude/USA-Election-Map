@@ -69,7 +69,7 @@ async function updateRegionBox(regionID = currentRegionID)
   let voteshareSortedData = regionData.partyVotesharePercentages ? cloneObject(regionData.partyVotesharePercentages).sort((voteData1, voteData2) => voteData2.voteshare-voteData1.voteshare) : []
   let roundedMarginValue = shouldShowVotes && shiftKeyDown && voteshareSortedData.length >= 2 && voteshareSortedData.every(voteData => voteData.votes != null)
   ? addCommaFormatting(voteshareSortedData[0].votes-voteshareSortedData[1].votes)
-  : getRoundedMarginValue(regionData.margin)
+  : getRoundedMarginValue(regionData.margin, regionData)
   
   let regionMarginString = getRegionCandidateName(regionData.partyID, regionData) + " " + currentMapSource.getVotesharePrefix(regionData)
 
@@ -367,10 +367,10 @@ function updateRegionBoxYPosition(mouseY)
   $("#regionboxcontainer").css("top", newRegionBoxYPos)
 }
 
-function getRoundedMarginValue(fullMarginValue)
+function getRoundedMarginValue(fullMarginValue, regionData)
 {
   let roundedMarginValue = roundValueToPlace(fullMarginValue, 2)
-  return currentMapSource.getAddDecimalPadding() ? decimalPadding(roundedMarginValue) : roundedMarginValue
+  return currentMapSource.getAddDecimalPadding(regionData) ? decimalPadding(roundedMarginValue) : roundedMarginValue
 }
 
 function getGradientCSS(fillColor, backgroundColor, fillPercentage, backgroundPercentage = 0)
@@ -441,7 +441,7 @@ function applyRegionMarginValue(regionID)
   }
   let newMarginIsValid = /^\d+\.?\d*e?[+-]?\d*$/.test(newMarginString) && !isNaN(newMargin) && newMargin >= 0
 
-  let currentMargin = getRoundedMarginValue(regionData.margin)
+  let currentMargin = getRoundedMarginValue(regionData.margin, regionData)
   if (newMarginIsValid && newMargin != currentMargin)
   {
     regionData.margin = newMargin

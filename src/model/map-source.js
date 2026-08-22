@@ -545,9 +545,10 @@ class MapSource
     return this.cycleYear ?? allYearsCycle
   }
 
-  getAddDecimalPadding()
+  getAddDecimalPadding(regionData)
   {
-    return this.addDecimalPadding
+    const isFunction = (typeof this.addDecimalPadding === 'function')
+    return isFunction ? this.addDecimalPadding(regionData) : this.addDecimalPadding
   }
 
   isCustom()
