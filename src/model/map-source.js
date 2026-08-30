@@ -450,7 +450,7 @@ class MapSource
     }
     
     !isCheck && linkToOpen && window.open(linkToOpen)
-    return linkToOpen != null ? (isCheck && linkIcon ? linkIcon : true) : false
+    return !!linkToOpen ? (isCheck && linkIcon ? linkIcon : true) : false
   }
 
   openHomepageLink(modelDate, isCheck = false)
