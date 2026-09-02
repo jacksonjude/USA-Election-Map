@@ -439,7 +439,7 @@ class MapSource
     
     let linkToOpen = null
     let linkIcon = null
-    if (typeof linkData === 'object')
+    if (linkData && typeof linkData === 'object')
     {
       linkToOpen = linkData.link
       linkIcon = linkData.icon
