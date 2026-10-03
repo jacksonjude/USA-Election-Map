@@ -436,7 +436,11 @@ const USASenateMapType = new MapType(
           
           for (const candidate of candidateList)
           {
-            const candidateDateData = dateData.candidates.find(c => c.id == candidate.id)
+            let candidateDateData = dateData.candidates.find(c => c.id == candidate.id)
+            if (!candidateDateData)
+            {
+              candidateDateData = dateData.candidates.find(c => c.id.slice(0, -1) == candidate.id.slice(0, -1))
+            }
             
             const voteshare = candidateDateData?.[columnMap.voteshare]
             const margin = columnMap.margin ? candidateDateData?.[columnMap.margin] : undefined
