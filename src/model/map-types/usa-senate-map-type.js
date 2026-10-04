@@ -957,8 +957,8 @@ const USASenateMapType = new MapType(
           
           const placeholderRegionData = {offYear: false, runoff: false, isHold: true}
           
-          // lower class => upper class order by default
-          const seatClassesToUse = stateClasses[regionID]
+          // on-cycle class => off-cycle class order by default (copy to avoid mutating stateClasses)
+          const seatClassesToUse = [...stateClasses[regionID]].sort((a, b) => (b == onCycleClass) - (a == onCycleClass))
           // reverse order if opposite seatClass already exists on region
           if (mapData[mapDate][regionID]?.seatClass == seatClassesToUse[1] || mapData[mapDate][regionID + "-S"]?.seatClass == seatClassesToUse[0])
           {
