@@ -31,12 +31,12 @@ function cycleMapCountry(buttonDiv)
   setMapCountry(mapCountryIDs[newMapCountryIndex], buttonDiv)
 }
 
-function setMapCountry(newMapCountryID, buttonDiv)
+async function setMapCountry(newMapCountryID, buttonDiv, loadMapType)
 {
   currentMapCountry = mapCountries[newMapCountryID]
   setCookie("currentMapCountry", currentMapCountry.getID())
 
   $(buttonDiv || "#cycleMapCountryButton").find("img").attr('src', currentMapCountry.getIconURL())
 
-  reloadForNewMapCountry()
+  await reloadForNewMapCountry(false, loadMapType)
 }

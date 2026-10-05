@@ -6,6 +6,8 @@ declare const bowser: any;
 declare const jscolor: any;
 declare const Chart: any;
 declare const ChartDataLabels: any;
+declare const firebase: any;
+declare const JSZip: any;
 
 interface Console {
 	everything: any[];

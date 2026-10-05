@@ -57,6 +57,11 @@ function toggleMarginEditing(marginID, div)
     if (shouldRefreshMap && showingDataMap)
     {
       displayDataMap()
+      
+      if (currentMapSource.isCustom())
+      {
+        autoSaveCurrentUserMap()
+      }
     }
 
     $("#" + editMarginID + "-edit").html(marginNames[editMarginID] + "<span style='float: right; font-family: \"Bree5erif-Mono\"'>" + marginValues[editMarginID] + "</span>")

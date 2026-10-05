@@ -15,6 +15,7 @@
     <script src="./lib/discord-invite.js"></script>
     <script src="./lib/svg-pan-zoom-3.6.1.min.js"></script>
     <script src="./lib/progressbar-1.0.1.min.js"></script>
+    <script src="./lib/jszip-3.10.1.min.js"></script>
     <script src="./src/constants.js"></script>
     <script src="./src/misc-lib.js"></script>
     <script src="./src/model/files-database.js"></script>
@@ -29,6 +30,8 @@
     <script src="./src/model/map-types/jju-house-map-type.js"></script>
     <script src="./src/model/map-types/jju-president-map-type.js"></script>
     <script src="./src/model/map-types/jju-governor-map-type.js"></script>
+    <script src="./src/display/modals/user-maps-modal.js"></script>
+    <script src="./src/display/dropdowns/profile-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-country-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-type-dropdown.js"></script>
     <script src="./src/display/dropdowns/map-cycle-dropdown.js"></script>
@@ -54,6 +57,11 @@
 
       gtag('config', 'UA-107565763-1');
     </script>
+    <script defer src="./lib/firebase-app-compat-12.19.0.min.js"></script>
+    <script defer src="./lib/firebase-app-check-compat-12.19.0.min.js"></script>
+    <script defer src="./lib/firebase-auth-compat-12.19.0.min.js"></script>
+    <script defer src="./lib/firebase-firestore-compat-12.19.0.min.js"></script>
+    <script defer src="./src/model/firebase.js"></script>
     <title>JJ Election Map</title>
     <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
@@ -72,12 +80,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body style="background-color: black; margin: 0; display: flex; flex-direction: column; height: 100vh;" onresize="updateSVGViewbox()">
+    <div id="modalsContainer" class="modals-container" style="display: none;">
+      <div id="modalBackdrop" class="modal-backdrop"></div>
+      <div id="userMapsModalContainer" class="modal-container boxcontainer" style="display: none; width: 75%; height: 75%;">
+        <div id="userMapsModal" class="modal box" style="padding: 20rem 30rem 0rem 30rem; gap: 25rem; cursor: default;">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 30rem;">
+            <span><span style="padding-right: 12rem;">🗺️</span>Saved Maps</span>
+            <a id="userMapsCloseButton" onclick="closeUserMapsModal()" style="display: block; height: 1lh; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="userMapsCloseButtonImage" src="./assets/close-icon.png" style="height: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
+          </div>
+          <div style="display: flex; align-items: start; flex: 1; width: 100%; overflow: auto; padding-bottom: 20rem;">
+            <table id="userMapsTable" class="user-maps-table" style="flex: 1;">
+              <tr>
+                <th style="width: 32%;">Name</th>
+                <th style="width: 24%;">Updated</th>
+                <th style="width: 22%;">Country</th>
+                <th style="width: 14%;">Election Type</th>
+                <th style="width: 8%;">Actions</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="topnav">
       <div style="display: flex; justify-content: space-between; gap: 4px;">
         <a href="https://jacksonjude.com" target="_blank" class="topnavbutton" style="display: flex; align-items: center; padding: 0;">
           <img src="./assets/favicon.ico" style="position: relative; width: 43px; height: 43px; padding: 3px;" />
         </a>
-        <a id="toggleHelpBoxButton" onclick="toggleHelpBox(this)">Help</a>
+        <div id="profileDropdown" class="dropdown" onmouseenter="deselectDropdownButton()">
+          <a id="profileButton" class="topnavbutton" onclick="" style="padding: 0;">
+            <div id="profileIconContainer" class="profile-icon-container" style="width: 37px; height: 37px; margin: 6px; position: relative;">
+              <img id="profileIconOutline" style="display: none;" src="./assets/profile.png" />
+              <span id="profileInitials" class="profile-initials"></span>
+            </div>
+          </a>
+          <div id="profileDropdownContent" class="dropdown-content" style="max-width: 350px; width: max-content;">
+            <div id="profileDropdownContainer" class="dropdown-container" style="overflow: hidden;">
+              <span class="profileSignInContainer" style="display: none;">
+                <div class='dropdown-separator'></div>
+                <a onclick="signInWithApple()" style="display: flex; justify-content: start;">
+                  Sign in (Apple)
+                </a>
+              </span>
+              <span class="profileSignInContainer" style="display: none;">
+                <div class='dropdown-separator'></div>
+                <a onclick="signInWithGoogle()" style="display: flex; justify-content: start;">
+                  Sign in (Google)
+                </a>
+              </span>
+              <span id="profileOpenMapsContainer" style="display: none;">
+                <div class='dropdown-separator'></div>
+                <a onclick="openUserMapsModal()" style="display: flex; justify-content: start;">
+                  <span style="padding-right: 8px;">🗺️</span>Saved Maps
+                </a>
+              </span>
+              <span id="profileDisplayNameContainer" style="display: none;">
+                <div class='dropdown-separator'></div>
+                <a id="profileDisplayNameButton" style="display: flex; justify-content: start; height: 25px; padding-top: 7px; padding-bottom: 7px;">
+                  <button id="user-color-picker" style="margin-right: 8px; width: 22px; height: 22px;" data-jscolor="{preset:'small dark', position:'top', onInput:'setUserColor(this.toHEXString())', onChange:'uploadUserColor(this.toHEXString())', previewSize: 0}"></button>
+                  <span id="profileDisplayNameText" onclick="toggleUserDisplayNameEditing()"></span>
+                  <input id="profileDisplayNameInput" class="profile-input textInput" style="display: none;" type="text" id="" value="" onclick="toggleUserDisplayNameEditing()">
+                </a>
+              </span>
+              <span id="profileSignOutContainer" style="display: none;">
+                <div class='dropdown-separator'></div>
+                <a class="deletebutton" onclick="signOut()" style="display: flex; justify-content: start;">
+                  <span style="padding-right: 8px;">🔓</span>
+                  Sign Out
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="cycleMapCountryButton" class="topnavbutton" onclick="cycleMapCountry(this)" style="padding: 0;">
             <img src="./assets/usa-flag.png" style="width: 43px; height: 43px; padding: 3px;"/>
@@ -288,20 +362,29 @@
         </div>
         <div class="dropdown" onmouseenter="deselectDropdownButton()">
           <a id="editDoneButton" class="topnavbutton topnav-iconbutton" onclick="toggleEditing()" style="min-width: 37px"><span class='topnav-text'>Copy</span><span class='topnav-icon'>📝</span></a>
-          <div id="copyDropdownContent" class="dropdown-content" style="min-width: 160px">
-            <div id="copyDropdownContainer" class="dropdown-container" style="overflow: hidden;">
+          <div id="editDoneDropdownContent" class="dropdown-content" style="width: max-content;">
+            <div id="selectEditModeContainer" class="dropdown-container" style="overflow: hidden;">
               <div class='dropdown-separator'></div>
-              <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)" style="text-align: center;">
-                Edit by margin
+              <a id="editMarginButton" onclick="selectEditMode(EditingMode.margin)">
+                <span style="margin-right: 8px;">✏️</span>Edit by margin
               </a>
               <div class='dropdown-separator'></div>
-              <a id="editVoteshareButton" onclick="selectEditMode(EditingMode.voteshare)" style="text-align: center;">
-                Edit by voteshare
+              <a id="editVoteshareButton" onclick="selectEditMode(EditingMode.voteshare)">
+                <span style="margin-right: 8px;">✒️</span>Edit by voteshare
+              </a>
+            </div>
+            <div id="customMapActionsContainer" class="dropdown-container" style="overflow: hidden; display: none;">
+              <div class='dropdown-separator'></div>
+              <a id="shareMapButton" onclick="shareCurrentUserMap(this)">
+                <span style="margin-right: 8px;">🔗</span>Share map
+              </a>
+              <div class='dropdown-separator'></div>
+              <a id="clearMapButton">
+                <span style="margin-right: 8px;">❌</span>Clear map
               </a>
             </div>
           </div>
         </div>
-        <a id="clearMapButton" class="topnav-iconbutton"><span class='topnav-text'>Clear</span><span class='topnav-icon'>❌</span></a>
       </div>
       <div style="display: flex; min-width: 48px; min-height: 48px;">
         <div class="loader" id="loader"></div>
@@ -381,7 +464,7 @@
             </script>
           </div>
         </div>
-        <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; margin-top: 40rem; user-select: none; -webkit-user-select: none;">
+        <div id="helpboxcontainer" class="boxcontainer textbox" style="display: none; vertical-align: top; margin-top: 15rem; user-select: none; -webkit-user-select: none;">
           <div id="helpbox" class="box" style='min-height: 740rem; display: flex; flex-direction: column; justify-content: space-between'>
             <div>
               <h2 style='margin: 0rem; margin-top: 5rem;'>Help: <span id="helpboxSubtitle"></span></h2>

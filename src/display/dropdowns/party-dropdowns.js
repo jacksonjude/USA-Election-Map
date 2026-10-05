@@ -408,6 +408,8 @@ async function toggleCandidateNameEditing(partyID, div, skipReload)
     {
       currentCustomMapSource.updateMapData(displayRegionDataArray, getCurrentDateOrToday(), false, currentMapSource.getCandidateNames(getCurrentDateOrToday()))
       await loadDataMap(null, null, null, false)
+      
+      await autoSaveCurrentUserMap()
     }
     else
     {
@@ -468,6 +470,8 @@ function createNewCustomParty()
   currentMapSource.setDropdownPartyIDs(cloneObject(dropdownPoliticalPartyIDs))
 
   displayPartyTotals(true)
+  
+  autoSaveCurrentUserMap()
 }
 
 async function deleteParty(partyID)

@@ -557,6 +557,125 @@ body {
   background-color: #666;
 }
 
+.profile-icon-container {
+  outline: 2px solid white;
+  outline-offset: -2px;
+  border-radius: 50%;
+  
+  * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.profile-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  font-size: 18px;
+}
+
+.profile-input {
+  position: inherit;
+  width: 150px;
+  max-width: 90%;
+  flex: 1;
+  text-align: left;
+}
+
+.modals-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 10;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  transition: opacity .15s;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: display .1s;
+}
+
+.modal-container {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+}
+
+.modal {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  background-color: rgba(51, 51, 51, 0.95);
+  border-radius: 8rem;
+}
+
+.user-maps-table {
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #999;
+  border-radius: 8rem;
+  overflow: hidden;
+  
+  th, td {
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+    text-align: left;
+    padding: 4rem 12rem;
+  }
+  
+  th {
+    color: #bbb;
+  }
+  
+  td {
+    height: 40rem;
+  }
+  
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  td .untitled-text {
+    color: #bbb;
+    font-style: italic;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  input[type="text"] {
+    position: inherit;
+    max-width: 90%;
+    width: 100%;
+    text-align: left;
+    float: none;
+  }
+  
+  a {
+    cursor: pointer;
+  }
+}
+
 @container discord-invite-box (max-width: 280px) {
   #discordInfo {
     display: none !important;
