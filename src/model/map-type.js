@@ -314,33 +314,33 @@ const MapSettingReloadType =
 
 let globalMapSettings =
 [
-  {id: "flipStates", title: "🔺 Flip States", type: MapSettingType.optionCycle, options:
+  {id: "flipStates", emoji: "🔺", title: "Flip States", type: MapSettingType.optionCycle, options:
     [
       {id: "show", title: "Shown", value: true},
       {id: "hide", title: "Hidden", value: false}
     ],
   defaultValue: "hide", reloadType: MapSettingReloadType.display},
-  {id: "pieStyle", title: "📊 Pie Style", type: MapSettingType.optionCycle, options:
+  {id: "pieStyle", emoji: "📊", title: "Pie Style", type: MapSettingType.optionCycle, options:
     [
       {id: "margins", title: "Margins", value: 0},
       {id: "popularVote", title: "Popular Vote", value: 1},
       {id: "all", title: "All Data", value: 2}
     ],
   defaultValue: "margins", reloadType: MapSettingReloadType.display},
-  {id: "partyAffiliations", title: "🎉 Party Affiliations", type: MapSettingType.optionCycle, options:
+  {id: "partyAffiliations", emoji: "🎉", title: "Party Affiliations", type: MapSettingType.optionCycle, options:
     [
       {id: "caucus", title: "Caucus", value: 0},
       {id: "ballot", title: "Ballot", value: 1}
     ],
   defaultValue: "caucus", reloadType: MapSettingReloadType.data},
-  {id: "dateFormat", title: "📅 Date Format", type: MapSettingType.optionCycle, options:
+  {id: "dateFormat", emoji: "📅", title: "Date Format", type: MapSettingType.optionCycle, options:
     [
       {id: "mdy", title: "MM/DD/YYYY", value: 0},
       {id: "dmy", title: "DD/MM/YYYY", value: 1},
       {id: "ymd", title: "YYYY/MM/DD", value: 2}
     ],
   defaultValue: "mdy", reloadType: MapSettingReloadType.display},
-  {id: "mapFont", title: "💬 Map Font", type: MapSettingType.optionCycle, options:
+  {id: "mapFont", emoji: "💬", title: "Map Font", type: MapSettingType.optionCycle, options:
     [
       {id: "sans-serif", title: "Bree Sans", value: "Bree-Regular"},
       {id: "serif", title: "Bree 5erif", value: "Bree5erif-Regular"}

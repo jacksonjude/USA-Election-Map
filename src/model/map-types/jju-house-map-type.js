@@ -18,7 +18,7 @@ const JJUHouseMapType = new MapType(
   {"BI": "Brunix Islands", "EX": "Emix", "DM": "Dalminica", "TR": "Trunoe", "AV": "Alvana", "QU": "Quintin", "DT": "Dentone", "GV": "Garvor", "KI": "Kilden", "NM": "Newmasi", "N": "North", "S": "South", "E": "East", "W": "West", "L1": "List Seat 1", "L2": "List Seat 2", "L3": "List Seat 3", "L4": "List Seat 4", "L5": "List Seat 5", "L6": "List Seat 6", "L7": "List Seat 7", "L8": "List Seat 8", "L9": "List Seat 9", "L10": "List Seat 10", "L11": "List Seat 11", "L12": "List Seat 12", "L13": "List Seat 13", "L14": "List Seat 14", "L15": "List Seat 15", "L16": "List Seat 16", "L17": "List Seat 17", "L18": "List Seat 18", "L19": "List Seat 19", "L20": "List Seat 20", "N-1": "North 1st", "S-1": "South 1st", "E-1": "East 1st", "W-1": "West 1st", "N-2": "North 2nd", "S-2": "South 2nd", "E-2": "East 2nd", "W-2": "West 2nd"},
   [/.+-S/],
   [
-    {id: "coalitions", title: "🤝 Coalitions", type: MapSettingType.optionCycle, options:
+    {id: "coalitions", emoji: "🤝", title: "Coalitions", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
@@ -27,7 +27,7 @@ const JJUHouseMapType = new MapType(
         return value
       },
     defaultValue: "hide", reloadType: MapSettingReloadType.data},
-	  {id: "offYear", title: "🔄 Off Cycle Elections", type: MapSettingType.optionCycle, options:
+	  {id: "offYear", emoji: "🔄", title: "Off Cycle Elections", type: MapSettingType.optionCycle, options:
 	    [
 		    {id: "show", title: "Shown", value: true},
 		    {id: "hide", title: "Hidden", value: false}
@@ -36,7 +36,7 @@ const JJUHouseMapType = new MapType(
 		    return value
 	    },
 	  defaultValue: "hide", reloadType: MapSettingReloadType.data},
-    {id: "mapCurrentSeats", title: "🗺️ Map Held Seats", type: MapSettingType.optionCycle, options:
+    {id: "mapCurrentSeats", emoji: "🗺️", title: "Map Held Seats", type: MapSettingType.optionCycle, options:
       [
         {id: "show", title: "Shown", value: true},
         {id: "hide", title: "Hidden", value: false}
