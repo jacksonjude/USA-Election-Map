@@ -82,11 +82,14 @@ async function openUserMap(id)
 	const userMapContent = await getUserMap(id)
 	if (!userMapContent) { return }
 	
-	if (userMapContent.countryID != currentMapCountry.getID())
+	const shouldSetCountry = userMapContent.countryID != currentMapCountry.getID()
+	if (shouldSetCountry)
 	{
 		await setMapCountry(userMapContent.countryID, null, false)
 	}
-	if (userMapContent.mapTypeID != currentMapType.getID())
+	
+	const shouldSetMapType = userMapContent.mapTypeID != currentMapType.getID() || shouldSetCountry
+	if (shouldSetMapType)
 	{
 		await setMapType(userMapContent.mapTypeID, null, false)
 	}
