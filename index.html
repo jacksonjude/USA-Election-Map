@@ -82,20 +82,21 @@
   <body style="background-color: black; margin: 0; display: flex; flex-direction: column; height: 100vh;" onresize="updateSVGViewbox()">
     <div id="modalsContainer" class="modals-container" style="display: none;">
       <div id="modalBackdrop" class="modal-backdrop"></div>
-      <div id="userMapsModalContainer" class="modal-container boxcontainer" style="display: none; width: 75%; height: 75%;">
-        <div id="userMapsModal" class="modal box" style="padding: 20rem 30rem 0rem 30rem; gap: 25rem; cursor: default;">
-          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 30rem;">
-            <span><span style="padding-right: 12rem;">🗺️</span>Saved Maps</span>
+      <div id="userMapsModalContainer" class="user-maps-modal-container modal-container boxcontainer" style="display: none;">
+        <div id="userMapsModal" class="modal box user-maps-modal-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; font-size: 30px;">
+            <span><span style="padding-right: 12px;">🗺️</span>Saved Maps</span>
             <a id="userMapsCloseButton" onclick="closeUserMapsModal()" style="display: block; height: 1lh; cursor: pointer; user-select: none; -webkit-user-select: none;"><img id="userMapsCloseButtonImage" src="./assets/close-icon.png" style="height: 100%; aspect-ratio: 1/1; text-decoration: none;" /></a>
           </div>
-          <div style="display: flex; align-items: start; flex: 1; width: 100%; overflow: auto; padding-bottom: 20rem;">
-            <table id="userMapsTable" class="user-maps-table" style="flex: 1;">
+          <div style="display: flex; align-items: start; flex: 1; width: 100%; overflow: auto; padding-bottom: 20px;">
+            <table id="userMapsTable" class="user-maps-table" style="flex: 1; width: 100%;">
               <tr>
-                <th style="width: 32%;">Name</th>
-                <th style="width: 24%;">Updated</th>
-                <th style="width: 22%;">Country</th>
-                <th style="width: 14%;">Election Type</th>
-                <th style="width: 8%;">Actions</th>
+                <th class="name-header">Name</th>
+                <th class="date-header">Updated</th>
+                <th class="country-header">Country</th>
+                <th class="type-header">Type</th>
+                <th class="share-header"><span style="display: flex; justify-content: center;">🔗</span></th>
+                <th class="delete-header"><span style="display: flex; justify-content: center;">🗑️</span></th>
               </tr>
             </table>
           </div>

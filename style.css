@@ -625,19 +625,31 @@ body {
   border-radius: 8rem;
 }
 
+.user-maps-modal-container {
+  width: 75%;
+  height: 75%;
+}
+
+.user-maps-modal-box {
+  padding: 20rem 30rem 0rem 30rem;
+  gap: 25rem;
+  cursor: default;
+  font-size: 20px;
+}
+
 .user-maps-table {
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0;
   border: 1px solid #999;
-  border-radius: 8rem;
+  border-radius: 4px;
   overflow: hidden;
   
   th, td {
     border-bottom: 1px solid #999;
     border-right: 1px solid #999;
     text-align: left;
-    padding: 4rem 12rem;
+    padding: 4px 12px;
   }
   
   th {
@@ -645,7 +657,7 @@ body {
   }
   
   td {
-    height: 40rem;
+    height: 40px;
   }
   
   th:last-child, td:last-child {
@@ -674,6 +686,42 @@ body {
   a {
     cursor: pointer;
   }
+  
+  .name-header {
+    width: 36%;
+  }
+  
+  .date-header {
+    width: 20%;
+  }
+  
+  .country-header {
+    width: 20%;
+  }
+  
+  .type-header {
+    width: 12%;
+  }
+  
+  .share-header, .delete-header {
+    width: 6%;
+  }
+  
+  .name-label, .date-cell {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .country-container {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .type-image {
+    display: none;
+  }
 }
 
 @container discord-invite-box (max-width: 280px) {
@@ -701,6 +749,45 @@ body {
     min-width: 150px !important;
     max-width: 150px !important;
   }
+  
+  .user-maps-table {
+    .country-container {
+      justify-content: center;
+    }
+    
+    .country-name {
+      display: none;
+    }
+    
+    .type-container {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .type-image {
+      display: block;
+    }
+    
+    .type-name {
+      display: none;
+    }
+    
+    .name-header {
+      width: 40%;
+    }
+    
+    .date-header {
+      width: 24%;
+    }
+    
+    .country-header {
+      width: 12%;
+    }
+    
+    .share-header, .delete-header {
+      width: 6%;
+    }
+  }
 }
 
 @media (max-width: 1425px) {
@@ -726,6 +813,30 @@ body {
   
   #shiftButton {
     min-width: auto;
+  }
+}
+
+@media (max-width: 1350px) {
+  .user-maps-table {
+    .name-header {
+      width: 50%;
+    }
+    
+    .date-header, .date-cell {
+      display: none;
+    }
+    
+    .country-header {
+      width: 16%;
+    }
+    
+    .type-header {
+      width: 16%;
+    }
+    
+    .share-header, .delete-header {
+      width: 9%;
+    }
   }
 }
 
@@ -798,6 +909,26 @@ body {
   
   #discordInviteContainer {
     height: 40%;
+  }
+  
+  .user-maps-modal-container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 750px) {
+  .user-maps-table {
+    .name-header {
+      width: 80%;
+    }
+    
+    .date-header, .date-cell, .country-header, .country-cell, .type-header, .type-cell {
+      display: none;
+    }
+    
+    .share-header, .delete-header {
+      width: 10%;
+    }
   }
 }
 

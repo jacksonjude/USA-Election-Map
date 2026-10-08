@@ -28,8 +28,8 @@ async function openUserMapsModal()
 		const name = userMap.name
 		trDiv += '<td>'
 		trDiv += `<span style='display: flex; justify-content: space-between; align-items: center;'>`
-		trDiv += `<span style='display: flex; flex: 1;'>`
-		trDiv += `<a data-untitled='${!name}' id='${userMap.id}-name-link' onclick='$(this).data("untitled") ? toggleUserMapNameEditing("${userMap.id}") : openUserMap("${userMap.id}")' class='${!name ? 'untitled-text' : ''}' style='text-decoration: underline; flex: 1;'>${name ?? 'Untitled'}</a>`
+		trDiv += `<span style='display: flex; flex: 1; min-width: 0;'>`
+		trDiv += `<a data-untitled='${!name}' id='${userMap.id}-name-link' onclick='$(this).data("untitled") ? toggleUserMapNameEditing("${userMap.id}") : openUserMap("${userMap.id}")' class='name-label ${!name ? 'untitled-text' : ''}' style='text-decoration: underline; flex: 1;'>${name ?? 'Untitled'}</a>`
 		trDiv += `<input id='${userMap.id}-name-text' class='textInput' type='text' style='display: none;' />`
 		trDiv += '</span>'
 		trDiv += `<a id='${userMap.id}-rename' onclick='toggleUserMapNameEditing("${userMap.id}")'>✏️</a>`
@@ -45,20 +45,20 @@ async function openUserMapsModal()
 			minute: 'numeric'
 		})
 		const dateString = `${formattedUpdatedDate}`
-		trDiv += `<td>${dateString}</td>`
+		trDiv += `<td class='date-cell'>${dateString}</td>`
 		
 		const country = mapCountries[userMap.country]
 		const countryName = country?.getName()
 		const countryIconURL = country?.getIconURL()
-		trDiv += `<td style='display: flex; align-items: center;'><img src='${countryIconURL}' style='width: 36rem; height: 36rem; padding-right: 12rem;'/>${countryName ?? 'Unknown'}</td>`
+		trDiv += `<td class='country-cell'><span class='country-container'><img src='${countryIconURL}' style='width: 36px; height: 36px;'/><span class='country-name'>${countryName ?? 'Unknown'}</span></span></td>`
 		
-		const electionTypeName = mapTypes[userMap.mapType]?.getName()
-		trDiv += `<td>${electionTypeName ?? 'Unknown'}</td>`
+		const mapType = mapTypes[userMap.mapType]
+		const mapTypeName = mapType?.getName()
+		const mapTypeIcon = mapType?.getIconURL()
+		trDiv += `<td class='type-cell'><span class='type-container'><img src='${mapTypeIcon}' class='type-image' style='width: 36px; height: 36px;'/><span class='type-name'>${mapTypeName ?? 'Unknown'}</span></span></td>`
 		
-		trDiv += `<td><span style='display: flex; justify-content: space-evenly; gap: 16rem;'>`
-		trDiv += `<a onclick='shareUserMap("${userMap.id}", this)'>🔗</a>`
-		trDiv += `<a id='${userMap.id}-delete' onclick='deleteUserMapClick("${userMap.id}", this)'>🗑️</a>`
-		trDiv += '</span></td>'
+		trDiv += `<td><a onclick='shareUserMap("${userMap.id}", this)' style='display: flex; justify-content: center;'>🔗</a></td>`
+		trDiv += `<td><a id='${userMap.id}-delete' onclick='deleteUserMapClick("${userMap.id}", this)' style='display: flex; justify-content: center;'>🗑️</a></td>`
 		
 		trDiv += '</tr>'
 		$('#userMapsTable').append(trDiv)
