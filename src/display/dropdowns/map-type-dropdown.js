@@ -33,12 +33,12 @@ function cycleMapType(buttonDiv)
   setMapType(mapTypeIDs[newMapTypeIndex], buttonDiv)
 }
 
-function setMapType(newMapTypeID, buttonDiv)
+async function setMapType(newMapTypeID, buttonDiv, loadMapSource)
 {
   currentMapType = mapTypes[newMapTypeID]
   setCookie(`${currentMapCountry.getID()}-currentMapType`, currentMapType.getID())
 
   $(buttonDiv || "#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
 
-  reloadForNewMapType()
+  await reloadForNewMapType(false, loadMapSource)
 }

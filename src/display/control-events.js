@@ -397,7 +397,15 @@ document.addEventListener('keypress', async function(e) {
     {
       toggleRegionVoteshareEditing(voteshareEditRegion)
     }
-    else if (currentMapType.getCustomMapEnabled())
+    else if (editingDisplayName)
+    {
+      toggleUserDisplayNameEditing()
+    }
+    else if (editUserMapNameID)
+    {
+      toggleUserMapNameEditing()
+    }
+    else if (currentMapType.getCustomMapEnabled() && !isEditingTextbox())
     {
       toggleEditing()
     }
@@ -457,7 +465,11 @@ document.addEventListener('keypress', async function(e) {
   {
     zoomOutMap()
   }
-  else if (e.key == "r" && currentRound)
+  else if (e.key == "Escape" && userMapsModalOpen)
+  {
+    closeUserMapsModal()
+  }
+  else if (e.key == "r" && currentRound && !isEditingTextbox())
   {
     currentRound += 1
     if (currentMapSource.isCompare())
@@ -468,6 +480,10 @@ document.addEventListener('keypress', async function(e) {
     {
       displayDataMap()
     }
+  }
+  else if (e.key == "o" && currentUser && !currentUser.isAnonymous && !isEditingTextbox())
+  {
+    openUserMapsModal()
   }
 })
 
@@ -777,8 +793,8 @@ async function leftClickRegion(div)
     if (currentMapType.getID() == USAPresidentMapType.getID())
     {
       $("#editDoneButton").addClass('topnavdisable')
-      $("#copyDropdownContent").addClass('topnavdisable')
-      $("#copyDropdownContent").css("opacity", "0%")
+      $("#editDoneDropdownContent").addClass('topnavdisable')
+      $("#editDoneDropdownContent").css("opacity", "0%")
       
       if (currentMapZoomRegion.includes("-"))
       {
@@ -956,5 +972,5 @@ function altShiftClickRegion(div)
 
 function isEditingTextbox()
 {
-  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor || isEnteringShiftAmount || editPartyPopularVote
+  return editMarginID || editingRegionEVs || editingRegionMarginValue || editingRegionVotesharePercentages || editCandidateNamePartyID || editPartyMarginColor || isEnteringShiftAmount || editPartyPopularVote || editingDisplayName || userMapsModalOpen
 }
