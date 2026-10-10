@@ -599,6 +599,11 @@ const USAGovernorMapType = new MapType(
         filteredMapData[mapDates[dateNum]] = filteredDateData
         partyNameData[mapDates[dateNum]] = currentDatePartyNameArray
       }
+      
+      if (heldSeatMapData)
+      {
+        fillHeldSeats(filteredMapData, regionNameToID, heldSeatMapData)
+      }
 
       let fullFilteredMapData = cloneObject(filteredMapData)
       for (let mapDate in fullFilteredMapData)
@@ -1295,6 +1300,50 @@ const USAGovernorMapType = new MapType(
       true, // shouldShowVoteshare
       1.0 // voteshareCutoffMargin
     )
+    
+    const JJDiscordGovernorAverage2026MapSource = new MapSource(
+      "JJ-Discord-2026-Governor-Average", // id
+      "Server Average", // name
+      "https://jacksonjude.com/USA-Election-Map-Data/data/2026-jj-discord-governor.csv", // dataURL
+      "https://discord.com/channels/865483785189064745/1556438961428103278/1557969871248035852", // homepageURL
+      {regular: "./assets/discord-large.png", mini: "./assets/discord.png"}, // iconURL
+      {
+        date: "date",
+        region: "region",
+        isSpecial: "special",
+        isRunoff: "runoff",
+        isOffyear: "offyear",
+        isDisabled: "disabled",
+        candidateName: "candidate",
+        partyID: "party",
+        voteshare: "voteshare"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, _, __, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare) => {
+        const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
+        return doubleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData, __, isCustomMap, voteshareCutoffMargin, shouldIncludeVoteshare)
+      }, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      null, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      (regionData) => {
+        return regionData.isHold
+      } // shouldShowVoteshare
+    )
 
     const PastElectionResultMapSource = new MapSource(
       "Past-Governor-Elections", // id
@@ -1428,12 +1477,13 @@ const USAGovernorMapType = new MapType(
     governorMapSources[CookGovernorProjection2022MapSource.getID()] = CookGovernorProjection2022MapSource
     governorMapSources[VotehubGovernorProjection2026MapSource.getID()] = VotehubGovernorProjection2026MapSource
     governorMapSources[VotehubGovernorPolls2026MapSource.getID()] = VotehubGovernorPolls2026MapSource
+    governorMapSources[JJDiscordGovernorAverage2026MapSource.getID()] = JJDiscordGovernorAverage2026MapSource
     governorMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     governorMapSources[CustomMapSource.getID()] = CustomMapSource
     
     const governorMapCycles = [2026, 2024, 2022]
     const governorMapSourceIDs = {
-      2026: [VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID()],
+      2026: [VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID(), JJDiscordGovernorAverage2026MapSource.getID()],
       2024: [PolymarketGovernor2024MapSource.getID()],
       2022: [FiveThirtyEightGovernorProjection2022MapSource.getID(), LTEGovernorProjection2022MapSource.getID(), CookGovernorProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
