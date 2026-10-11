@@ -95,9 +95,15 @@ async function openUserMap(id)
 	}
 	
 	const success = jsonFileLoaded({ target: { result: userMapContent.mapDataString } })
-	if (success && currentUser && userMapContent.ownerID == currentUser.uid)
+	if (!success) { return }
+	
+	if (currentUser && userMapContent.ownerID == currentUser.uid)
 	{
 		currentCustomMapSource.setMapUUID(id)
+	}
+	else
+	{
+		currentCustomMapSource.resetMapUUID()
 	}
 }
 

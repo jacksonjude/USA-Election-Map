@@ -266,6 +266,10 @@ async function reloadForNewMapType(initialLoad, loadMapSource = true)
     const mapID = urlParams.get('id')
     if (mapID)
     {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('id')
+      history.replaceState(null, '', url)
+      
       currentMapSource = NullMapSource
       openUserMap(mapID)
     }
