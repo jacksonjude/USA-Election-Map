@@ -11,7 +11,7 @@ firebase.initializeApp(firebaseConfig)
 
 const auth = firebase.auth()
 const db = firebase.firestore()
-db.settings({ experimentalForceLongPolling: true })
+db.settings({ experimentalForceLongPolling: true, experimentalAutoDetectLongPolling: false, merge: true })
 
 let currentUser = null
 
