@@ -206,7 +206,7 @@ async function reloadForNewMapType(initialLoad, loadMapSource = true)
   if (!initialLoad)
   {
     previousDateOverride = currentSliderDate ? currentSliderDate.getTime() : null
-    clearMap(true, false)
+    await clearMap(true, false)
   }
 
   mapSources = currentMapType.getMapSources()
@@ -682,7 +682,7 @@ async function setMapCycle(mapCycle)
 
   if (mapSourceIDs.includes(currentMapSource.getID())) return
 
-  clearMap(true, false)
+  await clearMap(true, false)
   await setMapSource(mapSources[mapSourceIDs[0]])
 }
 
