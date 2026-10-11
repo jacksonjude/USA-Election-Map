@@ -7,17 +7,7 @@ const firebaseConfig = {
 	appId: "1:457495858439:web:4f29bad70f1ab4ca1c89a2"
 }
 
-const recaptchaEnterpriseSiteKey = "6LcELN8tAAAAAA7xfxslj2XJrLfi2_agD5rTLoxK"
-
 firebase.initializeApp(firebaseConfig)
-
-if (location.hostname === 'localhost')
-{
-	self.FIREBASE_APPCHECK_DEBUG_TOKEN = true
-}
-
-const appCheck = firebase.appCheck()
-appCheck.activate(new firebase.appCheck.ReCaptchaEnterpriseProvider(recaptchaEnterpriseSiteKey), true)
 
 const auth = firebase.auth()
 const db = firebase.firestore()
