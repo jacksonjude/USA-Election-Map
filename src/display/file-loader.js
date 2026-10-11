@@ -97,7 +97,7 @@ function jsonFileLoaded(e)
     currentCustomMapSource.setDropdownPartyIDs(jsonMapData.partyIDs)
   }
   
-  currentEditingMode = jsonMapData.editingMode ?? EditingMode.margin
+  currentEditingMode = jsonMapData.editingMode ?? EditingMode.voteshare
   updateSelectedEditMode()
   currentCustomMapSource.setEditingMode(currentEditingMode)
 
