@@ -635,6 +635,9 @@ body {
   gap: 25rem;
   cursor: default;
   font-size: 20px;
+  
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .user-maps-table {
