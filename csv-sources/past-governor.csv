@@ -2246,6 +2246,8 @@ date,region,state_po,special,runoff,offyear,candidate,party,writein,voteshare,ca
 11/08/2011,West Virginia,WV,FALSE,FALSE,FALSE,Tomblin,democratic,FALSE,0.4955494148,,,
 11/08/2011,National Popular Vote,NPV,FALSE,FALSE,FALSE,Republican,republican,FALSE,0.542,,,
 11/08/2011,National Popular Vote,NPV,FALSE,FALSE,FALSE,Democratic,democrat,FALSE,0.375,,,
+06/05/2012,Wisconsin,WI,TRUE,FALSE,TRUE,Walker,republican,FALSE,0.5308229318,1335585,2516065,JJCooley
+06/05/2012,Wisconsin,WI,TRUE,FALSE,TRUE,Barrett,democratic,FALSE,0.462817932,1164480,2516065,JJCooley
 11/06/2012,Indiana,IN,FALSE,FALSE,FALSE,Harris,independent,TRUE,8.14797024361267E-06,,,
 11/06/2012,Indiana,IN,FALSE,FALSE,FALSE,Boneham,libertarian,FALSE,0.03952463965601600,,,
 11/06/2012,Indiana,IN,FALSE,FALSE,FALSE,Gregg,democratic,FALSE,0.4656045076123380,,,
