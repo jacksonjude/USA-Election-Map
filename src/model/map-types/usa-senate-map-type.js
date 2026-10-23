@@ -2095,11 +2095,11 @@ const USASenateMapType = new MapType(
     }
     
     const kPastElectionsVsPastElections = 1
-    const kPastElectionsVs538Projection = 2
+    const kPastElectionsVsVoteHubProjection = 2
 
     let defaultSenateCompareSourceIDs = {}
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultSenateCompareSourceIDs[kPastElectionsVs538Projection] = [PastElectionResultMapSource.getID(), FiveThirtyEightSenateProjection2024MapSource.getID()]
+    defaultSenateCompareSourceIDs[kPastElectionsVsVoteHubProjection] = [PastElectionResultMapSource.getID(), VotehubSenateProjectionLegacy2026MapSource.getID()]
 
     return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, mapCycles: senateMapCycles, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }

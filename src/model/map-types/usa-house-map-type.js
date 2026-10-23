@@ -1470,11 +1470,11 @@ const USAHouseMapType = new MapType(
     }
     
     const kPastElectionsVsPastElections = 1
-    const k538ProjectionVsPastElections = 2
+    const kVoteHubProjectionVsPastElections = 2
 
     let defaultHouseCompareSourceIDs = {}
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultHouseCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightHouseProjection2024MapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[kVoteHubProjectionVsPastElections] = [VotehubHouseProjectionLegacy2026MapSource.getID(), PastElectionResultMapSource.getID()]
 
     return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, mapCycles: houseMapCycles, defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }

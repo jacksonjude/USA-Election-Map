@@ -1527,11 +1527,11 @@ const USAGovernorMapType = new MapType(
     }
     
     const kPastElectionsVsPastElections = 1
-    const k538ProjectionVsPastElections = 2
+    const kVoteHubProjectionVsPastElections = 2
 
     let defaultGovernorCompareSourceIDs = {}
     defaultGovernorCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultGovernorCompareSourceIDs[k538ProjectionVsPastElections] = [FiveThirtyEightGovernorProjection2022MapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultGovernorCompareSourceIDs[kVoteHubProjectionVsPastElections] = [VotehubGovernorProjectionLegacy2026MapSource.getID(), PastElectionResultMapSource.getID()]
 
     return {mapSources: governorMapSources, mapSourceIDs: governorMapSourceIDs, mapCycles: governorMapCycles, defaultCompareSourceIDs: defaultGovernorCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
