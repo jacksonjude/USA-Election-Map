@@ -962,6 +962,36 @@ const USAHouseMapType = new MapType(
 
       return regionName
     }
+    
+    function getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, model)
+    {
+      if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
+      
+      let linkToOpen = homepageURL
+      if (!shouldOpenHomepage && (regionID != null && mapDate != null && mapData != null))
+      {
+        const regionData = mapData[mapDate.getTime()][regionID]
+        
+        let state = regionData.state
+        let district = regionData.district
+        
+        linkToOpen += `race/?race_id=H2026${state}${zeroPadding(district)}`
+        if (model)
+        {
+          linkToOpen += `&model=${model}`
+        }
+      }
+      else
+      {
+        linkToOpen += "house/"
+        if (model)
+        {
+          linkToOpen += `?model=${model}`
+        }
+      }
+      
+      return linkToOpen
+    }
 
     let CNNHouseResults2022MapSource = new MapSource(
       "CNN-2022-House-Results", // id
@@ -1190,9 +1220,52 @@ const USAHouseMapType = new MapType(
       true // shouldUseOriginalMapDataForTotalsPieChart
     )
     
+    const VotehubHouseProjectionLegacy2026MapSource = new MapSource(
+      "Votehub-2026-House-Projection-Legacy", // id
+      "VoteHub Legacy", // name
+      {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-legacy-house.json", type: jsonSourceType}, // dataURL
+      "https://votehub.com/2026-forecast/", // homepageURL
+      {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
+      {
+        date: "date",
+        region: "state",
+        district: "number",
+        candidates: "candidates",
+        voteshare: "voteshare",
+        margin: "margin",
+        winprob: "probability"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      regionIDToLinkBase, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareVotehubFilterFunctionWithPastElections, // organizeMapDataFunction
+      houseViewingData, // viewingDataFunction
+      houseZoomingData, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+      houseFormattedRegionName, // getFormattedRegionName
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, "legacy")
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0, // voteshareCutoffMargin
+      getHouseSVGFromDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      true // shouldUseOriginalMapDataForTotalsPieChart
+    )
+    
     const VotehubHouseProjection2026MapSource = new MapSource(
       "Votehub-2026-House-Projection", // id
-      "VoteHub Projection", // name
+      "VoteHub Complete", // name
       {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-house.json", type: jsonSourceType}, // dataURL
       "https://votehub.com/2026-forecast/", // homepageURL
       {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
@@ -1219,26 +1292,8 @@ const USAHouseMapType = new MapType(
       null, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
       houseFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
-      {
-        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
-        
-        let linkToOpen = homepageURL
-        if (!shouldOpenHomepage && (regionID != null && mapDate != null && mapData != null))
-        {
-          const regionData = mapData[mapDate.getTime()][regionID]
-          
-          let state = regionData.state
-          let district = regionData.district
-          
-          linkToOpen += `race/?race_id=H2026${state}${zeroPadding(district)}`
-        }
-        else
-        {
-          linkToOpen += "house/"
-        }
-        
-        return linkToOpen
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1402,12 +1457,13 @@ const USAHouseMapType = new MapType(
     houseMapSources[FiveThirtyEightHouseProjection2024MapSource.getID()] = FiveThirtyEightHouseProjection2024MapSource
     houseMapSources[CNNHouseResults2022MapSource.getID()] = CNNHouseResults2022MapSource
     houseMapSources[CNNHouseResults2024MapSource.getID()] = CNNHouseResults2024MapSource
+    houseMapSources[VotehubHouseProjectionLegacy2026MapSource.getID()] = VotehubHouseProjectionLegacy2026MapSource
     houseMapSources[VotehubHouseProjection2026MapSource.getID()] = VotehubHouseProjection2026MapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
     const houseMapCycles = [2026, 2024, 2022]
     const houseMapSourceIDs = {
-      2026: [VotehubHouseProjection2026MapSource.getID()],
+      2026: [VotehubHouseProjectionLegacy2026MapSource.getID(), VotehubHouseProjection2026MapSource.getID()],
       2024: [FiveThirtyEightHouseProjection2024MapSource.getID()],
       2022: [FiveThirtyEightHouseProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]

@@ -816,6 +816,37 @@ const USAGovernorMapType = new MapType(
       
       return null
     }
+    
+    function getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, model)
+    {
+      if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
+      
+      const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
+      if (pastElectionLinkData)
+      {
+        return pastElectionLinkData
+      }
+      
+      let linkToOpen = homepageURL
+      if (!shouldOpenHomepage)
+      {
+        linkToOpen += `race/?race_id=G2026${regionID}00`
+        if (model)
+        {
+          linkToOpen += `&model=${model}`
+        }
+      }
+      else
+      {
+        linkToOpen += "governor/"
+        if (model)
+        {
+          linkToOpen += `?model=${model}`
+        }
+      }
+      
+      return linkToOpen
+    }
 
     const CNNGovernorResults2022MapSource = new MapSource(
       "CNN-2022-Governor-Results", // id
@@ -1179,9 +1210,52 @@ const USAGovernorMapType = new MapType(
       null // updateCustomMapFunction
     )
     
+    const VotehubGovernorProjectionLegacy2026MapSource = new MapSource(
+      "Votehub-2026-Governor-Projection-Legacy", // id
+      "VoteHub Legacy", // name
+      {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-legacy-governor.json", type: jsonSourceType}, // dataURL
+      "https://votehub.com/2026-forecast/", // homepageURL
+      {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
+      {
+        date: "date",
+        region: "state",
+        seatClass: "number",
+        candidates: "candidates",
+        voteshare: "voteshare",
+        margin: "margin",
+        winprob: "probability"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID) => {
+        const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
+        return jsonVoteshareVotehubFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
+      }, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, "legacy")
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0 // voteshareCutoffMargin
+    )
+    
     const VotehubGovernorProjection2026MapSource = new MapSource(
       "Votehub-2026-Governor-Projection", // id
-      "VoteHub Projection", // name
+      "VoteHub Complete", // name
       {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-governor.json", type: jsonSourceType}, // dataURL
       "https://votehub.com/2026-forecast/", // homepageURL
       {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
@@ -1211,27 +1285,8 @@ const USAGovernorMapType = new MapType(
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
-      {
-        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
-        
-        const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
-        if (pastElectionLinkData)
-        {
-          return pastElectionLinkData
-        }
-        
-        let linkToOpen = homepageURL
-        if (!shouldOpenHomepage)
-        {
-          linkToOpen += `race/?race_id=G2026${regionID}00`
-        }
-        else
-        {
-          linkToOpen += "governor/"
-        }
-        
-        return linkToOpen
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1271,27 +1326,8 @@ const USAGovernorMapType = new MapType(
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
-      {
-        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
-        
-        const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
-        if (pastElectionLinkData)
-        {
-          return pastElectionLinkData
-        }
-        
-        let linkToOpen = homepageURL
-        if (!shouldOpenHomepage)
-        {
-          linkToOpen += `race/?race_id=G2026${regionID}00`
-        }
-        else
-        {
-          linkToOpen += "governor/"
-        }
-        
-        return linkToOpen
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1475,6 +1511,7 @@ const USAGovernorMapType = new MapType(
     governorMapSources[FiveThirtyEightGovernorProjection2022MapSource.getID()] = FiveThirtyEightGovernorProjection2022MapSource
     governorMapSources[LTEGovernorProjection2022MapSource.getID()] = LTEGovernorProjection2022MapSource
     governorMapSources[CookGovernorProjection2022MapSource.getID()] = CookGovernorProjection2022MapSource
+    governorMapSources[VotehubGovernorProjectionLegacy2026MapSource.getID()] = VotehubGovernorProjectionLegacy2026MapSource
     governorMapSources[VotehubGovernorProjection2026MapSource.getID()] = VotehubGovernorProjection2026MapSource
     governorMapSources[VotehubGovernorPolls2026MapSource.getID()] = VotehubGovernorPolls2026MapSource
     governorMapSources[JJDiscordGovernorAverage2026MapSource.getID()] = JJDiscordGovernorAverage2026MapSource
@@ -1483,7 +1520,7 @@ const USAGovernorMapType = new MapType(
     
     const governorMapCycles = [2026, 2024, 2022]
     const governorMapSourceIDs = {
-      2026: [VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID(), JJDiscordGovernorAverage2026MapSource.getID()],
+      2026: [VotehubGovernorProjectionLegacy2026MapSource.getID(), VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID(), JJDiscordGovernorAverage2026MapSource.getID()],
       2024: [PolymarketGovernor2024MapSource.getID()],
       2022: [FiveThirtyEightGovernorProjection2022MapSource.getID(), LTEGovernorProjection2022MapSource.getID(), CookGovernorProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]

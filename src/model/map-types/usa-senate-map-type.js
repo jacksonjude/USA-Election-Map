@@ -1117,6 +1117,44 @@ const USASenateMapType = new MapType(
       
       return null
     }
+    
+    function getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, model)
+    {
+      if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
+      
+      const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
+      if (pastElectionLinkData)
+      {
+        return pastElectionLinkData
+      }
+      
+      let linkToOpen = homepageURL
+      if (!shouldOpenHomepage)
+      {
+        let seatClass = 2 // 2026 default seat class
+        if (regionID != null && mapDate != null && mapData != null)
+        {
+          seatClass = mapData[mapDate.getTime()][regionID].seatClass
+        }
+        const state = regionID.replace('-S', '')
+        
+        linkToOpen += `race/?race_id=S2026${state}${zeroPadding(seatClass)}`
+        if (model)
+        {
+          linkToOpen += `&model=${model}`
+        }
+      }
+      else
+      {
+        linkToOpen += "senate/"
+        if (model)
+        {
+          linkToOpen += `?model=${model}`
+        }
+      }
+      
+      return linkToOpen
+    }
 
     const CNNSenateResults2022MapSource = new MapSource(
       "CNN-2022-Senate-Results", // id
@@ -1733,9 +1771,49 @@ const USASenateMapType = new MapType(
       false // shouldShowVoteshare
     )
     
+    const VotehubSenateProjectionLegacy2026MapSource = new MapSource(
+      "Votehub-2026-Senate-Projection-Legacy", // id
+      "VoteHub Legacy", // name
+      {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-legacy-senate.json", type: jsonSourceType}, // dataURL
+      "https://votehub.com/2026-forecast/", // homepageURL
+      {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
+      {
+        date: "date",
+        region: "state",
+        seatClass: "number",
+        candidates: "candidates",
+        voteshare: "voteshare",
+        margin: "margin",
+        winprob: "probability"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareVotehubFilterFunctionWithPastElections, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData, "legacy")
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0 // voteshareCutoffMargin
+    )
+    
     const VotehubSenateProjection2026MapSource = new MapSource(
       "Votehub-2026-Senate-Projection", // id
-      "VoteHub Projection", // name
+      "VoteHub Complete", // name
       {url: "https://jacksonjude.com/USA-Election-Map-Data/data/2026-votehub-forecast-senate.json", type: jsonSourceType}, // dataURL
       "https://votehub.com/2026-forecast/", // homepageURL
       {regular: "./assets/votehub-large.png", mini: "./assets/votehub.png"}, // iconURL
@@ -1762,34 +1840,8 @@ const USASenateMapType = new MapType(
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
-      {
-        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
-        
-        const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
-        if (pastElectionLinkData)
-        {
-          return pastElectionLinkData
-        }
-        
-        let linkToOpen = homepageURL
-        if (!shouldOpenHomepage)
-        {
-          let seatClass = 2 // 2026 default seat class
-          if (regionID != null && mapDate != null && mapData != null)
-          {
-            seatClass = mapData[mapDate.getTime()][regionID].seatClass
-          }
-          const state = regionID.replace('-S', '')
-          
-          linkToOpen += `race/?race_id=S2026${state}${zeroPadding(seatClass)}`
-        }
-        else
-        {
-          linkToOpen += "senate/"
-        }
-        
-        return linkToOpen
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1826,34 +1878,8 @@ const USASenateMapType = new MapType(
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
-      {
-        if (!shouldOpenHomepage && (!mapData || !regionID || !mapDate || !mapData[mapDate.getTime()][regionID])) return
-        
-        const pastElectionLinkData = getPastElectionRegionLink(mapData, mapDate, regionID)
-        if (pastElectionLinkData)
-        {
-          return pastElectionLinkData
-        }
-        
-        let linkToOpen = homepageURL
-        if (!shouldOpenHomepage)
-        {
-          let seatClass = 2 // 2026 default seat class
-          if (regionID != null && mapDate != null && mapData != null)
-          {
-            seatClass = mapData[mapDate.getTime()][regionID].seatClass
-          }
-          const state = regionID.replace('-S', '')
-          
-          linkToOpen += `race/?race_id=S2026${state}${zeroPadding(seatClass)}`
-        }
-        else
-        {
-          linkToOpen += "senate/"
-        }
-        
-        return linkToOpen
+      (homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData) => {
+        return getVoteHubElectionProjectionLink(homepageURL, regionID, _, mapDate, shouldOpenHomepage, mapData)
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -2053,6 +2079,7 @@ const USASenateMapType = new MapType(
     senateMapSources[PASenateProjection2022MapSource.getID()] = PASenateProjection2022MapSource
     senateMapSources[CookSenateProjection2022MapSource.getID()] = CookSenateProjection2022MapSource
     senateMapSources[SCBSenateProjection2022MapSource.getID()] = SCBSenateProjection2022MapSource
+    senateMapSources[VotehubSenateProjectionLegacy2026MapSource.getID()] = VotehubSenateProjectionLegacy2026MapSource
     senateMapSources[VotehubSenateProjection2026MapSource.getID()] = VotehubSenateProjection2026MapSource
     senateMapSources[VotehubSenatePolls2026MapSource.getID()] = VotehubSenatePolls2026MapSource
     senateMapSources[JJDiscordSenateAverage2026MapSource.getID()] = JJDiscordSenateAverage2026MapSource
@@ -2063,7 +2090,7 @@ const USASenateMapType = new MapType(
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
       [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
-      [2026]: [VotehubSenateProjection2026MapSource.getID(), VotehubSenatePolls2026MapSource.getID(), LTESenateProjection2026MapSource.getID(), JJDiscordSenateAverage2026MapSource.getID()],
+      [2026]: [VotehubSenateProjectionLegacy2026MapSource.getID(), VotehubSenateProjection2026MapSource.getID(), VotehubSenatePolls2026MapSource.getID(), LTESenateProjection2026MapSource.getID(), JJDiscordSenateAverage2026MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
