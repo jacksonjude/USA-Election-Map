@@ -567,7 +567,12 @@ function addDivEventListeners()
     }
   })
 
+  let regionBoxHideTimeout = null
+
   $("#regionboxcontainer").on('show', function() {
+    clearTimeout(regionBoxHideTimeout)
+    regionBoxHideTimeout = null
+    
     $(this).show()
     $(this).css('opacity', "1")
   })
@@ -575,8 +580,10 @@ function addDivEventListeners()
   $("#regionboxcontainer").on('hide', function() {
     $(this).css('opacity', "0")
 
-    setTimeout(function() {
-      if ($("#regionboxcontainer").css('opacity') == "0") { $("#regionboxcontainer").hide() }
+    clearTimeout(regionBoxHideTimeout)
+    regionBoxHideTimeout = setTimeout(function() {
+      regionBoxHideTimeout = null
+      $("#regionboxcontainer").hide()
     }, 200)
   })
 

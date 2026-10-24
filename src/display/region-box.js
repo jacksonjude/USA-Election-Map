@@ -2,6 +2,7 @@ async function updateRegionBox(regionID = currentRegionID)
 {
   let currentMapDataForDate = currentSliderDate && currentMapSource.getMapData() ? currentMapSource.getMapData()[currentSliderDate.getTime()] : null
   let canZoomCurrently = await currentMapSource.canZoom(currentMapDataForDate, regionID)
+  if (regionID != currentRegionID) { return }
 
   let isDiscreteRegion = viewingDiscreteRegions()
 
@@ -274,7 +275,8 @@ async function updateRegionBox(regionID = currentRegionID)
 
   if (regionData.voteSplits && regionData.voteSplits.length > 0 && canZoomCurrently && splitVoteDisplayOptions.showSplitVoteBoxes && currentSliderDate && currentMapSource.getMapData())
   {
-    let zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, currentRegionID)
+    let zoomingData = await currentMapSource.getZoomingData(currentMapDataForDate, regionID)
+    if (regionID != currentRegionID) { return }
     if (zoomingData)
     {
       const districtsPerLine = 4
