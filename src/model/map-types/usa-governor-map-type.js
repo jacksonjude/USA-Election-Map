@@ -52,7 +52,7 @@ const USAGovernorMapType = new MapType(
     const regionIDToLinkBase = {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}
     const regionIDToLinkHistorical = {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}
     
-    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
+    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, regionNameToID, heldSeatMapData, ____, _____, voteshareCutoffMargin)
     {
       let racesToIgnore = []
       let candidateExceptions = {"None of these candidates": "None"}
@@ -132,18 +132,10 @@ const USAGovernorMapType = new MapType(
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
 
-        mapData[mapDate][regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
+        mapData[mapDate][regionID] = {region: regionID, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[regionID]?.partyID != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
-      for (let regionID of Object.values(regionNameToID))
-      {
-        if (regionID == nationalPopularVoteID) continue
-
-        if (!mapData[mapDate][regionID])
-        {
-          mapData[mapDate][regionID] = {region: regionID, isSpecial: false, offYear: false, runoff: false, margin: 100, isHold: true, disabled: true, partyID: heldRegionMap[regionID]}
-        }
-      }
+      fillHeldSeats(mapData, regionNameToID, heldSeatMapData, cycleYear)
 
       return {mapData: mapData, candidateNameData: partyNameArray, mapDates: [mapDate]}
     }
@@ -686,6 +678,12 @@ const USAGovernorMapType = new MapType(
       return heldSeatMapData
     }
     
+    const jsonVoteshareCNNFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, _, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin) =>
+    {
+      const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
+      return jsonVoteshareCNNFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin)
+    }
+    
     function fillHeldSeats(mapData, regionNameToID, heldSeatMapData, onCycleYear)
     {
       const placeholderRegionData = {offYear: false, runoff: false, isHold: true}
@@ -867,6 +865,23 @@ const USAGovernorMapType = new MapType(
       
       return linkToOpen
     }
+    
+    function getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+    {
+      if (!shouldOpenHomepage && !regionID) return
+      
+      let linkToOpen = homepageURL
+      if (shouldOpenHomepage)
+      {
+        linkToOpen += "governor"
+      }
+      else
+      {
+        linkToOpen += regionIDToLinkMap[regionID] + "/" + "governor"
+      }
+      
+      return linkToOpen
+    }
 
     const CNNGovernorResults2022MapSource = new MapSource(
       "CNN-2022-Governor-Results", // id
@@ -894,28 +909,13 @@ const USAGovernorMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
-      {
-        if (!shouldOpenHomepage && !regionID) return
-
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "governor"
-        }
-        else
-        {
-          linkToOpen += regionIDToLinkMap[regionID] + "/" + "governor"
-        }
-
-        return linkToOpen
-      }, // customOpenRegionLinkFunction
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap
@@ -950,28 +950,54 @@ const USAGovernorMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      0.0 // voteshareCutoffMargin
+    )
+    
+    const CNNGovernorResults2026MapSource = new MapSource(
+      "CNN-2026-Governor-Results", // id
+      "CNN Results", // name
+      {url: "https://politics.api.cnn.io/results/national-races/2026-GG.json", type: jsonSourceType}, // dataURL
+      "https://www.cnn.com/election/2026/results/", // homepageURL
+      {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
       {
-        if (!shouldOpenHomepage && !regionID) return
-    
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "governor"
-        }
-        else
-        {
-          linkToOpen += regionIDToLinkMap[regionID] + "/" + "governor"
-        }
-    
-        return linkToOpen
-      }, // customOpenRegionLinkFunction
+        date: "extractedAt",
+        raceKey: "ecKey",
+        region: "stateAbbreviation",
+        special: "raceType",
+        totalVotes: "totalVote",
+        reportingPercent: "percentReporting",
+        candidates: "candidates",
+        candidateName: "lastName",
+        partyID: "majorParty",
+        candidateVotes: "voteNum"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      regionIDToLinkBase, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap
@@ -1527,6 +1553,7 @@ const USAGovernorMapType = new MapType(
     let governorMapSources = {}
     governorMapSources[CNNGovernorResults2022MapSource.getID()] = CNNGovernorResults2022MapSource
     governorMapSources[CNNGovernorResults2024MapSource.getID()] = CNNGovernorResults2024MapSource
+    governorMapSources[CNNGovernorResults2026MapSource.getID()] = CNNGovernorResults2026MapSource
     governorMapSources[PolymarketGovernor2024MapSource.getID()] = PolymarketGovernor2024MapSource
     governorMapSources[FiveThirtyEightGovernorProjection2022MapSource.getID()] = FiveThirtyEightGovernorProjection2022MapSource
     governorMapSources[LTEGovernorProjection2022MapSource.getID()] = LTEGovernorProjection2022MapSource

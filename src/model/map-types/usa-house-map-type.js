@@ -43,14 +43,16 @@ const USAHouseMapType = new MapType(
     const regionIDToLinkBase = {"AL":"alabama", "AK":"alaska", "AZ":"arizona", "AR":"arkansas", "CA":"california", "CO":"colorado", "CT":"connecticut", "DE":"delaware", "FL":"florida", "GA":"georgia", "HI":"hawaii", "ID":"idaho", "IL":"illinois", "IN":"indiana", "IA":"iowa", "KS":"kansas", "KY":"kentucky", "LA":"louisiana", "ME":"maine", "MD":"maryland", "MA":"massachusetts", "MI":"michigan", "MN":"minnesota", "MS":"mississippi", "MO":"missouri", "MT":"montana", "NE":"nebraska", "NV":"nevada", "NH":"new-hampshire", "NJ":"new-jersey", "NM":"new-mexico", "NY":"new-york", "NC":"north-carolina", "ND":"north-dakota", "OH":"ohio", "OK":"oklahoma", "OR":"oregon", "PA":"pennsylvania", "RI":"rhode-island", "SC":"south-carolina", "SD":"south-dakota", "TN":"tennessee", "TX":"texas", "UT":"utah", "VT":"vermont", "VA":"virginia", "WA":"washington", "WV":"west-virginia", "WI":"wisconsin", "WY":"wyoming"}
     const regionIDToLinkHistorical = {"AL":"Alabama", "AK":"Alaska", "AZ":"Arizona", "AR":"Arkansas", "CA":"California", "CO":"Colorado", "CT":"Connecticut", "DE":"Delaware", "FL":"Florida", "GA":"Georgia", "HI":"Hawaii", "ID":"Idaho", "IL":"Illinois", "IN":"Indiana", "IA":"Iowa", "KS":"Kansas", "KY":"Kentucky", "LA":"Louisiana", "ME":"Maine", "MD":"Maryland", "MA":"Massachusetts", "MI":"Michigan", "MN":"Minnesota", "MS":"Mississippi", "MO":"Missouri", "MT":"Montana", "NE":"Nebraska", "NV":"Nevada", "NH":"New_Hampshire", "NJ":"New_Jersey", "NM":"New_Mexico", "NY":"New_York", "NC":"North_Carolina", "ND":"North_Dakota", "OH":"Ohio", "OK":"Oklahoma", "OR":"Oregon", "PA":"Pennsylvania", "RI":"Rhode_Island", "SC":"South_Carolina", "SD":"South_Dakota", "TN":"Tennessee", "TX":"Texas", "UT":"Utah", "VT":"Vermont", "VA":"Virginia", "WA":"Washington", "WV":"West_Virginia", "WI":"Wisconsin", "WY":"Wyoming"}
     
-    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, __, ___, ____, heldRegionMap, ______, _______, voteshareCutoffMargin)
+    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, ____, heldSeatMapData, ______, _______, voteshareCutoffMargin)
     {
       let racesToIgnore = []
       let candidateExceptions = {"None of these candidates": "None"}
       let unopposedRaceDefaults = {
-        "FL__20": DemocraticParty.getID(),
-        "OK__3": RepublicanParty.getID()
-      }
+        2024: {
+          "FL__20": DemocraticParty.getID(),
+          "OK__3": RepublicanParty.getID()
+        }
+      }[cycleYear] ?? {}
 
       let mapDate = new Date(rawMapData[0][columnMap.date]).getTime()
 
@@ -142,7 +144,7 @@ const USAHouseMapType = new MapType(
         
         const isHold = reportingPercent <= 0 && unopposedRaceDefaults[regionID] != null
 
-        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
+        mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[regionID]?.partyID != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
       for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
@@ -151,7 +153,7 @@ const USAHouseMapType = new MapType(
         delete mapData[mapDate][state + subregionSeparator + "1"]
         regionData.district = "0"
         regionData.region = state + subregionSeparator + "0"
-        regionData.flip = heldRegionMap[regionData.region] != regionData.partyID
+        regionData.flip = heldSeatMapData[regionData.region]?.partyID != regionData.partyID
         mapData[mapDate][state + subregionSeparator + "0"] = regionData
       }
 
@@ -787,6 +789,12 @@ const USAHouseMapType = new MapType(
       return heldSeatMapData
     }
     
+    const jsonVoteshareCNNFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, _, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin) =>
+    {
+      const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
+      return jsonVoteshareCNNFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin)
+    }
+    
     const jsonVoteshare538FilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID) => {
       const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
       return jsonVoteshare538FilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
@@ -958,9 +966,9 @@ const USAHouseMapType = new MapType(
 
       for (let regionID in mapDateData)
       {
-        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID)) { continue }
-
         let regionData = mapDateData[regionID]
+
+        if (regionID.endsWith(subregionSeparator + statePopularVoteDistrictID) || !regionData.partyID) { continue }
 
         if (!(regionData.state in housePerStateMapData))
         {
@@ -1066,6 +1074,25 @@ const USAHouseMapType = new MapType(
       
       return linkToOpen
     }
+    
+    function getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+    {
+      if (!shouldOpenHomepage && !regionID) return
+      
+      let linkToOpen = homepageURL
+      if (shouldOpenHomepage)
+      {
+        linkToOpen += "house"
+      }
+      else
+      {
+        let [state, district] = regionID.split(subregionSeparator)
+        if (district === "0") district = "1"
+        linkToOpen += regionIDToLinkMap[state] + "/" + (district ? "us-house-district-" + district : "")
+      }
+      
+      return linkToOpen
+    }
 
     let CNNHouseResults2022MapSource = new MapSource(
       "CNN-2022-House-Results", // id
@@ -1095,30 +1122,13 @@ const USAHouseMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       houseViewingData, // viewingDataFunction
       houseZoomingData, // zoomingDataFunction
       null, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
       houseFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
-      {
-        if (!shouldOpenHomepage && !regionID) return
-
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "house"
-        }
-        else
-        {
-          let [state, district] = regionID.split(subregionSeparator)
-          if (district === "0") district = "1"
-          linkToOpen += regionIDToLinkMap[state] + "/" + (district ? "us-house-district-" + district : "")
-        }
-
-        return linkToOpen
-      }, // customOpenRegionLinkFunction
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap
@@ -1158,30 +1168,59 @@ const USAHouseMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       houseViewingData, // viewingDataFunction
       houseZoomingData, // zoomingDataFunction
       null, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
       houseFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      0.0, // voteshareCutoffMargin
+      getHouseSVGFromDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      true // shouldUseOriginalMapDataForTotalsPieChart
+    )
+    
+    const CNNHouseResults2026MapSource = new MapSource(
+      "CNN-2026-House-Results", // id
+      "CNN Results", // name
+      {url: "https://politics.api.cnn.io/results/national-races/2026-HG.json", type: jsonSourceType}, // dataURL
+      "https://www.cnn.com/election/2026/results/", // homepageURL
+      {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
       {
-        if (!shouldOpenHomepage && !regionID) return
-    
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "house"
-        }
-        else
-        {
-          let [state, district] = regionID.split(subregionSeparator)
-          if (district === "0") district = "1"
-          linkToOpen += regionIDToLinkMap[state] + "/" + (district ? "us-house-district-" + district : "")
-        }
-    
-        return linkToOpen
-      }, // customOpenRegionLinkFunction
+        date: "extractedAt",
+        raceKey: "ecKey",
+        state: "stateAbbreviation",
+        district: "jurisdictionCode",
+        special: "raceType",
+        totalVotes: "totalVote",
+        reportingPercent: "percentReporting",
+        calledRace: "editorialStatus",
+        candidates: "candidates",
+        candidateName: "lastName",
+        partyID: "majorParty",
+        candidateVotes: "voteNum"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      regionIDToLinkBase, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
+      houseViewingData, // viewingDataFunction
+      houseZoomingData, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+      houseFormattedRegionName, // getFormattedRegionName
+      getCNNElectionResultsLink, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap
@@ -1566,14 +1605,15 @@ const USAHouseMapType = new MapType(
     CustomMapSource.setTextMapData("date\n" + (todayDate.getMonth()+1) + "/" + todayDate.getDate() + "/" + todayDate.getFullYear())
 
     let houseMapSources = {}
-    houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
-    houseMapSources[FiveThirtyEightHouseProjection2022MapSource.getID()] = FiveThirtyEightHouseProjection2022MapSource
-    houseMapSources[FiveThirtyEightHouseProjection2024MapSource.getID()] = FiveThirtyEightHouseProjection2024MapSource
     houseMapSources[CNNHouseResults2022MapSource.getID()] = CNNHouseResults2022MapSource
     houseMapSources[CNNHouseResults2024MapSource.getID()] = CNNHouseResults2024MapSource
+    houseMapSources[CNNHouseResults2026MapSource.getID()] = CNNHouseResults2026MapSource
+    houseMapSources[FiveThirtyEightHouseProjection2022MapSource.getID()] = FiveThirtyEightHouseProjection2022MapSource
+    houseMapSources[FiveThirtyEightHouseProjection2024MapSource.getID()] = FiveThirtyEightHouseProjection2024MapSource
     houseMapSources[VotehubHouseProjectionLegacy2026MapSource.getID()] = VotehubHouseProjectionLegacy2026MapSource
     houseMapSources[VotehubHouseProjection2026MapSource.getID()] = VotehubHouseProjection2026MapSource
     houseMapSources[SplitTicketProjection2026MapSource.getID()] = SplitTicketProjection2026MapSource
+    houseMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
     const houseMapCycles = [2026, 2024, 2022]

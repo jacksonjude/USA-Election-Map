@@ -78,7 +78,7 @@ const USASenateMapType = new MapType(
     const democraticPartyID = DemocraticParty.getID()
     const republicanPartyID = RepublicanParty.getID()
     
-    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToID, heldRegionMap, ____, _____, voteshareCutoffMargin)
+    const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, __, regionNameToID, heldSeatMapData, ____, _____, voteshareCutoffMargin)
     {
       let onCycleClass = ((cycleYear-2)%6)/2+1
 
@@ -173,10 +173,10 @@ const USASenateMapType = new MapType(
           partyNameArray[mapDate][mainPartyID] = (politicalParties[mainPartyID] ?? IndependentGenericParty).getNames()[0]
         }
 
-        mapData[mapDate][fullRegionID] = {region: fullRegionID, seatClass: regionClass, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldRegionMap[regionID + "-" + regionClass] != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
+        mapData[mapDate][fullRegionID] = {region: fullRegionID, seatClass: regionClass, offYear: false, runoff: false, isSpecial: special, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[regionID + "-" + regionClass]?.partyID != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
       }
 
-      fillHeldSeats(mapData, regionNameToID, heldRegionMap, onCycleClass)
+      fillHeldSeats(mapData, regionNameToID, heldSeatMapData, onCycleClass)
 
       return {mapData: mapData, candidateNameData: partyNameArray, mapDates: [mapDate]}
     }
@@ -1001,6 +1001,12 @@ const USASenateMapType = new MapType(
       return heldSeatMapData
     }
     
+    const jsonVoteshareCNNFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, _, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin) =>
+    {
+      const heldSeatMapData = await getPastElectionHeldSeats(cycleYear)
+      return jsonVoteshareCNNFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData, shouldFilterOutDuplicateRows, isCustomMap, voteshareCutoffMargin)
+    }
+    
     const singleLineVoteshareFilterFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, __, ____, _____, voteshareCutoffMargin) => {
       const heldSeatMapData = await getPastElectionHeldSeats(cycleYear)
       return singleLineVoteshareFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData, ____, _____, voteshareCutoffMargin)
@@ -1240,6 +1246,23 @@ const USASenateMapType = new MapType(
       
       return linkToOpen
     }
+    
+    function getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __, specialElectionSuffix)
+    {
+      if (!shouldOpenHomepage && !regionID) return
+      
+      let linkToOpen = homepageURL
+      if (shouldOpenHomepage)
+      {
+        linkToOpen += "senate"
+      }
+      else
+      {
+        linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? specialElectionSuffix : "")
+      }
+      
+      return linkToOpen
+    }
 
     const CNNSenateResults2022MapSource = new MapSource(
       "CNN-2022-Senate-Results", // id
@@ -1267,27 +1290,14 @@ const USASenateMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
-      {
-        if (!shouldOpenHomepage && !regionID) return
-
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "senate"
-        }
-        else
-        {
-          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-2" : "")
-        }
-
-        return linkToOpen
+      (homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __) => {
+        return getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __, "-2")
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -1323,27 +1333,57 @@ const USASenateMapType = new MapType(
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
-      jsonVoteshareCNNFilterFunction, // organizeMapDataFunction
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
       null, // viewingDataFunction
       null, // zoomingDataFunction
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      function(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __)
+      (homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __) => {
+        return getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __, "-general-special-election")
+      }, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      0.0 // voteshareCutoffMargin
+    )
+    
+    const CNNSenateResults2026MapSource = new MapSource(
+      "CNN-2026-Senate-Results", // id
+      "CNN Results", // name
+      {url: "https://politics.api.cnn.io/results/national-races/2026-SG.json", type: jsonSourceType}, // dataURL
+      "https://www.cnn.com/election/2026/results/", // homepageURL
+      {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
       {
-        if (!shouldOpenHomepage && !regionID) return
-    
-        let linkToOpen = homepageURL
-        if (shouldOpenHomepage)
-        {
-          linkToOpen += "senate"
-        }
-        else
-        {
-          linkToOpen += regionIDToLinkMap[regionID.replace("-S", "")] + "/" + "senate" + (regionID.endsWith("-S") ? "-general-special-election" : "")
-        }
-    
-        return linkToOpen
+        date: "extractedAt",
+        raceKey: "ecKey",
+        region: "stateAbbreviation",
+        special: "raceType",
+        totalVotes: "totalVote",
+        reportingPercent: "percentReporting",
+        candidates: "candidates",
+        candidateName: "lastName",
+        partyID: "majorParty",
+        candidateVotes: "voteNum"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      regionIDToLinkBase, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      jsonVoteshareCNNFilterFunctionWithPastElections, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      (homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __) => {
+        return getCNNElectionResultsLink(homepageURL, regionID, regionIDToLinkMap, _, shouldOpenHomepage, __, "-general-special-election")
       }, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
@@ -2193,6 +2233,7 @@ const USASenateMapType = new MapType(
     let senateMapSources = {}
     senateMapSources[CNNSenateResults2022MapSource.getID()] = CNNSenateResults2022MapSource
     senateMapSources[CNNSenateResults2024MapSource.getID()] = CNNSenateResults2024MapSource
+    senateMapSources[CNNSenateResults2026MapSource.getID()] = CNNSenateResults2026MapSource
     senateMapSources[FiveThirtyEightSenateProjection2022MapSource.getID()] = FiveThirtyEightSenateProjection2022MapSource
     senateMapSources[FiveThirtyEightSenateProjection2024MapSource.getID()] = FiveThirtyEightSenateProjection2024MapSource
     senateMapSources[PolymarketSenate2024MapSource.getID()] = PolymarketSenate2024MapSource
