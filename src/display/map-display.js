@@ -194,7 +194,7 @@ async function reloadForNewMapCountry(initialLoad, loadMapType = true)
   countdownTimes = currentMapCountry.getCountdownTimes()
   createCountdownDropdownItems()
   
-  currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? mapTypeIDs[0]] ?? mapTypes[mapTypeIDs[0]]
+  currentMapType = mapTypes[getCookie(`${currentMapCountry.getID()}-currentMapType`) ?? getCookie("currentMapType") ?? currentMapCountry.getDefaultMapTypeID()] ?? mapTypes[currentMapCountry.getDefaultMapTypeID()]
   $("#cycleMapTypeButton").find("img").attr('src', currentMapType.getIconURL())
   
   loadMapType && await reloadForNewMapType(initialLoad)

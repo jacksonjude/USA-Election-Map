@@ -44,6 +44,16 @@ class MapCountry
     return this.mapTypeIDs
   }
   
+  getDefaultMapTypeID()
+  {
+    return this.defaultMapTypeID ?? this.mapTypeIDs[0]
+  }
+  
+  setDefaultMapTypeID(defaultMapTypeID)
+  {
+    this.defaultMapTypeID = defaultMapTypeID
+  }
+  
   setPoliticalPartyData(politicalParties, defaultDropdownPartyIDs, mainPoliticalPartyIDs, majorThirdPartyCandidateIDs)
   {
     this.politicalParties = politicalParties
@@ -79,6 +89,8 @@ function setMapCountries()
     [USAGovernorMapType.getID()]: USAGovernorMapType,
     [USAHouseMapType.getID()]: USAHouseMapType
   })
+  
+  USAMapCountry.setDefaultMapTypeID(USASenateMapType.getID())
   
   USAMapCountry.setPoliticalPartyData(
     {
