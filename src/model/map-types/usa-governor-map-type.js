@@ -237,7 +237,7 @@ const USAGovernorMapType = new MapType(
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
     
-    const jsonVoteshareVotehubFilterFunction = function(rawMapData, _, columnMap, __, ___, regionNameToID, heldSeatMapData)
+    const jsonVoteshareVotehubFilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, regionNameToID, heldSeatMapData)
     {
       const filteredMapData = {}
       const mapDates = []
@@ -343,7 +343,7 @@ const USAGovernorMapType = new MapType(
         }
       }
       
-      fillHeldSeats(filteredMapData, regionNameToID, heldSeatMapData)
+      fillHeldSeats(filteredMapData, regionNameToID, heldSeatMapData, cycleYear)
       
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
@@ -686,9 +686,11 @@ const USAGovernorMapType = new MapType(
       return heldSeatMapData
     }
     
-    function fillHeldSeats(mapData, regionNameToID, heldSeatMapData)
+    function fillHeldSeats(mapData, regionNameToID, heldSeatMapData, onCycleYear)
     {
-      const placeholderRegionData = {offYear: false, runoff: false, isHold: true, disabled: true}
+      const placeholderRegionData = {offYear: false, runoff: false, isHold: true}
+      
+      const onCycleRegionIDs = getOnCycleRegionIDs(regionNameToID, onCycleYear)
       
       for (const mapDate in mapData)
       {
@@ -698,12 +700,30 @@ const USAGovernorMapType = new MapType(
           
           if (!mapData[mapDate][regionID])
           {
-            mapData[mapDate][regionID] = {region: regionID, isSpecial: false, ...heldSeatMapData[regionID], ...placeholderRegionData}
+            mapData[mapDate][regionID] = {region: regionID, isSpecial: false, ...heldSeatMapData[regionID], disabled: !onCycleRegionIDs.includes(regionID), ...placeholderRegionData}
           }
         }
       }
     }
 
+    function getOnCycleRegionIDs(regionNameToID, cycleYear)
+    {
+      if (!cycleYear) return []
+      
+      const pastMapData = PastElectionResultMapSource.getMapData()
+      if (!pastMapData) return []
+      
+      const reversedPastMapDates = Object.keys(pastMapData).reverse()
+      return Object.values(regionNameToID).filter(regionID => {
+        // on-cycle if the last regular (non-special) election was a whole number of terms before cycleYear
+        const lastRegularDate = reversedPastMapDates.find(mapDate => pastMapData[mapDate][regionID] && !pastMapData[mapDate][regionID].isHold && !pastMapData[mapDate][regionID].isSpecial)
+        if (!lastRegularDate) return false
+        
+        const termLength = ["NH", "VT"].includes(regionID) ? 2 : 4
+        return (cycleYear - new Date(parseInt(lastRegularDate)).getFullYear()) % termLength == 0
+      })
+    }
+    
     function mostRecentWinner(mapData, dateToStart, regionID)
     {
       let reversedMapDates = cloneObject(Object.keys(mapData)).reverse()
