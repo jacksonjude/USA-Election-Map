@@ -696,6 +696,74 @@ const USAHouseMapType = new MapType(
       return {mapData: filteredMapData, mapDates: mapDates.sort()}
     }
     
+    const singleLineMarginSplitTicketFunction = function(rawMapData, _, columnMap, __, ___, ____, heldSeatMapData)
+    {
+      let mapData = {}
+      
+      const candidateColumns = {
+        [DemocraticParty.getID()]: {candidate: "demCandidate", probability: "demProbability"},
+        [RepublicanParty.getID()]: {candidate: "repCandidate", probability: "repProbability"},
+      }
+      const positivePartyID = RepublicanParty.getID()
+      const independentSuffix = " (Ind)"
+      
+      let rawDateData = Object.values(rawMapData)[0]
+      let mapDate = Date.now()
+      let dateData = {}
+      
+      for (let mapRow of rawDateData)
+      {
+        const regionMatch = /(\w\w)-(\d+|AL)/.exec(mapRow[columnMap.region])
+        if (!regionMatch)
+        {
+          console.log(`Unknown region ${mapRow[columnMap.region]}!`)
+          continue
+        }
+        const [_, state, districtStr] = regionMatch
+        const district = districtStr == "AL" ? 0 : parseInt(districtStr)
+        const formattedRegion = `${state}${subregionSeparator}${district}`
+        let candidateArray = []
+        
+        let rawMargin = parseFloat(mapRow[columnMap.margin])
+        
+        for (let partyID in candidateColumns)
+        {
+          const {candidate: candidateColumn, probability: probabilityColumn} = candidateColumns[partyID]
+          
+          let candidate = mapRow[columnMap[candidateColumn]].replace(/\*$/, '')
+          let candidatePartyID = partyID
+          if (candidate.endsWith(independentSuffix))
+          {
+            candidate = candidate.replace(independentSuffix, '')
+            candidatePartyID = IndependentGenericParty.getID()
+          }
+          
+          const voteshare = 50+((partyID == positivePartyID ? 1 : -1)*rawMargin/2)
+          const winPercentage = parseFloat(mapRow[columnMap[probabilityColumn]])
+          
+          candidateArray.push({candidate, partyID: candidatePartyID, voteshare, winPercentage})
+        }
+        
+        let voteshareSortedCandidateData = candidateArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        
+        let topTwoMargin = Math.abs(rawMargin)
+        let greatestMarginPartyID = topTwoMargin != 0 ? voteshareSortedCandidateData[0].partyID : TossupParty.getID()
+        let greatestMarginCandidateName = topTwoMargin != 0 ? voteshareSortedCandidateData[0].candidate : null
+        
+        let partyIDToCandidateNames = {}
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
+        }
+        
+        dateData[formattedRegion] = {region: formattedRegion, state: state, district: district, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[formattedRegion]?.partyID != greatestMarginPartyID}
+      }
+      
+      mapData[mapDate] = dateData
+      
+      return {mapData: mapData, mapDates: [mapDate]}
+    }
+    
     const getPastElectionHeldSeats = async function(cycleYear, regionNameToID)
     {
       let heldSeatMapData = null
@@ -728,6 +796,12 @@ const USAHouseMapType = new MapType(
     {
       const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
       return jsonVoteshareVotehubFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
+    }
+    
+    const singleLineMarginSplitTicketFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID) =>
+    {
+      const heldSeatMapData = await getPastElectionHeldSeats(cycleYear, regionNameToID)
+      return singleLineMarginSplitTicketFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
     }
 
     function mostRecentWinner(mapData, dateToStart, regionID)
@@ -1305,6 +1379,46 @@ const USAHouseMapType = new MapType(
       null, // shouldSetDisabledWorthToZero
       true // shouldUseOriginalMapDataForTotalsPieChart
     )
+    
+    const SplitTicketProjection2026MapSource = new MapSource(
+      "Split-Ticket-2026-House-Projection", // id
+      "Split Ticket", // name
+      "https://static.dwcdn.net/data/u9EZf.csv?v=0", // dataURL
+      "https://www.theargumentmag.com/p/split-ticket-2026-midterms-model", // homepageURL
+      {regular: "./assets/split-ticket-large.png", mini: "./assets/split-ticket.png"}, // iconURL
+      {
+        region: "cd",
+        demCandidate: "dem_name",
+        repCandidate: "rep_name",
+        margin: "raw_prediction",
+        demProbability: "win_prob_d",
+        repProbability: "win_prob_r"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      singleLineMarginSplitTicketFunctionWithPastElections, // organizeMapDataFunction
+      houseViewingData, // viewingDataFunction
+      houseZoomingData, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
+      houseFormattedRegionName, // getFormattedRegionName
+      null, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0, // voteshareCutoffMargin
+      getHouseSVGFromDate, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      true // shouldUseOriginalMapDataForTotalsPieChart
+    )
 
     const PastElectionResultMapSource = new MapSource(
       "Past-House-Elections", // id
@@ -1459,22 +1573,25 @@ const USAHouseMapType = new MapType(
     houseMapSources[CNNHouseResults2024MapSource.getID()] = CNNHouseResults2024MapSource
     houseMapSources[VotehubHouseProjectionLegacy2026MapSource.getID()] = VotehubHouseProjectionLegacy2026MapSource
     houseMapSources[VotehubHouseProjection2026MapSource.getID()] = VotehubHouseProjection2026MapSource
+    houseMapSources[SplitTicketProjection2026MapSource.getID()] = SplitTicketProjection2026MapSource
     houseMapSources[CustomMapSource.getID()] = CustomMapSource
 
     const houseMapCycles = [2026, 2024, 2022]
     const houseMapSourceIDs = {
-      2026: [VotehubHouseProjectionLegacy2026MapSource.getID(), VotehubHouseProjection2026MapSource.getID()],
+      2026: [VotehubHouseProjectionLegacy2026MapSource.getID(), VotehubHouseProjection2026MapSource.getID(), SplitTicketProjection2026MapSource.getID()],
       2024: [FiveThirtyEightHouseProjection2024MapSource.getID()],
       2022: [FiveThirtyEightHouseProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
     const kPastElectionsVsPastElections = 1
-    const kVoteHubProjectionVsPastElections = 2
+    const kPastElectionsVsVoteHubProjection = 2
+    const kPastElectionsVsSplitTicketProjection = 3
 
     let defaultHouseCompareSourceIDs = {}
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultHouseCompareSourceIDs[kVoteHubProjectionVsPastElections] = [VotehubHouseProjectionLegacy2026MapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[kPastElectionsVsVoteHubProjection] = [VotehubHouseProjectionLegacy2026MapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[kPastElectionsVsSplitTicketProjection] = [PastElectionResultMapSource.getID(), SplitTicketProjection2026MapSource.getID()]
 
     return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, mapCycles: houseMapCycles, defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }

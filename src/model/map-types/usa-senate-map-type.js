@@ -68,6 +68,13 @@ const USASenateMapType = new MapType(
       /* National Popular Vote */ [nationalPopularVoteID]: [1]
     }
     
+    const specialElectionClasses = {
+      2026: {
+        "FL": 3,
+        "OH": 3
+      }
+    }
+    
     const democraticPartyID = DemocraticParty.getID()
     const republicanPartyID = RepublicanParty.getID()
     
@@ -889,6 +896,79 @@ const USASenateMapType = new MapType(
       return {mapData: fullFilteredMapData, candidateNameData: partyNameData, mapDates: mapDates}
     }
     
+    const singleLineMarginSplitTicketFunction = function(rawMapData, _, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
+    {
+      let mapData = {}
+      let partyNameData = {}
+      
+      const candidateColumns = {
+        [DemocraticParty.getID()]: {candidate: "demCandidate", probability: "demProbability"},
+        [RepublicanParty.getID()]: {candidate: "repCandidate", probability: "repProbability"},
+      }
+      const positivePartyID = RepublicanParty.getID()
+      const independentSuffix = " (Ind)"
+      
+      const onCycleClass = ((cycleYear-2)%6)/2+1
+      const partyNames = Object.keys(candidateColumns).reduce((partyMap, partyID) => {
+        partyMap[partyID] = politicalParties[partyID].getNames()[0]
+        return partyMap
+      }, {})
+      
+      let rawDateData = Object.values(rawMapData)[0]
+      let mapDate = Date.now()
+      let dateData = {}
+      
+      for (let mapRow of rawDateData)
+      {
+        const regionID = regionNameToID[mapRow[columnMap.region]]
+        const regionClass = specialElectionClasses[cycleYear]?.[regionID] ?? onCycleClass
+
+        let shouldBeSpecialRegion = parseInt(regionClass) != onCycleClass
+        let candidateArray = []
+        
+        let rawMargin = parseFloat(mapRow[columnMap.margin])
+        
+        for (let partyID in candidateColumns)
+        {
+          const {candidate: candidateColumn, probability: probabilityColumn} = candidateColumns[partyID]
+          
+          let candidate = mapRow[columnMap[candidateColumn]].replace(/\*$/, '')
+          let candidatePartyID = partyID
+          if (candidate.endsWith(independentSuffix))
+          {
+            candidate = candidate.replace(independentSuffix, '')
+            candidatePartyID = IndependentGenericParty.getID()
+          }
+          
+          const voteshare = 50+((partyID == positivePartyID ? 1 : -1)*rawMargin/2)
+          const winPercentage = parseFloat(mapRow[columnMap[probabilityColumn]])
+          
+          candidateArray.push({candidate, partyID: candidatePartyID, voteshare, winPercentage})
+        }
+        
+        let voteshareSortedCandidateData = candidateArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
+        
+        let topTwoMargin = Math.abs(rawMargin)
+        let greatestMarginPartyID = topTwoMargin != 0 ? voteshareSortedCandidateData[0].partyID : TossupParty.getID()
+        let greatestMarginCandidateName = topTwoMargin != 0 ? voteshareSortedCandidateData[0].candidate : null
+        
+        let partyIDToCandidateNames = {}
+        for (let candidateData of voteshareSortedCandidateData)
+        {
+          partyIDToCandidateNames[candidateData.partyID] = candidateData.candidate
+        }
+        
+        dateData[regionID + (shouldBeSpecialRegion ? "-S" : "")] = {region: regionID + (shouldBeSpecialRegion ? "-S" : ""), seatClass: regionClass, offYear: false, runoff: false, isSpecial: shouldBeSpecialRegion, margin: topTwoMargin, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[regionID + "-" + regionClass]?.partyID != greatestMarginPartyID}
+      }
+      
+      mapData[mapDate] = dateData
+      partyNameData[mapDate] = partyNames
+      
+      fillHeldSeats(mapData, regionNameToID, heldSeatMapData, onCycleClass)
+      
+      return {mapData: mapData, candidateNameData: partyNameData, mapDates: [mapDate]}
+    }
+    
     const getPastElectionHeldSeats = async function(cycleYear)
     {
       let heldSeatMapData = null
@@ -945,6 +1025,11 @@ const USASenateMapType = new MapType(
     {
       const heldSeatMapData = await getPastElectionHeldSeats(cycleYear)
       return jsonVoteshareVotehubFilterFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
+    }
+    
+    const singleLineMarginSplitTicketFunctionWithPastElections = async (rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID) => {
+      const heldSeatMapData = await getPastElectionHeldSeats(cycleYear)
+      return singleLineMarginSplitTicketFunction(rawMapData, mapDates, columnMap, cycleYear, candidateNameToPartyIDMap, regionNameToID, heldSeatMapData)
     }
     
     function fillHeldSeats(mapData, regionNameToID, heldSeatMapData, onCycleClass, shouldDisableOnCycle = true)
@@ -1930,6 +2015,43 @@ const USASenateMapType = new MapType(
         return regionData.isHold
       } // shouldShowVoteshare
     )
+    
+    const SplitTicketProjection2026MapSource = new MapSource(
+      "Split-Ticket-2026-Senate-Projection", // id
+      "Split Ticket", // name
+      "https://static.dwcdn.net/data/g4hHM.csv?v=0", // dataURL
+      "https://www.theargumentmag.com/p/split-ticket-2026-midterms-model", // homepageURL
+      {regular: "./assets/split-ticket-large.png", mini: "./assets/split-ticket.png"}, // iconURL
+      {
+        region: "State",
+        demCandidate: "dem_name",
+        repCandidate: "rep_name",
+        margin: "raw_prediction",
+        demProbability: "win_prob_d",
+        repProbability: "win_prob_r"
+      }, // columnMap
+      2026, // cycleYear
+      null, // candidateNameToPartyIDMap
+      null, // shortCandidateNameOverride
+      regionNameToIDHistorical, // regionNameToIDMap
+      null, // regionIDToLinkMap
+      null, // heldRegionMap
+      false, // shouldFilterOutDuplicateRows
+      true, // addDecimalPadding
+      singleLineMarginSplitTicketFunctionWithPastElections, // organizeMapDataFunction
+      null, // viewingDataFunction
+      null, // zoomingDataFunction
+      null, // splitVoteDataFunction
+      null, // splitVoteDisplayOptions
+      getFormattedRegionName, // getFormattedRegionName
+      null, // customOpenRegionLinkFunction
+      null, // updateCustomMapFunction
+      null, // convertMapDataRowToCSVFunction
+      null, // isCustomMap
+      null, // shouldClearDisabled
+      true, // shouldShowVoteshare
+      1.0 // voteshareCutoffMargin
+    )
 
     const PastElectionResultMapSource = new MapSource(
       "Past-Senate-Elections", // id
@@ -2082,6 +2204,7 @@ const USASenateMapType = new MapType(
     senateMapSources[VotehubSenateProjectionLegacy2026MapSource.getID()] = VotehubSenateProjectionLegacy2026MapSource
     senateMapSources[VotehubSenateProjection2026MapSource.getID()] = VotehubSenateProjection2026MapSource
     senateMapSources[VotehubSenatePolls2026MapSource.getID()] = VotehubSenatePolls2026MapSource
+    senateMapSources[SplitTicketProjection2026MapSource.getID()] = SplitTicketProjection2026MapSource
     senateMapSources[JJDiscordSenateAverage2026MapSource.getID()] = JJDiscordSenateAverage2026MapSource
     senateMapSources[PastElectionResultMapSource.getID()] = PastElectionResultMapSource
     senateMapSources[CustomMapSource.getID()] = CustomMapSource
@@ -2090,16 +2213,18 @@ const USASenateMapType = new MapType(
     const senateMapSourceIDs = {
       [2022]: [FiveThirtyEightSenateProjection2022MapSource.getID(), LTESenateProjection2022MapSource.getID(), PASenateProjection2022MapSource.getID(), CookSenateProjection2022MapSource.getID(), SCBSenateProjection2022MapSource.getID()],
       [2024]: [FiveThirtyEightSenateProjection2024MapSource.getID(), PolymarketSenate2024MapSource.getID()],
-      [2026]: [VotehubSenateProjectionLegacy2026MapSource.getID(), VotehubSenateProjection2026MapSource.getID(), VotehubSenatePolls2026MapSource.getID(), LTESenateProjection2026MapSource.getID(), JJDiscordSenateAverage2026MapSource.getID()],
+      [2026]: [VotehubSenateProjectionLegacy2026MapSource.getID(), VotehubSenateProjection2026MapSource.getID(), VotehubSenatePolls2026MapSource.getID(), SplitTicketProjection2026MapSource.getID(), LTESenateProjection2026MapSource.getID(), JJDiscordSenateAverage2026MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
     }
     
     const kPastElectionsVsPastElections = 1
     const kPastElectionsVsVoteHubProjection = 2
+    const kPastElectionsVsSplitTicketProjection = 3
 
     let defaultSenateCompareSourceIDs = {}
     defaultSenateCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
     defaultSenateCompareSourceIDs[kPastElectionsVsVoteHubProjection] = [PastElectionResultMapSource.getID(), VotehubSenateProjectionLegacy2026MapSource.getID()]
+    defaultSenateCompareSourceIDs[kPastElectionsVsSplitTicketProjection] = [PastElectionResultMapSource.getID(), SplitTicketProjection2026MapSource.getID()]
 
     return {mapSources: senateMapSources, mapSourceIDs: senateMapSourceIDs, mapCycles: senateMapCycles, defaultCompareSourceIDs: defaultSenateCompareSourceIDs, customSourceID: CustomMapSource.getID()}
   }
