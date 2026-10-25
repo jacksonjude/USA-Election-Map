@@ -192,7 +192,7 @@ async function loadComparePreset(comparePresetNum)
   await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][0])
   if (defaultCompareSourceIDs[comparePresetNum][0] != defaultCompareSourceIDs[comparePresetNum][1])
   {
-    await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][1])
+    await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][1], null, true)
   }
 
   setCompareSliderDates()
@@ -227,7 +227,7 @@ function toggleCompareSortMode(div)
   }
 }
 
-async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
+async function addCompareMapSource(mapSourceID, clickDivIDToIgnore, shouldSwapSources = false)
 {
   if (clickDivIDToIgnore != null)
   {
@@ -261,13 +261,13 @@ async function addCompareMapSource(mapSourceID, clickDivIDToIgnore)
 
   showingCompareMap = true
   
-  await updateCompareMapSources(compareSourcesUpdated, false)
+  await updateCompareMapSources(compareSourcesUpdated, shouldSwapSources)
   
   toggleMapSettingDisable("seatArrangement", true)
   updateCompareMapSlidersVisibility()
 }
 
-async function updateCompareMapSources(compareSourcesToUpdate, _overrideSwapSources, swapSliderValues, overrideDateValues = [null, null])
+async function updateCompareMapSources(compareSourcesToUpdate, shouldSwapSources, swapSliderValues, overrideDateValues = [null, null])
 {
   $('.comparesourcecheckbox').prop('disabled', true)
   if (compareSourcesToUpdate[0])
@@ -280,11 +280,11 @@ async function updateCompareMapSources(compareSourcesToUpdate, _overrideSwapSour
   }
   $('.comparesourcecheckbox').prop('disabled', false)
 
-  // if (shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]) && !overrideSwapSources)
-  // {
-  //   swapCompareMapSources()
-  //   compareSourcesToUpdate = [true, true]
-  // }
+  if (shouldSwapSources && shouldSwapCompareMapSources(compareMapSourceIDArray[0], compareMapSourceIDArray[1]))
+  {
+    swapCompareMapSources()
+    compareSourcesToUpdate = [true, true]
+  }
 
   if (swapSliderValues)
   {
@@ -317,7 +317,9 @@ async function loadCompareMapSource(sourceID)
 
 function shouldSwapCompareMapSources(firstMapSourceID, secondMapSourceID)
 {
-  return mapSources[firstMapSourceID].getMapDates().slice(-1)[0] < mapSources[secondMapSourceID].getMapDates().slice(-1)[0]
+  // compare calendar days, since projections can be timestamped later on election day than the results
+  const getLatestDay = mapSourceID => new Date(mapSources[mapSourceID].getMapDates().slice(-1)[0]).setHours(0, 0, 0, 0)
+  return getLatestDay(firstMapSourceID) < getLatestDay(secondMapSourceID)
 }
 
 function updateCompareMapSlidersVisibility(overrideShowHide)

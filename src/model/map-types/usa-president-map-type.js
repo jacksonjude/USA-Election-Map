@@ -2259,7 +2259,7 @@ const USAPresidentMapType = new MapType(
           {
             compareResultCustomMapSource = CustomCountyMapSource
             shouldSetCompareMapSource = false
-            await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+            await updateCompareMapSources([true, true], false, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
             
             shouldSetCompareMapSource = true
           }

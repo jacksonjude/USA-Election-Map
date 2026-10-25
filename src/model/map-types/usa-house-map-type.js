@@ -1590,7 +1590,7 @@ const USAHouseMapType = new MapType(
 
     let defaultHouseCompareSourceIDs = {}
     defaultHouseCompareSourceIDs[kPastElectionsVsPastElections] = [PastElectionResultMapSource.getID(), PastElectionResultMapSource.getID()]
-    defaultHouseCompareSourceIDs[kPastElectionsVsVoteHubProjection] = [VotehubHouseProjectionLegacy2026MapSource.getID(), PastElectionResultMapSource.getID()]
+    defaultHouseCompareSourceIDs[kPastElectionsVsVoteHubProjection] = [PastElectionResultMapSource.getID(), VotehubHouseProjectionLegacy2026MapSource.getID()]
     defaultHouseCompareSourceIDs[kPastElectionsVsSplitTicketProjection] = [PastElectionResultMapSource.getID(), SplitTicketProjection2026MapSource.getID()]
 
     return {mapSources: houseMapSources, mapSourceIDs: houseMapSourceIDs, mapCycles: houseMapCycles, defaultCompareSourceIDs: defaultHouseCompareSourceIDs, customSourceID: CustomMapSource.getID()}

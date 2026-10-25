@@ -1685,7 +1685,7 @@ async function zoomOutMap(displayMap = true)
     getCompareMajorParties = null
     shouldSetCompareMapSource = currentMapSource.isCompare()
     
-    await updateCompareMapSources([true, true], true, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
+    await updateCompareMapSources([true, true], false, false, [$("#firstCompareDataMapDateSlider").val(), $("#secondCompareDataMapDateSlider").val()])
     shouldSetCompareMapSource = true
   }
   else if (currentMapSource.isCustom())
