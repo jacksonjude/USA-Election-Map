@@ -11,6 +11,7 @@ const USAGovernorMapType = new MapType(
   },
   false,
   4,
+  4,
   true,
   true,
   true,

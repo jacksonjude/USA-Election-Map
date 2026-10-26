@@ -11,6 +11,7 @@ const JJUPresidentMapType = new MapType(
   },
   false,
   2,
+  null,
   true,
   true,
   false,

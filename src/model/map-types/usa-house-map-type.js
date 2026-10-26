@@ -11,6 +11,7 @@ const USAHouseMapType = new MapType(
   },
   false,
   2,
+  2,
   true,
   true,
   true,

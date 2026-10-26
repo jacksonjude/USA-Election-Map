@@ -11,6 +11,7 @@ const USASenateMapType = new MapType(
   },
   false,
   3,
+  6,
   true,
   true,
   true,

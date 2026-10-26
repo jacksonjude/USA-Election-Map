@@ -22,6 +22,7 @@ const USAPresidentMapType = new MapType(
   },
   true,
   5,
+  4,
   true,
   true,
   false,

@@ -1,6 +1,6 @@
 class MapType
 {
-  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, customMapEnabled, compareMapEnabled, shouldListProjectionsFirst, shouldAlwaysReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
+  constructor(id, name, shortName, iconURL, svgPath, totalEV, evFunction, shouldDisplayEVOnMap, secondarySliderIncrement, termLengthYears, customMapEnabled, compareMapEnabled, shouldListProjectionsFirst, shouldAlwaysReorderOutlines, regionIDToName, regionsToHideOnDisable, mapSettingsLayout, createMapSources)
   {
     this.id = id
     this.name = name
@@ -11,6 +11,7 @@ class MapType
     this.evFunction = evFunction
     this.shouldDisplayEVOnMap = shouldDisplayEVOnMap
     this.secondarySliderIncrement = secondarySliderIncrement
+    this.termLengthYears = termLengthYears
     this.customMapEnabled = customMapEnabled
     this.compareMapEnabled = compareMapEnabled
     this.shouldListProjectionsFirst = shouldListProjectionsFirst
@@ -136,6 +137,11 @@ class MapType
   getSecondarySliderIncrement()
   {
     return this.secondarySliderIncrement
+  }
+
+  getTermLengthYears()
+  {
+    return this.termLengthYears
   }
 
   getCustomMapEnabled()

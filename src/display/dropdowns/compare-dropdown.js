@@ -147,7 +147,7 @@ async function hideCustomCompareSelection(shouldReset)
     toggleMapSettingDisable("seatArrangement", true)
     updateCompareMapSlidersVisibility()
     
-    setCompareSliderDates()
+    await setCompareSliderDates()
   }
   else
   {
@@ -195,16 +195,51 @@ async function loadComparePreset(comparePresetNum)
     await addCompareMapSource(defaultCompareSourceIDs[comparePresetNum][1], null, true)
   }
 
-  setCompareSliderDates()
+  await setCompareSliderDates()
 }
 
-function setCompareSliderDates()
+async function setCompareSliderDates()
 {
-  if (compareMapSourceIDArray[0] == compareMapSourceIDArray[1])
+  const termLengthYears = currentMapType.getTermLengthYears()
+  const compareSources = compareMapSourceIDArray.map(sourceID => mapSources[sourceID])
+  const isSameSource = compareMapSourceIDArray[0] == compareMapSourceIDArray[1]
+  
+  let sliderIndexToSet
+  let latestCycleYear
+  if (isSameSource)
   {
-    $("#secondCompareDataMapDateSlider").val(mapSources[compareMapSourceIDArray[1]].getMapDates().length-1)
-    setCompareSourceDate(1, mapSources[compareMapSourceIDArray[1]].getMapDates().length-1)
+    sliderIndexToSet = 1
+    if (compareSources[1].getCycleYear() == allYearsCycle)
+    {
+      latestCycleYear = new Date(compareSources[1].getMapDates().at(-1)).getFullYear()
+    }
   }
+  else
+  {
+    const projectionIndex = compareSources.findIndex(mapSource => mapSource.getCycleYear() != allYearsCycle)
+    sliderIndexToSet = compareSources.findIndex(mapSource => mapSource.getCycleYear() == allYearsCycle)
+    if (projectionIndex == -1 || sliderIndexToSet == -1) { return }
+    
+    latestCycleYear = compareSources[projectionIndex].getCycleYear()
+    // once the past source has results for the projection's cycle, keep comparing against those
+    if (new Date(compareSources[sliderIndexToSet].getMapDates().at(-1)).getFullYear() == latestCycleYear) { return }
+  }
+  
+  const mapDates = compareSources[sliderIndexToSet].getMapDates()
+  let dateIndexToSet = -1
+  if (latestCycleYear != null && termLengthYears != null)
+  {
+    dateIndexToSet = mapDates.findLastIndex(mapDate => new Date(mapDate).getFullYear() == latestCycleYear-termLengthYears)
+  }
+  if (dateIndexToSet == -1)
+  {
+    if (!isSameSource) { return }
+    dateIndexToSet = mapDates.length-1-1
+  }
+  
+  const sliderDivID = sliderIndexToSet == 0 ? "firstCompareDataMapDateSlider" : "secondCompareDataMapDateSlider"
+  $("#" + sliderDivID).val(dateIndexToSet+1)
+  await setCompareSourceDate(sliderIndexToSet, dateIndexToSet+1)
 }
 
 let compareSortMode = CompareSortMode.voteshare
