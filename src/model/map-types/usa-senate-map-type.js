@@ -1675,7 +1675,8 @@ const USASenateMapType = new MapType(
       1790294400000: "JKb6kLmnGik",
       1790812800000: "Zm80JF59P6s",
       1791763200000: "tnIcncCUDcE",
-      1792368000000: "GWwXvMi1hWk"
+      1792368000000: "GWwXvMi1hWk",
+      1793145600000: "BfodST29Vmc"
     }
     
     const LTESenateProjection2026MapSource = new MapSource(
