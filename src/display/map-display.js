@@ -430,7 +430,7 @@ function setOutlineDivProperties()
     outlineDiv.css('fill', defaultRegionFillColor)
 
     outlineDiv.attr('onmouseenter', "mouseEnteredRegion(this)")
-    outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
+    outlineDiv.attr('onmouseleave', "mouseLeftRegion(this, event)")
 
     outlineDiv.on('click', function(e) {
       if (!tapShouldClickRegion)

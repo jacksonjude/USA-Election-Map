@@ -520,6 +520,44 @@ body {
   text-shadow: 0 0 1.25rem #ffffff, 0 0 1.5rem #000000;
 }
 
+.regionbox-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #444;
+  color: #D8D8D8;
+  border: 1px solid #666;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-family: inherit;
+  font-size: 15px;
+  line-height: 100%;
+  cursor: pointer;
+}
+
+.regionbox-buttons {
+  display: grid;
+  gap: 4px;
+  margin: 4px 0px 10px;
+}
+
+.regionbox-header {
+  --dismiss-size: 26px;
+  display: grid;
+  grid-template-columns: var(--dismiss-size) 1fr var(--dismiss-size);
+  align-items: center;
+  gap: 10px;
+  margin: 4px -6px 0px;
+}
+
+.regionbox-dismiss-button {
+  grid-column: 3;
+  width: var(--dismiss-size);
+  height: var(--dismiss-size);
+  padding: 0;
+}
+
 .date-display {
   display: inline-block;
   padding-left: 20rem;
