@@ -27,11 +27,11 @@ body {
 }
 
 :root {
-  --slider-date-scale: 1;
+  --map-control-scale: 1;
   
-  --slider-tick-width: calc(4rem * var(--slider-date-scale));
-  --slider-thumb-width: calc(30rem * var(--slider-date-scale));
-  --slider-height: calc(30rem * var(--slider-date-scale));
+  --slider-tick-width: calc(4rem * var(--map-control-scale));
+  --slider-thumb-width: calc(30rem * var(--map-control-scale));
+  --slider-height: calc(30rem * var(--map-control-scale));
 }
 
 .background {
@@ -340,6 +340,10 @@ body {
   height: 19px;
 }
 
+#mapZoomControls {
+  width: calc(55rem * var(--map-control-scale));
+}
+
 #sliderDateDisplayContainer {
   display: flex;
   justify-content: center;
@@ -525,7 +529,7 @@ body {
   
   color: white;
   font-feature-settings: 'tnum' 1;
-  font-size: calc(20rem * var(--slider-date-scale));
+  font-size: calc(20rem * var(--map-control-scale));
   
   user-select: none;
   -webkit-user-select: none;
@@ -901,7 +905,7 @@ body {
   }
   
   :root {
-    --slider-date-scale: 1.75;
+    --map-control-scale: 1.75;
   }
   
   @container discord-invite-box (max-width: 310px) {
@@ -942,7 +946,7 @@ body {
   }
   
   :root {
-    --slider-date-scale: 1.75;
+    --map-control-scale: 1.75;
   }
   
   #credits-container {
@@ -951,7 +955,7 @@ body {
   
   @media (max-aspect-ratio: 1.1/1) {
     :root {
-      --slider-date-scale: 3;
+      --map-control-scale: 3;
     }
   }
 }
