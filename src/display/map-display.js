@@ -433,6 +433,7 @@ function setOutlineDivProperties()
     outlineDiv.attr('onmouseleave', "mouseLeftRegion(this)")
 
     outlineDiv.on('click', function(e) {
+      if (!tapShouldClickRegion) return
       if (e.altKey && e.shiftKey && altShiftClickRegion(e.target)) return
       if (e.altKey && altClickRegion(e.target)) return
       if (e.shiftKey && shiftClickRegion(e.target)) return

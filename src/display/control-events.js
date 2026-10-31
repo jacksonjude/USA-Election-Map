@@ -495,6 +495,23 @@ let currentRegionID
 let ignoreNextClick = false
 let clickUsedToZoom = false
 
+let touchSelectedRegionID = null
+let tapShouldClickRegion = true
+
+document.addEventListener('pointerdown', function(e) {
+  if (e.pointerType != "touch")
+  {
+    touchSelectedRegionID = null
+    tapShouldClickRegion = true
+    return
+  }
+  
+  let tappedRegionID = e.target.matches("#outlines > *") ? getBaseRegionID(e.target.id).baseID : null
+  let isMarginEditing = currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !editingRegionMarginValue
+  tapShouldClickRegion = tappedRegionID != null && (tappedRegionID == touchSelectedRegionID || isMarginEditing)
+  touchSelectedRegionID = tappedRegionID
+})
+
 let isDraggingInsideRoundControls = false
 
 let currentMouseX
