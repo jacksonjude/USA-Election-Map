@@ -509,7 +509,7 @@ document.addEventListener('pointerdown', function(e) {
   let tappedRegionID = e.target.matches("#outlines > *") ? getBaseRegionID(e.target.id).baseID : null
   let isMarginEditing = currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !editingRegionMarginValue
   tapShouldClickRegion = tappedRegionID != null && (tappedRegionID == touchSelectedRegionID || isMarginEditing)
-  touchSelectedRegionID = tappedRegionID
+  if (tappedRegionID == null) touchSelectedRegionID = null
 })
 
 let isDraggingInsideRoundControls = false
