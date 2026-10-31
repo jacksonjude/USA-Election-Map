@@ -790,18 +790,7 @@ const statePopularVoteDistrictID = "PV"
 const jsonSourceType = "JSON"
 const csvSourceType = "CSV"
 
-let mainTwoPartyIDsToNames = {}
-mainTwoPartyIDsToNames[DemocraticParty.getID()] = DemocraticParty.getNames()[0]
-mainTwoPartyIDsToNames[RepublicanParty.getID()] = RepublicanParty.getNames()[0]
-
 const NullMapSource = new MapSource(
   "None", // id
-  "None", // name
-  null, // dataURL
-  null, // homepageURL
-  null, // iconURL
-  null, // columnMap
-  null, // cycleYear
-  invertObject(mainTwoPartyIDsToNames), // candidateNameToPartyIDMap
-  mainTwoPartyIDsToNames // shortCandidateNameOverride
+  "None" // name
 )
