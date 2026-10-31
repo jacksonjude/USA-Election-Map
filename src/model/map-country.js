@@ -214,6 +214,7 @@ function setMapCountries()
     "2024 Presidential Election": {time: 1730847600000, url: "https://en.wikipedia.org/wiki/2024_United_States_presidential_election"},
     "2025 Inauguration Day": {time: 1737392400000, url: null},
     "2026 Midterm Elections": {time: 1793746800000, url: "https://en.wikipedia.org/wiki/2026_United_States_elections"},
+    "2028 Presidential Election": {time: 1857250800000, url: "https://en.wikipedia.org/wiki/2028_United_States_presidential_election"}
   })
   
   JJUMapCountry.setMapTypes({
