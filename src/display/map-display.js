@@ -435,7 +435,13 @@ function setOutlineDivProperties()
     outlineDiv.on('click', function(e) {
       if (!tapShouldClickRegion)
       {
-        touchSelectedRegionID = getBaseRegionID(e.target.id).baseID
+        const regionID = getBaseRegionID(e.target.id).baseID
+        // A touch drag elsewhere (ex. slider) leaves the emulated hover on this region, so mouseenter won't fire on re-tap
+        if (currentRegionID != regionID)
+        {
+          mouseEnteredRegion(e.target)
+        }
+        touchSelectedRegionID = regionID
         return
       }
       if (e.altKey && e.shiftKey && altShiftClickRegion(e.target)) return
