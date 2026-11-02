@@ -507,9 +507,10 @@ document.addEventListener('pointerdown', function(e) {
     tapShouldClickRegion = true
     return
   }
-  if (document.getElementById("regionboxcontainer").contains(e.target)) return
-  
-  let tappedRegionID = e.target.matches("#outlines > *") ? getBaseRegionID(e.target.id).baseID : null
+  const target = /** @type {Element} */ (e.target)
+  if (document.getElementById("regionboxcontainer").contains(target)) return
+
+  let tappedRegionID = target.matches("#outlines > *") ? getBaseRegionID(target.id).baseID : null
   let isMarginEditing = currentEditingState == EditingState.editing && currentMapSource.getEditingMode() == EditingMode.margin && !editingRegionMarginValue
   tapShouldClickRegion = tappedRegionID != null && currentEditingState == EditingState.editing && (tappedRegionID == touchSelectedRegionID || isMarginEditing)
   if (tappedRegionID == null)
@@ -693,7 +694,7 @@ document.addEventListener('mousemove', function(e) {
     }
   }
 
-  const isInsideRegionBox = document.getElementById("regionboxcontainer").contains(e.target)
+  const isInsideRegionBox = document.getElementById("regionboxcontainer").contains(/** @type {Element} */ (e.target))
   if (!editingRegionVotesharePercentages && !isInsideRegionBox)
   {
     updateRegionBoxPosition(e.pageX, e.pageY)
