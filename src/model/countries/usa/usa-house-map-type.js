@@ -1230,7 +1230,12 @@ const USAHouseMapType = new MapType(
       0.0, // voteshareCutoffMargin
       getHouseSVGFromDate, // overrideSVGPath
       null, // shouldSetDisabledWorthToZero
-      true // shouldUseOriginalMapDataForTotalsPieChart
+      true, // shouldUseOriginalMapDataForTotalsPieChart
+      null, // shouldForcePopularVoteDisplay
+      null, // customDefaultMargins
+      null, // customVotesharePrefix
+      null, // customVoteshareSuffix
+      60 // autoRefreshIntervalSeconds
     )
     
     const FiveThirtyEightHouseProjection2022MapSource = new MapSource(

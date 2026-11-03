@@ -83,6 +83,10 @@ const csvParseIndicatorColor = '#3ac635'
 
 let loaderStack = [LoaderType.hidden]
 
+let autoRefreshTimeout = null
+let isAutoRefreshing = false
+let lastMapSourceLoadTime = null
+
 let currentViewingState
 
 let currentEditingState
@@ -525,6 +529,17 @@ function addDivEventListeners()
     })
   })
   
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState != "visible") return
+    
+    const autoRefreshIntervalSeconds = currentMapSource.getAutoRefreshIntervalSeconds()
+    if (!autoRefreshIntervalSeconds) return
+    if (lastMapSourceLoadTime == null) return
+    if (Date.now()-lastMapSourceLoadTime < 1000*autoRefreshIntervalSeconds) return
+    
+    runAutoRefresh(currentMapSource.getID())
+  })
+  
   $('.dropdown').each(function () {
     this.addEventListener('mouseenter', (e) => updateDropdownFlip($(e.target).children('.dropdown-content')))
   })
@@ -768,6 +783,10 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   if (!loadedSuccessfully)
   {
     removeLoader(LoaderType.standard)
+    
+    lastMapSourceLoadTime = null
+    clearTimeout(autoRefreshTimeout)
+    
     return
   }
   
@@ -799,6 +818,46 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   }
   
   removeLoader(LoaderType.standard)
+
+  lastMapSourceLoadTime = Date.now()
+  scheduleAutoRefresh()
+}
+
+function scheduleAutoRefresh()
+{
+  clearTimeout(autoRefreshTimeout)
+  
+  const autoRefreshIntervalSeconds = currentMapSource.getAutoRefreshIntervalSeconds()
+  if (!autoRefreshIntervalSeconds) return
+  
+  const refreshMapSourceID = currentMapSource.getID()
+  autoRefreshTimeout = setTimeout(() => runAutoRefresh(refreshMapSourceID), 1000*autoRefreshIntervalSeconds)
+}
+
+async function runAutoRefresh(refreshMapSourceID)
+{
+  if (currentMapSource.getID() != refreshMapSourceID) return
+  if (isAutoRefreshing) return
+  isAutoRefreshing = true
+  
+  clearTimeout(autoRefreshTimeout)
+  
+  try
+  {
+    const loadedSuccessfully = await downloadDataForMapSource(refreshMapSourceID, getIconDivsToUpdateArrayForSourceID(refreshMapSourceID), null, true, true)
+    if (loadedSuccessfully && currentMapSource.getID() == refreshMapSourceID)
+    {
+      lastMapSourceLoadTime = Date.now()
+    }
+  }
+  finally
+  {
+    isAutoRefreshing = false
+    if (currentMapSource.getID() == refreshMapSourceID)
+    {
+      scheduleAutoRefresh()
+    }
+  }
 }
 
 function addLoader(loaderType, progressColor)

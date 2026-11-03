@@ -1,6 +1,6 @@
 class MapSource
 {
-  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplay, customDefaultMargins, customVotesharePrefix, customVoteshareSuffix)
+  constructor(id, name, dataURL, homepageURL, iconURL, columnMap, cycleYear, candidateNameToPartyIDMap, shortCandidateNameOverride, regionNameToIDMap, regionIDToLinkMap, heldRegionMap, shouldFilterOutDuplicateRows, addDecimalPadding, organizeMapDataFunction, viewingDataFunction, zoomingDataFunction, splitVoteDataFunction, splitVoteDisplayOptions, getFormattedRegionName, customOpenRegionLinkFunction, updateCustomMapFunction, convertMapDataRowToCSVFunction, isCustomMap, shouldClearDisabled, shouldShowVoteshare, voteshareCutoffMargin, overrideSVGPath, shouldSetDisabledWorthToZero, shouldUseOriginalMapDataForTotalsPieChart, shouldForcePopularVoteDisplay, customDefaultMargins, customVotesharePrefix, customVoteshareSuffix, autoRefreshIntervalSeconds)
   {
     this.id = id
     this.name = name
@@ -41,6 +41,7 @@ class MapSource
     this.customDefaultMargins = customDefaultMargins
     this.customVoteshareSuffix = customVoteshareSuffix
     this.customVotesharePrefix = customVotesharePrefix
+    this.autoRefreshIntervalSeconds = autoRefreshIntervalSeconds
   }
 
   // id,
@@ -77,6 +78,7 @@ class MapSource
   // customDefaultMargins
   // customVotesharePrefix
   // customVoteshareSuffix
+  // autoRefreshIntervalSeconds
 
   async loadMap(reloadCache, onlyAttemptLocalFetch, resetCandidateNames)
   {
@@ -240,11 +242,12 @@ class MapSource
           CSVDatabase.insertFile(self.id, data)
           resolve(data)
         },
-        fail: () => {
+        error: () => {
           removeLoader(LoaderType.progress)
 
           resolve(null)
-        }
+        },
+        timeout: 60*1000
       })
     })
 
@@ -620,6 +623,11 @@ class MapSource
   {
     const isFunction = (typeof this.customVoteshareSuffix === 'function')
     return isFunction ? this.customVoteshareSuffix(regionData) : this.customVoteshareSuffix
+  }
+  
+  getAutoRefreshIntervalSeconds()
+  {
+    return this.autoRefreshIntervalSeconds
   }
 
   getDropdownPartyIDs()

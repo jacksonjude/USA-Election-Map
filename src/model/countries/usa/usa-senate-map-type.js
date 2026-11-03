@@ -1389,7 +1389,15 @@ const USASenateMapType = new MapType(
       null, // isCustomMap
       null, // shouldClearDisabled
       true, // shouldShowVoteshare
-      0.0 // voteshareCutoffMargin
+      0.0, // voteshareCutoffMargin
+      null, // overrideSVGPath
+      null, // shouldSetDisabledWorthToZero
+      null, // shouldUseOriginalMapDataForTotalsPieChart
+      null, // shouldForcePopularVoteDisplay
+      null, // customDefaultMargins
+      null, // customVotesharePrefix
+      null, // customVoteshareSuffix
+      60 // autoRefreshIntervalSeconds
     )
     
     const FiveThirtyEightSenateProjection2022MapSource = new MapSource(
