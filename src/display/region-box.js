@@ -235,15 +235,17 @@ async function updateRegionBox(regionID = currentRegionID)
         return voteData2.voteshare - voteData1.voteshare
       })
     }
+    
+    let hasVoteCountsForAll = shouldShowVotes && sortedPercentages.every(voteData => voteData.votes != null)
 
     if (currentEditingState == EditingState.viewing)
     {
-      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 1px; display: block; line-height: 100%;'>Voteshare<br></span>"
+      regionBoxHTML += "<span style='font-size: 17px; padding-top: 5px; padding-bottom: 1px; display: block; line-height: 100%;'>"
+      regionBoxHTML += hasVoteCountsForAll && shiftKeyDown ? "Votes" : "Voteshare"
+      regionBoxHTML += "<br></span>"
     }
 
     regionBoxHTML += "<div style='font-size: 17px; padding-top: 2px; padding-bottom: 5px; padding-right: 8px; display: block; line-height: 100%; border-radius: 50px;'>"
-
-    let hasVoteCountsForAll = shouldShowVotes
 
     sortedPercentages.forEach((voteData, i) => {
       const roundedVoteshare = Math.round(voteData.voteshare*100)/100
@@ -254,8 +256,6 @@ async function updateRegionBox(regionID = currentRegionID)
       regionBoxHTML += "<span class='regionbox-text-shadow' id='voteshare-" + (voteData.partyID + "-" + candidateName.replaceAll(/[\s\.]/g, "_")) + "' style='display: inline-block; padding: 4px; color: #fff; border-radius: " + (i == 0 ? "3px 3px" : "0px 0px") + " " + (i == sortedPercentages.length-1 ? "3px 3px" : "0px 0px") + "; " + "background: " + getGradientCSS(politicalParties[voteData.partyID].getMarginColors().safe, politicalParties[voteData.partyID].getMarginColors().lean, (showingCompareMap && currentMapSource.isCustom() ? 50 : 0) + voteData.voteshare) + "; " + " width: 100%'><span style='float: left;'>" + candidateName + "</span><span style='float: right;'>"
       regionBoxHTML += shiftKeyDown && shouldShowVotes && voteData.votes != null ? addCommaFormatting(voteData.votes) : (showingCompareMap && currentMapSource.isCustom() && voteData.voteshare > 0.0 ? "+" : "") + decimalPadding(roundedVoteshare, 2) + currentMapSource.getVoteshareSuffix(regionData)
       regionBoxHTML += "</span></span><br>"
-
-      hasVoteCountsForAll = hasVoteCountsForAll && voteData.votes != null
     })
 
     tooltipsToShow.shiftForVotes.show = hasVoteCountsForAll
