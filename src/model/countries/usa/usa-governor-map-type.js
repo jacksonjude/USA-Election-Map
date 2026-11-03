@@ -970,7 +970,7 @@ const USAGovernorMapType = new MapType(
       "CNN-2026-Governor-Results", // id
       "CNN Results", // name
       {url: "https://politics.api.cnn.io/results/national-races/2026-GG.json", type: jsonSourceType}, // dataURL
-      "https://www.cnn.com/election/2026/results/", // homepageURL
+      "https://www.cnn.com/election/2026?election-data-id=2026-GG", // homepageURL
       {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
       {
         date: "extractedAt",
@@ -998,7 +998,7 @@ const USAGovernorMapType = new MapType(
       null, // splitVoteDataFunction
       null, // splitVoteDisplayOptions
       getFormattedRegionName, // getFormattedRegionName
-      getCNNElectionResultsLink, // customOpenRegionLinkFunction
+      null, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap

@@ -1191,7 +1191,7 @@ const USAHouseMapType = new MapType(
       "CNN-2026-House-Results", // id
       "CNN Results", // name
       {url: "https://politics.api.cnn.io/results/national-races/2026-HG.json", type: jsonSourceType}, // dataURL
-      "https://www.cnn.com/election/2026/results/", // homepageURL
+      "https://www.cnn.com/election/2026?election-data-id=2026-HG", // homepageURL
       {regular: "./assets/cnn-large.png", mini: "./assets/cnn.png"}, // iconURL
       {
         date: "extractedAt",
@@ -1221,7 +1221,7 @@ const USAHouseMapType = new MapType(
       null, // splitVoteDataFunction
       {showSplitVotesOnCanZoom: true, showSplitVoteBoxes: true}, // splitVoteDisplayOptions
       houseFormattedRegionName, // getFormattedRegionName
-      getCNNElectionResultsLink, // customOpenRegionLinkFunction
+      null, // customOpenRegionLinkFunction
       null, // updateCustomMapFunction
       null, // convertMapDataRowToCSVFunction
       null, // isCustomMap
