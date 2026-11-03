@@ -1619,7 +1619,7 @@ const USAHouseMapType = new MapType(
 
     const houseMapCycles = [2026, 2024, 2022]
     const houseMapSourceIDs = {
-      2026: [VotehubHouseProjectionLegacy2026MapSource.getID(), VotehubHouseProjection2026MapSource.getID(), SplitTicketProjection2026MapSource.getID()],
+      2026: [CNNHouseResults2026MapSource.getID(), VotehubHouseProjectionLegacy2026MapSource.getID(), VotehubHouseProjection2026MapSource.getID(), SplitTicketProjection2026MapSource.getID()],
       2024: [FiveThirtyEightHouseProjection2024MapSource.getID()],
       2022: [FiveThirtyEightHouseProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]

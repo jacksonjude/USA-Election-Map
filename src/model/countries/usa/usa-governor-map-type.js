@@ -1568,7 +1568,7 @@ const USAGovernorMapType = new MapType(
     
     const governorMapCycles = [2026, 2024, 2022]
     const governorMapSourceIDs = {
-      2026: [VotehubGovernorProjectionLegacy2026MapSource.getID(), VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID(), JJDiscordGovernorAverage2026MapSource.getID()],
+      2026: [CNNGovernorResults2026MapSource.getID(), VotehubGovernorProjectionLegacy2026MapSource.getID(), VotehubGovernorProjection2026MapSource.getID(), VotehubGovernorPolls2026MapSource.getID(), JJDiscordGovernorAverage2026MapSource.getID()],
       2024: [PolymarketGovernor2024MapSource.getID()],
       2022: [FiveThirtyEightGovernorProjection2022MapSource.getID(), LTEGovernorProjection2022MapSource.getID(), CookGovernorProjection2022MapSource.getID()],
       [allYearsCycle]: [PastElectionResultMapSource.getID(), CustomMapSource.getID()]
