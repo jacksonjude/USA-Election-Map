@@ -316,7 +316,9 @@ async function updateRegionBox(regionID = currentRegionID)
   
   if (regionData.reportingPercent != null)
   {
-    regionBoxHTML += "<div style='color: gray; font-size: 16px; margin-top: -5px; margin-bottom: 5px'>" + regionData.reportingPercent + "% reporting" + "</div>"
+    regionBoxHTML += "<span class='regionbox-text-shadow reporting-bar' id='reporting-percentage' style='--reporting-percent: " + regionData.reportingPercent + "%; display: inline-block; padding: 4px; color: #fff; border-radius: 3px; width: 100%; font-size: 16px; margin-bottom: 5px; box-sizing: border-box; line-height: 100%'>"
+    regionBoxHTML += regionData.reportingPercent + "% reporting"
+    regionBoxHTML += "</span><br>"
   }
   
   tooltipsToShow.altForAlternateData.show = regionData.altData || showingAltData

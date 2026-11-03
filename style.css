@@ -520,6 +520,33 @@ body {
   text-shadow: 0 0 1.25rem #ffffff, 0 0 1.5rem #000000;
 }
 
+.reporting-bar {
+  background:
+    linear-gradient(90deg, transparent var(--reporting-percent), #2a4a2a var(--reporting-percent)),
+    linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent
+    ),
+    #3a8a3a;
+  background-size: auto, 20px 20px;
+  animation: reporting-stripes 1s linear infinite;
+}
+
+@keyframes reporting-stripes {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 0 0, 20px 0;
+  }
+}
+
 .regionbox-button {
   display: flex;
   align-items: center;
