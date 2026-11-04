@@ -988,7 +988,7 @@ const USAGovernorMapType = new MapType(
       null, // candidateNameToPartyIDMap
       null, // shortCandidateNameOverride
       regionNameToIDHistorical, // regionNameToIDMap
-      regionIDToLinkBase, // regionIDToLinkMap
+      null, // regionIDToLinkMap
       null, // heldRegionMap
       false, // shouldFilterOutDuplicateRows
       true, // addDecimalPadding
