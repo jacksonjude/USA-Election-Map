@@ -776,6 +776,8 @@ async function loadDataMap(shouldSetToMax, forceDownload, previousDateOverride, 
   currentMapType.setCurrentMapSourceID(currentMapSource.getID())
   
   addLoader(LoaderType.standard)
+  
+  if (currentMapSource.getAutoRefreshIntervalSeconds()) forceDownload = true
 
   let iconDivDictionary = getIconDivsToUpdateArrayForSourceID(currentMapSource.getID())
   let loadedSuccessfully = await downloadDataForMapSource(currentMapSource.getID(), iconDivDictionary, null, forceDownload, null, null, resetCandidateNames)
