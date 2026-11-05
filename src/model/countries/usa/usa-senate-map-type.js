@@ -102,7 +102,7 @@ const USASenateMapType = new MapType(
         if (racesToIgnore.includes(raceKey)) continue
 
         let regionID = raceData[columnMap.region]
-        let special = raceData[columnMap.special] == "S2"
+        let special = raceData[columnMap.special] == "S2" || (columnMap.contestType && raceData[columnMap.contestType] == "SP")
 
         let totalVotes = raceData[columnMap.totalVotes]
         let reportingPercent = raceData[columnMap.reportingPercent]
@@ -1367,7 +1367,8 @@ const USASenateMapType = new MapType(
         candidates: "candidates",
         candidateName: "lastName",
         partyID: "majorParty",
-        candidateVotes: "voteNum"
+        candidateVotes: "voteNum",
+        contestType: "contestType"
       }, // columnMap
       2026, // cycleYear
       null, // candidateNameToPartyIDMap
