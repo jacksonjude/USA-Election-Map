@@ -83,6 +83,7 @@ const USAHouseMapType = new MapType(
         let totalVotes = raceData[columnMap.totalVotes]
         let reportingPercent = raceData[columnMap.reportingPercent]
         // let calledRace = raceData[columnMap.calledRace] == "called"
+        const isUncontested = columnMap.uncontested ? raceData[columnMap.uncontested] : false
 
         let formattedCandidatesArray = []
 
@@ -113,7 +114,7 @@ const USAHouseMapType = new MapType(
             }
           }
           
-          formattedCandidatesArray.push({candidate: candidateName, candidateFullName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : 0, votes: candidateVotes})
+          formattedCandidatesArray.push({candidate: candidateName, candidateFullName, partyID: partyID, voteshare: totalVotes > 0 ? candidateVotes/totalVotes*100 : (isUncontested ? 100 : 0), votes: candidateVotes})
         }
 
         let voteshareSortedCandidateData = formattedCandidatesArray.sort((cand1, cand2) => cand2.voteshare - cand1.voteshare)
@@ -1217,7 +1218,8 @@ const USAHouseMapType = new MapType(
         candidateName: "lastName",
         candidateFullName: "fullName",
         partyID: "majorParty",
-        candidateVotes: "voteNum"
+        candidateVotes: "voteNum",
+        uncontested: "uncontested"
       }, // columnMap
       2026, // cycleYear
       null, // candidateNameToPartyIDMap
