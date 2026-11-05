@@ -107,7 +107,9 @@ const USASenateMapType = new MapType(
         let totalVotes = raceData[columnMap.totalVotes]
         let reportingPercent = raceData[columnMap.reportingPercent]
 
-        let regionClass = !special ? onCycleClass : stateClasses[regionID].filter(classNum => classNum != onCycleClass)[0]
+        let regionClass = !special
+          ? onCycleClass
+          : specialElectionClasses[cycleYear][regionID] ?? stateClasses[regionID].filter(classNum => classNum != onCycleClass)[0]
 
         let fullRegionID = regionID + (special ? "-S" : "")
 
