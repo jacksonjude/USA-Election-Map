@@ -46,7 +46,9 @@ const USAHouseMapType = new MapType(
     
     const jsonVoteshareCNNFilterFunction = function(rawMapData, _, columnMap, cycleYear, ___, ____, heldSeatMapData, ______, _______, voteshareCutoffMargin)
     {
-      let racesToIgnore = []
+      let racesToIgnore = {
+        2026: []
+      }
       let candidateExceptions = {"None of these candidates": "None"}
       let unopposedRaceDefaults = {
         2024: {
@@ -65,11 +67,12 @@ const USAHouseMapType = new MapType(
       for (let raceData of rawMapData)
       {
         let raceKey = raceData[columnMap.raceKey]
-        if (racesToIgnore.includes(raceKey)) continue
+        if (racesToIgnore[cycleYear].includes(raceKey)) continue
 
         let state = raceData[columnMap.state]
         let district = raceData[columnMap.district]
-        let regionID = state + subregionSeparator + district
+        let electionType = raceData[columnMap.electionType]
+        let regionID = state + subregionSeparator + district + (electionType == 'W' ? '-W' : '')
 
         if (!stateDistrictCounts[state])
         {
@@ -158,6 +161,26 @@ const USAHouseMapType = new MapType(
         const isHold = reportingPercent <= 0 && unopposedRaceDefaults[regionID] != null
 
         mapData[mapDate][regionID] = {region: regionID, state: state, district: district, margin: topTwoMargin, isHold: isHold, partyID: greatestMarginPartyID, candidateName: greatestMarginCandidateName, candidateMap: partyIDToCandidateNames, partyVotesharePercentages: voteshareSortedCandidateData, flip: heldSeatMapData[regionID]?.partyID != greatestMarginPartyID, reportingPercent: reportingPercent, totalVotes: totalVotes}
+      }
+      
+      for (const regionID in mapData[mapDate])
+      {
+        if (regionID.endsWith('-W'))
+        {
+          const generalRegionID = regionID.replace(/-W$/, '')
+          
+          const generalRegionData = cloneObject(mapData[mapDate][generalRegionID])
+          delete mapData[mapDate][generalRegionID]
+          const runoffRegionData = cloneObject(mapData[mapDate][regionID])
+          delete mapData[mapDate][regionID]
+          
+          generalRegionData.altText = "general"
+          runoffRegionData.altData = generalRegionData
+          runoffRegionData.region = generalRegionID
+          mapData[mapDate][generalRegionID] = runoffRegionData
+          
+          stateDistrictCounts[runoffRegionData.state] -= 1
+        }
       }
 
       for (let state of Object.keys(stateDistrictCounts).filter(state => stateDistrictCounts[state] == 1))
@@ -1219,7 +1242,8 @@ const USAHouseMapType = new MapType(
         candidateFullName: "fullName",
         partyID: "majorParty",
         candidateVotes: "voteNum",
-        uncontested: "uncontested"
+        uncontested: "uncontested",
+        electionType: "electionType"
       }, // columnMap
       2026, // cycleYear
       null, // candidateNameToPartyIDMap
